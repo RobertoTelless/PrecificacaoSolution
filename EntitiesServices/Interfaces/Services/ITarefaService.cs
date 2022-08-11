@@ -28,6 +28,7 @@ namespace ModelServices.Interfaces.EntitiesServices
         TAREFA_ANEXO GetAnexoById(Int32 id);
         USUARIO GetUserById(Int32 id);
         List<PERIODICIDADE_TAREFA> GetAllPeriodicidade();
-        List<TAREFA> ExecuteFilter(Int32? tipoId, String titulo, DateTime? data, Int32 encerrado, Int32 prioridade, Int32? usuario, Int32 idAss);
+        List<TAREFA> ExecuteFilter(Int32? tipoId, String titulo, DateTime? dataInico, DateTime? dataFim, Int32 encerrada, Int32 prioridade, Int32? usuario, Int32 idUsu);
+    
     }
 }

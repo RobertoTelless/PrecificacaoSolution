@@ -16,35 +16,42 @@ using System.Data;
 
 namespace ModelServices.EntitiesServices
 {
-    public class TipoPessoaService : ServiceBase<TIPO_PESSOA>, ITipoPessoaService
+    public class CategoriaNotificacaoService : ServiceBase<CATEGORIA_NOTIFICACAO>, ICategoriaNotificacaoService
     {
-        private readonly ITipoPessoaRepository _baseRepository;
+        private readonly ICategoriaNotificacaoRepository _baseRepository;
         private readonly ILogRepository _logRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public TipoPessoaService(ITipoPessoaRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
+        public CategoriaNotificacaoService(ICategoriaNotificacaoRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
+
         }
 
-        public TIPO_PESSOA GetItemById(Int32 id)
+        public CATEGORIA_NOTIFICACAO GetItemById(Int32 id)
         {
-            TIPO_PESSOA item = _baseRepository.GetItemById(id);
+            CATEGORIA_NOTIFICACAO item = _baseRepository.GetItemById(id);
             return item;
         }
 
-        public List<TIPO_PESSOA> GetAllItens()
+        public List<CATEGORIA_NOTIFICACAO> GetAllItens(Int32 idAss)
         {
-            return _baseRepository.GetAllItens();
+            return _baseRepository.GetAllItens(idAss);
         }
 
-        public List<TIPO_PESSOA> GetAllItensAdm()
+        public List<CATEGORIA_NOTIFICACAO> GetAllItensAdm(Int32 idAss)
         {
-            return _baseRepository.GetAllItensAdm();
+            return _baseRepository.GetAllItensAdm(idAss);
         }
-    
-        public Int32 Create(TIPO_PESSOA item, LOG log)
+
+        public CATEGORIA_NOTIFICACAO CheckExist(CATEGORIA_NOTIFICACAO conta, Int32 idAss)
+        {
+            CATEGORIA_NOTIFICACAO item = _baseRepository.CheckExist(conta, idAss);
+            return item;
+        }
+
+        public Int32 Create(CATEGORIA_NOTIFICACAO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -63,7 +70,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Create(TIPO_PESSOA item)
+        public Int32 Create(CATEGORIA_NOTIFICACAO item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -82,13 +89,13 @@ namespace ModelServices.EntitiesServices
         }
 
 
-        public Int32 Edit(TIPO_PESSOA item, LOG log)
+        public Int32 Edit(CATEGORIA_NOTIFICACAO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    TIPO_PESSOA obj = _baseRepository.GetById(item.TIPE_CD_ID);
+                    CATEGORIA_NOTIFICACAO obj = _baseRepository.GetById(item.CANO_CD_ID);
                     _baseRepository.Detach(obj);
                     _logRepository.Add(log);
                     _baseRepository.Update(item);
@@ -103,13 +110,13 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Edit(TIPO_PESSOA item)
+        public Int32 Edit(CATEGORIA_NOTIFICACAO item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    TIPO_PESSOA obj = _baseRepository.GetById(item.TIPE_CD_ID);
+                    CATEGORIA_NOTIFICACAO obj = _baseRepository.GetById(item.CANO_CD_ID);
                     _baseRepository.Detach(obj);
                     _baseRepository.Update(item);
                     transaction.Commit();
@@ -123,7 +130,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Delete(TIPO_PESSOA item, LOG log)
+        public Int32 Delete(CATEGORIA_NOTIFICACAO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -141,6 +148,5 @@ namespace ModelServices.EntitiesServices
                 }
             }
         }
-
     }
 }

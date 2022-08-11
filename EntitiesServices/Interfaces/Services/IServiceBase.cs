@@ -10,5 +10,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         void Update(TEntity obj);
         void Remove(TEntity obj);
         void Dispose();
+
     }
 }

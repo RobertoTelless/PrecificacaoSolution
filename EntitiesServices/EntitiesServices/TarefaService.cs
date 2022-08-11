@@ -23,7 +23,7 @@ namespace ModelServices.EntitiesServices
         private readonly ITipoTarefaRepository _tipoRepository;
         private readonly ITarefaAnexoRepository _anexoRepository;
         private readonly IUsuarioRepository _usuRepository;
-        protected Db_GEDEntities Db = new Db_GEDEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public TarefaService(ITarefaRepository baseRepository, ILogRepository logRepository, ITipoTarefaRepository tipoRepository, ITarefaAnexoRepository anexoRepository, IUsuarioRepository usuRepository) : base(baseRepository)
         {
@@ -77,9 +77,9 @@ namespace ModelServices.EntitiesServices
             return _baseRepository.GetAllItensAdm(idAss);
         }
 
-        public List<TIPO_TAREFA> GetAllTipos()
+        public List<TIPO_TAREFA> GetAllTipos(Int32 idAss)
         {
-            return _tipoRepository.GetAllItens();
+            return _tipoRepository.GetAllItens(idAss);
         }
 
         public List<USUARIO> GetAllUsers(Int32 idAss)
@@ -97,10 +97,9 @@ namespace ModelServices.EntitiesServices
             return _baseRepository.GetAllPeriodicidade();
         }
 
-
-        public List<TAREFA> ExecuteFilter(Int32? tipoId, String titulo, DateTime? data, Int32 encerrada, Int32 prioridade, Int32? usuario, Int32 idAss)
+        public List<TAREFA> ExecuteFilter(Int32? tipoId, String titulo, DateTime? dataInico, DateTime? dataFim, Int32 encerrada, Int32 prioridade, Int32? usuario, Int32 idUsu)
         {
-            return _baseRepository.ExecuteFilter(tipoId, titulo, data, encerrada, prioridade, usuario, idAss);
+            return _baseRepository.ExecuteFilter(tipoId, titulo, dataInico, dataFim, encerrada, prioridade, usuario, idUsu);
 
         }
 

@@ -16,35 +16,48 @@ using System.Data;
 
 namespace ModelServices.EntitiesServices
 {
-    public class TipoPessoaService : ServiceBase<TIPO_PESSOA>, ITipoPessoaService
+    public class PlataformaEntregaService : ServiceBase<PLATAFORMA_ENTREGA>, IPlataformaEntregaService
     {
-        private readonly ITipoPessoaRepository _baseRepository;
+        private readonly IPlataformaEntregaRepository _baseRepository;
         private readonly ILogRepository _logRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public TipoPessoaService(ITipoPessoaRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
+        public PlataformaEntregaService(IPlataformaEntregaRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
+
         }
 
-        public TIPO_PESSOA GetItemById(Int32 id)
+        public PLATAFORMA_ENTREGA GetItemById(Int32 id)
         {
-            TIPO_PESSOA item = _baseRepository.GetItemById(id);
+            PLATAFORMA_ENTREGA item = _baseRepository.GetItemById(id);
             return item;
         }
 
-        public List<TIPO_PESSOA> GetAllItens()
+        public List<PLATAFORMA_ENTREGA> GetAllItens(Int32 idAss)
         {
-            return _baseRepository.GetAllItens();
+            return _baseRepository.GetAllItens(idAss);
         }
 
-        public List<TIPO_PESSOA> GetAllItensAdm()
+        public List<PLATAFORMA_ENTREGA> GetAllItensAdm(Int32 idAss)
         {
-            return _baseRepository.GetAllItensAdm();
+            return _baseRepository.GetAllItensAdm(idAss);
         }
-    
-        public Int32 Create(TIPO_PESSOA item, LOG log)
+
+        public PLATAFORMA_ENTREGA CheckExist(PLATAFORMA_ENTREGA conta, Int32 idAss)
+        {
+            PLATAFORMA_ENTREGA item = _baseRepository.CheckExist(conta, idAss);
+            return item;
+        }
+
+        public List<PLATAFORMA_ENTREGA> ExecuteFilter(String nome, Int32 idAss)
+        {
+            List<PLATAFORMA_ENTREGA> lista = _baseRepository.ExecuteFilter(nome, idAss);
+            return lista;
+        }
+
+        public Int32 Create(PLATAFORMA_ENTREGA item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -63,7 +76,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Create(TIPO_PESSOA item)
+        public Int32 Create(PLATAFORMA_ENTREGA item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -82,13 +95,13 @@ namespace ModelServices.EntitiesServices
         }
 
 
-        public Int32 Edit(TIPO_PESSOA item, LOG log)
+        public Int32 Edit(PLATAFORMA_ENTREGA item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    TIPO_PESSOA obj = _baseRepository.GetById(item.TIPE_CD_ID);
+                    PLATAFORMA_ENTREGA obj = _baseRepository.GetById(item.PLEN_CD_ID);
                     _baseRepository.Detach(obj);
                     _logRepository.Add(log);
                     _baseRepository.Update(item);
@@ -103,13 +116,13 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Edit(TIPO_PESSOA item)
+        public Int32 Edit(PLATAFORMA_ENTREGA item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    TIPO_PESSOA obj = _baseRepository.GetById(item.TIPE_CD_ID);
+                    PLATAFORMA_ENTREGA obj = _baseRepository.GetById(item.PLEN_CD_ID);
                     _baseRepository.Detach(obj);
                     _baseRepository.Update(item);
                     transaction.Commit();
@@ -123,7 +136,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Delete(TIPO_PESSOA item, LOG log)
+        public Int32 Delete(PLATAFORMA_ENTREGA item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -141,6 +154,5 @@ namespace ModelServices.EntitiesServices
                 }
             }
         }
-
     }
 }

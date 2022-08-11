@@ -20,7 +20,7 @@ namespace ModelServices.EntitiesServices
     {
         private readonly ITemplateRepository _baseRepository;
         private readonly ILogRepository _logRepository;
-        protected Db_GEDEntities Db = new Db_GEDEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public TemplateService(ITemplateRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
         {
@@ -35,19 +35,19 @@ namespace ModelServices.EntitiesServices
             return item;
         }
 
-        public List<TEMPLATE> GetAllItens()
+        public List<TEMPLATE> GetAllItens(Int32 idAss)
         {
-            return _baseRepository.GetAllItens();
+            return _baseRepository.GetAllItens(idAss);
         }
 
-        public List<TEMPLATE> GetAllItensAdm()
+        public List<TEMPLATE> GetAllItensAdm(Int32 idAss)
         {
-            return _baseRepository.GetAllItensAdm();
+            return _baseRepository.GetAllItensAdm(idAss);
         }
 
-        public TEMPLATE CheckExist(TEMPLATE item)
+        public TEMPLATE CheckExist(TEMPLATE item, Int32 idAss)
         {
-            TEMPLATE volta = _baseRepository.CheckExist(item);
+            TEMPLATE volta = _baseRepository.CheckExist(item, idAss);
             return volta;
         }
 
@@ -57,9 +57,9 @@ namespace ModelServices.EntitiesServices
             return item;
         }
 
-        public List<TEMPLATE> ExecuteFilter(String sigla, String nome, String conteudo)
+        public List<TEMPLATE> ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss)
         {
-            return _baseRepository.ExecuteFilter(sigla, nome, conteudo);
+            return _baseRepository.ExecuteFilter(sigla, nome, conteudo, idAss);
 
         }
 

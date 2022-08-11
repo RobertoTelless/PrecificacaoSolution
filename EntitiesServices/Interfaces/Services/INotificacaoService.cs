@@ -25,5 +25,6 @@ namespace ModelServices.Interfaces.EntitiesServices
 
         NOTIFICACAO_ANEXO GetAnexoById(Int32 id);
         List<CATEGORIA_NOTIFICACAO> GetAllCategorias(Int32 idAss);
+
     }
 }

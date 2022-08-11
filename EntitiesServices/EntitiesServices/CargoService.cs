@@ -16,35 +16,42 @@ using System.Data;
 
 namespace ModelServices.EntitiesServices
 {
-    public class TipoPessoaService : ServiceBase<TIPO_PESSOA>, ITipoPessoaService
+    public class CargoService : ServiceBase<CARGO_USUARIO>, ICargoService
     {
-        private readonly ITipoPessoaRepository _baseRepository;
+        private readonly ICargoRepository _baseRepository;
         private readonly ILogRepository _logRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public TipoPessoaService(ITipoPessoaRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
+        public CargoService(ICargoRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
+
         }
 
-        public TIPO_PESSOA GetItemById(Int32 id)
+        public CARGO_USUARIO GetItemById(Int32 id)
         {
-            TIPO_PESSOA item = _baseRepository.GetItemById(id);
+            CARGO_USUARIO item = _baseRepository.GetItemById(id);
             return item;
         }
 
-        public List<TIPO_PESSOA> GetAllItens()
+        public List<CARGO_USUARIO> GetAllItens(Int32 idAss)
         {
-            return _baseRepository.GetAllItens();
+            return _baseRepository.GetAllItens(idAss);
         }
 
-        public List<TIPO_PESSOA> GetAllItensAdm()
+        public List<CARGO_USUARIO> GetAllItensAdm(Int32 idAss)
         {
-            return _baseRepository.GetAllItensAdm();
+            return _baseRepository.GetAllItensAdm(idAss);
         }
-    
-        public Int32 Create(TIPO_PESSOA item, LOG log)
+
+        public CARGO_USUARIO CheckExist(CARGO_USUARIO conta, Int32 idAss)
+        {
+            CARGO_USUARIO item = _baseRepository.CheckExist(conta, idAss);
+            return item;
+        }
+
+        public Int32 Create(CARGO_USUARIO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -63,7 +70,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Create(TIPO_PESSOA item)
+        public Int32 Create(CARGO_USUARIO item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -82,13 +89,13 @@ namespace ModelServices.EntitiesServices
         }
 
 
-        public Int32 Edit(TIPO_PESSOA item, LOG log)
+        public Int32 Edit(CARGO_USUARIO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    TIPO_PESSOA obj = _baseRepository.GetById(item.TIPE_CD_ID);
+                    CARGO_USUARIO obj = _baseRepository.GetById(item.CARG_CD_ID);
                     _baseRepository.Detach(obj);
                     _logRepository.Add(log);
                     _baseRepository.Update(item);
@@ -103,13 +110,13 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Edit(TIPO_PESSOA item)
+        public Int32 Edit(CARGO_USUARIO item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    TIPO_PESSOA obj = _baseRepository.GetById(item.TIPE_CD_ID);
+                    CARGO_USUARIO obj = _baseRepository.GetById(item.CARG_CD_ID);
                     _baseRepository.Detach(obj);
                     _baseRepository.Update(item);
                     transaction.Commit();
@@ -123,7 +130,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Delete(TIPO_PESSOA item, LOG log)
+        public Int32 Delete(CARGO_USUARIO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -141,6 +148,5 @@ namespace ModelServices.EntitiesServices
                 }
             }
         }
-
     }
 }

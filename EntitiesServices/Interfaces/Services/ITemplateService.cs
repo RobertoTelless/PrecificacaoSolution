@@ -17,10 +17,10 @@ namespace ModelServices.Interfaces.EntitiesServices
         Int32 Delete(TEMPLATE perfil, LOG log);
 
         TEMPLATE GetByCode(String code);
-        List<TEMPLATE> GetAllItens();
+        List<TEMPLATE> GetAllItens(Int32 idAss);
         TEMPLATE GetItemById(Int32 id);
-        List<TEMPLATE> GetAllItensAdm();
-        List<TEMPLATE> ExecuteFilter(String sigla, String nome, String conteudo);
-        TEMPLATE CheckExist(TEMPLATE item);
+        List<TEMPLATE> GetAllItensAdm(Int32 idAss);
+        List<TEMPLATE> ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss);
+        TEMPLATE CheckExist(TEMPLATE item, Int32 idAss);
     }
 }

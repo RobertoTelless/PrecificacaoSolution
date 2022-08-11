@@ -22,5 +22,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<NOTICIA> ExecuteFilter(String titulo, String autor, DateTime? data, String texto, String link, Int32 idAss);
         List<NOTICIA> GetAllItensValidos(Int32 idAss);
         NOTICIA_COMENTARIO GetComentarioById(Int32 id);
+
     }
 }

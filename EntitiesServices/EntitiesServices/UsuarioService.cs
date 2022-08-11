@@ -27,7 +27,7 @@ namespace ModelServices.EntitiesServices
         private readonly INotificacaoRepository _notRepository;
         private readonly INoticiaRepository _ntcRepository;
         private readonly ICargoRepository _carRepository;
-        protected Db_GEDEntities Db = new Db_GEDEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public UsuarioService(IUsuarioRepository usuarioRepository, ILogRepository logRepository, IConfiguracaoRepository configuracaoRepository, IPerfilRepository perfRepository, ITemplateRepository tempRepository, IUsuarioAnexoRepository anexoRepository, INotificacaoRepository notRepository, INoticiaRepository ntcRepository, ICargoRepository carRepository) : base(usuarioRepository)
         {
@@ -107,7 +107,7 @@ namespace ModelServices.EntitiesServices
             return _usuarioRepository.GetAllItens(idAss);
         }
 
-        public List<CARGO> GetAllCargos(Int32 idAss)
+        public List<CARGO_USUARIO> GetAllCargos(Int32 idAss)
         {
             return _carRepository.GetAllItens(idAss);
         }

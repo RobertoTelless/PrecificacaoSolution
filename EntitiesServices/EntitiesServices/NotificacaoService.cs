@@ -22,7 +22,7 @@ namespace ModelServices.EntitiesServices
         private readonly ILogRepository _logRepository;
         private readonly INotificacaoAnexoRepository _anexoRepository;
         private readonly ICategoriaNotificacaoRepository _catRepository;
-        protected Db_GEDEntities Db = new Db_GEDEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public NotificacaoService(INotificacaoRepository baseRepository, ILogRepository logRepository, INotificacaoAnexoRepository anexoRepository, ICategoriaNotificacaoRepository catRepository) : base(baseRepository)
         {
@@ -119,7 +119,7 @@ namespace ModelServices.EntitiesServices
                 try
                 {
                     item.USUARIO = null;
-                    NOTIFICACAO obj = _baseRepository.GetById(item.NOTI_CD_ID);
+                    NOTIFICACAO obj = _baseRepository.GetById(item.NOTC_CD_ID);
                     _baseRepository.Detach(obj);
                     _logRepository.Add(log);
                     _baseRepository.Update(item);
@@ -143,7 +143,7 @@ namespace ModelServices.EntitiesServices
                     item.USUARIO = null;
                     item.ASSINANTE = null;
                     item.CATEGORIA_NOTIFICACAO = null;
-                    NOTIFICACAO obj = _baseRepository.GetById(item.NOTI_CD_ID);
+                    NOTIFICACAO obj = _baseRepository.GetById(item.NOTC_CD_ID);
                     _baseRepository.Detach(obj);
                     _baseRepository.Update(item);
                     transaction.Commit();

@@ -189,6 +189,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AgendaAnexoRepository.cs" />
+    <Compile Include="Repositories\ContaBancariaRepository.cs" />
     <Compile Include="Repositories\MaquinaRepository.cs" />
     <Compile Include="Repositories\FormaPagRecRepository.cs" />
     <Compile Include="Repositories\EmpresaRepository.cs" />

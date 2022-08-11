@@ -15,5 +15,6 @@ namespace ModelServices.Interfaces.EntitiesServices
 
         Int32 Edit(CONFIGURACAO item, LOG log);
         Int32 Create(CONFIGURACAO item);
+
     }
 }

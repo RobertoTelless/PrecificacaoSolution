@@ -15,6 +15,7 @@ namespace ModelServices.Interfaces.EntitiesServices
         Int32 Edit(PERFIL perfil, LOG log);
         Int32 Edit(PERFIL perfil);
         Int32 Delete(PERFIL perfil, LOG log);
+
         CONFIGURACAO CarregaConfiguracao();
         PERFIL GetByName(String nome);
         USUARIO GetUserProfile(PERFIL perfil);

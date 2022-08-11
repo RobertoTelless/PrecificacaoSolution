@@ -16,35 +16,42 @@ using System.Data;
 
 namespace ModelServices.EntitiesServices
 {
-    public class TipoPessoaService : ServiceBase<TIPO_PESSOA>, ITipoPessoaService
+    public class CategoriaUsuarioService : ServiceBase<CATEGORIA_USUARIO>, ICategoriaUsuarioService
     {
-        private readonly ITipoPessoaRepository _baseRepository;
+        private readonly ICategoriaUsuarioRepository _baseRepository;
         private readonly ILogRepository _logRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public TipoPessoaService(ITipoPessoaRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
+        public CategoriaUsuarioService(ICategoriaUsuarioRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
+
         }
 
-        public TIPO_PESSOA GetItemById(Int32 id)
+        public CATEGORIA_USUARIO GetItemById(Int32 id)
         {
-            TIPO_PESSOA item = _baseRepository.GetItemById(id);
+            CATEGORIA_USUARIO item = _baseRepository.GetItemById(id);
             return item;
         }
 
-        public List<TIPO_PESSOA> GetAllItens()
+        public List<CATEGORIA_USUARIO> GetAllItens(Int32 idAss)
         {
-            return _baseRepository.GetAllItens();
+            return _baseRepository.GetAllItens(idAss);
         }
 
-        public List<TIPO_PESSOA> GetAllItensAdm()
+        public List<CATEGORIA_USUARIO> GetAllItensAdm(Int32 idAss)
         {
-            return _baseRepository.GetAllItensAdm();
+            return _baseRepository.GetAllItensAdm(idAss);
         }
-    
-        public Int32 Create(TIPO_PESSOA item, LOG log)
+
+        public CATEGORIA_USUARIO CheckExist(CATEGORIA_USUARIO conta, Int32 idAss)
+        {
+            CATEGORIA_USUARIO item = _baseRepository.CheckExist(conta, idAss);
+            return item;
+        }
+
+        public Int32 Create(CATEGORIA_USUARIO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -63,7 +70,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Create(TIPO_PESSOA item)
+        public Int32 Create(CATEGORIA_USUARIO item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -82,13 +89,13 @@ namespace ModelServices.EntitiesServices
         }
 
 
-        public Int32 Edit(TIPO_PESSOA item, LOG log)
+        public Int32 Edit(CATEGORIA_USUARIO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    TIPO_PESSOA obj = _baseRepository.GetById(item.TIPE_CD_ID);
+                    CATEGORIA_USUARIO obj = _baseRepository.GetById(item.CAUS_CD_ID);
                     _baseRepository.Detach(obj);
                     _logRepository.Add(log);
                     _baseRepository.Update(item);
@@ -103,13 +110,13 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Edit(TIPO_PESSOA item)
+        public Int32 Edit(CATEGORIA_USUARIO item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    TIPO_PESSOA obj = _baseRepository.GetById(item.TIPE_CD_ID);
+                    CATEGORIA_USUARIO obj = _baseRepository.GetById(item.CAUS_CD_ID);
                     _baseRepository.Detach(obj);
                     _baseRepository.Update(item);
                     transaction.Commit();
@@ -123,7 +130,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Delete(TIPO_PESSOA item, LOG log)
+        public Int32 Delete(CATEGORIA_USUARIO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -141,6 +148,5 @@ namespace ModelServices.EntitiesServices
                 }
             }
         }
-
     }
 }

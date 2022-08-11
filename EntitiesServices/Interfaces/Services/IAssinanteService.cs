@@ -23,5 +23,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<TIPO_PESSOA> GetAllTiposPessoa();
         List<UF> GetAllUF();
         UF GetUFBySigla(String sigla);
+    
     }
 }
