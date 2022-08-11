@@ -63,7 +63,7 @@ namespace DataServices.Repositories
             }
             if (!String.IsNullOrEmpty(texto))
             {
-                query = query.Where(p => p.NOTC_TX_TEXTO.Contains(texto));
+                query = query.Where(p => p.NOTC_TX_NOTICIA.Contains(texto));
             }
             if (!String.IsNullOrEmpty(link))
             {

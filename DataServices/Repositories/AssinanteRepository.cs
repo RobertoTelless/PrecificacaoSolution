@@ -45,10 +45,6 @@ namespace DataServices.Repositories
         {
             List<ASSINANTE> lista = new List<ASSINANTE>();
             IQueryable<ASSINANTE> query = Db.ASSINANTE;
-            if (tipo > 0)
-            {
-                query = query.Where(p => p.ASSI_IN_TIPO == tipo);
-            }
             if (!String.IsNullOrEmpty(nome))
             {
                 query = query.Where(p => p.ASSI_NM_NOME.Contains(nome));

@@ -12,18 +12,21 @@ namespace EntitiesServices.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LOG
+    public partial class PESSOA_EXTERNA
     {
-        public int LOG_CD_ID { get; set; }
+        public int PEEX_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
-        public int USUA_CD_ID { get; set; }
-        public System.DateTime LOG_DT_LOG { get; set; }
-        public string LOG_NM_OPERACAO { get; set; }
-        public string LOG_TX_TEXTO { get; set; }
-        public string LOG_TX_TEXTO_ANTES { get; set; }
-        public int LOG_IN_ATIVO { get; set; }
+        public int CARG_CD_ID { get; set; }
+        public string PEEX_NM_NOME { get; set; }
+        public string PEEX_NR_CPF { get; set; }
+        public string PEEX_NR_RG { get; set; }
+        public string PEES_EM_EMAIL { get; set; }
+        public string PEEX_NR_TELEFONE { get; set; }
+        public string PEEX_NR_CELULAR { get; set; }
+        public System.DateTime PEEX_DT_CADASTRO { get; set; }
+        public int PEEX_IN_ATIVO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual CARGO_USUARIO CARGO_USUARIO { get; set; }
     }
 }

@@ -12,18 +12,17 @@ namespace EntitiesServices.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LOG
+    public partial class TEMPLATE_SMS
     {
-        public int LOG_CD_ID { get; set; }
-        public int ASSI_CD_ID { get; set; }
-        public int USUA_CD_ID { get; set; }
-        public System.DateTime LOG_DT_LOG { get; set; }
-        public string LOG_NM_OPERACAO { get; set; }
-        public string LOG_TX_TEXTO { get; set; }
-        public string LOG_TX_TEXTO_ANTES { get; set; }
-        public int LOG_IN_ATIVO { get; set; }
+        public int TSMS_CD_ID { get; set; }
+        public Nullable<int> ASSI_CD_ID { get; set; }
+        public string TSMS_NM_NOME { get; set; }
+        public string TSMS_SG_SIGLA { get; set; }
+        public string TSMS_TX_CORPO { get; set; }
+        public string TSMS_LK_LINK { get; set; }
+        public int TSMS_IN_ATIVO { get; set; }
+        public Nullable<int> TSMS_IN_EDITAVEL { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
     }
 }

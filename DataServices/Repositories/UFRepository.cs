@@ -30,6 +30,5 @@ namespace DataServices.Repositories
             IQueryable<UF> query = Db.UF.Where(p => p.UF_SG_SIGLA == sigla);
             return query.FirstOrDefault();
         }
-
     }
 }

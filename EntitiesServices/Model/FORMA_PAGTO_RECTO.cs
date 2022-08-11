@@ -21,8 +21,10 @@ namespace EntitiesServices.Model
         public string FOPR_NM_NOME_FORMA { get; set; }
         public System.DateTime FOPR_DT_CADASTRO { get; set; }
         public int FOPR_IN_ATIVO { get; set; }
+        public int ASSI_CD_ID { get; set; }
     
         public virtual CONTA_BANCO CONTA_BANCO { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }
+        public virtual ASSINANTE ASSINANTE { get; set; }
     }
 }

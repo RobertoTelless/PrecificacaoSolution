@@ -32,6 +32,7 @@ namespace EntitiesServices.Model
         public Nullable<System.DateTime> NOTC_DT_VISTA { get; set; }
         public int NOTC_IN_ATIVO { get; set; }
         public int USUARIOUSUA_CD_ID { get; set; }
+        public string NOTC_TX_NOTIFICACAO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_NOTIFICACAO CATEGORIA_NOTIFICACAO { get; set; }

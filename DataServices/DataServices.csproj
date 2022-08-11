@@ -189,16 +189,17 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AgendaAnexoRepository.cs" />
+    <Compile Include="Repositories\MaquinaRepository.cs" />
+    <Compile Include="Repositories\FormaPagRecRepository.cs" />
+    <Compile Include="Repositories\EmpresaRepository.cs" />
     <Compile Include="Repositories\AgendaRepository.cs" />
     <Compile Include="Repositories\AssinanteRepository.cs" />
     <Compile Include="Repositories\CargoRepository.cs" />
     <Compile Include="Repositories\CategoriaUsuarioRepository.cs" />
     <Compile Include="Repositories\PeriodicidadeRepository.cs" />
     <Compile Include="Repositories\CategoriaAgendaRepository.cs" />
-    <Compile Include="Repositories\CategoriaTelefoneRepository.cs" />
     <Compile Include="Repositories\CategoriaNotificacaoRepository.cs" />
     <Compile Include="Repositories\ConfiguracaoRepository.cs" />
-    <Compile Include="Repositories\TelefoneRepository.cs" />
     <Compile Include="Repositories\LogRepository.cs" />
     <Compile Include="Repositories\NoticiaComentarioRepository.cs" />
     <Compile Include="Repositories\NoticiaRepository.cs" />

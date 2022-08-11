@@ -32,6 +32,12 @@ namespace EntitiesServices.Model
         public Nullable<decimal> EMPR_VL_PATRIMONIO_LIQUIDO { get; set; }
         public System.DateTime EMPR_DT_CADASTRO { get; set; }
         public int EMPR_IN_ATIVO { get; set; }
+        public Nullable<int> MAQN_CD_ID { get; set; }
+        public int EMPR_IN_OPERA_CARTAO { get; set; }
+        public string EMPR_NM_OUTRA_MAQUINA { get; set; }
+        public Nullable<decimal> EMPR_PC_ANTECIPACAO { get; set; }
+        public int EMPR_IN_PAGA_COMISSAO { get; set; }
+        public Nullable<decimal> EMPR_VL_IMPOSTO_MEI { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -47,5 +53,6 @@ namespace EntitiesServices.Model
         public virtual ICollection<PRODUTO_ESTOQUE_EMPRESA> PRODUTO_ESTOQUE_EMPRESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUTO_TABELA_PRECO> PRODUTO_TABELA_PRECO { get; set; }
+        public virtual MAQUINA MAQUINA { get; set; }
     }
 }

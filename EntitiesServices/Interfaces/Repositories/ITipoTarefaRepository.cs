@@ -9,7 +9,9 @@ namespace ModelServices.Interfaces.Repositories
 {
     public interface ITipoTarefaRepository : IRepositoryBase<TIPO_TAREFA>
     {
-        List<TIPO_TAREFA> GetAllItens();
+        TIPO_TAREFA CheckExist(TIPO_TAREFA item, Int32 idAss);
+        List<TIPO_TAREFA> GetAllItens(Int32 idAss);
         TIPO_TAREFA GetItemById(Int32 id);
+        List<TIPO_TAREFA> GetAllItensAdm(Int32 idAss);
     }
 }

@@ -9,6 +9,7 @@ namespace ModelServices.Interfaces.Repositories
 {
     public interface IUsuarioRepository : IRepositoryBase<USUARIO>
     {
+        USUARIO CheckExist(USUARIO item, Int32 idAss);
         USUARIO GetByEmail(String email, Int32 idAss);
         USUARIO GetByLogin(String login, Int32 idAss);
         USUARIO GetItemById(Int32 id);

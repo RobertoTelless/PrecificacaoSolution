@@ -125,6 +125,36 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_USUARIO_ANEXO_USUARIO" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN416650" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CARGO_USUARIO" Width="1.5" PointX="3" PointY="63.875" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.COMISSAO_CARGO" Width="1.5" PointX="5.25" PointY="64" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MAQUINA" Width="1.5" PointX="3" PointY="60.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.OUTRO_CUSTO_VARIAVEL" Width="1.5" PointX="3" PointY="67.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA" Width="1.5" PointX="13.25" PointY="67.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLATAFORMA_ENTREGA" Width="1.5" PointX="3" PointY="70.25" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCARGO_USUA401517" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKMAQUINA36030" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKOUTRO_CUST578807" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPESSOA_EXT750477" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPLATAFORMA785659" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_USUARIO_CARGO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCOMISSAO_C527874" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPESSOA_EXT429415" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONFIGURACAO" Width="1.5" PointX="3" PointY="31.25" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONFIGURACAO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_CATEGORIA_AGENDA" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE" Width="1.5" PointX="3" PointY="26.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_EMAIL" Width="1.5" PointX="3" PointY="83.5" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_SMS" Width="1.5" PointX="3" PointY="22" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_EMAIL_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_SMS_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_AGENDA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_FORNECEDOR_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_USUARIO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_TAREFA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_NOTIFICACAO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORMA_PAGTO_RECTO_ASSINANTE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

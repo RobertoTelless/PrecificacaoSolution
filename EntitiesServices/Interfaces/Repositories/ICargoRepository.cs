@@ -7,10 +7,11 @@ using EntitiesServices.Model;
 
 namespace ModelServices.Interfaces.Repositories
 {
-    public interface ICargoRepository : IRepositoryBase<CARGO>
+    public interface ICargoRepository : IRepositoryBase<CARGO_USUARIO>
     {
-        List<CARGO> GetAllItens(Int32 idAss);
-        CARGO GetItemById(Int32 id);
-        List<CARGO> GetAllItensAdm(Int32 idAss);
+        CARGO_USUARIO CheckExist(CARGO_USUARIO item, Int32 idAss);
+        List<CARGO_USUARIO> GetAllItens(Int32 idAss);
+        CARGO_USUARIO GetItemById(Int32 id);
+        List<CARGO_USUARIO> GetAllItensAdm(Int32 idAss);
     }
 }

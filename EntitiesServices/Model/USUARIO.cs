@@ -57,6 +57,7 @@ namespace EntitiesServices.Model
         public int USUA_NR_ACESSOS { get; set; }
         public int USUA_NR_FALHAS { get; set; }
         public string USUA_TX_OBSERVACOES { get; set; }
+        public Nullable<int> CARG_CD_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }
@@ -81,5 +82,6 @@ namespace EntitiesServices.Model
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO1 { get; set; }
+        public virtual CARGO_USUARIO CARGO_USUARIO { get; set; }
     }
 }

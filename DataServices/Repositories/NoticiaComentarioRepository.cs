@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<NOTICIA_COMENTARIO> query = Db.NOTICIA_COMENTARIO.Where(p => p.NOCO_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

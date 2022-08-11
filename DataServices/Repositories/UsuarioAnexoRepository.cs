@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<USUARIO_ANEXO> query = Db.USUARIO_ANEXO.Where(p => p.USAN_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

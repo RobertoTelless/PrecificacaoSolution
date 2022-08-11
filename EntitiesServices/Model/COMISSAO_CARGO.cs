@@ -12,18 +12,15 @@ namespace EntitiesServices.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LOG
+    public partial class COMISSAO_CARGO
     {
-        public int LOG_CD_ID { get; set; }
-        public int ASSI_CD_ID { get; set; }
-        public int USUA_CD_ID { get; set; }
-        public System.DateTime LOG_DT_LOG { get; set; }
-        public string LOG_NM_OPERACAO { get; set; }
-        public string LOG_TX_TEXTO { get; set; }
-        public string LOG_TX_TEXTO_ANTES { get; set; }
-        public int LOG_IN_ATIVO { get; set; }
+        public int COCA_CD_ID { get; set; }
+        public int CARG_CD_ID { get; set; }
+        public string COCA_NM_NOME { get; set; }
+        public decimal COCA_PC_PERCENTUAL { get; set; }
+        public int COCA_IN_TIPO_COMISSAO { get; set; }
+        public int COCA_IN_ATIVO { get; set; }
     
-        public virtual ASSINANTE ASSINANTE { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual CARGO_USUARIO CARGO_USUARIO { get; set; }
     }
 }

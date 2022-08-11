@@ -12,18 +12,15 @@ namespace EntitiesServices.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LOG
+    public partial class OUTRO_CUSTO_VARIAVEL
     {
-        public int LOG_CD_ID { get; set; }
+        public int OUCV_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
-        public int USUA_CD_ID { get; set; }
-        public System.DateTime LOG_DT_LOG { get; set; }
-        public string LOG_NM_OPERACAO { get; set; }
-        public string LOG_TX_TEXTO { get; set; }
-        public string LOG_TX_TEXTO_ANTES { get; set; }
-        public int LOG_IN_ATIVO { get; set; }
+        public string OUCV_NM_CUSTO_VARIAVEL { get; set; }
+        public decimal OUCV_PC_PERECNTUAL { get; set; }
+        public System.DateTime OUCV_DT_CADASTRO { get; set; }
+        public int OUCV_IN_ATIVO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
     }
 }

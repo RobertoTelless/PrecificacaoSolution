@@ -24,26 +24,29 @@ namespace DataServices.Repositories
             return query.FirstOrDefault();
         }
 
-        public List<TEMPLATE> GetAllItensAdm()
+        public List<TEMPLATE> GetAllItensAdm(Int32 idAss)
         {
             IQueryable<TEMPLATE> query = Db.TEMPLATE;
+            query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
         }
 
-        public List<TEMPLATE> GetAllItens()
+        public List<TEMPLATE> GetAllItens(Int32 idAss)
         {
             IQueryable<TEMPLATE> query = Db.TEMPLATE.Where(p => p.TEMP_IN_ATIVO == 1);
+            query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
         }
 
-        public TEMPLATE CheckExist(TEMPLATE item)
+        public TEMPLATE CheckExist(TEMPLATE item, Int32 idAss)
         {
             IQueryable<TEMPLATE> query = Db.TEMPLATE;
             query = query.Where(p => p.TEMP_SG_SIGLA == item.TEMP_SG_SIGLA);
+            query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.FirstOrDefault();
         }
 
-        public List<TEMPLATE> ExecuteFilter(String sigla, String nome, String conteudo)
+        public List<TEMPLATE> ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss)
         {
             List<TEMPLATE> lista = new List<TEMPLATE>();
             IQueryable<TEMPLATE> query = Db.TEMPLATE;
@@ -61,6 +64,7 @@ namespace DataServices.Repositories
             }
             if (query != null)
             {
+                query = query.Where(p => p.ASSI_CD_ID == idAss);
                 query = query.OrderBy(a => a.TEMP_SG_SIGLA);
                 lista = query.ToList<TEMPLATE>();
             }

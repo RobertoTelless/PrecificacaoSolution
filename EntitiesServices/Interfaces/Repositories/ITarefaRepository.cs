@@ -17,6 +17,6 @@ namespace ModelServices.Interfaces.Repositories
         List<TAREFA> GetAllItens(Int32 idUsu);
         List<TAREFA> GetAllItensAdm(Int32 idUsu);
         List<PERIODICIDADE_TAREFA> GetAllPeriodicidade();
-        List<TAREFA> ExecuteFilter(Int32? tipoId, String titulo, DateTime? data, Int32 encerrada, Int32 prioridade, Int32? usuario, Int32 idUsu);
+        List<TAREFA> ExecuteFilter(Int32? tipoId, String titulo, DateTime? dataInico, DateTime? dataFim, Int32 encerrada, Int32 prioridade, Int32? usuario, Int32 idUsu);
     }
 }

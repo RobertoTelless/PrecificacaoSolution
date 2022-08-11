@@ -36,5 +36,6 @@ namespace EntitiesServices.Model
         public virtual ICollection<AGENDA_ANEXO> AGENDA_ANEXO { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        public virtual CATEGORIA_AGENDA CATEGORIA_AGENDA { get; set; }
     }
 }

@@ -11,10 +11,18 @@ namespace DataServices.Repositories
 {
     public class UsuarioRepository : RepositoryBase<USUARIO>, IUsuarioRepository
     {
+        public USUARIO CheckExist(USUARIO conta, Int32 idAss)
+        {
+            IQueryable<USUARIO> query = Db.USUARIO;
+            query = query.Where(p => p.USUA_NR_CPF == conta.USUA_NR_CPF);
+            query = query.Where(p => p.ASSI_CD_ID == idAss);
+            return query.FirstOrDefault();
+        }
+
         public USUARIO GetByEmail(String email, Int32 idAss)
         {
             IQueryable<USUARIO> query = Db.USUARIO.Where(p => p.USUA_IN_ATIVO == 1);
-            query = query.Where(p => p.USUA_NM_EMAIL == email);
+            query = query.Where(p => p.USUA_EM_EMAIL == email);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.FirstOrDefault();
         }
@@ -22,7 +30,7 @@ namespace DataServices.Repositories
         public USUARIO GetByEmailOnly(String email)
         {
             IQueryable<USUARIO> query = Db.USUARIO.Where(p => p.USUA_IN_ATIVO == 1);
-            query = query.Where(p => p.USUA_NM_EMAIL == email);
+            query = query.Where(p => p.USUA_EM_EMAIL == email);
             return query.FirstOrDefault();
         }
 
@@ -99,7 +107,7 @@ namespace DataServices.Repositories
             IQueryable<USUARIO> query = Db.USUARIO;
             if (!String.IsNullOrEmpty(email))
             {
-                query = query.Where(p => p.USUA_NM_EMAIL == email);
+                query = query.Where(p => p.USUA_EM_EMAIL == email);
             }
             if (!String.IsNullOrEmpty(nome))
             {

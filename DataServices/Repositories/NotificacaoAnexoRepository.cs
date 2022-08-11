@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<NOTIFICACAO_ANEXO> query = Db.NOTIFICACAO_ANEXO.Where(p => p.NOAN_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

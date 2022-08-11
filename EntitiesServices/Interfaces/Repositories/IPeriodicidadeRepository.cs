@@ -7,10 +7,11 @@ using EntitiesServices.Model;
 
 namespace ModelServices.Interfaces.Repositories
 {
-    public interface IPeriodicidadeRepository : IRepositoryBase<PERIODICIDADE>
+    public interface IPeriodicidadeRepository : IRepositoryBase<PERIODICIDADE_TAREFA>
     {
-        List<PERIODICIDADE> GetAllItens(Int32 idAss);
-        PERIODICIDADE GetItemById(Int32 id);
-        List<PERIODICIDADE> GetAllItensAdm(Int32 idAss);
+        PERIODICIDADE_TAREFA CheckExist(PERIODICIDADE_TAREFA item);
+        List<PERIODICIDADE_TAREFA> GetAllItens();
+        PERIODICIDADE_TAREFA GetItemById(Int32 id);
+        List<PERIODICIDADE_TAREFA> GetAllItensAdm();
     }
 }

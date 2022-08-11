@@ -76,5 +76,15 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
         public virtual DbSet<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
+        public virtual DbSet<CARGO_USUARIO> CARGO_USUARIO { get; set; }
+        public virtual DbSet<COMISSAO_CARGO> COMISSAO_CARGO { get; set; }
+        public virtual DbSet<MAQUINA> MAQUINA { get; set; }
+        public virtual DbSet<OUTRO_CUSTO_VARIAVEL> OUTRO_CUSTO_VARIAVEL { get; set; }
+        public virtual DbSet<PESSOA_EXTERNA> PESSOA_EXTERNA { get; set; }
+        public virtual DbSet<PLATAFORMA_ENTREGA> PLATAFORMA_ENTREGA { get; set; }
+        public virtual DbSet<CONFIGURACAO> CONFIGURACAO { get; set; }
+        public virtual DbSet<TEMPLATE> TEMPLATE { get; set; }
+        public virtual DbSet<TEMPLATE_EMAIL> TEMPLATE_EMAIL { get; set; }
+        public virtual DbSet<TEMPLATE_SMS> TEMPLATE_SMS { get; set; }
     }
 }

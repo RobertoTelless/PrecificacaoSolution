@@ -10,6 +10,14 @@ namespace DataServices.Repositories
 {
     public class CategoriaAgendaRepository : RepositoryBase<CATEGORIA_AGENDA>, ICategoriaAgendaRepository
     {
+        public CATEGORIA_AGENDA CheckExist(CATEGORIA_AGENDA conta, Int32 idAss)
+        {
+            IQueryable<CATEGORIA_AGENDA> query = Db.CATEGORIA_AGENDA;
+            query = query.Where(p => p.CAAG_NM_NOME == conta.CAAG_NM_NOME);
+            query = query.Where(p => p.ASSI_CD_ID == idAss);
+            return query.FirstOrDefault();
+        }
+
         public CATEGORIA_AGENDA GetItemById(Int32 id)
         {
             IQueryable<CATEGORIA_AGENDA> query = Db.CATEGORIA_AGENDA;

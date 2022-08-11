@@ -23,8 +23,10 @@ namespace EntitiesServices.Model
         public int TITR_CD_ID { get; set; }
         public string TITR_NM_NOME { get; set; }
         public Nullable<int> TITR_IN_ATIVO { get; set; }
+        public Nullable<int> ASSI_CD_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREFA> TAREFA { get; set; }
+        public virtual ASSINANTE ASSINANTE { get; set; }
     }
 }

@@ -28,10 +28,9 @@ namespace DataServices.Repositories
 
         public List<TIPO_PESSOA> GetAllItens()
         {
-            IQueryable<TIPO_PESSOA> query = Db.TIPO_PESSOA.Where(p => p.TIPE_IN_ATIVO == 1);
+            IQueryable<TIPO_PESSOA> query = Db.TIPO_PESSOA;
             return query.ToList();
         }
-
     }
 }
  

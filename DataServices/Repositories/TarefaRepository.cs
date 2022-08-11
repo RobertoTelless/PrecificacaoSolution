@@ -78,7 +78,7 @@ namespace DataServices.Repositories
             return query.ToList<PERIODICIDADE_TAREFA>();
         }
 
-        public List<TAREFA> ExecuteFilter(Int32? tipoId, String titulo, DateTime? data, Int32 encerrado, Int32 prioridade, Int32? usuario, Int32 idUsu)
+        public List<TAREFA> ExecuteFilter(Int32? tipoId, String titulo, DateTime? dataInicio, DateTime? dataFim, Int32 encerrado, Int32 prioridade, Int32? usuario, Int32 idUsu)
         {
             List<TAREFA> lista = new List<TAREFA>();
             IQueryable<TAREFA> query = Db.TAREFA;
@@ -109,17 +109,25 @@ namespace DataServices.Repositories
             {
                 query = query.Where(p => p.USUA_CD_ID == idUsu);
             }
+            if (dataInicio != null & dataFim == null)
+            {
+                query = query.Where(p => DbFunctions.TruncateTime(p.TARE_DT_ESTIMADA) >= DbFunctions.TruncateTime(dataInicio));
+            }
+            if (dataInicio == null & dataFim != null)
+            {
+                query = query.Where(p => DbFunctions.TruncateTime(p.TARE_DT_ESTIMADA) <= DbFunctions.TruncateTime(dataFim));
+            }
+            if (dataInicio != null & dataFim != null)
+            {
+                query = query.Where(p => DbFunctions.TruncateTime(p.TARE_DT_ESTIMADA) >= DbFunctions.TruncateTime(dataInicio) & DbFunctions.TruncateTime(p.TARE_DT_ESTIMADA) <= DbFunctions.TruncateTime(dataFim));
+            }
             if (query != null)
             {
                 query = query.OrderBy(a => a.TARE_DT_CADASTRO);
                 lista = query.ToList<TAREFA>();
-
-                if (data != DateTime.MinValue)
-                {
-                    lista = lista.Where(p => p.TARE_DT_CADASTRO == data).ToList();
-                }
             }
             return lista;
         }
+
     }
 }

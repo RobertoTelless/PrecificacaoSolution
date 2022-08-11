@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<AGENDA_ANEXO> query = Db.AGENDA_ANEXO.Where(p => p.AGAN_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

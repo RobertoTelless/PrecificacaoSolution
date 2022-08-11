@@ -9,6 +9,7 @@ namespace ModelServices.Interfaces.Repositories
 {
     public interface ICategoriaUsuarioRepository : IRepositoryBase<CATEGORIA_USUARIO>
     {
+        CATEGORIA_USUARIO CheckExist(CATEGORIA_USUARIO item, Int32 idAss);
         List<CATEGORIA_USUARIO> GetAllItens(Int32 idAss);
         CATEGORIA_USUARIO GetItemById(Int32 id);
         List<CATEGORIA_USUARIO> GetAllItensAdm(Int32 idAss);
