@@ -24,7 +24,7 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<TAREFA> GetAllItens(Int32 idAss);
         List<TAREFA> GetAllItensAdm(Int32 idAss);
         List<USUARIO> GetAllUsers(Int32 idAss);
-        List<TIPO_TAREFA> GetAllTipos();
+        List<TIPO_TAREFA> GetAllTipos(Int32 idAss);
         TAREFA_ANEXO GetAnexoById(Int32 id);
         USUARIO GetUserById(Int32 id);
         List<PERIODICIDADE_TAREFA> GetAllPeriodicidade();

@@ -45,6 +45,12 @@ namespace ModelServices.EntitiesServices
             return _baseRepository.GetAllItensAdm();
         }
 
+        public PERIODICIDADE_TAREFA CheckExist(PERIODICIDADE_TAREFA conta)
+        {
+            PERIODICIDADE_TAREFA item = _baseRepository.CheckExist(conta);
+            return item;
+        }
+
         public Int32 Create(PERIODICIDADE_TAREFA item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
