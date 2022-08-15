@@ -525,6 +525,7 @@ namespace ERP_Condominios_Solution.Controllers
             vm.ASSI_CD_ID = idAss;
             vm.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
             vm.NOTC_IN_VISTA = 0;
+            vm.NOTC_IN_NIVEL = 0;   
             return View(vm);
         }
 

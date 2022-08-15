@@ -434,6 +434,7 @@
           <Property Name="NOTC_DT_VISTA" Type="datetime" />
           <Property Name="NOTC_IN_ATIVO" Type="int" Nullable="false" />
           <Property Name="USUARIOUSUA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="NOTC_IN_NIVEL" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="NOTIFICACAO_ANEXO">
           <Key>
@@ -2895,6 +2896,7 @@
           <NavigationProperty Name="NOTIFICACAO_ANEXO" Relationship="Self.FKNOTIFICACA419021" FromRole="NOTIFICACAO" ToRole="NOTIFICACAO_ANEXO" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKNOTIFICACA793310" FromRole="NOTIFICACAO" ToRole="USUARIO" />
           <Property Name="NOTC_TX_NOTIFICACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NOTC_IN_NIVEL" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="NOTIFICACAO_ANEXO">
           <Key>
@@ -5399,6 +5401,7 @@
           <EntitySetMapping Name="NOTIFICACAO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.NOTIFICACAO">
               <MappingFragment StoreEntitySet="NOTIFICACAO">
+                <ScalarProperty Name="NOTC_IN_NIVEL" ColumnName="NOTC_IN_NIVEL" />
                 <ScalarProperty Name="NOTC_TX_NOTIFICACAO" ColumnName="NOTC_TX_NOTIFICACAO" />
                 <ScalarProperty Name="NOTC_CD_ID" ColumnName="NOTC_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />

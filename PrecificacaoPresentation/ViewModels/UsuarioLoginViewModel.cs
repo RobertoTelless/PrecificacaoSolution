@@ -26,7 +26,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public string USUA_NM_LOGIN { get; set; }
         [StringLength(150, ErrorMessage = "O E-MAIL deve ter no máximo 150 caracteres.")]
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Deve ser um e-mail válido")]
-        public string USUA_NM_EMAIL { get; set; }
+        public string USUA_EM_EMAIL { get; set; }
         [StringLength(10, ErrorMessage = "A MATRÍCULA deve ter no máximo 10 caracteres.")]
         public string USUA_NR_MATRICULA { get; set; }
         [StringLength(50, ErrorMessage = "O TELEFONE deve ter no máximo 50 caracteres.")]
