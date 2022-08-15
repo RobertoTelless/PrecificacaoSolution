@@ -54,7 +54,7 @@ namespace ApplicationServices.Services
             return _usuarioService.GetAllItens(idAss);
         }
 
-        public List<CARGO> GetAllCargos(Int32 idAss)
+        public List<CARGO_USUARIO> GetAllCargos(Int32 idAss)
         {
             return _usuarioService.GetAllCargos(idAss);
         }
@@ -105,7 +105,7 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica Email
-                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_NM_EMAIL))
+                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_EM_EMAIL))
                 {
                     return 2;
                 }
@@ -135,11 +135,11 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
                     ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -165,7 +165,7 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica Email
-                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_NM_EMAIL))
+                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_EM_EMAIL))
                 {
                     return 2;
                 }
@@ -195,11 +195,11 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
                     ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -219,13 +219,13 @@ namespace ApplicationServices.Services
             try
             {
                 // Verifica Email
-                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_NM_EMAIL))
+                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_EM_EMAIL))
                 {
                     return 1;
                 }
 
                 // Verifica existencia prévia
-                USUARIO usu = _usuarioService.GetByEmail(usuario.USUA_NM_EMAIL, usuarioLogado.ASSI_CD_ID);
+                USUARIO usu = _usuarioService.GetByEmail(usuario.USUA_EM_EMAIL, usuarioLogado.ASSI_CD_ID);
                 if (usu != null)
                 {
                     if (usu.USUA_CD_ID != usuario.USUA_CD_ID)
@@ -249,12 +249,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
                     ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<USUARIO>(usuarioAntes),
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<USUARIO>(usuarioAntes),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -274,7 +274,7 @@ namespace ApplicationServices.Services
             try
             {
                 // Verifica Email
-                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_NM_EMAIL))
+                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_EM_EMAIL))
                 {
                     return 1;
                 }
@@ -301,12 +301,41 @@ namespace ApplicationServices.Services
             try
             {
                 // Verifica integridade
+                if (usuario.FORNECEDOR_ANOTACOES.Count > 0)
+                {
+                    return 1;
+                }
+                if (usuario.NOTICIA_COMENTARIO.Count > 0)
+                {
+                    return 1;
+                }
+                if (usuario.NOTIFICACAO.Count > 0)
+                {
+                    return 1;
+                }
+                if (usuario.TAREFA.Count > 0)
+                {
+                    return 1;
+                }
+                if (usuario.TAREFA_ACOMPANHAMENTO.Count > 0)
+                {
+                    return 1;
+                }
 
                 // Acerta campos de usuários
                 usuario.USUA_DT_ALTERACAO = DateTime.Now;
                 usuario.USUA_IN_ATIVO = 0;
 
                 // Monta Log
+                LOG log = new LOG
+                {
+                    LOG_DT_LOG = DateTime.Now,
+                    USUA_CD_ID = usuarioLogado.USUA_CD_ID,
+                    ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
+                    LOG_NM_OPERACAO = "DelUSUA",
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_IN_ATIVO = 1
+                };
 
                 // Persiste
                 return _usuarioService.EditUser(usuario);
@@ -328,6 +357,15 @@ namespace ApplicationServices.Services
                 usuario.USUA_IN_ATIVO = 1;
 
                 // Monta Log
+                LOG log = new LOG
+                {
+                    LOG_DT_LOG = DateTime.Now,
+                    USUA_CD_ID = usuarioLogado.USUA_CD_ID,
+                    ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
+                    LOG_NM_OPERACAO = "ReatUSUA",
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_IN_ATIVO = 1
+                };
 
                 // Persiste
                 return _usuarioService.EditUser(usuario);
@@ -349,11 +387,11 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
                     ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "BlqUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -377,11 +415,11 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
                     LOG_NM_OPERACAO = "DbqUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -424,13 +462,6 @@ namespace ApplicationServices.Services
                 {
                     return 3;
                 }
-
-                // Verifica se acessa sistema
-                if (usuario.USUA_IN_SISTEMA == 0)
-                {
-                    return 11;
-                }
-
 
                 // Verifica se está bloqueado
                 if (usuario.USUA_IN_BLOQUEADO == 1)
@@ -549,26 +580,24 @@ namespace ApplicationServices.Services
                 NOTIFICACAO noti = new NOTIFICACAO();
                 noti.CANO_CD_ID = 1;
                 noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
-                noti.NOTI_DT_EMISSAO = DateTime.Today;
-                noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                noti.NOTI_IN_VISTA = 0;
-                noti.NOTI_NM_TITULO = "Alteração de Senha";
-                noti.NOTI_IN_ATIVO = 1;
-                noti.NOTI_TX_TEXTO = "ATENÇÃO: A sua senha foi alterada em " + DateTime.Today.Date.ToLongDateString() + ".";
+                noti.NOTC_DT_EMISSAO = DateTime.Today;
+                noti.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                noti.NOTC_IN_VISTA = 0;
+                noti.NOTC_NM_TITULO = "Alteração de Senha";
+                noti.NOTC_IN_ATIVO = 1;
+                noti.NOTC_TX_NOTIFICACAO = "ATENÇÃO: A sua senha foi alterada em " + DateTime.Today.Date.ToLongDateString() + ".";
                 noti.USUA_CD_ID = usuario.USUA_CD_ID;
-                noti.NOTI_IN_STATUS = 1;
-                noti.NOTI_IN_NIVEL = 1;
                 Int32 volta1 = _notiService.Create(noti);
 
 
                 //Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "ChangePWD",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
                 };
 
                 // Persiste
@@ -618,25 +647,23 @@ namespace ApplicationServices.Services
 
             // Monta log
             LOG log = new LOG();
-            log.LOG_DT_DATA = DateTime.Now;
+            log.LOG_DT_LOG = DateTime.Now;
             log.LOG_NM_OPERACAO = "NewPWD";
             log.ASSI_CD_ID = usuario.ASSI_CD_ID;
-            log.LOG_TX_REGISTRO = senha;
+            log.LOG_TX_TEXTO = senha;
             log.LOG_IN_ATIVO = 1;
 
             // Gera Notificação
             NOTIFICACAO noti = new NOTIFICACAO();
             noti.CANO_CD_ID = 1;
             noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
-            noti.NOTI_DT_EMISSAO = DateTime.Today;
-            noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-            noti.NOTI_IN_VISTA = 0;
-            noti.NOTI_NM_TITULO = "Geração de Nova Senha";
-            noti.NOTI_IN_ATIVO = 1;
-            noti.NOTI_TX_TEXTO = "ATENÇÃO: Sua solicitação de nova senha foi atendida em " + DateTime.Today.Date.ToLongDateString() + ". Verifique no seu e-mail cadastrado no sistema.";
+            noti.NOTC_DT_EMISSAO = DateTime.Today;
+            noti.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+            noti.NOTC_IN_VISTA = 0;
+            noti.NOTC_NM_TITULO = "Geração de Nova Senha";
+            noti.NOTC_IN_ATIVO = 1;
+            noti.NOTC_TX_NOTIFICACAO = "ATENÇÃO: Sua solicitação de nova senha foi atendida em " + DateTime.Today.Date.ToLongDateString() + ". Verifique no seu e-mail cadastrado no sistema.";
             noti.USUA_CD_ID = usuario.USUA_CD_ID;
-            noti.NOTI_IN_STATUS = 1;
-            noti.NOTI_IN_NIVEL = 1;
             Int32 volta1 = _notiService.Create(noti);
 
             // Recupera template e-mail
@@ -658,10 +685,10 @@ namespace ApplicationServices.Services
             mensagem.ASSUNTO = "Geração de Nova Senha";
             mensagem.CORPO = emailBody;
             mensagem.DEFAULT_CREDENTIALS = false;
-            mensagem.EMAIL_DESTINO = usuario.USUA_NM_EMAIL;
+            mensagem.EMAIL_DESTINO = usuario.USUA_EM_EMAIL;
             mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
             mensagem.ENABLE_SSL = true;
-            mensagem.NOME_EMISSOR = "Sistema";
+            mensagem.NOME_EMISSOR = "Sistema Precificação";
             mensagem.PORTA = conf.CONF_NM_PORTA_SMTP;
             mensagem.PRIORIDADE = System.Net.Mail.MailPriority.High;
             mensagem.SENHA_EMISSOR = conf.CONF_NM_SENHA_EMISSOR;

@@ -19,7 +19,7 @@ namespace ApplicationServices.Interfaces
         FORMA_PAGTO_RECTO GetItemById(Int32 id);
         List<FORMA_PAGTO_RECTO> GetAllItens(Int32 idAss);
         List<FORMA_PAGTO_RECTO> GetAllItensAdm(Int32 idAss);
-        List<FORMA_PAGTO_RECTO> ExecuteFilter(Int32? tipo, Int32? conta, String nome, Int32? idAss);
+        Int32 ExecuteFilter(Int32? tipo, Int32? conta, String nome, Int32? idAss, out List<FORMA_PAGTO_RECTO> objeto);
 
         List<CONTA_BANCO> GetAllContas(Int32 idAss);
     }

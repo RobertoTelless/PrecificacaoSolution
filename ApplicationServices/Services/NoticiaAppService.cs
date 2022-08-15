@@ -15,7 +15,6 @@ namespace ApplicationServices.Services
     public class NoticiaAppService : AppServiceBase<NOTICIA>, INoticiaAppService
     {
         private readonly INoticiaService _baseService;
-
         public NoticiaAppService(INoticiaService baseService): base(baseService)
         {
             _baseService = baseService;
@@ -84,12 +83,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddNOTI",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTICIA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTICIA>(item)
                 };
 
                 // Persiste
@@ -109,13 +108,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditNOTI",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTICIA>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<NOTICIA>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTICIA>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<NOTICIA>(itemAntes)
                 };
 
                 // Persiste
@@ -153,12 +152,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelNOTI",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTICIA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTICIA>(item)
                 };
 
                 // Persiste
@@ -182,12 +181,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatNOTI",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTICIA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTICIA>(item)
                 };
 
                 // Persiste

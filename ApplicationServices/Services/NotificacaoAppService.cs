@@ -92,17 +92,17 @@ namespace ApplicationServices.Services
                 // Verifica existencia prévia
 
                 // Completa objeto
-                item.NOTI_IN_ATIVO = 1;
+                item.NOTC_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddNOTI",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTIFICACAO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTIFICACAO>(item)
                 };
 
                 // Persiste
@@ -122,13 +122,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditNOTI",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTIFICACAO>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<NOTIFICACAO>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTIFICACAO>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<NOTIFICACAO>(itemAntes)
                 };
 
                 // Persiste
@@ -162,17 +162,17 @@ namespace ApplicationServices.Services
                 // Verifica integridade referencial
 
                 // Acerta campos
-                item.NOTI_IN_ATIVO = 0;
+                item.NOTC_IN_ATIVO = 0;
 
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelNOTI",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTIFICACAO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTIFICACAO>(item)
                 };
 
                 // Persiste
@@ -191,17 +191,17 @@ namespace ApplicationServices.Services
                 // Verifica integridade referencial
 
                 // Acerta campos
-                item.NOTI_IN_ATIVO = 1;
+                item.NOTC_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatNOTI",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTIFICACAO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTIFICACAO>(item)
                 };
 
                 // Persiste

@@ -19,6 +19,6 @@ namespace ApplicationServices.Interfaces
         PLATAFORMA_ENTREGA GetItemById(Int32 id);
         List<PLATAFORMA_ENTREGA> GetAllItens(Int32 idAss);
         List<PLATAFORMA_ENTREGA> GetAllItensAdm(Int32 idAss);
-        Int32 ExecuteFilter(String nome, Int32 idAss, out List<PLATAFORMA_ENTREGA> objeto);
+        Int32 ExecuteFilter(String nome, Int32? idAss, out List<PLATAFORMA_ENTREGA> objeto);
     }
 }

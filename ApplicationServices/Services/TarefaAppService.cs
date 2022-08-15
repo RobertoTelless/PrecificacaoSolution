@@ -71,9 +71,9 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public List<TIPO_TAREFA> GetAllTipos()
+        public List<TIPO_TAREFA> GetAllTipos(Int32 idAss)
         {
-            List<TIPO_TAREFA> lista = _baseService.GetAllTipos();
+            List<TIPO_TAREFA> lista = _baseService.GetAllTipos(idAss);
             return lista;
         }
 
@@ -88,7 +88,7 @@ namespace ApplicationServices.Services
             return _baseService.GetAllPeriodicidade();
         }
 
-        public Int32 ExecuteFilter(Int32? tipoId, String titulo, DateTime? data, Int32 encerradas, Int32 prioridade, Int32? usuario, Int32 idAss, out List<TAREFA> objeto)
+        public Int32 ExecuteFilter(Int32? tipoId, String titulo, DateTime? dataInicio, DateTime? dataFim, Int32 encerrada, Int32 prioridade, Int32? usuario, Int32 idAss, out List<TAREFA> objeto)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(tipoId, titulo, data, encerradas, prioridade, usuario, idAss);
+                objeto = _baseService.ExecuteFilter(tipoId, titulo, dataInicio, dataFim, encerrada, prioridade, usuario, idAss);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -146,12 +146,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddTARE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TAREFA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TAREFA>(item)
                 };
                 
                 // Persiste
@@ -185,13 +185,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditTARE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TAREFA>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<TAREFA>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TAREFA>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<TAREFA>(itemAntes)
                 };
 
                 // Persiste
@@ -258,12 +258,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelTARE",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TAREFA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TAREFA>(item)
                 };
 
                 // Persiste
@@ -308,12 +308,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatTARE",
-                    //LOG_TX_REGISTRO = Serialization.SerializeJSON<TAREFA>(item)
+                    LOG_TX_TEXTO = "Tarefa: " + item.TARE_NM_TITULO
                 };
 
                 // Persiste

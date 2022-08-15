@@ -12,50 +12,58 @@ using System.Text.RegularExpressions;
 
 namespace ApplicationServices.Services
 {
-    public class TipoPessoaAppService : AppServiceBase<TIPO_PESSOA>, ITipoPessoaAppService
+    public class CategoriaNotificacaoAppService : AppServiceBase<CATEGORIA_NOTIFICACAO>, ICategoriaNotificacaoAppService
     {
-        private readonly ITipoPessoaService _baseService;
+        private readonly ICategoriaNotificacaoService _baseService;
 
-        public TipoPessoaAppService(ITipoPessoaService baseService): base(baseService)
+        public CategoriaNotificacaoAppService(ICategoriaNotificacaoService baseService): base(baseService)
         {
             _baseService = baseService;
         }
 
-        public List<TIPO_PESSOA> GetAllItens()
+        public CATEGORIA_NOTIFICACAO CheckExist(CATEGORIA_NOTIFICACAO conta, Int32 idAss)
         {
-            List<TIPO_PESSOA> lista = _baseService.GetAllItens();
-            return lista;
-        }
-
-        public List<TIPO_PESSOA> GetAllItensAdm()
-        {
-            List<TIPO_PESSOA> lista = _baseService.GetAllItensAdm();
-            return lista;
-        }
-
-        public TIPO_PESSOA GetItemById(Int32 id)
-        {
-            TIPO_PESSOA item = _baseService.GetItemById(id);
+            CATEGORIA_NOTIFICACAO item = _baseService.CheckExist(conta, idAss);
             return item;
         }
 
-        public Int32 ValidateCreate(TIPO_PESSOA item, USUARIO usuario)
+        public List<CATEGORIA_NOTIFICACAO> GetAllItens(Int32 idAss)
+        {
+            List<CATEGORIA_NOTIFICACAO> lista = _baseService.GetAllItens(idAss);
+            return lista;
+        }
+
+        public List<CATEGORIA_NOTIFICACAO> GetAllItensAdm(Int32 idAss)
+        {
+            List<CATEGORIA_NOTIFICACAO> lista = _baseService.GetAllItensAdm(idAss);
+            return lista;
+        }
+
+        public CATEGORIA_NOTIFICACAO GetItemById(Int32 id)
+        {
+            CATEGORIA_NOTIFICACAO item = _baseService.GetItemById(id);
+            return item;
+        }
+
+        public Int32 ValidateCreate(CATEGORIA_NOTIFICACAO item, USUARIO usuario)
         {
             try
             {
                 // Verifica existencia prévia
 
                 // Completa objeto
+                item.CANO_IN_ATIVO = 1;
+                item.ASSI_CD_ID = usuario.ASSI_CD_ID;
 
                 // Monta Log
                 LOG log = new LOG
                 {
                     LOG_DT_LOG = DateTime.Now,
-                    USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
-                    LOG_NM_OPERACAO = "AddTIPE",
+                    USUA_CD_ID = usuario.USUA_CD_ID,
+                    LOG_NM_OPERACAO = "AddCANO",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<TIPO_PESSOA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CATEGORIA_NOTIFICACAO>(item)
                 };
 
                 // Persiste
@@ -68,7 +76,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(TIPO_PESSOA item, TIPO_PESSOA itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(CATEGORIA_NOTIFICACAO item, CATEGORIA_NOTIFICACAO itemAntes, USUARIO usuario)
         {
             try
             {
@@ -78,10 +86,10 @@ namespace ApplicationServices.Services
                     LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
-                    LOG_NM_OPERACAO = "EditTIPE",
+                    LOG_NM_OPERACAO = "EditCANO",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<TIPO_PESSOA>(item),
-                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<TIPO_PESSOA>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CATEGORIA_NOTIFICACAO>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<CATEGORIA_NOTIFICACAO>(itemAntes)
                 };
 
                 // Persiste
@@ -93,7 +101,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(TIPO_PESSOA item, TIPO_PESSOA itemAntes)
+        public Int32 ValidateEdit(CATEGORIA_NOTIFICACAO item, CATEGORIA_NOTIFICACAO itemAntes)
         {
             try
             {
@@ -106,17 +114,18 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(TIPO_PESSOA item, USUARIO usuario)
+        public Int32 ValidateDelete(CATEGORIA_NOTIFICACAO item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
-                //if (item.USUARIO.Count > 0)
-                //{
-                //    return 1;
-                //}
+                if (item.NOTIFICACAO.Count > 0)
+                {
+                    return 1;
+                }
 
                 // Acerta campos
+                item.CANO_IN_ATIVO = 0;
 
                 // Monta Log
                 LOG log = new LOG
@@ -125,8 +134,8 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
-                    LOG_NM_OPERACAO = "DeleTIPE",
-                    LOG_TX_TEXTO = "Tipo de Pessoa: " + item.TIPE_NM_NOME
+                    LOG_NM_OPERACAO = "DeleCANO",
+                    LOG_TX_TEXTO = "Categoria: " + item.CANO_NM_NOME
                 };
 
                 // Persiste
@@ -138,13 +147,14 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(TIPO_PESSOA item, USUARIO usuario)
+        public Int32 ValidateReativar(CATEGORIA_NOTIFICACAO item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
 
                 // Acerta campos
+                item.CANO_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -153,8 +163,8 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
-                    LOG_NM_OPERACAO = "ReatTIPE",
-                    LOG_TX_TEXTO = "Tipo de Pessoa: " + item.TIPE_NM_NOME
+                    LOG_NM_OPERACAO = "ReatCANO",
+                    LOG_TX_TEXTO = "Categoria: " + item.CANO_NM_NOME
                 };
 
                 // Persiste

@@ -12,48 +12,84 @@ using System.Text.RegularExpressions;
 
 namespace ApplicationServices.Services
 {
-    public class CargoAppService : AppServiceBase<CARGO_USUARIO>, ICargoAppService
+    public class EmpresaAppService : AppServiceBase<EMPRESA>, IEmpresaAppService
     {
-        private readonly ICargoService _baseService;
+        private readonly IEmpresaService _baseService;
 
-        public CargoAppService(ICargoService baseService): base(baseService)
+        public EmpresaAppService(IEmpresaService baseService): base(baseService)
         {
             _baseService = baseService;
         }
 
-        public CARGO_USUARIO CheckExist(CARGO_USUARIO conta, Int32 idAss)
+        public EMPRESA CheckExist(EMPRESA conta, Int32 idAss)
         {
-            CARGO_USUARIO item = _baseService.CheckExist(conta, idAss);
+            EMPRESA item = _baseService.CheckExist(conta, idAss);
             return item;
         }
 
-        public List<CARGO_USUARIO> GetAllItens(Int32 idAss)
+        public List<EMPRESA> GetAllItens(Int32 idAss)
         {
-            List<CARGO_USUARIO> lista = _baseService.GetAllItens(idAss);
+            List<EMPRESA> lista = _baseService.GetAllItens(idAss);
             return lista;
         }
 
-        public List<CARGO_USUARIO> GetAllItensAdm(Int32 idAss)
+        public List<EMPRESA> GetAllItensAdm(Int32 idAss)
         {
-            List<CARGO_USUARIO> lista = _baseService.GetAllItensAdm(idAss);
+            List<EMPRESA> lista = _baseService.GetAllItensAdm(idAss);
             return lista;
         }
 
-        public CARGO_USUARIO GetItemById(Int32 id)
+        public EMPRESA GetItemById(Int32 id)
         {
-            CARGO_USUARIO item = _baseService.GetItemById(id);
+            EMPRESA item = _baseService.GetItemById(id);
             return item;
         }
 
-        public Int32 ValidateCreate(CARGO_USUARIO item, USUARIO usuario)
+        public Int32 ExecuteFilter(String nome, Int32 idAss, out List<EMPRESA> objeto)
+        {
+            try
+            {
+                objeto = new List<EMPRESA>();
+                Int32 volta = 0;
+
+                // Processa filtro
+                objeto = _baseService.ExecuteFilter(nome, idAss);
+                if (objeto.Count == 0)
+                {
+                    volta = 1;
+                }
+                return volta;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<MAQUINA> GetAllMaquinas(Int32 idAss)
+        {
+            return _baseService.GetAllMaquinas(idAss);
+        }
+
+        public List<REGIME_TRIBUTARIO> GetAllRegimes()
+        {
+            return _baseService.GetAllRegimes();
+        }
+
+        public Int32 ValidateCreate(EMPRESA item, USUARIO usuario)
         {
             try
             {
                 // Verifica existencia prévia
+                if (_baseService.CheckExist(item, usuario.ASSI_CD_ID) != null)
+                {
+                    return 1;
+                }
 
                 // Completa objeto
-                item.CARG_IN_ATIVO = 1;
+                item.EMPR_IN_ATIVO = 1;
                 item.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                item.EMPR_DT_CADASTRO = DateTime.Today.Date;
 
                 // Monta Log
                 LOG log = new LOG
@@ -61,9 +97,9 @@ namespace ApplicationServices.Services
                     LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    LOG_NM_OPERACAO = "AddCARG",
+                    LOG_NM_OPERACAO = "AddEMPR",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<CARGO_USUARIO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<EMPRESA>(item)
                 };
 
                 // Persiste
@@ -76,7 +112,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(CARGO_USUARIO item, CARGO_USUARIO itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(EMPRESA item, EMPRESA itemAntes, USUARIO usuario)
         {
             try
             {
@@ -86,10 +122,10 @@ namespace ApplicationServices.Services
                     LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
-                    LOG_NM_OPERACAO = "EditCARG",
+                    LOG_NM_OPERACAO = "EditEMPR",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<CARGO_USUARIO>(item),
-                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<CARGO_USUARIO>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<EMPRESA>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<EMPRESA>(itemAntes)
                 };
 
                 // Persiste
@@ -101,7 +137,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(CARGO_USUARIO item, CARGO_USUARIO itemAntes)
+        public Int32 ValidateEdit(EMPRESA item, EMPRESA itemAntes)
         {
             try
             {
@@ -114,18 +150,22 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(CARGO_USUARIO item, USUARIO usuario)
+        public Int32 ValidateDelete(EMPRESA item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
-                if (item.USUARIO.Count > 0)
+                if (item.PRODUTO_ESTOQUE_EMPRESA.Count > 0)
                 {
                     return 1;
                 }
+                if (item.PRODUTO_TABELA_PRECO.Count > 0)
+                {
+                    return 2;
+                }
 
                 // Acerta campos
-                item.CARG_IN_ATIVO = 0;
+                item.EMPR_IN_ATIVO = 0;
 
                 // Monta Log
                 LOG log = new LOG
@@ -134,8 +174,8 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
-                    LOG_NM_OPERACAO = "DeleCARG",
-                    LOG_TX_TEXTO = "Cargo: " + item.CARG_NM_NOME
+                    LOG_NM_OPERACAO = "DeleEMPR",
+                    LOG_TX_TEXTO = "Empresa: " + item.EMPR_NM_NOME
                 };
 
                 // Persiste
@@ -147,14 +187,14 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(CARGO_USUARIO item, USUARIO usuario)
+        public Int32 ValidateReativar(EMPRESA item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
 
                 // Acerta campos
-                item.CARG_IN_ATIVO = 1;
+                item.EMPR_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -163,8 +203,8 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
-                    LOG_NM_OPERACAO = "ReatCARG",
-                    LOG_TX_TEXTO = "Cargo: " + item.CARG_NM_NOME
+                    LOG_NM_OPERACAO = "ReatEMPR",
+                    LOG_TX_TEXTO = "Empresa: " + item.EMPR_NM_NOME
                 };
 
                 // Persiste

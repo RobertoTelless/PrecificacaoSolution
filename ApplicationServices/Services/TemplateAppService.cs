@@ -21,21 +21,21 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<TEMPLATE> GetAllItens()
+        public List<TEMPLATE> GetAllItens(Int32 idAss)
         {
-            List<TEMPLATE> lista = _baseService.GetAllItens();
+            List<TEMPLATE> lista = _baseService.GetAllItens(idAss);
             return lista;
         }
 
-        public TEMPLATE CheckExist(TEMPLATE conta)
+        public TEMPLATE CheckExist(TEMPLATE conta, Int32 idAss)
         {
-            TEMPLATE item = _baseService.CheckExist(conta);
+            TEMPLATE item = _baseService.CheckExist(conta, idAss);
             return item;
         }
 
-        public List<TEMPLATE> GetAllItensAdm()
+        public List<TEMPLATE> GetAllItensAdm(Int32 idAss)
         {
-            List<TEMPLATE> lista = _baseService.GetAllItensAdm();
+            List<TEMPLATE> lista = _baseService.GetAllItensAdm(idAss);
             return lista;
         }
 
@@ -51,7 +51,7 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public Int32 ExecuteFilter(String sigla, String nome, String conteudo, out List<TEMPLATE> objeto)
+        public Int32 ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss, out List<TEMPLATE> objeto)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(sigla, nome, conteudo);
+                objeto = _baseService.ExecuteFilter(sigla, nome, conteudo, idAss);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -77,7 +77,7 @@ namespace ApplicationServices.Services
             try
             {
                 // Verifica existencia prévia
-                if (_baseService.CheckExist(item) != null)
+                if (_baseService.CheckExist(item, usuario.ASSI_CD_ID) != null)
                 {
                     return 1;
                 }
@@ -89,12 +89,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddTEMP",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE>(item)
                 };
 
                 // Persiste
@@ -114,13 +114,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditTEMP",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<TEMPLATE>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<TEMPLATE>(itemAntes)
                 };
 
                 // Persiste
@@ -148,12 +148,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelTEMP",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE>(item)
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<TEMPLATE>(item)
                 };
 
                 // Persiste
@@ -177,12 +177,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatTEMP",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE>(item)
                 };
 
                 // Persiste

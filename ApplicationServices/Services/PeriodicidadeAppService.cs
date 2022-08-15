@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace ApplicationServices.Services
 {
-    public class PeriodicidadeAppService : AppServiceBase<PERIODICIDADE>, IPeriodicidadeAppService
+    public class PeriodicidadeAppService : AppServiceBase<PERIODICIDADE_TAREFA>, IPeriodicidadeAppService
     {
         private readonly IPeriodicidadeService _baseService;
 
@@ -21,40 +21,46 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<PERIODICIDADE> GetAllItens()
+        public PERIODICIDADE_TAREFA CheckExist(PERIODICIDADE_TAREFA conta)
         {
-            List<PERIODICIDADE> lista = _baseService.GetAllItens();
-            return lista;
-        }
-
-        public List<PERIODICIDADE> GetAllItensAdm()
-        {
-            List<PERIODICIDADE> lista = _baseService.GetAllItensAdm();
-            return lista;
-        }
-
-        public PERIODICIDADE GetItemById(Int32 id)
-        {
-            PERIODICIDADE item = _baseService.GetItemById(id);
+            PERIODICIDADE_TAREFA item = _baseService.CheckExist(conta);
             return item;
         }
 
-        public Int32 ValidateCreate(PERIODICIDADE item, USUARIO usuario)
+        public List<PERIODICIDADE_TAREFA> GetAllItens()
+        {
+            List<PERIODICIDADE_TAREFA> lista = _baseService.GetAllItens();
+            return lista;
+        }
+
+        public List<PERIODICIDADE_TAREFA> GetAllItensAdm()
+        {
+            List<PERIODICIDADE_TAREFA> lista = _baseService.GetAllItensAdm();
+            return lista;
+        }
+
+        public PERIODICIDADE_TAREFA GetItemById(Int32 id)
+        {
+            PERIODICIDADE_TAREFA item = _baseService.GetItemById(id);
+            return item;
+        }
+
+        public Int32 ValidateCreate(PERIODICIDADE_TAREFA item, USUARIO usuario)
         {
             try
             {
                 // Completa objeto
-                item.PERI_IN_ATIVO = 1;
+                item.PETA_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = SessionMocks.IdAssinante,
+                    LOG_DT_LOG = DateTime.Now,
+                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddPERI",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<PERIODICIDADE>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<PERIODICIDADE_TAREFA>(item)
                 };
 
                 // Persiste
@@ -67,20 +73,20 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(PERIODICIDADE item, PERIODICIDADE itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(PERIODICIDADE_TAREFA item, PERIODICIDADE_TAREFA itemAntes, USUARIO usuario)
         {
             try
             {
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = SessionMocks.IdAssinante,
+                    LOG_DT_LOG = DateTime.Now,
+                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditPERI",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<PERIODICIDADE>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<PERIODICIDADE>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<PERIODICIDADE_TAREFA>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<PERIODICIDADE_TAREFA>(itemAntes)
                 };
 
                 // Persiste
@@ -92,28 +98,32 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(PERIODICIDADE item, USUARIO usuario)
+        public Int32 ValidateDelete(PERIODICIDADE_TAREFA item, USUARIO usuario)
         {
             try
             {
                 // Checa integridade
-                if (item.CONTA_PAGAR.Count > 0)
+                if (item.TAREFA.Count > 0)
+                {
+                    return 1;
+                }
+                if (item.CUSTO_FIXO.Count > 0)
                 {
                     return 1;
                 }
 
                 // Acerta campos
-                item.PERI_IN_ATIVO = 0;
+                item.PETA_IN_ATIVO = 0;
 
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = SessionMocks.IdAssinante,
+                    LOG_DT_LOG = DateTime.Now,
+                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelPERI",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<PERIODICIDADE>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<PERIODICIDADE_TAREFA>(item)
                 };
 
                 // Persiste
@@ -125,24 +135,24 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(PERIODICIDADE item, USUARIO usuario)
+        public Int32 ValidateReativar(PERIODICIDADE_TAREFA item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
 
                 // Acerta campos
-                item.PERI_IN_ATIVO = 1;
+                item.PETA_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = SessionMocks.IdAssinante,
+                    LOG_DT_LOG = DateTime.Now,
+                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatPERI",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<PERIODICIDADE>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<PERIODICIDADE_TAREFA>(item)
                 };
 
                 // Persiste

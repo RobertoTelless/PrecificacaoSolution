@@ -95,12 +95,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddAGEN",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<AGENDA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<AGENDA>(item)
                 };
 
                 // Persiste
@@ -137,12 +137,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelAGEN",
-                    LOG_TX_REGISTRO = item.AGEN_CD_ID.ToString() + "|" + item.CATEGORIA_AGENDA.CAAG_NM_NOME + "|" + item.AGEN_DS_DESCRICAO + "|" + item.AGEN_DT_DATA.ToShortDateString() + "|" + item.AGEN_HR_HORA.ToString() + "|" + item.AGEN_NM_TITULO + "|" + item.USUARIO.USUA_NM_NOME + "|" + item.AGEN_TX_OBSERVACOES
+                    LOG_TX_TEXTO = item.AGEN_CD_ID.ToString() + "|" + item.CATEGORIA_AGENDA.CAAG_NM_NOME + "|" + item.AGEN_DS_DESCRICAO + "|" + item.AGEN_DT_DATA.ToShortDateString() + "|" + item.AGEN_HR_HORA.ToString() + "|" + item.AGEN_NM_TITULO + "|" + item.USUARIO.USUA_NM_NOME + "|" + item.AGEN_TX_OBSERVACOES
                 };
 
                 // Persiste
@@ -167,12 +167,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatAGEN",
-                    LOG_TX_REGISTRO = item.AGEN_CD_ID.ToString() + "|" + item.CATEGORIA_AGENDA.CAAG_NM_NOME + "|" + item.AGEN_DS_DESCRICAO + "|" + item.AGEN_DT_DATA.ToShortDateString() + "|" + item.AGEN_HR_HORA.ToString() + "|" + item.AGEN_NM_TITULO + "|" + item.USUARIO.USUA_NM_NOME + "|" + item.AGEN_TX_OBSERVACOES
+                    LOG_TX_TEXTO = item.AGEN_CD_ID.ToString() + "|" + item.CATEGORIA_AGENDA.CAAG_NM_NOME + "|" + item.AGEN_DS_DESCRICAO + "|" + item.AGEN_DT_DATA.ToShortDateString() + "|" + item.AGEN_HR_HORA.ToString() + "|" + item.AGEN_NM_TITULO + "|" + item.USUARIO.USUA_NM_NOME + "|" + item.AGEN_TX_OBSERVACOES
             };
 
             // Persiste

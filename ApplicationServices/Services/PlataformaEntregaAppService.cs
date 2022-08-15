@@ -12,50 +12,84 @@ using System.Text.RegularExpressions;
 
 namespace ApplicationServices.Services
 {
-    public class TipoPessoaAppService : AppServiceBase<TIPO_PESSOA>, ITipoPessoaAppService
+    public class PlataformaEntregaAppService : AppServiceBase<PLATAFORMA_ENTREGA>, IPlataformaEntregaAppService
     {
-        private readonly ITipoPessoaService _baseService;
+        private readonly IPlataformaEntregaService _baseService;
 
-        public TipoPessoaAppService(ITipoPessoaService baseService): base(baseService)
+        public PlataformaEntregaAppService(IPlataformaEntregaService baseService): base(baseService)
         {
             _baseService = baseService;
         }
 
-        public List<TIPO_PESSOA> GetAllItens()
+        public PLATAFORMA_ENTREGA CheckExist(PLATAFORMA_ENTREGA conta, Int32 idAss)
         {
-            List<TIPO_PESSOA> lista = _baseService.GetAllItens();
-            return lista;
-        }
-
-        public List<TIPO_PESSOA> GetAllItensAdm()
-        {
-            List<TIPO_PESSOA> lista = _baseService.GetAllItensAdm();
-            return lista;
-        }
-
-        public TIPO_PESSOA GetItemById(Int32 id)
-        {
-            TIPO_PESSOA item = _baseService.GetItemById(id);
+            PLATAFORMA_ENTREGA item = _baseService.CheckExist(conta, idAss);
             return item;
         }
 
-        public Int32 ValidateCreate(TIPO_PESSOA item, USUARIO usuario)
+        public List<PLATAFORMA_ENTREGA> GetAllItens(Int32 idAss)
+        {
+            List<PLATAFORMA_ENTREGA> lista = _baseService.GetAllItens(idAss);
+            return lista;
+        }
+
+        public List<PLATAFORMA_ENTREGA> GetAllItensAdm(Int32 idAss)
+        {
+            List<PLATAFORMA_ENTREGA> lista = _baseService.GetAllItensAdm(idAss);
+            return lista;
+        }
+
+        public PLATAFORMA_ENTREGA GetItemById(Int32 id)
+        {
+            PLATAFORMA_ENTREGA item = _baseService.GetItemById(id);
+            return item;
+        }
+
+        public Int32 ExecuteFilter(String nome, Int32? idAss, out List<PLATAFORMA_ENTREGA> objeto)
+        {
+            try
+            {
+                objeto = new List<PLATAFORMA_ENTREGA>();
+                Int32 volta = 0;
+
+                // Processa filtro
+                objeto = _baseService.ExecuteFilter(nome, idAss.Value);
+                if (objeto.Count == 0)
+                {
+                    volta = 1;
+                }
+                return volta;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public Int32 ValidateCreate(PLATAFORMA_ENTREGA item, USUARIO usuario)
         {
             try
             {
                 // Verifica existencia prévia
+                if (_baseService.CheckExist(item, usuario.ASSI_CD_ID) != null)
+                {
+                    return 1;
+                }
 
                 // Completa objeto
+                item.PLEN_IN_ATIVO = 1;
+                item.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                item.PLEN_DT_CADASTRO = DateTime.Today.Date;
 
                 // Monta Log
                 LOG log = new LOG
                 {
                     LOG_DT_LOG = DateTime.Now,
-                    USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
-                    LOG_NM_OPERACAO = "AddTIPE",
+                    USUA_CD_ID = usuario.USUA_CD_ID,
+                    LOG_NM_OPERACAO = "AddPLEN",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<TIPO_PESSOA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<PLATAFORMA_ENTREGA>(item)
                 };
 
                 // Persiste
@@ -68,7 +102,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(TIPO_PESSOA item, TIPO_PESSOA itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(PLATAFORMA_ENTREGA item, PLATAFORMA_ENTREGA itemAntes, USUARIO usuario)
         {
             try
             {
@@ -78,10 +112,10 @@ namespace ApplicationServices.Services
                     LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
-                    LOG_NM_OPERACAO = "EditTIPE",
+                    LOG_NM_OPERACAO = "EditPLEN",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<TIPO_PESSOA>(item),
-                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<TIPO_PESSOA>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<PLATAFORMA_ENTREGA>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<PLATAFORMA_ENTREGA>(itemAntes)
                 };
 
                 // Persiste
@@ -93,7 +127,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(TIPO_PESSOA item, TIPO_PESSOA itemAntes)
+        public Int32 ValidateEdit(PLATAFORMA_ENTREGA item, PLATAFORMA_ENTREGA itemAntes)
         {
             try
             {
@@ -106,17 +140,14 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(TIPO_PESSOA item, USUARIO usuario)
+        public Int32 ValidateDelete(PLATAFORMA_ENTREGA item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
-                //if (item.USUARIO.Count > 0)
-                //{
-                //    return 1;
-                //}
 
                 // Acerta campos
+                item.PLEN_IN_ATIVO = 0;
 
                 // Monta Log
                 LOG log = new LOG
@@ -125,8 +156,8 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
-                    LOG_NM_OPERACAO = "DeleTIPE",
-                    LOG_TX_TEXTO = "Tipo de Pessoa: " + item.TIPE_NM_NOME
+                    LOG_NM_OPERACAO = "DelePLEN",
+                    LOG_TX_TEXTO = "Plataforma: " + item.PLEN_NM_NOME
                 };
 
                 // Persiste
@@ -138,13 +169,14 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(TIPO_PESSOA item, USUARIO usuario)
+        public Int32 ValidateReativar(PLATAFORMA_ENTREGA item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
 
                 // Acerta campos
+                item.PLEN_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -153,8 +185,8 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
-                    LOG_NM_OPERACAO = "ReatTIPE",
-                    LOG_TX_TEXTO = "Tipo de Pessoa: " + item.TIPE_NM_NOME
+                    LOG_NM_OPERACAO = "ReatPLEN",
+                    LOG_TX_TEXTO = "Plataforma: " + item.PLEN_NM_NOME
                 };
 
                 // Persiste
