@@ -190,6 +190,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AgendaAnexoRepository.cs" />
     <Compile Include="Repositories\ContaBancariaRepository.cs" />
+    <Compile Include="Repositories\PlataformaEntregaRepository.cs" />
+    <Compile Include="Repositories\PessoaExternaRepository.cs" />
     <Compile Include="Repositories\MaquinaRepository.cs" />
     <Compile Include="Repositories\FormaPagRecRepository.cs" />
     <Compile Include="Repositories\EmpresaRepository.cs" />
@@ -197,6 +199,9 @@
     <Compile Include="Repositories\AssinanteRepository.cs" />
     <Compile Include="Repositories\CargoRepository.cs" />
     <Compile Include="Repositories\CategoriaUsuarioRepository.cs" />
+    <Compile Include="Repositories\UsuarioAnotacaoRepository.cs" />
+    <Compile Include="Repositories\PessoaExternaAnotacaoRepository.cs" />
+    <Compile Include="Repositories\PessoaExternaAnexoRepository.cs" />
     <Compile Include="Repositories\PeriodicidadeRepository.cs" />
     <Compile Include="Repositories\CategoriaAgendaRepository.cs" />
     <Compile Include="Repositories\CategoriaNotificacaoRepository.cs" />

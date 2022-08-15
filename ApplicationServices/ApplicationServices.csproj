@@ -214,7 +214,6 @@
     <Compile Include="Interfaces\IPeriodicidadeAppService.cs" />
     <Compile Include="Interfaces\ITarefaAppService.cs" />
     <Compile Include="Interfaces\ITemplateAppService.cs" />
-    <Compile Include="Interfaces\ITipoPessoaAppService.cs" />
     <Compile Include="Interfaces\IUsuarioAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AgendaAppService.cs" />
@@ -236,7 +235,6 @@
     <Compile Include="Services\PeriodicidadeAppService.cs" />
     <Compile Include="Services\TarefaAppService.cs" />
     <Compile Include="Services\TemplateAppService.cs" />
-    <Compile Include="Services\TipoPessoaAppService.cs" />
     <Compile Include="Services\UsuarioAppService.cs" />
   </ItemGroup>
   <ItemGroup />

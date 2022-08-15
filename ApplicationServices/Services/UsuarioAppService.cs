@@ -94,6 +94,11 @@ namespace ApplicationServices.Services
             return _usuarioService.GetAnexoById(id);
         }
 
+        public USUARIO_ANOTACAO GetAnotacaoById(Int32 id)
+        {
+            return _usuarioService.GetAnotacaoById(id);
+        }
+
         public Int32 ValidateCreate(USUARIO usuario, USUARIO usuarioLogado)
         {
             try

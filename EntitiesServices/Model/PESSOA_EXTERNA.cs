@@ -14,6 +14,13 @@ namespace EntitiesServices.Model
     
     public partial class PESSOA_EXTERNA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PESSOA_EXTERNA()
+        {
+            this.PESSOA_EXTERNA_ANEXO = new HashSet<PESSOA_EXTERNA_ANEXO>();
+            this.PESSOA_EXTERNA_ANOTACAO = new HashSet<PESSOA_EXTERNA_ANOTACAO>();
+        }
+    
         public int PEEX_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
         public int CARG_CD_ID { get; set; }
@@ -28,5 +35,9 @@ namespace EntitiesServices.Model
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CARGO_USUARIO CARGO_USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PESSOA_EXTERNA_ANEXO> PESSOA_EXTERNA_ANEXO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
     }
 }

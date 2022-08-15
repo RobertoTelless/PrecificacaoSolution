@@ -68,7 +68,6 @@ namespace ERP_Condominios_Solution.ViewModels
         public string USUA_NR_CPF { get; set; }
         [StringLength(20, ErrorMessage = "O RG deve ter no máximo 20 caracteres.")]
         public string USUA_NR_RG { get; set; }
-        public Nullable<int> USUA_IN_SISTEMA { get; set; }
 
         public bool Bloqueio
         {
@@ -116,30 +115,11 @@ namespace ERP_Condominios_Solution.ViewModels
             }
         }
 
-        public bool Sistema
-        {
-            get
-            {
-                if (USUA_IN_SISTEMA == 1)
-                {
-                    return true;
-                }
-                return false;
-            }
-            set
-            {
-                USUA_IN_SISTEMA = (value == true) ? 1 : 0;
-            }
-        }
-
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGENDA> AGENDA1 { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
-        public virtual CARGO_USUARIO CARGO { get; set; }
         public virtual CATEGORIA_USUARIO CATEGORIA_USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FORNECEDOR_ANOTACOES> FORNECEDOR_ANOTACOES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LOG> LOG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -153,5 +133,12 @@ namespace ERP_Condominios_Solution.ViewModels
         public virtual ICollection<TAREFA_ACOMPANHAMENTO> TAREFA_ACOMPANHAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO1 { get; set; }
+        public virtual CARGO_USUARIO CARGO_USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
     }
 }

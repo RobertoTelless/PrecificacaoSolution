@@ -27,9 +27,10 @@ namespace ModelServices.EntitiesServices
         private readonly INotificacaoRepository _notRepository;
         private readonly INoticiaRepository _ntcRepository;
         private readonly ICargoRepository _carRepository;
+        private readonly IUsuarioAnotacaoRepository _anoRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, ILogRepository logRepository, IConfiguracaoRepository configuracaoRepository, IPerfilRepository perfRepository, ITemplateRepository tempRepository, IUsuarioAnexoRepository anexoRepository, INotificacaoRepository notRepository, INoticiaRepository ntcRepository, ICargoRepository carRepository) : base(usuarioRepository)
+        public UsuarioService(IUsuarioRepository usuarioRepository, ILogRepository logRepository, IConfiguracaoRepository configuracaoRepository, IPerfilRepository perfRepository, ITemplateRepository tempRepository, IUsuarioAnexoRepository anexoRepository, INotificacaoRepository notRepository, INoticiaRepository ntcRepository, ICargoRepository carRepository, IUsuarioAnotacaoRepository anoRepository) : base(usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
             _logRepository = logRepository;
@@ -40,6 +41,7 @@ namespace ModelServices.EntitiesServices
             _notRepository = notRepository;
             _ntcRepository = ntcRepository;
             _carRepository = carRepository;
+            _anoRepository = anoRepository;
         }
 
         public USUARIO RetriveUserByEmail(String email)
@@ -75,6 +77,11 @@ namespace ModelServices.EntitiesServices
         public USUARIO_ANEXO GetAnexoById(Int32 id)
         {
             return _anexoRepository.GetItemById(id);
+        }
+
+        public USUARIO_ANOTACAO GetAnotacaoById(Int32 id)
+        {
+            return _anoRepository.GetItemById(id);
         }
 
         public USUARIO GetByLogin(String login, Int32 idAss)

@@ -54,6 +54,16 @@ namespace ApplicationServices.Services
             return _baseService.GetAllCargos(idAss);
         }
 
+        public PESSOA_EXTERNA_ANEXO GetAnexoById(Int32 id)
+        {
+            return _baseService.GetAnexoById(id);
+        }
+
+        public PESSOA_EXTERNA_ANOTACAO GetAnotacaoById(Int32 id)
+        {
+            return _baseService.GetAnotacaoById(id);
+        }
+
         public Int32 ExecuteFilter(Int32? cargo, String nome, String cpf, String email, Int32 idAss, out List<PESSOA_EXTERNA> objeto)
         {
             try

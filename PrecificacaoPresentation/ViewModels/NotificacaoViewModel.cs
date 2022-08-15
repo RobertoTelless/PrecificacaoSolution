@@ -10,7 +10,7 @@ namespace ERP_Condominios_Solution.ViewModels
     public class NotificacaoViewModel
     {
         [Key]
-        public int NOTI_CD_ID { get; set; }
+        public int NOTC_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo DESTINO obrigatorio")]
         public int USUA_CD_ID { get; set; }
@@ -18,23 +18,20 @@ namespace ERP_Condominios_Solution.ViewModels
         public int CANO_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo DATA DE EMISSÃO obrigatorio")]
         [DataType(DataType.Date, ErrorMessage = "DATA DE EMISSÂO Deve ser uma data válida")]
-        public Nullable<System.DateTime> NOTI_DT_EMISSAO { get; set; }
-        public int NOTI_IN_ATIVO { get; set; }
-        public Nullable<int> NOTI_IN_STATUS { get; set; }
+        public Nullable<System.DateTime> NOTC_DT_EMISSAO { get; set; }
+        public int NOTC_IN_ATIVO { get; set; }
+        public Nullable<int> NOTC_IN_STATUS { get; set; }
         [StringLength(5000, ErrorMessage = "O TEXTO DA NOTIFICAÇÃO deve ter no máximo 5000 caracteres.")]
-        public string NOTI_TX_TEXTO { get; set; }
+        public string NOTC_TX_NOTIFICACAO { get; set; }
         [Required(ErrorMessage = "Campo TÍTULO obrigatorio")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "O TÍTULO deve ter no minimo 1 e no máximo 50 caracteres.")]
-        public string NOTI_NM_TITULO { get; set; }
-        public Nullable<int> NOTI_IN_VISTA { get; set; }
+        public string NOTC_NM_TITULO { get; set; }
+        public Nullable<int> NOTC_IN_VISTA { get; set; }
         [Required(ErrorMessage = "Campo DATA DE VALIDADE obrigatorio")]
         [DataType(DataType.Date, ErrorMessage = "DATA DE VALIDADE Deve ser uma data válida")]
-        public Nullable<System.DateTime> NOTI_DT_VALIDADE { get; set; }
+        public Nullable<System.DateTime> NOTC_DT_VALIDADE { get; set; }
         [DataType(DataType.Date, ErrorMessage = "DATA DE VISTA Deve ser uma data válida")]
-        public Nullable<System.DateTime> NOTI_DT_VISTA { get; set; }
-        public Nullable<int> NOTI_IN_ORIGEM { get; set; }
-        public Nullable<int> NOTI_IN_NIVEL { get; set; }
-        public Nullable<int> NOTI_IN_ANEXOS { get; set; }
+        public Nullable<System.DateTime> NOTC_DT_VISTA { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_NOTIFICACAO CATEGORIA_NOTIFICACAO { get; set; }

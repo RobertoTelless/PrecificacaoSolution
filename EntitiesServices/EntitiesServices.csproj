@@ -219,6 +219,9 @@
     <Compile Include="Interfaces\External\IECT_Services.cs" />
     <Compile Include="Interfaces\Repositories\IAgendaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUsuarioAnotacaoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPessoaExternaAnotacaoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPessoaExternaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRegimeTributarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMaquinaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFormaPagRecRepository.cs" />
@@ -380,6 +383,12 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PESSOA_EXTERNA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PESSOA_EXTERNA_ANEXO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PESSOA_EXTERNA_ANOTACAO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PLATAFORMA_ENTREGA.cs">

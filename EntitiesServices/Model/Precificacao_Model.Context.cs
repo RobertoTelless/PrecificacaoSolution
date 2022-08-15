@@ -86,5 +86,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<TEMPLATE> TEMPLATE { get; set; }
         public virtual DbSet<TEMPLATE_EMAIL> TEMPLATE_EMAIL { get; set; }
         public virtual DbSet<TEMPLATE_SMS> TEMPLATE_SMS { get; set; }
+        public virtual DbSet<PESSOA_EXTERNA_ANEXO> PESSOA_EXTERNA_ANEXO { get; set; }
+        public virtual DbSet<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
     }
 }

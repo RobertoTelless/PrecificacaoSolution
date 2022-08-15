@@ -71,21 +71,22 @@ namespace Presentation.Start
             kernel.Bind(typeof(IAppServiceBase<>)).To(typeof(AppServiceBase<>));
             kernel.Bind<IUsuarioAppService>().To<UsuarioAppService>();
             kernel.Bind<ILogAppService>().To<LogAppService>();
-            kernel.Bind<IPerfilAppService>().To<PerfilAppService>();
             kernel.Bind<IConfiguracaoAppService>().To<ConfiguracaoAppService>();
             kernel.Bind<INoticiaAppService>().To<NoticiaAppService>();
             kernel.Bind<INotificacaoAppService>().To<NotificacaoAppService>();
-            kernel.Bind<ITipoPessoaAppService>().To<TipoPessoaAppService>();
             kernel.Bind<ITemplateAppService>().To<TemplateAppService>();
             kernel.Bind<ITarefaAppService>().To<TarefaAppService>();
             kernel.Bind<IAgendaAppService>().To<AgendaAppService>();
             kernel.Bind<IAssinanteAppService>().To<AssinanteAppService>();
-            kernel.Bind<ITelefoneAppService>().To<TelefoneAppService>();
-            kernel.Bind<ICategoriaTelefoneAppService>().To<CategoriaTelefoneAppService>();
-            kernel.Bind<IClienteAppService>().To<ClienteAppService>();
-            kernel.Bind<IClienteCnpjAppService>().To<ClienteCnpjAppService>();
-            kernel.Bind<IGrupoAppService>().To<GrupoAppService>();
-            kernel.Bind<ISubgrupoAppService>().To<SubgrupoAppService>();
+            kernel.Bind<ICategoriaAgendaAppService>().To<CategoriaAgendaAppService>();
+            kernel.Bind<ICategoriaNotificacaoAppService>().To<CategoriaNotificacaoAppService>();
+            kernel.Bind<ICategoriaUsuarioAppService>().To<CategoriaUsuarioAppService>();
+            kernel.Bind<IEmpresaAppService>().To<EmpresaAppService>();
+            kernel.Bind<IFormaPagRecAppService>().To<FormaPagRecAppService>();
+            kernel.Bind<IMaquinaAppService>().To<MaquinaAppService>();
+            kernel.Bind<IPeriodicidadeAppService>().To<PeriodicidadeAppService>();
+            kernel.Bind<IPessoaExternaAppService>().To<PessoaExternaAppService>();
+            kernel.Bind<IPlataformaEntregaAppService>().To<PlataformaEntregaAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -99,12 +100,15 @@ namespace Presentation.Start
             kernel.Bind<ITarefaService>().To<TarefaService>();
             kernel.Bind<IAgendaService>().To<AgendaService>();
             kernel.Bind<IAssinanteService>().To<AssinanteService>();
-            kernel.Bind<ITelefoneService>().To<TelefoneService>();
-            kernel.Bind<ICategoriaTelefoneService>().To<CategoriaTelefoneService>();
-            kernel.Bind<IClienteService>().To<ClienteService>();
-            kernel.Bind<IClienteCnpjService>().To<ClienteCnpjService>();
-            kernel.Bind<IGrupoService>().To<GrupoService>();
-            kernel.Bind<ISubgrupoService>().To<SubgrupoService>();
+            kernel.Bind<ICategoriaAgendaService>().To<CategoriaAgendaService>();
+            kernel.Bind<ICategoriaNotificacaoService>().To<CategoriaNotificacaoService>();
+            kernel.Bind<ICategoriaUsuarioService>().To<CategoriaUsuarioService>();
+            kernel.Bind<IEmpresaService>().To<EmpresaService>();
+            kernel.Bind<IFormaPagRecService>().To<FormaPagRecService>();
+            kernel.Bind<IMaquinaService>().To<MaquinaService>();
+            kernel.Bind<IPeriodicidadeService>().To<PeriodicidadeService>();
+            kernel.Bind<IPessoaExternaService>().To<PessoaExternaService>();
+            kernel.Bind<IPlataformaEntregaService>().To<PlataformaEntregaService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -127,19 +131,17 @@ namespace Presentation.Start
             kernel.Bind<IAgendaAnexoRepository>().To<AgendaAnexoRepository>();
             kernel.Bind<ICategoriaAgendaRepository>().To<CategoriaAgendaRepository>();
             kernel.Bind<IAssinanteRepository>().To<AssinanteRepository>();
-            kernel.Bind<ITelefoneRepository>().To<TelefoneRepository>();
-            kernel.Bind<ICategoriaTelefoneRepository>().To<CategoriaTelefoneRepository>();
-            kernel.Bind<ITipoDocumentoRepository>().To<TipoDocumentoRepository>();
             kernel.Bind<IPeriodicidadeRepository>().To<PeriodicidadeRepository>();
             kernel.Bind<ICargoRepository>().To<CargoRepository>();
-            kernel.Bind<IClienteRepository>().To<ClienteRepository>();
-            kernel.Bind<IClienteCnpjRepository>().To<ClienteCnpjRepository>();
-            kernel.Bind<IClienteAnexoRepository>().To<ClienteAnexoRepository>();
-            kernel.Bind<IClienteContatoRepository>().To<ClienteContatoRepository>();
-            kernel.Bind<IClienteComentarioRepository>().To<ClienteComentarioRepository>();
-            kernel.Bind<ICategoriaClienteRepository>().To<CategoriaClienteRepository>();
-            kernel.Bind<IGrupoRepository>().To<GrupoRepository>();
-            kernel.Bind<ISubgrupoRepository>().To<SubgrupoRepository>();
+            kernel.Bind<ICategoriaUsuarioRepository>().To<CategoriaUsuarioRepository>();
+            kernel.Bind<IEmpresaRepository>().To<EmpresaRepository>();
+            kernel.Bind<IFormaPagRecRepository>().To<FormaPagRecRepository>();
+            kernel.Bind<IMaquinaRepository>().To<MaquinaRepository>();
+            kernel.Bind<IPessoaExternaRepository>().To<PessoaExternaRepository>();
+            kernel.Bind<IPessoaExternaAnexoRepository>().To<PessoaExternaAnexoRepository>();
+            kernel.Bind<IPessoaExternaAnotacaoRepository>().To<PessoaExternaAnotacaoRepository>();
+            kernel.Bind<IPlataformaEntregaRepository>().To<PlataformaEntregaRepository>();
+            kernel.Bind<IUsuarioAnotacaoRepository>().To<UsuarioAnotacaoRepository>();
 
         }
     }

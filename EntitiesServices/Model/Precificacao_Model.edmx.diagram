@@ -155,6 +155,11 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_TAREFA_ASSINANTE" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_NOTIFICACAO_ASSINANTE" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_FORMA_PAGTO_RECTO_ASSINANTE" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO" Width="1.5" PointX="15.5" PointY="68.25" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" Width="1.5" PointX="18.5" PointY="55" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

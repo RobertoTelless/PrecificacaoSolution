@@ -27,6 +27,7 @@ namespace EntitiesServices.Model
             this.USUARIO_ANEXO = new HashSet<USUARIO_ANEXO>();
             this.USUARIO_ANOTACAO = new HashSet<USUARIO_ANOTACAO>();
             this.USUARIO_ANOTACAO1 = new HashSet<USUARIO_ANOTACAO>();
+            this.PESSOA_EXTERNA_ANOTACAO = new HashSet<PESSOA_EXTERNA_ANOTACAO>();
         }
     
         public int USUA_CD_ID { get; set; }
@@ -83,5 +84,7 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO1 { get; set; }
         public virtual CARGO_USUARIO CARGO_USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
     }
 }

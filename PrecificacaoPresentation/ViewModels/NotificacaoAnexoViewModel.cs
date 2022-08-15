@@ -10,7 +10,7 @@ namespace SystemBR_Presentation.ViewModels
     public class NotificacaoAnexoViewModel
     {
         public int NOAN_CD_ID { get; set; }
-        public int NOTI_CD_ID { get; set; }
+        public int NOTC_CD_ID { get; set; }
         public string NOAN_NM_TITULO { get; set; }
         public Nullable<System.DateTime> NOAN_DT_ANEXO { get; set; }
         public Nullable<int> NOAN_IN_TIPO { get; set; }

@@ -491,6 +491,29 @@
           <Property Name="PEEX_DT_CADASTRO" Type="date" Nullable="false" />
           <Property Name="PEEX_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PESSOA_EXTERNA_ANEXO">
+          <Key>
+            <PropertyRef Name="PEAX_CD_ID" />
+          </Key>
+          <Property Name="PEAX_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PEEX_CD_ID" Type="int" Nullable="false" />
+          <Property Name="PEAX_NM_TITULO" Type="varchar" MaxLength="150" />
+          <Property Name="PEAX_DT_ANEXO" Type="date" />
+          <Property Name="PEAX_IN_TIPO" Type="int" />
+          <Property Name="PEAX_AQ_ARQUIVO" Type="varchar" MaxLength="250" />
+          <Property Name="PEAX_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PESSOA_EXTERNA_ANOTACAO">
+          <Key>
+            <PropertyRef Name="PEAN_CD_ID" />
+          </Key>
+          <Property Name="PEAN_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PEEX_CD_ID" Type="int" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="PEAN_DT_ANOTACAO" Type="datetime" Nullable="false" />
+          <Property Name="PEAN_TX_ANOTACAO" Type="text" Nullable="false" />
+          <Property Name="PEAN_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PLATAFORMA_ENTREGA">
           <Key>
             <PropertyRef Name="PLEN_CD_ID" />
@@ -1018,6 +1041,42 @@
               <PropertyRef Name="USUA_CD_ID" />
             </Principal>
             <Dependent Role="LOG">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA">
+          <End Role="PESSOA_EXTERNA" Type="Self.PESSOA_EXTERNA" Multiplicity="1" />
+          <End Role="PESSOA_EXTERNA_ANEXO" Type="Self.PESSOA_EXTERNA_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PESSOA_EXTERNA">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANEXO">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA">
+          <End Role="PESSOA_EXTERNA" Type="Self.PESSOA_EXTERNA" Multiplicity="1" />
+          <End Role="PESSOA_EXTERNA_ANOTACAO" Type="Self.PESSOA_EXTERNA_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PESSOA_EXTERNA">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="PESSOA_EXTERNA_ANOTACAO" Type="Self.PESSOA_EXTERNA_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
               <PropertyRef Name="USUA_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1936,6 +1995,8 @@
           <EntitySet Name="PERFIL" EntityType="Self.PERFIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PERIODICIDADE_TAREFA" EntityType="Self.PERIODICIDADE_TAREFA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PESSOA_EXTERNA" EntityType="Self.PESSOA_EXTERNA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PESSOA_EXTERNA_ANEXO" EntityType="Self.PESSOA_EXTERNA_ANEXO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PESSOA_EXTERNA_ANOTACAO" EntityType="Self.PESSOA_EXTERNA_ANOTACAO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLATAFORMA_ENTREGA" EntityType="Self.PLATAFORMA_ENTREGA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUTO" EntityType="Self.PRODUTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUTO_ANEXO" EntityType="Self.PRODUTO_ANEXO" Schema="dbo" store:Type="Tables" />
@@ -2023,6 +2084,18 @@
           <AssociationSet Name="FK_LOG_USUARIO" Association="Self.FK_LOG_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="LOG" EntitySet="LOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" Association="Self.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA">
+            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
+            <End Role="PESSOA_EXTERNA_ANEXO" EntitySet="PESSOA_EXTERNA_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" Association="Self.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA">
+            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
+            <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" Association="Self.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
           </AssociationSet>
           <AssociationSet Name="FK_TAREFA_ACOMPANHAMENTO_TAREFA" Association="Self.FK_TAREFA_ACOMPANHAMENTO_TAREFA">
             <End Role="TAREFA" EntitySet="TAREFA" />
@@ -3139,6 +3212,7 @@
           <NavigationProperty Name="USUARIO_ANOTACAO1" Relationship="Self.FKUSUARIO_AN728680" FromRole="USUARIO" ToRole="USUARIO_ANOTACAO" />
           <Property Name="CARG_CD_ID" Type="Int32" />
           <NavigationProperty Name="CARGO_USUARIO" Relationship="Db_PrecificacaoModel.FK_USUARIO_CARGO_USUARIO" FromRole="USUARIO" ToRole="CARGO_USUARIO" />
+          <NavigationProperty Name="PESSOA_EXTERNA_ANOTACAO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" FromRole="USUARIO" ToRole="PESSOA_EXTERNA_ANOTACAO" />
         </EntityType>
         <EntityType Name="USUARIO_ANEXO">
           <Key>
@@ -4412,6 +4486,20 @@
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="FORMA_PAGTO_RECTO" EntitySet="FORMA_PAGTO_RECTO" />
           </AssociationSet>
+          <EntitySet Name="PESSOA_EXTERNA_ANEXO" EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO" />
+          <EntitySet Name="PESSOA_EXTERNA_ANOTACAO" EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" />
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA">
+            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
+            <End Role="PESSOA_EXTERNA_ANEXO" EntitySet="PESSOA_EXTERNA_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA">
+            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
+            <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CARGO_USUARIO">
           <Key>
@@ -4482,6 +4570,8 @@
           <Property Name="PEEX_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FKPESSOA_EXT750477" FromRole="PESSOA_EXTERNA" ToRole="ASSINANTE" />
           <NavigationProperty Name="CARGO_USUARIO" Relationship="Db_PrecificacaoModel.FKPESSOA_EXT429415" FromRole="PESSOA_EXTERNA" ToRole="CARGO_USUARIO" />
+          <NavigationProperty Name="PESSOA_EXTERNA_ANEXO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA" ToRole="PESSOA_EXTERNA_ANEXO" />
+          <NavigationProperty Name="PESSOA_EXTERNA_ANOTACAO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA" ToRole="PESSOA_EXTERNA_ANOTACAO" />
         </EntityType>
         <EntityType Name="PLATAFORMA_ENTREGA">
           <Key>
@@ -4808,6 +4898,68 @@
             </Principal>
             <Dependent Role="FORMA_PAGTO_RECTO">
               <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PESSOA_EXTERNA_ANEXO">
+          <Key>
+            <PropertyRef Name="PEAX_CD_ID" />
+          </Key>
+          <Property Name="PEAX_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PEEX_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PEAX_NM_TITULO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PEAX_DT_ANEXO" Type="DateTime" Precision="0" />
+          <Property Name="PEAX_IN_TIPO" Type="Int32" />
+          <Property Name="PEAX_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PEAX_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA_ANEXO" ToRole="PESSOA_EXTERNA" />
+        </EntityType>
+        <EntityType Name="PESSOA_EXTERNA_ANOTACAO">
+          <Key>
+            <PropertyRef Name="PEAN_CD_ID" />
+          </Key>
+          <Property Name="PEAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PEEX_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PEAN_DT_ANOTACAO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PEAN_TX_ANOTACAO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PEAN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA_ANOTACAO" ToRole="PESSOA_EXTERNA" />
+          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" FromRole="PESSOA_EXTERNA_ANOTACAO" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA">
+          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA" Role="PESSOA_EXTERNA" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO" Role="PESSOA_EXTERNA_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PESSOA_EXTERNA">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANEXO">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA">
+          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA" Role="PESSOA_EXTERNA" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" Role="PESSOA_EXTERNA_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PESSOA_EXTERNA">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
+          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" Role="PESSOA_EXTERNA_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
+              <PropertyRef Name="USUA_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5700,6 +5852,31 @@
                 <ScalarProperty Name="TSMS_NM_NOME" ColumnName="TSMS_NM_NOME" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="TSMS_CD_ID" ColumnName="TSMS_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PESSOA_EXTERNA_ANEXO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO">
+              <MappingFragment StoreEntitySet="PESSOA_EXTERNA_ANEXO">
+                <ScalarProperty Name="PEAX_IN_ATIVO" ColumnName="PEAX_IN_ATIVO" />
+                <ScalarProperty Name="PEAX_AQ_ARQUIVO" ColumnName="PEAX_AQ_ARQUIVO" />
+                <ScalarProperty Name="PEAX_IN_TIPO" ColumnName="PEAX_IN_TIPO" />
+                <ScalarProperty Name="PEAX_DT_ANEXO" ColumnName="PEAX_DT_ANEXO" />
+                <ScalarProperty Name="PEAX_NM_TITULO" ColumnName="PEAX_NM_TITULO" />
+                <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
+                <ScalarProperty Name="PEAX_CD_ID" ColumnName="PEAX_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PESSOA_EXTERNA_ANOTACAO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO">
+              <MappingFragment StoreEntitySet="PESSOA_EXTERNA_ANOTACAO">
+                <ScalarProperty Name="PEAN_IN_ATIVO" ColumnName="PEAN_IN_ATIVO" />
+                <ScalarProperty Name="PEAN_TX_ANOTACAO" ColumnName="PEAN_TX_ANOTACAO" />
+                <ScalarProperty Name="PEAN_DT_ANOTACAO" ColumnName="PEAN_DT_ANOTACAO" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
+                <ScalarProperty Name="PEAN_CD_ID" ColumnName="PEAN_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

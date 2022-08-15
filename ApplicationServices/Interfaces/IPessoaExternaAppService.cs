@@ -23,5 +23,7 @@ namespace ApplicationServices.Interfaces
         Int32 ExecuteFilter(Int32? cargo, String nome, String cpf, String email, Int32 idAss, out List<PESSOA_EXTERNA> objeto);
 
         List<CARGO_USUARIO> GetAllCargos(Int32 idAss);
+        PESSOA_EXTERNA_ANEXO GetAnexoById(Int32 id);
+        PESSOA_EXTERNA_ANOTACAO GetAnotacaoById(Int32 id);
     }
 }

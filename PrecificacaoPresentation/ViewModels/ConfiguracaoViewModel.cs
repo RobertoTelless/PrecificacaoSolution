@@ -29,19 +29,11 @@ namespace ERP_Condominios_Solution.ViewModels
         [StringLength(50, MinimumLength = 1, ErrorMessage = "A CREDENCIAL deve conter no minimo 1 caracteres e no máximo 50.")]
         public string CONF_NM_SENHA_EMISSOR { get; set; }
         [RegularExpression(@"^([0-9]+)$", ErrorMessage = "Deve ser um valor inteiro positivo")]
-        public Nullable<int> CONF_NR_DIAS_PATRIMONIO { get; set; }
-        [RegularExpression(@"^([0-9]+)$", ErrorMessage = "Deve ser um valor inteiro positivo")]
-        public Nullable<int> CONF_NR_DIAS_ATENDIMENTO { get; set; }
-        [RegularExpression(@"^([0-9]+)$", ErrorMessage = "Deve ser um valor inteiro positivo")]
         public Nullable<int> CONF_NR_REFRESH_DASH { get; set; }
         [StringLength(50, ErrorMessage = "O ARQUIVO DE ALARME deve conter no máximo 50.")]
         public string CONF_NM_ARQUIVO_ALARME { get; set; }
         [RegularExpression(@"^([0-9]+)$", ErrorMessage = "Deve ser um valor inteiro positivo")]
         public Nullable<int> CONF_NR_REFRESH_NOTIFICACAO { get; set; }
-        [StringLength(50, ErrorMessage = "A CHAVE SENDGRID deve conter no máximo 50.")]
-        public string CONF_NM_SENDGRID_KEY { get; set; }
-        [StringLength(50, ErrorMessage = "O NOME DA EMPRESA deve conter no máximo 50.")]
-        public string CONF_NM_NOME_EMPRESA { get; set; }
         public string CONF_SG_LOGIN_SMS { get; set; }
         public string CONF_SG_SENHA_SMS { get; set; }
 

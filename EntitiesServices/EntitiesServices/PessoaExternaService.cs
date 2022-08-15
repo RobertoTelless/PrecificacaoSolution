@@ -20,14 +20,18 @@ namespace ModelServices.EntitiesServices
     {
         private readonly IPessoaExternaRepository _baseRepository;
         private readonly ILogRepository _logRepository;
+        private readonly IPessoaExternaAnexoRepository _anexoRepository;
+        private readonly IPessoaExternaAnotacaoRepository _anoRepository;
         private readonly ICargoRepository _carRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public PessoaExternaService(IPessoaExternaRepository baseRepository, ILogRepository logRepository, ICargoRepository carRepository) : base(baseRepository)
+        public PessoaExternaService(IPessoaExternaRepository baseRepository, ILogRepository logRepository, ICargoRepository carRepository, IPessoaExternaAnexoRepository anexoRepository, IPessoaExternaAnotacaoRepository anoRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
             _carRepository = carRepository;
+            _anexoRepository = anexoRepository;
+            _anoRepository = anoRepository;  
 
         }
 
@@ -68,6 +72,16 @@ namespace ModelServices.EntitiesServices
         public List<CARGO_USUARIO> GetAllCargos(Int32 idAss)
         {
             return _carRepository.GetAllItens(idAss);
+        }
+
+        public PESSOA_EXTERNA_ANEXO GetAnexoById(Int32 id)
+        {
+            return _anexoRepository.GetItemById(id);
+        }
+
+        public PESSOA_EXTERNA_ANOTACAO GetAnotacaoById(Int32 id)
+        {
+            return _anoRepository.GetItemById(id);
         }
 
         public Int32 Create(PESSOA_EXTERNA item, LOG log)

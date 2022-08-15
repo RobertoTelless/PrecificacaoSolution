@@ -38,5 +38,6 @@ namespace ApplicationServices.Interfaces
         List<NOTICIA> GetAllNoticias(Int32 idAss);
         USUARIO GetAdministrador(Int32 idAss);
         List<CARGO_USUARIO> GetAllCargos(Int32 idAss);
+        USUARIO_ANOTACAO GetAnotacaoById(Int32 id);
     }
 }

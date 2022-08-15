@@ -16,24 +16,24 @@ namespace MvcMapping.Mappers
             CreateMap<USUARIO, UsuarioLoginViewModel>();
             CreateMap<LOG, LogViewModel>();
             CreateMap<CONFIGURACAO, ConfiguracaoViewModel>();
-            //CreateMap<CARGO, CargoViewModel>();
+            CreateMap<CARGO_USUARIO, CargoViewModel>();
             CreateMap<NOTICIA, NoticiaViewModel>();
             CreateMap<NOTICIA_COMENTARIO, NoticiaComentarioViewModel>();
             CreateMap<NOTIFICACAO, NotificacaoViewModel>();
-            //CreateMap<CONTA_RECEBER, ContaReceberViewModel>();
-            //CreateMap<CATEGORIA_PRODUTO, CategoriaProdutoViewModel>();
-            //CreateMap<CATEGORIA_FORNECEDOR, CategoriaFornecedorViewModel>();
-            //CreateMap<TIPO_PESSOA, TipoPessoaViewModel>();
             CreateMap<TEMPLATE, TemplateViewModel>();
             CreateMap<TAREFA, TarefaViewModel>();
             CreateMap<CATEGORIA_AGENDA, CategoriaAgendaViewModel>();
             CreateMap<AGENDA, AgendaViewModel>();
             CreateMap<TAREFA_ACOMPANHAMENTO, TarefaAcompanhamentoViewModel>();
-            CreateMap<TELEFONE, TelefoneViewModel>();
-            CreateMap<CLIENTE, ClienteViewModel>();
-            CreateMap<CLIENTE_CONTATO, ClienteContatoViewModel>();
-            CreateMap<GRUPO, GrupoViewModel>();
-            CreateMap<SUBGRUPO, SubgrupoViewModel>();
+            CreateMap<CATEGORIA_NOTIFICACAO, CategoriaNotificacaoViewModel>();
+            CreateMap<CATEGORIA_USUARIO, CategoriaUsuarioViewModel>();
+            CreateMap<EMPRESA, EmpresaViewModel>();
+            CreateMap<FORMA_PAGTO_RECTO, FormaPagRecViewModel>();
+            CreateMap<MAQUINA, MaquinaViewModel>();
+            CreateMap<PESSOA_EXTERNA, PessoaExternaViewModel>();
+            CreateMap<PESSOA_EXTERNA_ANOTACAO, PessoaExternaAnotacaoViewModel>();
+            CreateMap<PLATAFORMA_ENTREGA, PlataformaEntregaViewModel>();
+            CreateMap<USUARIO_ANOTACAO, UsuarioAnotacaoViewModel>();
 
         }
     }
