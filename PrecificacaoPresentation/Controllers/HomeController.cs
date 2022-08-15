@@ -10,7 +10,7 @@ namespace PrecificacaoPresentation.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "ControleAcesso");
         }
 
         public ActionResult About()
