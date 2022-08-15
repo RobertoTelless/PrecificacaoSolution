@@ -14,5 +14,6 @@ namespace ApplicationServices.Interfaces
         Int32 ValidateDelete(PERFIL perfil, USUARIO usuario);
         List<PERFIL> GetAllItens();
         PERFIL GetByID(Int32 id);
+
     }
 }

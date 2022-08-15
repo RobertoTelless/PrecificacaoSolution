@@ -15,10 +15,11 @@ namespace ApplicationServices.Interfaces
         Int32 ValidateReativar(TEMPLATE item, USUARIO usuario);
 
         TEMPLATE GetByCode(String code);
-        TEMPLATE CheckExist(TEMPLATE item);
-        List<TEMPLATE> GetAllItens();
+        TEMPLATE CheckExist(TEMPLATE item, Int32 idAss);
+        List<TEMPLATE> GetAllItens(Int32 idAss);
         TEMPLATE GetItemById(Int32 id);
-        List<TEMPLATE> GetAllItensAdm();
-        Int32 ExecuteFilter(String sigla, String nome, String conteudo, out List<TEMPLATE> objeto);
+        List<TEMPLATE> GetAllItensAdm(Int32 idAss);
+        Int32 ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss, out List<TEMPLATE> objeto);
+    
     }
 }

@@ -23,5 +23,6 @@ namespace ApplicationServices.Interfaces
         List<AGENDA> GetAllItensAdm(Int32 idAss);
         AGENDA GetItemById(Int32 id);
         Int32 ExecuteFilter(DateTime? data, Int32? cat, String titulo, String descricao, Int32 idAss, Int32 idUser, Int32 corp, out List<AGENDA> objeto);
+    
     }
 }

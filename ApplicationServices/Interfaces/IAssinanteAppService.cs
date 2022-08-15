@@ -13,6 +13,7 @@ namespace ApplicationServices.Interfaces
         Int32 ValidateEdit(ASSINANTE perfil, ASSINANTE perfilAntes, USUARIO usuario);
         Int32 ValidateDelete(ASSINANTE perfil, USUARIO usuario);
         Int32 ValidateReativar(ASSINANTE perfil, USUARIO usuario);
+
         ASSINANTE CheckExist(ASSINANTE conta);
         List<ASSINANTE> GetAllItens();
         List<ASSINANTE> GetAllItensAdm();
