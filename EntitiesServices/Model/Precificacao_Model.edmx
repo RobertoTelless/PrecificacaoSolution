@@ -20,6 +20,8 @@
           <Property Name="AGEN_IN_STATUS" Type="int" Nullable="false" />
           <Property Name="AGEN_TX_OBSERVACOES" Type="varchar" MaxLength="5000" />
           <Property Name="AGEN_IN_ATIVO" Type="int" Nullable="false" />
+          <Property Name="AGEN_CD_USUARIO" Type="int" />
+          <Property Name="AGEN_LK_REUNIAO" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="AGENDA_ANEXO">
           <Key>
@@ -874,6 +876,18 @@
             </Principal>
             <Dependent Role="AGENDA">
               <PropertyRef Name="CAAG_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="AGEN_CD_USUARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2029,6 +2043,10 @@
             <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
             <End Role="AGENDA" EntitySet="AGENDA" />
           </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_USUARIO" Association="Self.FK_AGENDA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
           <AssociationSet Name="FK_CATEGORIA_AGENDA_ASSINANTE" Association="Self.FK_CATEGORIA_AGENDA_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
@@ -2413,6 +2431,9 @@
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKAGENDA22330" FromRole="AGENDA" ToRole="ASSINANTE" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKAGENDA418024" FromRole="AGENDA" ToRole="USUARIO" />
           <NavigationProperty Name="CATEGORIA_AGENDA" Relationship="Db_PrecificacaoModel.FK_AGENDA_CATEGORIA_AGENDA" FromRole="AGENDA" ToRole="CATEGORIA_AGENDA" />
+          <Property Name="AGEN_CD_USUARIO" Type="Int32" />
+          <Property Name="AGEN_LK_REUNIAO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USUARIO1" Relationship="Db_PrecificacaoModel.FK_AGENDA_USUARIO" FromRole="AGENDA" ToRole="USUARIO" />
         </EntityType>
         <EntityType Name="AGENDA_ANEXO">
           <Key>
@@ -3213,6 +3234,7 @@
           <Property Name="CARG_CD_ID" Type="Int32" />
           <NavigationProperty Name="CARGO_USUARIO" Relationship="Db_PrecificacaoModel.FK_USUARIO_CARGO_USUARIO" FromRole="USUARIO" ToRole="CARGO_USUARIO" />
           <NavigationProperty Name="PESSOA_EXTERNA_ANOTACAO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" FromRole="USUARIO" ToRole="PESSOA_EXTERNA_ANOTACAO" />
+          <NavigationProperty Name="AGENDA1" Relationship="Db_PrecificacaoModel.FK_AGENDA_USUARIO" FromRole="USUARIO" ToRole="AGENDA" />
         </EntityType>
         <EntityType Name="USUARIO_ANEXO">
           <Key>
@@ -4500,6 +4522,10 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
           </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_USUARIO" Association="Db_PrecificacaoModel.FK_AGENDA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CARGO_USUARIO">
           <Key>
@@ -4963,6 +4989,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AGENDA_USUARIO">
+          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.AGENDA" Role="AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="AGEN_CD_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4972,6 +5010,8 @@
           <EntitySetMapping Name="AGENDA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.AGENDA">
               <MappingFragment StoreEntitySet="AGENDA">
+                <ScalarProperty Name="AGEN_LK_REUNIAO" ColumnName="AGEN_LK_REUNIAO" />
+                <ScalarProperty Name="AGEN_CD_USUARIO" ColumnName="AGEN_CD_USUARIO" />
                 <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />

@@ -31,11 +31,14 @@ namespace EntitiesServices.Model
         public int AGEN_IN_STATUS { get; set; }
         public string AGEN_TX_OBSERVACOES { get; set; }
         public int AGEN_IN_ATIVO { get; set; }
+        public Nullable<int> AGEN_CD_USUARIO { get; set; }
+        public string AGEN_LK_REUNIAO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA_ANEXO> AGENDA_ANEXO { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual USUARIO USUARIO { get; set; }
         public virtual CATEGORIA_AGENDA CATEGORIA_AGENDA { get; set; }
+        public virtual USUARIO USUARIO1 { get; set; }
     }
 }

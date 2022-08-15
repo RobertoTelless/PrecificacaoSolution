@@ -160,6 +160,7 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_USUARIO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
