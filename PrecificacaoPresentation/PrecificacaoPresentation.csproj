@@ -137,6 +137,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks" />
@@ -223,6 +224,8 @@
     <Compile Include="Controllers\BaseAdminController.cs" />
     <Compile Include="Controllers\ControleAcessoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NoticiaController.cs" />
+    <Compile Include="Controllers\NotificacaoController.cs" />
     <Compile Include="Extensions\HMTLHelperExtensions.cs" />
     <Compile Include="Extensions\MVCButtonExtensions.cs" />
     <Compile Include="Extensions\WebMvcExtensions.cs" />
@@ -2855,6 +2858,10 @@
     <Content Include="Views\ControleAcesso\TrocarSenha.cshtml" />
     <Content Include="Views\ControleAcesso\TrocarSenhaInicio.cshtml" />
     <Content Include="Views\ControleAcesso\GerarSenha.cshtml" />
+    <Content Include="Views\BaseAdmin\CarregarBase.cshtml" />
+    <Content Include="Views\BaseAdmin\CarregarDesenvolvimento.cshtml" />
+    <Content Include="Views\BaseAdmin\MontarTelaDashboardAdministracao.cshtml" />
+    <Content Include="Views\BaseAdmin\MontarCentralMensagens.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2884,7 +2891,8 @@
     <Folder Include="Imagens\1\Notificacao\2\Anexos\" />
     <Folder Include="Imagens\1\Tarefa\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\BaseAdmin\" />
+    <Folder Include="Views\Noticia\" />
+    <Folder Include="Views\Notificacao\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

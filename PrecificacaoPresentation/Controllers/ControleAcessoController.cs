@@ -23,6 +23,7 @@ namespace ERP_Condominios_Solution.Controllers
         USUARIO objetoAntes = new USUARIO();
         List<USUARIO> listaMaster = new List<USUARIO>();
 
+
         public ControleAcessoController(IUsuarioAppService baseApps)
         {
             baseApp = baseApps;
