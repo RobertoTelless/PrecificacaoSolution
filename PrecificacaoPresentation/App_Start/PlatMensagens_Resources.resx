@@ -501,4 +501,28 @@
   <data name="M0149" xml:space="preserve">
     <value>Descrição do Motivo de cancelamento não especificada</value>
   </data>
+  <data name="M0150" xml:space="preserve">
+    <value>Maquina de cartão já cadastrada</value>
+  </data>
+  <data name="M0151" xml:space="preserve">
+    <value>Impossível excluir esta máqiuna de cartão. Existem registros vinculados a ela.</value>
+  </data>
+  <data name="M0152" xml:space="preserve">
+    <value>Plataforma de Entregas já cadastrada</value>
+  </data>
+  <data name="M0153" xml:space="preserve">
+    <value>Impossível excluir esta plataforma de entregas. Existem registros vinculados a ela.</value>
+  </data>
+  <data name="M0154" xml:space="preserve">
+    <value>Cargo já cadastrado</value>
+  </data>
+  <data name="M0155" xml:space="preserve">
+    <value>Impossível excluir este cargo. Existem registros vinculados a ele</value>
+  </data>
+  <data name="M0156" xml:space="preserve">
+    <value>Pessoa Externa já cadastrada</value>
+  </data>
+  <data name="M0157" xml:space="preserve">
+    <value>Impossível excluir esta pessoa externa. Existem registros vinculados a ela</value>
+  </data>
 </root>

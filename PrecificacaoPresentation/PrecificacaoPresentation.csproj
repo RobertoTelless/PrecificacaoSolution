@@ -2909,6 +2909,23 @@
     <Content Include="Views\Usuario\EditarUsuario.cshtml" />
     <Content Include="Views\Empresa\MontarTelaEmpresa.cshtml" />
     <Content Include="Views\Empresa\VerAnexoEmpresa.cshtml" />
+    <Content Include="Views\Configuracao\MontarTelaConfiguracao.cshtml" />
+    <Content Include="Views\Maquina\MontarTelaMaquina.cshtml" />
+    <Content Include="Views\Maquina\IncluirMaquina.cshtml" />
+    <Content Include="Views\Maquina\VerMaquina.cshtml" />
+    <Content Include="Views\Maquina\EditarMaquina.cshtml" />
+    <Content Include="Views\PlataformaEntrega\MontarTelaPlataformaEntrega.cshtml" />
+    <Content Include="Views\PlataformaEntrega\IncluirPlataformaEntrega.cshtml" />
+    <Content Include="Views\PlataformaEntrega\VerPlataformaEntrega.cshtml" />
+    <Content Include="Views\PlataformaEntrega\EditarPlataformaEntrega.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaCargo.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirCargo.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarCargo.cshtml" />
+    <Content Include="Views\PessoaExterna\MontarTelaPessoaExterna.cshtml" />
+    <Content Include="Views\PessoaExterna\VerAnexoPessoaExterna.cshtml" />
+    <Content Include="Views\PessoaExterna\VerPessoaExterna.cshtml" />
+    <Content Include="Views\PessoaExterna\IncluirPessoaExterna.cshtml" />
+    <Content Include="Views\PessoaExterna\EditarPessoaExterna.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2938,12 +2955,7 @@
     <Folder Include="Imagens\1\Notificacao\2\Anexos\" />
     <Folder Include="Imagens\1\Tarefa\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Configuracao\" />
     <Folder Include="Views\FormaPagRec\" />
-    <Folder Include="Views\Maquina\" />
-    <Folder Include="Views\PessoaExterna\" />
-    <Folder Include="Views\PlataformaEntrega\" />
-    <Folder Include="Views\TabelaAuxiliar\" />
     <Folder Include="Views\Template\" />
   </ItemGroup>
   <ItemGroup>
