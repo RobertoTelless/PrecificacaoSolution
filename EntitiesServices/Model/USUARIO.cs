@@ -60,6 +60,7 @@ namespace EntitiesServices.Model
         public int USUA_NR_FALHAS { get; set; }
         public string USUA_TX_OBSERVACOES { get; set; }
         public Nullable<int> CARG_CD_ID { get; set; }
+        public string USUA_NR_TELEFONE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }

@@ -242,6 +242,18 @@
           <Property Name="EMPR_DT_CADASTRO" Type="date" Nullable="false" />
           <Property Name="EMPR_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="EMPRESA_ANEXO">
+          <Key>
+            <PropertyRef Name="EMAN_CD_ID" />
+          </Key>
+          <Property Name="EMAN_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMPR_CD_ID" Type="int" Nullable="false" />
+          <Property Name="EMAN_NM_TITULO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EMAN_IN_TIPO" Type="int" Nullable="false" />
+          <Property Name="EMAN_DT_ANEXO" Type="date" Nullable="false" />
+          <Property Name="EMAN_AQ_ARQUIVO" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EMAN_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="FICHA_TECNICA">
           <Key>
             <PropertyRef Name="FITE_CD_ID" />
@@ -811,10 +823,11 @@
           <Property Name="USUA_AQ_FOTO" Type="varchar" MaxLength="250" />
           <Property Name="USUA_NM_NOME" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="USUA_NM_LOGIN" Type="varchar" MaxLength="6" Nullable="false" />
-          <Property Name="USUA_EM_EMAIL" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="USUA_NR_CPF" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="USUA_NR_RG" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="USUA_NR_CELULAR" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="USUA_EM_EMAIL" Type="varchar" MaxLength="150" />
+          <Property Name="USUA_NR_CPF" Type="varchar" MaxLength="15" />
+          <Property Name="USUA_NR_RG" Type="varchar" MaxLength="15" />
+          <Property Name="USUA_NR_TELEFONE" Type="varchar" MaxLength="50" />
+          <Property Name="USUA_NR_CELULAR" Type="varchar" MaxLength="12" />
           <Property Name="USUA_NM_SENHA" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="USUA_NM_SENHA_CONFIRMA" Type="varchar" MaxLength="8" />
           <Property Name="USUA_NM_NOVA_SENHA" Type="varchar" MaxLength="8" />
@@ -949,6 +962,18 @@
             </Principal>
             <Dependent Role="CONFIGURACAO">
               <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPRESA_ANEXO_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="EMPRESA_ANEXO" Type="Self.EMPRESA_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="EMPR_CD_ID" />
+            </Principal>
+            <Dependent Role="EMPRESA_ANEXO">
+              <PropertyRef Name="EMPR_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1992,6 +2017,7 @@
           <EntitySet Name="CONTA_BANCO_LANCAMENTO" EntityType="Self.CONTA_BANCO_LANCAMENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CUSTO_FIXO" EntityType="Self.CUSTO_FIXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPRESA_ANEXO" EntityType="Self.EMPRESA_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FICHA_TECNICA" EntityType="Self.FICHA_TECNICA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FICHA_TECNICA_DETALHE" EntityType="Self.FICHA_TECNICA_DETALHE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FORMA_PAGTO_RECTO" EntityType="Self.FORMA_PAGTO_RECTO" Schema="dbo" store:Type="Tables" />
@@ -2067,6 +2093,10 @@
           <AssociationSet Name="FK_CONFIGURACAO_ASSINANTE" Association="Self.FK_CONFIGURACAO_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="CONFIGURACAO" EntitySet="CONFIGURACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPRESA_ANEXO_EMPRESA" Association="Self.FK_EMPRESA_ANEXO_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="EMPRESA_ANEXO" EntitySet="EMPRESA_ANEXO" />
           </AssociationSet>
           <AssociationSet Name="FK_EMPRESA_MAQUINA" Association="Self.FK_EMPRESA_MAQUINA">
             <End Role="MAQUINA" EntitySet="MAQUINA" />
@@ -2682,6 +2712,7 @@
           <Property Name="EMPR_IN_PAGA_COMISSAO" Type="Int32" Nullable="false" />
           <Property Name="EMPR_VL_IMPOSTO_MEI" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="MAQUINA" Relationship="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA" FromRole="EMPRESA" ToRole="MAQUINA" />
+          <NavigationProperty Name="EMPRESA_ANEXO" Relationship="Db_PrecificacaoModel.FK_EMPRESA_ANEXO_EMPRESA" FromRole="EMPRESA" ToRole="EMPRESA_ANEXO" />
         </EntityType>
         <EntityType Name="FICHA_TECNICA">
           <Key>
@@ -3199,10 +3230,10 @@
           <Property Name="USUA_AQ_FOTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NM_NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUA_NM_LOGIN" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="USUA_EM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="USUA_NR_CPF" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="USUA_NR_RG" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="USUA_NR_CELULAR" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USUA_EM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="USUA_NR_CPF" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="USUA_NR_RG" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="USUA_NR_CELULAR" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NM_SENHA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUA_NM_SENHA_CONFIRMA" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NM_NOVA_SENHA" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
@@ -3237,6 +3268,7 @@
           <NavigationProperty Name="CARGO_USUARIO" Relationship="Db_PrecificacaoModel.FK_USUARIO_CARGO_USUARIO" FromRole="USUARIO" ToRole="CARGO_USUARIO" />
           <NavigationProperty Name="PESSOA_EXTERNA_ANOTACAO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" FromRole="USUARIO" ToRole="PESSOA_EXTERNA_ANOTACAO" />
           <NavigationProperty Name="AGENDA1" Relationship="Db_PrecificacaoModel.FK_AGENDA_USUARIO" FromRole="USUARIO" ToRole="AGENDA" />
+          <Property Name="USUA_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="USUARIO_ANEXO">
           <Key>
@@ -4528,6 +4560,11 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="AGENDA" EntitySet="AGENDA" />
           </AssociationSet>
+          <EntitySet Name="EMPRESA_ANEXO" EntityType="Db_PrecificacaoModel.EMPRESA_ANEXO" />
+          <AssociationSet Name="FK_EMPRESA_ANEXO_EMPRESA" Association="Db_PrecificacaoModel.FK_EMPRESA_ANEXO_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="EMPRESA_ANEXO" EntitySet="EMPRESA_ANEXO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CARGO_USUARIO">
           <Key>
@@ -5000,6 +5037,31 @@
             </Principal>
             <Dependent Role="AGENDA">
               <PropertyRef Name="AGEN_CD_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EMPRESA_ANEXO">
+          <Key>
+            <PropertyRef Name="EMAN_CD_ID" />
+          </Key>
+          <Property Name="EMAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMPR_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="EMAN_NM_TITULO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EMAN_IN_TIPO" Type="Int32" Nullable="false" />
+          <Property Name="EMAN_DT_ANEXO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EMAN_AQ_ARQUIVO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EMAN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EMPRESA" Relationship="Db_PrecificacaoModel.FK_EMPRESA_ANEXO_EMPRESA" FromRole="EMPRESA_ANEXO" ToRole="EMPRESA" />
+        </EntityType>
+        <Association Name="FK_EMPRESA_ANEXO_EMPRESA">
+          <End Type="Db_PrecificacaoModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.EMPRESA_ANEXO" Role="EMPRESA_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="EMPR_CD_ID" />
+            </Principal>
+            <Dependent Role="EMPRESA_ANEXO">
+              <PropertyRef Name="EMPR_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5688,6 +5750,7 @@
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="USUA_NR_TELEFONE" ColumnName="USUA_NR_TELEFONE" />
                 <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
@@ -5920,6 +5983,19 @@
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
                 <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
                 <ScalarProperty Name="PEAN_CD_ID" ColumnName="PEAN_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA_ANEXO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.EMPRESA_ANEXO">
+              <MappingFragment StoreEntitySet="EMPRESA_ANEXO">
+                <ScalarProperty Name="EMAN_IN_ATIVO" ColumnName="EMAN_IN_ATIVO" />
+                <ScalarProperty Name="EMAN_AQ_ARQUIVO" ColumnName="EMAN_AQ_ARQUIVO" />
+                <ScalarProperty Name="EMAN_DT_ANEXO" ColumnName="EMAN_DT_ANEXO" />
+                <ScalarProperty Name="EMAN_IN_TIPO" ColumnName="EMAN_IN_TIPO" />
+                <ScalarProperty Name="EMAN_NM_TITULO" ColumnName="EMAN_NM_TITULO" />
+                <ScalarProperty Name="EMPR_CD_ID" ColumnName="EMPR_CD_ID" />
+                <ScalarProperty Name="EMAN_CD_ID" ColumnName="EMAN_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

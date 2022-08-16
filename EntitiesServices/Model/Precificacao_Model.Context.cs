@@ -88,5 +88,6 @@ namespace EntitiesServices.Model
         public virtual DbSet<TEMPLATE_SMS> TEMPLATE_SMS { get; set; }
         public virtual DbSet<PESSOA_EXTERNA_ANEXO> PESSOA_EXTERNA_ANEXO { get; set; }
         public virtual DbSet<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
+        public virtual DbSet<EMPRESA_ANEXO> EMPRESA_ANEXO { get; set; }
     }
 }

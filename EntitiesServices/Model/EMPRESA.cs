@@ -23,6 +23,7 @@ namespace EntitiesServices.Model
             this.FORMA_PAGTO_RECTO = new HashSet<FORMA_PAGTO_RECTO>();
             this.PRODUTO_ESTOQUE_EMPRESA = new HashSet<PRODUTO_ESTOQUE_EMPRESA>();
             this.PRODUTO_TABELA_PRECO = new HashSet<PRODUTO_TABELA_PRECO>();
+            this.EMPRESA_ANEXO = new HashSet<EMPRESA_ANEXO>();
         }
     
         public int EMPR_CD_ID { get; set; }
@@ -54,5 +55,7 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUTO_TABELA_PRECO> PRODUTO_TABELA_PRECO { get; set; }
         public virtual MAQUINA MAQUINA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMPRESA_ANEXO> EMPRESA_ANEXO { get; set; }
     }
 }

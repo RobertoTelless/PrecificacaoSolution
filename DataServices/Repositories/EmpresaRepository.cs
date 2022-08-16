@@ -23,7 +23,7 @@ namespace DataServices.Repositories
         public EMPRESA GetItemById(Int32 id)
         {
             IQueryable<EMPRESA> query = Db.EMPRESA;
-            query = query.Where(p => p.EMPR_CD_ID == id);
+            query = query.Where(p => p.ASSI_CD_ID == id);
             return query.FirstOrDefault();
         }
 

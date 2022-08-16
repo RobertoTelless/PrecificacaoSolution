@@ -224,12 +224,19 @@
     <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\AuditoriaController.cs" />
     <Compile Include="Controllers\BaseAdminController.cs" />
+    <Compile Include="Controllers\ConfiguracaoController.cs" />
     <Compile Include="Controllers\ControleAcessoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\FormaPagRecController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaquinaController.cs" />
     <Compile Include="Controllers\NoticiaController.cs" />
     <Compile Include="Controllers\NotificacaoController.cs" />
+    <Compile Include="Controllers\PessoaExternaController.cs" />
+    <Compile Include="Controllers\PlataformaEntregaController.cs" />
+    <Compile Include="Controllers\TabelaAuxiliarController.cs" />
     <Compile Include="Controllers\TarefaController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Extensions\HMTLHelperExtensions.cs" />
     <Compile Include="Extensions\MVCButtonExtensions.cs" />
@@ -2893,6 +2900,15 @@
     <Content Include="Views\Tarefa\EditarTarefa.cshtml" />
     <Content Include="Views\Tarefa\VerAnexoTarefa.cshtml" />
     <Content Include="Views\Tarefa\IncluirAcompanhamento.cshtml" />
+    <Content Include="Views\Auditoria\MontarTelaLog.cshtml" />
+    <Content Include="Views\Auditoria\VerLog.cshtml" />
+    <Content Include="Views\Usuario\MontarTelaUsuario.cshtml" />
+    <Content Include="Views\Usuario\VerAnexoUsuario.cshtml" />
+    <Content Include="Views\Usuario\VerUsuario.cshtml" />
+    <Content Include="Views\Usuario\IncluirUsuario.cshtml" />
+    <Content Include="Views\Usuario\EditarUsuario.cshtml" />
+    <Content Include="Views\Empresa\MontarTelaEmpresa.cshtml" />
+    <Content Include="Views\Empresa\VerAnexoEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2922,9 +2938,13 @@
     <Folder Include="Imagens\1\Notificacao\2\Anexos\" />
     <Folder Include="Imagens\1\Tarefa\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Auditoria\" />
-    <Folder Include="Views\Empresa\" />
-    <Folder Include="Views\Usuario\" />
+    <Folder Include="Views\Configuracao\" />
+    <Folder Include="Views\FormaPagRec\" />
+    <Folder Include="Views\Maquina\" />
+    <Folder Include="Views\PessoaExterna\" />
+    <Folder Include="Views\PlataformaEntrega\" />
+    <Folder Include="Views\TabelaAuxiliar\" />
+    <Folder Include="Views\Template\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

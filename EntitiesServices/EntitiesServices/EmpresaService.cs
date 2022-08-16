@@ -22,15 +22,16 @@ namespace ModelServices.EntitiesServices
         private readonly ILogRepository _logRepository;
         private readonly IMaquinaRepository _maqRepository;
         private readonly IRegimeTributarioRepository _regRepository;
+        private readonly IEmpresaAnexoRepository _anexoRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public EmpresaService(IEmpresaRepository baseRepository, ILogRepository logRepository, IMaquinaRepository maqRepository, IRegimeTributarioRepository regRepository) : base(baseRepository)
+        public EmpresaService(IEmpresaRepository baseRepository, ILogRepository logRepository, IMaquinaRepository maqRepository, IRegimeTributarioRepository regRepository, IEmpresaAnexoRepository anexoRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
             _maqRepository = maqRepository;
             _regRepository = regRepository;
-
+            _anexoRepository = anexoRepository;
         }
 
         public EMPRESA GetItemById(Int32 id)
@@ -53,6 +54,11 @@ namespace ModelServices.EntitiesServices
         {
             EMPRESA item = _baseRepository.CheckExist(conta, idAss);
             return item;
+        }
+
+        public EMPRESA_ANEXO GetAnexoById(Int32 id)
+        {
+            return _anexoRepository.GetItemById(id);
         }
 
         public List<EMPRESA> ExecuteFilter(String nome, Int32? idAss)

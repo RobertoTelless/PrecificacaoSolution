@@ -45,6 +45,12 @@ namespace ApplicationServices.Services
             return item;
         }
 
+        public EMPRESA_ANEXO GetAnexoById(Int32 id)
+        {
+            EMPRESA_ANEXO lista = _baseService.GetAnexoById(id);
+            return lista;
+        }
+
         public Int32 ExecuteFilter(String nome, Int32 idAss, out List<EMPRESA> objeto)
         {
             try

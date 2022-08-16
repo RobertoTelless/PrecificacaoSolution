@@ -24,5 +24,6 @@ namespace ModelServices.Interfaces.EntitiesServices
 
         List<MAQUINA> GetAllMaquinas(Int32 idAss);
         List<REGIME_TRIBUTARIO> GetAllRegimes();
+        EMPRESA_ANEXO GetAnexoById(Int32 id);
     }
 }

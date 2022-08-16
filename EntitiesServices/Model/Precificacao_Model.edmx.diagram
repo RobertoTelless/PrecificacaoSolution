@@ -161,6 +161,8 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_USUARIO" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA_ANEXO" Width="1.5" PointX="5.25" PointY="39" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_ANEXO_EMPRESA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
