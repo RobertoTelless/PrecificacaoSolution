@@ -208,6 +208,7 @@ namespace ERP_Condominios_Solution.Controllers
             return View(vm);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult TrocarSenha(UsuarioLoginViewModel vm)

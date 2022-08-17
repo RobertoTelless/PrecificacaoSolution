@@ -490,6 +490,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Perfis = new SelectList((List<PERFIL>)Session["Perfis"], "PERF_CD_ID", "PERF_NM_NOME");
             ViewBag.Cargos = new SelectList(baseApp.GetAllCargos(idAss), "CARG_CD_ID", "CARG_NM_NOME");
             ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss).OrderBy(x => x.EMPR_NM_NOME).ToList<EMPRESA>(), "EMPR_CD_ID", "EMPR_NM_NOME");
+            
             if (ModelState.IsValid)
             {
                 try

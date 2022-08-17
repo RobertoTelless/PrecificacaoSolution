@@ -118,6 +118,7 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("MontarTelaLog");
         }
 
+
         [HttpPost]
         public ActionResult FiltrarLog(LOG item)
         {

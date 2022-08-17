@@ -470,6 +470,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
         }
 
+
         [HttpGet]
         public ActionResult EditarNoticia(Int32 id)
         {

@@ -388,7 +388,7 @@ namespace ERP_Condominios_Solution.Controllers
             // Mensagem
             if ((Int32)Session["MensNotificacao"] == 2)
             {
-                ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
             }
 
             // Abre view

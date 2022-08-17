@@ -194,6 +194,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Session["MensPermissao"] = 0;
             return View(vm);
+
         }
 
         public ActionResult CarregarDesenvolvimento()

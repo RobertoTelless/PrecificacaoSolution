@@ -403,6 +403,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
         }
 
+
         [HttpPost]
         public JsonResult EditarAgendaOnChange(Int32 id, DateTime data)
         {

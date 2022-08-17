@@ -91,8 +91,16 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Title = "Empresa";
 
             // Indicadores
-            ViewBag.Regime = new SelectList(baseApp.GetAllRegimes(), "RETR_CD_ID", "RETR_NM_NOME");
+            ViewBag.Regimes = new SelectList(baseApp.GetAllRegimes(), "RETR_CD_ID", "RETR_NM_NOME");
             ViewBag.Maquinas = new SelectList(baseApp.GetAllMaquinas(idAss), "MAQN_CD_ID", "MAQN_NM_NOME");
+            List<SelectListItem> opera = new List<SelectListItem>();
+            opera.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            opera.Add(new SelectListItem() { Text = "Não", Value = "2" });
+            ViewBag.Opera = new SelectList(opera, "Value", "Text");
+            List<SelectListItem> comissao = new List<SelectListItem>();
+            comissao.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            comissao.Add(new SelectListItem() { Text = "Não", Value = "2" });
+            ViewBag.Comissao = new SelectList(comissao, "Value", "Text");
             ViewBag.Perfil = usuario.PERF_CD_ID;
 
             // Mensagem
@@ -127,8 +135,16 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
-            ViewBag.Regime = new SelectList(baseApp.GetAllRegimes(), "RETR_CD_ID", "RETR_NM_NOME");
+            ViewBag.Regimes = new SelectList(baseApp.GetAllRegimes(), "RETR_CD_ID", "RETR_NM_NOME");
             ViewBag.Maquinas = new SelectList(baseApp.GetAllMaquinas(idAss), "MAQN_CD_ID", "MAQN_NM_NOME");
+            List<SelectListItem> opera = new List<SelectListItem>();
+            opera.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            opera.Add(new SelectListItem() { Text = "Não", Value = "2" });
+            ViewBag.Opera = new SelectList(opera, "Value", "Text");
+            List<SelectListItem> comissao = new List<SelectListItem>();
+            comissao.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            comissao.Add(new SelectListItem() { Text = "Não", Value = "2" });
+            ViewBag.Comissao = new SelectList(comissao, "Value", "Text");
             if (ModelState.IsValid)
             {
                 try

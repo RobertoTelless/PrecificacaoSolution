@@ -235,6 +235,10 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
 
             // Prepara listas
+            List<SelectListItem> antecipa = new List<SelectListItem>();
+            antecipa.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            antecipa.Add(new SelectListItem() { Text = "Não", Value = "2" });
+            ViewBag.Antecipa = new SelectList(antecipa, "Value", "Text");
             ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
 
             // Prepara view
@@ -261,6 +265,10 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            List<SelectListItem> antecipa = new List<SelectListItem>();
+            antecipa.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            antecipa.Add(new SelectListItem() { Text = "Não", Value = "2" });
+            ViewBag.Antecipa = new SelectList(antecipa, "Value", "Text");
             if (ModelState.IsValid)
             {
                 try
@@ -335,16 +343,10 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Prepara view
             PLATAFORMA_ENTREGA item = servApp.GetItemById(id);
-            //ViewBag.Tipos = new SelectList(servApp.GetAllTipos(idAss).OrderBy(x => x.CASE_NM_NOME).ToList<CATEGORIA_SERVICO>(), "CASE_CD_ID", "CASE_NM_NOME");
-            //ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss).OrderBy(p => p.FILI_NM_NOME), "FILI_CD_ID", "FILI_NM_NOME");
-            //ViewBag.Unidades = new SelectList(unApp.GetAllItens(idAss).Where(p => p.UNID_IN_TIPO_UNIDADE == 2).OrderBy(p => p.UNID_NM_NOME), "UNID_CD_ID", "UNID_NM_NOME");
-            //ViewBag.Nomes = new SelectList(servApp.GetAllNBSE().OrderBy(p => p.NBSE_NM_NOME), "NBSE_CD_ID", "NBSE_NM_NOME");
-            //List<SelectListItem> local = new List<SelectListItem>();
-            //local.Add(new SelectListItem() { Text = "Interno", Value = "1" });
-            //local.Add(new SelectListItem() { Text = "Externo", Value = "2" });
-            //local.Add(new SelectListItem() { Text = "Interno/externo", Value = "3" });
-            //ViewBag.Local = new SelectList(local, "Value", "Text");
-            ////ViewBag.LstPedidos = pedvApp.GetAllItens();
+            List<SelectListItem> antecipa = new List<SelectListItem>();
+            antecipa.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            antecipa.Add(new SelectListItem() { Text = "Não", Value = "2" });
+            ViewBag.Antecipa = new SelectList(antecipa, "Value", "Text");
             objetoAntes = item;
 
             if (Session["MensPlataformaEntrega"] != null)
@@ -377,16 +379,10 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
-
-            //ViewBag.Tipos = new SelectList(servApp.GetAllTipos(idAss).OrderBy(x => x.CASE_NM_NOME).ToList<CATEGORIA_SERVICO>(), "CASE_CD_ID", "CASE_NM_NOME");
-            //ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss).OrderBy(p => p.FILI_NM_NOME), "FILI_CD_ID", "FILI_NM_NOME");
-            //ViewBag.Unidades = new SelectList(unApp.GetAllItens(idAss).Where(p => p.UNID_IN_TIPO_UNIDADE == 2).OrderBy(p => p.UNID_NM_NOME), "UNID_CD_ID", "UNID_NM_NOME");
-            //ViewBag.Nomes = new SelectList(servApp.GetAllNBSE().OrderBy(p => p.NBSE_NM_NOME), "NBSE_CD_ID", "NBSE_NM_NOME");
-            //List<SelectListItem> local = new List<SelectListItem>();
-            //local.Add(new SelectListItem() { Text = "Interno", Value = "1" });
-            //local.Add(new SelectListItem() { Text = "Externo", Value = "2" });
-            //local.Add(new SelectListItem() { Text = "Interno/externo", Value = "3" });
-            //ViewBag.Local = new SelectList(local, "Value", "Text");
+            List<SelectListItem> antecipa = new List<SelectListItem>();
+            antecipa.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            antecipa.Add(new SelectListItem() { Text = "Não", Value = "2" });
+            ViewBag.Antecipa = new SelectList(antecipa, "Value", "Text");
             if (ModelState.IsValid)
             {
                 try
