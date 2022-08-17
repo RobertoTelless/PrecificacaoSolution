@@ -2926,6 +2926,9 @@
     <Content Include="Views\PessoaExterna\VerPessoaExterna.cshtml" />
     <Content Include="Views\PessoaExterna\IncluirPessoaExterna.cshtml" />
     <Content Include="Views\PessoaExterna\EditarPessoaExterna.cshtml" />
+    <Content Include="Views\PessoaExterna\IncluirAnotacao.cshtml" />
+    <Content Include="Views\PessoaExterna\EnviarEMailPessoaExterna.cshtml" />
+    <Content Include="Views\PessoaExterna\EnviarSMSPessoaExterna.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
