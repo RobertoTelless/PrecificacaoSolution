@@ -809,6 +809,7 @@
           </Key>
           <Property Name="UNID_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UNID_NM_NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UNID_SG_SIGLA" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UNID_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="USUARIO">
@@ -827,7 +828,7 @@
           <Property Name="USUA_NR_CPF" Type="varchar" MaxLength="15" />
           <Property Name="USUA_NR_RG" Type="varchar" MaxLength="15" />
           <Property Name="USUA_NR_TELEFONE" Type="varchar" MaxLength="50" />
-          <Property Name="USUA_NR_CELULAR" Type="varchar" MaxLength="12" />
+          <Property Name="USUA_NR_CELULAR" Type="varchar" MaxLength="50" />
           <Property Name="USUA_NM_SENHA" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="USUA_NM_SENHA_CONFIRMA" Type="varchar" MaxLength="8" />
           <Property Name="USUA_NM_NOVA_SENHA" Type="varchar" MaxLength="8" />
@@ -3218,6 +3219,7 @@
           <Property Name="UNID_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UNID_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PRODUTO" Relationship="Self.FKPRODUTO131046" FromRole="UNIDADE" ToRole="PRODUTO" />
+          <Property Name="UNID_SG_SIGLA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -3233,7 +3235,7 @@
           <Property Name="USUA_EM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NR_CPF" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NR_RG" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="USUA_NR_CELULAR" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="USUA_NR_CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NM_SENHA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUA_NM_SENHA_CONFIRMA" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NM_NOVA_SENHA" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
@@ -5741,6 +5743,7 @@
           <EntitySetMapping Name="UNIDADE">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.UNIDADE">
               <MappingFragment StoreEntitySet="UNIDADE">
+                <ScalarProperty Name="UNID_SG_SIGLA" ColumnName="UNID_SG_SIGLA" />
                 <ScalarProperty Name="UNID_CD_ID" ColumnName="UNID_CD_ID" />
                 <ScalarProperty Name="UNID_NM_NOME" ColumnName="UNID_NM_NOME" />
                 <ScalarProperty Name="UNID_IN_ATIVO" ColumnName="UNID_IN_ATIVO" />
