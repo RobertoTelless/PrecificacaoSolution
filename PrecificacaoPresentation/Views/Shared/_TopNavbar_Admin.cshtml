@@ -25,34 +25,34 @@
                     {
                         <li>
                             <div class="dropdown-messages-box">
-                                <a href="@Url.Action("VerNotificacao", "Notificacao", new { id = cond.NOTI_CD_ID })" class="pull-left btn-link">
+                                <a href="@Url.Action("VerNotificacao", "Notificacao", new { id = cond.NOTC_CD_ID })" class="pull-left btn-link">
                                     <img alt="image" class="img-circle" src="@Url.Content((String)Session["Foto"])">
                                 </a>
                                 <div class="media-body">
-                                    <small class="pull-right">@cond.NOTI_DT_EMISSAO.Value.ToShortDateString()</small>
-                                    <a href="@Url.Action("VerNotificacao", "Notificacao", new { id = cond.NOTI_CD_ID })" class="pull-left btn-link">
-                                        @if (cond.NOTI_NM_TITULO.Length < 20)
+                                    <small class="pull-right">@cond.NOTC_DT_EMISSAO.Value.ToShortDateString()</small>
+                                    <a href="@Url.Action("VerNotificacao", "Notificacao", new { id = cond.NOTC_CD_ID })" class="pull-left btn-link">
+                                        @if (cond.NOTC_NM_TITULO.Length < 20)
                                         {
-                                            <strong>@cond.NOTI_NM_TITULO</strong>
+                                            <strong>@cond.NOTC_NM_TITULO</strong>
                                         }
                                         else
                                         {
-                                            <strong>@cond.NOTI_NM_TITULO.Substring(0, 19)</strong>
+                                            <strong>@cond.NOTC_NM_TITULO.Substring(0, 19)</strong>
                                         }
                                     </a>
-                                    @if (cond.NOTI_TX_TEXTO != null)
+                                    @if (cond.NOTC_TX_NOTIFICACAO != null)
                                     {
-                                        if (cond.NOTI_TX_TEXTO.Length < 50)
+                                        if (cond.NOTC_TX_NOTIFICACAO.Length < 50)
                                         {
-                                            @cond.NOTI_TX_TEXTO
+                                            @cond.NOTC_TX_NOTIFICACAO
                                         }
                                         else
                                         {
-                                            @cond.NOTI_TX_TEXTO.Substring(0, 49)
+                                            @cond.NOTC_TX_NOTIFICACAO.Substring(0, 49)
                                         }
                                     }
                                     <br>
-                                    <small class="text-muted">@CrossCutting.Formatters.DiffTimeFormatter(cond.NOTI_DT_EMISSAO.Value)</small>
+                                    <small class="text-muted">@CrossCutting.Formatters.DiffTimeFormatter(cond.NOTC_DT_EMISSAO.Value)</small>
                                 </div>
                             </div>
                         </li>

@@ -943,7 +943,7 @@ namespace ERP_Condominios_Solution.Controllers
                     HorizontalAlignment = Element.ALIGN_LEFT
                 };
                 table.AddCell(cell);
-                cell = new PdfPCell(new Paragraph(item.NOTC_DT_EMISSAO.ToShortDateString(), meuFont))
+                cell = new PdfPCell(new Paragraph(item.NOTC_DT_EMISSAO.Value.ToShortDateString(), meuFont))
                 {
                     VerticalAlignment = Element.ALIGN_MIDDLE,
                     HorizontalAlignment = Element.ALIGN_LEFT
@@ -1027,12 +1027,12 @@ namespace ERP_Condominios_Solution.Controllers
                 {
                     if (ja == 0)
                     {
-                        parametros += "Data: " + filtro.NOTC_DT_EMISSAO.ToShortDateString();
+                        parametros += "Data: " + filtro.NOTC_DT_EMISSAO.Value.ToShortDateString();
                         ja = 1;
                     }
                     else
                     {
-                        parametros += " e Data: " + filtro.NOTC_DT_EMISSAO.ToShortDateString();
+                        parametros += " e Data: " + filtro.NOTC_DT_EMISSAO.Value.ToShortDateString();
                     }
                 }
                 if (filtro.NOTC_TX_NOTIFICACAO != null)
@@ -1169,9 +1169,10 @@ namespace ERP_Condominios_Solution.Controllers
             cell.HorizontalAlignment = Element.ALIGN_LEFT;
             table.AddCell(cell);
 
+
             if (aten.NOTC_DT_EMISSAO != null)
             {
-                cell = new PdfPCell(new Paragraph("Emissão: " + aten.NOTC_DT_EMISSAO.ToShortDateString(), meuFont));
+                cell = new PdfPCell(new Paragraph("Emissão: " + aten.NOTC_DT_EMISSAO.Value.ToShortDateString(), meuFont));
                 cell.Border = 0;
                 cell.Colspan = 1;
                 cell.VerticalAlignment = Element.ALIGN_MIDDLE;

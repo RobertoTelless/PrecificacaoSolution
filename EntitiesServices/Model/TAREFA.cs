@@ -25,7 +25,7 @@ namespace EntitiesServices.Model
         public int ASSI_CD_ID { get; set; }
         public int USUA_CD_ID { get; set; }
         public int TITR_CD_ID { get; set; }
-        public int PETA_CD_ID { get; set; }
+        public Nullable<int> PETA_CD_ID { get; set; }
         public System.DateTime TARE_DT_CADASTRO { get; set; }
         public System.DateTime TARE_DT_ESTIMADA { get; set; }
         public Nullable<System.DateTime> TARE_DT_REALIZADA { get; set; }

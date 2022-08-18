@@ -21,7 +21,8 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="ibox-content text-center">
-                        <h1>@Model.USUA_NM_NOME.Substring(0, Model.USUA_NM_NOME.IndexOf(" "))</h1>
+                        @*<h1>@Model.USUA_NM_NOME.Substring(0, Model.USUA_NM_NOME.IndexOf(" "))</h1>*@
+                        <h1>@Model.USUA_NM_NOME</h1>
                         <div class="m-b-sm">
                             <img alt="image" class="img-circle" src="@Url.Content(Model.USUA_AQ_FOTO)" style="width: auto; height: auto; max-height: 90px; max-width: 90px;">
                         </div>
@@ -86,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    @Html.ButtonLinkIndex(text: "Cadastros", action: "CarregarDesenvolvimento", controller: "BaseAdmin", buttonClass: "success")                
+                    @Html.ButtonLinkIndex(text: "Cadastros", action: "CarregarDesenvolvimento", controller: "BaseAdmin", buttonClass: "primary")                
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-12">
@@ -173,7 +174,7 @@
                                                             <span class="label label-primary pull-left">Lida</span>
                                                         }
 
-                                                        <small class="pull-right text-navy">@CrossCutting.Formatters.DiffTimeFormatter(cond.NOTC_DT_EMISSAO)</small>
+                                                        <small class="pull-right text-navy">@CrossCutting.Formatters.DiffTimeFormatter(cond.NOTC_DT_EMISSAO.Value)</small>
                                                         <br />
                                                         <br />
                                                         <a href="@Url.Action("VerNotificacao", "Notificacao", new { id = cond.NOTC_CD_ID })" class="btn-link">
@@ -196,7 +197,7 @@
                                                         <br />
                                                         <small class="text-muted">@cond.NOTIFICACAO_ANEXO.Count anexos</small>
                                                         <br />
-                                                        <small class="text-muted">@CrossCutting.Formatters.LongDateFormatter(cond.NOTC_DT_EMISSAO)</small> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <small class="text-muted">@CrossCutting.Formatters.LongDateFormatter(cond.NOTC_DT_EMISSAO.Value)</small> &nbsp;&nbsp;&nbsp;&nbsp;
                                                     </div>
                                                 </div>
                                             }

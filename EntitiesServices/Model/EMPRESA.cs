@@ -19,32 +19,35 @@ namespace EntitiesServices.Model
         {
             this.CONTA_BANCO = new HashSet<CONTA_BANCO>();
             this.CUSTO_FIXO = new HashSet<CUSTO_FIXO>();
+            this.EMPRESA_ANEXO = new HashSet<EMPRESA_ANEXO>();
             this.FORNECEDOR = new HashSet<FORNECEDOR>();
             this.FORMA_PAGTO_RECTO = new HashSet<FORMA_PAGTO_RECTO>();
             this.PRODUTO_ESTOQUE_EMPRESA = new HashSet<PRODUTO_ESTOQUE_EMPRESA>();
             this.PRODUTO_TABELA_PRECO = new HashSet<PRODUTO_TABELA_PRECO>();
-            this.EMPRESA_ANEXO = new HashSet<EMPRESA_ANEXO>();
         }
     
         public int EMPR_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
         public int RETR_CD_ID { get; set; }
+        public Nullable<int> MAQN_CD_ID { get; set; }
         public string EMPR_NM_NOME { get; set; }
         public Nullable<decimal> EMPR_VL_PATRIMONIO_LIQUIDO { get; set; }
-        public System.DateTime EMPR_DT_CADASTRO { get; set; }
-        public int EMPR_IN_ATIVO { get; set; }
-        public Nullable<int> MAQN_CD_ID { get; set; }
         public int EMPR_IN_OPERA_CARTAO { get; set; }
         public string EMPR_NM_OUTRA_MAQUINA { get; set; }
         public Nullable<decimal> EMPR_PC_ANTECIPACAO { get; set; }
         public int EMPR_IN_PAGA_COMISSAO { get; set; }
         public Nullable<decimal> EMPR_VL_IMPOSTO_MEI { get; set; }
+        public System.DateTime EMPR_DT_CADASTRO { get; set; }
+        public int EMPR_IN_ATIVO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_BANCO> CONTA_BANCO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CUSTO_FIXO> CUSTO_FIXO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMPRESA_ANEXO> EMPRESA_ANEXO { get; set; }
+        public virtual MAQUINA MAQUINA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FORNECEDOR> FORNECEDOR { get; set; }
         public virtual REGIME_TRIBUTARIO REGIME_TRIBUTARIO { get; set; }
@@ -54,8 +57,5 @@ namespace EntitiesServices.Model
         public virtual ICollection<PRODUTO_ESTOQUE_EMPRESA> PRODUTO_ESTOQUE_EMPRESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUTO_TABELA_PRECO> PRODUTO_TABELA_PRECO { get; set; }
-        public virtual MAQUINA MAQUINA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPRESA_ANEXO> EMPRESA_ANEXO { get; set; }
     }
 }

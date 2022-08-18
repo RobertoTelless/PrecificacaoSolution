@@ -15,16 +15,16 @@ namespace EntitiesServices.Model
     public partial class FORMA_PAGTO_RECTO
     {
         public int FOPR_CD_ID { get; set; }
+        public int ASSI_CD_ID { get; set; }
         public int EMPR_CD_ID { get; set; }
         public int COBA_CD_ID { get; set; }
         public int FOPA_IN_TIPO_FORMA { get; set; }
         public string FOPR_NM_NOME_FORMA { get; set; }
         public System.DateTime FOPR_DT_CADASTRO { get; set; }
         public int FOPR_IN_ATIVO { get; set; }
-        public int ASSI_CD_ID { get; set; }
     
+        public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CONTA_BANCO CONTA_BANCO { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }
-        public virtual ASSINANTE ASSINANTE { get; set; }
     }
 }

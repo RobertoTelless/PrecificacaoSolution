@@ -12,6 +12,7 @@ namespace ERP_Condominios_Solution.ViewModels
     {
         [Key]
         public int TARE_CD_ID { get; set; }
+        public int ASSI_CD_ID { get; set; }
         public int USUA_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo DATA obrigatorio")]
         [DataType(DataType.Date, ErrorMessage = "Deve ser uma data válida")]

@@ -24,15 +24,15 @@ namespace EntitiesServices.Model
         public int ASSI_CD_ID { get; set; }
         public int USUA_CD_ID { get; set; }
         public int CANO_CD_ID { get; set; }
-        public System.DateTime NOTC_DT_EMISSAO { get; set; }
+        public Nullable<System.DateTime> NOTC_DT_EMISSAO { get; set; }
         public System.DateTime NOTC_DT_VALIDADE { get; set; }
         public string NOTC_NM_TITULO { get; set; }
         public byte[] NOTC_TX_TEXTO { get; set; }
+        public string NOTC_TX_NOTIFICACAO { get; set; }
         public int NOTC_IN_VISTA { get; set; }
         public Nullable<System.DateTime> NOTC_DT_VISTA { get; set; }
         public int NOTC_IN_ATIVO { get; set; }
-        public int USUARIOUSUA_CD_ID { get; set; }
-        public string NOTC_TX_NOTIFICACAO { get; set; }
+        public Nullable<int> USUARIOUSUA_CD_ID { get; set; }
         public int NOTC_IN_NIVEL { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }

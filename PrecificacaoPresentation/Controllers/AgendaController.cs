@@ -801,6 +801,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 objeto.AGEN_DT_DATA = DateTime.Now.Date;
             }
+            objeto.AGEN_DT_DATA = DateTime.Now.Date;
             Session["VoltaAgenda"] = 2;
             return View(objeto);
         }

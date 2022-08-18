@@ -81,8 +81,8 @@ namespace ERP_Condominios_Solution.Controllers
             USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
             NOTICIA_COMENTARIO coment = new NOTICIA_COMENTARIO();
             NoticiaComentarioViewModel vm = Mapper.Map<NOTICIA_COMENTARIO, NoticiaComentarioViewModel>(coment);
-            vm.NOCO_DT_COMENTARIO = DateTime.Now;
-            vm.NOCO_IN_ATIVO = 1;
+            vm.NOTC_DT_COMENTARIO = DateTime.Now;
+            vm.NOTC_IN_ATIVO = 1;
             vm.NOTC_CD_ID = item.NOTC_CD_ID;
             vm.USUARIO = usuarioLogado;
             vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
@@ -193,7 +193,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            return RedirectToAction("MontarTelaDashboardAdministracao", "Usuario");
+            return RedirectToAction("MontarTelaDashboardAdministracao", "BaseAdmin");
         }
 
         [HttpPost]
@@ -438,7 +438,7 @@ namespace ERP_Condominios_Solution.Controllers
                     // Verifica retorno
 
                     // Carrega foto e processa alteracao
-                    item.NOTC_AQ_FOTO = "~/Imagens/p_big2.jpg";
+                    item.NOTC_AQ_FOTO = "~/Images/p_big2.jpg";
                     volta = baseApp.ValidateEdit(item, item, usuarioLogado);
 
                     // Cria pastas

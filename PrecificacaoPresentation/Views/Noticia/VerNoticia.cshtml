@@ -44,7 +44,7 @@
                     </div>
                     <div>
                         <br />
-                        @Model.NOTC_TX_TEXTO
+                        @Model.NOTC_TX_NOTICIA
                         <br />
                     </div>
                     <div class="row">
@@ -67,7 +67,7 @@
                             <h2>Comentários:</h2>
                                 @if (Model.NOTICIA_COMENTARIO.Count > 0)
                                 {
-                                    foreach (var item in (Model.NOTICIA_COMENTARIO).OrderByDescending(a => a.NOCO_DT_COMENTARIO))
+                                    foreach (var item in (Model.NOTICIA_COMENTARIO).OrderByDescending(a => a.NOTC_DT_COMENTARIO))
                                     {
                                         <div class="social-feed-box">
                                             <div class="social-avatar">
@@ -78,12 +78,12 @@
                                                     <a href="#">
                                                         @item.USUARIO.USUA_NM_NOME
                                                     </a>
-                                                    <small class="text-muted">@item.NOCO_DT_COMENTARIO.Value.ToLongDateString() as @item.NOCO_DT_COMENTARIO.Value.ToShortTimeString()</small>
+                                                    <small class="text-muted">@item.NOTC_DT_COMENTARIO.ToLongDateString() as @item.NOTC_DT_COMENTARIO.ToShortTimeString()</small>
                                                 </div>
                                             </div>
                                             <div class="social-body">
                                                 <p>
-                                                    @item.NOCO_DS_COMENTARIO
+                                                    @item.NOTC_DS_COMENTARIO
                                                 </p>
                                             </div>
                                         </div>

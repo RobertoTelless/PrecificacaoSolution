@@ -142,6 +142,8 @@ namespace Presentation.Start
             kernel.Bind<IPessoaExternaAnotacaoRepository>().To<PessoaExternaAnotacaoRepository>();
             kernel.Bind<IPlataformaEntregaRepository>().To<PlataformaEntregaRepository>();
             kernel.Bind<IUsuarioAnotacaoRepository>().To<UsuarioAnotacaoRepository>();
+            kernel.Bind<IRegimeTributarioRepository>().To<RegimeTributarioRepository>();
+            kernel.Bind<IEmpresaAnexoRepository>().To<EmpresaAnexoRepository>();
 
         }
     }

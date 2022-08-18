@@ -60,6 +60,13 @@
                                                                         @Html.HiddenFor(m => m.USUA_CD_ID)
                                                                     }
                                                                     @Html.HiddenFor(m => m.TARE_IN_ATIVO)
+                                                                    @Html.HiddenFor(m => m.TARE_DT_CADASTRO)
+                                                                    @Html.HiddenFor(m => m.ASSI_CD_ID)
+                                                                    @Html.HiddenFor(m => m.TARE_IN_ATIVO)
+                                                                    @Html.HiddenFor(m => m.TARE_IN_AVISA)
+                                                                    @Html.HiddenFor(m => m.TARE_IN_STATUS)
+                                                                    @Html.HiddenFor(m => m.TARE_TX_OBSERVACOES)
+                                                                    @Html.HiddenFor(m => m.USUA_CD_ID)
                                                                     Tipo de Tarefa*
                                                                     @Html.DropDownListFor(m => m.TITR_CD_ID, (SelectList)ViewBag.Tipos, "Selecionar", new { @class = "form-control", autofocus = true })
                                                                     @Html.ValidationMessageFor(m => m.TITR_CD_ID, "", new { @style = "color:red" })

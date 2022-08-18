@@ -81,7 +81,7 @@
                                         @foreach (var cond in (ViewBag.Listas as List<EntitiesServices.Model.NOTIFICACAO>))
                                         {
                                             <tr>
-                                                <td>@cond.NOTC_DT_EMISSAO.ToShortDateString()</td>
+                                                <td>@cond.NOTC_DT_EMISSAO.Value.ToShortDateString()</td>
                                                 <td>@cond.CATEGORIA_NOTIFICACAO.CANO_NM_NOME</td>
                                                 <td>@cond.NOTC_NM_TITULO</td>
                                                 @if (cond.NOTC_DT_VALIDADE == null)

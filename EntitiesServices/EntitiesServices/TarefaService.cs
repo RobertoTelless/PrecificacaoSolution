@@ -109,6 +109,7 @@ namespace ModelServices.EntitiesServices
             {
                 try
                 {
+                    item.ASSINANTE = null;
                     _logRepository.Add(log);
                     _baseRepository.Add(item);
                     transaction.Commit();
@@ -128,6 +129,7 @@ namespace ModelServices.EntitiesServices
             {
                 try
                 {
+                    item.ASSINANTE = null;
                     _baseRepository.Add(item);
                     transaction.Commit();
                     return 0;

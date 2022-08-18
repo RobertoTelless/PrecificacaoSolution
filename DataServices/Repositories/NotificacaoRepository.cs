@@ -15,6 +15,7 @@ namespace DataServices.Repositories
         {
             IQueryable<NOTIFICACAO> query = Db.NOTIFICACAO;
             query = query.Where(p => p.NOTC_CD_ID == id);
+            query = query.Include(p => p.NOTIFICACAO_ANEXO);
             return query.FirstOrDefault();
         }
 

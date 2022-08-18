@@ -82,7 +82,7 @@ namespace DataServices.Repositories
         {
             List<TAREFA> lista = new List<TAREFA>();
             IQueryable<TAREFA> query = Db.TAREFA;
-            if (tipoId != null)
+            if (tipoId > 0)
             {
                 query = query.Where(p => p.TITR_CD_ID == tipoId);
             }
@@ -109,15 +109,15 @@ namespace DataServices.Repositories
             {
                 query = query.Where(p => p.USUA_CD_ID == idUsu);
             }
-            if (dataInicio != null & dataFim == null)
+            if (dataInicio != DateTime.MinValue & dataFim == DateTime.MinValue)
             {
                 query = query.Where(p => DbFunctions.TruncateTime(p.TARE_DT_ESTIMADA) >= DbFunctions.TruncateTime(dataInicio));
             }
-            if (dataInicio == null & dataFim != null)
+            if (dataInicio == DateTime.MinValue & dataFim != DateTime.MinValue)
             {
                 query = query.Where(p => DbFunctions.TruncateTime(p.TARE_DT_ESTIMADA) <= DbFunctions.TruncateTime(dataFim));
             }
-            if (dataInicio != null & dataFim != null)
+            if (dataInicio != DateTime.MinValue & dataFim != DateTime.MinValue)
             {
                 query = query.Where(p => DbFunctions.TruncateTime(p.TARE_DT_ESTIMADA) >= DbFunctions.TruncateTime(dataInicio) & DbFunctions.TruncateTime(p.TARE_DT_ESTIMADA) <= DbFunctions.TruncateTime(dataFim));
             }

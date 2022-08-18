@@ -104,7 +104,7 @@
                                         @foreach (var cond in (ViewBag.Listas as List<EntitiesServices.Model.NOTIFICACAO>))
                                         {
                                             <tr>
-                                                <td>@cond.NOTC_DT_EMISSAO.ToShortDateString()</td>
+                                                <td>@cond.NOTC_DT_EMISSAO.Value.ToShortDateString()</td>
                                                 @if (!String.IsNullOrEmpty(cond.USUARIO.USUA_AQ_FOTO))
 	                                            {
                                                     <td><img src="@Url.Content(cond.USUARIO.USUA_AQ_FOTO)" style = "width: auto; height: auto; max-height: 55px; max-width: 45px;"></td>

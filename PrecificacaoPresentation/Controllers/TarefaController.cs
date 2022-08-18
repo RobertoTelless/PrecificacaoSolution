@@ -261,8 +261,10 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Abre view
             Session["MensTarefa"] = 0;
+            Session["VoltaTarefa"] = 1;
             objeto = new TAREFA();
             objeto.TARE_DT_CADASTRO = DateTime.Today.Date;
+            objeto.TARE_DT_ESTIMADA = DateTime.Today.Date;
             return View(objeto);
         }
 
@@ -394,7 +396,9 @@ namespace ERP_Condominios_Solution.Controllers
             vm.TARE_DT_CADASTRO = DateTime.Today.Date;
             vm.TARE_DT_ESTIMADA = DateTime.Today.Date.AddDays(5);
             vm.TARE_IN_PRIORIDADE = 1;
+            vm.TARE_IN_STATUS = 1;
             vm.TARE_IN_AVISA = 1;
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
             return View(vm);
         }
 
@@ -447,6 +451,7 @@ namespace ERP_Condominios_Solution.Controllers
                             ag.AGEN_IN_ATIVO = 1;
                             ag.AGEN_IN_STATUS = 1;
                             ag.AGEN_NM_TITULO = item.TARE_NM_TITULO;
+                            ag.AGEN_DS_DESCRICAO = item.TARE_NM_TITULO;
                             ag.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
                             ag.CAAG_CD_ID = 1;
 
@@ -536,12 +541,13 @@ namespace ERP_Condominios_Solution.Controllers
                         ag.AGEN_IN_STATUS = 1;
                         ag.AGEN_NM_TITULO = item.TARE_NM_TITULO;
                         ag.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
+                        ag.AGEN_DS_DESCRICAO = item.TARE_NM_TITULO;
                         ag.CAAG_CD_ID = 1;
 
-                        Int32 volta = baseApp.ValidateCreate(item, usuarioLogado);
+                        Int32 volta1 = baseApp.ValidateCreate(item, usuarioLogado);
 
                         // Verifica retorno
-                        if (volta == 1)
+                        if (volta1 == 1)
                         {
                             ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
                             return View(vm);

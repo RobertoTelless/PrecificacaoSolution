@@ -29,18 +29,22 @@ namespace EntitiesServices.Model
         public virtual DbSet<AGENDA_ANEXO> AGENDA_ANEXO { get; set; }
         public virtual DbSet<ASSINANTE> ASSINANTE { get; set; }
         public virtual DbSet<BANCO> BANCO { get; set; }
+        public virtual DbSet<CARGO_USUARIO> CARGO_USUARIO { get; set; }
         public virtual DbSet<CATEGORIA_AGENDA> CATEGORIA_AGENDA { get; set; }
         public virtual DbSet<CATEGORIA_CUSTO_FIXO> CATEGORIA_CUSTO_FIXO { get; set; }
         public virtual DbSet<CATEGORIA_FORNECEDOR> CATEGORIA_FORNECEDOR { get; set; }
         public virtual DbSet<CATEGORIA_NOTIFICACAO> CATEGORIA_NOTIFICACAO { get; set; }
         public virtual DbSet<CATEGORIA_PRODUTO> CATEGORIA_PRODUTO { get; set; }
         public virtual DbSet<CATEGORIA_USUARIO> CATEGORIA_USUARIO { get; set; }
+        public virtual DbSet<COMISSAO_CARGO> COMISSAO_CARGO { get; set; }
+        public virtual DbSet<CONFIGURACAO> CONFIGURACAO { get; set; }
         public virtual DbSet<CONTA_BANCO> CONTA_BANCO { get; set; }
         public virtual DbSet<CONTA_BANCO_ANEXO> CONTA_BANCO_ANEXO { get; set; }
         public virtual DbSet<CONTA_BANCO_CONTATO> CONTA_BANCO_CONTATO { get; set; }
         public virtual DbSet<CONTA_BANCO_LANCAMENTO> CONTA_BANCO_LANCAMENTO { get; set; }
         public virtual DbSet<CUSTO_FIXO> CUSTO_FIXO { get; set; }
         public virtual DbSet<EMPRESA> EMPRESA { get; set; }
+        public virtual DbSet<EMPRESA_ANEXO> EMPRESA_ANEXO { get; set; }
         public virtual DbSet<FICHA_TECNICA> FICHA_TECNICA { get; set; }
         public virtual DbSet<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
         public virtual DbSet<FORMA_PAGTO_RECTO> FORMA_PAGTO_RECTO { get; set; }
@@ -50,12 +54,18 @@ namespace EntitiesServices.Model
         public virtual DbSet<FORNECEDOR_CONTATO> FORNECEDOR_CONTATO { get; set; }
         public virtual DbSet<FORNECEDOR_QUADRO_SOCIETARIO> FORNECEDOR_QUADRO_SOCIETARIO { get; set; }
         public virtual DbSet<LOG> LOG { get; set; }
+        public virtual DbSet<MAQUINA> MAQUINA { get; set; }
         public virtual DbSet<NOTICIA> NOTICIA { get; set; }
         public virtual DbSet<NOTICIA_COMENTARIO> NOTICIA_COMENTARIO { get; set; }
         public virtual DbSet<NOTIFICACAO> NOTIFICACAO { get; set; }
         public virtual DbSet<NOTIFICACAO_ANEXO> NOTIFICACAO_ANEXO { get; set; }
+        public virtual DbSet<OUTRO_CUSTO_VARIAVEL> OUTRO_CUSTO_VARIAVEL { get; set; }
         public virtual DbSet<PERFIL> PERFIL { get; set; }
         public virtual DbSet<PERIODICIDADE_TAREFA> PERIODICIDADE_TAREFA { get; set; }
+        public virtual DbSet<PESSOA_EXTERNA> PESSOA_EXTERNA { get; set; }
+        public virtual DbSet<PESSOA_EXTERNA_ANEXO> PESSOA_EXTERNA_ANEXO { get; set; }
+        public virtual DbSet<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
+        public virtual DbSet<PLATAFORMA_ENTREGA> PLATAFORMA_ENTREGA { get; set; }
         public virtual DbSet<PRODUTO> PRODUTO { get; set; }
         public virtual DbSet<PRODUTO_ANEXO> PRODUTO_ANEXO { get; set; }
         public virtual DbSet<PRODUTO_ESTOQUE_EMPRESA> PRODUTO_ESTOQUE_EMPRESA { get; set; }
@@ -68,6 +78,9 @@ namespace EntitiesServices.Model
         public virtual DbSet<TAREFA> TAREFA { get; set; }
         public virtual DbSet<TAREFA_ACOMPANHAMENTO> TAREFA_ACOMPANHAMENTO { get; set; }
         public virtual DbSet<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }
+        public virtual DbSet<TEMPLATE> TEMPLATE { get; set; }
+        public virtual DbSet<TEMPLATE_EMAIL> TEMPLATE_EMAIL { get; set; }
+        public virtual DbSet<TEMPLATE_SMS> TEMPLATE_SMS { get; set; }
         public virtual DbSet<TIPO_CONTA> TIPO_CONTA { get; set; }
         public virtual DbSet<TIPO_PESSOA> TIPO_PESSOA { get; set; }
         public virtual DbSet<TIPO_TAREFA> TIPO_TAREFA { get; set; }
@@ -76,18 +89,5 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
         public virtual DbSet<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
-        public virtual DbSet<CARGO_USUARIO> CARGO_USUARIO { get; set; }
-        public virtual DbSet<COMISSAO_CARGO> COMISSAO_CARGO { get; set; }
-        public virtual DbSet<MAQUINA> MAQUINA { get; set; }
-        public virtual DbSet<OUTRO_CUSTO_VARIAVEL> OUTRO_CUSTO_VARIAVEL { get; set; }
-        public virtual DbSet<PESSOA_EXTERNA> PESSOA_EXTERNA { get; set; }
-        public virtual DbSet<PLATAFORMA_ENTREGA> PLATAFORMA_ENTREGA { get; set; }
-        public virtual DbSet<CONFIGURACAO> CONFIGURACAO { get; set; }
-        public virtual DbSet<TEMPLATE> TEMPLATE { get; set; }
-        public virtual DbSet<TEMPLATE_EMAIL> TEMPLATE_EMAIL { get; set; }
-        public virtual DbSet<TEMPLATE_SMS> TEMPLATE_SMS { get; set; }
-        public virtual DbSet<PESSOA_EXTERNA_ANEXO> PESSOA_EXTERNA_ANEXO { get; set; }
-        public virtual DbSet<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
-        public virtual DbSet<EMPRESA_ANEXO> EMPRESA_ANEXO { get; set; }
     }
 }

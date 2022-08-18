@@ -132,45 +132,47 @@ namespace ERP_Condominios_Solution.Controllers
 
             ObjectCache cache = MemoryCache.Default;
             USUARIO usuContent = cache["usuario" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID] as USUARIO;
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
 
-            if (usuContent == null)
-            {
-                usu = usuApp.GetItemById(((USUARIO)Session["UserCredentials"]).USUA_CD_ID);
-                vm = Mapper.Map<USUARIO, UsuarioViewModel>(usu);
-                noti = notfApp.GetAllItens(idAss);
-                DateTime expiration = DateTime.Now.AddDays(15);
-                cache.Set("usuario" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, usu, expiration);
-                cache.Set("vm" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, vm, expiration);
-                cache.Set("noti" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, noti, expiration);
-            }
+            //if (usuContent == null)
+            //{
+            //    usu = usuApp.GetItemById(((USUARIO)Session["UserCredentials"]).USUA_CD_ID);
+            //    vm = Mapper.Map<USUARIO, UsuarioViewModel>(usu);
+            //    noti = notfApp.GetAllItens(idAss);
+            //    DateTime expiration = DateTime.Now.AddDays(15);
+            //    cache.Set("usuario" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, usu, expiration);
+            //    cache.Set("vm" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, vm, expiration);
+            //    cache.Set("noti" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, noti, expiration);
+            //}
 
-            usu = cache.Get("usuario" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as USUARIO;
-            vm = cache.Get("vm" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as UsuarioViewModel;
-            noti = cache.Get("noti" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as List<NOTIFICACAO>;
-            ViewBag.Perfil = usu.PERFIL.PERF_SG_SIGLA;
+            //usu = cache.Get("usuario" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as USUARIO;
+            //vm = cache.Get("vm" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as UsuarioViewModel;
+            //noti = cache.Get("noti" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as List<NOTIFICACAO>;
+            //ViewBag.Perfil = usu.PERFIL.PERF_SG_SIGLA;
 
-            noti = notfApp.GetAllItensUser(usu.USUA_CD_ID, usu.ASSI_CD_ID);
+            noti = notfApp.GetAllItensUser(usuario.USUA_CD_ID, usuario.ASSI_CD_ID);
             Session["Notificacoes"] = noti;
-            Session["ListaNovas"] = noti.Where(p => p.NOTC_IN_VISTA == 0).ToList().Take(5).OrderByDescending(p => p.NOTC_DT_EMISSAO).ToList();
+            Session["ListaNovas"] = noti.Where(p => p.NOTC_IN_VISTA == 0).ToList().Take(5).OrderByDescending(p => p.NOTC_DT_EMISSAO.Value).ToList();
             Session["NovasNotificacoes"] = noti.Where(p => p.NOTC_IN_VISTA == 0).Count();
-            Session["Nome"] = usu.USUA_NM_NOME;
+            Session["Nome"] = usuario.USUA_NM_NOME;
 
             Session["Noticias"] = notiApp.GetAllItensValidos(idAss);
             Session["NoticiasNumero"] = ((List<NOTICIA>)Session["Noticias"]).Count;
 
-            Session["ListaPendentes"] = tarApp.GetTarefaStatus(usu.USUA_CD_ID, 1);
+            Session["ListaPendentes"] = tarApp.GetTarefaStatus(usuario.USUA_CD_ID, 1);
             Session["TarefasPendentes"] = ((List<TAREFA>)Session["ListaPendentes"]).Count;
-            Session["TarefasLista"] = tarApp.GetByUser(usu.USUA_CD_ID);
+            Session["TarefasLista"] = tarApp.GetByUser(usuario.USUA_CD_ID);
             Session["Tarefas"] = ((List<TAREFA>)Session["TarefasLista"]).Count;
 
-            Session["Agendas"] = ageApp.GetByUser(usu.USUA_CD_ID, usu.ASSI_CD_ID);
+            Session["Agendas"] = ageApp.GetByUser(usuario.USUA_CD_ID, usuario.ASSI_CD_ID);
             Session["NumAgendas"] = ((List<AGENDA>)Session["Agendas"]).Count;
             Session["AgendasHoje"] = ((List<AGENDA>)Session["Agendas"]).Where(p => p.AGEN_DT_DATA == DateTime.Today.Date).ToList();
             Session["NumAgendasHoje"] = ((List<AGENDA>)Session["AgendasHoje"]).Count;
             Session["Logs"] = usu.LOG.Count;
 
             String frase = String.Empty;
-            String nome = usu.USUA_NM_NOME.Substring(0, usu.USUA_NM_NOME.IndexOf(" "));
+            String nome = usuario.USUA_NM_NOME.Substring(0, usuario.USUA_NM_NOME.IndexOf(" "));
             Session["NomeGreeting"] = nome;
             if (DateTime.Now.Hour <= 12)
             {
@@ -185,7 +187,7 @@ namespace ERP_Condominios_Solution.Controllers
                 frase = "Boa noite, " + nome;
             }
             Session["Greeting"] = frase;
-            Session["Foto"] = usu.USUA_AQ_FOTO;
+            Session["Foto"] = usuario.USUA_AQ_FOTO;
 
             // Mensagens
             if ((Int32)Session["MensPermissao"] == 2)

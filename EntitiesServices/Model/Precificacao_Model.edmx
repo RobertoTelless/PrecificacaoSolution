@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Db_PrecificacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Db_PrecificacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AGENDA">
           <Key>
             <PropertyRef Name="AGEN_CD_ID" />
@@ -413,7 +413,7 @@
           <Property Name="NOTC_TX_TEXTO" Type="image" Nullable="false" />
           <Property Name="NOTC_TX_NOTICIA" Type="text" />
           <Property Name="NOTC_LK_LINK" Type="varchar" MaxLength="250" />
-          <Property Name="NOTC_NM_ORIGEM" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="NOTC_NM_ORIGEM" Type="varchar" MaxLength="150" />
           <Property Name="NOTC_AQ_FOTO" Type="varchar" MaxLength="250" />
           <Property Name="NOTC_NR_ACESSOS" Type="int" Nullable="false" />
           <Property Name="NOTC_IN_ATIVO" Type="int" Nullable="false" />
@@ -437,15 +437,15 @@
           <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
           <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
           <Property Name="CANO_CD_ID" Type="int" Nullable="false" />
-          <Property Name="NOTC_DT_EMISSAO" Type="datetime" Nullable="false" />
+          <Property Name="NOTC_DT_EMISSAO" Type="datetime" />
           <Property Name="NOTC_DT_VALIDADE" Type="date" Nullable="false" />
           <Property Name="NOTC_NM_TITULO" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="NOTC_TX_TEXTO" Type="image" Nullable="false" />
+          <Property Name="NOTC_TX_TEXTO" Type="image" />
           <Property Name="NOTC_TX_NOTIFICACAO" Type="text" />
           <Property Name="NOTC_IN_VISTA" Type="int" Nullable="false" />
           <Property Name="NOTC_DT_VISTA" Type="datetime" />
           <Property Name="NOTC_IN_ATIVO" Type="int" Nullable="false" />
-          <Property Name="USUARIOUSUA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="USUARIOUSUA_CD_ID" Type="int" />
           <Property Name="NOTC_IN_NIVEL" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="NOTIFICACAO_ANEXO">
@@ -684,7 +684,7 @@
           <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
           <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
           <Property Name="TITR_CD_ID" Type="int" Nullable="false" />
-          <Property Name="PETA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="PETA_CD_ID" Type="int" />
           <Property Name="TARE_DT_CADASTRO" Type="date" Nullable="false" />
           <Property Name="TARE_DT_ESTIMADA" Type="date" Nullable="false" />
           <Property Name="TARE_DT_REALIZADA" Type="date" />
@@ -1147,7 +1147,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TAREFA_PERIODICIDADE_TAREFA">
-          <End Role="PERIODICIDADE_TAREFA" Type="Self.PERIODICIDADE_TAREFA" Multiplicity="1" />
+          <End Role="PERIODICIDADE_TAREFA" Type="Self.PERIODICIDADE_TAREFA" Multiplicity="0..1" />
           <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PERIODICIDADE_TAREFA">
@@ -2440,7 +2440,8 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Db_PrecificacaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2459,13 +2460,13 @@
           <Property Name="AGEN_IN_STATUS" Type="Int32" Nullable="false" />
           <Property Name="AGEN_TX_OBSERVACOES" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
           <Property Name="AGEN_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AGENDA_ANEXO" Relationship="Self.FK_AGENDA_ANEXO_AGENDA" FromRole="AGENDA" ToRole="AGENDA_ANEXO" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKAGENDA22330" FromRole="AGENDA" ToRole="ASSINANTE" />
-          <NavigationProperty Name="USUARIO" Relationship="Self.FKAGENDA418024" FromRole="AGENDA" ToRole="USUARIO" />
-          <NavigationProperty Name="CATEGORIA_AGENDA" Relationship="Db_PrecificacaoModel.FK_AGENDA_CATEGORIA_AGENDA" FromRole="AGENDA" ToRole="CATEGORIA_AGENDA" />
           <Property Name="AGEN_CD_USUARIO" Type="Int32" />
           <Property Name="AGEN_LK_REUNIAO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USUARIO1" Relationship="Db_PrecificacaoModel.FK_AGENDA_USUARIO" FromRole="AGENDA" ToRole="USUARIO" />
+          <NavigationProperty Name="AGENDA_ANEXO" Relationship="Self.FK_AGENDA_ANEXO_AGENDA" FromRole="AGENDA" ToRole="AGENDA_ANEXO" />
+          <NavigationProperty Name="CATEGORIA_AGENDA" Relationship="Self.FK_AGENDA_CATEGORIA_AGENDA" FromRole="AGENDA" ToRole="CATEGORIA_AGENDA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_AGENDA_USUARIO" FromRole="AGENDA" ToRole="USUARIO" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKAGENDA22330" FromRole="AGENDA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="USUARIO1" Relationship="Self.FKAGENDA418024" FromRole="AGENDA" ToRole="USUARIO" />
         </EntityType>
         <EntityType Name="AGENDA_ANEXO">
           <Key>
@@ -2489,32 +2490,32 @@
           <Property Name="ASSI_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ASSI_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AGENDA" Relationship="Self.FKAGENDA22330" FromRole="ASSINANTE" ToRole="AGENDA" />
+          <NavigationProperty Name="CATEGORIA_AGENDA" Relationship="Self.FK_CATEGORIA_AGENDA_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_AGENDA" />
+          <NavigationProperty Name="CATEGORIA_FORNECEDOR" Relationship="Self.FK_CATEGORIA_FORNECEDOR_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_FORNECEDOR" />
+          <NavigationProperty Name="CATEGORIA_NOTIFICACAO" Relationship="Self.FK_CATEGORIA_NOTIFICACAO_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_NOTIFICACAO" />
+          <NavigationProperty Name="CATEGORIA_USUARIO" Relationship="Self.FK_CATEGORIA_USUARIO_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_USUARIO" />
+          <NavigationProperty Name="CONFIGURACAO" Relationship="Self.FK_CONFIGURACAO_ASSINANTE" FromRole="ASSINANTE" ToRole="CONFIGURACAO" />
+          <NavigationProperty Name="FORMA_PAGTO_RECTO" Relationship="Self.FK_FORMA_PAGTO_RECTO_ASSINANTE" FromRole="ASSINANTE" ToRole="FORMA_PAGTO_RECTO" />
           <NavigationProperty Name="FORNECEDOR" Relationship="Self.FK_FORNECEDOR_ASSINANTE" FromRole="ASSINANTE" ToRole="FORNECEDOR" />
           <NavigationProperty Name="LOG" Relationship="Self.FK_LOG_ASSINANTE" FromRole="ASSINANTE" ToRole="LOG" />
+          <NavigationProperty Name="TEMPLATE" Relationship="Self.FK_TEMPLATE_ASSINANTE" FromRole="ASSINANTE" ToRole="TEMPLATE" />
+          <NavigationProperty Name="TEMPLATE_EMAIL" Relationship="Self.FK_TEMPLATE_EMAIL_ASSINANTE" FromRole="ASSINANTE" ToRole="TEMPLATE_EMAIL" />
+          <NavigationProperty Name="TEMPLATE_SMS" Relationship="Self.FK_TEMPLATE_SMS_ASSINANTE" FromRole="ASSINANTE" ToRole="TEMPLATE_SMS" />
+          <NavigationProperty Name="TIPO_TAREFA" Relationship="Self.FK_TIPO_TAREFA_ASSINANTE" FromRole="ASSINANTE" ToRole="TIPO_TAREFA" />
           <NavigationProperty Name="BANCO" Relationship="Self.FKBANCO388863" FromRole="ASSINANTE" ToRole="BANCO" />
+          <NavigationProperty Name="CARGO_USUARIO" Relationship="Self.FKCARGO_USUA401517" FromRole="ASSINANTE" ToRole="CARGO_USUARIO" />
           <NavigationProperty Name="CATEGORIA_PRODUTO" Relationship="Self.FKCATEGORIA_171360" FromRole="ASSINANTE" ToRole="CATEGORIA_PRODUTO" />
           <NavigationProperty Name="CATEGORIA_CUSTO_FIXO" Relationship="Self.FKCATEGORIA_825959" FromRole="ASSINANTE" ToRole="CATEGORIA_CUSTO_FIXO" />
           <NavigationProperty Name="EMPRESA" Relationship="Self.FKEMPRESA495355" FromRole="ASSINANTE" ToRole="EMPRESA" />
+          <NavigationProperty Name="MAQUINA" Relationship="Self.FKMAQUINA36030" FromRole="ASSINANTE" ToRole="MAQUINA" />
           <NavigationProperty Name="NOTICIA" Relationship="Self.FKNOTICIA215325" FromRole="ASSINANTE" ToRole="NOTICIA" />
           <NavigationProperty Name="NOTIFICACAO" Relationship="Self.FKNOTIFICACA189005" FromRole="ASSINANTE" ToRole="NOTIFICACAO" />
+          <NavigationProperty Name="OUTRO_CUSTO_VARIAVEL" Relationship="Self.FKOUTRO_CUST578807" FromRole="ASSINANTE" ToRole="OUTRO_CUSTO_VARIAVEL" />
+          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Self.FKPESSOA_EXT750477" FromRole="ASSINANTE" ToRole="PESSOA_EXTERNA" />
+          <NavigationProperty Name="PLATAFORMA_ENTREGA" Relationship="Self.FKPLATAFORMA785659" FromRole="ASSINANTE" ToRole="PLATAFORMA_ENTREGA" />
           <NavigationProperty Name="PRODUTO" Relationship="Self.FKPRODUTO932438" FromRole="ASSINANTE" ToRole="PRODUTO" />
           <NavigationProperty Name="TAREFA" Relationship="Self.FKTAREFA157283" FromRole="ASSINANTE" ToRole="TAREFA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKUSUARIO561404" FromRole="ASSINANTE" ToRole="USUARIO" />
-          <NavigationProperty Name="CARGO_USUARIO" Relationship="Db_PrecificacaoModel.FKCARGO_USUA401517" FromRole="ASSINANTE" ToRole="CARGO_USUARIO" />
-          <NavigationProperty Name="MAQUINA" Relationship="Db_PrecificacaoModel.FKMAQUINA36030" FromRole="ASSINANTE" ToRole="MAQUINA" />
-          <NavigationProperty Name="OUTRO_CUSTO_VARIAVEL" Relationship="Db_PrecificacaoModel.FKOUTRO_CUST578807" FromRole="ASSINANTE" ToRole="OUTRO_CUSTO_VARIAVEL" />
-          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Db_PrecificacaoModel.FKPESSOA_EXT750477" FromRole="ASSINANTE" ToRole="PESSOA_EXTERNA" />
-          <NavigationProperty Name="PLATAFORMA_ENTREGA" Relationship="Db_PrecificacaoModel.FKPLATAFORMA785659" FromRole="ASSINANTE" ToRole="PLATAFORMA_ENTREGA" />
-          <NavigationProperty Name="CONFIGURACAO" Relationship="Db_PrecificacaoModel.FK_CONFIGURACAO_ASSINANTE" FromRole="ASSINANTE" ToRole="CONFIGURACAO" />
-          <NavigationProperty Name="TEMPLATE" Relationship="Db_PrecificacaoModel.FK_TEMPLATE_ASSINANTE" FromRole="ASSINANTE" ToRole="TEMPLATE" />
-          <NavigationProperty Name="TEMPLATE_EMAIL" Relationship="Db_PrecificacaoModel.FK_TEMPLATE_EMAIL_ASSINANTE" FromRole="ASSINANTE" ToRole="TEMPLATE_EMAIL" />
-          <NavigationProperty Name="TEMPLATE_SMS" Relationship="Db_PrecificacaoModel.FK_TEMPLATE_SMS_ASSINANTE" FromRole="ASSINANTE" ToRole="TEMPLATE_SMS" />
-          <NavigationProperty Name="CATEGORIA_AGENDA" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_AGENDA_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_AGENDA" />
-          <NavigationProperty Name="CATEGORIA_FORNECEDOR" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_FORNECEDOR_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_FORNECEDOR" />
-          <NavigationProperty Name="CATEGORIA_USUARIO" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_USUARIO_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_USUARIO" />
-          <NavigationProperty Name="TIPO_TAREFA" Relationship="Db_PrecificacaoModel.FK_TIPO_TAREFA_ASSINANTE" FromRole="ASSINANTE" ToRole="TIPO_TAREFA" />
-          <NavigationProperty Name="CATEGORIA_NOTIFICACAO" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_NOTIFICACAO_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_NOTIFICACAO" />
-          <NavigationProperty Name="FORMA_PAGTO_RECTO" Relationship="Db_PrecificacaoModel.FK_FORMA_PAGTO_RECTO_ASSINANTE" FromRole="ASSINANTE" ToRole="FORMA_PAGTO_RECTO" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -2528,16 +2529,29 @@
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKBANCO388863" FromRole="BANCO" ToRole="ASSINANTE" />
           <NavigationProperty Name="CONTA_BANCO" Relationship="Self.FKCONTA_BANC816139" FromRole="BANCO" ToRole="CONTA_BANCO" />
         </EntityType>
+        <EntityType Name="CARGO_USUARIO">
+          <Key>
+            <PropertyRef Name="CARG_CD_ID" />
+          </Key>
+          <Property Name="CARG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CARG_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CARG_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKCARGO_USUA401517" FromRole="CARGO_USUARIO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_CARGO_USUARIO" FromRole="CARGO_USUARIO" ToRole="USUARIO" />
+          <NavigationProperty Name="COMISSAO_CARGO" Relationship="Self.FKCOMISSAO_C527874" FromRole="CARGO_USUARIO" ToRole="COMISSAO_CARGO" />
+          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Self.FKPESSOA_EXT429415" FromRole="CARGO_USUARIO" ToRole="PESSOA_EXTERNA" />
+        </EntityType>
         <EntityType Name="CATEGORIA_AGENDA">
           <Key>
             <PropertyRef Name="CAAG_CD_ID" />
           </Key>
           <Property Name="CAAG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
           <Property Name="CAAG_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CAAG_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AGENDA" Relationship="Db_PrecificacaoModel.FK_AGENDA_CATEGORIA_AGENDA" FromRole="CATEGORIA_AGENDA" ToRole="AGENDA" />
-          <Property Name="ASSI_CD_ID" Type="Int32" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_AGENDA_ASSINANTE" FromRole="CATEGORIA_AGENDA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="AGENDA" Relationship="Self.FK_AGENDA_CATEGORIA_AGENDA" FromRole="CATEGORIA_AGENDA" ToRole="AGENDA" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_CATEGORIA_AGENDA_ASSINANTE" FromRole="CATEGORIA_AGENDA" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="CATEGORIA_CUSTO_FIXO">
           <Key>
@@ -2555,22 +2569,22 @@
             <PropertyRef Name="CAFO_CD_ID" />
           </Key>
           <Property Name="CAFO_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
           <Property Name="CAFO_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CAFO_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_CATEGORIA_FORNECEDOR_ASSINANTE" FromRole="CATEGORIA_FORNECEDOR" ToRole="ASSINANTE" />
           <NavigationProperty Name="FORNECEDOR" Relationship="Self.FKFORNECEDOR675570" FromRole="CATEGORIA_FORNECEDOR" ToRole="FORNECEDOR" />
-          <Property Name="ASSI_CD_ID" Type="Int32" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_FORNECEDOR_ASSINANTE" FromRole="CATEGORIA_FORNECEDOR" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="CATEGORIA_NOTIFICACAO">
           <Key>
             <PropertyRef Name="CANO_CD_ID" />
           </Key>
           <Property Name="CANO_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="CANO_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CANO_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_CATEGORIA_NOTIFICACAO_ASSINANTE" FromRole="CATEGORIA_NOTIFICACAO" ToRole="ASSINANTE" />
           <NavigationProperty Name="NOTIFICACAO" Relationship="Self.FKNOTIFICACA285980" FromRole="CATEGORIA_NOTIFICACAO" ToRole="NOTIFICACAO" />
-          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_NOTIFICACAO_ASSINANTE" FromRole="CATEGORIA_NOTIFICACAO" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="CATEGORIA_PRODUTO">
           <Key>
@@ -2589,11 +2603,41 @@
             <PropertyRef Name="CAUS_CD_ID" />
           </Key>
           <Property Name="CAUS_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
           <Property Name="CAUS_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CAUS_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_CATEGORIA_USUARIO_ASSINANTE" FromRole="CATEGORIA_USUARIO" ToRole="ASSINANTE" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_CATEGORIA_USUARIO" FromRole="CATEGORIA_USUARIO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="COMISSAO_CARGO">
+          <Key>
+            <PropertyRef Name="COCA_CD_ID" />
+          </Key>
+          <Property Name="COCA_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CARG_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="COCA_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COCA_PC_PERCENTUAL" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="COCA_IN_TIPO_COMISSAO" Type="Int32" Nullable="false" />
+          <Property Name="COCA_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CARGO_USUARIO" Relationship="Self.FKCOMISSAO_C527874" FromRole="COMISSAO_CARGO" ToRole="CARGO_USUARIO" />
+        </EntityType>
+        <EntityType Name="CONFIGURACAO">
+          <Key>
+            <PropertyRef Name="CONF_CD_ID" />
+          </Key>
+          <Property Name="CONF_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ASSI_CD_ID" Type="Int32" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_USUARIO_ASSINANTE" FromRole="CATEGORIA_USUARIO" ToRole="ASSINANTE" />
+          <Property Name="CONF_NR_FALHAS_DIA" Type="Int32" />
+          <Property Name="CONF_NM_HOST_SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_PORTA_SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_EMAIL_EMISSOO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_SENHA_EMISSOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NR_REFRESH_DASH" Type="Int32" />
+          <Property Name="CONF_NM_ARQUIVO_ALARME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NR_REFRESH_NOTIFICACAO" Type="Int32" />
+          <Property Name="CONF_SG_LOGIN_SMS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_SG_SENHA_SMS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_CONFIGURACAO_ASSINANTE" FromRole="CONFIGURACAO" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="CONTA_BANCO">
           <Key>
@@ -2694,26 +2738,39 @@
           <Property Name="EMPR_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="RETR_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MAQN_CD_ID" Type="Int32" />
           <Property Name="EMPR_NM_NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EMPR_VL_PATRIMONIO_LIQUIDO" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="EMPR_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EMPR_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKEMPRESA495355" FromRole="EMPRESA" ToRole="ASSINANTE" />
-          <NavigationProperty Name="CONTA_BANCO" Relationship="Self.FKCONTA_BANC199360" FromRole="EMPRESA" ToRole="CONTA_BANCO" />
-          <NavigationProperty Name="CUSTO_FIXO" Relationship="Self.FKCUSTO_FIXO481608" FromRole="EMPRESA" ToRole="CUSTO_FIXO" />
-          <NavigationProperty Name="FORNECEDOR" Relationship="Self.FK_FORNECEDOR_EMPRESA" FromRole="EMPRESA" ToRole="FORNECEDOR" />
-          <NavigationProperty Name="REGIME_TRIBUTARIO" Relationship="Self.FKEMPRESA834470" FromRole="EMPRESA" ToRole="REGIME_TRIBUTARIO" />
-          <NavigationProperty Name="FORMA_PAGTO_RECTO" Relationship="Self.FKFORMA_PAGT560718" FromRole="EMPRESA" ToRole="FORMA_PAGTO_RECTO" />
-          <NavigationProperty Name="PRODUTO_ESTOQUE_EMPRESA" Relationship="Self.FKPRODUTO_ES179016" FromRole="EMPRESA" ToRole="PRODUTO_ESTOQUE_EMPRESA" />
-          <NavigationProperty Name="PRODUTO_TABELA_PRECO" Relationship="Self.FKPRODUTO_TA392272" FromRole="EMPRESA" ToRole="PRODUTO_TABELA_PRECO" />
-          <Property Name="MAQN_CD_ID" Type="Int32" />
           <Property Name="EMPR_IN_OPERA_CARTAO" Type="Int32" Nullable="false" />
           <Property Name="EMPR_NM_OUTRA_MAQUINA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EMPR_PC_ANTECIPACAO" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="EMPR_IN_PAGA_COMISSAO" Type="Int32" Nullable="false" />
           <Property Name="EMPR_VL_IMPOSTO_MEI" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="MAQUINA" Relationship="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA" FromRole="EMPRESA" ToRole="MAQUINA" />
-          <NavigationProperty Name="EMPRESA_ANEXO" Relationship="Db_PrecificacaoModel.FK_EMPRESA_ANEXO_EMPRESA" FromRole="EMPRESA" ToRole="EMPRESA_ANEXO" />
+          <Property Name="EMPR_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EMPR_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKEMPRESA495355" FromRole="EMPRESA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="CONTA_BANCO" Relationship="Self.FKCONTA_BANC199360" FromRole="EMPRESA" ToRole="CONTA_BANCO" />
+          <NavigationProperty Name="CUSTO_FIXO" Relationship="Self.FKCUSTO_FIXO481608" FromRole="EMPRESA" ToRole="CUSTO_FIXO" />
+          <NavigationProperty Name="EMPRESA_ANEXO" Relationship="Self.FK_EMPRESA_ANEXO_EMPRESA" FromRole="EMPRESA" ToRole="EMPRESA_ANEXO" />
+          <NavigationProperty Name="MAQUINA" Relationship="Self.FK_EMPRESA_MAQUINA" FromRole="EMPRESA" ToRole="MAQUINA" />
+          <NavigationProperty Name="FORNECEDOR" Relationship="Self.FK_FORNECEDOR_EMPRESA" FromRole="EMPRESA" ToRole="FORNECEDOR" />
+          <NavigationProperty Name="REGIME_TRIBUTARIO" Relationship="Self.FKEMPRESA834470" FromRole="EMPRESA" ToRole="REGIME_TRIBUTARIO" />
+          <NavigationProperty Name="FORMA_PAGTO_RECTO" Relationship="Self.FKFORMA_PAGT560718" FromRole="EMPRESA" ToRole="FORMA_PAGTO_RECTO" />
+          <NavigationProperty Name="PRODUTO_ESTOQUE_EMPRESA" Relationship="Self.FKPRODUTO_ES179016" FromRole="EMPRESA" ToRole="PRODUTO_ESTOQUE_EMPRESA" />
+          <NavigationProperty Name="PRODUTO_TABELA_PRECO" Relationship="Self.FKPRODUTO_TA392272" FromRole="EMPRESA" ToRole="PRODUTO_TABELA_PRECO" />
+        </EntityType>
+        <EntityType Name="EMPRESA_ANEXO">
+          <Key>
+            <PropertyRef Name="EMAN_CD_ID" />
+          </Key>
+          <Property Name="EMAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMPR_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="EMAN_NM_TITULO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAN_IN_TIPO" Type="Int32" Nullable="false" />
+          <Property Name="EMAN_DT_ANEXO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EMAN_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK_EMPRESA_ANEXO_EMPRESA" FromRole="EMPRESA_ANEXO" ToRole="EMPRESA" />
         </EntityType>
         <EntityType Name="FICHA_TECNICA">
           <Key>
@@ -2755,16 +2812,16 @@
             <PropertyRef Name="FOPR_CD_ID" />
           </Key>
           <Property Name="FOPR_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="EMPR_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="COBA_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="FOPA_IN_TIPO_FORMA" Type="Int32" Nullable="false" />
           <Property Name="FOPR_NM_NOME_FORMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FOPR_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="FOPR_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_FORMA_PAGTO_RECTO_ASSINANTE" FromRole="FORMA_PAGTO_RECTO" ToRole="ASSINANTE" />
           <NavigationProperty Name="CONTA_BANCO" Relationship="Self.FKFORMA_PAGT509018" FromRole="FORMA_PAGTO_RECTO" ToRole="CONTA_BANCO" />
           <NavigationProperty Name="EMPRESA" Relationship="Self.FKFORMA_PAGT560718" FromRole="FORMA_PAGTO_RECTO" ToRole="EMPRESA" />
-          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_FORMA_PAGTO_RECTO_ASSINANTE" FromRole="FORMA_PAGTO_RECTO" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="FORNECEDOR">
           <Key>
@@ -2869,9 +2926,24 @@
           <Property Name="LOG_NM_OPERACAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LOG_TX_TEXTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LOG_TX_TEXTO_ANTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LOG_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_LOG_ASSINANTE" FromRole="LOG" ToRole="ASSINANTE" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_LOG_USUARIO" FromRole="LOG" ToRole="USUARIO" />
-          <Property Name="LOG_IN_ATIVO" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAQUINA">
+          <Key>
+            <PropertyRef Name="MAQN_CD_ID" />
+          </Key>
+          <Property Name="MAQN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MAQN_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAQN_NM_PROVEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MAQN_PC_DEBITO" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="MAQN_PC_CREDITO" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="MAQN_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MAQN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKMAQUINA36030" FromRole="MAQUINA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK_EMPRESA_MAQUINA" FromRole="MAQUINA" ToRole="EMPRESA" />
         </EntityType>
         <EntityType Name="NOTICIA">
           <Key>
@@ -2885,14 +2957,14 @@
           <Property Name="NOTC_NM_AUTOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="NOTC_DT_DATA_AUTOR" Type="DateTime" Precision="0" />
           <Property Name="NOTC_TX_TEXTO" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="NOTC_TX_NOTICIA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NOTC_LK_LINK" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="NOTC_NM_ORIGEM" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOTC_NM_ORIGEM" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="NOTC_AQ_FOTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="NOTC_NR_ACESSOS" Type="Int32" Nullable="false" />
           <Property Name="NOTC_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKNOTICIA215325" FromRole="NOTICIA" ToRole="ASSINANTE" />
           <NavigationProperty Name="NOTICIA_COMENTARIO" Relationship="Self.FKNOTICIA_CO334260" FromRole="NOTICIA" ToRole="NOTICIA_COMENTARIO" />
-          <Property Name="NOTC_TX_NOTICIA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="NOTICIA_COMENTARIO">
           <Key>
@@ -2915,20 +2987,20 @@
           <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="CANO_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="NOTC_DT_EMISSAO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NOTC_DT_EMISSAO" Type="DateTime" Precision="3" />
           <Property Name="NOTC_DT_VALIDADE" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="NOTC_NM_TITULO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NOTC_TX_TEXTO" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="NOTC_TX_TEXTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NOTC_TX_NOTIFICACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NOTC_IN_VISTA" Type="Int32" Nullable="false" />
           <Property Name="NOTC_DT_VISTA" Type="DateTime" Precision="3" />
           <Property Name="NOTC_IN_ATIVO" Type="Int32" Nullable="false" />
-          <Property Name="USUARIOUSUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUARIOUSUA_CD_ID" Type="Int32" />
+          <Property Name="NOTC_IN_NIVEL" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKNOTIFICACA189005" FromRole="NOTIFICACAO" ToRole="ASSINANTE" />
           <NavigationProperty Name="CATEGORIA_NOTIFICACAO" Relationship="Self.FKNOTIFICACA285980" FromRole="NOTIFICACAO" ToRole="CATEGORIA_NOTIFICACAO" />
           <NavigationProperty Name="NOTIFICACAO_ANEXO" Relationship="Self.FKNOTIFICACA419021" FromRole="NOTIFICACAO" ToRole="NOTIFICACAO_ANEXO" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKNOTIFICACA793310" FromRole="NOTIFICACAO" ToRole="USUARIO" />
-          <Property Name="NOTC_TX_NOTIFICACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="NOTC_IN_NIVEL" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="NOTIFICACAO_ANEXO">
           <Key>
@@ -2942,6 +3014,18 @@
           <Property Name="NOAN_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NOAN_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="NOTIFICACAO" Relationship="Self.FKNOTIFICACA419021" FromRole="NOTIFICACAO_ANEXO" ToRole="NOTIFICACAO" />
+        </EntityType>
+        <EntityType Name="OUTRO_CUSTO_VARIAVEL">
+          <Key>
+            <PropertyRef Name="OUCV_CD_ID" />
+          </Key>
+          <Property Name="OUCV_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="OUCV_NM_CUSTO_VARIAVEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OUCV_PC_PERECNTUAL" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="OUCV_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OUCV_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKOUTRO_CUST578807" FromRole="OUTRO_CUSTO_VARIAVEL" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="PERFIL">
           <Key>
@@ -2964,6 +3048,69 @@
           <Property Name="PETA_IN_ATIVO" Type="Int32" />
           <NavigationProperty Name="CUSTO_FIXO" Relationship="Self.FKCUSTO_FIXO921563" FromRole="PERIODICIDADE_TAREFA" ToRole="CUSTO_FIXO" />
           <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_PERIODICIDADE_TAREFA" FromRole="PERIODICIDADE_TAREFA" ToRole="TAREFA" />
+        </EntityType>
+        <EntityType Name="PESSOA_EXTERNA">
+          <Key>
+            <PropertyRef Name="PEEX_CD_ID" />
+          </Key>
+          <Property Name="PEEX_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CARG_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PEEX_NM_NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PEEX_NR_CPF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PEEX_NR_RG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PEES_EM_EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PEEX_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PEEX_NR_CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PEEX_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PEEX_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKPESSOA_EXT750477" FromRole="PESSOA_EXTERNA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="CARGO_USUARIO" Relationship="Self.FKPESSOA_EXT429415" FromRole="PESSOA_EXTERNA" ToRole="CARGO_USUARIO" />
+          <NavigationProperty Name="PESSOA_EXTERNA_ANEXO" Relationship="Self.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA" ToRole="PESSOA_EXTERNA_ANEXO" />
+          <NavigationProperty Name="PESSOA_EXTERNA_ANOTACAO" Relationship="Self.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA" ToRole="PESSOA_EXTERNA_ANOTACAO" />
+        </EntityType>
+        <EntityType Name="PESSOA_EXTERNA_ANEXO">
+          <Key>
+            <PropertyRef Name="PEAX_CD_ID" />
+          </Key>
+          <Property Name="PEAX_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PEEX_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PEAX_NM_TITULO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PEAX_DT_ANEXO" Type="DateTime" Precision="0" />
+          <Property Name="PEAX_IN_TIPO" Type="Int32" />
+          <Property Name="PEAX_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PEAX_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Self.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA_ANEXO" ToRole="PESSOA_EXTERNA" />
+        </EntityType>
+        <EntityType Name="PESSOA_EXTERNA_ANOTACAO">
+          <Key>
+            <PropertyRef Name="PEAN_CD_ID" />
+          </Key>
+          <Property Name="PEAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PEEX_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PEAN_DT_ANOTACAO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PEAN_TX_ANOTACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PEAN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Self.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA_ANOTACAO" ToRole="PESSOA_EXTERNA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" FromRole="PESSOA_EXTERNA_ANOTACAO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="PLATAFORMA_ENTREGA">
+          <Key>
+            <PropertyRef Name="PLEN_CD_ID" />
+          </Key>
+          <Property Name="PLEN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PLEN_NM_NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PLEN_VL_FIXO" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="PLEN_VL_LIMITE_FIXO" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="PLEN_PC_VENDA" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="PLEN_VL_TAXA_CARTAO" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="PLEN_IN_ANTECIPACAO" Type="Int32" Nullable="false" />
+          <Property Name="PLEN_PC_ANTECIPACAO" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="PLEN_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PLEN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FKPLATAFORMA785659" FromRole="PLATAFORMA_ENTREGA" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="PRODUTO">
           <Key>
@@ -3128,7 +3275,7 @@
           <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="TITR_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="PETA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PETA_CD_ID" Type="Int32" />
           <Property Name="TARE_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TARE_DT_ESTIMADA" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TARE_DT_REALIZADA" Type="DateTime" Precision="0" />
@@ -3174,6 +3321,59 @@
           <Property Name="TAAN_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_ANEXO_TAREFA" FromRole="TAREFA_ANEXO" ToRole="TAREFA" />
         </EntityType>
+        <EntityType Name="TEMPLATE">
+          <Key>
+            <PropertyRef Name="TEMP_CD_ID" />
+          </Key>
+          <Property Name="TEMP_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
+          <Property Name="TEMP_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_IN_TIPO" Type="Int32" />
+          <Property Name="TEMP_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TX_CONTEUDO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_AQ_ARQUIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="TEMP_TX_CONTEUDO_LIMPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TX_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TX_CORPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TX_DADOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_DT_CRIACAO" Type="DateTime" Precision="0" />
+          <Property Name="TEMP_IN_EDITAVEL" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_TEMPLATE_ASSINANTE" FromRole="TEMPLATE" ToRole="ASSINANTE" />
+        </EntityType>
+        <EntityType Name="TEMPLATE_EMAIL">
+          <Key>
+            <PropertyRef Name="TEEM_CD_ID" />
+          </Key>
+          <Property Name="TEEM_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
+          <Property Name="TEEM_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_LK_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_IN_ATIVO" Type="Int32" />
+          <Property Name="TEEM_TX_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_TX_CORPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_TX_DADOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_AQ_ARQUIVO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_TX_COMPLETO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_IN_HTML" Type="Int32" />
+          <Property Name="TEEM_IN_EDITAVEL" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_TEMPLATE_EMAIL_ASSINANTE" FromRole="TEMPLATE_EMAIL" ToRole="ASSINANTE" />
+        </EntityType>
+        <EntityType Name="TEMPLATE_SMS">
+          <Key>
+            <PropertyRef Name="TSMS_CD_ID" />
+          </Key>
+          <Property Name="TSMS_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
+          <Property Name="TSMS_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TSMS_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TSMS_TX_CORPO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TSMS_LK_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TSMS_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="TSMS_IN_EDITAVEL" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_TEMPLATE_SMS_ASSINANTE" FromRole="TEMPLATE_SMS" ToRole="ASSINANTE" />
+        </EntityType>
         <EntityType Name="TIPO_CONTA">
           <Key>
             <PropertyRef Name="TICO_CD_ID" />
@@ -3196,11 +3396,11 @@
             <PropertyRef Name="TITR_CD_ID" />
           </Key>
           <Property Name="TITR_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
           <Property Name="TITR_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TITR_IN_ATIVO" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_TIPO_TAREFA_ASSINANTE" FromRole="TIPO_TAREFA" ToRole="ASSINANTE" />
           <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_TIPO_TAREFA" FromRole="TIPO_TAREFA" ToRole="TAREFA" />
-          <Property Name="ASSI_CD_ID" Type="Int32" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_TIPO_TAREFA_ASSINANTE" FromRole="TIPO_TAREFA" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="UF">
           <Key>
@@ -3217,9 +3417,9 @@
           </Key>
           <Property Name="UNID_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UNID_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UNID_SG_SIGLA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UNID_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PRODUTO" Relationship="Self.FKPRODUTO131046" FromRole="UNIDADE" ToRole="PRODUTO" />
-          <Property Name="UNID_SG_SIGLA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -3229,12 +3429,14 @@
           <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="PERF_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="CAUS_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CARG_CD_ID" Type="Int32" />
           <Property Name="USUA_AQ_FOTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NM_NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUA_NM_LOGIN" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUA_EM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NR_CPF" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NR_RG" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="USUA_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NR_CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="USUA_NM_SENHA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUA_NM_SENHA_CONFIRMA" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
@@ -3253,24 +3455,22 @@
           <Property Name="USUA_NR_ACESSOS" Type="Int32" Nullable="false" />
           <Property Name="USUA_NR_FALHAS" Type="Int32" Nullable="false" />
           <Property Name="USUA_TX_OBSERVACOES" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AGENDA" Relationship="Self.FKAGENDA418024" FromRole="USUARIO" ToRole="AGENDA" />
+          <NavigationProperty Name="AGENDA" Relationship="Self.FK_AGENDA_USUARIO" FromRole="USUARIO" ToRole="AGENDA" />
+          <NavigationProperty Name="AGENDA1" Relationship="Self.FKAGENDA418024" FromRole="USUARIO" ToRole="AGENDA" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKUSUARIO561404" FromRole="USUARIO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="CARGO_USUARIO" Relationship="Self.FK_USUARIO_CARGO_USUARIO" FromRole="USUARIO" ToRole="CARGO_USUARIO" />
           <NavigationProperty Name="CATEGORIA_USUARIO" Relationship="Self.FK_USUARIO_CATEGORIA_USUARIO" FromRole="USUARIO" ToRole="CATEGORIA_USUARIO" />
           <NavigationProperty Name="FORNECEDOR_ANOTACOES" Relationship="Self.FK_FORNECEDOR_ANOTACOES_USUARIO" FromRole="USUARIO" ToRole="FORNECEDOR_ANOTACOES" />
           <NavigationProperty Name="LOG" Relationship="Self.FK_LOG_USUARIO" FromRole="USUARIO" ToRole="LOG" />
           <NavigationProperty Name="NOTICIA_COMENTARIO" Relationship="Self.FKNOTICIA_CO92730" FromRole="USUARIO" ToRole="NOTICIA_COMENTARIO" />
           <NavigationProperty Name="NOTIFICACAO" Relationship="Self.FKNOTIFICACA793310" FromRole="USUARIO" ToRole="NOTIFICACAO" />
           <NavigationProperty Name="PERFIL" Relationship="Self.FK_USUARIO_PERFIL" FromRole="USUARIO" ToRole="PERFIL" />
+          <NavigationProperty Name="PESSOA_EXTERNA_ANOTACAO" Relationship="Self.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" FromRole="USUARIO" ToRole="PESSOA_EXTERNA_ANOTACAO" />
           <NavigationProperty Name="TAREFA" Relationship="Self.FKTAREFA210002" FromRole="USUARIO" ToRole="TAREFA" />
           <NavigationProperty Name="TAREFA_ACOMPANHAMENTO" Relationship="Self.FKTAREFA_ACO948353" FromRole="USUARIO" ToRole="TAREFA_ACOMPANHAMENTO" />
           <NavigationProperty Name="USUARIO_ANEXO" Relationship="Self.FK_USUARIO_ANEXO_USUARIO" FromRole="USUARIO" ToRole="USUARIO_ANEXO" />
           <NavigationProperty Name="USUARIO_ANOTACAO" Relationship="Self.FKUSUARIO_AN416650" FromRole="USUARIO" ToRole="USUARIO_ANOTACAO" />
           <NavigationProperty Name="USUARIO_ANOTACAO1" Relationship="Self.FKUSUARIO_AN728680" FromRole="USUARIO" ToRole="USUARIO_ANOTACAO" />
-          <Property Name="CARG_CD_ID" Type="Int32" />
-          <NavigationProperty Name="CARGO_USUARIO" Relationship="Db_PrecificacaoModel.FK_USUARIO_CARGO_USUARIO" FromRole="USUARIO" ToRole="CARGO_USUARIO" />
-          <NavigationProperty Name="PESSOA_EXTERNA_ANOTACAO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" FromRole="USUARIO" ToRole="PESSOA_EXTERNA_ANOTACAO" />
-          <NavigationProperty Name="AGENDA1" Relationship="Db_PrecificacaoModel.FK_AGENDA_USUARIO" FromRole="USUARIO" ToRole="AGENDA" />
-          <Property Name="USUA_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="USUARIO_ANEXO">
           <Key>
@@ -3310,6 +3510,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AGENDA_CATEGORIA_AGENDA">
+          <End Role="CATEGORIA_AGENDA" Type="Self.CATEGORIA_AGENDA" Multiplicity="1" />
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_AGENDA">
+              <PropertyRef Name="CAAG_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="CAAG_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="AGEN_CD_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKAGENDA22330">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
           <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="*" />
@@ -3331,6 +3555,78 @@
             </Principal>
             <Dependent Role="AGENDA">
               <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORIA_AGENDA_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="CATEGORIA_AGENDA" Type="Self.CATEGORIA_AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CATEGORIA_AGENDA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORIA_FORNECEDOR_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="CATEGORIA_FORNECEDOR" Type="Self.CATEGORIA_FORNECEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CATEGORIA_FORNECEDOR">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORIA_NOTIFICACAO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="CATEGORIA_NOTIFICACAO" Type="Self.CATEGORIA_NOTIFICACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CATEGORIA_NOTIFICACAO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORIA_USUARIO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="CATEGORIA_USUARIO" Type="Self.CATEGORIA_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CATEGORIA_USUARIO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIGURACAO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="CONFIGURACAO" Type="Self.CONFIGURACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CONFIGURACAO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FORMA_PAGTO_RECTO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="FORMA_PAGTO_RECTO" Type="Self.FORMA_PAGTO_RECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="FORMA_PAGTO_RECTO">
+              <PropertyRef Name="ASSI_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3358,6 +3654,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TEMPLATE_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="TEMPLATE" Type="Self.TEMPLATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="TEMPLATE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEMPLATE_EMAIL_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="TEMPLATE_EMAIL" Type="Self.TEMPLATE_EMAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="TEMPLATE_EMAIL">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEMPLATE_SMS_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="TEMPLATE_SMS" Type="Self.TEMPLATE_SMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="TEMPLATE_SMS">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_TAREFA_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="TIPO_TAREFA" Type="Self.TIPO_TAREFA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="TIPO_TAREFA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKBANCO388863">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
           <End Role="BANCO" Type="Self.BANCO" Multiplicity="*" />
@@ -3366,6 +3710,18 @@
               <PropertyRef Name="ASSI_CD_ID" />
             </Principal>
             <Dependent Role="BANCO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCARGO_USUA401517">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="CARGO_USUARIO" Type="Self.CARGO_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CARGO_USUARIO">
               <PropertyRef Name="ASSI_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3406,6 +3762,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKMAQUINA36030">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="MAQUINA" Type="Self.MAQUINA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="MAQUINA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKNOTICIA215325">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
           <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
@@ -3426,6 +3794,42 @@
               <PropertyRef Name="ASSI_CD_ID" />
             </Principal>
             <Dependent Role="NOTIFICACAO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOUTRO_CUST578807">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="OUTRO_CUSTO_VARIAVEL" Type="Self.OUTRO_CUSTO_VARIAVEL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="OUTRO_CUSTO_VARIAVEL">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPESSOA_EXT750477">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="PESSOA_EXTERNA" Type="Self.PESSOA_EXTERNA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPLATAFORMA785659">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="PLATAFORMA_ENTREGA" Type="Self.PLATAFORMA_ENTREGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="PLATAFORMA_ENTREGA">
               <PropertyRef Name="ASSI_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3475,6 +3879,42 @@
             </Principal>
             <Dependent Role="CONTA_BANCO">
               <PropertyRef Name="BANC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_CARGO_USUARIO">
+          <End Role="CARGO_USUARIO" Type="Self.CARGO_USUARIO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO_USUARIO">
+              <PropertyRef Name="CARG_CD_ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="CARG_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCOMISSAO_C527874">
+          <End Role="CARGO_USUARIO" Type="Self.CARGO_USUARIO" Multiplicity="1" />
+          <End Role="COMISSAO_CARGO" Type="Self.COMISSAO_CARGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO_USUARIO">
+              <PropertyRef Name="CARG_CD_ID" />
+            </Principal>
+            <Dependent Role="COMISSAO_CARGO">
+              <PropertyRef Name="CARG_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPESSOA_EXT429415">
+          <End Role="CARGO_USUARIO" Type="Self.CARGO_USUARIO" Multiplicity="1" />
+          <End Role="PESSOA_EXTERNA" Type="Self.PESSOA_EXTERNA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO_USUARIO">
+              <PropertyRef Name="CARG_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA">
+              <PropertyRef Name="CARG_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3643,6 +4083,30 @@
             </Principal>
             <Dependent Role="CUSTO_FIXO">
               <PropertyRef Name="PETA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPRESA_ANEXO_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="EMPRESA_ANEXO" Type="Self.EMPRESA_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="EMPR_CD_ID" />
+            </Principal>
+            <Dependent Role="EMPRESA_ANEXO">
+              <PropertyRef Name="EMPR_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPRESA_MAQUINA">
+          <End Role="MAQUINA" Type="Self.MAQUINA" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAQUINA">
+              <PropertyRef Name="MAQN_CD_ID" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="MAQN_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3923,7 +4387,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TAREFA_PERIODICIDADE_TAREFA">
-          <End Role="PERIODICIDADE_TAREFA" Type="Self.PERIODICIDADE_TAREFA" Multiplicity="1" />
+          <End Role="PERIODICIDADE_TAREFA" Type="Self.PERIODICIDADE_TAREFA" Multiplicity="0..1" />
           <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PERIODICIDADE_TAREFA">
@@ -3931,6 +4395,42 @@
             </Principal>
             <Dependent Role="TAREFA">
               <PropertyRef Name="PETA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA">
+          <End Role="PESSOA_EXTERNA" Type="Self.PESSOA_EXTERNA" Multiplicity="1" />
+          <End Role="PESSOA_EXTERNA_ANEXO" Type="Self.PESSOA_EXTERNA_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PESSOA_EXTERNA">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANEXO">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA">
+          <End Role="PESSOA_EXTERNA" Type="Self.PESSOA_EXTERNA" Multiplicity="1" />
+          <End Role="PESSOA_EXTERNA_ANOTACAO" Type="Self.PESSOA_EXTERNA_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PESSOA_EXTERNA">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
+              <PropertyRef Name="PEEX_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="PESSOA_EXTERNA_ANOTACAO" Type="Self.PESSOA_EXTERNA_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
+              <PropertyRef Name="USUA_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4131,18 +4631,22 @@
           <EntitySet Name="AGENDA_ANEXO" EntityType="Self.AGENDA_ANEXO" />
           <EntitySet Name="ASSINANTE" EntityType="Self.ASSINANTE" />
           <EntitySet Name="BANCO" EntityType="Self.BANCO" />
+          <EntitySet Name="CARGO_USUARIO" EntityType="Self.CARGO_USUARIO" />
           <EntitySet Name="CATEGORIA_AGENDA" EntityType="Self.CATEGORIA_AGENDA" />
           <EntitySet Name="CATEGORIA_CUSTO_FIXO" EntityType="Self.CATEGORIA_CUSTO_FIXO" />
           <EntitySet Name="CATEGORIA_FORNECEDOR" EntityType="Self.CATEGORIA_FORNECEDOR" />
           <EntitySet Name="CATEGORIA_NOTIFICACAO" EntityType="Self.CATEGORIA_NOTIFICACAO" />
           <EntitySet Name="CATEGORIA_PRODUTO" EntityType="Self.CATEGORIA_PRODUTO" />
           <EntitySet Name="CATEGORIA_USUARIO" EntityType="Self.CATEGORIA_USUARIO" />
+          <EntitySet Name="COMISSAO_CARGO" EntityType="Self.COMISSAO_CARGO" />
+          <EntitySet Name="CONFIGURACAO" EntityType="Self.CONFIGURACAO" />
           <EntitySet Name="CONTA_BANCO" EntityType="Self.CONTA_BANCO" />
           <EntitySet Name="CONTA_BANCO_ANEXO" EntityType="Self.CONTA_BANCO_ANEXO" />
           <EntitySet Name="CONTA_BANCO_CONTATO" EntityType="Self.CONTA_BANCO_CONTATO" />
           <EntitySet Name="CONTA_BANCO_LANCAMENTO" EntityType="Self.CONTA_BANCO_LANCAMENTO" />
           <EntitySet Name="CUSTO_FIXO" EntityType="Self.CUSTO_FIXO" />
           <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+          <EntitySet Name="EMPRESA_ANEXO" EntityType="Self.EMPRESA_ANEXO" />
           <EntitySet Name="FICHA_TECNICA" EntityType="Self.FICHA_TECNICA" />
           <EntitySet Name="FICHA_TECNICA_DETALHE" EntityType="Self.FICHA_TECNICA_DETALHE" />
           <EntitySet Name="FORMA_PAGTO_RECTO" EntityType="Self.FORMA_PAGTO_RECTO" />
@@ -4152,12 +4656,18 @@
           <EntitySet Name="FORNECEDOR_CONTATO" EntityType="Self.FORNECEDOR_CONTATO" />
           <EntitySet Name="FORNECEDOR_QUADRO_SOCIETARIO" EntityType="Self.FORNECEDOR_QUADRO_SOCIETARIO" />
           <EntitySet Name="LOG" EntityType="Self.LOG" />
+          <EntitySet Name="MAQUINA" EntityType="Self.MAQUINA" />
           <EntitySet Name="NOTICIA" EntityType="Self.NOTICIA" />
           <EntitySet Name="NOTICIA_COMENTARIO" EntityType="Self.NOTICIA_COMENTARIO" />
           <EntitySet Name="NOTIFICACAO" EntityType="Self.NOTIFICACAO" />
           <EntitySet Name="NOTIFICACAO_ANEXO" EntityType="Self.NOTIFICACAO_ANEXO" />
+          <EntitySet Name="OUTRO_CUSTO_VARIAVEL" EntityType="Self.OUTRO_CUSTO_VARIAVEL" />
           <EntitySet Name="PERFIL" EntityType="Self.PERFIL" />
           <EntitySet Name="PERIODICIDADE_TAREFA" EntityType="Self.PERIODICIDADE_TAREFA" />
+          <EntitySet Name="PESSOA_EXTERNA" EntityType="Self.PESSOA_EXTERNA" />
+          <EntitySet Name="PESSOA_EXTERNA_ANEXO" EntityType="Self.PESSOA_EXTERNA_ANEXO" />
+          <EntitySet Name="PESSOA_EXTERNA_ANOTACAO" EntityType="Self.PESSOA_EXTERNA_ANOTACAO" />
+          <EntitySet Name="PLATAFORMA_ENTREGA" EntityType="Self.PLATAFORMA_ENTREGA" />
           <EntitySet Name="PRODUTO" EntityType="Self.PRODUTO" />
           <EntitySet Name="PRODUTO_ANEXO" EntityType="Self.PRODUTO_ANEXO" />
           <EntitySet Name="PRODUTO_ESTOQUE_EMPRESA" EntityType="Self.PRODUTO_ESTOQUE_EMPRESA" />
@@ -4170,6 +4680,9 @@
           <EntitySet Name="TAREFA" EntityType="Self.TAREFA" />
           <EntitySet Name="TAREFA_ACOMPANHAMENTO" EntityType="Self.TAREFA_ACOMPANHAMENTO" />
           <EntitySet Name="TAREFA_ANEXO" EntityType="Self.TAREFA_ANEXO" />
+          <EntitySet Name="TEMPLATE" EntityType="Self.TEMPLATE" />
+          <EntitySet Name="TEMPLATE_EMAIL" EntityType="Self.TEMPLATE_EMAIL" />
+          <EntitySet Name="TEMPLATE_SMS" EntityType="Self.TEMPLATE_SMS" />
           <EntitySet Name="TIPO_CONTA" EntityType="Self.TIPO_CONTA" />
           <EntitySet Name="TIPO_PESSOA" EntityType="Self.TIPO_PESSOA" />
           <EntitySet Name="TIPO_TAREFA" EntityType="Self.TIPO_TAREFA" />
@@ -4182,6 +4695,14 @@
             <End Role="AGENDA" EntitySet="AGENDA" />
             <End Role="AGENDA_ANEXO" EntitySet="AGENDA_ANEXO" />
           </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_CATEGORIA_AGENDA" Association="Self.FK_AGENDA_CATEGORIA_AGENDA">
+            <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_USUARIO" Association="Self.FK_AGENDA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
           <AssociationSet Name="FKAGENDA22330" Association="Self.FKAGENDA22330">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="AGENDA" EntitySet="AGENDA" />
@@ -4189,6 +4710,30 @@
           <AssociationSet Name="FKAGENDA418024" Association="Self.FKAGENDA418024">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORIA_AGENDA_ASSINANTE" Association="Self.FK_CATEGORIA_AGENDA_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORIA_FORNECEDOR_ASSINANTE" Association="Self.FK_CATEGORIA_FORNECEDOR_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CATEGORIA_FORNECEDOR" EntitySet="CATEGORIA_FORNECEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORIA_NOTIFICACAO_ASSINANTE" Association="Self.FK_CATEGORIA_NOTIFICACAO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CATEGORIA_NOTIFICACAO" EntitySet="CATEGORIA_NOTIFICACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORIA_USUARIO_ASSINANTE" Association="Self.FK_CATEGORIA_USUARIO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CATEGORIA_USUARIO" EntitySet="CATEGORIA_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIGURACAO_ASSINANTE" Association="Self.FK_CONFIGURACAO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CONFIGURACAO" EntitySet="CONFIGURACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FORMA_PAGTO_RECTO_ASSINANTE" Association="Self.FK_FORMA_PAGTO_RECTO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="FORMA_PAGTO_RECTO" EntitySet="FORMA_PAGTO_RECTO" />
           </AssociationSet>
           <AssociationSet Name="FK_FORNECEDOR_ASSINANTE" Association="Self.FK_FORNECEDOR_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
@@ -4198,9 +4743,29 @@
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="LOG" EntitySet="LOG" />
           </AssociationSet>
+          <AssociationSet Name="FK_TEMPLATE_ASSINANTE" Association="Self.FK_TEMPLATE_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="TEMPLATE" EntitySet="TEMPLATE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEMPLATE_EMAIL_ASSINANTE" Association="Self.FK_TEMPLATE_EMAIL_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="TEMPLATE_EMAIL" EntitySet="TEMPLATE_EMAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEMPLATE_SMS_ASSINANTE" Association="Self.FK_TEMPLATE_SMS_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="TEMPLATE_SMS" EntitySet="TEMPLATE_SMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_TAREFA_ASSINANTE" Association="Self.FK_TIPO_TAREFA_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="TIPO_TAREFA" EntitySet="TIPO_TAREFA" />
+          </AssociationSet>
           <AssociationSet Name="FKBANCO388863" Association="Self.FKBANCO388863">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="BANCO" EntitySet="BANCO" />
+          </AssociationSet>
+          <AssociationSet Name="FKCARGO_USUA401517" Association="Self.FKCARGO_USUA401517">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CARGO_USUARIO" EntitySet="CARGO_USUARIO" />
           </AssociationSet>
           <AssociationSet Name="FKCATEGORIA_171360" Association="Self.FKCATEGORIA_171360">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
@@ -4214,6 +4779,10 @@
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="EMPRESA" EntitySet="EMPRESA" />
           </AssociationSet>
+          <AssociationSet Name="FKMAQUINA36030" Association="Self.FKMAQUINA36030">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="MAQUINA" EntitySet="MAQUINA" />
+          </AssociationSet>
           <AssociationSet Name="FKNOTICIA215325" Association="Self.FKNOTICIA215325">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="NOTICIA" EntitySet="NOTICIA" />
@@ -4221,6 +4790,18 @@
           <AssociationSet Name="FKNOTIFICACA189005" Association="Self.FKNOTIFICACA189005">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="NOTIFICACAO" EntitySet="NOTIFICACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FKOUTRO_CUST578807" Association="Self.FKOUTRO_CUST578807">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="OUTRO_CUSTO_VARIAVEL" EntitySet="OUTRO_CUSTO_VARIAVEL" />
+          </AssociationSet>
+          <AssociationSet Name="FKPESSOA_EXT750477" Association="Self.FKPESSOA_EXT750477">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
+          </AssociationSet>
+          <AssociationSet Name="FKPLATAFORMA785659" Association="Self.FKPLATAFORMA785659">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="PLATAFORMA_ENTREGA" EntitySet="PLATAFORMA_ENTREGA" />
           </AssociationSet>
           <AssociationSet Name="FKPRODUTO932438" Association="Self.FKPRODUTO932438">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
@@ -4237,6 +4818,18 @@
           <AssociationSet Name="FKCONTA_BANC816139" Association="Self.FKCONTA_BANC816139">
             <End Role="BANCO" EntitySet="BANCO" />
             <End Role="CONTA_BANCO" EntitySet="CONTA_BANCO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_CARGO_USUARIO" Association="Self.FK_USUARIO_CARGO_USUARIO">
+            <End Role="CARGO_USUARIO" EntitySet="CARGO_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FKCOMISSAO_C527874" Association="Self.FKCOMISSAO_C527874">
+            <End Role="CARGO_USUARIO" EntitySet="CARGO_USUARIO" />
+            <End Role="COMISSAO_CARGO" EntitySet="COMISSAO_CARGO" />
+          </AssociationSet>
+          <AssociationSet Name="FKPESSOA_EXT429415" Association="Self.FKPESSOA_EXT429415">
+            <End Role="CARGO_USUARIO" EntitySet="CARGO_USUARIO" />
+            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
           </AssociationSet>
           <AssociationSet Name="FKCUSTO_FIXO798962" Association="Self.FKCUSTO_FIXO798962">
             <End Role="CATEGORIA_CUSTO_FIXO" EntitySet="CATEGORIA_CUSTO_FIXO" />
@@ -4293,6 +4886,14 @@
           <AssociationSet Name="FKCUSTO_FIXO921563" Association="Self.FKCUSTO_FIXO921563">
             <End Role="PERIODICIDADE_TAREFA" EntitySet="PERIODICIDADE_TAREFA" />
             <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPRESA_ANEXO_EMPRESA" Association="Self.FK_EMPRESA_ANEXO_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="EMPRESA_ANEXO" EntitySet="EMPRESA_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPRESA_MAQUINA" Association="Self.FK_EMPRESA_MAQUINA">
+            <End Role="MAQUINA" EntitySet="MAQUINA" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
           </AssociationSet>
           <AssociationSet Name="FK_FORNECEDOR_EMPRESA" Association="Self.FK_FORNECEDOR_EMPRESA">
             <End Role="EMPRESA" EntitySet="EMPRESA" />
@@ -4390,6 +4991,18 @@
             <End Role="PERIODICIDADE_TAREFA" EntitySet="PERIODICIDADE_TAREFA" />
             <End Role="TAREFA" EntitySet="TAREFA" />
           </AssociationSet>
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" Association="Self.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA">
+            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
+            <End Role="PESSOA_EXTERNA_ANEXO" EntitySet="PESSOA_EXTERNA_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" Association="Self.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA">
+            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
+            <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" Association="Self.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
+          </AssociationSet>
           <AssociationSet Name="FKPRODUTO_AN539356" Association="Self.FKPRODUTO_AN539356">
             <End Role="PRODUTO" EntitySet="PRODUTO" />
             <End Role="PRODUTO_ANEXO" EntitySet="PRODUTO_ANEXO" />
@@ -4454,619 +5067,7 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="USUARIO_ANOTACAO" EntitySet="USUARIO_ANOTACAO" />
           </AssociationSet>
-          <EntitySet Name="CARGO_USUARIO" EntityType="Db_PrecificacaoModel.CARGO_USUARIO" />
-          <EntitySet Name="COMISSAO_CARGO" EntityType="Db_PrecificacaoModel.COMISSAO_CARGO" />
-          <EntitySet Name="MAQUINA" EntityType="Db_PrecificacaoModel.MAQUINA" />
-          <EntitySet Name="OUTRO_CUSTO_VARIAVEL" EntityType="Db_PrecificacaoModel.OUTRO_CUSTO_VARIAVEL" />
-          <EntitySet Name="PESSOA_EXTERNA" EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA" />
-          <EntitySet Name="PLATAFORMA_ENTREGA" EntityType="Db_PrecificacaoModel.PLATAFORMA_ENTREGA" />
-          <AssociationSet Name="FKCARGO_USUA401517" Association="Db_PrecificacaoModel.FKCARGO_USUA401517">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="CARGO_USUARIO" EntitySet="CARGO_USUARIO" />
-          </AssociationSet>
-          <AssociationSet Name="FKMAQUINA36030" Association="Db_PrecificacaoModel.FKMAQUINA36030">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="MAQUINA" EntitySet="MAQUINA" />
-          </AssociationSet>
-          <AssociationSet Name="FKOUTRO_CUST578807" Association="Db_PrecificacaoModel.FKOUTRO_CUST578807">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="OUTRO_CUSTO_VARIAVEL" EntitySet="OUTRO_CUSTO_VARIAVEL" />
-          </AssociationSet>
-          <AssociationSet Name="FKPESSOA_EXT750477" Association="Db_PrecificacaoModel.FKPESSOA_EXT750477">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
-          </AssociationSet>
-          <AssociationSet Name="FKPLATAFORMA785659" Association="Db_PrecificacaoModel.FKPLATAFORMA785659">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="PLATAFORMA_ENTREGA" EntitySet="PLATAFORMA_ENTREGA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USUARIO_CARGO_USUARIO" Association="Db_PrecificacaoModel.FK_USUARIO_CARGO_USUARIO">
-            <End Role="CARGO_USUARIO" EntitySet="CARGO_USUARIO" />
-            <End Role="USUARIO" EntitySet="USUARIO" />
-          </AssociationSet>
-          <AssociationSet Name="FKCOMISSAO_C527874" Association="Db_PrecificacaoModel.FKCOMISSAO_C527874">
-            <End Role="CARGO_USUARIO" EntitySet="CARGO_USUARIO" />
-            <End Role="COMISSAO_CARGO" EntitySet="COMISSAO_CARGO" />
-          </AssociationSet>
-          <AssociationSet Name="FKPESSOA_EXT429415" Association="Db_PrecificacaoModel.FKPESSOA_EXT429415">
-            <End Role="CARGO_USUARIO" EntitySet="CARGO_USUARIO" />
-            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EMPRESA_MAQUINA" Association="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA">
-            <End Role="MAQUINA" EntitySet="MAQUINA" />
-            <End Role="EMPRESA" EntitySet="EMPRESA" />
-          </AssociationSet>
-          <EntitySet Name="CONFIGURACAO" EntityType="Db_PrecificacaoModel.CONFIGURACAO" />
-          <AssociationSet Name="FK_CONFIGURACAO_ASSINANTE" Association="Db_PrecificacaoModel.FK_CONFIGURACAO_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="CONFIGURACAO" EntitySet="CONFIGURACAO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AGENDA_CATEGORIA_AGENDA" Association="Db_PrecificacaoModel.FK_AGENDA_CATEGORIA_AGENDA">
-            <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
-            <End Role="AGENDA" EntitySet="AGENDA" />
-          </AssociationSet>
-          <EntitySet Name="TEMPLATE" EntityType="Db_PrecificacaoModel.TEMPLATE" />
-          <EntitySet Name="TEMPLATE_EMAIL" EntityType="Db_PrecificacaoModel.TEMPLATE_EMAIL" />
-          <EntitySet Name="TEMPLATE_SMS" EntityType="Db_PrecificacaoModel.TEMPLATE_SMS" />
-          <AssociationSet Name="FK_TEMPLATE_ASSINANTE" Association="Db_PrecificacaoModel.FK_TEMPLATE_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="TEMPLATE" EntitySet="TEMPLATE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TEMPLATE_EMAIL_ASSINANTE" Association="Db_PrecificacaoModel.FK_TEMPLATE_EMAIL_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="TEMPLATE_EMAIL" EntitySet="TEMPLATE_EMAIL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TEMPLATE_SMS_ASSINANTE" Association="Db_PrecificacaoModel.FK_TEMPLATE_SMS_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="TEMPLATE_SMS" EntitySet="TEMPLATE_SMS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CATEGORIA_AGENDA_ASSINANTE" Association="Db_PrecificacaoModel.FK_CATEGORIA_AGENDA_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CATEGORIA_FORNECEDOR_ASSINANTE" Association="Db_PrecificacaoModel.FK_CATEGORIA_FORNECEDOR_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="CATEGORIA_FORNECEDOR" EntitySet="CATEGORIA_FORNECEDOR" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CATEGORIA_USUARIO_ASSINANTE" Association="Db_PrecificacaoModel.FK_CATEGORIA_USUARIO_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="CATEGORIA_USUARIO" EntitySet="CATEGORIA_USUARIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TIPO_TAREFA_ASSINANTE" Association="Db_PrecificacaoModel.FK_TIPO_TAREFA_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="TIPO_TAREFA" EntitySet="TIPO_TAREFA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CATEGORIA_NOTIFICACAO_ASSINANTE" Association="Db_PrecificacaoModel.FK_CATEGORIA_NOTIFICACAO_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="CATEGORIA_NOTIFICACAO" EntitySet="CATEGORIA_NOTIFICACAO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FORMA_PAGTO_RECTO_ASSINANTE" Association="Db_PrecificacaoModel.FK_FORMA_PAGTO_RECTO_ASSINANTE">
-            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
-            <End Role="FORMA_PAGTO_RECTO" EntitySet="FORMA_PAGTO_RECTO" />
-          </AssociationSet>
-          <EntitySet Name="PESSOA_EXTERNA_ANEXO" EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO" />
-          <EntitySet Name="PESSOA_EXTERNA_ANOTACAO" EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" />
-          <AssociationSet Name="FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA">
-            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
-            <End Role="PESSOA_EXTERNA_ANEXO" EntitySet="PESSOA_EXTERNA_ANEXO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA">
-            <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
-            <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
-            <End Role="USUARIO" EntitySet="USUARIO" />
-            <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AGENDA_USUARIO" Association="Db_PrecificacaoModel.FK_AGENDA_USUARIO">
-            <End Role="USUARIO" EntitySet="USUARIO" />
-            <End Role="AGENDA" EntitySet="AGENDA" />
-          </AssociationSet>
-          <EntitySet Name="EMPRESA_ANEXO" EntityType="Db_PrecificacaoModel.EMPRESA_ANEXO" />
-          <AssociationSet Name="FK_EMPRESA_ANEXO_EMPRESA" Association="Db_PrecificacaoModel.FK_EMPRESA_ANEXO_EMPRESA">
-            <End Role="EMPRESA" EntitySet="EMPRESA" />
-            <End Role="EMPRESA_ANEXO" EntitySet="EMPRESA_ANEXO" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="CARGO_USUARIO">
-          <Key>
-            <PropertyRef Name="CARG_CD_ID" />
-          </Key>
-          <Property Name="CARG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="CARG_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CARG_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FKCARGO_USUA401517" FromRole="CARGO_USUARIO" ToRole="ASSINANTE" />
-          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_USUARIO_CARGO_USUARIO" FromRole="CARGO_USUARIO" ToRole="USUARIO" />
-          <NavigationProperty Name="COMISSAO_CARGO" Relationship="Db_PrecificacaoModel.FKCOMISSAO_C527874" FromRole="CARGO_USUARIO" ToRole="COMISSAO_CARGO" />
-          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Db_PrecificacaoModel.FKPESSOA_EXT429415" FromRole="CARGO_USUARIO" ToRole="PESSOA_EXTERNA" />
-        </EntityType>
-        <EntityType Name="COMISSAO_CARGO">
-          <Key>
-            <PropertyRef Name="COCA_CD_ID" />
-          </Key>
-          <Property Name="COCA_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CARG_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="COCA_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="COCA_PC_PERCENTUAL" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
-          <Property Name="COCA_IN_TIPO_COMISSAO" Type="Int32" Nullable="false" />
-          <Property Name="COCA_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CARGO_USUARIO" Relationship="Db_PrecificacaoModel.FKCOMISSAO_C527874" FromRole="COMISSAO_CARGO" ToRole="CARGO_USUARIO" />
-        </EntityType>
-        <EntityType Name="MAQUINA">
-          <Key>
-            <PropertyRef Name="MAQN_CD_ID" />
-          </Key>
-          <Property Name="MAQN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="MAQN_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MAQN_NM_PROVEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MAQN_PC_DEBITO" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
-          <Property Name="MAQN_PC_CREDITO" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
-          <Property Name="MAQN_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="MAQN_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FKMAQUINA36030" FromRole="MAQUINA" ToRole="ASSINANTE" />
-          <NavigationProperty Name="EMPRESA" Relationship="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA" FromRole="MAQUINA" ToRole="EMPRESA" />
-        </EntityType>
-        <EntityType Name="OUTRO_CUSTO_VARIAVEL">
-          <Key>
-            <PropertyRef Name="OUCV_CD_ID" />
-          </Key>
-          <Property Name="OUCV_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="OUCV_NM_CUSTO_VARIAVEL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OUCV_PC_PERECNTUAL" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
-          <Property Name="OUCV_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="OUCV_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FKOUTRO_CUST578807" FromRole="OUTRO_CUSTO_VARIAVEL" ToRole="ASSINANTE" />
-        </EntityType>
-        <EntityType Name="PESSOA_EXTERNA">
-          <Key>
-            <PropertyRef Name="PEEX_CD_ID" />
-          </Key>
-          <Property Name="PEEX_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="CARG_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="PEEX_NM_NOME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PEEX_NR_CPF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PEEX_NR_RG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PEES_EM_EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PEEX_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PEEX_NR_CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PEEX_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PEEX_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FKPESSOA_EXT750477" FromRole="PESSOA_EXTERNA" ToRole="ASSINANTE" />
-          <NavigationProperty Name="CARGO_USUARIO" Relationship="Db_PrecificacaoModel.FKPESSOA_EXT429415" FromRole="PESSOA_EXTERNA" ToRole="CARGO_USUARIO" />
-          <NavigationProperty Name="PESSOA_EXTERNA_ANEXO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA" ToRole="PESSOA_EXTERNA_ANEXO" />
-          <NavigationProperty Name="PESSOA_EXTERNA_ANOTACAO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA" ToRole="PESSOA_EXTERNA_ANOTACAO" />
-        </EntityType>
-        <EntityType Name="PLATAFORMA_ENTREGA">
-          <Key>
-            <PropertyRef Name="PLEN_CD_ID" />
-          </Key>
-          <Property Name="PLEN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="PLEN_NM_NOME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PLEN_VL_FIXO" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="PLEN_VL_LIMITE_FIXO" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="PLEN_PC_VENDA" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="PLEN_VL_TAXA_CARTAO" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="PLEN_IN_ANTECIPACAO" Type="Int32" Nullable="false" />
-          <Property Name="PLEN_PC_ANTECIPACAO" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="PLEN_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PLEN_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FKPLATAFORMA785659" FromRole="PLATAFORMA_ENTREGA" ToRole="ASSINANTE" />
-        </EntityType>
-        <Association Name="FKCARGO_USUA401517">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.CARGO_USUARIO" Role="CARGO_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="CARGO_USUARIO">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKMAQUINA36030">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.MAQUINA" Role="MAQUINA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="MAQUINA">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKOUTRO_CUST578807">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.OUTRO_CUSTO_VARIAVEL" Role="OUTRO_CUSTO_VARIAVEL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="OUTRO_CUSTO_VARIAVEL">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKPESSOA_EXT750477">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA" Role="PESSOA_EXTERNA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="PESSOA_EXTERNA">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKPLATAFORMA785659">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.PLATAFORMA_ENTREGA" Role="PLATAFORMA_ENTREGA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="PLATAFORMA_ENTREGA">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_USUARIO_CARGO_USUARIO">
-          <End Type="Db_PrecificacaoModel.CARGO_USUARIO" Role="CARGO_USUARIO" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CARGO_USUARIO">
-              <PropertyRef Name="CARG_CD_ID" />
-            </Principal>
-            <Dependent Role="USUARIO">
-              <PropertyRef Name="CARG_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKCOMISSAO_C527874">
-          <End Type="Db_PrecificacaoModel.CARGO_USUARIO" Role="CARGO_USUARIO" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.COMISSAO_CARGO" Role="COMISSAO_CARGO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CARGO_USUARIO">
-              <PropertyRef Name="CARG_CD_ID" />
-            </Principal>
-            <Dependent Role="COMISSAO_CARGO">
-              <PropertyRef Name="CARG_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKPESSOA_EXT429415">
-          <End Type="Db_PrecificacaoModel.CARGO_USUARIO" Role="CARGO_USUARIO" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA" Role="PESSOA_EXTERNA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CARGO_USUARIO">
-              <PropertyRef Name="CARG_CD_ID" />
-            </Principal>
-            <Dependent Role="PESSOA_EXTERNA">
-              <PropertyRef Name="CARG_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EMPRESA_MAQUINA">
-          <End Type="Db_PrecificacaoModel.MAQUINA" Role="MAQUINA" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.EMPRESA" Role="EMPRESA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MAQUINA">
-              <PropertyRef Name="MAQN_CD_ID" />
-            </Principal>
-            <Dependent Role="EMPRESA">
-              <PropertyRef Name="MAQN_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CONFIGURACAO">
-          <Key>
-            <PropertyRef Name="CONF_CD_ID" />
-          </Key>
-          <Property Name="CONF_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" />
-          <Property Name="CONF_NR_FALHAS_DIA" Type="Int32" />
-          <Property Name="CONF_NM_HOST_SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_PORTA_SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_EMAIL_EMISSOO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_SENHA_EMISSOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NR_REFRESH_DASH" Type="Int32" />
-          <Property Name="CONF_NM_ARQUIVO_ALARME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NR_REFRESH_NOTIFICACAO" Type="Int32" />
-          <Property Name="CONF_SG_LOGIN_SMS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_SG_SENHA_SMS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_CONFIGURACAO_ASSINANTE" FromRole="CONFIGURACAO" ToRole="ASSINANTE" />
-        </EntityType>
-        <Association Name="FK_CONFIGURACAO_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.CONFIGURACAO" Role="CONFIGURACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="CONFIGURACAO">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AGENDA_CATEGORIA_AGENDA">
-          <End Type="Db_PrecificacaoModel.CATEGORIA_AGENDA" Role="CATEGORIA_AGENDA" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.AGENDA" Role="AGENDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORIA_AGENDA">
-              <PropertyRef Name="CAAG_CD_ID" />
-            </Principal>
-            <Dependent Role="AGENDA">
-              <PropertyRef Name="CAAG_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="TEMPLATE">
-          <Key>
-            <PropertyRef Name="TEMP_CD_ID" />
-          </Key>
-          <Property Name="TEMP_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" />
-          <Property Name="TEMP_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_IN_TIPO" Type="Int32" />
-          <Property Name="TEMP_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_TX_CONTEUDO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_AQ_ARQUIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_IN_ATIVO" Type="Int32" Nullable="false" />
-          <Property Name="TEMP_TX_CONTEUDO_LIMPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_TX_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_TX_CORPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_TX_DADOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_DT_CRIACAO" Type="DateTime" Precision="0" />
-          <Property Name="TEMP_IN_EDITAVEL" Type="Int32" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_TEMPLATE_ASSINANTE" FromRole="TEMPLATE" ToRole="ASSINANTE" />
-        </EntityType>
-        <EntityType Name="TEMPLATE_EMAIL">
-          <Key>
-            <PropertyRef Name="TEEM_CD_ID" />
-          </Key>
-          <Property Name="TEEM_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" />
-          <Property Name="TEEM_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_LK_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_IN_ATIVO" Type="Int32" />
-          <Property Name="TEEM_TX_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_TX_CORPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_TX_DADOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_AQ_ARQUIVO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_TX_COMPLETO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_IN_HTML" Type="Int32" />
-          <Property Name="TEEM_IN_EDITAVEL" Type="Int32" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_TEMPLATE_EMAIL_ASSINANTE" FromRole="TEMPLATE_EMAIL" ToRole="ASSINANTE" />
-        </EntityType>
-        <EntityType Name="TEMPLATE_SMS">
-          <Key>
-            <PropertyRef Name="TSMS_CD_ID" />
-          </Key>
-          <Property Name="TSMS_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ASSI_CD_ID" Type="Int32" />
-          <Property Name="TSMS_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TSMS_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TSMS_TX_CORPO" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TSMS_LK_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TSMS_IN_ATIVO" Type="Int32" Nullable="false" />
-          <Property Name="TSMS_IN_EDITAVEL" Type="Int32" />
-          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_TEMPLATE_SMS_ASSINANTE" FromRole="TEMPLATE_SMS" ToRole="ASSINANTE" />
-        </EntityType>
-        <Association Name="FK_TEMPLATE_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.TEMPLATE" Role="TEMPLATE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="TEMPLATE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TEMPLATE_EMAIL_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.TEMPLATE_EMAIL" Role="TEMPLATE_EMAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="TEMPLATE_EMAIL">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TEMPLATE_SMS_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.TEMPLATE_SMS" Role="TEMPLATE_SMS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="TEMPLATE_SMS">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CATEGORIA_AGENDA_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.CATEGORIA_AGENDA" Role="CATEGORIA_AGENDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="CATEGORIA_AGENDA">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CATEGORIA_FORNECEDOR_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.CATEGORIA_FORNECEDOR" Role="CATEGORIA_FORNECEDOR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="CATEGORIA_FORNECEDOR">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CATEGORIA_USUARIO_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.CATEGORIA_USUARIO" Role="CATEGORIA_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="CATEGORIA_USUARIO">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TIPO_TAREFA_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.TIPO_TAREFA" Role="TIPO_TAREFA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="TIPO_TAREFA">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CATEGORIA_NOTIFICACAO_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.CATEGORIA_NOTIFICACAO" Role="CATEGORIA_NOTIFICACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="CATEGORIA_NOTIFICACAO">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FORMA_PAGTO_RECTO_ASSINANTE">
-          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.FORMA_PAGTO_RECTO" Role="FORMA_PAGTO_RECTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ASSINANTE">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Principal>
-            <Dependent Role="FORMA_PAGTO_RECTO">
-              <PropertyRef Name="ASSI_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PESSOA_EXTERNA_ANEXO">
-          <Key>
-            <PropertyRef Name="PEAX_CD_ID" />
-          </Key>
-          <Property Name="PEAX_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PEEX_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="PEAX_NM_TITULO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="PEAX_DT_ANEXO" Type="DateTime" Precision="0" />
-          <Property Name="PEAX_IN_TIPO" Type="Int32" />
-          <Property Name="PEAX_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="PEAX_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA_ANEXO" ToRole="PESSOA_EXTERNA" />
-        </EntityType>
-        <EntityType Name="PESSOA_EXTERNA_ANOTACAO">
-          <Key>
-            <PropertyRef Name="PEAN_CD_ID" />
-          </Key>
-          <Property Name="PEAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PEEX_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="PEAN_DT_ANOTACAO" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PEAN_TX_ANOTACAO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PEAN_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PESSOA_EXTERNA" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" FromRole="PESSOA_EXTERNA_ANOTACAO" ToRole="PESSOA_EXTERNA" />
-          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" FromRole="PESSOA_EXTERNA_ANOTACAO" ToRole="USUARIO" />
-        </EntityType>
-        <Association Name="FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA">
-          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA" Role="PESSOA_EXTERNA" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO" Role="PESSOA_EXTERNA_ANEXO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PESSOA_EXTERNA">
-              <PropertyRef Name="PEEX_CD_ID" />
-            </Principal>
-            <Dependent Role="PESSOA_EXTERNA_ANEXO">
-              <PropertyRef Name="PEEX_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA">
-          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA" Role="PESSOA_EXTERNA" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" Role="PESSOA_EXTERNA_ANOTACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PESSOA_EXTERNA">
-              <PropertyRef Name="PEEX_CD_ID" />
-            </Principal>
-            <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
-              <PropertyRef Name="PEEX_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
-          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" Role="PESSOA_EXTERNA_ANOTACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AGENDA_USUARIO">
-          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
-          <End Type="Db_PrecificacaoModel.AGENDA" Role="AGENDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="AGENDA">
-              <PropertyRef Name="AGEN_CD_USUARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="EMPRESA_ANEXO">
-          <Key>
-            <PropertyRef Name="EMAN_CD_ID" />
-          </Key>
-          <Property Name="EMAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EMPR_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="EMAN_NM_TITULO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="EMAN_IN_TIPO" Type="Int32" Nullable="false" />
-          <Property Name="EMAN_DT_ANEXO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EMAN_AQ_ARQUIVO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="EMAN_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EMPRESA" Relationship="Db_PrecificacaoModel.FK_EMPRESA_ANEXO_EMPRESA" FromRole="EMPRESA_ANEXO" ToRole="EMPRESA" />
-        </EntityType>
-        <Association Name="FK_EMPRESA_ANEXO_EMPRESA">
-          <End Type="Db_PrecificacaoModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
-          <End Type="Db_PrecificacaoModel.EMPRESA_ANEXO" Role="EMPRESA_ANEXO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPRESA">
-              <PropertyRef Name="EMPR_CD_ID" />
-            </Principal>
-            <Dependent Role="EMPRESA_ANEXO">
-              <PropertyRef Name="EMPR_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5076,8 +5077,6 @@
           <EntitySetMapping Name="AGENDA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.AGENDA">
               <MappingFragment StoreEntitySet="AGENDA">
-                <ScalarProperty Name="AGEN_LK_REUNIAO" ColumnName="AGEN_LK_REUNIAO" />
-                <ScalarProperty Name="AGEN_CD_USUARIO" ColumnName="AGEN_CD_USUARIO" />
                 <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
@@ -5089,6 +5088,8 @@
                 <ScalarProperty Name="AGEN_IN_STATUS" ColumnName="AGEN_IN_STATUS" />
                 <ScalarProperty Name="AGEN_TX_OBSERVACOES" ColumnName="AGEN_TX_OBSERVACOES" />
                 <ScalarProperty Name="AGEN_IN_ATIVO" ColumnName="AGEN_IN_ATIVO" />
+                <ScalarProperty Name="AGEN_CD_USUARIO" ColumnName="AGEN_CD_USUARIO" />
+                <ScalarProperty Name="AGEN_LK_REUNIAO" ColumnName="AGEN_LK_REUNIAO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5126,11 +5127,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CARGO_USUARIO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.CARGO_USUARIO">
+              <MappingFragment StoreEntitySet="CARGO_USUARIO">
+                <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="CARG_NM_NOME" ColumnName="CARG_NM_NOME" />
+                <ScalarProperty Name="CARG_IN_ATIVO" ColumnName="CARG_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CATEGORIA_AGENDA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CATEGORIA_AGENDA">
               <MappingFragment StoreEntitySet="CATEGORIA_AGENDA">
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CAAG_CD_ID" ColumnName="CAAG_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CAAG_NM_NOME" ColumnName="CAAG_NM_NOME" />
                 <ScalarProperty Name="CAAG_IN_ATIVO" ColumnName="CAAG_IN_ATIVO" />
               </MappingFragment>
@@ -5149,8 +5160,8 @@
           <EntitySetMapping Name="CATEGORIA_FORNECEDOR">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CATEGORIA_FORNECEDOR">
               <MappingFragment StoreEntitySet="CATEGORIA_FORNECEDOR">
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CAFO_CD_ID" ColumnName="CAFO_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CAFO_NM_NOME" ColumnName="CAFO_NM_NOME" />
                 <ScalarProperty Name="CAFO_IN_ATIVO" ColumnName="CAFO_IN_ATIVO" />
               </MappingFragment>
@@ -5159,8 +5170,8 @@
           <EntitySetMapping Name="CATEGORIA_NOTIFICACAO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CATEGORIA_NOTIFICACAO">
               <MappingFragment StoreEntitySet="CATEGORIA_NOTIFICACAO">
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CANO_CD_ID" ColumnName="CANO_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CANO_NM_NOME" ColumnName="CANO_NM_NOME" />
                 <ScalarProperty Name="CANO_IN_ATIVO" ColumnName="CANO_IN_ATIVO" />
               </MappingFragment>
@@ -5179,10 +5190,40 @@
           <EntitySetMapping Name="CATEGORIA_USUARIO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CATEGORIA_USUARIO">
               <MappingFragment StoreEntitySet="CATEGORIA_USUARIO">
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CAUS_CD_ID" ColumnName="CAUS_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CAUS_NM_NOME" ColumnName="CAUS_NM_NOME" />
                 <ScalarProperty Name="CAUS_IN_ATIVO" ColumnName="CAUS_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMISSAO_CARGO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.COMISSAO_CARGO">
+              <MappingFragment StoreEntitySet="COMISSAO_CARGO">
+                <ScalarProperty Name="COCA_CD_ID" ColumnName="COCA_CD_ID" />
+                <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
+                <ScalarProperty Name="COCA_NM_NOME" ColumnName="COCA_NM_NOME" />
+                <ScalarProperty Name="COCA_PC_PERCENTUAL" ColumnName="COCA_PC_PERCENTUAL" />
+                <ScalarProperty Name="COCA_IN_TIPO_COMISSAO" ColumnName="COCA_IN_TIPO_COMISSAO" />
+                <ScalarProperty Name="COCA_IN_ATIVO" ColumnName="COCA_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONFIGURACAO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.CONFIGURACAO">
+              <MappingFragment StoreEntitySet="CONFIGURACAO">
+                <ScalarProperty Name="CONF_CD_ID" ColumnName="CONF_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="CONF_NR_FALHAS_DIA" ColumnName="CONF_NR_FALHAS_DIA" />
+                <ScalarProperty Name="CONF_NM_HOST_SMTP" ColumnName="CONF_NM_HOST_SMTP" />
+                <ScalarProperty Name="CONF_NM_PORTA_SMTP" ColumnName="CONF_NM_PORTA_SMTP" />
+                <ScalarProperty Name="CONF_NM_EMAIL_EMISSOO" ColumnName="CONF_NM_EMAIL_EMISSOO" />
+                <ScalarProperty Name="CONF_NM_SENHA_EMISSOR" ColumnName="CONF_NM_SENHA_EMISSOR" />
+                <ScalarProperty Name="CONF_NR_REFRESH_DASH" ColumnName="CONF_NR_REFRESH_DASH" />
+                <ScalarProperty Name="CONF_NM_ARQUIVO_ALARME" ColumnName="CONF_NM_ARQUIVO_ALARME" />
+                <ScalarProperty Name="CONF_NR_REFRESH_NOTIFICACAO" ColumnName="CONF_NR_REFRESH_NOTIFICACAO" />
+                <ScalarProperty Name="CONF_SG_LOGIN_SMS" ColumnName="CONF_SG_LOGIN_SMS" />
+                <ScalarProperty Name="CONF_SG_SENHA_SMS" ColumnName="CONF_SG_SENHA_SMS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5273,19 +5314,32 @@
           <EntitySetMapping Name="EMPRESA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.EMPRESA">
               <MappingFragment StoreEntitySet="EMPRESA">
-                <ScalarProperty Name="EMPR_VL_IMPOSTO_MEI" ColumnName="EMPR_VL_IMPOSTO_MEI" />
-                <ScalarProperty Name="EMPR_IN_PAGA_COMISSAO" ColumnName="EMPR_IN_PAGA_COMISSAO" />
-                <ScalarProperty Name="EMPR_PC_ANTECIPACAO" ColumnName="EMPR_PC_ANTECIPACAO" />
-                <ScalarProperty Name="EMPR_NM_OUTRA_MAQUINA" ColumnName="EMPR_NM_OUTRA_MAQUINA" />
-                <ScalarProperty Name="EMPR_IN_OPERA_CARTAO" ColumnName="EMPR_IN_OPERA_CARTAO" />
-                <ScalarProperty Name="MAQN_CD_ID" ColumnName="MAQN_CD_ID" />
                 <ScalarProperty Name="EMPR_CD_ID" ColumnName="EMPR_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="RETR_CD_ID" ColumnName="RETR_CD_ID" />
+                <ScalarProperty Name="MAQN_CD_ID" ColumnName="MAQN_CD_ID" />
                 <ScalarProperty Name="EMPR_NM_NOME" ColumnName="EMPR_NM_NOME" />
                 <ScalarProperty Name="EMPR_VL_PATRIMONIO_LIQUIDO" ColumnName="EMPR_VL_PATRIMONIO_LIQUIDO" />
+                <ScalarProperty Name="EMPR_IN_OPERA_CARTAO" ColumnName="EMPR_IN_OPERA_CARTAO" />
+                <ScalarProperty Name="EMPR_NM_OUTRA_MAQUINA" ColumnName="EMPR_NM_OUTRA_MAQUINA" />
+                <ScalarProperty Name="EMPR_PC_ANTECIPACAO" ColumnName="EMPR_PC_ANTECIPACAO" />
+                <ScalarProperty Name="EMPR_IN_PAGA_COMISSAO" ColumnName="EMPR_IN_PAGA_COMISSAO" />
+                <ScalarProperty Name="EMPR_VL_IMPOSTO_MEI" ColumnName="EMPR_VL_IMPOSTO_MEI" />
                 <ScalarProperty Name="EMPR_DT_CADASTRO" ColumnName="EMPR_DT_CADASTRO" />
                 <ScalarProperty Name="EMPR_IN_ATIVO" ColumnName="EMPR_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA_ANEXO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.EMPRESA_ANEXO">
+              <MappingFragment StoreEntitySet="EMPRESA_ANEXO">
+                <ScalarProperty Name="EMAN_CD_ID" ColumnName="EMAN_CD_ID" />
+                <ScalarProperty Name="EMPR_CD_ID" ColumnName="EMPR_CD_ID" />
+                <ScalarProperty Name="EMAN_NM_TITULO" ColumnName="EMAN_NM_TITULO" />
+                <ScalarProperty Name="EMAN_IN_TIPO" ColumnName="EMAN_IN_TIPO" />
+                <ScalarProperty Name="EMAN_DT_ANEXO" ColumnName="EMAN_DT_ANEXO" />
+                <ScalarProperty Name="EMAN_AQ_ARQUIVO" ColumnName="EMAN_AQ_ARQUIVO" />
+                <ScalarProperty Name="EMAN_IN_ATIVO" ColumnName="EMAN_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5323,8 +5377,8 @@
           <EntitySetMapping Name="FORMA_PAGTO_RECTO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.FORMA_PAGTO_RECTO">
               <MappingFragment StoreEntitySet="FORMA_PAGTO_RECTO">
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="FOPR_CD_ID" ColumnName="FOPR_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="EMPR_CD_ID" ColumnName="EMPR_CD_ID" />
                 <ScalarProperty Name="COBA_CD_ID" ColumnName="COBA_CD_ID" />
                 <ScalarProperty Name="FOPA_IN_TIPO_FORMA" ColumnName="FOPA_IN_TIPO_FORMA" />
@@ -5419,7 +5473,6 @@
           <EntitySetMapping Name="LOG">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.LOG">
               <MappingFragment StoreEntitySet="LOG">
-                <ScalarProperty Name="LOG_IN_ATIVO" ColumnName="LOG_IN_ATIVO" />
                 <ScalarProperty Name="LOG_CD_ID" ColumnName="LOG_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
@@ -5427,13 +5480,27 @@
                 <ScalarProperty Name="LOG_NM_OPERACAO" ColumnName="LOG_NM_OPERACAO" />
                 <ScalarProperty Name="LOG_TX_TEXTO" ColumnName="LOG_TX_TEXTO" />
                 <ScalarProperty Name="LOG_TX_TEXTO_ANTES" ColumnName="LOG_TX_TEXTO_ANTES" />
+                <ScalarProperty Name="LOG_IN_ATIVO" ColumnName="LOG_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAQUINA">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.MAQUINA">
+              <MappingFragment StoreEntitySet="MAQUINA">
+                <ScalarProperty Name="MAQN_CD_ID" ColumnName="MAQN_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="MAQN_NM_NOME" ColumnName="MAQN_NM_NOME" />
+                <ScalarProperty Name="MAQN_NM_PROVEDOR" ColumnName="MAQN_NM_PROVEDOR" />
+                <ScalarProperty Name="MAQN_PC_DEBITO" ColumnName="MAQN_PC_DEBITO" />
+                <ScalarProperty Name="MAQN_PC_CREDITO" ColumnName="MAQN_PC_CREDITO" />
+                <ScalarProperty Name="MAQN_DT_CADASTRO" ColumnName="MAQN_DT_CADASTRO" />
+                <ScalarProperty Name="MAQN_IN_ATIVO" ColumnName="MAQN_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NOTICIA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.NOTICIA">
               <MappingFragment StoreEntitySet="NOTICIA">
-                <ScalarProperty Name="NOTC_TX_NOTICIA" ColumnName="NOTC_TX_NOTICIA" />
                 <ScalarProperty Name="NOTC_CD_ID" ColumnName="NOTC_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="NOTC_DT_EMISSAO" ColumnName="NOTC_DT_EMISSAO" />
@@ -5442,6 +5509,7 @@
                 <ScalarProperty Name="NOTC_NM_AUTOR" ColumnName="NOTC_NM_AUTOR" />
                 <ScalarProperty Name="NOTC_DT_DATA_AUTOR" ColumnName="NOTC_DT_DATA_AUTOR" />
                 <ScalarProperty Name="NOTC_TX_TEXTO" ColumnName="NOTC_TX_TEXTO" />
+                <ScalarProperty Name="NOTC_TX_NOTICIA" ColumnName="NOTC_TX_NOTICIA" />
                 <ScalarProperty Name="NOTC_LK_LINK" ColumnName="NOTC_LK_LINK" />
                 <ScalarProperty Name="NOTC_NM_ORIGEM" ColumnName="NOTC_NM_ORIGEM" />
                 <ScalarProperty Name="NOTC_AQ_FOTO" ColumnName="NOTC_AQ_FOTO" />
@@ -5465,8 +5533,6 @@
           <EntitySetMapping Name="NOTIFICACAO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.NOTIFICACAO">
               <MappingFragment StoreEntitySet="NOTIFICACAO">
-                <ScalarProperty Name="NOTC_IN_NIVEL" ColumnName="NOTC_IN_NIVEL" />
-                <ScalarProperty Name="NOTC_TX_NOTIFICACAO" ColumnName="NOTC_TX_NOTIFICACAO" />
                 <ScalarProperty Name="NOTC_CD_ID" ColumnName="NOTC_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
@@ -5475,10 +5541,12 @@
                 <ScalarProperty Name="NOTC_DT_VALIDADE" ColumnName="NOTC_DT_VALIDADE" />
                 <ScalarProperty Name="NOTC_NM_TITULO" ColumnName="NOTC_NM_TITULO" />
                 <ScalarProperty Name="NOTC_TX_TEXTO" ColumnName="NOTC_TX_TEXTO" />
+                <ScalarProperty Name="NOTC_TX_NOTIFICACAO" ColumnName="NOTC_TX_NOTIFICACAO" />
                 <ScalarProperty Name="NOTC_IN_VISTA" ColumnName="NOTC_IN_VISTA" />
                 <ScalarProperty Name="NOTC_DT_VISTA" ColumnName="NOTC_DT_VISTA" />
                 <ScalarProperty Name="NOTC_IN_ATIVO" ColumnName="NOTC_IN_ATIVO" />
                 <ScalarProperty Name="USUARIOUSUA_CD_ID" ColumnName="USUARIOUSUA_CD_ID" />
+                <ScalarProperty Name="NOTC_IN_NIVEL" ColumnName="NOTC_IN_NIVEL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5492,6 +5560,18 @@
                 <ScalarProperty Name="NOAN_IN_TIPO" ColumnName="NOAN_IN_TIPO" />
                 <ScalarProperty Name="NOAN_AQ_ARQUIVO" ColumnName="NOAN_AQ_ARQUIVO" />
                 <ScalarProperty Name="NOAN_IN_ATIVO" ColumnName="NOAN_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OUTRO_CUSTO_VARIAVEL">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.OUTRO_CUSTO_VARIAVEL">
+              <MappingFragment StoreEntitySet="OUTRO_CUSTO_VARIAVEL">
+                <ScalarProperty Name="OUCV_CD_ID" ColumnName="OUCV_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="OUCV_NM_CUSTO_VARIAVEL" ColumnName="OUCV_NM_CUSTO_VARIAVEL" />
+                <ScalarProperty Name="OUCV_PC_PERECNTUAL" ColumnName="OUCV_PC_PERECNTUAL" />
+                <ScalarProperty Name="OUCV_DT_CADASTRO" ColumnName="OUCV_DT_CADASTRO" />
+                <ScalarProperty Name="OUCV_IN_ATIVO" ColumnName="OUCV_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5513,6 +5593,65 @@
                 <ScalarProperty Name="PETA_NM_NOME" ColumnName="PETA_NM_NOME" />
                 <ScalarProperty Name="PETA_NR_DIAS" ColumnName="PETA_NR_DIAS" />
                 <ScalarProperty Name="PETA_IN_ATIVO" ColumnName="PETA_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PESSOA_EXTERNA">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PESSOA_EXTERNA">
+              <MappingFragment StoreEntitySet="PESSOA_EXTERNA">
+                <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
+                <ScalarProperty Name="PEEX_NM_NOME" ColumnName="PEEX_NM_NOME" />
+                <ScalarProperty Name="PEEX_NR_CPF" ColumnName="PEEX_NR_CPF" />
+                <ScalarProperty Name="PEEX_NR_RG" ColumnName="PEEX_NR_RG" />
+                <ScalarProperty Name="PEES_EM_EMAIL" ColumnName="PEES_EM_EMAIL" />
+                <ScalarProperty Name="PEEX_NR_TELEFONE" ColumnName="PEEX_NR_TELEFONE" />
+                <ScalarProperty Name="PEEX_NR_CELULAR" ColumnName="PEEX_NR_CELULAR" />
+                <ScalarProperty Name="PEEX_DT_CADASTRO" ColumnName="PEEX_DT_CADASTRO" />
+                <ScalarProperty Name="PEEX_IN_ATIVO" ColumnName="PEEX_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PESSOA_EXTERNA_ANEXO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO">
+              <MappingFragment StoreEntitySet="PESSOA_EXTERNA_ANEXO">
+                <ScalarProperty Name="PEAX_CD_ID" ColumnName="PEAX_CD_ID" />
+                <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
+                <ScalarProperty Name="PEAX_NM_TITULO" ColumnName="PEAX_NM_TITULO" />
+                <ScalarProperty Name="PEAX_DT_ANEXO" ColumnName="PEAX_DT_ANEXO" />
+                <ScalarProperty Name="PEAX_IN_TIPO" ColumnName="PEAX_IN_TIPO" />
+                <ScalarProperty Name="PEAX_AQ_ARQUIVO" ColumnName="PEAX_AQ_ARQUIVO" />
+                <ScalarProperty Name="PEAX_IN_ATIVO" ColumnName="PEAX_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PESSOA_EXTERNA_ANOTACAO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO">
+              <MappingFragment StoreEntitySet="PESSOA_EXTERNA_ANOTACAO">
+                <ScalarProperty Name="PEAN_CD_ID" ColumnName="PEAN_CD_ID" />
+                <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="PEAN_DT_ANOTACAO" ColumnName="PEAN_DT_ANOTACAO" />
+                <ScalarProperty Name="PEAN_TX_ANOTACAO" ColumnName="PEAN_TX_ANOTACAO" />
+                <ScalarProperty Name="PEAN_IN_ATIVO" ColumnName="PEAN_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLATAFORMA_ENTREGA">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PLATAFORMA_ENTREGA">
+              <MappingFragment StoreEntitySet="PLATAFORMA_ENTREGA">
+                <ScalarProperty Name="PLEN_CD_ID" ColumnName="PLEN_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="PLEN_NM_NOME" ColumnName="PLEN_NM_NOME" />
+                <ScalarProperty Name="PLEN_VL_FIXO" ColumnName="PLEN_VL_FIXO" />
+                <ScalarProperty Name="PLEN_VL_LIMITE_FIXO" ColumnName="PLEN_VL_LIMITE_FIXO" />
+                <ScalarProperty Name="PLEN_PC_VENDA" ColumnName="PLEN_PC_VENDA" />
+                <ScalarProperty Name="PLEN_VL_TAXA_CARTAO" ColumnName="PLEN_VL_TAXA_CARTAO" />
+                <ScalarProperty Name="PLEN_IN_ANTECIPACAO" ColumnName="PLEN_IN_ANTECIPACAO" />
+                <ScalarProperty Name="PLEN_PC_ANTECIPACAO" ColumnName="PLEN_PC_ANTECIPACAO" />
+                <ScalarProperty Name="PLEN_DT_CADASTRO" ColumnName="PLEN_DT_CADASTRO" />
+                <ScalarProperty Name="PLEN_IN_ATIVO" ColumnName="PLEN_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5704,6 +5843,59 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TEMPLATE">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.TEMPLATE">
+              <MappingFragment StoreEntitySet="TEMPLATE">
+                <ScalarProperty Name="TEMP_CD_ID" ColumnName="TEMP_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="TEMP_SG_SIGLA" ColumnName="TEMP_SG_SIGLA" />
+                <ScalarProperty Name="TEMP_IN_TIPO" ColumnName="TEMP_IN_TIPO" />
+                <ScalarProperty Name="TEMP_NM_NOME" ColumnName="TEMP_NM_NOME" />
+                <ScalarProperty Name="TEMP_TX_CONTEUDO" ColumnName="TEMP_TX_CONTEUDO" />
+                <ScalarProperty Name="TEMP_AQ_ARQUIVO" ColumnName="TEMP_AQ_ARQUIVO" />
+                <ScalarProperty Name="TEMP_IN_ATIVO" ColumnName="TEMP_IN_ATIVO" />
+                <ScalarProperty Name="TEMP_TX_CONTEUDO_LIMPO" ColumnName="TEMP_TX_CONTEUDO_LIMPO" />
+                <ScalarProperty Name="TEMP_TX_CABECALHO" ColumnName="TEMP_TX_CABECALHO" />
+                <ScalarProperty Name="TEMP_TX_CORPO" ColumnName="TEMP_TX_CORPO" />
+                <ScalarProperty Name="TEMP_TX_DADOS" ColumnName="TEMP_TX_DADOS" />
+                <ScalarProperty Name="TEMP_DT_CRIACAO" ColumnName="TEMP_DT_CRIACAO" />
+                <ScalarProperty Name="TEMP_IN_EDITAVEL" ColumnName="TEMP_IN_EDITAVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPLATE_EMAIL">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.TEMPLATE_EMAIL">
+              <MappingFragment StoreEntitySet="TEMPLATE_EMAIL">
+                <ScalarProperty Name="TEEM_CD_ID" ColumnName="TEEM_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="TEEM_NM_NOME" ColumnName="TEEM_NM_NOME" />
+                <ScalarProperty Name="TEEM_SG_SIGLA" ColumnName="TEEM_SG_SIGLA" />
+                <ScalarProperty Name="TEEM_LK_LINK" ColumnName="TEEM_LK_LINK" />
+                <ScalarProperty Name="TEEM_IN_ATIVO" ColumnName="TEEM_IN_ATIVO" />
+                <ScalarProperty Name="TEEM_TX_CABECALHO" ColumnName="TEEM_TX_CABECALHO" />
+                <ScalarProperty Name="TEEM_TX_CORPO" ColumnName="TEEM_TX_CORPO" />
+                <ScalarProperty Name="TEEM_TX_DADOS" ColumnName="TEEM_TX_DADOS" />
+                <ScalarProperty Name="TEEM_AQ_ARQUIVO" ColumnName="TEEM_AQ_ARQUIVO" />
+                <ScalarProperty Name="TEEM_TX_COMPLETO" ColumnName="TEEM_TX_COMPLETO" />
+                <ScalarProperty Name="TEEM_IN_HTML" ColumnName="TEEM_IN_HTML" />
+                <ScalarProperty Name="TEEM_IN_EDITAVEL" ColumnName="TEEM_IN_EDITAVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPLATE_SMS">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.TEMPLATE_SMS">
+              <MappingFragment StoreEntitySet="TEMPLATE_SMS">
+                <ScalarProperty Name="TSMS_CD_ID" ColumnName="TSMS_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="TSMS_NM_NOME" ColumnName="TSMS_NM_NOME" />
+                <ScalarProperty Name="TSMS_SG_SIGLA" ColumnName="TSMS_SG_SIGLA" />
+                <ScalarProperty Name="TSMS_TX_CORPO" ColumnName="TSMS_TX_CORPO" />
+                <ScalarProperty Name="TSMS_LK_LINK" ColumnName="TSMS_LK_LINK" />
+                <ScalarProperty Name="TSMS_IN_ATIVO" ColumnName="TSMS_IN_ATIVO" />
+                <ScalarProperty Name="TSMS_IN_EDITAVEL" ColumnName="TSMS_IN_EDITAVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TIPO_CONTA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.TIPO_CONTA">
               <MappingFragment StoreEntitySet="TIPO_CONTA">
@@ -5724,8 +5916,8 @@
           <EntitySetMapping Name="TIPO_TAREFA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.TIPO_TAREFA">
               <MappingFragment StoreEntitySet="TIPO_TAREFA">
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="TITR_CD_ID" ColumnName="TITR_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="TITR_NM_NOME" ColumnName="TITR_NM_NOME" />
                 <ScalarProperty Name="TITR_IN_ATIVO" ColumnName="TITR_IN_ATIVO" />
               </MappingFragment>
@@ -5743,9 +5935,9 @@
           <EntitySetMapping Name="UNIDADE">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.UNIDADE">
               <MappingFragment StoreEntitySet="UNIDADE">
-                <ScalarProperty Name="UNID_SG_SIGLA" ColumnName="UNID_SG_SIGLA" />
                 <ScalarProperty Name="UNID_CD_ID" ColumnName="UNID_CD_ID" />
                 <ScalarProperty Name="UNID_NM_NOME" ColumnName="UNID_NM_NOME" />
+                <ScalarProperty Name="UNID_SG_SIGLA" ColumnName="UNID_SG_SIGLA" />
                 <ScalarProperty Name="UNID_IN_ATIVO" ColumnName="UNID_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5753,18 +5945,18 @@
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
-                <ScalarProperty Name="USUA_NR_TELEFONE" ColumnName="USUA_NR_TELEFONE" />
-                <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="PERF_CD_ID" ColumnName="PERF_CD_ID" />
                 <ScalarProperty Name="CAUS_CD_ID" ColumnName="CAUS_CD_ID" />
+                <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
                 <ScalarProperty Name="USUA_AQ_FOTO" ColumnName="USUA_AQ_FOTO" />
                 <ScalarProperty Name="USUA_NM_NOME" ColumnName="USUA_NM_NOME" />
                 <ScalarProperty Name="USUA_NM_LOGIN" ColumnName="USUA_NM_LOGIN" />
                 <ScalarProperty Name="USUA_EM_EMAIL" ColumnName="USUA_EM_EMAIL" />
                 <ScalarProperty Name="USUA_NR_CPF" ColumnName="USUA_NR_CPF" />
                 <ScalarProperty Name="USUA_NR_RG" ColumnName="USUA_NR_RG" />
+                <ScalarProperty Name="USUA_NR_TELEFONE" ColumnName="USUA_NR_TELEFONE" />
                 <ScalarProperty Name="USUA_NR_CELULAR" ColumnName="USUA_NR_CELULAR" />
                 <ScalarProperty Name="USUA_NM_SENHA" ColumnName="USUA_NM_SENHA" />
                 <ScalarProperty Name="USUA_NM_SENHA_CONFIRMA" ColumnName="USUA_NM_SENHA_CONFIRMA" />
@@ -5808,197 +6000,6 @@
                 <ScalarProperty Name="USAN_IN_AUTOR" ColumnName="USAN_IN_AUTOR" />
                 <ScalarProperty Name="USAN_TX_ANOTACAO" ColumnName="USAN_TX_ANOTACAO" />
                 <ScalarProperty Name="USAN_IN_ATIVO" ColumnName="USAN_IN_ATIVO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CARGO_USUARIO">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.CARGO_USUARIO">
-              <MappingFragment StoreEntitySet="CARGO_USUARIO">
-                <ScalarProperty Name="CARG_IN_ATIVO" ColumnName="CARG_IN_ATIVO" />
-                <ScalarProperty Name="CARG_NM_NOME" ColumnName="CARG_NM_NOME" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="COMISSAO_CARGO">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.COMISSAO_CARGO">
-              <MappingFragment StoreEntitySet="COMISSAO_CARGO">
-                <ScalarProperty Name="COCA_IN_ATIVO" ColumnName="COCA_IN_ATIVO" />
-                <ScalarProperty Name="COCA_IN_TIPO_COMISSAO" ColumnName="COCA_IN_TIPO_COMISSAO" />
-                <ScalarProperty Name="COCA_PC_PERCENTUAL" ColumnName="COCA_PC_PERCENTUAL" />
-                <ScalarProperty Name="COCA_NM_NOME" ColumnName="COCA_NM_NOME" />
-                <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
-                <ScalarProperty Name="COCA_CD_ID" ColumnName="COCA_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MAQUINA">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.MAQUINA">
-              <MappingFragment StoreEntitySet="MAQUINA">
-                <ScalarProperty Name="MAQN_IN_ATIVO" ColumnName="MAQN_IN_ATIVO" />
-                <ScalarProperty Name="MAQN_DT_CADASTRO" ColumnName="MAQN_DT_CADASTRO" />
-                <ScalarProperty Name="MAQN_PC_CREDITO" ColumnName="MAQN_PC_CREDITO" />
-                <ScalarProperty Name="MAQN_PC_DEBITO" ColumnName="MAQN_PC_DEBITO" />
-                <ScalarProperty Name="MAQN_NM_PROVEDOR" ColumnName="MAQN_NM_PROVEDOR" />
-                <ScalarProperty Name="MAQN_NM_NOME" ColumnName="MAQN_NM_NOME" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="MAQN_CD_ID" ColumnName="MAQN_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OUTRO_CUSTO_VARIAVEL">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.OUTRO_CUSTO_VARIAVEL">
-              <MappingFragment StoreEntitySet="OUTRO_CUSTO_VARIAVEL">
-                <ScalarProperty Name="OUCV_IN_ATIVO" ColumnName="OUCV_IN_ATIVO" />
-                <ScalarProperty Name="OUCV_DT_CADASTRO" ColumnName="OUCV_DT_CADASTRO" />
-                <ScalarProperty Name="OUCV_PC_PERECNTUAL" ColumnName="OUCV_PC_PERECNTUAL" />
-                <ScalarProperty Name="OUCV_NM_CUSTO_VARIAVEL" ColumnName="OUCV_NM_CUSTO_VARIAVEL" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="OUCV_CD_ID" ColumnName="OUCV_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PESSOA_EXTERNA">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PESSOA_EXTERNA">
-              <MappingFragment StoreEntitySet="PESSOA_EXTERNA">
-                <ScalarProperty Name="PEEX_IN_ATIVO" ColumnName="PEEX_IN_ATIVO" />
-                <ScalarProperty Name="PEEX_DT_CADASTRO" ColumnName="PEEX_DT_CADASTRO" />
-                <ScalarProperty Name="PEEX_NR_CELULAR" ColumnName="PEEX_NR_CELULAR" />
-                <ScalarProperty Name="PEEX_NR_TELEFONE" ColumnName="PEEX_NR_TELEFONE" />
-                <ScalarProperty Name="PEES_EM_EMAIL" ColumnName="PEES_EM_EMAIL" />
-                <ScalarProperty Name="PEEX_NR_RG" ColumnName="PEEX_NR_RG" />
-                <ScalarProperty Name="PEEX_NR_CPF" ColumnName="PEEX_NR_CPF" />
-                <ScalarProperty Name="PEEX_NM_NOME" ColumnName="PEEX_NM_NOME" />
-                <ScalarProperty Name="CARG_CD_ID" ColumnName="CARG_CD_ID" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PLATAFORMA_ENTREGA">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PLATAFORMA_ENTREGA">
-              <MappingFragment StoreEntitySet="PLATAFORMA_ENTREGA">
-                <ScalarProperty Name="PLEN_IN_ATIVO" ColumnName="PLEN_IN_ATIVO" />
-                <ScalarProperty Name="PLEN_DT_CADASTRO" ColumnName="PLEN_DT_CADASTRO" />
-                <ScalarProperty Name="PLEN_PC_ANTECIPACAO" ColumnName="PLEN_PC_ANTECIPACAO" />
-                <ScalarProperty Name="PLEN_IN_ANTECIPACAO" ColumnName="PLEN_IN_ANTECIPACAO" />
-                <ScalarProperty Name="PLEN_VL_TAXA_CARTAO" ColumnName="PLEN_VL_TAXA_CARTAO" />
-                <ScalarProperty Name="PLEN_PC_VENDA" ColumnName="PLEN_PC_VENDA" />
-                <ScalarProperty Name="PLEN_VL_LIMITE_FIXO" ColumnName="PLEN_VL_LIMITE_FIXO" />
-                <ScalarProperty Name="PLEN_VL_FIXO" ColumnName="PLEN_VL_FIXO" />
-                <ScalarProperty Name="PLEN_NM_NOME" ColumnName="PLEN_NM_NOME" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="PLEN_CD_ID" ColumnName="PLEN_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CONFIGURACAO">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.CONFIGURACAO">
-              <MappingFragment StoreEntitySet="CONFIGURACAO">
-                <ScalarProperty Name="CONF_SG_SENHA_SMS" ColumnName="CONF_SG_SENHA_SMS" />
-                <ScalarProperty Name="CONF_SG_LOGIN_SMS" ColumnName="CONF_SG_LOGIN_SMS" />
-                <ScalarProperty Name="CONF_NR_REFRESH_NOTIFICACAO" ColumnName="CONF_NR_REFRESH_NOTIFICACAO" />
-                <ScalarProperty Name="CONF_NM_ARQUIVO_ALARME" ColumnName="CONF_NM_ARQUIVO_ALARME" />
-                <ScalarProperty Name="CONF_NR_REFRESH_DASH" ColumnName="CONF_NR_REFRESH_DASH" />
-                <ScalarProperty Name="CONF_NM_SENHA_EMISSOR" ColumnName="CONF_NM_SENHA_EMISSOR" />
-                <ScalarProperty Name="CONF_NM_EMAIL_EMISSOO" ColumnName="CONF_NM_EMAIL_EMISSOO" />
-                <ScalarProperty Name="CONF_NM_PORTA_SMTP" ColumnName="CONF_NM_PORTA_SMTP" />
-                <ScalarProperty Name="CONF_NM_HOST_SMTP" ColumnName="CONF_NM_HOST_SMTP" />
-                <ScalarProperty Name="CONF_NR_FALHAS_DIA" ColumnName="CONF_NR_FALHAS_DIA" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="CONF_CD_ID" ColumnName="CONF_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TEMPLATE">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.TEMPLATE">
-              <MappingFragment StoreEntitySet="TEMPLATE">
-                <ScalarProperty Name="TEMP_IN_EDITAVEL" ColumnName="TEMP_IN_EDITAVEL" />
-                <ScalarProperty Name="TEMP_DT_CRIACAO" ColumnName="TEMP_DT_CRIACAO" />
-                <ScalarProperty Name="TEMP_TX_DADOS" ColumnName="TEMP_TX_DADOS" />
-                <ScalarProperty Name="TEMP_TX_CORPO" ColumnName="TEMP_TX_CORPO" />
-                <ScalarProperty Name="TEMP_TX_CABECALHO" ColumnName="TEMP_TX_CABECALHO" />
-                <ScalarProperty Name="TEMP_TX_CONTEUDO_LIMPO" ColumnName="TEMP_TX_CONTEUDO_LIMPO" />
-                <ScalarProperty Name="TEMP_IN_ATIVO" ColumnName="TEMP_IN_ATIVO" />
-                <ScalarProperty Name="TEMP_AQ_ARQUIVO" ColumnName="TEMP_AQ_ARQUIVO" />
-                <ScalarProperty Name="TEMP_TX_CONTEUDO" ColumnName="TEMP_TX_CONTEUDO" />
-                <ScalarProperty Name="TEMP_NM_NOME" ColumnName="TEMP_NM_NOME" />
-                <ScalarProperty Name="TEMP_IN_TIPO" ColumnName="TEMP_IN_TIPO" />
-                <ScalarProperty Name="TEMP_SG_SIGLA" ColumnName="TEMP_SG_SIGLA" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="TEMP_CD_ID" ColumnName="TEMP_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TEMPLATE_EMAIL">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.TEMPLATE_EMAIL">
-              <MappingFragment StoreEntitySet="TEMPLATE_EMAIL">
-                <ScalarProperty Name="TEEM_IN_EDITAVEL" ColumnName="TEEM_IN_EDITAVEL" />
-                <ScalarProperty Name="TEEM_IN_HTML" ColumnName="TEEM_IN_HTML" />
-                <ScalarProperty Name="TEEM_TX_COMPLETO" ColumnName="TEEM_TX_COMPLETO" />
-                <ScalarProperty Name="TEEM_AQ_ARQUIVO" ColumnName="TEEM_AQ_ARQUIVO" />
-                <ScalarProperty Name="TEEM_TX_DADOS" ColumnName="TEEM_TX_DADOS" />
-                <ScalarProperty Name="TEEM_TX_CORPO" ColumnName="TEEM_TX_CORPO" />
-                <ScalarProperty Name="TEEM_TX_CABECALHO" ColumnName="TEEM_TX_CABECALHO" />
-                <ScalarProperty Name="TEEM_IN_ATIVO" ColumnName="TEEM_IN_ATIVO" />
-                <ScalarProperty Name="TEEM_LK_LINK" ColumnName="TEEM_LK_LINK" />
-                <ScalarProperty Name="TEEM_SG_SIGLA" ColumnName="TEEM_SG_SIGLA" />
-                <ScalarProperty Name="TEEM_NM_NOME" ColumnName="TEEM_NM_NOME" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="TEEM_CD_ID" ColumnName="TEEM_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TEMPLATE_SMS">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.TEMPLATE_SMS">
-              <MappingFragment StoreEntitySet="TEMPLATE_SMS">
-                <ScalarProperty Name="TSMS_IN_EDITAVEL" ColumnName="TSMS_IN_EDITAVEL" />
-                <ScalarProperty Name="TSMS_IN_ATIVO" ColumnName="TSMS_IN_ATIVO" />
-                <ScalarProperty Name="TSMS_LK_LINK" ColumnName="TSMS_LK_LINK" />
-                <ScalarProperty Name="TSMS_TX_CORPO" ColumnName="TSMS_TX_CORPO" />
-                <ScalarProperty Name="TSMS_SG_SIGLA" ColumnName="TSMS_SG_SIGLA" />
-                <ScalarProperty Name="TSMS_NM_NOME" ColumnName="TSMS_NM_NOME" />
-                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
-                <ScalarProperty Name="TSMS_CD_ID" ColumnName="TSMS_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PESSOA_EXTERNA_ANEXO">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO">
-              <MappingFragment StoreEntitySet="PESSOA_EXTERNA_ANEXO">
-                <ScalarProperty Name="PEAX_IN_ATIVO" ColumnName="PEAX_IN_ATIVO" />
-                <ScalarProperty Name="PEAX_AQ_ARQUIVO" ColumnName="PEAX_AQ_ARQUIVO" />
-                <ScalarProperty Name="PEAX_IN_TIPO" ColumnName="PEAX_IN_TIPO" />
-                <ScalarProperty Name="PEAX_DT_ANEXO" ColumnName="PEAX_DT_ANEXO" />
-                <ScalarProperty Name="PEAX_NM_TITULO" ColumnName="PEAX_NM_TITULO" />
-                <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
-                <ScalarProperty Name="PEAX_CD_ID" ColumnName="PEAX_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PESSOA_EXTERNA_ANOTACAO">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO">
-              <MappingFragment StoreEntitySet="PESSOA_EXTERNA_ANOTACAO">
-                <ScalarProperty Name="PEAN_IN_ATIVO" ColumnName="PEAN_IN_ATIVO" />
-                <ScalarProperty Name="PEAN_TX_ANOTACAO" ColumnName="PEAN_TX_ANOTACAO" />
-                <ScalarProperty Name="PEAN_DT_ANOTACAO" ColumnName="PEAN_DT_ANOTACAO" />
-                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
-                <ScalarProperty Name="PEEX_CD_ID" ColumnName="PEEX_CD_ID" />
-                <ScalarProperty Name="PEAN_CD_ID" ColumnName="PEAN_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EMPRESA_ANEXO">
-            <EntityTypeMapping TypeName="Db_PrecificacaoModel.EMPRESA_ANEXO">
-              <MappingFragment StoreEntitySet="EMPRESA_ANEXO">
-                <ScalarProperty Name="EMAN_IN_ATIVO" ColumnName="EMAN_IN_ATIVO" />
-                <ScalarProperty Name="EMAN_AQ_ARQUIVO" ColumnName="EMAN_AQ_ARQUIVO" />
-                <ScalarProperty Name="EMAN_DT_ANEXO" ColumnName="EMAN_DT_ANEXO" />
-                <ScalarProperty Name="EMAN_IN_TIPO" ColumnName="EMAN_IN_TIPO" />
-                <ScalarProperty Name="EMAN_NM_TITULO" ColumnName="EMAN_NM_TITULO" />
-                <ScalarProperty Name="EMPR_CD_ID" ColumnName="EMPR_CD_ID" />
-                <ScalarProperty Name="EMAN_CD_ID" ColumnName="EMAN_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

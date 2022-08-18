@@ -28,12 +28,12 @@ namespace EntitiesServices.Model
         public string NOTC_NM_AUTOR { get; set; }
         public Nullable<System.DateTime> NOTC_DT_DATA_AUTOR { get; set; }
         public byte[] NOTC_TX_TEXTO { get; set; }
+        public string NOTC_TX_NOTICIA { get; set; }
         public string NOTC_LK_LINK { get; set; }
         public string NOTC_NM_ORIGEM { get; set; }
         public string NOTC_AQ_FOTO { get; set; }
         public int NOTC_NR_ACESSOS { get; set; }
         public int NOTC_IN_ATIVO { get; set; }
-        public string NOTC_TX_NOTICIA { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

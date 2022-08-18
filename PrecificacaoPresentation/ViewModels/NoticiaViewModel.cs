@@ -36,6 +36,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public int NOTC_IN_ATIVO { get; set; }
         public string NOTC_AQ_FOTO { get; set; }
         public string NOTC_NM_ORIGEM { get; set; }
+        public string NOTC_TX_NOTICIA { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTICIA_COMENTARIO> NOTICIA_COMENTARIO { get; set; }
