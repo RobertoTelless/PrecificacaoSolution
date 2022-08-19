@@ -44,6 +44,11 @@ namespace ApplicationServices.Services
             return _usuarioService.GetItemById(id);
         }
 
+        public USUARIO CheckExist(USUARIO usuario, Int32 idAss)
+        {
+            return _usuarioService.CheckExist(usuario, idAss);
+        }
+
         public List<USUARIO> GetAllUsuarios(Int32 idAss)
         {
             return _usuarioService.GetAllUsuarios(idAss);
@@ -121,6 +126,12 @@ namespace ApplicationServices.Services
                     return 4;
                 }
 
+                // Verifica existencia CPF
+                if (_usuarioService.CheckExist(usuario, usuarioLogado.ASSI_CD_ID) != null)
+                {
+                    return 6;
+                }
+
                 //Completa campos de usuários
                 //usuario.USUA_NM_SENHA = Cryptography.Encode(usuario.USUA_NM_SENHA);
                 usuario.USUA_IN_BLOQUEADO = 0;
@@ -134,6 +145,7 @@ namespace ApplicationServices.Services
                 usuario.USUA_DT_ACESSO = DateTime.Now;
                 usuario.USUA_DT_CADASTRO = DateTime.Today.Date;
                 usuario.USUA_IN_ATIVO = 1;
+                usuario.CAUS_CD_ID = 1;
                 usuario.USUA_DT_ULTIMA_FALHA = DateTime.Now;
                 usuario.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
 
@@ -194,6 +206,7 @@ namespace ApplicationServices.Services
                 usuario.USUA_DT_ACESSO = DateTime.Now;
                 usuario.USUA_DT_CADASTRO = DateTime.Today.Date;
                 usuario.USUA_IN_ATIVO = 1;
+                usuario.CAUS_CD_ID = 1;
                 usuario.USUA_DT_ULTIMA_FALHA = DateTime.Now;
                 usuario.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
 
@@ -250,6 +263,7 @@ namespace ApplicationServices.Services
                 //Acerta campos de usuários
                 usuario.USUA_DT_ALTERACAO = DateTime.Now;
                 usuario.USUA_IN_ATIVO = 1;
+                usuario.CAUS_CD_ID = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -289,6 +303,7 @@ namespace ApplicationServices.Services
                 //Acerta campos de usuários
                 usuario.USUA_DT_ALTERACAO = DateTime.Now;
                 usuario.USUA_IN_ATIVO = 1;
+                usuario.CAUS_CD_ID = 1;
 
                 // Persiste
                 Int32 volta = _usuarioService.EditUser(usuario);
@@ -330,6 +345,7 @@ namespace ApplicationServices.Services
                 // Acerta campos de usuários
                 usuario.USUA_DT_ALTERACAO = DateTime.Now;
                 usuario.USUA_IN_ATIVO = 0;
+                usuario.CAUS_CD_ID = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -360,6 +376,7 @@ namespace ApplicationServices.Services
                 // Acerta campos de usuários
                 usuario.USUA_DT_ALTERACAO = DateTime.Now;
                 usuario.USUA_IN_ATIVO = 1;
+                usuario.CAUS_CD_ID = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -388,6 +405,7 @@ namespace ApplicationServices.Services
                 //Acerta campos de usuários
                 usuario.USUA_DT_BLOQUEADO = DateTime.Today;
                 usuario.USUA_IN_BLOQUEADO = 1;
+                usuario.CAUS_CD_ID = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -416,6 +434,7 @@ namespace ApplicationServices.Services
                 //Acerta campos de usuários
                 usuario.USUA_DT_BLOQUEADO = DateTime.Now;
                 usuario.USUA_IN_BLOQUEADO = 0;
+                usuario.CAUS_CD_ID = 1;
 
                 // Monta Log
                 LOG log = new LOG

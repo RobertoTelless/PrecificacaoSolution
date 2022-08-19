@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using ApplicationServices.Interfaces;
 using EntitiesServices.Model;
 using System.Globalization;
-using ERP_Condominios_Solution.App_Start;
+using ERP_Condominios_Solution;
+using PrecificacaoPresentation.App_Start;
 using EntitiesServices.Work_Classes;
 using AutoMapper;
 using ERP_Condominios_Solution.ViewModels;
@@ -608,11 +609,11 @@ namespace ERP_Condominios_Solution.Controllers
             // Mensagens
             if ((Int32)Session["MensNotificacao"] == 10)
             {
-                ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0019", CultureInfo.CurrentCulture));
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0019", CultureInfo.CurrentCulture));
             }
             if ((Int32)Session["MensNotificacao"] == 11)
             {
-                ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
             }
 
             NOTIFICACAO item = baseApp.GetItemById(id);

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ERP_Condominios_Solution.App_Start {
+namespace PrecificacaoPresentation.App_Start {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace ERP_Condominios_Solution.App_Start {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ERP_Condominios_Resource {
+    internal class ERP_Condominio_Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ERP_Condominios_Resource() {
+        internal ERP_Condominio_Resource() {
         }
         
-        /// <summary>   
+        /// <summary>
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GED.App_Start.ERP_Condominio_Resource", typeof(ERP_Condominios_Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PrecificacaoPresentation.App_Start.ERP_Condominio_Resource", typeof(ERP_Condominio_Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

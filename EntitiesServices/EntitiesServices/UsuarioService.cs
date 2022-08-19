@@ -74,6 +74,11 @@ namespace ModelServices.EntitiesServices
             return _usuarioRepository.GetByEmail(email, idAss);
         }
 
+        public USUARIO CheckExist(USUARIO usuario, Int32 idAss)
+        {
+            return _usuarioRepository.CheckExist(usuario, idAss);
+        }
+
         public USUARIO_ANEXO GetAnexoById(Int32 id)
         {
             return _anexoRepository.GetItemById(id);

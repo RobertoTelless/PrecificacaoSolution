@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ERP_Condominios_Solution.App_Start {
+namespace PrecificacaoPresentation.App_Start {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace ERP_Condominios_Solution.App_Start {
     // através de uma ferramenta como ResGen ou Visual Studio.
     // Para adicionar ou remover um associado, edite o arquivo .ResX e execute ResGen novamente
     // com a opção /str, ou recrie o projeto do VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PlatMensagens_Resources {
@@ -39,7 +39,7 @@ namespace ERP_Condominios_Solution.App_Start {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SMS_Presentation.App_Start.PlatMensagens_Resources", typeof(PlatMensagens_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PrecificacaoPresentation.App_Start.PlatMensagens_Resources", typeof(PlatMensagens_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -295,7 +295,7 @@ namespace ERP_Condominios_Solution.App_Start {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Processo CRM  já cadastrado para este cliente.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Já existe um processo com o mesmo nome para este usuário.
         /// </summary>
         internal static string M0035 {
             get {
@@ -349,7 +349,7 @@ namespace ERP_Condominios_Solution.App_Start {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível editar eta ação. Ela está encerrada ou excluída..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível editar esta ação. Ela está encerrada ou excluída..
         /// </summary>
         internal static string M0041 {
             get {
@@ -358,7 +358,7 @@ namespace ERP_Condominios_Solution.App_Start {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível reativar esta ação. Já existe uma ação ativa neste momento..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível criar/reativar esta ação. Já existe uma ação ativa neste momento..
         /// </summary>
         internal static string M0042 {
             get {
@@ -502,6 +502,141 @@ namespace ERP_Condominios_Solution.App_Start {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Filial já cadastrada.
+        /// </summary>
+        internal static string M0058 {
+            get {
+                return ResourceManager.GetString("M0058", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não é possível excluir essa Filial. Existem informações vinculadas a ela.
+        /// </summary>
+        internal static string M0059 {
+            get {
+                return ResourceManager.GetString("M0059", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Deve ser especificado um arquivo template HTML ou o corpo da mensagem.
+        /// </summary>
+        internal static string M0060 {
+            get {
+                return ResourceManager.GetString("M0060", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Corpo de mansagem especificado sem cabeçalho e área de dados (rodapé).
+        /// </summary>
+        internal static string M0061 {
+            get {
+                return ResourceManager.GetString("M0061", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nenhum filtro foi definido para montagem do grupo..
+        /// </summary>
+        internal static string M0062 {
+            get {
+                return ResourceManager.GetString("M0062", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nenhum contato obedeceu ao filtro especificado.
+        /// </summary>
+        internal static string M0063 {
+            get {
+                return ResourceManager.GetString("M0063", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Este plano de assinatura não tem acesso às funcionalidades de CRM.
+        /// </summary>
+        internal static string M0064 {
+            get {
+                return ResourceManager.GetString("M0064", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Essa mensagem já foi convertida em processo CRM.
+        /// </summary>
+        internal static string M0065 {
+            get {
+                return ResourceManager.GetString("M0065", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria já cadastrada.
+        /// </summary>
+        internal static string M0066 {
+            get {
+                return ResourceManager.GetString("M0066", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cargo já cadastrado.
+        /// </summary>
+        internal static string M0067 {
+            get {
+                return ResourceManager.GetString("M0067", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este cargo. Ele está vinculado a outras informações.
+        /// </summary>
+        internal static string M0068 {
+            get {
+                return ResourceManager.GetString("M0068", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta categoria. Ela está vinculada a outras informações.
+        /// </summary>
+        internal static string M0069 {
+            get {
+                return ResourceManager.GetString("M0069", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Origem do processo CRM já cadastrada.
+        /// </summary>
+        internal static string M0070 {
+            get {
+                return ResourceManager.GetString("M0070", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta origem. Ela está vinculada a outras informações.
+        /// </summary>
+        internal static string M0071 {
+            get {
+                return ResourceManager.GetString("M0071", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Motivo de Cancelameneto já cadastrado.
+        /// </summary>
+        internal static string M0072 {
+            get {
+                return ResourceManager.GetString("M0072", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a A Senha não pode ficar em branco.
         /// </summary>
         internal static string M0073 {
@@ -529,6 +664,186 @@ namespace ERP_Condominios_Solution.App_Start {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este motivo. Ele está vinculado a outras informações.
+        /// </summary>
+        internal static string M0076 {
+            get {
+                return ResourceManager.GetString("M0076", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Motivo de Encerramento já cadastrado.
+        /// </summary>
+        internal static string M0077 {
+            get {
+                return ResourceManager.GetString("M0077", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tipo de Ação já cadastrado.
+        /// </summary>
+        internal static string M0078 {
+            get {
+                return ResourceManager.GetString("M0078", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este tipo. Ele está vinculado a outras informações.
+        /// </summary>
+        internal static string M0079 {
+            get {
+                return ResourceManager.GetString("M0079", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível incluir/reativar cliente. Número de clientes ativos excede o contratado no Plano de Assinatura.
+        /// </summary>
+        internal static string M0080 {
+            get {
+                return ResourceManager.GetString("M0080", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível incluir/reativar fornecedor. Número de fornecedores ativos excede o contratado no Plano de Assinatura.
+        /// </summary>
+        internal static string M0081 {
+            get {
+                return ResourceManager.GetString("M0081", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria de Equipamento já cadastrada.
+        /// </summary>
+        internal static string M0082 {
+            get {
+                return ResourceManager.GetString("M0082", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria de Fornecedor já cadastrada.
+        /// </summary>
+        internal static string M0083 {
+            get {
+                return ResourceManager.GetString("M0083", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O valor residual não pode ser maior que o valor de compra.
+        /// </summary>
+        internal static string M0084 {
+            get {
+                return ResourceManager.GetString("M0084", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível incluir/reativar produto. Número de produtos ativos excede o contratado no Plano de Assinatura.
+        /// </summary>
+        internal static string M0085 {
+            get {
+                return ResourceManager.GetString("M0085", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este produto. Ele está vinculado a outras informações.
+        /// </summary>
+        internal static string M0086 {
+            get {
+                return ResourceManager.GetString("M0086", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este produto. Ele está vinculado a um ou mais pedidos de venda.
+        /// </summary>
+        internal static string M0087 {
+            get {
+                return ResourceManager.GetString("M0087", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria de Produto já cadastrada.
+        /// </summary>
+        internal static string M0088 {
+            get {
+                return ResourceManager.GetString("M0088", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Subcategoria de Produto já cadastrada.
+        /// </summary>
+        internal static string M0089 {
+            get {
+                return ResourceManager.GetString("M0089", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta subcategoria. Ela está vinculada a outras informações.
+        /// </summary>
+        internal static string M0090 {
+            get {
+                return ResourceManager.GetString("M0090", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tamanho já cadastrado.
+        /// </summary>
+        internal static string M0091 {
+            get {
+                return ResourceManager.GetString("M0091", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este tamanho. Ele está vinculado a outras informações.
+        /// </summary>
+        internal static string M0092 {
+            get {
+                return ResourceManager.GetString("M0092", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Unidade já cadastrada.
+        /// </summary>
+        internal static string M0093 {
+            get {
+                return ResourceManager.GetString("M0093", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta unidade. Ela está vinculada a outras informações.
+        /// </summary>
+        internal static string M0094 {
+            get {
+                return ResourceManager.GetString("M0094", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a E-Mail não cadastrado..
+        /// </summary>
+        internal static string M0096 {
+            get {
+                return ResourceManager.GetString("M0096", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O login não pode ficar em branco.
         /// </summary>
         internal static string M0109 {
@@ -552,6 +867,429 @@ namespace ERP_Condominios_Solution.App_Start {
         internal static string M0111 {
             get {
                 return ResourceManager.GetString("M0111", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível incluir/reativar atendimentos. Número de atendimentos ativos excede o contratado no Plano de Assinatura.
+        /// </summary>
+        internal static string M0112 {
+            get {
+                return ResourceManager.GetString("M0112", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Definição de automação de mensagens já cadastrada.
+        /// </summary>
+        internal static string M0113 {
+            get {
+                return ResourceManager.GetString("M0113", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este grupo. Ele está vinculaoa a outras informações.
+        /// </summary>
+        internal static string M0114 {
+            get {
+                return ResourceManager.GetString("M0114", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Grupo já cadastrado.
+        /// </summary>
+        internal static string M0115 {
+            get {
+                return ResourceManager.GetString("M0115", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este subgrupo. Ele está vinculaoa a outras informações.
+        /// </summary>
+        internal static string M0116 {
+            get {
+                return ResourceManager.GetString("M0116", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Subgrupo já cadastrado.
+        /// </summary>
+        internal static string M0117 {
+            get {
+                return ResourceManager.GetString("M0117", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível incluir/reativar ordens de serviço. Número de ordens de serviço ativas excede o contratado no Plano de Assinatura.
+        /// </summary>
+        internal static string M0118 {
+            get {
+                return ResourceManager.GetString("M0118", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Justificativa de cancelamento não preenchida.
+        /// </summary>
+        internal static string M0119 {
+            get {
+                return ResourceManager.GetString("M0119", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Departamento já cadastrado.
+        /// </summary>
+        internal static string M0120 {
+            get {
+                return ResourceManager.GetString("M0120", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este departamento. Ele está vinculada a outras informações.
+        /// </summary>
+        internal static string M0121 {
+            get {
+                return ResourceManager.GetString("M0121", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível criar/reativar esta proposta. Já existe uma proposta sendo processada neste momento..
+        /// </summary>
+        internal static string M0122 {
+            get {
+                return ResourceManager.GetString("M0122", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível editar esta proposta. Ela está encerrada, cancelada ou reprovada.
+        /// </summary>
+        internal static string M0123 {
+            get {
+                return ResourceManager.GetString("M0123", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A justificativa do cancelamento é obrigatória.
+        /// </summary>
+        internal static string M0124 {
+            get {
+                return ResourceManager.GetString("M0124", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de cancelamento não informada.
+        /// </summary>
+        internal static string M0125 {
+            get {
+                return ResourceManager.GetString("M0125", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de reprovação não pode ser inferior a data de criação do processo.
+        /// </summary>
+        internal static string M0126 {
+            get {
+                return ResourceManager.GetString("M0126", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de reprovação não pode ser superior a data corrente.
+        /// </summary>
+        internal static string M0127 {
+            get {
+                return ResourceManager.GetString("M0127", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A justificativa da reprovação é obrigatória.
+        /// </summary>
+        internal static string M0128 {
+            get {
+                return ResourceManager.GetString("M0128", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de reprovação não informada.
+        /// </summary>
+        internal static string M0129 {
+            get {
+                return ResourceManager.GetString("M0129", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de aprovação não pode ser inferior a data de criação do processo.
+        /// </summary>
+        internal static string M0130 {
+            get {
+                return ResourceManager.GetString("M0130", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de aprovação não pode ser superior a data corrente.
+        /// </summary>
+        internal static string M0131 {
+            get {
+                return ResourceManager.GetString("M0131", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A justificativa da aprovação é obrigatória.
+        /// </summary>
+        internal static string M0132 {
+            get {
+                return ResourceManager.GetString("M0132", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de aprovação não informada.
+        /// </summary>
+        internal static string M0133 {
+            get {
+                return ResourceManager.GetString("M0133", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de envio não informada.
+        /// </summary>
+        internal static string M0134 {
+            get {
+                return ResourceManager.GetString("M0134", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de envio não pode ser inferior a data de criação do processo.
+        /// </summary>
+        internal static string M0135 {
+            get {
+                return ResourceManager.GetString("M0135", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de envio não pode ser superior a data corrente.
+        /// </summary>
+        internal static string M0136 {
+            get {
+                return ResourceManager.GetString("M0136", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu erro no envio da proposta por e-mail.
+        /// </summary>
+        internal static string M0137 {
+            get {
+                return ResourceManager.GetString("M0137", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível enviar. Nenhum arquivo anexado a essa proposta.
+        /// </summary>
+        internal static string M0138 {
+            get {
+                return ResourceManager.GetString("M0138", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nenhum template de mensagem selecionado.
+        /// </summary>
+        internal static string M0139 {
+            get {
+                return ResourceManager.GetString("M0139", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível criar/reativar este pedido. Já existe um pedido sendo processado neste momento..
+        /// </summary>
+        internal static string M0140 {
+            get {
+                return ResourceManager.GetString("M0140", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cliente não especificado.
+        /// </summary>
+        internal static string M0141 {
+            get {
+                return ResourceManager.GetString("M0141", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tipo de ação não especificado.
+        /// </summary>
+        internal static string M0142 {
+            get {
+                return ResourceManager.GetString("M0142", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Responsável pela ação não especificado.
+        /// </summary>
+        internal static string M0143 {
+            get {
+                return ResourceManager.GetString("M0143", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Template de proposta não especificado.
+        /// </summary>
+        internal static string M0144 {
+            get {
+                return ResourceManager.GetString("M0144", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Motivo de cancelamento não especificado.
+        /// </summary>
+        internal static string M0145 {
+            get {
+                return ResourceManager.GetString("M0145", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Transportadora não especificada.
+        /// </summary>
+        internal static string M0146 {
+            get {
+                return ResourceManager.GetString("M0146", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data prevista para entrega não especificada.
+        /// </summary>
+        internal static string M0147 {
+            get {
+                return ResourceManager.GetString("M0147", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de saida para entrega não especificada.
+        /// </summary>
+        internal static string M0148 {
+            get {
+                return ResourceManager.GetString("M0148", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Descrição do Motivo de cancelamento não especificada.
+        /// </summary>
+        internal static string M0149 {
+            get {
+                return ResourceManager.GetString("M0149", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Maquina de cartão já cadastrada.
+        /// </summary>
+        internal static string M0150 {
+            get {
+                return ResourceManager.GetString("M0150", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta máqiuna de cartão. Existem registros vinculados a ela..
+        /// </summary>
+        internal static string M0151 {
+            get {
+                return ResourceManager.GetString("M0151", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Plataforma de Entregas já cadastrada.
+        /// </summary>
+        internal static string M0152 {
+            get {
+                return ResourceManager.GetString("M0152", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta plataforma de entregas. Existem registros vinculados a ela..
+        /// </summary>
+        internal static string M0153 {
+            get {
+                return ResourceManager.GetString("M0153", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cargo já cadastrado.
+        /// </summary>
+        internal static string M0154 {
+            get {
+                return ResourceManager.GetString("M0154", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este cargo. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0155 {
+            get {
+                return ResourceManager.GetString("M0155", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pessoa Externa já cadastrada.
+        /// </summary>
+        internal static string M0156 {
+            get {
+                return ResourceManager.GetString("M0156", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta pessoa externa. Existem registros vinculados a ela.
+        /// </summary>
+        internal static string M0157 {
+            get {
+                return ResourceManager.GetString("M0157", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a CPF já existente na lista de usuários.
+        /// </summary>
+        internal static string M0158 {
+            get {
+                return ResourceManager.GetString("M0158", resourceCulture);
             }
         }
     }

@@ -525,4 +525,7 @@
   <data name="M0157" xml:space="preserve">
     <value>Impossível excluir esta pessoa externa. Existem registros vinculados a ela</value>
   </data>
+  <data name="M0158" xml:space="preserve">
+    <value>CPF já existente na lista de usuários</value>
+  </data>
 </root>

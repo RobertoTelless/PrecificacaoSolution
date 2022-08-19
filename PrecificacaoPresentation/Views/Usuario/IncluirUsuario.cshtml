@@ -12,6 +12,9 @@
                 <a href="@Url.Action("CarregarBase", "BaseAdmin")">Dashboard</a>
             </li>
             <li>
+                <a href="@Url.Action("MontarTelaDashboardAdministracao", "BaseAdmin")">Dashboard - Administração</a>
+            </li>
+            <li>
                 <a href="@Url.Action("MontarTelaUsuario", "Usuario")">Usuários</a>
             </li>
             <li class="active">
@@ -59,6 +62,7 @@
                                                     @Html.HiddenFor(m => m.USUA_IN_PROVISORIO)
                                                     @Html.HiddenFor(m => m.USUA_NR_ACESSOS)
                                                     @Html.HiddenFor(m => m.USUA_NR_FALHAS)
+                                                    @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                     Perfil de Acesso*
                                                     @Html.DropDownListFor(m => m.PERF_CD_ID, (SelectList)ViewBag.Perfis, "Selecionar", new { @class = "form-control", autofocus = true, @style = "color:green; font-weight:bold"  })
                                                     @Html.ValidationMessageFor(m => m.PERF_CD_ID, "", new { @style = "color:red" })

@@ -33,6 +33,9 @@
                 <a href="@Url.Action("CarregarBase", "BaseAdmin")">Dashboard</a>
             </li>
             <li>
+                <a href="@Url.Action("MontarTelaDashboardAdministracao", "BaseAdmin")">Dashboard - Administração</a>
+            </li>
+            <li>
                 <a href="@Url.Action("MontarTelaUsuario", "Usuario")">Usuários</a>
             </li>
             <li class="active">
@@ -124,6 +127,8 @@
                             <button alt="Desativar" class="btn btn-sm btn-warning demo2" onclick="ShowModalReativar('/Usuario/ReativarUsuario/@Model.USUA_CD_ID', '@Model.USUA_NM_NOME')" title="Desbloquear">Reativar</button>
                         }
                     }
+                    @Html.ButtonLinkIndex(text: "Enviar E-Mail", action: "EnviarEMailUsuarioForm", controller: "Usuario")
+                    @Html.ButtonLinkIndex(text: "Enviar SMS", action: "EnviarSMSUsuarioForm", controller: "Usuario")
                     @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarBase", controller: "Usuario", buttonClass: "warning")
                 </div>
 
@@ -174,6 +179,7 @@
                                                     @Html.HiddenFor(m => m.USUA_NR_FALHAS)
                                                     @Html.HiddenFor(m => m.USUA_NR_TELEFONE)
                                                     @Html.HiddenFor(m => m.USUA_TX_OBSERVACOES)
+                                                    @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                     @if (!String.IsNullOrEmpty(Model.USUA_AQ_FOTO))
                                                     {
                                                         <img src="@Url.Content(Model.USUA_AQ_FOTO)" style="width: auto; height: auto; max-height: 110px; max-width: 90px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@Model.USUA_NM_NOME', '@Url.Content(Model.USUA_AQ_FOTO)')">
@@ -210,6 +216,7 @@
                                                         @Html.HiddenFor(m => m.USUA_NR_ACESSOS)
                                                         @Html.HiddenFor(m => m.USUA_NR_FALHAS)
                                                         @Html.HiddenFor(m => m.PERF_CD_ID)                                                        
+                                                        @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                         Nome*
                                                         @Html.TextBoxFor(m => m.USUA_NM_NOME, new { @class = "form-control", autofocus = true })
                                                         @Html.ValidationMessageFor(m => m.USUA_NM_NOME, "", new { @style = "color:red" })
@@ -383,6 +390,7 @@
                                                     @Html.HiddenFor(m => m.USUA_NM_SENHA)
                                                     @Html.HiddenFor(m => m.USUA_NM_SENHA_CONFIRMA)
                                                     @Html.HiddenFor(m => m.USUA_TX_OBSERVACOES)
+                                                    @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                     Bloqueado?
                                                     <br />
                                                     @Html.CheckBoxFor(m => m.Bloqueio, new { @class = "checkbox i-checks", autofocus = true, @readonly="readonly" })
@@ -407,7 +415,7 @@
                                                     Data de Alteração
                                                     @Html.TextBoxFor(m => m.USUA_DT_ALTERACAO,"{0:dd/MM/yyyy}", new { @class = "form-control", autofocus = true, @readonly="readonly" })
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Data de Troca de Senha
                                                     @Html.TextBoxFor(m => m.USUA_DT_TROCA_SENHA,"{0:dd/MM/yyyy}", new { @class = "form-control", autofocus = true, @readonly="readonly" })
                                                 </div>
@@ -473,6 +481,7 @@
                                                     @Html.HiddenFor(m => m.USUA_NR_TELEFONE)
                                                     @Html.HiddenFor(m => m.USUA_NR_WHATSAPP)
                                                     @Html.HiddenFor(m => m.CAUS_CD_ID)
+                                                    @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                     Observações
                                                     @Html.TextAreaFor(m => m.USUA_TX_OBSERVACOES, new { @class = "form-control", style = "width: 100%; height: 400px;", autofocus = true})
                                                     @Html.ValidationMessageFor(m => m.USUA_TX_OBSERVACOES, "",new { @style="color:red" })
@@ -512,7 +521,7 @@
                                                                 @foreach (var cond in (Model.NOTIFICACAO.OrderByDescending(a => a.NOTC_DT_EMISSAO).Take(5)))
                                                                 {
                                                                     <tr>
-                                                                        <td>@cond.NOTC_DT_EMISSAO.ToShortDateString()</td>
+                                                                        <td>@cond.NOTC_DT_EMISSAO.Value.ToShortDateString()</td>
                                                                         <td>@cond.NOTC_NM_TITULO</td>
                                                                         <td>@cond.CATEGORIA_NOTIFICACAO.CANO_NM_NOME</td>
                                                                         @if (cond.NOTC_IN_VISTA == 1)

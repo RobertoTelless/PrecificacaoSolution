@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using ApplicationServices.Interfaces;
 using EntitiesServices.Model;
 using System.Globalization;
-using ERP_Condominios_Solution.App_Start;
+using ERP_Condominios_Solution;
+using PrecificacaoPresentation.App_Start;
 using EntitiesServices.WorkClasses;
 using AutoMapper;
 using ERP_Condominios_Solution.ViewModels;
@@ -108,15 +109,15 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 if ((Int32)Session["MensEmpresa"] == 1)
                 {
-                    ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0019", CultureInfo.CurrentCulture));
+                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0019", CultureInfo.CurrentCulture));
                 }
                 if ((Int32)Session["MensEmpresa"] == 3)
                 {
-                    ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
+                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
                 }
                 if ((Int32)Session["MensEmpresa"] == 4)
                 {
-                    ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0020", CultureInfo.CurrentCulture));
+                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0020", CultureInfo.CurrentCulture));
                 }
             }
 
@@ -244,7 +245,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
             if (file == null)
             {
-                ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0019", CultureInfo.CurrentCulture));
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0019", CultureInfo.CurrentCulture));
                 Session["MensEmpresa"] = 1;
                 return RedirectToAction("VoltarAnexoEmpresa");
             }
@@ -255,7 +256,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             if (fileName.Length > 250)
             {
-                ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
                 Session["MensEmpresa"] = 3;
                 return RedirectToAction("VoltarAnexoEmpresa");
             }
@@ -292,7 +293,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             item.EMPRESA_ANEXO.Add(foto);
             objetoAntes = item;
-            Int32 volta = baseApp.ValidateEdit(item, objetoAntes, usuario);
+            Int32 volta = baseApp.ValidateEdit(item, objetoAntes);
             return RedirectToAction("VoltarAnexoEmpresa");
         }
     }

@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using ApplicationServices.Interfaces;
 using EntitiesServices.Model;
 using System.Globalization;
-using ERP_Condominios_Solution.App_Start;
+using ERP_Condominios_Solution;
+using PrecificacaoPresentation.App_Start;
 using EntitiesServices.Work_Classes;
 using AutoMapper;
 using ERP_Condominios_Solution.ViewModels;
@@ -192,7 +193,7 @@ namespace ERP_Condominios_Solution.Controllers
             // Mensagens
             if ((Int32)Session["MensPermissao"] == 2)
             {
-                ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
             }
             Session["MensPermissao"] = 0;
             return View(vm);

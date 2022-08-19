@@ -123,6 +123,7 @@ namespace ApplicationServices.Services
             try
             {
                 // Monta Log
+                
                 LOG log = new LOG
                 {
                     LOG_DT_LOG = DateTime.Now,

@@ -213,10 +213,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\ERP_Condominio_Resource.Designer.cs" />
+    <Compile Include="App_Start\ERP_Condominio_Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_Condominio_Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
-    <Compile Include="App_Start\PlatMensagens_Resources.Designer.cs" />
+    <Compile Include="App_Start\PlatMensagens_Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlatMensagens_Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
@@ -2928,6 +2936,8 @@
     <Content Include="Views\PessoaExterna\IncluirAnotacao.cshtml" />
     <Content Include="Views\PessoaExterna\EnviarEMailPessoaExterna.cshtml" />
     <Content Include="Views\PessoaExterna\EnviarSMSPessoaExterna.cshtml" />
+    <Content Include="Views\Usuario\EnviarEMailUsuario.cshtml" />
+    <Content Include="Views\Usuario\EnviarSMSUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2975,10 +2985,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_Start\ERP_Condominio_Resource.resx" />
-    <EmbeddedResource Include="App_Start\PlatMensagens_Resources.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ApplicationServices\ApplicationServices.csproj">
       <Project>{923fa444-af91-4fd0-b3bc-9a4e7fbfd550}</Project>
       <Name>ApplicationServices</Name>
@@ -2995,6 +3001,16 @@
       <Project>{888f90bf-96a5-4e1a-9a80-22140dd756c7}</Project>
       <Name>EntitiesServices</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_Start\ERP_Condominio_Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ERP_Condominio_Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_Start\PlatMensagens_Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlatMensagens_Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

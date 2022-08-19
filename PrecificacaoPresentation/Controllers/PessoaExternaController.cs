@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using ApplicationServices.Interfaces;
 using EntitiesServices.Model;
 using System.Globalization;
-using ERP_Condominios_Solution.App_Start;
+using ERP_Condominios_Solution;
+using PrecificacaoPresentation.App_Start;
 using EntitiesServices.WorkClasses;
 using AutoMapper;
 using ERP_Condominios_Solution.ViewModels;
@@ -168,7 +169,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            return RedirectToAction("MontarTelaDashboardAdministracao");
+            return RedirectToAction("MontarTelaDashboardAdministracao", "BaseAdmin");
         }
 
         [HttpPost]
@@ -1060,7 +1061,7 @@ namespace ERP_Condominios_Solution.Controllers
                     }
 
                     // Sucesso
-                    return RedirectToAction("VoltarBasePessoaExterna");
+                    return RedirectToAction("VoltarBase");
                 }
                 catch (Exception ex)
                 {
@@ -1180,7 +1181,7 @@ namespace ERP_Condominios_Solution.Controllers
                     }
 
                     // Sucesso
-                    return RedirectToAction("VoltarBasePessoaExterna");
+                    return RedirectToAction("VoltarBase");
                 }
                 catch (Exception ex)
                 {

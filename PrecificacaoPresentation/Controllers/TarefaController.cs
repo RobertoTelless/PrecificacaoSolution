@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using ApplicationServices.Interfaces;
 using EntitiesServices.Model;
 using System.Globalization;
-using ERP_Condominios_Solution.App_Start;
+using ERP_Condominios_Solution;
+using PrecificacaoPresentation.App_Start;
 using EntitiesServices.WorkClasses;
 using AutoMapper;
 using ERP_Condominios_Solution.ViewModels;
@@ -463,12 +464,12 @@ namespace ERP_Condominios_Solution.Controllers
                                 // Verifica retorno
                                 if (volta == 1)
                                 {
-                                    ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
+                                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
                                     return View(vm);
                                 }
                                 if (volta == 2)
                                 {
-                                    ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0094", CultureInfo.CurrentCulture));
+                                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0094", CultureInfo.CurrentCulture));
                                     return View(vm);
                                 }
                             }
@@ -549,7 +550,7 @@ namespace ERP_Condominios_Solution.Controllers
                         // Verifica retorno
                         if (volta1 == 1)
                         {
-                            ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
+                            ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
                             return View(vm);
                         }
 
@@ -640,11 +641,11 @@ namespace ERP_Condominios_Solution.Controllers
             // Mensagens
             if ((Int32)Session["MensTarefa"] == 10)
             {
-                ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0019", CultureInfo.CurrentCulture));
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0019", CultureInfo.CurrentCulture));
             }
             if ((Int32)Session["MensTarefa"] == 11)
             {
-                ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
             }
 
             TAREFA item = baseApp.GetItemById(id);
@@ -694,12 +695,12 @@ namespace ERP_Condominios_Solution.Controllers
                     // Verifica retorno
                     if (volta == 1)
                     {
-                        ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0013", CultureInfo.CurrentCulture));
+                        ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0013", CultureInfo.CurrentCulture));
                         return View(vm);
                     }
                     if (volta == 2)
                     {
-                        ModelState.AddModelError("", ERP_Condominios_Resource.ResourceManager.GetString("M0014", CultureInfo.CurrentCulture));
+                        ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0014", CultureInfo.CurrentCulture));
                         return View(vm);
                     }
 
@@ -755,11 +756,11 @@ namespace ERP_Condominios_Solution.Controllers
                 // Verifica retorno
                 if (volta == 1)
                 {
-                    return Json(ERP_Condominios_Resource.ResourceManager.GetString("M0013", CultureInfo.CurrentCulture));
+                    return Json(ERP_Condominio_Resource.ResourceManager.GetString("M0013", CultureInfo.CurrentCulture));
                 }
                 if (volta == 2)
                 {
-                    return Json(ERP_Condominios_Resource.ResourceManager.GetString("M0014", CultureInfo.CurrentCulture));
+                    return Json(ERP_Condominio_Resource.ResourceManager.GetString("M0014", CultureInfo.CurrentCulture));
                 }
 
                 Session["ListaTarefa"] = null;

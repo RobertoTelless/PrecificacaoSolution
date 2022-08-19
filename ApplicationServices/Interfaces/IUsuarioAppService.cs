@@ -20,6 +20,7 @@ namespace ApplicationServices.Interfaces
         USUARIO_ANEXO GetAnexoById(Int32 id);
         List<NOTIFICACAO> GetAllItensUser(Int32 id, Int32 idAss);
         List<NOTIFICACAO> GetNotificacaoNovas(Int32 id, Int32 idAss);
+        USUARIO CheckExist(USUARIO item, Int32 idAss);
 
         Int32 ValidateCreate(USUARIO usuario, USUARIO usuarioLogado);
         Int32 ValidateCreateAssinante(USUARIO usuario, USUARIO usuarioLogado);
