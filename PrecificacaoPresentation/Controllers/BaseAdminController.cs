@@ -210,6 +210,11 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("CarregarBase", "BaseAdmin");
         }
 
+        public ActionResult VoltarDashboardAdministracao()
+        {
+            return RedirectToAction("MontarTelaDashboardAdministracao", "BaseAdmin");
+        }
+
         public ActionResult MontarFaleConosco()
         {
             return View();
@@ -591,6 +596,35 @@ namespace ERP_Condominios_Solution.Controllers
                 ViewBag.Message = ex.Message;
                 return RedirectToAction("MontarCentralMensagens");
             }
+        }
+
+        [HttpGet]
+        public ActionResult MontarTelaTabelasAuxiliares()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            UsuarioViewModel vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
+            return View(vm);
         }
 
     }

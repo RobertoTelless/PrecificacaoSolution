@@ -615,8 +615,14 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagens\1\Assinante\Foto\FotoOficial.jpg" />
+    <Content Include="Imagens\1\Tarefa\4\Anexos\299136059_10229555299814975_5235234925343145656_n.jpg" />
+    <Content Include="Imagens\1\Tarefa\5\Anexos\299136059_10229555299814975_5235234925343145656_n.jpg" />
     <Content Include="Imagens\1\Usuario\1\Anexos\full_height.jpg" />
     <Content Include="Imagens\1\Usuario\1\Foto\FotoOficial.jpg" />
+    <Content Include="Imagens\1\Usuario\2\Anexos\dashboard4_1.jpg" />
+    <Content Include="Imagens\1\Usuario\3\Fotos\image_2021-04-08_13-28-54.png" />
+    <Content Include="Imagens\1\Usuario\5\Fotos\a2.jpg" />
+    <Content Include="Imagens\1\Usuario\6\Fotos\FotoMaluquete.jpg" />
     <Content Include="Imagens\Base\FotoBase.jpg" />
     <Content Include="Imagens\Base\FotoOficial.jpg" />
     <Content Include="Imagens\Base\icone_imagem.jpg" />
@@ -2026,6 +2032,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Imagens\1\Notificacao\3\Anexos\Notificacao_3_18082022.pdf" />
+    <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\characterCount.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -2938,6 +2945,7 @@
     <Content Include="Views\PessoaExterna\EnviarSMSPessoaExterna.cshtml" />
     <Content Include="Views\Usuario\EnviarEMailUsuario.cshtml" />
     <Content Include="Views\Usuario\EnviarSMSUsuario.cshtml" />
+    <Content Include="Views\BaseAdmin\MontarTelaTabelasAuxiliares.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2959,6 +2967,9 @@
     <Folder Include="Imagens\1\Agenda\4 - Cópia\" />
     <Folder Include="Imagens\1\Agenda\4\Anexos\" />
     <Folder Include="Imagens\1\Agenda\5\Anexos\" />
+    <Folder Include="Imagens\1\Agenda\6\Anexos\" />
+    <Folder Include="Imagens\1\Agenda\7\Anexos\" />
+    <Folder Include="Imagens\1\Agenda\8\Anexos\" />
     <Folder Include="Imagens\1\Empresa\1\Anexos\" />
     <Folder Include="Imagens\1\Noticias\1\Fotos\" />
     <Folder Include="Imagens\1\Noticias\2\Fotos\" />
@@ -2967,6 +2978,16 @@
     <Folder Include="Imagens\1\Noticias\5\Fotos\" />
     <Folder Include="Imagens\1\Notificacao\1\Anexos\" />
     <Folder Include="Imagens\1\Notificacao\2\Anexos\" />
+    <Folder Include="Imagens\1\PessoaExterna\1\Anexos\" />
+    <Folder Include="Imagens\1\PessoaExterna\1\Fotos\" />
+    <Folder Include="Imagens\1\PessoaExterna\2\Anexos\" />
+    <Folder Include="Imagens\1\PessoaExterna\2\Fotos\" />
+    <Folder Include="Imagens\1\Tarefa\6\Anexos\" />
+    <Folder Include="Imagens\1\Usuario\3\Anexos\" />
+    <Folder Include="Imagens\1\Usuario\4\Anexos\" />
+    <Folder Include="Imagens\1\Usuario\4\Fotos\" />
+    <Folder Include="Imagens\1\Usuario\5\Anexos\" />
+    <Folder Include="Imagens\1\Usuario\6\Anexos\" />
     <Folder Include="Models\" />
     <Folder Include="Views\FormaPagRec\" />
     <Folder Include="Views\Template\" />

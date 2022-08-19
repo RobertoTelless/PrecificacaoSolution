@@ -87,6 +87,7 @@ namespace Presentation.Start
             kernel.Bind<IPeriodicidadeAppService>().To<PeriodicidadeAppService>();
             kernel.Bind<IPessoaExternaAppService>().To<PessoaExternaAppService>();
             kernel.Bind<IPlataformaEntregaAppService>().To<PlataformaEntregaAppService>();
+            kernel.Bind<ICargoAppService>().To<CargoAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -109,6 +110,7 @@ namespace Presentation.Start
             kernel.Bind<IPeriodicidadeService>().To<PeriodicidadeService>();
             kernel.Bind<IPessoaExternaService>().To<PessoaExternaService>();
             kernel.Bind<IPlataformaEntregaService>().To<PlataformaEntregaService>();
+            kernel.Bind<ICargoService>().To<CargoService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();

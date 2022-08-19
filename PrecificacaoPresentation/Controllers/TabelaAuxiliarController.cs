@@ -64,7 +64,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            return RedirectToAction("CarregarBase", "BaseAdmin");
+            return RedirectToAction("MontarTelaTabelasAuxiliares", "BaseAdmin");
         }
 
         public ActionResult VoltarDash()
@@ -288,6 +288,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
 
             // Prepara view
             CARGO_USUARIO item = carApp.GetItemById(id);
