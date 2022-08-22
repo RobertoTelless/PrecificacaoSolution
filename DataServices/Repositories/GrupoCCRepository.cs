@@ -11,33 +11,33 @@ using System.Data.Entity;
 
 namespace DataServices.Repositories
 {
-    public class GrupoCCRepository : RepositoryBase<GRUPO_CC>, IGrupoCCRepository
+    public class GrupoCCRepository : RepositoryBase<GRUPO_PLANO_CONTA>, IGrupoCCRepository
     {
-        public GRUPO_CC CheckExist(GRUPO_CC conta, Int32 idAss)
+        public GRUPO_PLANO_CONTA CheckExist(GRUPO_PLANO_CONTA conta, Int32 idAss)
         {
-            IQueryable<GRUPO_CC> query = Db.GRUPO_CC;
+            IQueryable<GRUPO_PLANO_CONTA> query = Db.GRUPO_PLANO_CONTA;
             query = query.Where(p => p.GRCC_NR_NUMERO == conta.GRCC_NR_NUMERO);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.FirstOrDefault();
         }
 
-        public GRUPO_CC GetItemById(Int32 id)
+        public GRUPO_PLANO_CONTA GetItemById(Int32 id)
         {
-            IQueryable<GRUPO_CC> query = Db.GRUPO_CC;
+            IQueryable<GRUPO_PLANO_CONTA> query = Db.GRUPO_PLANO_CONTA;
             query = query.Where(p => p.GRCC_CD_ID == id);
             return query.FirstOrDefault();
         }
 
-        public List<GRUPO_CC> GetAllItensAdm(Int32 idAss)
+        public List<GRUPO_PLANO_CONTA> GetAllItensAdm(Int32 idAss)
         {
-            IQueryable<GRUPO_CC> query = Db.GRUPO_CC;
+            IQueryable<GRUPO_PLANO_CONTA> query = Db.GRUPO_PLANO_CONTA;
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
         }
 
-        public List<GRUPO_CC> GetAllItens(Int32 idAss)
+        public List<GRUPO_PLANO_CONTA> GetAllItens(Int32 idAss)
         {
-            IQueryable<GRUPO_CC> query = Db.GRUPO_CC.Where(p => p.GRCC_IN_ATIVO == 1);
+            IQueryable<GRUPO_PLANO_CONTA> query = Db.GRUPO_PLANO_CONTA.Where(p => p.GRCC_IN_ATIVO == 1);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
         }

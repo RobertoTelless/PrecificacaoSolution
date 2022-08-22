@@ -152,7 +152,7 @@ namespace ERP_Condominios_Solution.Controllers
             hash.Add("hora", evento.AGEN_HR_HORA.ToString());
             hash.Add("categoria", evento.CATEGORIA_AGENDA.CAAG_NM_NOME);
             hash.Add("titulo", evento.AGEN_NM_TITULO);
-            //hash.Add("contato", evento.USUARIO1 == null ? "-" : evento.USUARIO1.USUA_NM_NOME);
+            hash.Add("contato", evento.USUARIO == null ? "-" : evento.USUARIO.USUA_NM_NOME);
             if (evento.AGEN_IN_STATUS == 1)
             {
                 hash.Add("status", "Ativo");

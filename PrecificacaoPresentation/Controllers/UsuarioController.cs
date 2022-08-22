@@ -156,6 +156,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Abre view
             Session["MensUsuario"] = 0;
+            Session["VoltaUsuario"] = 1;
             objeto = new USUARIO();
             return View(objeto);
         }
@@ -174,6 +175,10 @@ namespace ERP_Condominios_Solution.Controllers
             if ((String)Session["Ativa"] == null)
             {
                 return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((Int32)Session["VoltaUsuario"] == 2)
+            {
+                return RedirectToAction("CarregarBase", "BaseAdmin");
             }
             return RedirectToAction("MontarTelaUsuario");
         }
@@ -311,6 +316,18 @@ namespace ERP_Condominios_Solution.Controllers
             USUARIO item = baseApp.GetItemById(id);
             UsuarioViewModel vm = Mapper.Map<USUARIO, UsuarioViewModel>(item);
             return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult MontarTelaPerfilUsuario()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idUsu = ((USUARIO)Session["UserCredentials"]).USUA_CD_ID;
+            Session["VoltaUsuario"] = 2;
+            return RedirectToAction("VerUsuario", new { id = idUsu });
         }
 
         [HttpGet]

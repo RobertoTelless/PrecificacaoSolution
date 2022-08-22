@@ -40,6 +40,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<int> TITR_CD_ID { get; set; }
         public Nullable<int> PETA_CD_ID { get; set; }
         public Nullable<int> TARE_NR_PERIODICIDADE_QUANTIDADE { get; set; }
+        public string TARE_TEX_OBSERVACAO { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

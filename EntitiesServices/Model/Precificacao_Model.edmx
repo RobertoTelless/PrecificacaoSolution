@@ -736,6 +736,7 @@
           <Property Name="TARE_NR_PERIODICIDADE_QUANTIDADE" Type="int" />
           <Property Name="TARE_TX_OBSERVACOES" Type="image" />
           <Property Name="TARE_IN_ATIVO" Type="int" Nullable="false" />
+          <Property Name="TARE_TEX_OBSERVACAO" Type="text" />
         </EntityType>
         <EntityType Name="TAREFA_ACOMPANHAMENTO">
           <Key>
@@ -3434,6 +3435,7 @@
           <NavigationProperty Name="TAREFA_ANEXO" Relationship="Self.FK_TAREFA_ANEXO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_ANEXO" />
           <NavigationProperty Name="TIPO_TAREFA" Relationship="Self.FK_TAREFA_TIPO_TAREFA" FromRole="TAREFA" ToRole="TIPO_TAREFA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKTAREFA210002" FromRole="TAREFA" ToRole="USUARIO" />
+          <Property Name="TARE_TEX_OBSERVACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TAREFA_ACOMPANHAMENTO">
           <Key>
@@ -6085,6 +6087,7 @@
           <EntitySetMapping Name="TAREFA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.TAREFA">
               <MappingFragment StoreEntitySet="TAREFA">
+                <ScalarProperty Name="TARE_TEX_OBSERVACAO" ColumnName="TARE_TEX_OBSERVACAO" />
                 <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />

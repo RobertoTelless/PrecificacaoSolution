@@ -11,33 +11,33 @@ using System.Data.Entity;
 
 namespace DataServices.Repositories
 {
-    public class SubgrupoRepository : RepositoryBase<SUBGRUPO>, ISubgrupoRepository
+    public class SubgrupoRepository : RepositoryBase<SUBGRUPO_PLANO_CONTA>, ISubgrupoRepository
     {
-        public SUBGRUPO CheckExist(SUBGRUPO conta, Int32 idAss)
+        public SUBGRUPO_PLANO_CONTA CheckExist(SUBGRUPO_PLANO_CONTA conta, Int32 idAss)
         {
-            IQueryable<SUBGRUPO> query = Db.SUBGRUPO;
-            query = query.Where(p => p.SUBG_NR_NUMERO == conta.SUBG_NR_NUMERO);
+            IQueryable<SUBGRUPO_PLANO_CONTA> query = Db.SUBGRUPO_PLANO_CONTA;
+            query = query.Where(p => p.SGCC_NR_NUMERO == conta.SGCC_NR_NUMERO);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.FirstOrDefault();
         }
 
-        public SUBGRUPO GetItemById(Int32 id)
+        public SUBGRUPO_PLANO_CONTA GetItemById(Int32 id)
         {
-            IQueryable<SUBGRUPO> query = Db.SUBGRUPO;
-            query = query.Where(p => p.SUBG_CD_ID == id);
+            IQueryable<SUBGRUPO_PLANO_CONTA> query = Db.SUBGRUPO_PLANO_CONTA;
+            query = query.Where(p => p.SGCC_CD_ID == id);
             return query.FirstOrDefault();
         }
 
-        public List<SUBGRUPO> GetAllItensAdm(Int32 idAss)
+        public List<SUBGRUPO_PLANO_CONTA> GetAllItensAdm(Int32 idAss)
         {
-            IQueryable<SUBGRUPO> query = Db.SUBGRUPO;
+            IQueryable<SUBGRUPO_PLANO_CONTA> query = Db.SUBGRUPO_PLANO_CONTA;
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
         }
 
-        public List<SUBGRUPO> GetAllItens(Int32 idAss)
+        public List<SUBGRUPO_PLANO_CONTA> GetAllItens(Int32 idAss)
         {
-            IQueryable<SUBGRUPO> query = Db.SUBGRUPO.Where(p => p.SUBG_IN_ATIVO == 1);
+            IQueryable<SUBGRUPO_PLANO_CONTA> query = Db.SUBGRUPO_PLANO_CONTA.Where(p => p.SGCC_IN_ATIVO == 1);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
         }

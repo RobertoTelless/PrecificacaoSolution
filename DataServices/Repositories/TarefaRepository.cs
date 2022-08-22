@@ -47,6 +47,14 @@ namespace DataServices.Repositories
             {
                 query = query.Where(p => p.TARE_IN_STATUS == 5);
             }
+            if (tipo == 3)
+            {
+                query = query.Where(p => p.TARE_IN_STATUS == 3);
+            }
+            if (tipo == 4)
+            {
+                query = query.Where(p => p.TARE_IN_STATUS == 4);
+            }
             return query.ToList();
         }
 

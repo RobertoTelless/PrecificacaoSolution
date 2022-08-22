@@ -38,6 +38,7 @@ namespace EntitiesServices.Model
         public Nullable<int> TARE_NR_PERIODICIDADE_QUANTIDADE { get; set; }
         public byte[] TARE_TX_OBSERVACOES { get; set; }
         public int TARE_IN_ATIVO { get; set; }
+        public string TARE_TEX_OBSERVACAO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual PERIODICIDADE_TAREFA PERIODICIDADE_TAREFA { get; set; }

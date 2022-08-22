@@ -243,6 +243,8 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "TITR_CD_ID", "TITR_NM_NOME");
             ViewBag.TarefasPendentes = baseApp.GetTarefaStatus(usuario.USUA_CD_ID, 1).Count;
             ViewBag.TarefasEncerradas = baseApp.GetTarefaStatus(usuario.USUA_CD_ID, 2).Count;
+            ViewBag.TarefasSuspensas = baseApp.GetTarefaStatus(usuario.USUA_CD_ID, 3).Count;
+            ViewBag.TarefasCanceladas= baseApp.GetTarefaStatus(usuario.USUA_CD_ID, 4).Count;
 
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss), "USUA_CD_ID", "USUA_NM_NOME");
             ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
@@ -285,8 +287,8 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            Int32 idAss = (Int32)Session["IdAssinante"];
-            listaMaster = baseApp.GetAllItensAdm(idAss);
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            listaMaster = baseApp.GetAllItensAdm(usuario.USUA_CD_ID);
             Session["ListaTarefa"] = listaMaster;
             return RedirectToAction("MontarTelaTarefa");
         }
