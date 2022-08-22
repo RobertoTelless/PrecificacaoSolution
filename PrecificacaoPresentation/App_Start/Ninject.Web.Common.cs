@@ -88,6 +88,9 @@ namespace Presentation.Start
             kernel.Bind<IPessoaExternaAppService>().To<PessoaExternaAppService>();
             kernel.Bind<IPlataformaEntregaAppService>().To<PlataformaEntregaAppService>();
             kernel.Bind<ICargoAppService>().To<CargoAppService>();
+            kernel.Bind<ICentroCustoAppService>().To<CentroCustoAppService>();
+            kernel.Bind<IGrupoCCAppService>().To<GrupoCCAppService>();
+            kernel.Bind<ISubgrupoAppService>().To<SubgrupoAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -111,6 +114,9 @@ namespace Presentation.Start
             kernel.Bind<IPessoaExternaService>().To<PessoaExternaService>();
             kernel.Bind<IPlataformaEntregaService>().To<PlataformaEntregaService>();
             kernel.Bind<ICargoService>().To<CargoService>();
+            kernel.Bind<ICentroCustoService>().To<CentroCustoService>();
+            kernel.Bind<IGrupoCCService>().To<GrupoCCService>();
+            kernel.Bind<ISubgrupoService>().To<SubgrupoService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -146,6 +152,9 @@ namespace Presentation.Start
             kernel.Bind<IUsuarioAnotacaoRepository>().To<UsuarioAnotacaoRepository>();
             kernel.Bind<IRegimeTributarioRepository>().To<RegimeTributarioRepository>();
             kernel.Bind<IEmpresaAnexoRepository>().To<EmpresaAnexoRepository>();
+            kernel.Bind<ICentroCustoRepository>().To<CentroCustoRepository>();
+            kernel.Bind<IGrupoCCRepository>().To<GrupoCCRepository>();
+            kernel.Bind<ISubgrupoRepository>().To<SubgrupoRepository>();
 
         }
     }

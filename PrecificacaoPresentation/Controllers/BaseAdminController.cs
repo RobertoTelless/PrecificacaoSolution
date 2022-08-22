@@ -627,5 +627,116 @@ namespace ERP_Condominios_Solution.Controllers
             return View(vm);
         }
 
+        public ActionResult MontarTelaDashboardCadastros()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            UsuarioViewModel vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
+
+            // Carrega valores dos cadastros
+            //List<BANCO> banco = banApp.GetAllItens();
+            //Int32 bancos = banco.Count;
+            //List<PLANO_CONTA> plano = plaApp.GetAllItens();
+            //Int32 planos = plano.Count;
+            //List<CONTA_BANCO> conta = conApp.GetAllItens();
+            //Int32 contas = conta.Count;
+
+            Int32 bancos = 1;
+            Int32 contas = 2; 
+            Int32 planos = 4;
+
+            Session["Bancos"] = bancos;
+            Session["Planos"] = planos;
+            Session["Contas"] = contas;
+
+            ViewBag.Bancos = bancos;
+            ViewBag.Planos = planos;
+            ViewBag.Contas = contas;
+            ViewBag.Clientes = 0;
+            ViewBag.Fornecedores = 0;
+            ViewBag.Produtos = 0;
+
+            //Session["PlanoCredito"] = plano.Where(p => p.CECU_IN_TIPO == 1).ToList().Count;
+            //Session["PlanoDebito"] = plano.Where(p => p.CECU_IN_TIPO == 2).ToList().Count;
+            //Session["ContaCorrente"] = conta.Where(p => p.TICO_CD_ID == 1).ToList().Count;
+            //Session["ContaPoupanca"] = conta.Where(p => p.TICO_CD_ID == 2).ToList().Count;
+            //Session["ContaInvestimento"] = conta.Where(p => p.TICO_CD_ID == 3).ToList().Count;
+            Session["PlanoCredito"] = 1;
+            Session["PlanoDebito"] = 3;
+            Session["ContaCorrente"] = 1;
+            Session["ContaPoupanca"] = 1;
+            Session["ContaInvestimento"] = 0;
+
+            // Recupera contatos por qualificacao
+            //List<ModeloViewModel> lista2 = new List<ModeloViewModel>();
+            //List<QUALIFICACAO> quals = conApp.GetAllQualificacao().ToList();
+            //foreach (QUALIFICACAO item in quals)
+            //{
+            //    Int32 conta = conts.Where(p => p.QUAL_CD_ID == item.QUAL_CD_ID).ToList().Count;
+            //    ModeloViewModel mod = new ModeloViewModel();
+            //    mod.Nome = item.QUAL_NM_NOME;
+            //    mod.Valor = conta;
+            //    lista2.Add(mod);
+            //}
+            //ViewBag.ListaContatoQuali = lista2;
+            //Session["ListaContatoQuali"] = lista2;
+            return View(vm);
+        }
+
+        public JsonResult GetDadosGraficoPlanoTipo()
+        {
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+
+            Int32 q1 = (Int32)Session["PlanoCredito"];
+            Int32 q2 = (Int32)Session["PlanoDebito"];
+
+            desc.Add("Conta de Crédito");
+            quant.Add(q1);
+            cor.Add("#359E18");
+            desc.Add("Conta de Débito");
+            quant.Add(q2);
+            cor.Add("#FFAE00");
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosGraficoContaTipo()
+        {
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+
+            Int32 q1 = (Int32)Session["ContaCorrente"];
+            Int32 q2 = (Int32)Session["ContaPoupanca"];
+            Int32 q3 = (Int32)Session["ContaInvestimento"];
+
+
+            desc.Add("Conta Corrente");
+            quant.Add(q1);
+            cor.Add("#359E18");
+            desc.Add("Conta Poupança");
+            quant.Add(q2);
+            cor.Add("#FFAE00");
+            desc.Add("Conta Investimento");
+            quant.Add(q2);
+            cor.Add("#FFAB69");
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
     }
 }

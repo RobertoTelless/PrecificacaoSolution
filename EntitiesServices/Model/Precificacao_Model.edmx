@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Db_PrecificacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Db_PrecificacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AGENDA">
           <Key>
             <PropertyRef Name="AGEN_CD_ID" />
@@ -373,6 +373,17 @@
           <Property Name="FOQS_NM_NOME" Type="varchar" MaxLength="100" />
           <Property Name="FOQS_IN_ATIVO" Type="int" />
         </EntityType>
+        <EntityType Name="GRUPO_PLANO_CONTA">
+          <Key>
+            <PropertyRef Name="GRCC_CD_ID" />
+          </Key>
+          <Property Name="GRCC_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="GRCC_NM_NOME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="GRCC_NR_NUMERO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="GRCC_IN_ATIVO" Type="int" Nullable="false" />
+          <Property Name="GRCC_NM_EXIBE" Type="varchar" MaxLength="113" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
         <EntityType Name="LOG">
           <Key>
             <PropertyRef Name="LOG_CD_ID" />
@@ -529,6 +540,21 @@
           <Property Name="PEAN_TX_ANOTACAO" Type="text" Nullable="false" />
           <Property Name="PEAN_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PLANO_CONTA">
+          <Key>
+            <PropertyRef Name="CECU_CD_ID" />
+          </Key>
+          <Property Name="CECU_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="GRCC_CD_ID" Type="int" Nullable="false" />
+          <Property Name="SGCC_CD_ID" Type="int" Nullable="false" />
+          <Property Name="CECU_NR_NUMERO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CECU_NM_NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CECU_IN_TIPO" Type="int" Nullable="false" />
+          <Property Name="CECU_IN_MOVTO" Type="int" Nullable="false" />
+          <Property Name="CECU_IN_ATIVO" Type="int" Nullable="false" />
+          <Property Name="CECU_NM_EXIBE" Type="varchar" MaxLength="63" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
         <EntityType Name="PLATAFORMA_ENTREGA">
           <Key>
             <PropertyRef Name="PLEN_CD_ID" />
@@ -675,6 +701,19 @@
           <Property Name="CAPR_CD_ID" Type="int" Nullable="false" />
           <Property Name="SCPR_NM_NOME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SCPR_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUBGRUPO_PLANO_CONTA">
+          <Key>
+            <PropertyRef Name="SGCC_CD_ID" />
+          </Key>
+          <Property Name="SGCC_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" />
+          <Property Name="GRCC_CD_ID" Type="int" Nullable="false" />
+          <Property Name="SGCC_NR_NUMERO" Type="varchar" MaxLength="10" />
+          <Property Name="SGCC_NM_NOME" Type="varchar" MaxLength="100" />
+          <Property Name="SGCC_DS_DESCRICAO" Type="varchar" MaxLength="500" />
+          <Property Name="SGCC_IN_ATIVO" Type="int" />
+          <Property Name="SGCC_NM_EXIBE" Type="varchar" MaxLength="113" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="TAREFA">
           <Key>
@@ -1062,6 +1101,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GRUPO_PLANO_CONTA_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="GRUPO_PLANO_CONTA" Type="Self.GRUPO_PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO_PLANO_CONTA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LOG_ASSINANTE">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
           <End Role="LOG" Type="Self.LOG" Multiplicity="*" />
@@ -1119,6 +1170,30 @@
             </Principal>
             <Dependent Role="PESSOA_EXTERNA_ANOTACAO">
               <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANO_CONTA_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="PLANO_CONTA" Type="Self.PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="PLANO_CONTA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBGRUPO_PLANO_CONTA_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="SUBGRUPO_PLANO_CONTA" Type="Self.SUBGRUPO_PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="SUBGRUPO_PLANO_CONTA">
+              <PropertyRef Name="ASSI_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1746,6 +1821,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKPLANO_CONT396583">
+          <End Role="GRUPO_PLANO_CONTA" Type="Self.GRUPO_PLANO_CONTA" Multiplicity="1" />
+          <End Role="PLANO_CONTA" Type="Self.PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO_PLANO_CONTA">
+              <PropertyRef Name="GRCC_CD_ID" />
+            </Principal>
+            <Dependent Role="PLANO_CONTA">
+              <PropertyRef Name="GRCC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPLANO_CONT936913">
+          <End Role="SUBGRUPO_PLANO_CONTA" Type="Self.SUBGRUPO_PLANO_CONTA" Multiplicity="1" />
+          <End Role="PLANO_CONTA" Type="Self.PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBGRUPO_PLANO_CONTA">
+              <PropertyRef Name="SGCC_CD_ID" />
+            </Principal>
+            <Dependent Role="PLANO_CONTA">
+              <PropertyRef Name="SGCC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKPLATAFORMA785659">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
           <End Role="PLATAFORMA_ENTREGA" Type="Self.PLATAFORMA_ENTREGA" Multiplicity="*" />
@@ -1926,6 +2025,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKSUBGRUPO_P567299">
+          <End Role="GRUPO_PLANO_CONTA" Type="Self.GRUPO_PLANO_CONTA" Multiplicity="1" />
+          <End Role="SUBGRUPO_PLANO_CONTA" Type="Self.SUBGRUPO_PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO_PLANO_CONTA">
+              <PropertyRef Name="GRCC_CD_ID" />
+            </Principal>
+            <Dependent Role="SUBGRUPO_PLANO_CONTA">
+              <PropertyRef Name="GRCC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKTAREFA_ACO948353">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
           <End Role="TAREFA_ACOMPANHAMENTO" Type="Self.TAREFA_ACOMPANHAMENTO" Multiplicity="*" />
@@ -2027,6 +2138,7 @@
           <EntitySet Name="FORNECEDOR_ANOTACOES" EntityType="Self.FORNECEDOR_ANOTACOES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FORNECEDOR_CONTATO" EntityType="Self.FORNECEDOR_CONTATO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FORNECEDOR_QUADRO_SOCIETARIO" EntityType="Self.FORNECEDOR_QUADRO_SOCIETARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRUPO_PLANO_CONTA" EntityType="Self.GRUPO_PLANO_CONTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOG" EntityType="Self.LOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MAQUINA" EntityType="Self.MAQUINA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NOTICIA" EntityType="Self.NOTICIA" Schema="dbo" store:Type="Tables" />
@@ -2039,6 +2151,7 @@
           <EntitySet Name="PESSOA_EXTERNA" EntityType="Self.PESSOA_EXTERNA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PESSOA_EXTERNA_ANEXO" EntityType="Self.PESSOA_EXTERNA_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PESSOA_EXTERNA_ANOTACAO" EntityType="Self.PESSOA_EXTERNA_ANOTACAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANO_CONTA" EntityType="Self.PLANO_CONTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLATAFORMA_ENTREGA" EntityType="Self.PLATAFORMA_ENTREGA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUTO" EntityType="Self.PRODUTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUTO_ANEXO" EntityType="Self.PRODUTO_ANEXO" Schema="dbo" store:Type="Tables" />
@@ -2049,6 +2162,7 @@
           <EntitySet Name="PRODUTO_ULTIMOS_CUSTOS" EntityType="Self.PRODUTO_ULTIMOS_CUSTOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REGIME_TRIBUTARIO" EntityType="Self.REGIME_TRIBUTARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUBCATEGORIA_PRODUTO" EntityType="Self.SUBCATEGORIA_PRODUTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBGRUPO_PLANO_CONTA" EntityType="Self.SUBGRUPO_PLANO_CONTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAREFA" EntityType="Self.TAREFA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAREFA_ACOMPANHAMENTO" EntityType="Self.TAREFA_ACOMPANHAMENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAREFA_ANEXO" EntityType="Self.TAREFA_ANEXO" Schema="dbo" store:Type="Tables" />
@@ -2127,6 +2241,10 @@
             <End Role="UF" EntitySet="UF" />
             <End Role="FORNECEDOR" EntitySet="FORNECEDOR" />
           </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_PLANO_CONTA_ASSINANTE" Association="Self.FK_GRUPO_PLANO_CONTA_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="GRUPO_PLANO_CONTA" EntitySet="GRUPO_PLANO_CONTA" />
+          </AssociationSet>
           <AssociationSet Name="FK_LOG_ASSINANTE" Association="Self.FK_LOG_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="LOG" EntitySet="LOG" />
@@ -2146,6 +2264,14 @@
           <AssociationSet Name="FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" Association="Self.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="PESSOA_EXTERNA_ANOTACAO" EntitySet="PESSOA_EXTERNA_ANOTACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANO_CONTA_ASSINANTE" Association="Self.FK_PLANO_CONTA_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" Association="Self.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="SUBGRUPO_PLANO_CONTA" EntitySet="SUBGRUPO_PLANO_CONTA" />
           </AssociationSet>
           <AssociationSet Name="FK_TAREFA_ACOMPANHAMENTO_TAREFA" Association="Self.FK_TAREFA_ACOMPANHAMENTO_TAREFA">
             <End Role="TAREFA" EntitySet="TAREFA" />
@@ -2355,6 +2481,14 @@
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="PESSOA_EXTERNA" EntitySet="PESSOA_EXTERNA" />
           </AssociationSet>
+          <AssociationSet Name="FKPLANO_CONT396583" Association="Self.FKPLANO_CONT396583">
+            <End Role="GRUPO_PLANO_CONTA" EntitySet="GRUPO_PLANO_CONTA" />
+            <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FKPLANO_CONT936913" Association="Self.FKPLANO_CONT936913">
+            <End Role="SUBGRUPO_PLANO_CONTA" EntitySet="SUBGRUPO_PLANO_CONTA" />
+            <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+          </AssociationSet>
           <AssociationSet Name="FKPLATAFORMA785659" Association="Self.FKPLATAFORMA785659">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="PLATAFORMA_ENTREGA" EntitySet="PLATAFORMA_ENTREGA" />
@@ -2415,6 +2549,10 @@
             <End Role="CATEGORIA_PRODUTO" EntitySet="CATEGORIA_PRODUTO" />
             <End Role="SUBCATEGORIA_PRODUTO" EntitySet="SUBCATEGORIA_PRODUTO" />
           </AssociationSet>
+          <AssociationSet Name="FKSUBGRUPO_P567299" Association="Self.FKSUBGRUPO_P567299">
+            <End Role="GRUPO_PLANO_CONTA" EntitySet="GRUPO_PLANO_CONTA" />
+            <End Role="SUBGRUPO_PLANO_CONTA" EntitySet="SUBGRUPO_PLANO_CONTA" />
+          </AssociationSet>
           <AssociationSet Name="FKTAREFA_ACO948353" Association="Self.FKTAREFA_ACO948353">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="TAREFA_ACOMPANHAMENTO" EntitySet="TAREFA_ACOMPANHAMENTO" />
@@ -2440,8 +2578,7 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Db_PrecificacaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2516,6 +2653,9 @@
           <NavigationProperty Name="PRODUTO" Relationship="Self.FKPRODUTO932438" FromRole="ASSINANTE" ToRole="PRODUTO" />
           <NavigationProperty Name="TAREFA" Relationship="Self.FKTAREFA157283" FromRole="ASSINANTE" ToRole="TAREFA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKUSUARIO561404" FromRole="ASSINANTE" ToRole="USUARIO" />
+          <NavigationProperty Name="GRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_GRUPO_PLANO_CONTA_ASSINANTE" FromRole="ASSINANTE" ToRole="GRUPO_PLANO_CONTA" />
+          <NavigationProperty Name="PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_PLANO_CONTA_ASSINANTE" FromRole="ASSINANTE" ToRole="PLANO_CONTA" />
+          <NavigationProperty Name="SUBGRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" FromRole="ASSINANTE" ToRole="SUBGRUPO_PLANO_CONTA" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -5067,7 +5207,154 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="USUARIO_ANOTACAO" EntitySet="USUARIO_ANOTACAO" />
           </AssociationSet>
+          <EntitySet Name="GRUPO_PLANO_CONTA" EntityType="Db_PrecificacaoModel.GRUPO_PLANO_CONTA" />
+          <EntitySet Name="PLANO_CONTA" EntityType="Db_PrecificacaoModel.PLANO_CONTA" />
+          <EntitySet Name="SUBGRUPO_PLANO_CONTA" EntityType="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA" />
+          <AssociationSet Name="FK_GRUPO_PLANO_CONTA_ASSINANTE" Association="Db_PrecificacaoModel.FK_GRUPO_PLANO_CONTA_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="GRUPO_PLANO_CONTA" EntitySet="GRUPO_PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANO_CONTA_ASSINANTE" Association="Db_PrecificacaoModel.FK_PLANO_CONTA_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" Association="Db_PrecificacaoModel.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="SUBGRUPO_PLANO_CONTA" EntitySet="SUBGRUPO_PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FKPLANO_CONT396583" Association="Db_PrecificacaoModel.FKPLANO_CONT396583">
+            <End Role="GRUPO_PLANO_CONTA" EntitySet="GRUPO_PLANO_CONTA" />
+            <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FKSUBGRUPO_P567299" Association="Db_PrecificacaoModel.FKSUBGRUPO_P567299">
+            <End Role="GRUPO_PLANO_CONTA" EntitySet="GRUPO_PLANO_CONTA" />
+            <End Role="SUBGRUPO_PLANO_CONTA" EntitySet="SUBGRUPO_PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FKPLANO_CONT936913" Association="Db_PrecificacaoModel.FKPLANO_CONT936913">
+            <End Role="SUBGRUPO_PLANO_CONTA" EntitySet="SUBGRUPO_PLANO_CONTA" />
+            <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="GRUPO_PLANO_CONTA">
+          <Key>
+            <PropertyRef Name="GRCC_CD_ID" />
+          </Key>
+          <Property Name="GRCC_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="GRCC_NM_NOME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GRCC_NR_NUMERO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GRCC_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="GRCC_NM_EXIBE" Type="String" Nullable="false" MaxLength="113" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_GRUPO_PLANO_CONTA_ASSINANTE" FromRole="GRUPO_PLANO_CONTA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="PLANO_CONTA" Relationship="Db_PrecificacaoModel.FKPLANO_CONT396583" FromRole="GRUPO_PLANO_CONTA" ToRole="PLANO_CONTA" />
+          <NavigationProperty Name="SUBGRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FKSUBGRUPO_P567299" FromRole="GRUPO_PLANO_CONTA" ToRole="SUBGRUPO_PLANO_CONTA" />
+        </EntityType>
+        <EntityType Name="PLANO_CONTA">
+          <Key>
+            <PropertyRef Name="CECU_CD_ID" />
+          </Key>
+          <Property Name="CECU_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="GRCC_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="SGCC_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CECU_NR_NUMERO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CECU_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CECU_IN_TIPO" Type="Int32" Nullable="false" />
+          <Property Name="CECU_IN_MOVTO" Type="Int32" Nullable="false" />
+          <Property Name="CECU_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="CECU_NM_EXIBE" Type="String" Nullable="false" MaxLength="63" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_PLANO_CONTA_ASSINANTE" FromRole="PLANO_CONTA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="GRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FKPLANO_CONT396583" FromRole="PLANO_CONTA" ToRole="GRUPO_PLANO_CONTA" />
+          <NavigationProperty Name="SUBGRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FKPLANO_CONT936913" FromRole="PLANO_CONTA" ToRole="SUBGRUPO_PLANO_CONTA" />
+        </EntityType>
+        <EntityType Name="SUBGRUPO_PLANO_CONTA">
+          <Key>
+            <PropertyRef Name="SGCC_CD_ID" />
+          </Key>
+          <Property Name="SGCC_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
+          <Property Name="GRCC_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="SGCC_NR_NUMERO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SGCC_NM_NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SGCC_DS_DESCRICAO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SGCC_IN_ATIVO" Type="Int32" />
+          <Property Name="SGCC_NM_EXIBE" Type="String" MaxLength="113" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" FromRole="SUBGRUPO_PLANO_CONTA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="GRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FKSUBGRUPO_P567299" FromRole="SUBGRUPO_PLANO_CONTA" ToRole="GRUPO_PLANO_CONTA" />
+          <NavigationProperty Name="PLANO_CONTA" Relationship="Db_PrecificacaoModel.FKPLANO_CONT936913" FromRole="SUBGRUPO_PLANO_CONTA" ToRole="PLANO_CONTA" />
+        </EntityType>
+        <Association Name="FK_GRUPO_PLANO_CONTA_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.GRUPO_PLANO_CONTA" Role="GRUPO_PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO_PLANO_CONTA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANO_CONTA_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.PLANO_CONTA" Role="PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="PLANO_CONTA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBGRUPO_PLANO_CONTA_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA" Role="SUBGRUPO_PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="SUBGRUPO_PLANO_CONTA">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPLANO_CONT396583">
+          <End Type="Db_PrecificacaoModel.GRUPO_PLANO_CONTA" Role="GRUPO_PLANO_CONTA" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.PLANO_CONTA" Role="PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO_PLANO_CONTA">
+              <PropertyRef Name="GRCC_CD_ID" />
+            </Principal>
+            <Dependent Role="PLANO_CONTA">
+              <PropertyRef Name="GRCC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSUBGRUPO_P567299">
+          <End Type="Db_PrecificacaoModel.GRUPO_PLANO_CONTA" Role="GRUPO_PLANO_CONTA" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA" Role="SUBGRUPO_PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO_PLANO_CONTA">
+              <PropertyRef Name="GRCC_CD_ID" />
+            </Principal>
+            <Dependent Role="SUBGRUPO_PLANO_CONTA">
+              <PropertyRef Name="GRCC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPLANO_CONT936913">
+          <End Type="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA" Role="SUBGRUPO_PLANO_CONTA" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.PLANO_CONTA" Role="PLANO_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBGRUPO_PLANO_CONTA">
+              <PropertyRef Name="SGCC_CD_ID" />
+            </Principal>
+            <Dependent Role="PLANO_CONTA">
+              <PropertyRef Name="SGCC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6000,6 +6287,48 @@
                 <ScalarProperty Name="USAN_IN_AUTOR" ColumnName="USAN_IN_AUTOR" />
                 <ScalarProperty Name="USAN_TX_ANOTACAO" ColumnName="USAN_TX_ANOTACAO" />
                 <ScalarProperty Name="USAN_IN_ATIVO" ColumnName="USAN_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRUPO_PLANO_CONTA">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.GRUPO_PLANO_CONTA">
+              <MappingFragment StoreEntitySet="GRUPO_PLANO_CONTA">
+                <ScalarProperty Name="GRCC_NM_EXIBE" ColumnName="GRCC_NM_EXIBE" />
+                <ScalarProperty Name="GRCC_IN_ATIVO" ColumnName="GRCC_IN_ATIVO" />
+                <ScalarProperty Name="GRCC_NR_NUMERO" ColumnName="GRCC_NR_NUMERO" />
+                <ScalarProperty Name="GRCC_NM_NOME" ColumnName="GRCC_NM_NOME" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="GRCC_CD_ID" ColumnName="GRCC_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANO_CONTA">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PLANO_CONTA">
+              <MappingFragment StoreEntitySet="PLANO_CONTA">
+                <ScalarProperty Name="CECU_NM_EXIBE" ColumnName="CECU_NM_EXIBE" />
+                <ScalarProperty Name="CECU_IN_ATIVO" ColumnName="CECU_IN_ATIVO" />
+                <ScalarProperty Name="CECU_IN_MOVTO" ColumnName="CECU_IN_MOVTO" />
+                <ScalarProperty Name="CECU_IN_TIPO" ColumnName="CECU_IN_TIPO" />
+                <ScalarProperty Name="CECU_NM_NOME" ColumnName="CECU_NM_NOME" />
+                <ScalarProperty Name="CECU_NR_NUMERO" ColumnName="CECU_NR_NUMERO" />
+                <ScalarProperty Name="SGCC_CD_ID" ColumnName="SGCC_CD_ID" />
+                <ScalarProperty Name="GRCC_CD_ID" ColumnName="GRCC_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="CECU_CD_ID" ColumnName="CECU_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBGRUPO_PLANO_CONTA">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA">
+              <MappingFragment StoreEntitySet="SUBGRUPO_PLANO_CONTA">
+                <ScalarProperty Name="SGCC_NM_EXIBE" ColumnName="SGCC_NM_EXIBE" />
+                <ScalarProperty Name="SGCC_IN_ATIVO" ColumnName="SGCC_IN_ATIVO" />
+                <ScalarProperty Name="SGCC_DS_DESCRICAO" ColumnName="SGCC_DS_DESCRICAO" />
+                <ScalarProperty Name="SGCC_NM_NOME" ColumnName="SGCC_NM_NOME" />
+                <ScalarProperty Name="SGCC_NR_NUMERO" ColumnName="SGCC_NR_NUMERO" />
+                <ScalarProperty Name="GRCC_CD_ID" ColumnName="GRCC_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="SGCC_CD_ID" ColumnName="SGCC_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

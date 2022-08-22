@@ -1292,5 +1292,59 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0158", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Grupo já cadastrado.
+        /// </summary>
+        internal static string M0159 {
+            get {
+                return ResourceManager.GetString("M0159", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este grupo. Existem registros vinculados a ele..
+        /// </summary>
+        internal static string M0160 {
+            get {
+                return ResourceManager.GetString("M0160", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Subgrupo já cadastrado.
+        /// </summary>
+        internal static string M0161 {
+            get {
+                return ResourceManager.GetString("M0161", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este subgrupo. Existem registros vinculados a ele..
+        /// </summary>
+        internal static string M0162 {
+            get {
+                return ResourceManager.GetString("M0162", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Conta já cadastrada no Plano de Contas.
+        /// </summary>
+        internal static string M0163 {
+            get {
+                return ResourceManager.GetString("M0163", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta conta do plano de contas. Existem registros vinculados a ela..
+        /// </summary>
+        internal static string M0164 {
+            get {
+                return ResourceManager.GetString("M0164", resourceCulture);
+            }
+        }
     }
 }

@@ -528,4 +528,22 @@
   <data name="M0158" xml:space="preserve">
     <value>CPF já existente na lista de usuários</value>
   </data>
+  <data name="M0159" xml:space="preserve">
+    <value>Grupo já cadastrado</value>
+  </data>
+  <data name="M0160" xml:space="preserve">
+    <value>Impossível excluir este grupo. Existem registros vinculados a ele.</value>
+  </data>
+  <data name="M0161" xml:space="preserve">
+    <value>Subgrupo já cadastrado</value>
+  </data>
+  <data name="M0162" xml:space="preserve">
+    <value>Impossível excluir este subgrupo. Existem registros vinculados a ele.</value>
+  </data>
+  <data name="M0163" xml:space="preserve">
+    <value>Conta já cadastrada no Plano de Contas</value>
+  </data>
+  <data name="M0164" xml:space="preserve">
+    <value>Impossível excluir esta conta do plano de contas. Existem registros vinculados a ela.</value>
+  </data>
 </root>

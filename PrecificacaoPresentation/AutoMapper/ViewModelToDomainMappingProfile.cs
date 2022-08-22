@@ -34,6 +34,9 @@ namespace MvcMapping.Mappers
             CreateMap<PessoaExternaAnotacaoViewModel, PESSOA_EXTERNA_ANOTACAO>();
             CreateMap<PlataformaEntregaViewModel, PLATAFORMA_ENTREGA>();
             CreateMap<UsuarioAnotacaoViewModel, USUARIO_ANOTACAO>();
+            CreateMap<CentroCustoViewModel, PLANO_CONTA>();
+            CreateMap<GrupoViewModel, GRUPO_PLANO_CONTA>();
+            CreateMap<SubgrupoViewModel, SUBGRUPO_PLANO_CONTA>();
 
         }
     }

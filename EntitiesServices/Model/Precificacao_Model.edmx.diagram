@@ -163,6 +163,15 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_USUARIO_ANEXO_USUARIO" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN416650" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.GRUPO_PLANO_CONTA" Width="1.5" PointX="3" PointY="83.875" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLANO_CONTA" Width="1.5" PointX="18.25" PointY="89.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA" Width="1.5" PointX="16.25" PointY="66.5" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_PLANO_CONTA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PLANO_CONTA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT396583" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKSUBGRUPO_P567299" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT936913" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

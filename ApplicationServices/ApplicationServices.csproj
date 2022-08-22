@@ -201,6 +201,8 @@
     <Compile Include="Interfaces\ICategoriaUsuarioAppService.cs" />
     <Compile Include="Interfaces\ICategoriaNotificacaoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaAgendaAppService.cs" />
+    <Compile Include="Interfaces\ICentroCustoAppService.cs" />
+    <Compile Include="Interfaces\IGrupoCCAppService.cs" />
     <Compile Include="Interfaces\IPlataformaEntregaAppService.cs" />
     <Compile Include="Interfaces\IPessoaExternaAppService.cs" />
     <Compile Include="Interfaces\IMaquinaAppService.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Interfaces\INotificacaoAppService.cs" />
     <Compile Include="Interfaces\IPerfilAppService.cs" />
     <Compile Include="Interfaces\IPeriodicidadeAppService.cs" />
+    <Compile Include="Interfaces\ISubgrupoAppService.cs" />
     <Compile Include="Interfaces\ITarefaAppService.cs" />
     <Compile Include="Interfaces\ITemplateAppService.cs" />
     <Compile Include="Interfaces\IUsuarioAppService.cs" />
@@ -219,6 +222,8 @@
     <Compile Include="Services\AgendaAppService.cs" />
     <Compile Include="Services\AppServiceBase.cs" />
     <Compile Include="Services\AssinanteAppService.cs" />
+    <Compile Include="Services\CentroCustoAppService.cs" />
+    <Compile Include="Services\GrupoCCAppService.cs" />
     <Compile Include="Services\PlataformaEntregaAppService.cs" />
     <Compile Include="Services\PessoaExternaAppService.cs" />
     <Compile Include="Services\MaquinaAppService.cs" />
@@ -233,6 +238,7 @@
     <Compile Include="Services\NoticiaAppService.cs" />
     <Compile Include="Services\NotificacaoAppService.cs" />
     <Compile Include="Services\PeriodicidadeAppService.cs" />
+    <Compile Include="Services\SubgrupoAppService.cs" />
     <Compile Include="Services\TarefaAppService.cs" />
     <Compile Include="Services\TemplateAppService.cs" />
     <Compile Include="Services\UsuarioAppService.cs" />
