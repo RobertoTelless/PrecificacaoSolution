@@ -248,6 +248,7 @@
     <Compile Include="Controllers\TarefaController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Extensions\HMTLHelperExtensions.cs" />
     <Compile Include="Extensions\MVCButtonExtensions.cs" />
     <Compile Include="Extensions\WebMvcExtensions.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="ViewModels\ContaBancariaContatoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaLancamentoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaViewModel.cs" />
+    <Compile Include="ViewModels\VideoViewModel.cs" />
     <Compile Include="ViewModels\SubgrupoViewModel.cs" />
     <Compile Include="ViewModels\GrupoViewModel.cs" />
     <Compile Include="ViewModels\CategoriaUsuarioViewModel.cs" />
@@ -2978,6 +2980,11 @@
     <Content Include="Views\Banco\IncluirContato.cshtml" />
     <Content Include="Views\Banco\IncluirLancamento.cshtml" />
     <Content Include="Views\Banco\EditarLancamento.cshtml" />
+    <Content Include="Views\Video\VerVideo.cshtml" />
+    <Content Include="Views\Video\MontarTelaUsuario.cshtml" />
+    <Content Include="Views\Video\MontarTelaVideo.cshtml" />
+    <Content Include="Views\Video\IncluirVideo.cshtml" />
+    <Content Include="Views\BaseAdmin\CarregarBase - Cópia .cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

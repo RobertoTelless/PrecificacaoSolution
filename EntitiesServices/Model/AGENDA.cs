@@ -33,6 +33,7 @@ namespace EntitiesServices.Model
         public int AGEN_IN_ATIVO { get; set; }
         public Nullable<int> AGEN_CD_USUARIO { get; set; }
         public string AGEN_LK_REUNIAO { get; set; }
+        public Nullable<int> TARE_CD_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA_ANEXO> AGENDA_ANEXO { get; set; }
@@ -40,5 +41,6 @@ namespace EntitiesServices.Model
         public virtual USUARIO USUARIO { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual USUARIO USUARIO1 { get; set; }
+        public virtual TAREFA TAREFA { get; set; }
     }
 }

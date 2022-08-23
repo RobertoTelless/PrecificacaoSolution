@@ -43,12 +43,14 @@ namespace ERP_Condominios_Solution.ViewModels
         public string TARE_TEX_OBSERVACAO { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
+        public virtual PERIODICIDADE_TAREFA PERIODICIDADE_TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREFA_ACOMPANHAMENTO> TAREFA_ACOMPANHAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }
         public virtual TIPO_TAREFA TIPO_TAREFA { get; set; }
         public virtual USUARIO USUARIO { get; set; }
-        public virtual PERIODICIDADE_TAREFA PERIODICIDADE_TAREFA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AGENDA> AGENDA { get; set; }
     }
 }

@@ -187,6 +187,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonHelpers.cs" />
     <Compile Include="CommunicationPackage.cs" />
     <Compile Include="Cryptography.cs" />
     <Compile Include="EMail.cs" />

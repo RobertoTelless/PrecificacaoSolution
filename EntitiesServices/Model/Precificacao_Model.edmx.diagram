@@ -173,6 +173,9 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKSUBGRUPO_P567299" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT936913" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_BANCO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_TAREFA" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO" Width="1.5" PointX="3" PointY="87.75" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_ASSINANTE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

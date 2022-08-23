@@ -48,6 +48,7 @@ namespace EntitiesServices.Model
             this.PLANO_CONTA = new HashSet<PLANO_CONTA>();
             this.SUBGRUPO_PLANO_CONTA = new HashSet<SUBGRUPO_PLANO_CONTA>();
             this.CONTA_BANCO = new HashSet<CONTA_BANCO>();
+            this.VIDEO = new HashSet<VIDEO>();
         }
     
         public int ASSI_CD_ID { get; set; }
@@ -117,5 +118,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<SUBGRUPO_PLANO_CONTA> SUBGRUPO_PLANO_CONTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_BANCO> CONTA_BANCO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VIDEO> VIDEO { get; set; }
     }
 }

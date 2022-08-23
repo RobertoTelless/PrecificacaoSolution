@@ -19,6 +19,7 @@ namespace EntitiesServices.Model
         {
             this.TAREFA_ACOMPANHAMENTO = new HashSet<TAREFA_ACOMPANHAMENTO>();
             this.TAREFA_ANEXO = new HashSet<TAREFA_ANEXO>();
+            this.AGENDA = new HashSet<AGENDA>();
         }
     
         public int TARE_CD_ID { get; set; }
@@ -48,5 +49,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }
         public virtual TIPO_TAREFA TIPO_TAREFA { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AGENDA> AGENDA { get; set; }
     }
 }

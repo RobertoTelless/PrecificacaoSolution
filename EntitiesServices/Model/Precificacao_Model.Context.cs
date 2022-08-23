@@ -92,5 +92,6 @@ namespace EntitiesServices.Model
         public virtual DbSet<GRUPO_PLANO_CONTA> GRUPO_PLANO_CONTA { get; set; }
         public virtual DbSet<PLANO_CONTA> PLANO_CONTA { get; set; }
         public virtual DbSet<SUBGRUPO_PLANO_CONTA> SUBGRUPO_PLANO_CONTA { get; set; }
+        public virtual DbSet<VIDEO> VIDEO { get; set; }
     }
 }

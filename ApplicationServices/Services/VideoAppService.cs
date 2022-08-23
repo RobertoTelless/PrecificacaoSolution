@@ -1,5 +1,4 @@
 using System;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,66 +12,48 @@ using System.Text.RegularExpressions;
 
 namespace ApplicationServices.Services
 {
-    public class NotificacaoAppService : AppServiceBase<NOTIFICACAO>, INotificacaoAppService
+    public class VideoAppService : AppServiceBase<VIDEO>, IVideoAppService
     {
-        private readonly INotificacaoService _baseService;
+        private readonly IVideoService _baseService;
 
-        public NotificacaoAppService(INotificacaoService baseService): base(baseService)
+        public VideoAppService(IVideoService baseService): base(baseService)
         {
             _baseService = baseService;
         }
 
-        public List<NOTIFICACAO> GetAllItens(Int32 idAss)
+        public List<VIDEO> GetAllItens(Int32 idAss)
         {
-            List<NOTIFICACAO> lista = _baseService.GetAllItens(idAss);
+            List<VIDEO> lista = _baseService.GetAllItens(idAss);
             return lista;
         }
 
-        public List<NOTIFICACAO> GetAllItensAdm(Int32 idAss)
+        public List<VIDEO> GetAllItensAdm(Int32 idAss)
         {
-            List<NOTIFICACAO> lista = _baseService.GetAllItensAdm(idAss);
+            List<VIDEO> lista = _baseService.GetAllItensAdm(idAss);
             return lista;
         }
 
-        public List<CATEGORIA_NOTIFICACAO> GetAllCategorias(Int32 idAss)
+        public VIDEO GetItemById(Int32 id)
         {
-            List<CATEGORIA_NOTIFICACAO> lista = _baseService.GetAllCategorias(idAss);
-            return lista;
-        }
-
-        public NOTIFICACAO_ANEXO GetAnexoById(Int32 id)
-        {
-            NOTIFICACAO_ANEXO lista = _baseService.GetAnexoById(id);
-            return lista;
-        }
-
-        public NOTIFICACAO GetItemById(Int32 id)
-        {
-            NOTIFICACAO item = _baseService.GetItemById(id);
+            VIDEO item = _baseService.GetItemById(id);
             return item;
         }
 
-        public List<NOTIFICACAO> GetAllItensUser(Int32 id, Int32 idAss)
+        public List<VIDEO> GetAllItensValidos(Int32 idAss)
         {
-            List<NOTIFICACAO> lista = _baseService.GetAllItensUser(id, idAss);
+            List<VIDEO> lista = _baseService.GetAllItensValidos(idAss);
             return lista;
         }
 
-        public List<NOTIFICACAO> GetNotificacaoNovas(Int32 id, Int32 idAss)
-        {
-            List<NOTIFICACAO> lista = _baseService.GetNotificacaoNovas(id, idAss);
-            return lista;
-        }
-
-        public Int32 ExecuteFilter(String titulo, DateTime? data, String texto, Int32 idAss, out List<NOTIFICACAO> objeto)
+        public Int32 ExecuteFilter(String titulo, String autor, DateTime? data, String texto, String link, Int32 idAss, out List<VIDEO> objeto)
         {
             try
             {
-                objeto = new List<NOTIFICACAO>();
+                objeto = new List<VIDEO>();
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(titulo, data, texto, idAss);
+                objeto = _baseService.ExecuteFilter(titulo, autor, data, texto, link, idAss);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -85,14 +66,14 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreate(NOTIFICACAO item, USUARIO usuario)
+        public Int32 ValidateCreate(VIDEO item, USUARIO usuario)
         {
             try
             {
                 // Verifica existencia prévia
 
                 // Completa objeto
-                item.NOTC_IN_ATIVO = 1;
+                item.VIDE_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -100,9 +81,9 @@ namespace ApplicationServices.Services
                     LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
-                    LOG_NM_OPERACAO = "AddNOTI",
+                    LOG_NM_OPERACAO = "AddVIDE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTIFICACAO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<VIDEO>(item)
                 };
 
                 // Persiste
@@ -115,7 +96,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(NOTIFICACAO item, NOTIFICACAO itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(VIDEO item, VIDEO itemAntes, USUARIO usuario)
         {
             try
             {
@@ -125,10 +106,10 @@ namespace ApplicationServices.Services
                     LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
-                    LOG_NM_OPERACAO = "EditNOTI",
+                    LOG_NM_OPERACAO = "EditVIDE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<NOTIFICACAO>(item),
-                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<NOTIFICACAO>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<VIDEO>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<VIDEO>(itemAntes)
                 };
 
                 // Persiste
@@ -140,13 +121,12 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(NOTIFICACAO item, NOTIFICACAO itemAntes)
+        public Int32 ValidateEdit(VIDEO item, VIDEO itemAntes)
         {
             try
             {
 
                 // Persiste
-                item.USUARIO = null;
                 return _baseService.Edit(item);
             }
             catch (Exception ex)
@@ -155,15 +135,14 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(NOTIFICACAO item, USUARIO usuario)
+        public Int32 ValidateDelete(VIDEO item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
-               
 
                 // Acerta campos
-                item.NOTC_IN_ATIVO = 0;
+                item.VIDE_IN_ATIVO = 0;
 
                 // Monta Log
                 LOG log = new LOG
@@ -172,8 +151,8 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
-                    LOG_NM_OPERACAO = "DelNOTI",
-                    LOG_TX_TEXTO = "Notificação: " + item.NOTC_NM_TITULO
+                    LOG_NM_OPERACAO = "DelVIDE",
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<VIDEO>(item)
                 };
 
                 // Persiste
@@ -185,14 +164,14 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(NOTIFICACAO item, USUARIO usuario)
+        public Int32 ValidateReativar(VIDEO item, USUARIO usuario)
         {
             try
             {
                 // Verifica integridade referencial
 
                 // Acerta campos
-                item.NOTC_IN_ATIVO = 1;
+                item.VIDE_IN_ATIVO = 1;
 
                 // Monta Log
                 LOG log = new LOG
@@ -201,8 +180,8 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
-                    LOG_NM_OPERACAO = "ReatNOTI",
-                    LOG_TX_TEXTO = "Notificação: " + item.NOTC_NM_TITULO
+                    LOG_NM_OPERACAO = "ReatVIDE",
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<VIDEO>(item)
                 };
 
                 // Persiste
@@ -213,5 +192,6 @@ namespace ApplicationServices.Services
                 throw;
             }
         }
+
     }
 }

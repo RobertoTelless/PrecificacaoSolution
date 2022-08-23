@@ -199,6 +199,7 @@
     <Compile Include="EntitiesServices\CentroCustoService.cs" />
     <Compile Include="EntitiesServices\ContaBancariaService.cs" />
     <Compile Include="EntitiesServices\GrupoCCService.cs" />
+    <Compile Include="EntitiesServices\VideoService.cs" />
     <Compile Include="EntitiesServices\SubgrupoService.cs" />
     <Compile Include="EntitiesServices\TipoTarefaService.cs" />
     <Compile Include="EntitiesServices\PlataformaEntregaService.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Interfaces\Repositories\IAgendaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGrupoCCRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IVideoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISubgrupoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoContaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUsuarioAnotacaoRepository.cs" />
@@ -271,6 +273,7 @@
     <Compile Include="Interfaces\Services\ICentroCustoService.cs" />
     <Compile Include="Interfaces\Services\IContaBancariaService.cs" />
     <Compile Include="Interfaces\Services\IGrupoCCService.cs" />
+    <Compile Include="Interfaces\Services\IVideoService.cs" />
     <Compile Include="Interfaces\Services\ISubgrupoService.cs" />
     <Compile Include="Interfaces\Services\ITipoTarefaService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaUsuarioService.cs" />
@@ -506,6 +509,9 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\USUARIO_ANOTACAO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VIDEO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

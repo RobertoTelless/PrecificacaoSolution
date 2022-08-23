@@ -13,6 +13,7 @@
           <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
           <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
           <Property Name="CAAG_CD_ID" Type="int" Nullable="false" />
+          <Property Name="TARE_CD_ID" Type="int" />
           <Property Name="AGEN_DT_DATA" Type="date" Nullable="false" />
           <Property Name="AGEN_HR_HORA" Type="time" Precision="7" Nullable="false" />
           <Property Name="AGEN_NM_TITULO" Type="varchar" MaxLength="200" Nullable="false" />
@@ -912,6 +913,22 @@
           <Property Name="USAN_TX_ANOTACAO" Type="varchar" MaxLength="5000" />
           <Property Name="USAN_IN_ATIVO" Type="int" />
         </EntityType>
+        <EntityType Name="VIDEO">
+          <Key>
+            <PropertyRef Name="VIDE_CD_ID" />
+          </Key>
+          <Property Name="VIDE_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="VIDE_NM_TITULO" Type="varchar" MaxLength="300" />
+          <Property Name="VIDE_NM_DESCRICAO" Type="varchar" MaxLength="1000" />
+          <Property Name="VIDE_AQ_FOTO" Type="varchar" MaxLength="250" />
+          <Property Name="VIDE_LK_LINK" Type="varchar" MaxLength="150" />
+          <Property Name="VIDE_DT_EMISSAO" Type="date" Nullable="false" />
+          <Property Name="VIDE_DT_VALIDADE" Type="date" Nullable="false" />
+          <Property Name="VIDE_NR_ACESSOS" Type="int" Nullable="false" />
+          <Property Name="VIDE_NM_AUTOR" Type="varchar" MaxLength="100" />
+          <Property Name="VIDE_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_AGENDA_ANEXO_AGENDA">
           <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="1" />
           <End Role="AGENDA_ANEXO" Type="Self.AGENDA_ANEXO" Multiplicity="*" />
@@ -933,6 +950,18 @@
             </Principal>
             <Dependent Role="AGENDA">
               <PropertyRef Name="CAAG_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_TAREFA">
+          <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="0..1" />
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREFA">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="TARE_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1353,6 +1382,18 @@
             </Principal>
             <Dependent Role="USUARIO">
               <PropertyRef Name="PERF_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="VIDEO" Type="Self.VIDEO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="VIDEO">
+              <PropertyRef Name="ASSI_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2192,12 +2233,17 @@
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO_ANEXO" EntityType="Self.USUARIO_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO_ANOTACAO" EntityType="Self.USUARIO_ANOTACAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VIDEO" EntityType="Self.VIDEO" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AGENDA_ANEXO_AGENDA" Association="Self.FK_AGENDA_ANEXO_AGENDA">
             <End Role="AGENDA" EntitySet="AGENDA" />
             <End Role="AGENDA_ANEXO" EntitySet="AGENDA_ANEXO" />
           </AssociationSet>
           <AssociationSet Name="FK_AGENDA_CATEGORIA_AGENDA" Association="Self.FK_AGENDA_CATEGORIA_AGENDA">
             <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_TAREFA" Association="Self.FK_AGENDA_TAREFA">
+            <End Role="TAREFA" EntitySet="TAREFA" />
             <End Role="AGENDA" EntitySet="AGENDA" />
           </AssociationSet>
           <AssociationSet Name="FK_AGENDA_USUARIO" Association="Self.FK_AGENDA_USUARIO">
@@ -2339,6 +2385,10 @@
           <AssociationSet Name="FK_USUARIO_PERFIL" Association="Self.FK_USUARIO_PERFIL">
             <End Role="PERFIL" EntitySet="PERFIL" />
             <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_ASSINANTE" Association="Self.FK_VIDEO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="VIDEO" EntitySet="VIDEO" />
           </AssociationSet>
           <AssociationSet Name="FKAGENDA22330" Association="Self.FKAGENDA22330">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
@@ -2623,6 +2673,8 @@
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_AGENDA_USUARIO" FromRole="AGENDA" ToRole="USUARIO" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKAGENDA22330" FromRole="AGENDA" ToRole="ASSINANTE" />
           <NavigationProperty Name="USUARIO1" Relationship="Self.FKAGENDA418024" FromRole="AGENDA" ToRole="USUARIO" />
+          <Property Name="TARE_CD_ID" Type="Int32" />
+          <NavigationProperty Name="TAREFA" Relationship="Db_PrecificacaoModel.FK_AGENDA_TAREFA" FromRole="AGENDA" ToRole="TAREFA" />
         </EntityType>
         <EntityType Name="AGENDA_ANEXO">
           <Key>
@@ -2676,6 +2728,7 @@
           <NavigationProperty Name="PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_PLANO_CONTA_ASSINANTE" FromRole="ASSINANTE" ToRole="PLANO_CONTA" />
           <NavigationProperty Name="SUBGRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" FromRole="ASSINANTE" ToRole="SUBGRUPO_PLANO_CONTA" />
           <NavigationProperty Name="CONTA_BANCO" Relationship="Db_PrecificacaoModel.FK_CONTA_BANCO_ASSINANTE" FromRole="ASSINANTE" ToRole="CONTA_BANCO" />
+          <NavigationProperty Name="VIDEO" Relationship="Db_PrecificacaoModel.FK_VIDEO_ASSINANTE" FromRole="ASSINANTE" ToRole="VIDEO" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -3458,6 +3511,7 @@
           <NavigationProperty Name="TIPO_TAREFA" Relationship="Self.FK_TAREFA_TIPO_TAREFA" FromRole="TAREFA" ToRole="TIPO_TAREFA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKTAREFA210002" FromRole="TAREFA" ToRole="USUARIO" />
           <Property Name="TARE_TEX_OBSERVACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AGENDA" Relationship="Db_PrecificacaoModel.FK_AGENDA_TAREFA" FromRole="TAREFA" ToRole="AGENDA" />
         </EntityType>
         <EntityType Name="TAREFA_ACOMPANHAMENTO">
           <Key>
@@ -5262,6 +5316,15 @@
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="CONTA_BANCO" EntitySet="CONTA_BANCO" />
           </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_TAREFA" Association="Db_PrecificacaoModel.FK_AGENDA_TAREFA">
+            <End Role="TAREFA" EntitySet="TAREFA" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
+          <EntitySet Name="VIDEO" EntityType="Db_PrecificacaoModel.VIDEO" />
+          <AssociationSet Name="FK_VIDEO_ASSINANTE" Association="Db_PrecificacaoModel.FK_VIDEO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="VIDEO" EntitySet="VIDEO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="GRUPO_PLANO_CONTA">
           <Key>
@@ -5395,6 +5458,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AGENDA_TAREFA">
+          <End Type="Db_PrecificacaoModel.TAREFA" Role="TAREFA" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.AGENDA" Role="AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREFA">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VIDEO">
+          <Key>
+            <PropertyRef Name="VIDE_CD_ID" />
+          </Key>
+          <Property Name="VIDE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="VIDE_NM_TITULO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="VIDE_NM_DESCRICAO" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="VIDE_AQ_FOTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="VIDE_LK_LINK" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="VIDE_DT_EMISSAO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VIDE_DT_VALIDADE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VIDE_NR_ACESSOS" Type="Int32" Nullable="false" />
+          <Property Name="VIDE_NM_AUTOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VIDE_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_VIDEO_ASSINANTE" FromRole="VIDEO" ToRole="ASSINANTE" />
+        </EntityType>
+        <Association Name="FK_VIDEO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.VIDEO" Role="VIDEO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="VIDEO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5404,6 +5508,7 @@
           <EntitySetMapping Name="AGENDA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.AGENDA">
               <MappingFragment StoreEntitySet="AGENDA">
+                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
                 <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
@@ -6372,6 +6477,23 @@
                 <ScalarProperty Name="GRCC_CD_ID" ColumnName="GRCC_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="SGCC_CD_ID" ColumnName="SGCC_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VIDEO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.VIDEO">
+              <MappingFragment StoreEntitySet="VIDEO">
+                <ScalarProperty Name="VIDE_IN_ATIVO" ColumnName="VIDE_IN_ATIVO" />
+                <ScalarProperty Name="VIDE_NM_AUTOR" ColumnName="VIDE_NM_AUTOR" />
+                <ScalarProperty Name="VIDE_NR_ACESSOS" ColumnName="VIDE_NR_ACESSOS" />
+                <ScalarProperty Name="VIDE_DT_VALIDADE" ColumnName="VIDE_DT_VALIDADE" />
+                <ScalarProperty Name="VIDE_DT_EMISSAO" ColumnName="VIDE_DT_EMISSAO" />
+                <ScalarProperty Name="VIDE_LK_LINK" ColumnName="VIDE_LK_LINK" />
+                <ScalarProperty Name="VIDE_AQ_FOTO" ColumnName="VIDE_AQ_FOTO" />
+                <ScalarProperty Name="VIDE_NM_DESCRICAO" ColumnName="VIDE_NM_DESCRICAO" />
+                <ScalarProperty Name="VIDE_NM_TITULO" ColumnName="VIDE_NM_TITULO" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="VIDE_CD_ID" ColumnName="VIDE_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

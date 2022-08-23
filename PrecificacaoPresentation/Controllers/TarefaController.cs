@@ -443,25 +443,16 @@ namespace ERP_Condominios_Solution.Controllers
                     {
                         DateTime dtAgenda = (DateTime)item.TARE_DT_ESTIMADA;
                         DateTime dtTarefa = (DateTime)item.TARE_DT_CADASTRO;
+                        TAREFA tarefa = new TAREFA();
+                        Int32 tare = 0;
 
                         for (var i = 0; i < item.TARE_NR_PERIODICIDADE_QUANTIDADE; i++)
                         {
-                            AGENDA ag = new AGENDA();
-                            ag.USUA_CD_ID = item.USUA_CD_ID;
-                            ag.AGEN_CD_USUARIO = item.USUA_CD_ID;
-                            ag.AGEN_DT_DATA = dtAgenda;
-                            ag.AGEN_HR_HORA = dtAgenda.AddHours(12).TimeOfDay;
-                            ag.AGEN_IN_ATIVO = 1;
-                            ag.AGEN_IN_STATUS = 1;
-                            ag.AGEN_NM_TITULO = item.TARE_NM_TITULO;
-                            ag.AGEN_DS_DESCRICAO = item.TARE_NM_TITULO;
-                            ag.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
-                            ag.CAAG_CD_ID = 1;
-
                             if (i == 0)
                             {
                                 Int32 volta = baseApp.ValidateCreate(item, usuarioLogado);
                                 Session["PeriTarefa"] = item.PERIODICIDADE_TAREFA;
+                                tare = item.TARE_CD_ID;
 
                                 // Verifica retorno
                                 if (volta == 1)
@@ -477,7 +468,7 @@ namespace ERP_Condominios_Solution.Controllers
                             }
                             else
                             {
-                                TAREFA tarefa = new TAREFA();
+                                tarefa = new TAREFA();
                                 tarefa.USUA_CD_ID = item.USUA_CD_ID;
                                 tarefa.TITR_CD_ID = item.TITR_CD_ID;
                                 tarefa.TARE_DS_DESCRICAO = item.TARE_DS_DESCRICAO;
@@ -496,8 +487,21 @@ namespace ERP_Condominios_Solution.Controllers
                                 tarefa.TARE_NM_TITULO = $"{item.TARE_NM_TITULO} #{i}";
 
                                 Int32 volta = baseApp.ValidateCreate(tarefa, usuarioLogado);
+                                tare = tarefa.TARE_CD_ID;
                             }
 
+                            AGENDA ag = new AGENDA();
+                            ag.USUA_CD_ID = item.USUA_CD_ID;
+                            ag.AGEN_CD_USUARIO = item.USUA_CD_ID;
+                            ag.AGEN_DT_DATA = dtAgenda;
+                            ag.AGEN_HR_HORA = dtAgenda.AddHours(12).TimeOfDay;
+                            ag.AGEN_IN_ATIVO = 1;
+                            ag.AGEN_IN_STATUS = 1;
+                            ag.AGEN_NM_TITULO = item.TARE_NM_TITULO + (i == 0 ? String.Empty : "#" + i.ToString());
+                            ag.AGEN_DS_DESCRICAO = item.TARE_NM_TITULO;
+                            ag.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
+                            ag.TARE_CD_ID = tare;
+                            ag.CAAG_CD_ID = 1;
                             Int32 voltaAg = agenApp.ValidateCreate(ag, usuarioLogado);
 
                             // Cria pastas Tarefa
@@ -535,6 +539,8 @@ namespace ERP_Condominios_Solution.Controllers
                     }
                     else
                     {
+                        Int32 volta1 = baseApp.ValidateCreate(item, usuarioLogado);
+
                         AGENDA ag = new AGENDA();
                         ag.USUA_CD_ID = item.USUA_CD_ID;
                         ag.AGEN_CD_USUARIO = item.USUA_CD_ID;
@@ -545,9 +551,9 @@ namespace ERP_Condominios_Solution.Controllers
                         ag.AGEN_NM_TITULO = item.TARE_NM_TITULO;
                         ag.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
                         ag.AGEN_DS_DESCRICAO = item.TARE_NM_TITULO;
+                        ag.TARE_CD_ID = item.TARE_CD_ID;
                         ag.CAAG_CD_ID = 1;
 
-                        Int32 volta1 = baseApp.ValidateCreate(item, usuarioLogado);
 
                         // Verifica retorno
                         if (volta1 == 1)
@@ -704,6 +710,28 @@ namespace ERP_Condominios_Solution.Controllers
                     {
                         ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0014", CultureInfo.CurrentCulture));
                         return View(vm);
+                    }
+
+                    // Acerta agenda
+                    if (item.TARE_IN_STATUS == 3)
+                    {
+                        List<AGENDA> ags = agenApp.GetAllItens(idAss);
+                        ags = ags.Where(p => p.TARE_CD_ID == item.TARE_CD_ID).ToList();
+                        foreach (AGENDA ag in ags)
+                        {
+                            ag.AGEN_IN_STATUS = 2;
+                            Int32 volta1 = agenApp.ValidateEdit(ag, ag, usuarioLogado);
+                        }
+                    }
+                    if (item.TARE_IN_STATUS == 4 || item.TARE_IN_STATUS == 5)
+                    {
+                        List<AGENDA> ags = agenApp.GetAllItens(idAss);
+                        ags = ags.Where(p => p.TARE_CD_ID == item.TARE_CD_ID).ToList();
+                        foreach (AGENDA ag in ags)
+                        {
+                            ag.AGEN_IN_STATUS = 3;
+                            Int32 volta1 = agenApp.ValidateEdit(ag, ag, usuarioLogado);
+                        }
                     }
 
                     // Sucesso

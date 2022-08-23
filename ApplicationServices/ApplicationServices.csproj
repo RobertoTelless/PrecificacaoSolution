@@ -205,6 +205,7 @@
     <Compile Include="Interfaces\ICentroCustoAppService.cs" />
     <Compile Include="Interfaces\IContaBancariaAppService.cs" />
     <Compile Include="Interfaces\IGrupoCCAppService.cs" />
+    <Compile Include="Interfaces\IVideoAppService.cs" />
     <Compile Include="Interfaces\IPlataformaEntregaAppService.cs" />
     <Compile Include="Interfaces\IPessoaExternaAppService.cs" />
     <Compile Include="Interfaces\IMaquinaAppService.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Services\CentroCustoAppService.cs" />
     <Compile Include="Services\ContaBancariaAppService.cs" />
     <Compile Include="Services\GrupoCCAppService.cs" />
+    <Compile Include="Services\VideoAppService.cs" />
     <Compile Include="Services\PlataformaEntregaAppService.cs" />
     <Compile Include="Services\PessoaExternaAppService.cs" />
     <Compile Include="Services\MaquinaAppService.cs" />

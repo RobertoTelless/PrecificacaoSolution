@@ -28,6 +28,10 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly IUsuarioAppService usuApp;
         private readonly IAgendaAppService ageApp;
         private readonly IConfiguracaoAppService confApp;
+        private readonly IVideoAppService vidApp;
+        private readonly IPessoaExternaAppService pesApp;
+        private readonly IMaquinaAppService maqApp;
+        private readonly IFormaPagRecAppService forApp;
 
         private String msg;
         private Exception exception;
@@ -35,7 +39,7 @@ namespace ERP_Condominios_Solution.Controllers
         USUARIO objetoAntes = new USUARIO();
         List<USUARIO> listaMaster = new List<USUARIO>();
 
-        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps)
+        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps)
         {
             baseApp = baseApps;
             logApp = logApps;
@@ -45,6 +49,10 @@ namespace ERP_Condominios_Solution.Controllers
             usuApp = usuApps;
             ageApp = ageApps;
             confApp = confApps;
+            vidApp = vidApps;
+            pesApp = pesApps;   
+            maqApp = maqApps;   
+            forApp = forApps;
         }
 
         public ActionResult CarregarAdmin()
@@ -123,6 +131,9 @@ namespace ERP_Condominios_Solution.Controllers
             Session["MensBanco"] = 0;
             Session["MensSMSError"] = 0;
             Session["MensPermissao"] = 0;
+            Session["MensBanco"] = 0;
+            Session["MensConta"] = 0;
+            Session["MensVideo"] = 0;
 
             Session["VoltaNotificacao"] = 3;
             Session["VoltaNoticia"] = 1;
@@ -160,6 +171,9 @@ namespace ERP_Condominios_Solution.Controllers
 
             Session["Noticias"] = notiApp.GetAllItensValidos(idAss);
             Session["NoticiasNumero"] = ((List<NOTICIA>)Session["Noticias"]).Count;
+
+            Session["Videos"] = vidApp.GetAllItensValidos(idAss);
+            Session["VideosNumero"] = ((List<VIDEO>)Session["Videos"]).Count;
 
             Session["ListaPendentes"] = tarApp.GetTarefaStatus(usuario.USUA_CD_ID, 1);
             Session["TarefasPendentes"] = ((List<TAREFA>)Session["ListaPendentes"]).Count;
@@ -246,6 +260,30 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
             UsuarioViewModel vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
+
+            // Carrega valores dos cadastros
+            List<PESSOA_EXTERNA> pessoa = pesApp.GetAllItens(idAss);
+            Int32 pessoas = pessoa.Count;
+            List<NOTICIA> noticia = notiApp.GetAllItens(idAss);
+            Int32 noticias = noticia.Count;
+            List<VIDEO> video = vidApp.GetAllItens(idAss);
+            Int32 videos = video.Count;
+            List<MAQUINA> maquina = maqApp.GetAllItens(idAss);
+            Int32 maquinas = maquina.Count;
+            List<FORMA_PAGTO_RECTO> forma = forApp.GetAllItens(idAss);
+            Int32 formas = forma.Count;
+
+            Session["Pessoas"] = pessoas;
+            Session["Noticias"] = noticias;
+            Session["Video"] = videos;
+            Session["Maquina"] = maquinas;
+            Session["Formas"] = formas;
+
+            ViewBag.Pessoas = pessoas;
+            ViewBag.Noticias = noticias;
+            ViewBag.Videos = videos;
+            ViewBag.Maquinas = maquinas;
+            ViewBag.Formas = formas;
 
             // Recupera listas usuarios
             List<USUARIO> listaTotal = baseApp.GetAllItens(idAss);
