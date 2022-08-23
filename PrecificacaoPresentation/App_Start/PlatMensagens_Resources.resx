@@ -546,4 +546,19 @@
   <data name="M0164" xml:space="preserve">
     <value>Impossível excluir esta conta do plano de contas. Existem registros vinculados a ela.</value>
   </data>
+  <data name="M0165" xml:space="preserve">
+    <value>Banco já cadastrado</value>
+  </data>
+  <data name="M0166" xml:space="preserve">
+    <value>Impossível excluir este banco. Existem registros vinculados a ele</value>
+  </data>
+  <data name="M0167" xml:space="preserve">
+    <value>Conta bancária já cadastrada</value>
+  </data>
+  <data name="M0168" xml:space="preserve">
+    <value>Já existe uma conta marcada como principal</value>
+  </data>
+  <data name="M0169" xml:space="preserve">
+    <value>Nenhum lançamento cadastrado nessa conta</value>
+  </data>
 </root>

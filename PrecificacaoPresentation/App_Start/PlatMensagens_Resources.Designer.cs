@@ -1346,5 +1346,50 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0164", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Banco já cadastrado.
+        /// </summary>
+        internal static string M0165 {
+            get {
+                return ResourceManager.GetString("M0165", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este banco. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0166 {
+            get {
+                return ResourceManager.GetString("M0166", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Conta bancária já cadastrada.
+        /// </summary>
+        internal static string M0167 {
+            get {
+                return ResourceManager.GetString("M0167", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Já existe uma conta marcada como principal.
+        /// </summary>
+        internal static string M0168 {
+            get {
+                return ResourceManager.GetString("M0168", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nenhum lançamento cadastrado nessa conta.
+        /// </summary>
+        internal static string M0169 {
+            get {
+                return ResourceManager.GetString("M0169", resourceCulture);
+            }
+        }
     }
 }

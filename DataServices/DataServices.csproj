@@ -207,6 +207,7 @@
     <Compile Include="Repositories\CargoRepository.cs" />
     <Compile Include="Repositories\CategoriaUsuarioRepository.cs" />
     <Compile Include="Repositories\SubgrupoRepository.cs" />
+    <Compile Include="Repositories\TipoContaRepository.cs" />
     <Compile Include="Repositories\UsuarioAnotacaoRepository.cs" />
     <Compile Include="Repositories\PessoaExternaAnotacaoRepository.cs" />
     <Compile Include="Repositories\PessoaExternaAnexoRepository.cs" />

@@ -15,6 +15,7 @@ namespace ModelServices.Interfaces.Repositories
         List<BANCO> GetAllItens(Int32 idAss);
         List<BANCO> GetAllItensAdm(Int32 idAss);
         List<BANCO> ExecuteFilter(String codigo, String nome, Int32 idAss);
+
     }
 }
 

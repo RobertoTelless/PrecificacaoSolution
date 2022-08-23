@@ -41,6 +41,8 @@ namespace EntitiesServices.Model
         public decimal COBA_VL_SALDO_ATUAL { get; set; }
         public System.DateTime COBA_DT_CADASTRO { get; set; }
         public int COBA_IN_ATIVO { get; set; }
+        public int ASSI_CD_ID { get; set; }
+        public int COBA_IN_CONTA_PADRAO { get; set; }
     
         public virtual BANCO BANCO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -53,5 +55,6 @@ namespace EntitiesServices.Model
         public virtual ICollection<CONTA_BANCO_CONTATO> CONTA_BANCO_CONTATO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FORMA_PAGTO_RECTO> FORMA_PAGTO_RECTO { get; set; }
+        public virtual ASSINANTE ASSINANTE { get; set; }
     }
 }

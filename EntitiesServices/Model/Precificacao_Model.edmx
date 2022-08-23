@@ -150,6 +150,7 @@
             <PropertyRef Name="COBA_CD_ID" />
           </Key>
           <Property Name="COBA_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
           <Property Name="EMPR_CD_ID" Type="int" Nullable="false" />
           <Property Name="TICO_CD_ID" Type="int" Nullable="false" />
           <Property Name="BANC_CD_ID" Type="int" Nullable="false" />
@@ -165,6 +166,7 @@
           <Property Name="COBA_DT_ABERTURA" Type="date" Nullable="false" />
           <Property Name="COBA_VL_SALDO_INICIAL" Type="decimal" Precision="19" Scale="2" Nullable="false" />
           <Property Name="COBA_VL_SALDO_ATUAL" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="COBA_IN_CONTA_PADRAO" Type="int" Nullable="false" />
           <Property Name="COBA_DT_CADASTRO" Type="date" Nullable="false" />
           <Property Name="COBA_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
@@ -1002,6 +1004,18 @@
               <PropertyRef Name="ASSI_CD_ID" />
             </Principal>
             <Dependent Role="CONFIGURACAO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTA_BANCO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="CONTA_BANCO" Type="Self.CONTA_BANCO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CONTA_BANCO">
               <PropertyRef Name="ASSI_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2210,6 +2224,10 @@
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="CONFIGURACAO" EntitySet="CONFIGURACAO" />
           </AssociationSet>
+          <AssociationSet Name="FK_CONTA_BANCO_ASSINANTE" Association="Self.FK_CONTA_BANCO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CONTA_BANCO" EntitySet="CONTA_BANCO" />
+          </AssociationSet>
           <AssociationSet Name="FK_EMPRESA_ANEXO_EMPRESA" Association="Self.FK_EMPRESA_ANEXO_EMPRESA">
             <End Role="EMPRESA" EntitySet="EMPRESA" />
             <End Role="EMPRESA_ANEXO" EntitySet="EMPRESA_ANEXO" />
@@ -2657,6 +2675,7 @@
           <NavigationProperty Name="GRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_GRUPO_PLANO_CONTA_ASSINANTE" FromRole="ASSINANTE" ToRole="GRUPO_PLANO_CONTA" />
           <NavigationProperty Name="PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_PLANO_CONTA_ASSINANTE" FromRole="ASSINANTE" ToRole="PLANO_CONTA" />
           <NavigationProperty Name="SUBGRUPO_PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" FromRole="ASSINANTE" ToRole="SUBGRUPO_PLANO_CONTA" />
+          <NavigationProperty Name="CONTA_BANCO" Relationship="Db_PrecificacaoModel.FK_CONTA_BANCO_ASSINANTE" FromRole="ASSINANTE" ToRole="CONTA_BANCO" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -2809,6 +2828,9 @@
           <NavigationProperty Name="CONTA_BANCO_LANCAMENTO" Relationship="Self.FKCONTA_BANC521858" FromRole="CONTA_BANCO" ToRole="CONTA_BANCO_LANCAMENTO" />
           <NavigationProperty Name="CONTA_BANCO_CONTATO" Relationship="Self.FKCONTA_BANC819274" FromRole="CONTA_BANCO" ToRole="CONTA_BANCO_CONTATO" />
           <NavigationProperty Name="FORMA_PAGTO_RECTO" Relationship="Self.FKFORMA_PAGT509018" FromRole="CONTA_BANCO" ToRole="FORMA_PAGTO_RECTO" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_CONTA_BANCO_ASSINANTE" FromRole="CONTA_BANCO" ToRole="ASSINANTE" />
+          <Property Name="COBA_IN_CONTA_PADRAO" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CONTA_BANCO_ANEXO">
           <Key>
@@ -5236,6 +5258,10 @@
             <End Role="SUBGRUPO_PLANO_CONTA" EntitySet="SUBGRUPO_PLANO_CONTA" />
             <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
           </AssociationSet>
+          <AssociationSet Name="FK_CONTA_BANCO_ASSINANTE" Association="Db_PrecificacaoModel.FK_CONTA_BANCO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CONTA_BANCO" EntitySet="CONTA_BANCO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="GRUPO_PLANO_CONTA">
           <Key>
@@ -5354,6 +5380,18 @@
             </Principal>
             <Dependent Role="PLANO_CONTA">
               <PropertyRef Name="SGCC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTA_BANCO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.CONTA_BANCO" Role="CONTA_BANCO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CONTA_BANCO">
+              <PropertyRef Name="ASSI_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5519,6 +5557,8 @@
           <EntitySetMapping Name="CONTA_BANCO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CONTA_BANCO">
               <MappingFragment StoreEntitySet="CONTA_BANCO">
+                <ScalarProperty Name="COBA_IN_CONTA_PADRAO" ColumnName="COBA_IN_CONTA_PADRAO" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="COBA_CD_ID" ColumnName="COBA_CD_ID" />
                 <ScalarProperty Name="EMPR_CD_ID" ColumnName="EMPR_CD_ID" />
                 <ScalarProperty Name="TICO_CD_ID" ColumnName="TICO_CD_ID" />

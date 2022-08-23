@@ -49,7 +49,7 @@ namespace DataServices.Repositories
         {
             IQueryable<CONTA_BANCO> query = Db.CONTA_BANCO.Where(p => p.COBA_IN_ATIVO == 1);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
-            return query.Sum(p => p.COBA_VL_SALDO_ATUAL).Value;
+            return query.Sum(p => p.COBA_VL_SALDO_ATUAL);
         }
 
         public List<CONTA_BANCO> GetAllItensAdm(Int32 idAss)

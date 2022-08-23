@@ -164,12 +164,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddCOBA",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_BANCO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_BANCO>(item)
                 };
 
                 // Persiste
@@ -214,14 +214,14 @@ namespace ApplicationServices.Services
                 {
                     return 1;
                 }
-                if (item.CONTA_PAGAR.Count > 0)
-                {
-                    return 1;
-                }
-                if (item.CONTA_RECEBER.Count > 0)
-                {
-                    return 1;
-                }
+                //if (item.CONTA_PAGAR.Count > 0)
+                //{
+                //    return 1;
+                //}
+                //if (item.CONTA_RECEBER.Count > 0)
+                //{
+                //    return 1;
+                //}
 
                 // Acerta campos
                 item.COBA_IN_ATIVO = 0;
@@ -229,12 +229,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelCOBA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_BANCO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_BANCO>(item)
                 };
 
                 // Persiste
@@ -258,12 +258,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatCOBA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_BANCO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_BANCO>(item)
                 };
 
                 // Persiste

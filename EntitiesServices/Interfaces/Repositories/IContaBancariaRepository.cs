@@ -15,6 +15,7 @@ namespace ModelServices.Interfaces.Repositories
         Decimal GetTotalContas(Int32 idAss);
         List<CONTA_BANCO> GetAllItens(Int32 idAss);
         List<CONTA_BANCO> GetAllItensAdm(Int32 idAss);
+
     }
 }
 

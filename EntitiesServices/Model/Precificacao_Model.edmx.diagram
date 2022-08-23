@@ -172,6 +172,7 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT396583" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKSUBGRUPO_P567299" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT936913" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_BANCO_ASSINANTE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

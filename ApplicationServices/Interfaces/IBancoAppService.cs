@@ -20,5 +20,6 @@ namespace ApplicationServices.Interfaces
         BANCO GetItemById(Int32 id);
         BANCO GetByCodigo(String codigo);
         Int32 ExecuteFilter(String codigo, String nome, Int32 idAss, out List<BANCO> objeto);
+
     }
 }

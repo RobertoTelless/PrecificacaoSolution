@@ -231,6 +231,7 @@
     <Compile Include="Interfaces\Repositories\IContaBancariaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGrupoCCRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISubgrupoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITipoContaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUsuarioAnotacaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPessoaExternaAnotacaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPessoaExternaAnexoRepository.cs" />

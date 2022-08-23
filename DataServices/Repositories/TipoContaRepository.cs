@@ -22,6 +22,7 @@ namespace DataServices.Repositories
             IQueryable<TIPO_CONTA> query = Db.TIPO_CONTA;
             return query.ToList();
         }
+
     }
 }
  

@@ -22,6 +22,7 @@ namespace DataServices.Repositories
             IQueryable<CONTA_BANCO_CONTATO> query = Db.CONTA_BANCO_CONTATO.Where(p => p.CBCT_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

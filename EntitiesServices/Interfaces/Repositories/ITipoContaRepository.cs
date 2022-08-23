@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<TIPO_CONTA> GetAllItens(Int32 idAss);
         TIPO_CONTA GetItemById(Int32 id);
+
     }
 }

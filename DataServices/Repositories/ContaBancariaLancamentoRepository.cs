@@ -50,32 +50,32 @@ namespace DataServices.Repositories
 
         public Decimal GetTotalReceita(Int32 conta)
         {
-            IQueryable<CONTA_BANCO_LANCAMENTO> query = Db.CONTA_BANCO_LANCAMENTO.Where(p => p.CBLA_IN_TIPO.Value == 1);
+            IQueryable<CONTA_BANCO_LANCAMENTO> query = Db.CONTA_BANCO_LANCAMENTO.Where(p => p.CBLA_IN_TIPO == 1);
             query = query.Where(p => p.COBA_CD_ID == conta);
-            return query.Sum(p => p.CBLA_VL_VALOR).Value;
+            return query.Sum(p => p.CBLA_VL_VALOR);
         }
 
         public Decimal GetTotalDespesa(Int32 conta)
         {
-            IQueryable<CONTA_BANCO_LANCAMENTO> query = Db.CONTA_BANCO_LANCAMENTO.Where(p => p.CBLA_IN_TIPO.Value == 2);
+            IQueryable<CONTA_BANCO_LANCAMENTO> query = Db.CONTA_BANCO_LANCAMENTO.Where(p => p.CBLA_IN_TIPO == 2);
             query = query.Where(p => p.COBA_CD_ID == conta);
-            return query.Sum(p => p.CBLA_VL_VALOR).Value;
+            return query.Sum(p => p.CBLA_VL_VALOR);
         }
 
         public Decimal GetTotalReceitaMes(Int32 conta, Int32 mes)
         {
-            IQueryable<CONTA_BANCO_LANCAMENTO> query = Db.CONTA_BANCO_LANCAMENTO.Where(p => p.CBLA_IN_TIPO.Value == 1);
+            IQueryable<CONTA_BANCO_LANCAMENTO> query = Db.CONTA_BANCO_LANCAMENTO.Where(p => p.CBLA_IN_TIPO == 1);
             query = query.Where(p => p.COBA_CD_ID == conta);
             query = query.Where(p => DbFunctions.TruncateTime(p.CBLA_DT_LANCAMENTO).Value.Month == mes);
-            return query.Sum(p => p.CBLA_VL_VALOR).Value;
+            return query.Sum(p => p.CBLA_VL_VALOR);
         }
 
         public Decimal GetTotalDespesaMes(Int32 conta, Int32 mes)
         {
-            IQueryable<CONTA_BANCO_LANCAMENTO> query = Db.CONTA_BANCO_LANCAMENTO.Where(p => p.CBLA_IN_TIPO.Value == 2);
+            IQueryable<CONTA_BANCO_LANCAMENTO> query = Db.CONTA_BANCO_LANCAMENTO.Where(p => p.CBLA_IN_TIPO == 2);
             query = query.Where(p => p.COBA_CD_ID == conta);
             query = query.Where(p => DbFunctions.TruncateTime(p.CBLA_DT_LANCAMENTO).Value.Month == mes);
-            return query.Sum(p => p.CBLA_VL_VALOR).Value;
+            return query.Sum(p => p.CBLA_VL_VALOR);
         }
 
         public List<CONTA_BANCO_LANCAMENTO> GetLancamentosMes(Int32 conta, Int32 mes)

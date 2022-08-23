@@ -39,5 +39,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<CONTA_BANCO_LANCAMENTO> GetLancamentosDia(Int32 conta, DateTime data);
         List<CONTA_BANCO_LANCAMENTO> GetLancamentosFaixa(Int32 conta, DateTime inicio, DateTime final);
         List<CONTA_BANCO_LANCAMENTO> ExecuteFilterLanc(Int32 conta, DateTime? data, Int32? tipo, String desc);
+
     }
 }
