@@ -17,6 +17,7 @@ namespace DataServices.Repositories
         {
             IQueryable<SUBGRUPO_PLANO_CONTA> query = Db.SUBGRUPO_PLANO_CONTA;
             query = query.Where(p => p.SGCC_NR_NUMERO == conta.SGCC_NR_NUMERO);
+            query = query.Where(p => p.GRCC_CD_ID == conta.GRCC_CD_ID);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.FirstOrDefault();
         }

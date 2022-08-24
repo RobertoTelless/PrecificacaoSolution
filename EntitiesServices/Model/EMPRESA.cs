@@ -17,7 +17,6 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMPRESA()
         {
-            this.CONTA_BANCO = new HashSet<CONTA_BANCO>();
             this.CUSTO_FIXO = new HashSet<CUSTO_FIXO>();
             this.EMPRESA_ANEXO = new HashSet<EMPRESA_ANEXO>();
             this.FORNECEDOR = new HashSet<FORNECEDOR>();
@@ -41,8 +40,6 @@ namespace EntitiesServices.Model
         public int EMPR_IN_ATIVO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CONTA_BANCO> CONTA_BANCO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CUSTO_FIXO> CUSTO_FIXO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

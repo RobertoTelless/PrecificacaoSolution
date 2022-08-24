@@ -81,6 +81,9 @@
                             @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
                             {
                                 @Html.ButtonActionSubmit(text: "Confirma Edição do Banco", htmlAttributes: new { id = "basictoast" })
+                            }
+                            @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+                            {
                                 @Html.ButtonLinkIndex(text: "Incluir Nova Conta Bancária", action: "IncluirConta", controller: "Banco", buttonClass: "primary")
                             }
                             @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarBaseBanco", controller: "Banco")

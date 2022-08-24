@@ -53,6 +53,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<FORNECEDOR_ANOTACOES> FORNECEDOR_ANOTACOES { get; set; }
         public virtual DbSet<FORNECEDOR_CONTATO> FORNECEDOR_CONTATO { get; set; }
         public virtual DbSet<FORNECEDOR_QUADRO_SOCIETARIO> FORNECEDOR_QUADRO_SOCIETARIO { get; set; }
+        public virtual DbSet<GRUPO_PLANO_CONTA> GRUPO_PLANO_CONTA { get; set; }
         public virtual DbSet<LOG> LOG { get; set; }
         public virtual DbSet<MAQUINA> MAQUINA { get; set; }
         public virtual DbSet<NOTICIA> NOTICIA { get; set; }
@@ -65,6 +66,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<PESSOA_EXTERNA> PESSOA_EXTERNA { get; set; }
         public virtual DbSet<PESSOA_EXTERNA_ANEXO> PESSOA_EXTERNA_ANEXO { get; set; }
         public virtual DbSet<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
+        public virtual DbSet<PLANO_CONTA> PLANO_CONTA { get; set; }
         public virtual DbSet<PLATAFORMA_ENTREGA> PLATAFORMA_ENTREGA { get; set; }
         public virtual DbSet<PRODUTO> PRODUTO { get; set; }
         public virtual DbSet<PRODUTO_ANEXO> PRODUTO_ANEXO { get; set; }
@@ -75,6 +77,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<PRODUTO_ULTIMOS_CUSTOS> PRODUTO_ULTIMOS_CUSTOS { get; set; }
         public virtual DbSet<REGIME_TRIBUTARIO> REGIME_TRIBUTARIO { get; set; }
         public virtual DbSet<SUBCATEGORIA_PRODUTO> SUBCATEGORIA_PRODUTO { get; set; }
+        public virtual DbSet<SUBGRUPO_PLANO_CONTA> SUBGRUPO_PLANO_CONTA { get; set; }
         public virtual DbSet<TAREFA> TAREFA { get; set; }
         public virtual DbSet<TAREFA_ACOMPANHAMENTO> TAREFA_ACOMPANHAMENTO { get; set; }
         public virtual DbSet<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }
@@ -89,9 +92,6 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
         public virtual DbSet<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
-        public virtual DbSet<GRUPO_PLANO_CONTA> GRUPO_PLANO_CONTA { get; set; }
-        public virtual DbSet<PLANO_CONTA> PLANO_CONTA { get; set; }
-        public virtual DbSet<SUBGRUPO_PLANO_CONTA> SUBGRUPO_PLANO_CONTA { get; set; }
         public virtual DbSet<VIDEO> VIDEO { get; set; }
         public virtual DbSet<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
     }

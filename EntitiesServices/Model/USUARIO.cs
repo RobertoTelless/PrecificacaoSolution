@@ -27,9 +27,9 @@ namespace EntitiesServices.Model
             this.TAREFA = new HashSet<TAREFA>();
             this.TAREFA_ACOMPANHAMENTO = new HashSet<TAREFA_ACOMPANHAMENTO>();
             this.USUARIO_ANEXO = new HashSet<USUARIO_ANEXO>();
+            this.VIDEO_COMENTARIO = new HashSet<VIDEO_COMENTARIO>();
             this.USUARIO_ANOTACAO = new HashSet<USUARIO_ANOTACAO>();
             this.USUARIO_ANOTACAO1 = new HashSet<USUARIO_ANOTACAO>();
-            this.VIDEO_COMENTARIO = new HashSet<VIDEO_COMENTARIO>();
         }
     
         public int USUA_CD_ID { get; set; }
@@ -88,10 +88,10 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
     }
 }

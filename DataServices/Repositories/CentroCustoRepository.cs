@@ -71,21 +71,17 @@ namespace DataServices.Repositories
         {
             List<PLANO_CONTA> lista = new List<PLANO_CONTA>();
             IQueryable<PLANO_CONTA> query = Db.PLANO_CONTA;
-            if (grupoId != null)
+            if (grupoId > 0)
             {
                 query = query.Where(p => p.GRCC_CD_ID == grupoId);
             }
-            if (subGrupoId != null)
+            if (subGrupoId > 0)
             {
                 query = query.Where(p => p.SGCC_CD_ID == subGrupoId);
             }
-            if (tipo != null)
+            if (tipo > 0)
             {
                 query = query.Where(p => p.CECU_IN_TIPO == tipo);
-            }
-            if (movimento != null)
-            {
-                query = query.Where(p => p.CECU_IN_MOVTO == movimento);
             }
             if (!String.IsNullOrEmpty(numero))
             {

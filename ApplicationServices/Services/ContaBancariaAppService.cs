@@ -160,6 +160,7 @@ namespace ApplicationServices.Services
                 // Completa objeto
                 item.COBA_IN_ATIVO = 1;
                 item.COBA_VL_SALDO_ATUAL = item.COBA_VL_SALDO_INICIAL;
+                item.COBA_NR_DIGITO_CONTA = "0";
 
                 // Monta Log
                 LOG log = new LOG

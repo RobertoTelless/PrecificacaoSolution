@@ -32,6 +32,10 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly IPessoaExternaAppService pesApp;
         private readonly IMaquinaAppService maqApp;
         private readonly IFormaPagRecAppService forApp;
+        private readonly IBancoAppService banApp;
+        private readonly IContaBancariaAppService cbApp;
+        private readonly ICentroCustoAppService ccApp;
+
 
         private String msg;
         private Exception exception;
@@ -39,7 +43,7 @@ namespace ERP_Condominios_Solution.Controllers
         USUARIO objetoAntes = new USUARIO();
         List<USUARIO> listaMaster = new List<USUARIO>();
 
-        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps)
+        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps, IBancoAppService banApps, IContaBancariaAppService cbApps, ICentroCustoAppService ccApps)
         {
             baseApp = baseApps;
             logApp = logApps;
@@ -53,6 +57,9 @@ namespace ERP_Condominios_Solution.Controllers
             pesApp = pesApps;   
             maqApp = maqApps;   
             forApp = forApps;
+            banApp = banApps;
+            cbApp = cbApps;
+            ccApp = ccApps;
         }
 
         public ActionResult CarregarAdmin()
@@ -274,7 +281,7 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 formas = forma.Count;
 
             Session["Pessoas"] = pessoas;
-            Session["Noticias"] = noticias;
+            Session["Noticias1"] = noticias;
             Session["Video"] = videos;
             Session["Maquina"] = maquinas;
             Session["Formas"] = formas;
@@ -676,16 +683,12 @@ namespace ERP_Condominios_Solution.Controllers
             UsuarioViewModel vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
 
             // Carrega valores dos cadastros
-            //List<BANCO> banco = banApp.GetAllItens();
-            //Int32 bancos = banco.Count;
-            //List<PLANO_CONTA> plano = plaApp.GetAllItens();
-            //Int32 planos = plano.Count;
-            //List<CONTA_BANCO> conta = conApp.GetAllItens();
-            //Int32 contas = conta.Count;
-
-            Int32 bancos = 1;
-            Int32 contas = 2; 
-            Int32 planos = 4;
+            List<BANCO> banco = banApp.GetAllItens(idAss);
+            Int32 bancos = banco.Count;
+            List<PLANO_CONTA> plano = ccApp.GetAllItens(idAss);
+            Int32 planos = plano.Count;
+            List<CONTA_BANCO> conta = cbApp.GetAllItens(idAss);
+            Int32 contas = conta.Count;
 
             Session["Bancos"] = bancos;
             Session["Planos"] = planos;
@@ -698,16 +701,11 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Fornecedores = 0;
             ViewBag.Produtos = 0;
 
-            //Session["PlanoCredito"] = plano.Where(p => p.CECU_IN_TIPO == 1).ToList().Count;
-            //Session["PlanoDebito"] = plano.Where(p => p.CECU_IN_TIPO == 2).ToList().Count;
-            //Session["ContaCorrente"] = conta.Where(p => p.TICO_CD_ID == 1).ToList().Count;
-            //Session["ContaPoupanca"] = conta.Where(p => p.TICO_CD_ID == 2).ToList().Count;
-            //Session["ContaInvestimento"] = conta.Where(p => p.TICO_CD_ID == 3).ToList().Count;
-            Session["PlanoCredito"] = 1;
-            Session["PlanoDebito"] = 3;
-            Session["ContaCorrente"] = 1;
-            Session["ContaPoupanca"] = 1;
-            Session["ContaInvestimento"] = 0;
+            Session["PlanoCredito"] = plano.Where(p => p.CECU_IN_TIPO == 1).ToList().Count;
+            Session["PlanoDebito"] = plano.Where(p => p.CECU_IN_TIPO == 2).ToList().Count;
+            Session["ContaCorrente"] = conta.Where(p => p.TICO_CD_ID == 1).ToList().Count;
+            Session["ContaPoupanca"] = conta.Where(p => p.TICO_CD_ID == 2).ToList().Count;
+            Session["ContaInvestimento"] = conta.Where(p => p.TICO_CD_ID == 3).ToList().Count;
 
             // Recupera contatos por qualificacao
             //List<ModeloViewModel> lista2 = new List<ModeloViewModel>();
@@ -734,10 +732,10 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 q1 = (Int32)Session["PlanoCredito"];
             Int32 q2 = (Int32)Session["PlanoDebito"];
 
-            desc.Add("Conta de Crédito");
+            desc.Add("Contas de Receitas");
             quant.Add(q1);
             cor.Add("#359E18");
-            desc.Add("Conta de Débito");
+            desc.Add("Contas de Despesas");
             quant.Add(q2);
             cor.Add("#FFAE00");
 

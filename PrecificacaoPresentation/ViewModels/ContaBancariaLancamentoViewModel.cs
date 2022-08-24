@@ -24,6 +24,17 @@ namespace ERP_Condominios_Solution.ViewModels
         [Required(ErrorMessage = "Campo VALOR obrigatorio")]
         [RegularExpression(@"^[0-9]+([,][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<decimal> CBLA_VL_VALOR { get; set; }
+        public string Valor
+        {
+            get
+            {
+                return CBLA_VL_VALOR.HasValue ? CrossCutting.Formatters.DecimalFormatter(CBLA_VL_VALOR.Value) : string.Empty;
+            }
+            set
+            {
+                CBLA_VL_VALOR = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
         public Nullable<int> CBLA_IN_ATIVO { get; set; }
         [StringLength(50, MinimumLength = 1, ErrorMessage = "A DESCRIÇÂO deve conter no minimo 1 caracteres e no máximo 50 caracteres.")]
         public string CBLA_NR_NUMERO { get; set; }

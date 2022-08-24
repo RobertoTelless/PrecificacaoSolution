@@ -17,9 +17,9 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TAREFA()
         {
+            this.AGENDA = new HashSet<AGENDA>();
             this.TAREFA_ACOMPANHAMENTO = new HashSet<TAREFA_ACOMPANHAMENTO>();
             this.TAREFA_ANEXO = new HashSet<TAREFA_ANEXO>();
-            this.AGENDA = new HashSet<AGENDA>();
         }
     
         public int TARE_CD_ID { get; set; }
@@ -41,6 +41,8 @@ namespace EntitiesServices.Model
         public int TARE_IN_ATIVO { get; set; }
         public string TARE_TEX_OBSERVACAO { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AGENDA> AGENDA { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual PERIODICIDADE_TAREFA PERIODICIDADE_TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -49,7 +51,5 @@ namespace EntitiesServices.Model
         public virtual ICollection<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }
         public virtual TIPO_TAREFA TIPO_TAREFA { get; set; }
         public virtual USUARIO USUARIO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGENDA> AGENDA { get; set; }
     }
 }

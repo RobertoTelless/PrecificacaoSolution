@@ -158,17 +158,17 @@
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-xs-12">
                                                 Saldo Inicial
-                                                @Html.TextBoxFor(m => m.COBA_VL_SALDO_INICIAL, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly", @style = "color:green; font-weight:bold" })
+                                                @Html.TextBoxFor(m => m.SaldoInicial, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly", @style = "color:green; font-weight:bold" })
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-xs-12">
                                                 Saldo Atual
                                                 @if (Model.COBA_VL_SALDO_ATUAL < 0)
                                                 {
-                                                    @Html.TextBoxFor(m => m.COBA_VL_SALDO_ATUAL, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly", @style = "color:red; font-weight:bold" })
+                                                    @Html.TextBoxFor(m => m.SaldoAtual, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly", @style = "color:red; font-weight:bold" })
                                                 }
                                                 else
                                                 {
-                                                    @Html.TextBoxFor(m => m.COBA_VL_SALDO_ATUAL, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly", @style = "color:blue; font-weight:bold" })
+                                                    @Html.TextBoxFor(m => m.SaldoAtual, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly", @style = "color:blue; font-weight:bold" })
                                                 }
                                             </div>
                                         </div>

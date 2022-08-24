@@ -22,6 +22,17 @@ namespace ERP_Condominios_Solution.ViewModels
         [Required(ErrorMessage = "Campo SALDO INICIAL obrigatorio")]
         [RegularExpression(@"^[0-9]+([,][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public decimal COBA_VL_SALDO_INICIAL { get; set; }
+        public string SaldoInicial
+        {
+            get
+            {
+                return CrossCutting.Formatters.DecimalFormatter(COBA_VL_SALDO_INICIAL);
+            }
+            set
+            {
+                COBA_VL_SALDO_INICIAL = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
         [Required(ErrorMessage = "Campo NÚMERO DA AGENCIA obrigatorio")]
         [StringLength(10, MinimumLength = 3, ErrorMessage = "O NÚMERO DA AGENCIA deve conter no minimo 3 caracteres e no máximo 10 caracteres.")]
         public string COBA_NR_AGENCIA { get; set; }
@@ -41,24 +52,20 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<System.DateTime> COBA_DT_ABERTURA { get; set; }
         [RegularExpression(@"^[0-9]+([,][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<decimal> COBA_VL_SALDO_ATUAL { get; set; }
+        public string SaldoAtual
+        {
+            get
+            {
+                return COBA_VL_SALDO_ATUAL.HasValue ? CrossCutting.Formatters.DecimalFormatter(COBA_VL_SALDO_ATUAL.Value) : string.Empty;
+            }
+            set
+            {
+                COBA_VL_SALDO_ATUAL = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
         public string COBA_NM_NOME_EXIBE { get; set; }
         public Nullable<int> COBA_IN_CONTA_PADRAO { get; set; }
         public string COBA_NM_NOME_EXIBE_OLD { get; set; }
-
-        public Nullable<decimal> SaldoInicial
-        {
-            get
-            {
-                return COBA_VL_SALDO_INICIAL;
-            }
-        }
-        public Nullable<decimal> SaldoAtual
-        {
-            get
-            {
-                return COBA_VL_SALDO_ATUAL;
-            }
-        }
 
         public bool Padrao
         {

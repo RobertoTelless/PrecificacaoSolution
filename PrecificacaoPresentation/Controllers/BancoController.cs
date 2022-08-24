@@ -328,6 +328,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
 
             if (Session["MensBanco"] != null)
             {
@@ -688,6 +689,7 @@ namespace ERP_Condominios_Solution.Controllers
         public ActionResult FiltrarLancamento(CONTA_BANCO_LANCAMENTO item)
         {
             Session["FiltroLancamento"] = item;
+            Session["MensConta"] = 0;
             return RedirectToAction("EditarConta", new { id = (Int32)Session["IdConta"] });
         }
 

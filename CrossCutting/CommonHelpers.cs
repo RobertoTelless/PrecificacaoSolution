@@ -678,11 +678,11 @@ namespace CrossCutting
 					{
 						if (includePeriod)
 						{
-							if (testString[index] == '.')
+							if (testString[index] == ',')
 							{
 								if (periodCount == 0)
 								{
-									retValue += ".";
+									retValue += ",";
 								}
 
 								periodCount += 1;

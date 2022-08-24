@@ -29,41 +29,46 @@
                         <br />
                         @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarInicio", controller: "Video")
                     </div>
-                    <div class="form-group" allign="center">
-                        <br />
-                        <img src="@Url.Content(Model.VIDE_AQ_FOTO)" style="width: auto; height: auto; max-height: 500px; max-width: 700px;" allign="middle"  >
-                    </div>
-                    <div class="text-center article-title">
-                        <span class="text-muted"><i class="fa fa-clock-o"></i> @Model.VIDE_DT_EMISSAO.ToLongDateString()</span>
-                        <br /><br />
-                        <h1>
-                            @Model.VIDE_NM_TITULO
-                        </h1>
-                        <h4>
-                            @Model.VIDE_NM_AUTOR
-                        </h4>
-                        <h4>
-                            <a href="@Model.VIDE_LK_LINK" target="_blank">@Model.VIDE_LK_LINK</a>
-                        </h4>
-                    </div>
-                    <div>
-                        <br />
-                        @Model.VIDE_NM_DESCRICAO
-                        <br />
-                    </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="small text-right">
+                        <div class="form-group">
+                            <div class="col-lg-5 col-md-5 col-sm-12">
                                 <br />
-                                <h5>Stats:</h5>
-                                <div> <i class="fa fa-comments-o"> </i> @Model.VIDEO_COMENTARIO.Count.ToString() comentários </div>
-                                <i class="fa fa-eye"> </i> @Model.VIDE_NR_ACESSOS visualizações
-                            </div>
+                                <img src="@Url.Content(Model.VIDE_AQ_FOTO)" style="width: auto; height: auto; max-height: 500px; max-width: 650px;" allign="middle"  >
+                            </div> 
+                            <div class="col-lg-7 col-md-7 col-sm-12">
+                                <div class="text-center article-title">
+                                    <span class="text-muted"><i class="fa fa-clock-o"></i> @Model.VIDE_DT_EMISSAO.ToLongDateString()</span>
+                                    <br /><br />
+                                    <h1>
+                                        @Model.VIDE_NM_TITULO
+                                    </h1>
+                                    <h4>
+                                        @Model.VIDE_NM_AUTOR
+                                    </h4>
+                                    <h4>
+                                        <a href="@Model.VIDE_LK_LINK" target="_blank">@Model.VIDE_LK_LINK</a>
+                                    </h4>
+                                </div>
+                                <div>
+                                    @Model.VIDE_NM_DESCRICAO
+                                    <br />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="small text-right">
+                                            <br />
+                                            <h5>Stats:</h5>
+                                            <div> <i class="fa fa-comments-o"> </i> @Model.VIDEO_COMENTARIO.Count.ToString() comentários </div>
+                                            <i class="fa fa-eye"> </i> @Model.VIDE_NR_ACESSOS visualizações
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                      
                         </div>
                     </div>
                     <div class="row">
                         <br />
-                        @Html.ButtonLinkIndex(text: "Novo Comentário", action: "IncluirComentario", controller: "Video")
+                        @Html.ButtonLinkIndex(text: "Novo Comentário", action: "IncluirComentario", controller: "Video", buttonClass: "success")
                         <br />
                     </div>
                     <div class="row">

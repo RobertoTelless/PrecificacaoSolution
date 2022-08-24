@@ -33,7 +33,7 @@ namespace DataServices.Repositories
 
             List<CONTA_BANCO_LANCAMENTO> lista = query.ToList<CONTA_BANCO_LANCAMENTO>();
 
-            if (data != null)
+            if (data != DateTime.MinValue)
             {
                 lista = lista.Where(x => x.CBLA_DT_LANCAMENTO == data).ToList<CONTA_BANCO_LANCAMENTO>();
             }

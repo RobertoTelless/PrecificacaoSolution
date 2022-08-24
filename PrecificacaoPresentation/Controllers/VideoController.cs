@@ -608,8 +608,8 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            Int32 idNot = (Int32)Session["IdVolta"];
-            return RedirectToAction("EditarNoticia", new { id = idNot });
+            Int32 idNot = (Int32)Session["IdVideo"];
+            return RedirectToAction("EditarVideo", new { id = idNot });
         }
 
         [HttpPost]
@@ -703,7 +703,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            Int32 id = (Int32)Session["IdVolta"];
+            Int32 id = (Int32)Session["IdVideo"];
             VIDEO item = baseApp.GetItemById(id);
             USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
             VIDEO_COMENTARIO coment = new VIDEO_COMENTARIO();
