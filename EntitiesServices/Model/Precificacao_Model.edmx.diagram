@@ -176,6 +176,9 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_TAREFA" />
         <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO" Width="1.5" PointX="3" PointY="87.75" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_ASSINANTE" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO_COMENTARIO" Width="1.5" PointX="19.5" PointY="72" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

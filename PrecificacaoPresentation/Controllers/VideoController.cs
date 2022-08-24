@@ -61,7 +61,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            Session["IdVolta"] = id;
+            Session["IdVideo"] = id;
             VIDEO item = baseApp.GetItemById(id);
             item.VIDE_NR_ACESSOS = ++item.VIDE_NR_ACESSOS;
             objetoAntes = item;
@@ -133,6 +133,15 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             return RedirectToAction("MontarTelaDashboardAdministracao", "BaseAdmin");
+        }
+
+        public ActionResult VoltarInicio()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            return RedirectToAction("CarregarBase", "BaseAdmin");
         }
 
         [HttpPost]
@@ -686,5 +695,65 @@ namespace ERP_Condominios_Solution.Controllers
             }
             return RedirectToAction("VoltarAnexoUsuario");
         }
+
+        [HttpGet]
+        public ActionResult IncluirComentario()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 id = (Int32)Session["IdVolta"];
+            VIDEO item = baseApp.GetItemById(id);
+            USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+            VIDEO_COMENTARIO coment = new VIDEO_COMENTARIO();
+            VideoComentarioViewModel vm = Mapper.Map<VIDEO_COMENTARIO, VideoComentarioViewModel>(coment);
+            vm.VICO_DT_COMENTARIO = DateTime.Now;
+            vm.VICO_IN_ATIVO = 1;
+            vm.VIDE_CD_ID = item.VIDE_CD_ID;
+            vm.USUARIO = usuarioLogado;
+            vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult IncluirComentario(VideoComentarioViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdVideo"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    VIDEO_COMENTARIO item = Mapper.Map<VideoComentarioViewModel, VIDEO_COMENTARIO>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    VIDEO not = baseApp.GetItemById(idNot);
+
+                    item.USUARIO = null;
+                    not.VIDEO_COMENTARIO.Add(item);
+                    objetoAntes = not;
+                    Int32 volta = baseApp.ValidateEdit(not, objetoAntes);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    return RedirectToAction("VerVideo", new { id = idNot });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
     }
 }

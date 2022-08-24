@@ -21,6 +21,7 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<VIDEO> GetAllItensAdm(Int32 idAss);
         List<VIDEO> ExecuteFilter(String titulo, String autor, DateTime? data, String texto, String link, Int32 idAss);
         List<VIDEO> GetAllItensValidos(Int32 idAss);
+        VIDEO_COMENTARIO GetComentarioById(Int32 id);
 
     }
 }

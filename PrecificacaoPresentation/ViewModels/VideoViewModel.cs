@@ -33,6 +33,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public string VIDE_NM_AUTOR { get; set; }
         public int VIDE_IN_ATIVO { get; set; }
 
+        public virtual ICollection<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
     }
 }

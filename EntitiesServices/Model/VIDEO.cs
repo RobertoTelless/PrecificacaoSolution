@@ -14,6 +14,12 @@ namespace EntitiesServices.Model
     
     public partial class VIDEO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public VIDEO()
+        {
+            this.VIDEO_COMENTARIO = new HashSet<VIDEO_COMENTARIO>();
+        }
+    
         public int VIDE_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
         public string VIDE_NM_TITULO { get; set; }
@@ -27,5 +33,7 @@ namespace EntitiesServices.Model
         public int VIDE_IN_ATIVO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
     }
 }

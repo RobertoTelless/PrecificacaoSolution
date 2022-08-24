@@ -112,6 +112,7 @@
                                         <th>Contato</th>
                                         <th>Status</th>
                                         <th>Link Reunião</th>
+                                        <th>Anexos</th>
                                         <th class="td-one-action">Ações</th>
                                     </tr>
                                 </thead>
@@ -144,6 +145,14 @@
                                                 <td><span class="badge badge-sucess">Encerrado</span></td>
                                             }
                                             <td>@cond.AGEN_LK_REUNIAO</td>
+                                            @if (cond.AGENDA_ANEXO.Count == 0)
+                                            {
+                                                <td><span class="badge badge-warning">Nenhum</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td>@cond.AGENDA_ANEXO.Count</td>
+                                            }
                                             <td class="td-one-action">
                                                 @if (cond.AGEN_LK_REUNIAO != null)
                                                 {

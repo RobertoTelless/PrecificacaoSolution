@@ -231,6 +231,7 @@
     <Compile Include="Interfaces\Repositories\IAgendaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGrupoCCRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IVideoComentarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVideoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISubgrupoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoContaRepository.cs" />
@@ -512,6 +513,9 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\VIDEO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VIDEO_COMENTARIO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

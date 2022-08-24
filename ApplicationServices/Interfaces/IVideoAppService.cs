@@ -20,6 +20,7 @@ namespace ApplicationServices.Interfaces
         List<VIDEO> GetAllItensAdm(Int32 idAss);
         Int32 ExecuteFilter(String titulo, String autor, DateTime? data, String texto, String link, Int32 idAss, out List<VIDEO> objeto);
         List<VIDEO> GetAllItensValidos(Int32 idAss);
+        VIDEO_COMENTARIO GetComentarioById(Int32 id);
 
     }
 }

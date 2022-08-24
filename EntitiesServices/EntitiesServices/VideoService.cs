@@ -20,12 +20,14 @@ namespace ModelServices.EntitiesServices
     {
         private readonly IVideoRepository _baseRepository;
         private readonly ILogRepository _logRepository;
+        private readonly IVideoComentarioRepository _comRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public VideoService(IVideoRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
+        public VideoService(IVideoRepository baseRepository, ILogRepository logRepository, IVideoComentarioRepository comRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
+            _comRepository = comRepository;
         }
 
         public VIDEO GetItemById(Int32 id)
@@ -48,7 +50,12 @@ namespace ModelServices.EntitiesServices
         {
             return _baseRepository.GetAllItensValidos(idAss);
         }
-        
+
+        public VIDEO_COMENTARIO GetComentarioById(Int32 id)
+        {
+            return _comRepository.GetItemById(id);
+        }
+
         public List<VIDEO> ExecuteFilter(String titulo, String autor, DateTime? data, String texto, String link, Int32 idAss)
         {
             return _baseRepository.ExecuteFilter(titulo, autor, data, texto, link, idAss);

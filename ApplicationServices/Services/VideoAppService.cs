@@ -45,6 +45,12 @@ namespace ApplicationServices.Services
             return lista;
         }
 
+        public VIDEO_COMENTARIO GetComentarioById(Int32 id)
+        {
+            VIDEO_COMENTARIO lista = _baseService.GetComentarioById(id);
+            return lista;
+        }
+
         public Int32 ExecuteFilter(String titulo, String autor, DateTime? data, String texto, String link, Int32 idAss, out List<VIDEO> objeto)
         {
             try

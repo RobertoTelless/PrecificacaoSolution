@@ -167,6 +167,7 @@ namespace Presentation.Start
             kernel.Bind<IContaBancariaLancamentoRepository>().To<ContaBancariaLancamentoRepository>();
             kernel.Bind<ITipoContaRepository>().To<TipoContaRepository>();
             kernel.Bind<IVideoRepository>().To<VideoRepository>();
+            kernel.Bind<IVideoComentarioRepository>().To<VideoComentarioRepository>();
 
         }
     }

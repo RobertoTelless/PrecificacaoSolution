@@ -265,6 +265,7 @@
     <Compile Include="ViewModels\ContaBancariaContatoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaLancamentoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaViewModel.cs" />
+    <Compile Include="ViewModels\VideoComentarioViewModel.cs" />
     <Compile Include="ViewModels\VideoViewModel.cs" />
     <Compile Include="ViewModels\SubgrupoViewModel.cs" />
     <Compile Include="ViewModels\GrupoViewModel.cs" />
@@ -635,6 +636,7 @@
     <Content Include="Imagens\1\Usuario\3\Fotos\image_2021-04-08_13-28-54.png" />
     <Content Include="Imagens\1\Usuario\5\Fotos\a2.jpg" />
     <Content Include="Imagens\1\Usuario\6\Fotos\FotoMaluquete.jpg" />
+    <Content Include="Imagens\1\Videos\1\Fotos\gper-encore-carmen-mezz.jpg" />
     <Content Include="Imagens\Base\FotoBase.jpg" />
     <Content Include="Imagens\Base\FotoOficial.jpg" />
     <Content Include="Imagens\Base\icone_imagem.jpg" />
@@ -2985,6 +2987,8 @@
     <Content Include="Views\Video\MontarTelaVideo.cshtml" />
     <Content Include="Views\Video\IncluirVideo.cshtml" />
     <Content Include="Views\BaseAdmin\CarregarBase - Cópia .cshtml" />
+    <Content Include="Views\Video\EditarVideo.cshtml" />
+    <Content Include="Views\Video\IncluirComentario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

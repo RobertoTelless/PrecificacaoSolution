@@ -297,13 +297,14 @@
                                         {
                                             <div class="ibox">
                                                 <div class="ibox-content">
-                                                    <img src="@Url.Content(cond.VIDE_AQ_FOTO)" style="width: auto; height: auto; max-height: 400px; max-width: 600px;">
+                                                    <img src="@Url.Content(cond.VIDE_AQ_FOTO)" style="width: auto; height: auto; max-height: 400px; max-width: 430px;">
                                                     <a href="@Url.Action("VerVideo", "Video", new { id = cond.VIDE_CD_ID })" class="btn-link">
                                                         <h2>
                                                             @cond.VIDE_NM_TITULO
                                                         </h2>
                                                     </a>
                                                     <a href=@cond.VIDE_LK_LINK>@cond.VIDE_LK_LINK</a>
+                                                    <br /><br />
                                                     <p>
                                                         @if (cond.VIDE_NM_DESCRICAO.Length > 1000)
                                                         {
@@ -318,6 +319,7 @@
                                                         <div class="col-md-6">
                                                             <div class="small text-right">
                                                                 <h5>Stats:</h5>
+                                                                <div> <i class="fa fa-comments-o"> </i> @cond.VIDEO_COMENTARIO.Count comentários </div>
                                                                 <i class="fa fa-eye"> </i> @cond.VIDE_NR_ACESSOS visualizações
                                                             </div>
                                                         </div>

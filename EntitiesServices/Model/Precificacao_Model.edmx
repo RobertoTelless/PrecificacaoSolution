@@ -929,6 +929,17 @@
           <Property Name="VIDE_NM_AUTOR" Type="varchar" MaxLength="100" />
           <Property Name="VIDE_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="VIDEO_COMENTARIO">
+          <Key>
+            <PropertyRef Name="VICO_CD_ID" />
+          </Key>
+          <Property Name="VICO_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VIDE_CD_ID" Type="int" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="VICO_DT_COMENTARIO" Type="date" Nullable="false" />
+          <Property Name="VICO_TX_COMENTARIO" Type="text" Nullable="false" />
+          <Property Name="VICO_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_AGENDA_ANEXO_AGENDA">
           <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="1" />
           <End Role="AGENDA_ANEXO" Type="Self.AGENDA_ANEXO" Multiplicity="*" />
@@ -1394,6 +1405,30 @@
             </Principal>
             <Dependent Role="VIDEO">
               <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_COMENTARIO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="VIDEO_COMENTARIO" Type="Self.VIDEO_COMENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="VIDEO_COMENTARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_COMENTARIO_VIDEO">
+          <End Role="VIDEO" Type="Self.VIDEO" Multiplicity="1" />
+          <End Role="VIDEO_COMENTARIO" Type="Self.VIDEO_COMENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VIDEO">
+              <PropertyRef Name="VIDE_CD_ID" />
+            </Principal>
+            <Dependent Role="VIDEO_COMENTARIO">
+              <PropertyRef Name="VIDE_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2234,6 +2269,7 @@
           <EntitySet Name="USUARIO_ANEXO" EntityType="Self.USUARIO_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO_ANOTACAO" EntityType="Self.USUARIO_ANOTACAO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VIDEO" EntityType="Self.VIDEO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VIDEO_COMENTARIO" EntityType="Self.VIDEO_COMENTARIO" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AGENDA_ANEXO_AGENDA" Association="Self.FK_AGENDA_ANEXO_AGENDA">
             <End Role="AGENDA" EntitySet="AGENDA" />
             <End Role="AGENDA_ANEXO" EntitySet="AGENDA_ANEXO" />
@@ -2389,6 +2425,14 @@
           <AssociationSet Name="FK_VIDEO_ASSINANTE" Association="Self.FK_VIDEO_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="VIDEO" EntitySet="VIDEO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_COMENTARIO_USUARIO" Association="Self.FK_VIDEO_COMENTARIO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="VIDEO_COMENTARIO" EntitySet="VIDEO_COMENTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_COMENTARIO_VIDEO" Association="Self.FK_VIDEO_COMENTARIO_VIDEO">
+            <End Role="VIDEO" EntitySet="VIDEO" />
+            <End Role="VIDEO_COMENTARIO" EntitySet="VIDEO_COMENTARIO" />
           </AssociationSet>
           <AssociationSet Name="FKAGENDA22330" Association="Self.FKAGENDA22330">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
@@ -3689,6 +3733,7 @@
           <NavigationProperty Name="USUARIO_ANEXO" Relationship="Self.FK_USUARIO_ANEXO_USUARIO" FromRole="USUARIO" ToRole="USUARIO_ANEXO" />
           <NavigationProperty Name="USUARIO_ANOTACAO" Relationship="Self.FKUSUARIO_AN416650" FromRole="USUARIO" ToRole="USUARIO_ANOTACAO" />
           <NavigationProperty Name="USUARIO_ANOTACAO1" Relationship="Self.FKUSUARIO_AN728680" FromRole="USUARIO" ToRole="USUARIO_ANOTACAO" />
+          <NavigationProperty Name="VIDEO_COMENTARIO" Relationship="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_USUARIO" FromRole="USUARIO" ToRole="VIDEO_COMENTARIO" />
         </EntityType>
         <EntityType Name="USUARIO_ANEXO">
           <Key>
@@ -5325,6 +5370,15 @@
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="VIDEO" EntitySet="VIDEO" />
           </AssociationSet>
+          <EntitySet Name="VIDEO_COMENTARIO" EntityType="Db_PrecificacaoModel.VIDEO_COMENTARIO" />
+          <AssociationSet Name="FK_VIDEO_COMENTARIO_USUARIO" Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="VIDEO_COMENTARIO" EntitySet="VIDEO_COMENTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_COMENTARIO_VIDEO" Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO">
+            <End Role="VIDEO" EntitySet="VIDEO" />
+            <End Role="VIDEO_COMENTARIO" EntitySet="VIDEO_COMENTARIO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="GRUPO_PLANO_CONTA">
           <Key>
@@ -5486,6 +5540,7 @@
           <Property Name="VIDE_NM_AUTOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VIDE_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_VIDEO_ASSINANTE" FromRole="VIDEO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="VIDEO_COMENTARIO" Relationship="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" FromRole="VIDEO" ToRole="VIDEO_COMENTARIO" />
         </EntityType>
         <Association Name="FK_VIDEO_ASSINANTE">
           <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
@@ -5496,6 +5551,43 @@
             </Principal>
             <Dependent Role="VIDEO">
               <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VIDEO_COMENTARIO">
+          <Key>
+            <PropertyRef Name="VICO_CD_ID" />
+          </Key>
+          <Property Name="VICO_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VIDE_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="VICO_DT_COMENTARIO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VICO_TX_COMENTARIO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VICO_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_USUARIO" FromRole="VIDEO_COMENTARIO" ToRole="USUARIO" />
+          <NavigationProperty Name="VIDEO" Relationship="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" FromRole="VIDEO_COMENTARIO" ToRole="VIDEO" />
+        </EntityType>
+        <Association Name="FK_VIDEO_COMENTARIO_USUARIO">
+          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.VIDEO_COMENTARIO" Role="VIDEO_COMENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="VIDEO_COMENTARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_COMENTARIO_VIDEO">
+          <End Type="Db_PrecificacaoModel.VIDEO" Role="VIDEO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.VIDEO_COMENTARIO" Role="VIDEO_COMENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VIDEO">
+              <PropertyRef Name="VIDE_CD_ID" />
+            </Principal>
+            <Dependent Role="VIDEO_COMENTARIO">
+              <PropertyRef Name="VIDE_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6494,6 +6586,18 @@
                 <ScalarProperty Name="VIDE_NM_TITULO" ColumnName="VIDE_NM_TITULO" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="VIDE_CD_ID" ColumnName="VIDE_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VIDEO_COMENTARIO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.VIDEO_COMENTARIO">
+              <MappingFragment StoreEntitySet="VIDEO_COMENTARIO">
+                <ScalarProperty Name="VICO_IN_ATIVO" ColumnName="VICO_IN_ATIVO" />
+                <ScalarProperty Name="VICO_TX_COMENTARIO" ColumnName="VICO_TX_COMENTARIO" />
+                <ScalarProperty Name="VICO_DT_COMENTARIO" ColumnName="VICO_DT_COMENTARIO" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="VIDE_CD_ID" ColumnName="VIDE_CD_ID" />
+                <ScalarProperty Name="VICO_CD_ID" ColumnName="VICO_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
