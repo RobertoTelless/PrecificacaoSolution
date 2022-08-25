@@ -440,6 +440,8 @@
           <Property Name="FORN_NM_RAZAO_SOCIAL" Type="varchar" MaxLength="100" />
           <Property Name="FORN_NR_CPF" Type="varchar" MaxLength="15" />
           <Property Name="FORN_NR_CNPJ" Type="varchar" MaxLength="15" />
+          <Property Name="FORN_NR_INSCRICAO_ESTADUAL" Type="varchar" MaxLength="50" />
+          <Property Name="FORN_NR_INSCRICAO_MUNICIPAL" Type="varchar" MaxLength="50" />
           <Property Name="FORN_NR_TELEFONE" Type="varchar" MaxLength="20" />
           <Property Name="FORN_NR_CELULAR" Type="varchar" MaxLength="20" />
           <Property Name="FORN_NR_WHATSAPP" Type="varchar" MaxLength="50" />
@@ -3547,6 +3549,8 @@
           <NavigationProperty Name="FORNECEDOR_ANEXO" Relationship="Self.FKFORNECEDOR90800" FromRole="FORNECEDOR" ToRole="FORNECEDOR_ANEXO" />
           <NavigationProperty Name="PRODUTO_FORNECEDOR" Relationship="Self.FKPRODUTO_FO601856" FromRole="FORNECEDOR" ToRole="PRODUTO_FORNECEDOR" />
           <Property Name="FORN_TX_OBSERVACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FORN_NR_INSCRICAO_ESTADUAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FORN_NR_INSCRICAO_MUNICIPAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FORNECEDOR_ANEXO">
           <Key>
@@ -6800,6 +6804,8 @@
           <EntitySetMapping Name="FORNECEDOR">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.FORNECEDOR">
               <MappingFragment StoreEntitySet="FORNECEDOR">
+                <ScalarProperty Name="FORN_NR_INSCRICAO_MUNICIPAL" ColumnName="FORN_NR_INSCRICAO_MUNICIPAL" />
+                <ScalarProperty Name="FORN_NR_INSCRICAO_ESTADUAL" ColumnName="FORN_NR_INSCRICAO_ESTADUAL" />
                 <ScalarProperty Name="FORN_TX_OBSERVACAO" ColumnName="FORN_TX_OBSERVACAO" />
                 <ScalarProperty Name="FORN_CD_ID" ColumnName="FORN_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />

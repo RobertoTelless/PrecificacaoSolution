@@ -561,4 +561,10 @@
   <data name="M0169" xml:space="preserve">
     <value>Nenhum lançamento cadastrado nessa conta</value>
   </data>
+  <data name="M0170" xml:space="preserve">
+    <value>Fornecedor já cadastrado</value>
+  </data>
+  <data name="M0171" xml:space="preserve">
+    <value>Impossível excluir este fornecedor. Existem registros vinculados a ele</value>
+  </data>
 </root>

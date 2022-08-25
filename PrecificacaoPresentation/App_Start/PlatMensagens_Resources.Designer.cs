@@ -1391,5 +1391,23 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0169", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Fornecedor já cadastrado.
+        /// </summary>
+        internal static string M0170 {
+            get {
+                return ResourceManager.GetString("M0170", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este fornecedor. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0171 {
+            get {
+                return ResourceManager.GetString("M0171", resourceCulture);
+            }
+        }
     }
 }

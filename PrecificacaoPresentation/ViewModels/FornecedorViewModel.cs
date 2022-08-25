@@ -56,6 +56,10 @@ namespace ERP_Condominios_Solution.ViewModels
         public int FORN_IN_ATIVO { get; set; }
         [StringLength(5000, ErrorMessage = "A OBSERVAÇÃO deve conter no máximo 5000 caracteres.")]
         public string FORN_TX_OBSERVACAO { get; set; }
+        [StringLength(50, ErrorMessage = "A INSCRIÇÃO ESTADUAL deve conter no máximo 50 caracteres.")]
+        public string FORN_NR_INSCRICAO_ESTADUAL { get; set; }
+        [StringLength(50, ErrorMessage = "A INSCRIÇÃO MUNICIPAL deve conter no máximo 50 caracteres.")]
+        public string FORN_NR_INSCRICAO_MUNICIPAL { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_FORNECEDOR CATEGORIA_FORNECEDOR { get; set; }

@@ -48,6 +48,8 @@ namespace EntitiesServices.Model
         public System.DateTime FORN_DT_CADASTRO { get; set; }
         public int FORN_IN_ATIVO { get; set; }
         public string FORN_TX_OBSERVACAO { get; set; }
+        public string FORN_NR_INSCRICAO_ESTADUAL { get; set; }
+        public string FORN_NR_INSCRICAO_MUNICIPAL { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_FORNECEDOR CATEGORIA_FORNECEDOR { get; set; }
