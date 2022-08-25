@@ -94,5 +94,14 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         public virtual DbSet<VIDEO> VIDEO { get; set; }
         public virtual DbSet<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
+        public virtual DbSet<CATEGORIA_CLIENTE> CATEGORIA_CLIENTE { get; set; }
+        public virtual DbSet<CLIENTE> CLIENTE { get; set; }
+        public virtual DbSet<CLIENTE_ANEXO> CLIENTE_ANEXO { get; set; }
+        public virtual DbSet<CLIENTE_CONTATO> CLIENTE_CONTATO { get; set; }
+        public virtual DbSet<CLIENTE_QUADRO_SOCIETARIO> CLIENTE_QUADRO_SOCIETARIO { get; set; }
+        public virtual DbSet<CLIENTE_REFERENCIA> CLIENTE_REFERENCIA { get; set; }
+        public virtual DbSet<SEXO> SEXO { get; set; }
+        public virtual DbSet<TIPO_CONTRIBUINTE> TIPO_CONTRIBUINTE { get; set; }
+        public virtual DbSet<CLIENTE_ANOTACAO> CLIENTE_ANOTACAO { get; set; }
     }
 }

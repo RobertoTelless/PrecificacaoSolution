@@ -12,25 +12,18 @@ namespace EntitiesServices.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class UF
+    public partial class SEXO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UF()
+        public SEXO()
         {
-            this.FORNECEDOR = new HashSet<FORNECEDOR>();
             this.CLIENTE = new HashSet<CLIENTE>();
-            this.CLIENTE1 = new HashSet<CLIENTE>();
         }
     
-        public int UF_CD_ID { get; set; }
-        public string UF_SG_SIGLA { get; set; }
-        public string UF_NM_NOME { get; set; }
+        public int SEXO_CD_ID { get; set; }
+        public string SEXO_NM_NOME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FORNECEDOR> FORNECEDOR { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CLIENTE> CLIENTE1 { get; set; }
     }
 }

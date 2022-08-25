@@ -314,6 +314,9 @@
     <Compile Include="Model\CATEGORIA_AGENDA.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CATEGORIA_CLIENTE.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CATEGORIA_CUSTO_FIXO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
@@ -327,6 +330,24 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CATEGORIA_USUARIO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CLIENTE.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CLIENTE_ANEXO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CLIENTE_ANOTACAO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CLIENTE_CONTATO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CLIENTE_QUADRO_SOCIETARIO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CLIENTE_REFERENCIA.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\COMISSAO_CARGO.cs">
@@ -464,6 +485,9 @@
     <Compile Include="Model\REGIME_TRIBUTARIO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SEXO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SUBCATEGORIA_PRODUTO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
@@ -489,6 +513,9 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIPO_CONTA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TIPO_CONTRIBUINTE.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIPO_PESSOA.cs">

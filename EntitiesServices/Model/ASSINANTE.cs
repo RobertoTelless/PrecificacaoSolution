@@ -49,6 +49,9 @@ namespace EntitiesServices.Model
             this.PRODUTO = new HashSet<PRODUTO>();
             this.TAREFA = new HashSet<TAREFA>();
             this.USUARIO = new HashSet<USUARIO>();
+            this.CATEGORIA_CLIENTE = new HashSet<CATEGORIA_CLIENTE>();
+            this.CLIENTE = new HashSet<CLIENTE>();
+            this.TIPO_CONTRIBUINTE = new HashSet<TIPO_CONTRIBUINTE>();
         }
     
         public int ASSI_CD_ID { get; set; }
@@ -120,5 +123,11 @@ namespace EntitiesServices.Model
         public virtual ICollection<TAREFA> TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO> USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CATEGORIA_CLIENTE> CATEGORIA_CLIENTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLIENTE> CLIENTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TIPO_CONTRIBUINTE> TIPO_CONTRIBUINTE { get; set; }
     }
 }

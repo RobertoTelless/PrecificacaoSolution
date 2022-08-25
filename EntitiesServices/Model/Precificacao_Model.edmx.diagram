@@ -178,6 +178,33 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN416650" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_CLIENTE" Width="1.5" PointX="3" PointY="93.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE" Width="1.5" PointX="19.5" PointY="72.875" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_ANEXO" Width="1.5" PointX="21.75" PointY="83.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_CONTATO" Width="1.5" PointX="21.75" PointY="76.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_QUADRO_SOCIETARIO" Width="1.5" PointX="21.75" PointY="80.25" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_REFERENCIA" Width="1.5" PointX="21.75" PointY="73.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SEXO" Width="1.5" PointX="17.25" PointY="77.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CONTRIBUINTE" Width="1.5" PointX="3" PointY="90.25" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_CLIENTE_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_CONTRIBUINTE_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_CATEGORIA_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_ANEXO_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_CONTATO_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_EMPRESA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_QUADRO_SOCIETARIO_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_REFERENCIA_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_REGIME_TRIBUTARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_SEXO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_TIPO_CONTRIBUINTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_TIPO_PESSOA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_UF" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_UF1" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_USUARIO" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_ANOTACAO" Width="1.5" PointX="24.75" PointY="77.375" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_ANOTACAO_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_ANOTACAO_USUARIO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
