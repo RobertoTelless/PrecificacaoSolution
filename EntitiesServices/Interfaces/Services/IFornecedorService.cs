@@ -29,10 +29,10 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<TIPO_PESSOA> GetAllTiposPessoa();
         List<UF> GetAllUF();
         UF GetUFbySigla(String sigla);
+        FORNECEDOR_ANOTACOES GetComentarioById(Int32 id);
 
         FORNECEDOR_CONTATO GetContatoById(Int32 id);
         Int32 EditContato(FORNECEDOR_CONTATO item);
         Int32 CreateContato(FORNECEDOR_CONTATO item);
-
     }
 }

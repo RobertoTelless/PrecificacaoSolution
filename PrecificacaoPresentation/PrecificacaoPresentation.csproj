@@ -261,10 +261,14 @@
     <Compile Include="ViewModels\AssinanteViewModel.cs" />
     <Compile Include="ViewModels\BancoViewModel.cs" />
     <Compile Include="ViewModels\CargoViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaFornecedorViewModel.cs" />
     <Compile Include="ViewModels\CentroCustoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaContatoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaLancamentoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaViewModel.cs" />
+    <Compile Include="ViewModels\FornecedorComentarioViewModel.cs" />
+    <Compile Include="ViewModels\FornecedorContatoViewModel.cs" />
+    <Compile Include="ViewModels\FornecedorViewModel.cs" />
     <Compile Include="ViewModels\VideoComentarioViewModel.cs" />
     <Compile Include="ViewModels\VideoViewModel.cs" />
     <Compile Include="ViewModels\SubgrupoViewModel.cs" />

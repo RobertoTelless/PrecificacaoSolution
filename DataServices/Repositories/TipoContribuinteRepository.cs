@@ -23,5 +23,6 @@ namespace DataServices.Repositories
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
         }
+
     }
 }

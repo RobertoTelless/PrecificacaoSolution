@@ -74,6 +74,12 @@ namespace ApplicationServices.Services
             return lista;
         }
 
+        public FORNECEDOR_ANOTACOES GetComentarioById(Int32 id)
+        {
+            FORNECEDOR_ANOTACOES lista = _baseService.GetComentarioById(id);
+            return lista;
+        }
+
         public Int32 ExecuteFilter(Int32? catId, String razao, String nome, String cpf, String cnpj, String email, String cidade, Int32? uf, String rede, Int32? ativo, Int32 idAss, out List<FORNECEDOR> objeto)
         {
             try
@@ -155,12 +161,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddFORN",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<FORNECEDOR>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<FORNECEDOR>(item)
                 };
 
                 // Persiste
@@ -203,13 +209,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditFORN",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<FORNECEDOR>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<FORNECEDOR>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<FORNECEDOR>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<FORNECEDOR>(itemAntes)
                 };
 
                 // Persiste
@@ -269,12 +275,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelFORN",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<FORNECEDOR>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<FORNECEDOR>(item)
                 };
 
                 // Persiste
@@ -298,12 +304,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatFORN",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<FORNECEDOR>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<FORNECEDOR>(item)
                 };
 
                 // Persiste

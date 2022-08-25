@@ -7,10 +7,9 @@ using EntitiesServices.Model;
 
 namespace ModelServices.Interfaces.Repositories
 {
-    public interface ISexoRepository : IRepositoryBase<SEXO>
+    public interface IFornecedorAnotacaoRepository : IRepositoryBase<FORNECEDOR_ANOTACOES>
     {
-        List<SEXO> GetAllItens();
-        SEXO GetItemById(Int32 id);
-
+        List<FORNECEDOR_ANOTACOES> GetAllItens();
+        FORNECEDOR_ANOTACOES GetItemById(Int32 id);
     }
 }

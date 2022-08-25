@@ -25,9 +25,10 @@ namespace ModelServices.EntitiesServices
         private readonly ITipoPessoaRepository _pesRepository;
         private readonly IFornecedorContatoRepository _contRepository;
         private readonly IUFRepository _ufRepository;
-        protected ERP_CRMEntities Db = new ERP_CRMEntities();
+        private readonly IFornecedorAnotacaoRepository _anoRepository;
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public FornecedorService(IFornecedorRepository baseRepository, ILogRepository logRepository, ICategoriaFornecedorRepository tipoRepository, IFornecedorAnexoRepository anexoRepository, ITipoPessoaRepository pesRepository, IFornecedorContatoRepository contRepository, IUFRepository ufRepository) : base(baseRepository)
+        public FornecedorService(IFornecedorRepository baseRepository, ILogRepository logRepository, ICategoriaFornecedorRepository tipoRepository, IFornecedorAnexoRepository anexoRepository, ITipoPessoaRepository pesRepository, IFornecedorContatoRepository contRepository, IUFRepository ufRepository, IFornecedorAnotacaoRepository anoRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
@@ -36,6 +37,7 @@ namespace ModelServices.EntitiesServices
             _pesRepository = pesRepository;
             _contRepository = contRepository;
             _ufRepository = ufRepository;
+            _anoRepository = anoRepository;
         }
 
         public FORNECEDOR CheckExist(FORNECEDOR conta, Int32 idAss)
@@ -94,6 +96,11 @@ namespace ModelServices.EntitiesServices
         public List<FORNECEDOR> ExecuteFilterSemPedido(String nome, String cidade, Int32? uf, Int32 idAss)
         {
             return _baseRepository.ExecuteFilterSemPedido(nome, cidade, uf, idAss);
+        }
+
+        public FORNECEDOR_ANOTACOES GetComentarioById(Int32 id)
+        {
+            return _anoRepository.GetItemById(id);
         }
 
         public Int32 Create(FORNECEDOR item, LOG log)

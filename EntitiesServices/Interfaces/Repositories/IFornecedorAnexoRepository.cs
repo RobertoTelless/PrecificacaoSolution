@@ -12,5 +12,4 @@ namespace ModelServices.Interfaces.Repositories
         List<FORNECEDOR_ANEXO> GetAllItens(Int32 idAss);
         FORNECEDOR_ANEXO GetItemById(Int32 id);
     }
-
 }

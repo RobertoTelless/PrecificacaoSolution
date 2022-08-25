@@ -22,5 +22,6 @@ namespace DataServices.Repositories
             IQueryable<SEXO> query = Db.SEXO;
             return query.ToList();
         }
+
     }
 }

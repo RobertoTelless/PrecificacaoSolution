@@ -11,16 +11,16 @@ using System.Data.Entity;
 
 namespace DataServices.Repositories
 {
-    public class FornecedorContatoRepository : RepositoryBase<FORNECEDOR_CONTATO>, IFornecedorContatoRepository
+    public class FornecedorAnotacaoRepository : RepositoryBase<FORNECEDOR_ANOTACOES>, IFornecedorAnotacaoRepository
     {
-        public List<FORNECEDOR_CONTATO> GetAllItens(Int32 idAss)
+        public List<FORNECEDOR_ANOTACOES> GetAllItens()
         {
-            return Db.FORNECEDOR_CONTATO.ToList();
+            return Db.FORNECEDOR_ANOTACOES.ToList();
         }
 
-        public FORNECEDOR_CONTATO GetItemById(Int32 id)
+        public FORNECEDOR_ANOTACOES GetItemById(Int32 id)
         {
-            IQueryable<FORNECEDOR_CONTATO> query = Db.FORNECEDOR_CONTATO.Where(p => p.FOCO_CD_ID == id);
+            IQueryable<FORNECEDOR_ANOTACOES> query = Db.FORNECEDOR_ANOTACOES.Where(p => p.FOAT_CD_ID == id);
             return query.FirstOrDefault();
         }
     }

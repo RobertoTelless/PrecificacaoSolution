@@ -32,7 +32,7 @@ namespace DataServices.Repositories
         public FORNECEDOR GetByEmail(String email)
         {
             IQueryable<FORNECEDOR> query = Db.FORNECEDOR.Where(p => p.FORN_IN_ATIVO == 1);
-            query = query.Where(p => p.FORN_NM_EMAIL == email);
+            query = query.Where(p => p.FORN_EM_EMAIL == email);
             return query.FirstOrDefault();
         }
 
@@ -40,6 +40,8 @@ namespace DataServices.Repositories
         {
             IQueryable<FORNECEDOR> query = Db.FORNECEDOR;
             query = query.Where(p => p.FORN_CD_ID == id);
+            query = query.Include(p => p.FORNECEDOR_ANEXO);
+            query = query.Include(p => p.FORNECEDOR_ANOTACOES);
             return query.FirstOrDefault();
         }
 
@@ -75,7 +77,7 @@ namespace DataServices.Repositories
             }
             if (!String.IsNullOrEmpty(razao))
             {
-                query = query.Where(p => p.FORN_NM_RAZAO.Contains(razao));
+                query = query.Where(p => p.FORN_NM_RAZAO_SOCIAL.Contains(razao));
             }
             if (!String.IsNullOrEmpty(nome))
             {
@@ -83,17 +85,15 @@ namespace DataServices.Repositories
             }
             if (!String.IsNullOrEmpty(cpf))
             {
-                //cpf = ValidarNumerosDocumentos.RemoveNaoNumericos(cpf);
                 query = query.Where(p => p.FORN_NR_CPF == cpf);
             }
             if (!String.IsNullOrEmpty(cnpj))
             {
-                //cnpj = ValidarNumerosDocumentos.RemoveNaoNumericos(cnpj);
                 query = query.Where(p => p.FORN_NR_CNPJ == cnpj);
             }
             if (!String.IsNullOrEmpty(email))
             {
-                query = query.Where(p => p.FORN_NM_EMAIL.Contains(email));
+                query = query.Where(p => p.FORN_EM_EMAIL.Contains(email));
             }
             if (!String.IsNullOrEmpty(cidade))
             {
