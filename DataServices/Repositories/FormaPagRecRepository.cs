@@ -16,6 +16,7 @@ namespace DataServices.Repositories
         {
             IQueryable<FORMA_PAGTO_RECTO> query = Db.FORMA_PAGTO_RECTO;
             query = query.Where(p => p.FOPR_NM_NOME_FORMA == tarefa.FOPR_NM_NOME_FORMA);
+            query = query.Where(p => p.FOPA_IN_TIPO_FORMA == tarefa.FOPA_IN_TIPO_FORMA);
             query = query.Where(p => p.ASSI_CD_ID == tarefa.ASSI_CD_ID);
             return query.FirstOrDefault();
         }

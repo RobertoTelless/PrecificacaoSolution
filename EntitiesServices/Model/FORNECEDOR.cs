@@ -26,7 +26,7 @@ namespace EntitiesServices.Model
     
         public int FORN_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
-        public int EMPR_CD_ID { get; set; }
+        public Nullable<int> EMPR_CD_ID { get; set; }
         public int CAFO_CD_ID { get; set; }
         public int TIPE_CD_ID { get; set; }
         public string FORN_AQ_LOGOTIPO { get; set; }
@@ -34,9 +34,12 @@ namespace EntitiesServices.Model
         public string FORN_NM_RAZAO_SOCIAL { get; set; }
         public string FORN_NR_CPF { get; set; }
         public string FORN_NR_CNPJ { get; set; }
+        public string FORN_NR_INSCRICAO_ESTADUAL { get; set; }
+        public string FORN_NR_INSCRICAO_MUNICIPAL { get; set; }
         public string FORN_NR_TELEFONE { get; set; }
         public string FORN_NR_CELULAR { get; set; }
         public string FORN_NR_WHATSAPP { get; set; }
+        public string FORN_LK_WEBSITE { get; set; }
         public string FORN_EM_EMAIL { get; set; }
         public string FORN_NM_ENDERECO { get; set; }
         public string FORN_NM_BAIRRO { get; set; }
@@ -45,11 +48,9 @@ namespace EntitiesServices.Model
         public Nullable<int> UF_CD_ID { get; set; }
         public string FORN_DS_SITUACAO { get; set; }
         public byte[] FORN_TX_OBSERVACOES { get; set; }
+        public string FORN_TX_OBSERVACAO { get; set; }
         public System.DateTime FORN_DT_CADASTRO { get; set; }
         public int FORN_IN_ATIVO { get; set; }
-        public string FORN_TX_OBSERVACAO { get; set; }
-        public string FORN_NR_INSCRICAO_ESTADUAL { get; set; }
-        public string FORN_NR_INSCRICAO_MUNICIPAL { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_FORNECEDOR CATEGORIA_FORNECEDOR { get; set; }

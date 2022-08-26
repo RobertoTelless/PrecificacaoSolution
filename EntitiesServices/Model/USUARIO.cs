@@ -19,6 +19,8 @@ namespace EntitiesServices.Model
         {
             this.AGENDA = new HashSet<AGENDA>();
             this.AGENDA1 = new HashSet<AGENDA>();
+            this.CLIENTE = new HashSet<CLIENTE>();
+            this.CLIENTE_ANOTACAO = new HashSet<CLIENTE_ANOTACAO>();
             this.FORNECEDOR_ANOTACOES = new HashSet<FORNECEDOR_ANOTACOES>();
             this.LOG = new HashSet<LOG>();
             this.NOTICIA_COMENTARIO = new HashSet<NOTICIA_COMENTARIO>();
@@ -30,8 +32,6 @@ namespace EntitiesServices.Model
             this.VIDEO_COMENTARIO = new HashSet<VIDEO_COMENTARIO>();
             this.USUARIO_ANOTACAO = new HashSet<USUARIO_ANOTACAO>();
             this.USUARIO_ANOTACAO1 = new HashSet<USUARIO_ANOTACAO>();
-            this.CLIENTE = new HashSet<CLIENTE>();
-            this.CLIENTE_ANOTACAO = new HashSet<CLIENTE_ANOTACAO>();
         }
     
         public int USUA_CD_ID { get; set; }
@@ -73,6 +73,10 @@ namespace EntitiesServices.Model
         public virtual CARGO_USUARIO CARGO_USUARIO { get; set; }
         public virtual CATEGORIA_USUARIO CATEGORIA_USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLIENTE> CLIENTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLIENTE_ANOTACAO> CLIENTE_ANOTACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FORNECEDOR_ANOTACOES> FORNECEDOR_ANOTACOES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LOG> LOG { get; set; }
@@ -95,9 +99,5 @@ namespace EntitiesServices.Model
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CLIENTE> CLIENTE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CLIENTE_ANOTACAO> CLIENTE_ANOTACAO { get; set; }
     }
 }

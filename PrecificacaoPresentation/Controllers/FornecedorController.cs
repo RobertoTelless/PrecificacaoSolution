@@ -369,6 +369,7 @@ namespace ERP_Condominios_Solution.Controllers
             // Indicadores
             ViewBag.Fornecedores = ((List<FORNECEDOR>)Session["ListaFornecedor"]).Count;
             ViewBag.Atrasos = 0;
+            ViewBag.SemPedidos = 0;
             ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
             ViewBag.Inativos = fornApp.GetAllItensAdm(idAss).Where(p => p.FORN_IN_ATIVO == 0).ToList().Count;
             //ViewBag.SemPedidos = fornApp.GetAllItens(idAss).Where(p => p.ITEM_PEDIDO_COMPRA.Count == 0 || p.ITEM_PEDIDO_COMPRA == null).ToList().Count;

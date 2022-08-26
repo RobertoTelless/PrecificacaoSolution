@@ -119,7 +119,11 @@ namespace ERP_Condominios_Solution.Controllers
                 }
                 if ((Int32)Session["MensFormaPag"] == 4)
                 {
-                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0056", CultureInfo.CurrentCulture));
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0173", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensFormaPag"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0172", CultureInfo.CurrentCulture));
                 }
             }
 
@@ -135,8 +139,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
-            listaMasterFP = fpApp.GetAllItensAdm(idAss);
-            Session["ListaForma"] = listaMasterFP;
+            Session["ListaForma"] = null;
             return RedirectToAction("MontarTelaFormaPagamento");
         }
 
@@ -215,11 +218,12 @@ namespace ERP_Condominios_Solution.Controllers
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
                     Int32 volta = fpApp.ValidateCreate(item, usuarioLogado);
 
-
-
-
-
-
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensFormaPag"] = 3;
+                        return RedirectToAction("MontarTelaFormaPagamento");
+                    }
 
                     // Sucesso
                     listaMasterFP = new List<FORMA_PAGTO_RECTO>();
@@ -255,7 +259,7 @@ namespace ERP_Condominios_Solution.Controllers
                 if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
                 {
                     Session["MensFormaPag"] = 2;
-                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                    return RedirectToAction("MontarTelaFormaPagamento");
                 }
             }
             else
@@ -272,7 +276,7 @@ namespace ERP_Condominios_Solution.Controllers
             tipo.Add(new SelectListItem() { Text = "Ambos", Value = "3" });
             ViewBag.Tipos = new SelectList(tipo, "Value", "Text");
             Session["Forma"] = item;
-            Session["IdVolta"] = id;
+            Session["IdForma"] = id;
             FormaPagRecViewModel vm = Mapper.Map<FORMA_PAGTO_RECTO, FormaPagRecViewModel>(item);
             return View(vm);
         }
@@ -336,7 +340,7 @@ namespace ERP_Condominios_Solution.Controllers
                 if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
                 {
                     Session["MensFormaPag"] = 2;
-                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                    return RedirectToAction("MontarTelaFormaPagamento");
                 }
             }
             else
@@ -376,7 +380,7 @@ namespace ERP_Condominios_Solution.Controllers
                 if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
                 {
                     Session["MensFormaPag"] = 2;
-                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                    return RedirectToAction("MontarTelaFormaPagamento");
                 }
             }
             else

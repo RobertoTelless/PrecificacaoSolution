@@ -1409,5 +1409,23 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0171", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Forma de Pagamento/Recebimento já cadastrada.
+        /// </summary>
+        internal static string M0172 {
+            get {
+                return ResourceManager.GetString("M0172", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta Forma de Pagamento/Recebomento. Existem registros vinculados a ela.
+        /// </summary>
+        internal static string M0173 {
+            get {
+                return ResourceManager.GetString("M0173", resourceCulture);
+            }
+        }
     }
 }

@@ -18,10 +18,10 @@ namespace EntitiesServices.Model
         public CLIENTE()
         {
             this.CLIENTE_ANEXO = new HashSet<CLIENTE_ANEXO>();
+            this.CLIENTE_ANOTACAO = new HashSet<CLIENTE_ANOTACAO>();
             this.CLIENTE_CONTATO = new HashSet<CLIENTE_CONTATO>();
             this.CLIENTE_QUADRO_SOCIETARIO = new HashSet<CLIENTE_QUADRO_SOCIETARIO>();
             this.CLIENTE_REFERENCIA = new HashSet<CLIENTE_REFERENCIA>();
-            this.CLIENTE_ANOTACAO = new HashSet<CLIENTE_ANOTACAO>();
         }
     
         public int CLIE_CD_ID { get; set; }
@@ -84,6 +84,8 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE_ANEXO> CLIENTE_ANEXO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLIENTE_ANOTACAO> CLIENTE_ANOTACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE_CONTATO> CLIENTE_CONTATO { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -97,7 +99,5 @@ namespace EntitiesServices.Model
         public virtual UF UF { get; set; }
         public virtual UF UF1 { get; set; }
         public virtual USUARIO USUARIO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CLIENTE_ANOTACAO> CLIENTE_ANOTACAO { get; set; }
     }
 }

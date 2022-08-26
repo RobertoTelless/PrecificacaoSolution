@@ -17,8 +17,8 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public REGIME_TRIBUTARIO()
         {
-            this.EMPRESA = new HashSet<EMPRESA>();
             this.CLIENTE = new HashSet<CLIENTE>();
+            this.EMPRESA = new HashSet<EMPRESA>();
         }
     
         public int RETR_CD_ID { get; set; }
@@ -26,8 +26,8 @@ namespace EntitiesServices.Model
         public int RETR_IN_ATIVO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPRESA> EMPRESA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMPRESA> EMPRESA { get; set; }
     }
 }
