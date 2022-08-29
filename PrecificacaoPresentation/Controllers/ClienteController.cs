@@ -883,8 +883,9 @@ namespace ERP_Condominios_Solution.Controllers
             //ViewBag.Servicos = item.ORDEM_SERVICO.Count;
             //ViewBag.Atendimentos = item.ATENDIMENTO.Count;
             ViewBag.Vendas = 0;
-            ViewBag.Servicos = 0;
             ViewBag.Atendimentos = 0;
+            ViewBag.AReceber = 0;
+            ViewBag.Atrasos = 0;
 
             ViewBag.Incluir = (Int32)Session["IncluirCliente"];
             //ViewBag.ListaVendas = peds;

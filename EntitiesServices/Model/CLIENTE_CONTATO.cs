@@ -22,6 +22,7 @@ namespace EntitiesServices.Model
         public string CLCO_NM_TELEFONE { get; set; }
         public string CLCO_DS_OBSERVACOES { get; set; }
         public int CLCO_IN_ATIVO { get; set; }
+        public string CLCO_NR_CELULAR { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
     }

@@ -219,6 +219,7 @@
           <Property Name="CLCO_NM_CARGO" Type="varchar" MaxLength="50" />
           <Property Name="CLCO_NM_EMAIL" Type="varchar" MaxLength="100" />
           <Property Name="CLCO_NM_TELEFONE" Type="varchar" MaxLength="50" />
+          <Property Name="CLCO_NR_CELULAR" Type="varchar" MaxLength="50" />
           <Property Name="CLCO_DS_OBSERVACOES" Type="varchar" MaxLength="1000" />
           <Property Name="CLCO_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
@@ -3422,6 +3423,7 @@
           <Property Name="CLCO_DS_OBSERVACOES" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="CLCO_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_CONTATO_CLIENTE" FromRole="CLIENTE_CONTATO" ToRole="CLIENTE" />
+          <Property Name="CLCO_NR_CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CLIENTE_QUADRO_SOCIETARIO">
           <Key>
@@ -6711,6 +6713,7 @@
           <EntitySetMapping Name="CLIENTE_CONTATO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CLIENTE_CONTATO">
               <MappingFragment StoreEntitySet="CLIENTE_CONTATO">
+                <ScalarProperty Name="CLCO_NR_CELULAR" ColumnName="CLCO_NR_CELULAR" />
                 <ScalarProperty Name="CLCO_CD_ID" ColumnName="CLCO_CD_ID" />
                 <ScalarProperty Name="CLIE_CD_ID" ColumnName="CLIE_CD_ID" />
                 <ScalarProperty Name="CLCO_NM_NOME" ColumnName="CLCO_NM_NOME" />

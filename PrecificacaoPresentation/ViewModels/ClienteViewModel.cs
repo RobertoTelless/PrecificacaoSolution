@@ -89,6 +89,17 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<int> CLIE_UF_CD_ENTREGA { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "O LIMITE DE CRÉDITO deve ser um valor numérico positivo")]
         public Nullable<decimal> CLIE_VL_LIMITE_CREDITO { get; set; }
+        public string LimiteText
+        {
+            get
+            {
+                return CLIE_VL_LIMITE_CREDITO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CLIE_VL_LIMITE_CREDITO.Value) : string.Empty;
+            }
+            set
+            {
+                CLIE_VL_LIMITE_CREDITO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
         [StringLength(50, ErrorMessage = "O TELEFONE deve conter no máximo 50.")]
         public string CLIE_NR_TELEFONE_ADICIONAL { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "O SALDO deve ser um valor numérico positivo")]
@@ -116,11 +127,11 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<int> CLIE_IN_STATUS { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<ATENDIMENTO> ATENDIMENTO { get; set; }
         public virtual CATEGORIA_CLIENTE CATEGORIA_CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE_ANEXO> CLIENTE_ANEXO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLIENTE_ANOTACAO> CLIENTE_ANOTACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE_CONTATO> CLIENTE_CONTATO { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }
@@ -130,7 +141,6 @@ namespace ERP_Condominios_Solution.ViewModels
         public virtual ICollection<CLIENTE_REFERENCIA> CLIENTE_REFERENCIA { get; set; }
         public virtual REGIME_TRIBUTARIO REGIME_TRIBUTARIO { get; set; }
         public virtual SEXO SEXO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual TIPO_CONTRIBUINTE TIPO_CONTRIBUINTE { get; set; }
         public virtual TIPO_PESSOA TIPO_PESSOA { get; set; }
         public virtual UF UF { get; set; }

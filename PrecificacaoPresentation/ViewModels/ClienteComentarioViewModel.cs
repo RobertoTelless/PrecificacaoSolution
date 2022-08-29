@@ -18,7 +18,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public System.DateTime CLAT_DT_ANOTACAO { get; set; }
         [Required(ErrorMessage = "Campo ANOTAÇÃO obrigatorio")]
         [StringLength(5000, MinimumLength = 1, ErrorMessage = "O COMENTÁRIO deve conter no minimo 1 caracteres e no máximo 5000 caracteres.")]
-        public string CLAT_DS_ANOTACAO { get; set; }
+        public string CLAT_TX_ANOTACAO { get; set; }
         public int CLAT_IN_ATIVO { get; set; }
 
         public virtual CLIENTE CLIENTE { get; set; }
