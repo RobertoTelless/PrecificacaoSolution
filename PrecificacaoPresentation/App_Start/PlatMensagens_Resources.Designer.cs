@@ -1427,5 +1427,23 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0173", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cliente já cadastrado.
+        /// </summary>
+        internal static string M0174 {
+            get {
+                return ResourceManager.GetString("M0174", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este cliente. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0175 {
+            get {
+                return ResourceManager.GetString("M0175", resourceCulture);
+            }
+        }
     }
 }

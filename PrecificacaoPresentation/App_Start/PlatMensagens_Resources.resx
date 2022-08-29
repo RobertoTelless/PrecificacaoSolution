@@ -573,4 +573,10 @@
   <data name="M0173" xml:space="preserve">
     <value>Impossível excluir esta Forma de Pagamento/Recebomento. Existem registros vinculados a ela</value>
   </data>
+  <data name="M0174" xml:space="preserve">
+    <value>Cliente já cadastrado</value>
+  </data>
+  <data name="M0175" xml:space="preserve">
+    <value>Impossível excluir este cliente. Existem registros vinculados a ele</value>
+  </data>
 </root>

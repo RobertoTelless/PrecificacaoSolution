@@ -235,6 +235,7 @@
     <Compile Include="Controllers\BancoController.cs" />
     <Compile Include="Controllers\BaseAdminController.cs" />
     <Compile Include="Controllers\CentroCustoController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ConfiguracaoController.cs" />
     <Compile Include="Controllers\ControleAcessoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
@@ -3023,6 +3024,16 @@
     <Content Include="Views\FormaPagRec\MontarTelaFormaPagamento.cshtml" />
     <Content Include="Views\FormaPagRec\IncluirFormaPagamento.cshtml" />
     <Content Include="Views\FormaPagRec\EditarFormaPagamento.cshtml" />
+    <Content Include="Views\Cliente\MontarTelaCliente.cshtml" />
+    <Content Include="Views\Cliente\IncluirCliente.cshtml" />
+    <Content Include="Views\Cliente\EditarCliente.cshtml" />
+    <Content Include="Views\Cliente\VerCardsCliente.cshtml" />
+    <Content Include="Views\Cliente\VerAnexoCliente.cshtml" />
+    <Content Include="Views\Cliente\EditarContato.cshtml" />
+    <Content Include="Views\Cliente\IncluirContato.cshtml" />
+    <Content Include="Views\Cliente\IncluirClienteRapido.cshtml" />
+    <Content Include="Views\Cliente\EnviarEMailCliente.cshtml" />
+    <Content Include="Views\Cliente\EnviarSMSCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3056,7 +3067,9 @@
     <Folder Include="Imagens\1\Agenda\6\Anexos\" />
     <Folder Include="Imagens\1\Agenda\7\Anexos\" />
     <Folder Include="Imagens\1\Agenda\8\Anexos\" />
+    <Folder Include="Imagens\1\Clientes\" />
     <Folder Include="Imagens\1\Empresa\1\Anexos\" />
+    <Folder Include="Imagens\1\Fornecedores\" />
     <Folder Include="Imagens\1\Noticias\1\Fotos\" />
     <Folder Include="Imagens\1\Noticias\2\Fotos\" />
     <Folder Include="Imagens\1\Noticias\3\Fotos\" />
