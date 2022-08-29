@@ -3451,7 +3451,101 @@ namespace ERP_Condominios_Solution.Controllers
             return 0;
         }
 
+        [HttpGet]
+        public ActionResult VerCliente(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
 
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensCliente"] = 2;
+                    return RedirectToAction("MontarTelaCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara view
+            ViewBag.Incluir = (Int32)Session["IncluirForn"];
+
+            CLIENTE item = baseApp.GetItemById(id);
+            ViewBag.QuadroSoci = ccnpjApp.GetByCliente(item);
+            objetoAntes = item;
+            Session["Cliente"] = item;
+            Session["IdVolta"] = id;
+            Session["IdCliente"] = id;
+            Session["VoltaCEP"] = 1;
+            ClienteViewModel vm = Mapper.Map<CLIENTE, ClienteViewModel>(item);
+            return View(vm);
+        }
+
+        public ActionResult IncluirComentarioCliente()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            CLIENTE item = baseApp.GetItemById((Int32)Session["IdCliente"]);
+            USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+            CLIENTE_ANOTACAO coment = new CLIENTE_ANOTACAO();
+            ClienteAnotacaoViewModel vm = Mapper.Map<CLIENTE_ANOTACAO, ClienteAnotacaoViewModel>(coment);
+            vm.CLAT_DT_ANOTACAO = DateTime.Now;
+            vm.CLAT_IN_ATIVO = 1;
+            vm.CLIE_CD_ID = item.CLIE_CD_ID;
+            vm.USUARIO = usuarioLogado;
+            vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult IncluirComentarioCliente(ClienteAnotacaoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    CLIENTE_ANOTACAO item = Mapper.Map<ClienteAnotacaoViewModel, CLIENTE_ANOTACAO>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    CLIENTE not = baseApp.GetItemById((Int32)Session["IdCliente"]);
+
+                    item.USUARIO = null;
+                    not.CLIENTE_ANOTACAO.Add(item);
+                    objetoAntes = not;
+                    Int32 volta = baseApp.ValidateEdit(not, objetoAntes);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    return RedirectToAction("EditarCliente", new { id = (Int32)Session["IdCliente"] });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
 
 
 

@@ -273,6 +273,7 @@
     <Compile Include="ViewModels\ContaBancariaContatoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaLancamentoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaViewModel.cs" />
+    <Compile Include="ViewModels\ClienteComentarioViewModel.cs" />
     <Compile Include="ViewModels\FornecedorComentarioViewModel.cs" />
     <Compile Include="ViewModels\FornecedorContatoViewModel.cs" />
     <Compile Include="ViewModels\FornecedorViewModel.cs" />
@@ -3034,6 +3035,8 @@
     <Content Include="Views\Cliente\IncluirClienteRapido.cshtml" />
     <Content Include="Views\Cliente\EnviarEMailCliente.cshtml" />
     <Content Include="Views\Cliente\EnviarSMSCliente.cshtml" />
+    <Content Include="Views\Cliente\VerCliente.cshtml" />
+    <Content Include="Views\Cliente\IncluirComentarioCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
