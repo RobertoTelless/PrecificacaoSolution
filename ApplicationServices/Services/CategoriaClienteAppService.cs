@@ -61,12 +61,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddCACL",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CATEGORIA_CLIENTE>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CATEGORIA_CLIENTE>(item)
                 };
 
                 // Persiste
@@ -87,13 +87,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditCACL",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CATEGORIA_CLIENTE>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<CATEGORIA_CLIENTE>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CATEGORIA_CLIENTE>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<CATEGORIA_CLIENTE>(itemAntes)
                 };
 
                 // Persiste
@@ -121,12 +121,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelCACL",
-                    LOG_TX_REGISTRO = item.CACL_NM_NOME
+                    LOG_TX_TEXTO = item.CACL_NM_NOME
                 };
 
                 // Persiste
@@ -150,12 +150,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatCACL",
-                    LOG_TX_REGISTRO = item.CACL_NM_NOME
+                    LOG_TX_TEXTO = item.CACL_NM_NOME
                 };
 
                 // Persiste

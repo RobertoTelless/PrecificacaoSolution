@@ -16,5 +16,6 @@ namespace ModelServices.Interfaces.EntitiesServices
 
         Int32 Create(CLIENTE_QUADRO_SOCIETARIO cqs, LOG log);
         Int32 Create(CLIENTE_QUADRO_SOCIETARIO cqs);
+
     }
 }

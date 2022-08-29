@@ -13,5 +13,6 @@ namespace ModelServices.Interfaces.Repositories
         List<CATEGORIA_CLIENTE> GetAllItens(Int32 idAss);
         CATEGORIA_CLIENTE GetItemById(Int32 id);
         List<CATEGORIA_CLIENTE> GetAllItensAdm(Int32 idAss);
+
     }
 }

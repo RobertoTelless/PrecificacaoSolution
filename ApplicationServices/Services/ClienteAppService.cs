@@ -29,6 +29,11 @@ namespace ApplicationServices.Services
             return lista;
         }
 
+        public CLIENTE_ANOTACAO GetComentarioById(Int32 id)
+        {
+            return _baseService.GetComentarioById(id);
+        }
+
         public List<UF> GetAllUF()
         {
             List<UF> lista = _baseService.GetAllUF();
@@ -166,12 +171,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddCLIE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CLIENTE>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CLIENTE>(item)
                 };
 
                 // Persiste
@@ -196,9 +201,9 @@ namespace ApplicationServices.Services
                 {
                     itemAntes.CATEGORIA_CLIENTE = null;
                 }
-                if (itemAntes.FILIAL != null)
+                if (itemAntes.EMPRESA != null)
                 {
-                    itemAntes.FILIAL = null;
+                    itemAntes.EMPRESA = null;
                 }
                 if (itemAntes.SEXO != null)
                 {
@@ -224,13 +229,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditCLIE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CLIENTE>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<CLIENTE>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CLIENTE>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<CLIENTE>(itemAntes)
                 };
 
                 // Persiste
@@ -274,12 +279,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelCLIE",
-                    LOG_TX_REGISTRO = "Nome: " + item.CLIE_NM_NOME
+                    LOG_TX_TEXTO = "Nome: " + item.CLIE_NM_NOME
                 };
 
                 // Persiste
@@ -303,12 +308,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatCLIE",
-                    LOG_TX_REGISTRO = "Nome: " + item.CLIE_NM_NOME
+                    LOG_TX_TEXTO = "Nome: " + item.CLIE_NM_NOME
                 };
 
                 // Persiste
@@ -368,20 +373,6 @@ namespace ApplicationServices.Services
             {
                 // Persiste
                 Int32 volta = _baseService.CreateReferencia(item);
-                return volta;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        public Int32 ValidateCreateTag(CLIENTE_TAG item)
-        {
-            try
-            {
-                // Persiste
-                Int32 volta = _baseService.CreateTag(item);
                 return volta;
             }
             catch (Exception ex)

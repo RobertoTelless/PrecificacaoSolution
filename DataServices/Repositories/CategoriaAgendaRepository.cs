@@ -5,6 +5,7 @@ using ModelServices.Interfaces.Repositories;
 using System.Linq;
 using EntitiesServices.Work_Classes;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace DataServices.Repositories
 {
@@ -37,6 +38,13 @@ namespace DataServices.Repositories
             IQueryable<CATEGORIA_AGENDA> query = Db.CATEGORIA_AGENDA;
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
+        }
+
+        public async Task<IEnumerable<CATEGORIA_AGENDA>> GetAllItensAsync(Int32 idAss)
+        {
+            IQueryable<CATEGORIA_AGENDA> query = Db.CATEGORIA_AGENDA.Where(p => p.CAAG_IN_ATIVO == 1);
+            query = query.Where(p => p.ASSI_CD_ID == idAss);
+            return await query.ToListAsync();
         }
     }
 }

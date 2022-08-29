@@ -78,6 +78,11 @@ namespace ModelServices.EntitiesServices
             return _tipoRepository.GetAllItens(idAss);
         }
 
+        public async Task<IEnumerable<CATEGORIA_AGENDA>> GetAllItensAsync(Int32 idAss)
+        {
+            return await _tipoRepository.GetAllItensAsync(idAss);
+        }
+
         public Int32 Create(AGENDA item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))

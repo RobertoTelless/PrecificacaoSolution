@@ -97,6 +97,9 @@ namespace Presentation.Start
             kernel.Bind<ICategoriaFornecedorAppService>().To<CategoriaFornecedorAppService>();
             kernel.Bind<IFornecedorAppService>().To<FornecedorAppService>();
             kernel.Bind<IFornecedorCnpjAppService>().To<FornecedorCnpjAppService>();
+            kernel.Bind<ICategoriaClienteAppService>().To<CategoriaClienteAppService>();
+            kernel.Bind<IClienteAppService>().To<ClienteAppService>();
+            kernel.Bind<IClienteCnpjAppService>().To<ClienteCnpjAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -129,6 +132,9 @@ namespace Presentation.Start
             kernel.Bind<ICategoriaFornecedorService>().To<CategoriaFornecedorService>();
             kernel.Bind<IFornecedorService>().To<FornecedorService>();
             kernel.Bind<IFornecedorCnpjService>().To<FornecedorCnpjService>();
+            kernel.Bind<ICategoriaClienteService>().To<CategoriaClienteService>();
+            kernel.Bind<IClienteService>().To<ClienteService>();
+            kernel.Bind<IClienteCnpjService>().To<ClienteCnpjService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -182,6 +188,13 @@ namespace Presentation.Start
             kernel.Bind<IFornecedorAnotacaoRepository>().To<FornecedorAnotacaoRepository>();
             kernel.Bind<IFornecedorCnpjRepository>().To<FornecedorCnpjRepository>();
             kernel.Bind<IFornecedorContatoRepository>().To<FornecedorContatoRepository>();
+            kernel.Bind<ICategoriaClienteRepository>().To<CategoriaClienteRepository>();
+            kernel.Bind<IClienteRepository>().To<ClienteRepository>();
+            kernel.Bind<IClienteAnexoRepository>().To<ClienteAnexoRepository>();
+            kernel.Bind<IClienteAnotacaoRepository>().To<ClienteAnotacaoRepository>();
+            kernel.Bind<IClienteContatoRepository>().To<ClienteContatoRepository>();
+            kernel.Bind<IClienteReferenciaRepository>().To<ClienteReferenciaRepository>();
+            kernel.Bind<IClienteCnpjRepository>().To<ClienteCnpjRepository>();
 
         }
     }

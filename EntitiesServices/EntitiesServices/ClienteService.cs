@@ -23,16 +23,16 @@ namespace ModelServices.EntitiesServices
         private readonly ICategoriaClienteRepository _tipoRepository;
         private readonly IClienteAnexoRepository _anexoRepository;
         private readonly IClienteContatoRepository _contRepository;
-        private readonly IClienteTagRepository _tagRepository;
+        private readonly IClienteAnotacaoRepository _tagRepository;
         private readonly ITipoPessoaRepository _pesRepository;
         private readonly ITipoContribuinteRepository _tcRepository;
         private readonly IClienteReferenciaRepository _refRepository;
         private readonly IUFRepository _ufRepository;
         private readonly IRegimeTributarioRepository _rtRepository;
         private readonly ISexoRepository _sxRepository;
-        protected ERP_CRMEntities Db = new ERP_CRMEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public ClienteService(IClienteRepository baseRepository, ILogRepository logRepository, ICategoriaClienteRepository tipoRepository, IClienteAnexoRepository anexoRepository, ITipoPessoaRepository pesRepository, IClienteTagRepository tagRepository, IClienteContatoRepository contRepository, IClienteReferenciaRepository refRepository, IUFRepository ufRepository, ITipoContribuinteRepository tcRepository, IRegimeTributarioRepository rtRepository, ISexoRepository sxRepository) : base(baseRepository)
+        public ClienteService(IClienteRepository baseRepository, ILogRepository logRepository, ICategoriaClienteRepository tipoRepository, IClienteAnexoRepository anexoRepository, ITipoPessoaRepository pesRepository, IClienteAnotacaoRepository tagRepository, IClienteContatoRepository contRepository, IClienteReferenciaRepository refRepository, IUFRepository ufRepository, ITipoContribuinteRepository tcRepository, IRegimeTributarioRepository rtRepository, ISexoRepository sxRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
@@ -70,6 +70,11 @@ namespace ModelServices.EntitiesServices
             return item;
         }
 
+        public CLIENTE_ANOTACAO GetComentarioById(Int32 id)
+        {
+            return _tagRepository.GetItemById(id);
+        }
+
         public CLIENTE GetByEmail(String email)
         {
             CLIENTE item = _baseRepository.GetByEmail(email);
@@ -88,7 +93,7 @@ namespace ModelServices.EntitiesServices
 
         public List<REGIME_TRIBUTARIO> GetAllRegimes(Int32 idAss)
         {
-            return _rtRepository.GetAllItens(idAss);
+            return _rtRepository.GetAllItens();
         }
 
         public List<SEXO> GetAllSexo()
@@ -130,11 +135,6 @@ namespace ModelServices.EntitiesServices
         {
             return _baseRepository.ExecuteFilter(id, catId, razao, nome, cpf, cnpj, email, cidade, uf, ativo, idAss);
         }
-
-        //public List<CLIENTE> ExecuteFilterSemPedido(String nome, String cidade, Int32? uf)
-        //{
-        //    return _baseRepository.ExecuteFilterSemPedido(nome, cidade, uf);
-        //}
 
         public Int32 Create(CLIENTE item, LOG log)
         {
@@ -299,24 +299,6 @@ namespace ModelServices.EntitiesServices
                 try
                 {
                     _refRepository.Add(item);
-                    transaction.Commit();
-                    return 0;
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    throw ex;
-                }
-            }
-        }
-
-        public Int32 CreateTag(CLIENTE_TAG item)
-        {
-            using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
-            {
-                try
-                {
-                    _tagRepository.Add(item);
                     transaction.Commit();
                     return 0;
                 }

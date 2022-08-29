@@ -21,7 +21,7 @@ using Image = iTextSharp.text.Image;
 using System.Text;
 using System.Net;
 using CrossCutting;
-
+using System.Threading.Tasks;
 
 namespace ERP_Condominios_Solution.Controllers
 {
@@ -200,6 +200,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Itens = ((List<AGENDA>)Session["ListaAgenda"]).Count;
             ViewBag.Title = "Agenda";
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CAAG_CD_ID", "CAAG_NM_NOME");
+            Task<IEnumerable<CATEGORIA_AGENDA>> tipos1 = baseApp.GetAllItensAsync(idAss);
 
             // Indicadores
             ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;

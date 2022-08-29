@@ -11,19 +11,18 @@ using System.Data.Entity;
 
 namespace DataServices.Repositories
 {
-    public class ClienteContatoRepository : RepositoryBase<CLIENTE_CONTATO>, IClienteContatoRepository
+    public class ClienteAnotacaoRepository : RepositoryBase<CLIENTE_ANOTACAO>, IClienteAnotacaoRepository
     {
-        public List<CLIENTE_CONTATO> GetAllItens()
+        public List<CLIENTE_ANOTACAO> GetAllItens()
         {
-            return Db.CLIENTE_CONTATO.ToList();
+            return Db.CLIENTE_ANOTACAO.ToList();
         }
 
-        public CLIENTE_CONTATO GetItemById(Int32 id)
+        public CLIENTE_ANOTACAO GetItemById(Int32 id)
         {
-            IQueryable<CLIENTE_CONTATO> query = Db.CLIENTE_CONTATO.Where(p => p.CLCO_CD_ID == id);
+            IQueryable<CLIENTE_ANOTACAO> query = Db.CLIENTE_ANOTACAO.Where(p => p.CLAT_CD_ID == id);
             return query.FirstOrDefault();
         }
-
     }
 }
  

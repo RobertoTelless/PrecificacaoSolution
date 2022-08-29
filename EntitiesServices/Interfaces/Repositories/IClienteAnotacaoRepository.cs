@@ -7,10 +7,9 @@ using EntitiesServices.Model;
 
 namespace ModelServices.Interfaces.Repositories
 {
-    public interface IClienteAnexoRepository : IRepositoryBase<CLIENTE_ANEXO>
+    public interface IClienteAnotacaoRepository : IRepositoryBase<CLIENTE_ANOTACAO>
     {
-        List<CLIENTE_ANEXO> GetAllItens();
-        CLIENTE_ANEXO GetItemById(Int32 id);
-
+        List<CLIENTE_ANOTACAO> GetAllItens();
+        CLIENTE_ANOTACAO GetItemById(Int32 id);
     }
 }

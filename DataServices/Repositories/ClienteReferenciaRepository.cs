@@ -20,5 +20,6 @@ namespace DataServices.Repositories
             IQueryable<CLIENTE_REFERENCIA> query = Db.CLIENTE_REFERENCIA.Where(p => p.CLRE_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }

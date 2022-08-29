@@ -35,6 +35,7 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly IBancoAppService banApp;
         private readonly IContaBancariaAppService cbApp;
         private readonly ICentroCustoAppService ccApp;
+        private readonly IFornecedorAppService fornApp;
 
 
         private String msg;
@@ -43,7 +44,7 @@ namespace ERP_Condominios_Solution.Controllers
         USUARIO objetoAntes = new USUARIO();
         List<USUARIO> listaMaster = new List<USUARIO>();
 
-        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps, IBancoAppService banApps, IContaBancariaAppService cbApps, ICentroCustoAppService ccApps)
+        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps, IBancoAppService banApps, IContaBancariaAppService cbApps, ICentroCustoAppService ccApps, IFornecedorAppService fornApps)
         {
             baseApp = baseApps;
             logApp = logApps;
@@ -60,6 +61,7 @@ namespace ERP_Condominios_Solution.Controllers
             banApp = banApps;
             cbApp = cbApps;
             ccApp = ccApps;
+            fornApp = fornApps;
         }
 
         public ActionResult CarregarAdmin()
@@ -689,16 +691,19 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 planos = plano.Count;
             List<CONTA_BANCO> conta = cbApp.GetAllItens(idAss);
             Int32 contas = conta.Count;
+            List<FORNECEDOR> forn = fornApp.GetAllItens(idAss);
+            Int32 forns = forn.Count;
 
             Session["Bancos"] = bancos;
             Session["Planos"] = planos;
             Session["Contas"] = contas;
+            Session["Fornecedores"] = forns;
 
             ViewBag.Bancos = bancos;
             ViewBag.Planos = planos;
             ViewBag.Contas = contas;
             ViewBag.Clientes = 0;
-            ViewBag.Fornecedores = 0;
+            ViewBag.Fornecedores = forns;
             ViewBag.Produtos = 0;
 
             Session["PlanoCredito"] = plano.Where(p => p.CECU_IN_TIPO == 1).ToList().Count;
@@ -707,19 +712,54 @@ namespace ERP_Condominios_Solution.Controllers
             Session["ContaPoupanca"] = conta.Where(p => p.TICO_CD_ID == 2).ToList().Count;
             Session["ContaInvestimento"] = conta.Where(p => p.TICO_CD_ID == 3).ToList().Count;
 
-            // Recupera contatos por qualificacao
-            //List<ModeloViewModel> lista2 = new List<ModeloViewModel>();
-            //List<QUALIFICACAO> quals = conApp.GetAllQualificacao().ToList();
-            //foreach (QUALIFICACAO item in quals)
-            //{
-            //    Int32 conta = conts.Where(p => p.QUAL_CD_ID == item.QUAL_CD_ID).ToList().Count;
-            //    ModeloViewModel mod = new ModeloViewModel();
-            //    mod.Nome = item.QUAL_NM_NOME;
-            //    mod.Valor = conta;
-            //    lista2.Add(mod);
-            //}
-            //ViewBag.ListaContatoQuali = lista2;
-            //Session["ListaContatoQuali"] = lista2;
+            // Recupera fornecedores por UF
+            List<ModeloViewModel> lista2 = new List<ModeloViewModel>();
+            List<UF> ufs = fornApp.GetAllUF().ToList();
+            foreach (UF item in ufs)
+            {
+                Int32 num = forn.Where(p => p.UF_CD_ID == item.UF_CD_ID).ToList().Count;
+                ModeloViewModel mod = new ModeloViewModel();
+                mod.Nome = item.UF_NM_NOME;
+                mod.Valor = num;
+                lista2.Add(mod);
+            }
+            ViewBag.ListaFornUF = lista2;
+            Session["ListaFornUF"] = lista2;
+
+            // Recupera fornecedores por Cidade
+            List<ModeloViewModel> lista3 = new List<ModeloViewModel>();
+            List<String> cids = forn.Select(p => p.FORN_NM_CIDADE).Distinct().ToList();
+            foreach (String item in cids)
+            {
+                Int32 num = forn.Where(p => p.FORN_NM_CIDADE == item).ToList().Count;
+                ModeloViewModel mod = new ModeloViewModel();
+                mod.Nome = item;
+                mod.Valor = num;
+                lista3.Add(mod);
+            }
+            ViewBag.ListaFornCidade = lista3;
+            Session["ListaFornCidade"] = lista3;
+
+            // Recupera fornecedores por Categoria
+            List<ModeloViewModel> lista4 = new List<ModeloViewModel>();
+            List<CATEGORIA_FORNECEDOR> cats = fornApp.GetAllTipos(idAss).ToList();
+            foreach (CATEGORIA_FORNECEDOR item in cats)
+            {
+                Int32 num = forn.Where(p => p.CAFO_CD_ID == item.CAFO_CD_ID).ToList().Count;
+                ModeloViewModel mod = new ModeloViewModel();
+                mod.Nome = item.CAFO_NM_NOME;
+                mod.Valor = num;
+                lista2.Add(mod);
+            }
+            ViewBag.ListaFornCats = lista2;
+            Session["ListaFornCats"] = lista2;
+
+
+
+
+
+
+
             return View(vm);
         }
 
@@ -766,6 +806,169 @@ namespace ERP_Condominios_Solution.Controllers
             desc.Add("Conta Investimento");
             quant.Add(q2);
             cor.Add("#FFAB69");
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorUFLista()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornUF"];
+            List<String> uf = new List<String>();
+            List<Int32> valor = new List<Int32>();
+            uf.Add(" ");
+            valor.Add(0);
+
+            foreach (ModeloViewModel item in lista)
+            {
+                uf.Add(item.Nome);
+                valor.Add(item.Valor);
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("ufs", uf);
+            result.Add("valores", valor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorCidadeLista()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornCidade"];
+            List<String> cidade = new List<String>();
+            List<Int32> valor = new List<Int32>();
+            cidade.Add(" ");
+            valor.Add(0);
+
+            foreach (ModeloViewModel item in lista)
+            {
+                cidade.Add(item.Nome);
+                valor.Add(item.Valor);
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("cids", cidade);
+            result.Add("valores", valor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorUF()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornUF"];
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+            cor.Add("#359E18");
+            cor.Add("#FFAE00");
+            cor.Add("#FF7F00");
+            Int32 i = 1;
+
+            foreach (ModeloViewModel item in lista)
+            {
+                desc.Add(item.Nome);
+                quant.Add(item.Valor);
+                if (i == 1)
+                {
+                    cor.Add("#359E18");
+                }
+                else if (i == 2)
+                {
+                    cor.Add("#FFAE00");
+                }
+                else if (i == 3)
+                {
+                    cor.Add("#FF7F00");
+                }
+                i++;
+                if (i > 3)
+                {
+                    i = 1;
+                }
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorCidade()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornCidade"];
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+            cor.Add("#359E18");
+            cor.Add("#FFAE00");
+            cor.Add("#FF7F00");
+            Int32 i = 1;
+
+            foreach (ModeloViewModel item in lista)
+            {
+                desc.Add(item.Nome);
+                quant.Add(item.Valor);
+                if (i == 1)
+                {
+                    cor.Add("#359E18");
+                }
+                else if (i == 2)
+                {
+                    cor.Add("#FFAE00");
+                }
+                else if (i == 3)
+                {
+                    cor.Add("#FF7F00");
+                }
+                i++;
+                if (i > 3)
+                {
+                    i = 1;
+                }
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorCategoria()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornCats"];
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+            cor.Add("#359E18");
+            cor.Add("#FFAE00");
+            cor.Add("#FF7F00");
+            Int32 i = 1;
+
+            foreach (ModeloViewModel item in lista)
+            {
+                desc.Add(item.Nome);
+                quant.Add(item.Valor);
+                if (i == 1)
+                {
+                    cor.Add("#359E18");
+                }
+                else if (i == 2)
+                {
+                    cor.Add("#FFAE00");
+                }
+                else if (i == 3)
+                {
+                    cor.Add("#FF7F00");
+                }
+                i++;
+                if (i > 3)
+                {
+                    i = 1;
+                }
+            }
 
             Hashtable result = new Hashtable();
             result.Add("labels", desc);

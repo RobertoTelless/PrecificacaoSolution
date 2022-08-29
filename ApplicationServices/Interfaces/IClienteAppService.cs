@@ -29,15 +29,14 @@ namespace ApplicationServices.Interfaces
         List<TIPO_CONTRIBUINTE> GetAllContribuinte(Int32 idAss);
         List<REGIME_TRIBUTARIO> GetAllRegimes(Int32 idAss);
         List<SEXO> GetAllSexo();
+        CLIENTE_ANOTACAO GetComentarioById(Int32 id);
 
         Int32 ExecuteFilter(Int32? id,  Int32? catId, String razao, String nome, String cpf, String cnpj, String email, String cidade, Int32? uf, Int32? ativo, Int32 idAss, out List<CLIENTE> objeto);
-        //Int32 ExecuteFilterSemPedido(String nome, String cidade, Int32? uf, out List<CLIENTE> objeto);
         
         Int32 ValidateEditContato(CLIENTE_CONTATO item);
         Int32 ValidateCreateContato(CLIENTE_CONTATO item);
         Int32 ValidateEditReferencia(CLIENTE_REFERENCIA item);
         Int32 ValidateCreateReferencia(CLIENTE_REFERENCIA item);
-        Int32 ValidateCreateTag(CLIENTE_TAG item);
 
         List<UF> GetAllUF();
         UF GetUFbySigla(String sigla);

@@ -13,5 +13,6 @@ namespace ModelServices.Interfaces.Repositories
         List<CLIENTE_QUADRO_SOCIETARIO> GetAllItens();
         List<CLIENTE_QUADRO_SOCIETARIO> GetByCliente(CLIENTE cliente);
 
+
     }
 }

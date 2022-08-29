@@ -6,7 +6,7 @@ using System.Web;
 using EntitiesServices.Model;
 using EntitiesServices.Attributes;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class CategoriaClienteViewModel
     {
@@ -21,6 +21,5 @@ namespace ERP_CRM_Solution.ViewModels
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
-
     }
 }

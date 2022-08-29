@@ -33,5 +33,6 @@ namespace DataServices.Repositories
             query = query.Where(p => p.CLIE_CD_ID == cliente.CLIE_CD_ID);
              return query.ToList();
         }
+
     }
 }

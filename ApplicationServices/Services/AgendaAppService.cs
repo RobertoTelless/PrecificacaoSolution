@@ -63,6 +63,11 @@ namespace ApplicationServices.Services
             return lista;
         }
 
+        public async Task<IEnumerable<CATEGORIA_AGENDA>> GetAllItensAsync(Int32 idAss)
+        {
+            return await _baseService.GetAllItensAsync(idAss);
+        }
+
         public Int32 ExecuteFilter(DateTime? data, Int32 ? cat, String titulo, String descricao, Int32 idAss, Int32 idUser, Int32 corp, out List<AGENDA> objeto)
         {
             try

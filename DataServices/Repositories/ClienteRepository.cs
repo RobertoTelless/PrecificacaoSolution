@@ -35,7 +35,6 @@ namespace DataServices.Repositories
             query = query.Where(p => p.CLIE_NM_EMAIL == email);
             query = query.Include(p => p.CLIENTE_ANEXO);
             query = query.Include(p => p.CLIENTE_CONTATO);
-            query = query.Include(p => p.CLIENTE_TAG);
             return query.FirstOrDefault();
         }
 
@@ -45,7 +44,8 @@ namespace DataServices.Repositories
             query = query.Where(p => p.CLIE_CD_ID == id);
             query = query.Include(p => p.CLIENTE_ANEXO);
             query = query.Include(p => p.CLIENTE_CONTATO);
-            query = query.Include(p => p.CLIENTE_TAG);
+            query = query.Include(p => p.CLIENTE_ANOTACAO);
+            query = query.Include(p => p.CLIENTE_REFERENCIA);
             return query.FirstOrDefault();
         }
 
@@ -91,7 +91,6 @@ namespace DataServices.Repositories
             }
             if (!String.IsNullOrEmpty(cnpj))
             {
-                cnpj = ValidarNumerosDocumentos.RemoveNaoNumericos(cnpj);
                 query = query.Where(p => p.CLIE_NR_CNPJ == cnpj);
             }
             if (!String.IsNullOrEmpty(email))
@@ -114,31 +113,6 @@ namespace DataServices.Repositories
             }
             return lista;
         }
-
-        //public List<CLIENTE> ExecuteFilterSemPedido(String nome, String cidade, Int32? uf)
-        //{
-        //    Int32? idAss = SessionMocks.IdAssinante;
-        //    List<CLIENTE> lista = new List<CLIENTE>();
-        //    IQueryable<CLIENTE> query = Db.CLIENTE.Where(p => p.PEDIDO_VENDA.Count == 0);
-        //    if (!String.IsNullOrEmpty(nome))
-        //    {
-        //        query = query.Where(p => p.CLIE_NM_NOME.Contains(nome));
-        //    }
-        //    if (!String.IsNullOrEmpty(cidade))
-        //    {
-        //        query = query.Where(p => p.CLIE_NM_CIDADE.Contains(cidade));
-        //    }
-        //    if (uf != null)
-        //    {
-        //        query = query.Where(p => p.UF_CD_ID == uf);
-        //    }
-        //    if (query != null)
-        //    {
-        //        query = query.Where(p => p.ASSI_CD_ID == idAss);
-        //        lista = query.ToList<CLIENTE>();
-        //    }
-        //    return lista;
-        //}
 
         public List<CLIENTE> FiltrarContatos(MontagemGrupo grupo, Int32 idAss)
         {

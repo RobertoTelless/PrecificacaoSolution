@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<CLIENTE_CONTATO> GetAllItens();
         CLIENTE_CONTATO GetItemById(Int32 id);
+
     }
 }

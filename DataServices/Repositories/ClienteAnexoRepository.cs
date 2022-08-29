@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<CLIENTE_ANEXO> query = Db.CLIENTE_ANEXO.Where(p => p.CLAN_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

@@ -25,6 +25,7 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<AGENDA> GetAllItens(Int32 idAss);
         List<AGENDA> GetAllItensAdm(Int32 idAss);
         List<AGENDA> ExecuteFilter(DateTime? data, Int32? cat, String titulo, String descricao, Int32 idAss, Int32 idUser, Int32 corp);
-    
+        Task<IEnumerable<CATEGORIA_AGENDA>> GetAllItensAsync(Int32 idAss);
+
     }
 }
