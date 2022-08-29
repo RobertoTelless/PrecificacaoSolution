@@ -1025,11 +1025,11 @@
                                                                             @Html.TableLinkDetails(cond.CLCO_CD_ID, "EditarContatoCliente", "fa-edit", "Editar/Consultar")
                                                                             @if (cond.CLCO_IN_ATIVO == 1)
                                                                             {
-                                                                                <span style="color: #337ab7; cursor:pointer;" alt="Excluir" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Cliente/ExcluirContato/@cond.CLIE_CD_ID')" title="Excluir"></span>
+                                                                                <span style="color: #337ab7; cursor:pointer;" alt="Excluir" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Cliente/ExcluirContato/@cond.CLCO_CD_ID')" title="Excluir"></span>
                                                                             }
                                                                             else
                                                                             {
-                                                                                <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Cliente/ReativarContato/@cond.CLIE_CD_ID')" title="Reativar"></span>
+                                                                                <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Cliente/ReativarContato/@cond.CLCO_CD_ID')" title="Reativar"></span>
                                                                             }
                                                                         </td>
                                                                     </tr>

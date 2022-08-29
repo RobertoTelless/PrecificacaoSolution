@@ -3099,7 +3099,6 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Template\" />
-    <Folder Include="Views\XXXXX\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

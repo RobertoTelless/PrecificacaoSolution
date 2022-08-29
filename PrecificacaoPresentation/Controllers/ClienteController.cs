@@ -24,6 +24,8 @@ using CrossCutting;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using Canducci.Zip;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace ERP_Condominios_Solution.Controllers
 {
@@ -3548,6 +3550,159 @@ namespace ERP_Condominios_Solution.Controllers
             }
         }
 
+        public void DownloadTemplateExcel()
+        {
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                Int32 idAss = (Int32)Session["IdAssinante"];
+                List<CATEGORIA_CLIENTE> lstCat = baseApp.GetAllTipos(idAss);
+                List<EMPRESA> lstFili = filApp.GetAllItens(idAss);
+                List<TIPO_CONTRIBUINTE> lstTco = baseApp.GetAllContribuinte(idAss);
+                List<TIPO_PESSOA> lstTp = baseApp.GetAllTiposPessoa();
+                List<REGIME_TRIBUTARIO> lstRegime = baseApp.GetAllRegimes(idAss);
+
+                //PREPARA WORKSHEET PARA LISTAS
+                ExcelWorksheet HiddenWs = package.Workbook.Worksheets.Add("Hidden");
+                HiddenWs.Cells["A1"].LoadFromCollection(lstCat.Where(x => x.CACL_NM_NOME != "").Select(x => x.CACL_NM_NOME));
+                HiddenWs.Cells["B1"].LoadFromCollection(lstFili.Where(x => x.EMPR_NM_NOME != "").Select(x => x.EMPR_NM_NOME));
+                HiddenWs.Cells["C1"].LoadFromCollection(lstTco.Where(x => x.TICO_NM_NOME != "").Select(x => x.TICO_NM_NOME));
+                HiddenWs.Cells["D1"].LoadFromCollection(lstTp.Where(x => x.TIPE_NM_NOME != "").Select(x => x.TIPE_NM_NOME));
+                HiddenWs.Cells["E1"].LoadFromCollection(lstRegime.Where(x => x.RETR_NM_NOME != "").Select(x => x.RETR_NM_NOME));
+
+                //PREPARA WORKSHEET DADOS GERAIS
+                ExcelWorksheet ws1 = package.Workbook.Worksheets.Add("Dados Gerais");
+                ws1.Cells["A1"].Value = "TIPO DE PESSOA*";
+                ws1.Cells["B1"].Value = "EMPRESA";
+                ws1.Cells["C1"].Value = "TIPO DE CONTRIBUINTE";
+                ws1.Cells["D1"].Value = "CATEGORIA*";
+                ws1.Cells["E1"].Value = "CPF";
+                ws1.Cells["F1"].Value = "NOME*";
+                ws1.Cells["G1"].Value = "CNPJ";
+                ws1.Cells["H1"].Value = "INC. ESTADUAL";
+                ws1.Cells["I1"].Value = "INC. MUNICIPAL";
+                //ws1.Cells["J1"].Value = "SALDO";
+                ws1.Cells["J1"].Value = "REGIME TRIBUTARIO";
+                //ws1.Cells["L1"].Value = "INSCRIÇÃO SUFRAMA";
+                ws1.Cells[ws1.Dimension.Address].AutoFitColumns(100);
+                using (ExcelRange rng = ws1.Cells["A1:J1"])
+                {
+                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    rng.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+
+                    rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+                    rng.Style.Locked = true;
+                }
+
+                using (ExcelRange rng = ws1.Cells["A2:J30"])
+                {
+                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    rng.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+
+                    rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                }
+
+                ws1.Cells["E2:E30"].Style.Numberformat.Format = "000\".\"###\".\"###-##";
+                ws1.Cells["G2:G30"].Style.Numberformat.Format = "00\".\"###\".\"###\"/\"####-##";
+                //ws1.Cells["J2:J30"].Style.Numberformat.Format = "#,##0.00";
+
+                var listTpWs1 = ws1.DataValidations.AddListValidation("A2:A30");
+                var listFiliWs1 = ws1.DataValidations.AddListValidation("B2:B30");
+                var listTcoWs1 = ws1.DataValidations.AddListValidation("C2:C30");
+                var listCatWs1 = ws1.DataValidations.AddListValidation("D2:D30");
+                var listRegimeWs1 = ws1.DataValidations.AddListValidation("J2:J30");
+
+                listTpWs1.Formula.ExcelFormula = "Hidden!$D$1:$D$" + lstTp.Where(x => x.TIPE_NM_NOME != "").Count().ToString();
+                listFiliWs1.Formula.ExcelFormula = "Hidden!$B$1:$B$" + lstFili.Count.ToString();
+                listTcoWs1.Formula.ExcelFormula = "Hidden!$C$1:$C$" + lstTco.Count.ToString();
+                listCatWs1.Formula.ExcelFormula = "Hidden!$A$1:$A$" + lstCat.Count.ToString();
+                listRegimeWs1.Formula.ExcelFormula = "Hidden!$J$1:$J$" + lstRegime.Count.ToString();
+
+                //PREAPARA WORKSHEET ENDEREÇOS
+                ExcelWorksheet ws2 = package.Workbook.Worksheets.Add("Endereços");
+                ws2.Cells["A1"].Value = "CEP";
+                ws2.Cells["B1"].Value = "COMPLEMENTO";
+                ws2.Cells["C1"].Value = "CEP ENTREGA";
+                ws2.Cells["D1"].Value = "COMPLEMENTO ENTREGA";
+                ws2.Cells[ws2.Dimension.Address].AutoFitColumns(13);
+                using (ExcelRange rng = ws2.Cells["A1:D1"])
+                {
+                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    rng.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+
+                    rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+                    rng.Style.Locked = true;
+                }
+
+                using (ExcelRange rng = ws2.Cells["A2:D30"])
+                {
+                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    rng.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+
+                    rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                }
+
+                ws2.Cells["A2:A30"].Style.Numberformat.Format = "#####-###";
+                ws2.Cells["C2:C30"].Style.Numberformat.Format = "#####-###";
+
+                //PREAPARA WORKSHEET CONTATOS
+                ExcelWorksheet ws3 = package.Workbook.Worksheets.Add("Contatos");
+                ws3.Cells["A1"].Value = "E-MAIL*";
+                ws3.Cells["B1"].Value = "E-MAIL DANFE";
+                ws3.Cells["C1"].Value = "REDES SOCIAIS";
+                ws3.Cells["D1"].Value = "TELEFONE";
+                ws3.Cells["E1"].Value = "CELULAR";
+                ws3.Cells["F1"].Value = "WHATSAPP";
+                ws3.Cells[ws3.Dimension.Address].AutoFitColumns(13);
+                using (ExcelRange rng = ws3.Cells["A1:F1"])
+                {
+                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    rng.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+
+                    rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+                    rng.Style.Locked = true;
+                }
+
+                using (ExcelRange rng = ws3.Cells["A2:F30"])
+                {
+                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    rng.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+
+                    rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    rng.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                }
+
+                ws3.Cells["D2:D30"].Style.Numberformat.Format = "\"(\"##\")\" ####-####";
+                ws3.Cells["E2:E30"].Style.Numberformat.Format = "\"(\"##\")\" #####-####";
+                ws3.Cells["F2:F30"].Style.Numberformat.Format = "\"(\"##\")\" ####-####";
+
+                HiddenWs.Hidden = eWorkSheetHidden.Hidden;
+                Response.Clear();
+                Response.ContentType = "application/xlsx";
+                Response.AddHeader("content-disposition", "attachment; filename=TemplateCliente.xlsx");
+                Response.BinaryWrite(package.GetAsByteArray());
+                Response.End();
+            }
+        }
 
 
 
