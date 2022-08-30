@@ -5,7 +5,7 @@
 }
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="page-title">
-        <h3 class="title">Fornecedores</h3>
+        <h3 class="title">Clientes</h3>
         <br />
         <ol class="breadcrumb">
             <li>
@@ -15,13 +15,13 @@
                 <a href="@Url.Action("MontarTelaDashboardCadastros", "BaseAdmin")">Dashboard</a>
             </li>
             <li>
-                <a href="@Url.Action("MontarTelaFornecedor", "Fornecedor")">Fornecedores</a>
+                <a href="@Url.Action("MontarTelaCliente", "Cliente")">Clientes</a>
             </li>
             <li>
-                <a href="@Url.Action("EditarFornecedor", "Fornecedor")">Fornecedor - Edição</a>
+                <a href="@Url.Action("EditarCliente", "Cliente")">Clientes - Edição</a>
             </li>
             <li class="active">
-                <strong>Fornecedor - Mensagens</strong>
+                <strong>Cliente - Mensagens</strong>
             </li>
         </ol>
         <br />
@@ -32,7 +32,7 @@
                 <div class="ibox-title">
                     <h5>Contatos - SMS</h5>
                 </div>
-                @using (Html.BeginForm("EnviarSMSContato", "Fornecedor", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id="pwd-container1" }))
+                @using (Html.BeginForm("EnviarSMSContato", "Cliente", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id="pwd-container1" }))
                 {
                     <div class="ibox-content">
                         <div class="row">

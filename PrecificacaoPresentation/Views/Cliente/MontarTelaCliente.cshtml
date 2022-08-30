@@ -66,41 +66,56 @@
         </ol>
         <br />
     </div>
-    @*@if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+    @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
     {
         <div class="row">
             <div class="col-lg-2">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-primary pull-right">Hoje</span>
+                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                        <span class="label label-success pull-right">Hoje</span>
                         <h5>Clientes</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">@ViewBag.SemPedidos</h1>
-                        <small>Clientes Sem Pedidos</small>
+                        <h1 class="no-margins">@ViewBag.ClienteAtrasos</h1>
+                        <small>Recebimento em Atraso</small>
                         <br />
                         <br />
-                        @Html.ButtonLinkIndex(text: "Ver", controller: "Cliente", action: "VerClientesSemPedidos", buttonClass: "white")
+                        @Html.ButtonLinkIndex(text: "Ver", controller: "Cliente", action: "MontarTelaClienteAtraso", buttonClass: "white")
                     </div>
                 </div>
             </div>
             <div class="col-lg-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <span class="label label-primary pull-right">Hoje</span>
-                            <h5>Clientes</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">@ViewBag.Atrasos</h1>
-                            <small>Clientes Inadimplentes</small>
-                            <br />
-                            <br />
-                            @Html.ButtonLinkIndex(text: "Ver", controller: "Cliente", action: "VerClientesAtraso", buttonClass: "white")
-                        </div>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                        <span class="label label-success pull-right">Hoje</span>
+                        <h5>Clientes</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@ViewBag.ClientePedidos</h1>
+                        <small>Com Vendas</small>
+                        <br />
+                        <br />
+                        @Html.ButtonLinkIndex(text: "Ver", controller: "Cliente", action: "MontarTelaClienteVendas", buttonClass: "white")
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                        <span class="label label-success pull-right">Hoje</span>
+                        <h5>Clientes</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@ViewBag.ClientePendentes</h1>
+                        <small>Vendas Pendentes</small>
+                        <br />
+                        <br />
+                        @Html.ButtonLinkIndex(text: "Ver", controller: "Cliente", action: "MontarTelaClientePendentes", buttonClass: "white")
+                    </div>
+                </div>
+            </div>
         </div>
-    }*@
+    }
 
     <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
@@ -156,7 +171,10 @@
                                 @Html.ButtonLinkIndex(text: "Gerar Listagem", controller: "Cliente", action: "GerarRelatorioLista")
                                 @Html.ButtonLinkIndex(text: "Importar Planilha", action: "IncluirClientePlanilha", controller: "Cliente")
                                 @Html.ButtonLinkIndex(text: "Gerar Planilha", action: "GerarClientePlanilha", controller: "Cliente")
-                                @Html.ButtonLinkIndex(text: "Indicadores", action: "MontarTelaIndicadoresClientes", controller: "Cliente", buttonClass: "success")
+                                @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+                                {
+                                    @Html.ButtonLinkIndex(text: "Indicadores", action: "MontarTelaIndicadoresClientes", controller: "Cliente", buttonClass: "success")
+                                }
                                 @Html.ButtonLinkIndex(text: "Voltar", controller: "Cliente", action: "VoltarDash")
                             </div>
                         </div>

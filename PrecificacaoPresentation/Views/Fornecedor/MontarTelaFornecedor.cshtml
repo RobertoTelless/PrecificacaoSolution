@@ -46,32 +46,47 @@
     {
         <div class="row">
             <div class="col-lg-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <span class="label label-primary pull-right">Hoje</span>
-                            <h5>Fornecedores</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">@ViewBag.Atrasos</h1>
-                            <small>Pagamentos em Atraso</small>
-                            <br />
-                            <br />
-                            @Html.ButtonLinkIndex(text: "Ver", controller: "Fornecedor", action: "VerPagamentosAtraso", buttonClass: "white")
-                        </div>
-                    </div>
-                </div>
-            <div class="col-lg-2">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-primary pull-right">Hoje</span>
+                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                        <span class="label label-success pull-right">Hoje</span>
                         <h5>Fornecedores</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">@ViewBag.SemPedidos</h1>
-                        <small>Fornecedores Sem Pedidos</small>
+                        <h1 class="no-margins">@ViewBag.FornAtrasos</h1>
+                        <small>Pagamento em Atraso</small>
                         <br />
                         <br />
-                        @Html.ButtonLinkIndex(text: "Ver", controller: "Fornecedor", action: "VerFornecedorSemPedidos", buttonClass: "white")
+                        @Html.ButtonLinkIndex(text: "Ver", controller: "Fornecedor", action: "MontarTelaFornecedorPagAtraso", buttonClass: "white")
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                        <span class="label label-success pull-right">Hoje</span>
+                        <h5>Fornecedores</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@ViewBag.FornPedidos</h1>
+                        <small>Com Pedidos</small>
+                        <br />
+                        <br />
+                        @Html.ButtonLinkIndex(text: "Ver", controller: "Fornecedor", action: "MontarTelaFornecedorPedidos", buttonClass: "white")
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                        <span class="label label-success pull-right">Hoje</span>
+                        <h5>Fornecedores</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">@ViewBag.FornPendentes</h1>
+                        <small>Pedidos Pendentes</small>
+                        <br />
+                        <br />
+                        @Html.ButtonLinkIndex(text: "Ver", controller: "Fornecedor", action: "MontarTelaFornecedorPendentes", buttonClass: "white")
                     </div>
                 </div>
             </div>
@@ -135,7 +150,10 @@
                                     @Html.ButtonLinkIndex(text: "Exibir Todos", controller: "Fornecedor", action: "MostrarTudoFornecedor")
                                     @Html.ButtonLinkIndex(text: "Exibir Cards dos Fornecedores", controller: "Fornecedor", action: "VerCardsFornecedor")
                                     @Html.ButtonLinkIndex(text: "Gerar Listagem", controller: "Fornecedor", action: "GerarRelatorioLista")
-                                    @Html.ButtonLinkIndex(text: "Indicadores", action: "MontarTelaIndicadoresFornecedor", controller: "Fornecedor", buttonClass: "success")
+                                    @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+                                    {
+                                        @Html.ButtonLinkIndex(text: "Indicadores", action: "MontarTelaIndicadoresFornecedor", controller: "Fornecedor", buttonClass: "success")
+                                    }
                                     @Html.ButtonLinkIndex(text: "Voltar", controller: "Fornecedor", action: "VoltarDashboard")
                                </div>
                             </div>

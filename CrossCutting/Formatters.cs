@@ -151,5 +151,17 @@ namespace CrossCutting
             }
             return "Dezembro";
         }
+
+        public static String RetirarCaracterString(String str, Char ch)
+        {
+            for (int i = 0; i < str.Length - 1; i++)
+            {
+                if (str[i] == ch)
+                {
+                    str = str.Remove(i, 1);
+                }
+            }
+            return str;
+        }
     }
 }

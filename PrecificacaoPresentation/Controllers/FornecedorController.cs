@@ -368,8 +368,9 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Indicadores
             ViewBag.Fornecedores = ((List<FORNECEDOR>)Session["ListaFornecedor"]).Count;
-            ViewBag.Atrasos = 0;
-            ViewBag.SemPedidos = 0;
+            ViewBag.FornAtrasos = 0;
+            ViewBag.FornPedidos = 0;
+            ViewBag.FornPendentes = 0;
             ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
             ViewBag.Inativos = fornApp.GetAllItensAdm(idAss).Where(p => p.FORN_IN_ATIVO == 0).ToList().Count;
             //ViewBag.SemPedidos = fornApp.GetAllItens(idAss).Where(p => p.ITEM_PEDIDO_COMPRA.Count == 0 || p.ITEM_PEDIDO_COMPRA == null).ToList().Count;
@@ -2969,6 +2970,249 @@ namespace ERP_Condominios_Solution.Controllers
                 erro = ex.Message;
             }
             return 0;
+        }
+
+        public ActionResult MontarTelaIndicadoresFornecedor()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            UsuarioViewModel vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
+
+            // Carrega Fornecedores
+            List<FORNECEDOR> forns = fornApp.GetAllItens(idAss);
+            Int32 fornNum = forns.Count;
+            Int32 fornAtivos = forns.Where(p => p.FORN_IN_ATIVO == 1).Count();
+            Int32 fornAtrasos = 0;
+            Int32 fornPedidos = 0;
+            Int32 fornPendentes= 0;
+
+            Session["FornNum"] = fornNum;
+            Session["FornAtivos"] = fornAtivos;
+            Session["FornAtrasos"] = fornAtrasos;
+            Session["FornPedidos"] = fornPedidos;
+            Session["FornPendentes"] = fornPendentes;
+
+            ViewBag.FornNum = fornNum;
+            ViewBag.FornAtivos = fornAtivos;
+            ViewBag.FornAtrasos = fornAtrasos;
+            ViewBag.FornPedidos = fornPedidos;
+            ViewBag.FornPendentes = fornPendentes;
+
+            // Recupera fornecedores por UF
+            List<ModeloViewModel> lista2 = new List<ModeloViewModel>();
+            List<UF> ufs = fornApp.GetAllUF().ToList();
+            foreach (UF item in ufs)
+            {
+                Int32 num = forns.Where(p => p.UF_CD_ID == item.UF_CD_ID).ToList().Count;
+                ModeloViewModel mod = new ModeloViewModel();
+                mod.Nome = item.UF_NM_NOME;
+                mod.Valor = num;
+                lista2.Add(mod);
+            }
+            ViewBag.ListaFornUF = lista2;
+            Session["ListaFornUF"] = lista2;
+
+            // Recupera fornecedores por Cidade
+            List<ModeloViewModel> lista3 = new List<ModeloViewModel>();
+            List<String> cids = forns.Select(p => p.FORN_NM_CIDADE).Distinct().ToList();
+            foreach (String item in cids)
+            {
+                Int32 num = forns.Where(p => p.FORN_NM_CIDADE == item).ToList().Count;
+                ModeloViewModel mod = new ModeloViewModel();
+                mod.Nome = item;
+                mod.Valor = num;
+                lista3.Add(mod);
+            }
+            ViewBag.ListaFornCidade = lista3;
+            Session["ListaFornCidade"] = lista3;
+
+            // Recupera fornecedores por Categoria
+            List<ModeloViewModel> lista4 = new List<ModeloViewModel>();
+            List<CATEGORIA_FORNECEDOR> cats = fornApp.GetAllTipos(idAss).ToList();
+            foreach (CATEGORIA_FORNECEDOR item in cats)
+            {
+                Int32 num = forns.Where(p => p.CAFO_CD_ID == item.CAFO_CD_ID).ToList().Count;
+                ModeloViewModel mod = new ModeloViewModel();
+                mod.Nome = item.CAFO_NM_NOME;
+                mod.Valor = num;
+                lista2.Add(mod);
+            }
+            ViewBag.ListaFornCats = lista2;
+            Session["ListaFornCats"] = lista2;
+
+            // Recupera Fornecedores com Pagto em atraso
+            ViewBag.ListaFornAtraso = null;
+
+            // Recupera Fornecedores com mais pedidos
+            ViewBag.ListaFornPedidos = null;
+            return View(vm);
+        }
+
+        public JsonResult GetDadosFornecedorUFLista()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornUF"];
+            List<String> uf = new List<String>();
+            List<Int32> valor = new List<Int32>();
+            uf.Add(" ");
+            valor.Add(0);
+
+            foreach (ModeloViewModel item in lista)
+            {
+                uf.Add(item.Nome);
+                valor.Add(item.Valor);
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("ufs", uf);
+            result.Add("valores", valor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorCidadeLista()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornCidade"];
+            List<String> cidade = new List<String>();
+            List<Int32> valor = new List<Int32>();
+            cidade.Add(" ");
+            valor.Add(0);
+
+            foreach (ModeloViewModel item in lista)
+            {
+                cidade.Add(item.Nome);
+                valor.Add(item.Valor);
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("cids", cidade);
+            result.Add("valores", valor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorUF()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornUF"];
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+            cor.Add("#359E18");
+            cor.Add("#FFAE00");
+            cor.Add("#FF7F00");
+            Int32 i = 1;
+
+            foreach (ModeloViewModel item in lista)
+            {
+                desc.Add(item.Nome);
+                quant.Add(item.Valor);
+                if (i == 1)
+                {
+                    cor.Add("#359E18");
+                }
+                else if (i == 2)
+                {
+                    cor.Add("#FFAE00");
+                }
+                else if (i == 3)
+                {
+                    cor.Add("#FF7F00");
+                }
+                i++;
+                if (i > 3)
+                {
+                    i = 1;
+                }
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorCidade()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornCidade"];
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+            cor.Add("#359E18");
+            cor.Add("#FFAE00");
+            cor.Add("#FF7F00");
+            Int32 i = 1;
+
+            foreach (ModeloViewModel item in lista)
+            {
+                desc.Add(item.Nome);
+                quant.Add(item.Valor);
+                if (i == 1)
+                {
+                    cor.Add("#359E18");
+                }
+                else if (i == 2)
+                {
+                    cor.Add("#FFAE00");
+                }
+                else if (i == 3)
+                {
+                    cor.Add("#FF7F00");
+                }
+                i++;
+                if (i > 3)
+                {
+                    i = 1;
+                }
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosFornecedorCategoria()
+        {
+            List<ModeloViewModel> lista = (List<ModeloViewModel>)Session["ListaFornCats"];
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+            cor.Add("#359E18");
+            cor.Add("#FFAE00");
+            cor.Add("#FF7F00");
+            Int32 i = 1;
+
+            foreach (ModeloViewModel item in lista)
+            {
+                desc.Add(item.Nome);
+                quant.Add(item.Valor);
+                if (i == 1)
+                {
+                    cor.Add("#359E18");
+                }
+                else if (i == 2)
+                {
+                    cor.Add("#FFAE00");
+                }
+                else if (i == 3)
+                {
+                    cor.Add("#FF7F00");
+                }
+                i++;
+                if (i > 3)
+                {
+                    i = 1;
+                }
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
         }
 
     }
