@@ -195,6 +195,7 @@ namespace Presentation.Start
             kernel.Bind<IClienteContatoRepository>().To<ClienteContatoRepository>();
             kernel.Bind<IClienteReferenciaRepository>().To<ClienteReferenciaRepository>();
             kernel.Bind<IClienteCnpjRepository>().To<ClienteCnpjRepository>();
+            kernel.Bind<IEmpresaMaquinaRepository>().To<EmpresaMaquinaRepository>();
 
         }
     }

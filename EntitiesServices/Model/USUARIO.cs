@@ -32,6 +32,12 @@ namespace EntitiesServices.Model
             this.VIDEO_COMENTARIO = new HashSet<VIDEO_COMENTARIO>();
             this.USUARIO_ANOTACAO = new HashSet<USUARIO_ANOTACAO>();
             this.USUARIO_ANOTACAO1 = new HashSet<USUARIO_ANOTACAO>();
+            this.CRM = new HashSet<CRM>();
+            this.CRM_ACAO = new HashSet<CRM_ACAO>();
+            this.CRM_ACAO1 = new HashSet<CRM_ACAO>();
+            this.CRM_COMENTARIO = new HashSet<CRM_COMENTARIO>();
+            this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
+            this.CRM_PEDIDO_VENDA_ACOMPANHAMENTO = new HashSet<CRM_PEDIDO_VENDA_ACOMPANHAMENTO>();
         }
     
         public int USUA_CD_ID { get; set; }
@@ -99,5 +105,17 @@ namespace EntitiesServices.Model
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM> CRM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_ACAO> CRM_ACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_ACAO> CRM_ACAO1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_COMENTARIO> CRM_COMENTARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_PEDIDO_VENDA_ACOMPANHAMENTO> CRM_PEDIDO_VENDA_ACOMPANHAMENTO { get; set; }
     }
 }

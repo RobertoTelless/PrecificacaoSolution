@@ -205,6 +205,76 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN416650" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM" Width="1.5" PointX="16.5" PointY="79.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ACAO" Width="1.5" PointX="20.75" PointY="93.5" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ANEXO" Width="1.5" PointX="18.75" PointY="86.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_COMENTARIO" Width="1.5" PointX="18.75" PointY="82.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_CONTATO" Width="1.5" PointX="18.75" PointY="89.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ORIGEM" Width="1.5" PointX="3" PointY="63.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA" Width="1.5" PointX="24.75" PointY="99.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ACOMPANHAMENTO" Width="1.5" PointX="27" PointY="95" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ANEXO" Width="1.5" PointX="27" PointY="113.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ITEM" Width="1.5" PointX="27" PointY="88.875" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA_MAQUINA" Width="1.5" PointX="16.5" PointY="115.5" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_ENVIO" Width="1.5" PointX="3" PointY="160.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_FRETE" Width="1.5" PointX="3" PointY="163.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOTIVO_CANCELAMENTO" Width="1.5" PointX="3" PointY="102" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOTIVO_ENCERRAMENTO" Width="1.5" PointX="3" PointY="51.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_PROPOSTA" Width="1.5" PointX="3" PointY="59" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_ACAO" Width="1.5" PointX="3" PointY="105.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CRM" Width="1.5" PointX="3" PointY="55.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_TRANSPORTE" Width="1.5" PointX="17.25" PointY="112.5" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_VEICULO" Width="1.5" PointX="17.25" PointY="123" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TRANSPORTADORA" Width="1.5" PointX="19.5" PointY="105" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TRANSPORTADORA_ANEXO" Width="1.5" PointX="21.75" PointY="107.375" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ORIGEM_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORMA_ENVIO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORMA_FRETE_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOTIVO_CANCELAMENTO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOTIVO_ENCERRAMENTO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_PROPOSTA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_ACAO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_CRM_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_CRM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ANEXO_CRM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_COMENTARIO_CRM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_CONTATO_CRM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_CRM_ORIGEM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_MOTIVO_CANCELAMENTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_MOTIVO_ENCERRAMENTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_CRM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_TIPO_CRM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_TIPO_ACAO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_USUARIO1" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_COMENTARIO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ACOMPANHAMENTO_CRM_PEDIDO_VENDA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ANEXO_CRM_PEDIDO_VENDA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_FORMA_ENVIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_FORMA_FRETE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ITEM_CRM_PEDIDO_VENDA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_MOTIVO_CANCELAMENTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_MOTIVO_ENCERRAMENTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_TEMPLATE_PROPOSTA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_TRANSPORTADORA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ACOMPANHAMENTO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ITEM_PRODUTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ITEM_UNIDADE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA_EMPRESA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_UF" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_EMPR" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA_MAQUINA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_TIPO_TRANSPORTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_TIPO_VEICULO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_ANEXO_TRANSPORTADORA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

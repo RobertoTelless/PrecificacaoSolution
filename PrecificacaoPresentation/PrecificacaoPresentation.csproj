@@ -275,6 +275,7 @@
     <Compile Include="ViewModels\ContaBancariaViewModel.cs" />
     <Compile Include="ViewModels\ClienteComentarioViewModel.cs" />
     <Compile Include="ViewModels\FornecedorComentarioViewModel.cs" />
+    <Compile Include="ViewModels\EmpresaMaquinaViewModel.cs" />
     <Compile Include="ViewModels\FornecedorContatoViewModel.cs" />
     <Compile Include="ViewModels\FornecedorViewModel.cs" />
     <Compile Include="ViewModels\VideoComentarioViewModel.cs" />
@@ -3039,6 +3040,7 @@
     <Content Include="Views\Cliente\EnviarEMailContato.cshtml" />
     <Content Include="Views\Cliente\EnviarSMSContato.cshtml" />
     <Content Include="Views\Cliente\MontarTelaIndicadoresCliente.cshtml" />
+    <Content Include="Views\Empresa\IncluirEmpresaMaquina.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -206,7 +206,21 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltarMaquina"] == 10)
+            {
+                return RedirectToAction("IncluirEmpresaMaquina", "Empresa");
+            }
             return RedirectToAction("MontarTelaMaquina");
+        }
+
+        public ActionResult IncluirMaquinaForm()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaMaquina"] = 10;
+            return RedirectToAction("IncluirMaquina");
         }
 
         [HttpGet]
@@ -278,7 +292,7 @@ namespace ERP_Condominios_Solution.Controllers
                     // Sucesso
                     listaMaster = new List<MAQUINA>();
                     Session["ListaMaquina"] = null;
-                    return RedirectToAction("MontarTelaMaquina");
+                    return RedirectToAction("VoltarBaseMaquina");
                 }
                 catch (Exception ex)
                 {
@@ -495,6 +509,17 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             return RedirectToAction("EditarMaquina", new { id = (Int32)Session["IdMaquina"] });
+        }
+
+        public JsonResult GetMaquina(Int32 id)
+        {
+            var forn = servApp.GetItemById(id);
+            var hash = new Hashtable();
+            hash.Add("provedor", forn.MAQN_NM_PROVEDOR);
+            hash.Add("credito", forn.MAQN_PC_CREDITO);
+            hash.Add("debito", forn.MAQN_PC_DEBITO);
+            hash.Add("antecipacao", forn.MAQN_PC_ANTECIPACAO);
+            return Json(hash);
         }
 
     }

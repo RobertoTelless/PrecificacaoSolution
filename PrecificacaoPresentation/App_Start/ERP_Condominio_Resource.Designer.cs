@@ -779,5 +779,23 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0111", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A soma dos percentuais relativos de vendas por tipo não pode ser superior a 100.
+        /// </summary>
+        internal static string M0112 {
+            get {
+                return ResourceManager.GetString("M0112", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A soma dos percentuais relativos de vendas por tipo não pode ser inferior a 100.
+        /// </summary>
+        internal static string M0113 {
+            get {
+                return ResourceManager.GetString("M0113", resourceCulture);
+            }
+        }
     }
 }

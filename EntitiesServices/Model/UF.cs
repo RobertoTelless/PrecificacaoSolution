@@ -20,6 +20,7 @@ namespace EntitiesServices.Model
             this.CLIENTE = new HashSet<CLIENTE>();
             this.CLIENTE1 = new HashSet<CLIENTE>();
             this.FORNECEDOR = new HashSet<FORNECEDOR>();
+            this.EMPRESA = new HashSet<EMPRESA>();
         }
     
         public int UF_CD_ID { get; set; }
@@ -32,5 +33,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<CLIENTE> CLIENTE1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FORNECEDOR> FORNECEDOR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMPRESA> EMPRESA { get; set; }
     }
 }

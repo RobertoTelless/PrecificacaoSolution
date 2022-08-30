@@ -12,23 +12,24 @@ namespace EntitiesServices.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REGIME_TRIBUTARIO
+    public partial class MOTIVO_ENCERRAMENTO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public REGIME_TRIBUTARIO()
+        public MOTIVO_ENCERRAMENTO()
         {
-            this.CLIENTE = new HashSet<CLIENTE>();
-            this.EMPRESA = new HashSet<EMPRESA>();
+            this.CRM = new HashSet<CRM>();
+            this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
         }
     
-        public int RETR_CD_ID { get; set; }
-        public string RETR_NM_NOME { get; set; }
-        public int RETR_IN_ATIVO { get; set; }
-        public Nullable<decimal> RETR_VL_ALIQUOTA { get; set; }
+        public int MOEN_CD_ID { get; set; }
+        public int ASSI_CD_ID { get; set; }
+        public string MOEN_NM_NOME { get; set; }
+        public Nullable<int> MOEN_IN_ATIVO { get; set; }
     
+        public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CLIENTE> CLIENTE { get; set; }
+        public virtual ICollection<CRM> CRM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPRESA> EMPRESA { get; set; }
+        public virtual ICollection<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
     }
 }

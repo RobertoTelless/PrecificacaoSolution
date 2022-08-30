@@ -22,6 +22,8 @@ namespace EntitiesServices.Model
             this.CLIENTE_CONTATO = new HashSet<CLIENTE_CONTATO>();
             this.CLIENTE_QUADRO_SOCIETARIO = new HashSet<CLIENTE_QUADRO_SOCIETARIO>();
             this.CLIENTE_REFERENCIA = new HashSet<CLIENTE_REFERENCIA>();
+            this.CRM = new HashSet<CRM>();
+            this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
         }
     
         public int CLIE_CD_ID { get; set; }
@@ -99,5 +101,9 @@ namespace EntitiesServices.Model
         public virtual UF UF { get; set; }
         public virtual UF UF1 { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM> CRM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
     }
 }

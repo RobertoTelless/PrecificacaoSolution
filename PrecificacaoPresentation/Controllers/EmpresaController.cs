@@ -27,6 +27,7 @@ namespace ERP_Condominios_Solution.Controllers
     public class EmpresaController : Controller
     {
         private readonly IEmpresaAppService baseApp;
+        private readonly IFornecedorAppService fornApp;
         private String msg;
         private Exception exception;
         EMPRESA objeto = new EMPRESA();
@@ -34,9 +35,10 @@ namespace ERP_Condominios_Solution.Controllers
         List<EMPRESA> listaMaster = new List<EMPRESA>();
         String extensao;
 
-        public EmpresaController(IEmpresaAppService baseApps)
+        public EmpresaController(IEmpresaAppService baseApps, IFornecedorAppService fornApps)
         {
             baseApp = baseApps;
+            fornApp = fornApps;
         }
 
         [HttpGet]
@@ -90,9 +92,11 @@ namespace ERP_Condominios_Solution.Controllers
             Session["Empresa"] = objeto;
             ViewBag.Empresa = objeto;
             ViewBag.Title = "Empresa";
+            Session["IdEmpresa"] = objeto.EMPR_CD_ID;
 
             // Indicadores
             ViewBag.Regimes = new SelectList(baseApp.GetAllRegimes(), "RETR_CD_ID", "RETR_NM_NOME");
+            ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             ViewBag.Maquinas = new SelectList(baseApp.GetAllMaquinas(idAss), "MAQN_CD_ID", "MAQN_NM_NOME");
             List<SelectListItem> opera = new List<SelectListItem>();
             opera.Add(new SelectListItem() { Text = "Sim", Value = "1" });
@@ -118,6 +122,14 @@ namespace ERP_Condominios_Solution.Controllers
                 if ((Int32)Session["MensEmpresa"] == 4)
                 {
                     ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0020", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensEmpresa"] == 10)
+                {
+                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0112", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensEmpresa"] == 11)
+                {
+                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0113", CultureInfo.CurrentCulture));
                 }
             }
 
@@ -156,6 +168,16 @@ namespace ERP_Condominios_Solution.Controllers
                     Int32 volta = baseApp.ValidateEdit(item, objetoAntes, usuarioLogado);
 
                     // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensEmpresa"] = 10;
+                        return RedirectToAction("MontarTelaEmpresa", "Empresa");
+                    }
+                    if (volta == 2)
+                    {
+                        Session["MensEmpresa"] = 11;
+                        return RedirectToAction("MontarTelaEmpresa", "Empresa");
+                    }
 
                     // Sucesso
                     listaMaster = new List<EMPRESA>();
@@ -295,6 +317,89 @@ namespace ERP_Condominios_Solution.Controllers
             objetoAntes = item;
             Int32 volta = baseApp.ValidateEdit(item, objetoAntes);
             return RedirectToAction("VoltarAnexoEmpresa");
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirEmpresaMaquina(Int32 id)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            EMPRESA_MAQUINA item = baseApp.GetMaquinaById(id);
+            item.EMMA_IN_ATIVO = 0;
+            Int32 volta = baseApp.ValidateEditMaquina(item);
+            return RedirectToAction("VoltarAnexoEmpresa");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarEmpresaMaquina(Int32 id)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            EMPRESA_MAQUINA item = baseApp.GetMaquinaById(id);
+            item.EMMA_IN_ATIVO = 1;
+            Int32 volta = baseApp.ValidateEditMaquina(item);
+            return RedirectToAction("VoltarAnexoEmpresa");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirEmpresaMaquina()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+
+            // Prepara view
+            ViewBag.Maquinas = new SelectList(baseApp.GetAllMaquinas(idAss).OrderBy(p => p.MAQN_NM_NOME), "MAQN_CD_ID", "MAQN_NM_EXIBE");
+            EMPRESA_MAQUINA item = new EMPRESA_MAQUINA();
+            EmpresaMaquinaViewModel vm = Mapper.Map<EMPRESA_MAQUINA, EmpresaMaquinaViewModel>(item);
+            vm.EMPR_CD_ID = (Int32)Session["IdEmpresa"];
+            vm.EMMA_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirEmpresaMaquina(EmpresaMaquinaViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Maquinas = new SelectList(baseApp.GetAllMaquinas(idAss).OrderBy(p => p.MAQN_NM_NOME), "MAQN_CD_ID", "MAQN_NM_EXIBE");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    EMPRESA_MAQUINA item = Mapper.Map<EmpresaMaquinaViewModel, EMPRESA_MAQUINA>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = baseApp.ValidateCreateMaquina(item);
+                    
+                    // Verifica retorno
+                    return RedirectToAction("VoltarAnexoEmpresa");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
         }
     }
 }

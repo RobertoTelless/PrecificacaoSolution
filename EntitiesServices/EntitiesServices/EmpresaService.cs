@@ -23,15 +23,17 @@ namespace ModelServices.EntitiesServices
         private readonly IMaquinaRepository _maqRepository;
         private readonly IRegimeTributarioRepository _regRepository;
         private readonly IEmpresaAnexoRepository _anexoRepository;
+        private readonly IEmpresaMaquinaRepository _emaqRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public EmpresaService(IEmpresaRepository baseRepository, ILogRepository logRepository, IMaquinaRepository maqRepository, IRegimeTributarioRepository regRepository, IEmpresaAnexoRepository anexoRepository) : base(baseRepository)
+        public EmpresaService(IEmpresaRepository baseRepository, ILogRepository logRepository, IMaquinaRepository maqRepository, IRegimeTributarioRepository regRepository, IEmpresaAnexoRepository anexoRepository, IEmpresaMaquinaRepository emaqRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
             _maqRepository = maqRepository;
             _regRepository = regRepository;
             _anexoRepository = anexoRepository;
+            _emaqRepository = emaqRepository;
         }
 
         public EMPRESA GetItemById(Int32 id)
@@ -174,5 +176,56 @@ namespace ModelServices.EntitiesServices
                 }
             }
         }
+
+        public EMPRESA_MAQUINA GetByEmpresaMaquina(Int32 empresa, Int32 maquina)
+        {
+            return _emaqRepository.GetByEmpresaMaquina(empresa, maquina);
+        }
+
+        public EMPRESA_MAQUINA GetMaquinaById(Int32 id)
+        {
+            return _emaqRepository.GetItemById(id);
+        }
+
+        public Int32 EditMaquina(EMPRESA_MAQUINA item)
+        {
+            using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    EMPRESA_MAQUINA obj = _emaqRepository.GetById(item.EMMA_CD_ID);
+                    _emaqRepository.Detach(obj);
+                    _emaqRepository.Update(item);
+                    transaction.Commit();
+                    return 0;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+            }
+        }
+
+        public Int32 CreateMaquina(EMPRESA_MAQUINA item)
+        {
+            using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    _emaqRepository.Add(item);
+                    transaction.Commit();
+                    return 0;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+            }
+        }
+
+
+
     }
 }

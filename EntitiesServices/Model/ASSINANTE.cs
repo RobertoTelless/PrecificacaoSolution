@@ -52,12 +52,28 @@ namespace EntitiesServices.Model
             this.PRODUTO = new HashSet<PRODUTO>();
             this.TAREFA = new HashSet<TAREFA>();
             this.USUARIO = new HashSet<USUARIO>();
+            this.CRM_ACAO = new HashSet<CRM_ACAO>();
+            this.CRM = new HashSet<CRM>();
+            this.CRM_ORIGEM = new HashSet<CRM_ORIGEM>();
+            this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
+            this.FORMA_ENVIO = new HashSet<FORMA_ENVIO>();
+            this.FORMA_FRETE = new HashSet<FORMA_FRETE>();
+            this.MOTIVO_CANCELAMENTO = new HashSet<MOTIVO_CANCELAMENTO>();
+            this.MOTIVO_ENCERRAMENTO = new HashSet<MOTIVO_ENCERRAMENTO>();
+            this.TEMPLATE_PROPOSTA = new HashSet<TEMPLATE_PROPOSTA>();
+            this.TIPO_ACAO = new HashSet<TIPO_ACAO>();
+            this.TIPO_CRM = new HashSet<TIPO_CRM>();
+            this.TRANSPORTADORA = new HashSet<TRANSPORTADORA>();
         }
     
         public int ASSI_CD_ID { get; set; }
         public string ASSI_NM_NOME { get; set; }
         public System.DateTime ASSI_DT_CADASTRO { get; set; }
         public int ASSI_IN_ATIVO { get; set; }
+        public string ASSI_NM_RAZAO { get; set; }
+        public string ASSI_NR_CNPJ { get; set; }
+        public string ASSI_NR_INSCRICAO_ESTADUAL { get; set; }
+        public string ASSI_NR_INSCRICAO_MUNICIPAL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }
@@ -129,5 +145,29 @@ namespace EntitiesServices.Model
         public virtual ICollection<TAREFA> TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO> USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_ACAO> CRM_ACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM> CRM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_ORIGEM> CRM_ORIGEM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FORMA_ENVIO> FORMA_ENVIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FORMA_FRETE> FORMA_FRETE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOTIVO_CANCELAMENTO> MOTIVO_CANCELAMENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOTIVO_ENCERRAMENTO> MOTIVO_ENCERRAMENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TEMPLATE_PROPOSTA> TEMPLATE_PROPOSTA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TIPO_ACAO> TIPO_ACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TIPO_CRM> TIPO_CRM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TRANSPORTADORA> TRANSPORTADORA { get; set; }
     }
 }

@@ -4,6 +4,26 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="modalContainer">
+        <div id="modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @*titulo gerado dinamicamente*@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @*Gerado dinamicamente*@
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="page-title">
         <h3 class="title">Condomínio</h3>
         <br />
@@ -38,6 +58,7 @@
                     <div class="tabs-container">
                         <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab-1">Dados Gerais</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-3">Máquinas de Cartões</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-2">Anexos</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-5">Indicadores</a></li>
                         </ul>
@@ -51,7 +72,10 @@
                                         <div class="row" style="width: 100%;">
                                             <div class="col-lg-12 col-md-12 col-xs-12">
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                    @Html.ButtonActionSubmit(text: "Confirma edição de Dados da Empresa", htmlAttributes: new { id = "basictoast" })
+                                                    @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+                                                    {
+                                                        @Html.ButtonActionSubmit(text: "Confirma Alteração de Dados da Empresa", htmlAttributes: new { id = "basictoast" })
+                                                    }
                                                     @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarDash", controller: "Empresa")
                                                 </div>
                                             </div>
@@ -60,7 +84,7 @@
                                             <div class="col-lg-12 col-md-12 col-xs-12">
                                                 <div class="row">
                                                     <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                        <div class="col-lg-4 col-md-4 col-xs-12">
+                                                        <div class="col-lg-3 col-md-3 col-xs-12">
                                                             @Html.HiddenFor(m => m.ASSI_CD_ID)
                                                             @Html.HiddenFor(m => m.EMPR_IN_ATIVO)
                                                             @Html.HiddenFor(m => m.EMPR_DT_CADASTRO)
@@ -70,31 +94,96 @@
                                                             @Html.ValidationMessageFor(m => m.EMPR_NM_NOME, "", new { @style = "color:red" })
                                                         </div>
                                                         <div class="col-lg-3 col-md-3 col-xs-12">
+                                                            Razão Social
+                                                            @Html.TextBoxFor(m => m.EMPR_NM_RAZAO, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_NM_RAZAO, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            CNPJ*
+                                                            @Html.TextBoxFor(m => m.EMPR_NR_CNPJ, new { @class = "form-control", @id = "cnpj", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_NR_CNPJ, "", new { @style = "color:red" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
                                                             Regime Tributário*
                                                             @Html.DropDownListFor(m => m.RETR_CD_ID, (SelectList)ViewBag.Regimes, "Selecionar", new { @class = "form-control", autofocus = true })
                                                             @Html.ValidationMessageFor(m => m.RETR_CD_ID, "", new { @style = "color:red" })
                                                         </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Alíquota Real (%)
+                                                            @Html.TextBoxFor(m => m.REGIME_TRIBUTARIO.RETR_VL_ALIQUOTA, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_VL_IMPOSTO_MEI, "", new { @style = "color:red" })
+                                                        </div>
+                                                        @if (Model.EMPR_VL_IMPOSTO_MEI == Model.REGIME_TRIBUTARIO.RETR_VL_ALIQUOTA)
+                                                        {
+                                                            <div class="col-lg-2 col-md-2 col-xs-12">
+                                                                Alíquota Praticada (%)
+                                                                @Html.TextBoxFor(m => m.EMPR_VL_IMPOSTO_MEI, new { @class = "form-control", autofocus = true })
+                                                                @Html.ValidationMessageFor(m => m.EMPR_VL_IMPOSTO_MEI, "", new { @style = "color:red" })
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="col-lg-2 col-md-2 col-xs-12" style="background-color:beige; color: green; font-weight: bold">
+                                                                Alíquota Praticada (%)
+                                                                @Html.TextBoxFor(m => m.EMPR_VL_IMPOSTO_MEI, new { @class = "form-control", autofocus = true })
+                                                                @Html.ValidationMessageFor(m => m.EMPR_VL_IMPOSTO_MEI, "", new { @style = "color:red" })
+                                                            </div>
+                                                        }
                                                     </div>
                                                     <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Insc.Estadual
+                                                            @Html.TextBoxFor(m => m.EMPR_NR_INSCRICAO_ESTADUAL, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_NR_INSCRICAO_ESTADUAL, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Insc.Municipal
+                                                            @Html.TextBoxFor(m => m.EMPR_NR_INSCRICAO_MUNICIPAL, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_NR_INSCRICAO_MUNICIPAL, "", new { @style = "color:red" })
+                                                        </div>
                                                         <div class="col-lg-2 col-md-2 col-xs-12">
                                                             Opera Cartão?*
                                                             @Html.DropDownListFor(m => m.EMPR_IN_OPERA_CARTAO, (SelectList)ViewBag.Opera, "Selecionar", new { @class = "form-control", autofocus = true, @id = "opera", onchange = "ValidaDiv($(this).val())" })
                                                             @Html.ValidationMessageFor(m => m.EMPR_IN_OPERA_CARTAO, "", new { @style = "color:red" })
                                                         </div>
-                                                        <div class="col-lg-2 col-md-2 col-xs-12" id="maquina">
-                                                            Máquina de Cartão
-                                                            @Html.DropDownListFor(m => m.MAQN_CD_ID, (SelectList)ViewBag.Maquinas, "Selecionar", new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.MAQN_CD_ID, "", new { @style = "color:red" })
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Paga Comissão?*
+                                                            @Html.DropDownListFor(m => m.EMPR_IN_PAGA_COMISSAO, (SelectList)ViewBag.Comissao, "Selecionar", new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_IN_PAGA_COMISSAO, "", new { @style = "color:red" })
                                                         </div>
-                                                        <div class="col-lg-3 col-md-3 col-xs-12" id="outra">
-                                                            Outra Máquina
-                                                            @Html.TextBoxFor(m => m.EMPR_NM_OUTRA_MAQUINA, new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.EMPR_NM_OUTRA_MAQUINA, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group" style="margin: 0 -15px 0 -15px;" id="containerCep">
+                                                        <div class="col-lg-1 col-md-1 col-xs-12">
+                                                            CEP
+                                                            @Html.TextBoxFor(m => m.EMPR_NR_CEP, new { @class = "form-control", autofocus = true, @id = "cep" })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_NR_CEP, "", new { @style = "color:red" })
                                                         </div>
-                                                        <div class="col-lg-2 col-md-2 col-xs-12" id="antecipacao">
-                                                            Perc.Antecipação (%)
-                                                            @Html.TextBoxFor(m => m.EMPR_PC_ANTECIPACAO, new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.EMPR_PC_ANTECIPACAO, "", new { @style = "color:red" })
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            <span class="btn btn-warning btn-sm" style="margin-bottom: -45px;" id="btnBuscaCep" onclick="PesquisaCep($('#cep').val(), $(this), 1)">Buscar CEP</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin: 30px -15px 0 -15px;" id="containerEnd">
+                                                        <div class="col-lg-4 col-md-4 col-xs-12">
+                                                            Endereço
+                                                            @Html.TextBoxFor(m => m.EMPR_NM_ENDERECO, new { @class = "form-control", autofocus = true, @id = "endereco" })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_NM_ENDERECO, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3 col-xs-12">
+                                                            Bairro
+                                                            @Html.TextBoxFor(m => m.EMPR_NM_BAIRRO, new { @class = "form-control", autofocus = true, @id = "bairro" })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_NM_BAIRRO, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3 col-xs-12">
+                                                            Cidade
+                                                            @Html.TextBoxFor(m => m.EMPR_NM_CIDADE, new { @class = "form-control", autofocus = true, @id = "cidade" })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_NM_CIDADE, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            UF
+                                                            @Html.DropDownListFor(m => m.UF_CD_ID, (SelectList)ViewBag.UF, "Selecionar", new { @class = "form-control", autofocus = true, @id = "uf" })
+                                                            @Html.ValidationMessageFor(m => m.UF_CD_ID, "", new { @style = "color:red" })
                                                         </div>
                                                     </div>
                                                 </div>
@@ -108,18 +197,86 @@
                                                     @Html.ValidationMessageFor(m => m.PatrimonioText, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
-                                                    Imposto MEI
-                                                    @Html.TextBoxFor(m => m.EMPR_VL_IMPOSTO_MEI, new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.EMPR_VL_IMPOSTO_MEI, "", new { @style = "color:red" })
+                                                    Perc.Venda Débito (%)
+                                                    @Html.TextBoxFor(m => m.EMPR_PC_VENDA_DEBITO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.EMPR_PC_VENDA_DEBITO, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
-                                                    Paga Comissão?*
-                                                    @Html.DropDownListFor(m => m.EMPR_IN_PAGA_COMISSAO, (SelectList)ViewBag.Comissao, "Selecionar", new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.EMPR_IN_PAGA_COMISSAO, "", new { @style = "color:red" })
+                                                    Perc.Venda Crédito (%)
+                                                    @Html.TextBoxFor(m => m.EMPR_PC_VENDA_CREDITO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.EMPR_PC_VENDA_CREDITO, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Perc.Venda Dinheiro (%)
+                                                    @Html.TextBoxFor(m => m.EMPR_PC_VENDA_DINHEIRO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.EMPR_PC_VENDA_DINHEIRO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
                                         </div>
                                     }
+                                </div>
+                            </div>
+
+                            <div id="tab-3" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row" id="maquina">
+                                        <hr />
+                                        <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" >
+                                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                                <h4>Máquinas de Cartões</h4>
+                                                <br />
+                                                @if (Model.EMPRESA_MAQUINA != null && Model.EMPRESA_MAQUINA.Count > 0)
+                                                {
+                                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                                        <thead style="background-color:lightsteelblue">
+                                                            <tr>
+                                                                <th>Nome</th>
+                                                                <th>Marca</th>
+                                                                <th>Perc.Crédito (%)</th>
+                                                                <th>Perc.Débito (%)</th>
+                                                                <th>Perc.Antecipação (%)</th>
+                                                                @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+                                                                {
+                                                                    <th class="td-one-action">Ações</th>
+                                                                }
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var cond in (Model.EMPRESA_MAQUINA))
+                                                            {
+                                                                <tr>
+                                                                    <td>@cond.MAQUINA.MAQN_NM_NOME</td>
+                                                                    <td>@cond.MAQUINA.MAQN_NM_PROVEDOR</td>
+                                                                    <td>@CrossCutting.Formatters.DecimalFormatter(cond.MAQUINA.MAQN_PC_CREDITO)</td>
+                                                                    <td>@CrossCutting.Formatters.DecimalFormatter(cond.MAQUINA.MAQN_PC_DEBITO)</td>
+                                                                    <td>@CrossCutting.Formatters.DecimalFormatter(cond.MAQUINA.MAQN_PC_ANTECIPACAO.Value)</td>
+                                                                    @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+                                                                    {
+                                                                        <td class="td-one-action">
+                                                                            @if (cond.EMMA_IN_ATIVO == 1)
+                                                                            {
+                                                                                <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Empresa/ExcluirEmpresaMaquina/@cond.EMMA_CD_ID')" title="Excluir"></span>
+                                                                            }
+                                                                            else
+                                                                            {   
+                                                                                <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Empresa/ReativarEmpresaMaquina/@cond.EMMA_CD_ID')" title="Reativar"></span>
+                                                                            }
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+                                        {
+                                            @Html.ButtonLinkIndex(text: "Associar nova Máquina de Cartão", action: "IncluirEmpresaMaquina", controller: "Empresa")
+                                        }
+                                    </div>
                                 </div>
                             </div>
                             
@@ -129,7 +286,7 @@
                                     <div class="row">
                                         <hr />
                                         <div class="col-lg-12 col-md-12 col-xs-12">
-                                            <h4>Arquivos Anexos</h4>
+                                            <h4>Anexos</h4>
                                             <br />
                                             <div class="form-group">
                                                 @using (Html.BeginForm("UploadFileEmpresa", "Empresa", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @id = "pwd-container2" }))
@@ -223,7 +380,30 @@
     @Scripts.Render("~/plugins/jasnyBootstrap")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
 
+    <script>
+        $(function () {
+            limpaModal();
+        });
 
+        function limpaModal() {
+            $('#btnModal').remove();
+            $('#modalTitle').remove();
+        }
+
+        function ShowModalExcluir(url) {
+            $('#modal').find('.modal-footer').prepend('<a id="btnModal" alt="Desativar" class="btn btn-primary" href="' + url + '" target="_self" title="Desativar">Confirmar</a>');
+            $('#modal').find('.modal-body').html('Confirma exclusão de máquina de cartão?');
+            $('#modal').find('.modal-header').prepend('<h5 id="modalTitle" class="modal-title">Confimar Exclusão</h5>');
+            $('#modal').modal('show');
+        }
+
+        function ShowModalReativar(url) {
+            $('#modal').find('.modal-footer').prepend('<a id="btnModal" alt="Reativar" class="btn btn-primary" href="' + url + '" target="_self" title="Reativar">Confirmar</a>');
+            $('#modal').find('.modal-body').html('Confirma reativação de máquina de cartão?');
+            $('#modal').find('.modal-header').prepend('<h5 id="modalTitle" class="modal-title">Confimar Reativação</h5>');
+            $('#modal').modal('show');
+        }
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -264,29 +444,43 @@
             $('#wpp').mask("(99) 99999-9999");
         });
     </script>
+
+    <script>
+        function PesquisaCep(cep, btn, tipoEnd) {
+            data = {
+                cep: cep
+                , tipoEnd: tipoEnd
+            }
+
+            $('#btnBuscaCep').attr("disabled", "disabled");
+
+            $.ajax({
+                url: '../Empresa/PesquisaCEP_Javascript'
+                , type: 'POST'
+                , data: data
+                , success: function (r) {
+                    $('#endereco').val(r.EMPR_NM_ENDERECO);
+                    $('#bairro').val(r.EMPR_NM_BAIRRO);
+                    $('#cidade').val(r.EMPR_NM_CIDADE);
+
+                    $('#uf option[value="' + r.UF_CD_ID + '"]').attr("selected", "selected");
+                    $('#btnBuscaCep').removeAttr("disabled");
+                }
+            });
+        }
+    </script>
     <script type="text/javascript">
         function ValidaDiv(valOpera) {
             if (valOpera == '1') {
                 $("#maquina").show();
-                $("#outra").show();
-                $("#antecipacao").show();
             } else if (valOpera == '2') { //Se o tempo for mé igual a 2 mostra a divCpf
                 $("#maquina").hide();
-                $("#outra").hide();
-                $("#antecipacao").hide();
-                LimpaMaquina();
             } 
         }
 
         $(document).ready(function () {
             ValidaDiv($('#opera').val());
         });
-
-        function LimpaMaquina() {
-            $('#maquina').val('');
-            $('#outra').val('');
-            $('#antecipacao').val('');
-        }
     </script>
 
     <script type="text/javascript">

@@ -240,6 +240,7 @@
     <Compile Include="Interfaces\Repositories\IClienteRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaContatoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaLancamentoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IEmpresaMaquinaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEmpresaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAgendaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaRepository.cs" />
@@ -395,6 +396,36 @@
     <Compile Include="Model\CONTA_BANCO_LANCAMENTO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CRM.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_ACAO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_ANEXO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_COMENTARIO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_CONTATO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_ORIGEM.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_PEDIDO_VENDA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_PEDIDO_VENDA_ACOMPANHAMENTO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_PEDIDO_VENDA_ANEXO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CRM_PEDIDO_VENDA_ITEM.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CUSTO_FIXO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
@@ -404,10 +435,19 @@
     <Compile Include="Model\EMPRESA_ANEXO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\EMPRESA_MAQUINA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\FICHA_TECNICA.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\FICHA_TECNICA_DETALHE.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FORMA_ENVIO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FORMA_FRETE.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\FORMA_PAGTO_RECTO.cs">
@@ -435,6 +475,12 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\MAQUINA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MOTIVO_CANCELAMENTO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MOTIVO_ENCERRAMENTO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\NOTICIA.cs">
@@ -536,7 +582,13 @@
     <Compile Include="Model\TEMPLATE_EMAIL.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TEMPLATE_PROPOSTA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TEMPLATE_SMS.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TIPO_ACAO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIPO_CONTA.cs">
@@ -545,10 +597,25 @@
     <Compile Include="Model\TIPO_CONTRIBUINTE.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TIPO_CRM.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TIPO_PESSOA.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIPO_TAREFA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TIPO_TRANSPORTE.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TIPO_VEICULO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TRANSPORTADORA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TRANSPORTADORA_ANEXO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\UF.cs">

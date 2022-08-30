@@ -51,6 +51,12 @@ namespace ApplicationServices.Services
             return lista;
         }
 
+        public EMPRESA_MAQUINA GetMaquinaById(Int32 id)
+        {
+            EMPRESA_MAQUINA lista = _baseService.GetMaquinaById(id);
+            return lista;
+        }
+
         public Int32 ExecuteFilter(String nome, Int32 idAss, out List<EMPRESA> objeto)
         {
             try
@@ -122,8 +128,17 @@ namespace ApplicationServices.Services
         {
             try
             {
-                // Monta Log
-                
+                // Criticas
+                if (item.EMPR_PC_VENDA_CREDITO + item.EMPR_PC_VENDA_DEBITO + item.EMPR_PC_VENDA_DINHEIRO > 100)
+                {
+                    return 1;
+                }
+                if (item.EMPR_PC_VENDA_CREDITO + item.EMPR_PC_VENDA_DEBITO + item.EMPR_PC_VENDA_DINHEIRO < 100)
+                {
+                    return 2;
+                }
+
+                // Monta Log                
                 LOG log = new LOG
                 {
                     LOG_DT_LOG = DateTime.Now,
@@ -222,5 +237,38 @@ namespace ApplicationServices.Services
                 throw;
             }
         }
+
+        public Int32 ValidateEditMaquina(EMPRESA_MAQUINA item)
+        {
+            try
+            {
+                // Persiste
+                return _baseService.EditMaquina(item);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public Int32 ValidateCreateMaquina(EMPRESA_MAQUINA item)
+        {
+            try
+            {
+                // Persiste
+                Int32 volta = _baseService.CreateMaquina(item);
+                return volta;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public EMPRESA_MAQUINA GetByEmpresaMaquina(Int32 empresa, Int32 maquina)
+        {
+            return _baseService.GetByEmpresaMaquina(empresa, maquina);
+        }
+
     }
 }

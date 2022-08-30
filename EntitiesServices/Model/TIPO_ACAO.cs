@@ -12,23 +12,21 @@ namespace EntitiesServices.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REGIME_TRIBUTARIO
+    public partial class TIPO_ACAO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public REGIME_TRIBUTARIO()
+        public TIPO_ACAO()
         {
-            this.CLIENTE = new HashSet<CLIENTE>();
-            this.EMPRESA = new HashSet<EMPRESA>();
+            this.CRM_ACAO = new HashSet<CRM_ACAO>();
         }
     
-        public int RETR_CD_ID { get; set; }
-        public string RETR_NM_NOME { get; set; }
-        public int RETR_IN_ATIVO { get; set; }
-        public Nullable<decimal> RETR_VL_ALIQUOTA { get; set; }
+        public int TIAC_CD_ID { get; set; }
+        public int ASSI_CD_ID { get; set; }
+        public string TIAC_NM_NOME { get; set; }
+        public Nullable<int> TIAC_IN_ATIVO { get; set; }
     
+        public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CLIENTE> CLIENTE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPRESA> EMPRESA { get; set; }
+        public virtual ICollection<CRM_ACAO> CRM_ACAO { get; set; }
     }
 }

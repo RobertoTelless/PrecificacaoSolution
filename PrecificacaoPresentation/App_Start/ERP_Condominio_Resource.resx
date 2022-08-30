@@ -357,4 +357,10 @@
   <data name="M0111" xml:space="preserve">
     <value>Padrão de Mensagem já cadastrado</value>
   </data>
+  <data name="M0112" xml:space="preserve">
+    <value>A soma dos percentuais relativos de vendas por tipo não pode ser superior a 100</value>
+  </data>
+  <data name="M0113" xml:space="preserve">
+    <value>A soma dos percentuais relativos de vendas por tipo não pode ser inferior a 100</value>
+  </data>
 </root>

@@ -23,6 +23,7 @@ namespace EntitiesServices.Model
             this.PRODUTO_KIT = new HashSet<PRODUTO_KIT>();
             this.PRODUTO_TABELA_PRECO = new HashSet<PRODUTO_TABELA_PRECO>();
             this.PRODUTO_ULTIMOS_CUSTOS = new HashSet<PRODUTO_ULTIMOS_CUSTOS>();
+            this.CRM_PEDIDO_VENDA_ITEM = new HashSet<CRM_PEDIDO_VENDA_ITEM>();
         }
     
         public int PROD_CD_ID { get; set; }
@@ -83,5 +84,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<PRODUTO_ULTIMOS_CUSTOS> PRODUTO_ULTIMOS_CUSTOS { get; set; }
         public virtual UNIDADE UNIDADE { get; set; }
         public virtual SUBCATEGORIA_PRODUTO SUBCATEGORIA_PRODUTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_PEDIDO_VENDA_ITEM> CRM_PEDIDO_VENDA_ITEM { get; set; }
     }
 }

@@ -12,23 +12,25 @@ namespace EntitiesServices.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REGIME_TRIBUTARIO
+    public partial class TEMPLATE_PROPOSTA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public REGIME_TRIBUTARIO()
+        public TEMPLATE_PROPOSTA()
         {
-            this.CLIENTE = new HashSet<CLIENTE>();
-            this.EMPRESA = new HashSet<EMPRESA>();
+            this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
         }
     
-        public int RETR_CD_ID { get; set; }
-        public string RETR_NM_NOME { get; set; }
-        public int RETR_IN_ATIVO { get; set; }
-        public Nullable<decimal> RETR_VL_ALIQUOTA { get; set; }
+        public int TEPR_CD_ID { get; set; }
+        public Nullable<int> ASSI_CD_ID { get; set; }
+        public string TEPR_SG_SIGLA { get; set; }
+        public string TEPR_NM_NOME { get; set; }
+        public string TEPR_TX_TEXTO { get; set; }
+        public string TEPR_TX_CABECALHO { get; set; }
+        public string TEPR_TX_RODAPE { get; set; }
+        public int TEPR_IN_ATIVO { get; set; }
     
+        public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CLIENTE> CLIENTE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPRESA> EMPRESA { get; set; }
+        public virtual ICollection<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
     }
 }

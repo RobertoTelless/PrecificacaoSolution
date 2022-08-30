@@ -24,6 +24,8 @@ namespace EntitiesServices.Model
             this.FORMA_PAGTO_RECTO = new HashSet<FORMA_PAGTO_RECTO>();
             this.PRODUTO_ESTOQUE_EMPRESA = new HashSet<PRODUTO_ESTOQUE_EMPRESA>();
             this.PRODUTO_TABELA_PRECO = new HashSet<PRODUTO_TABELA_PRECO>();
+            this.EMPRESA_MAQUINA = new HashSet<EMPRESA_MAQUINA>();
+            this.TRANSPORTADORA = new HashSet<TRANSPORTADORA>();
         }
     
         public int EMPR_CD_ID { get; set; }
@@ -39,6 +41,20 @@ namespace EntitiesServices.Model
         public Nullable<decimal> EMPR_VL_IMPOSTO_MEI { get; set; }
         public System.DateTime EMPR_DT_CADASTRO { get; set; }
         public int EMPR_IN_ATIVO { get; set; }
+        public Nullable<decimal> EMPR_PC_VENDA_DEBITO { get; set; }
+        public Nullable<decimal> EMPR_PC_VENDA_CREDITO { get; set; }
+        public Nullable<decimal> EMPR_PC_VENDA_DINHEIRO { get; set; }
+        public string EMPR_NM_RAZAO { get; set; }
+        public string EMPR_NR_CNPJ { get; set; }
+        public string EMPR_NR_INSCRICAO_MUNICIPAL { get; set; }
+        public string EMPR_NR_INSCRICAO_ESTADUAL { get; set; }
+        public string EMPR_NM_ENDERECO { get; set; }
+        public string EMPR_NM_NUMERO { get; set; }
+        public string EMPR_NM_COMPLEMENTO { get; set; }
+        public string EMPR_NM_BAIRRO { get; set; }
+        public string EMPR_NM_CIDADE { get; set; }
+        public Nullable<int> UF_CD_ID { get; set; }
+        public string EMPR_NR_CEP { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -57,5 +73,10 @@ namespace EntitiesServices.Model
         public virtual ICollection<PRODUTO_ESTOQUE_EMPRESA> PRODUTO_ESTOQUE_EMPRESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUTO_TABELA_PRECO> PRODUTO_TABELA_PRECO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMPRESA_MAQUINA> EMPRESA_MAQUINA { get; set; }
+        public virtual UF UF { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TRANSPORTADORA> TRANSPORTADORA { get; set; }
     }
 }
