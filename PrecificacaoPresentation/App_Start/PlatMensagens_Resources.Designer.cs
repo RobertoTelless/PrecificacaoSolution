@@ -1481,5 +1481,14 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0179", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Máquina de cartão já associada à empresa.
+        /// </summary>
+        internal static string M0180 {
+            get {
+                return ResourceManager.GetString("M0180", resourceCulture);
+            }
+        }
     }
 }

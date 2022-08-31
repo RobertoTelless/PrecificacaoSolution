@@ -722,10 +722,13 @@ namespace ERP_Condominios_Solution.Controllers
             foreach (UF item in ufs)
             {
                 Int32 num = forn.Where(p => p.UF_CD_ID == item.UF_CD_ID).ToList().Count;
-                ModeloViewModel mod = new ModeloViewModel();
-                mod.Nome = item.UF_NM_NOME;
-                mod.Valor = num;
-                lista2.Add(mod);
+                if (num > 0)
+                {
+                    ModeloViewModel mod = new ModeloViewModel();
+                    mod.Nome = item.UF_NM_NOME;
+                    mod.Valor = num;
+                    lista2.Add(mod);
+                }
             }
             ViewBag.ListaFornUF = lista2;
             Session["ListaFornUF"] = lista2;
@@ -750,10 +753,13 @@ namespace ERP_Condominios_Solution.Controllers
             foreach (CATEGORIA_FORNECEDOR item in cats)
             {
                 Int32 num = forn.Where(p => p.CAFO_CD_ID == item.CAFO_CD_ID).ToList().Count;
-                ModeloViewModel mod = new ModeloViewModel();
-                mod.Nome = item.CAFO_NM_NOME;
-                mod.Valor = num;
-                lista4.Add(mod);
+                if (num > 0)
+                {
+                    ModeloViewModel mod = new ModeloViewModel();
+                    mod.Nome = item.CAFO_NM_NOME;
+                    mod.Valor = num;
+                    lista4.Add(mod);
+                }
             }
             ViewBag.ListaFornCats = lista4;
             Session["ListaFornCats"] = lista4;
@@ -764,10 +770,13 @@ namespace ERP_Condominios_Solution.Controllers
             foreach (UF item in ufs)
             {
                 Int32 num = forn.Where(p => p.UF_CD_ID == item.UF_CD_ID).ToList().Count;
-                ModeloViewModel mod = new ModeloViewModel();
-                mod.Nome = item.UF_NM_NOME;
-                mod.Valor = num;
-                lista5.Add(mod);
+                if (num > 0)
+                {
+                    ModeloViewModel mod = new ModeloViewModel();
+                    mod.Nome = item.UF_NM_NOME;
+                    mod.Valor = num;
+                    lista5.Add(mod);
+                }
             }
             ViewBag.ListaClienteUF = lista5;
             Session["ListaClienteUF"] = lista5;
@@ -792,10 +801,13 @@ namespace ERP_Condominios_Solution.Controllers
             foreach (CATEGORIA_CLIENTE item in catc)
             {
                 Int32 num = cliente.Where(p => p.CACL_CD_ID == item.CACL_CD_ID).ToList().Count;
-                ModeloViewModel mod = new ModeloViewModel();
-                mod.Nome = item.CACL_NM_NOME;
-                mod.Valor = num;
-                lista7.Add(mod);
+                if (num > 0)
+                {
+                    ModeloViewModel mod = new ModeloViewModel();
+                    mod.Nome = item.CACL_NM_NOME;
+                    mod.Valor = num;
+                    lista7.Add(mod);
+                }
             }
             ViewBag.ListaClienteCats = lista7;
             Session["ListaClienteCats"] = lista7;

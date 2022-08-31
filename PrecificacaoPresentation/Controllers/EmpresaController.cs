@@ -21,6 +21,7 @@ using Image = iTextSharp.text.Image;
 using System.Text;
 using System.Net;
 using CrossCutting;
+using Canducci.Zip;
 
 namespace ERP_Condominios_Solution.Controllers
 {
@@ -106,7 +107,8 @@ namespace ERP_Condominios_Solution.Controllers
             comissao.Add(new SelectListItem() { Text = "Sim", Value = "1" });
             comissao.Add(new SelectListItem() { Text = "Não", Value = "2" });
             ViewBag.Comissao = new SelectList(comissao, "Value", "Text");
-            ViewBag.Perfil = usuario.PERF_CD_ID;
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
 
             // Mensagem
             if (Session["MensEmpresa"] != null)
@@ -359,6 +361,15 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
 
+            // Mensagens
+            if (Session["MensEmpresa"] != null)
+            {
+                if ((Int32)Session["MensEmpresa"] == 20)
+                {
+                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0180", CultureInfo.CurrentCulture));
+                }
+            }
+
             // Prepara view
             ViewBag.Maquinas = new SelectList(baseApp.GetAllMaquinas(idAss).OrderBy(p => p.MAQN_NM_NOME), "MAQN_CD_ID", "MAQN_NM_EXIBE");
             EMPRESA_MAQUINA item = new EMPRESA_MAQUINA();
@@ -385,9 +396,16 @@ namespace ERP_Condominios_Solution.Controllers
                     // Executa a operação
                     EMPRESA_MAQUINA item = Mapper.Map<EmpresaMaquinaViewModel, EMPRESA_MAQUINA>(vm);
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
-                    Int32 volta = baseApp.ValidateCreateMaquina(item);
-                    
+                    Int32 volta = baseApp.ValidateCreateMaquina(item, idAss);
+
                     // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensEmpresa"] = 20;
+                        return RedirectToAction("IncluirEmpresaMaquina", "Empresa");
+                    }
+
+                    // Retorna
                     return RedirectToAction("VoltarAnexoEmpresa");
                 }
                 catch (Exception ex)
@@ -407,6 +425,37 @@ namespace ERP_Condominios_Solution.Controllers
             var forn = baseApp.GetRegimeById(id);
             var hash = new Hashtable();
             hash.Add("aliquota", forn.RETR_VL_ALIQUOTA);
+            return Json(hash);
+        }
+
+        [HttpPost]
+        public JsonResult PesquisaCEP_Javascript(String cep, int tipoEnd)
+        {
+            // Chama servico ECT
+            ZipCodeLoad zipLoad = new ZipCodeLoad();
+            ZipCodeInfo end = new ZipCodeInfo();
+            ZipCode zipCode = null;
+            cep = CrossCutting.ValidarNumerosDocumentos.RemoveNaoNumericos(cep);
+            if (ZipCode.TryParse(cep, out zipCode))
+            {
+                end = zipLoad.Find(zipCode);
+            }
+
+            // Atualiza
+            var hash = new Hashtable();
+
+            if (tipoEnd == 1)
+            {
+                hash.Add("EMPR_NM_ENDERECO", end.Address);
+                hash.Add("EMPR_NM_UMERO", end.Complement);
+                hash.Add("EMPR_NM_BAIRRO", end.District);
+                hash.Add("EMPR_NM_CIDADE", end.City);
+                hash.Add("UF_CD_ID", baseApp.GetUFbySigla(end.Uf).UF_CD_ID);
+                hash.Add("EMPR_NR_CEP", cep);
+            }
+
+            // Retorna
+            Session["VoltaCEP"] = 2;
             return Json(hash);
         }
 

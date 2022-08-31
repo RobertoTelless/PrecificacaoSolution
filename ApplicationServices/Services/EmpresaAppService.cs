@@ -45,6 +45,17 @@ namespace ApplicationServices.Services
             return item;
         }
 
+        public List<UF> GetAllUF()
+        {
+            List<UF> lista = _baseService.GetAllUF();
+            return lista;
+        }
+
+        public UF GetUFbySigla(String sigla)
+        {
+            return _baseService.GetUFbySigla(sigla);
+        }
+
         public EMPRESA_ANEXO GetAnexoById(Int32 id)
         {
             EMPRESA_ANEXO lista = _baseService.GetAnexoById(id);
@@ -257,10 +268,17 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreateMaquina(EMPRESA_MAQUINA item)
+        public Int32 ValidateCreateMaquina(EMPRESA_MAQUINA item, Int32 idAss)
         {
             try
             {
+                // Verifica existencia
+                EMPRESA_MAQUINA volta1 = _baseService.CheckExistMaquina(item, idAss);
+                if (volta1 != null)
+                {
+                    return 1;
+                }
+
                 // Persiste
                 Int32 volta = _baseService.CreateMaquina(item);
                 return volta;

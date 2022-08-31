@@ -26,7 +26,10 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<REGIME_TRIBUTARIO> GetAllRegimes();
         EMPRESA_ANEXO GetAnexoById(Int32 id);
         REGIME_TRIBUTARIO GetRegimeById(Int32 id);
+        List<UF> GetAllUF();
+        UF GetUFbySigla(String sigla);
 
+        EMPRESA_MAQUINA CheckExistMaquina(EMPRESA_MAQUINA item, Int32 idAss);
         EMPRESA_MAQUINA GetMaquinaById(Int32 id);
         Int32 EditMaquina(EMPRESA_MAQUINA item);
         Int32 CreateMaquina(EMPRESA_MAQUINA item);

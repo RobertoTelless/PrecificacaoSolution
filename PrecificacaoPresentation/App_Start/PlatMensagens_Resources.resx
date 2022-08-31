@@ -591,4 +591,7 @@
   <data name="M0179" xml:space="preserve">
     <value>Impossível excluir esta categoria. Existem registros vinculados a ela</value>
   </data>
+  <data name="M0180" xml:space="preserve">
+    <value>Máquina de cartão já associada à empresa</value>
+  </data>
 </root>

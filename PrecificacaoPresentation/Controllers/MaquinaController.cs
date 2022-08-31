@@ -73,7 +73,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            return RedirectToAction("MontarTelaEmpresa", "Empresa");
+            return RedirectToAction("MontarTelaDashboardCadastros", "BaseAdmin");
         }
 
         [HttpGet]
@@ -137,7 +137,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Abre view
             Session["MensMaquina"] = 0;
-            Session["VoltaMaquina"] = 1;
+            Session["VoltarMaquina"] = 1;
             objeto = new MAQUINA();
             return View(objeto);
         }

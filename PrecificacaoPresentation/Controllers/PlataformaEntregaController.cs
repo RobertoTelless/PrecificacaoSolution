@@ -73,7 +73,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            return RedirectToAction("MontarTelaEmpresa", "Empresa");
+            return RedirectToAction("MontarTelaDashboardCadastros", "BaseAdmin");
         }
 
         [HttpGet]

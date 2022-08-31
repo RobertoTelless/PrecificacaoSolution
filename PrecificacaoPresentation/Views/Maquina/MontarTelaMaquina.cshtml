@@ -34,7 +34,7 @@
                 <a href="@Url.Action("CarregarAdmin", "BaseAdmin")">Dashboard</a>
             </li>
             <li>
-                <a href="@Url.Action("MontarTelaEmpresa", "Empresa")">Configuração da Empresa</a>
+                <a href="@Url.Action("MontarTelaDashboardCadastros", "BaseAdmin")">Cadastros</a>
             </li>
             <li class="active">
                 <strong>Máquinas de Cartão</strong>
@@ -70,7 +70,7 @@
                                         @Html.ButtonLinkIndex(text: "Incluir Nova Máquina de Cartão", controller: "Maquina", action: "IncluirMaquina", buttonClass: "primary")
                                     }
                                     @Html.ButtonLinkIndex(text: "Retirar Filtro", controller: "Maquina", action: "RetirarFiltroMaquina")
-                                    @Html.ButtonLinkIndex(text: "Exibir Todas", controller: "Maquina", action: "MostrarTudoMaquina")
+                                    @Html.ButtonLinkIndex(text: "Mostrar Todas", controller: "Maquina", action: "MostrarTudoMaquina")
                                     @Html.ButtonLinkIndex(text: "Voltar", controller: "Maquina", action: "VoltarDash")
                                 </div>
                             </div>
@@ -98,6 +98,7 @@
                                         <th>Marca</th>
                                         <th>Perc.Débito (%)</th>
                                         <th>Perc.Crédito (%)</th>
+                                        <th>Perc.Antecipação (%)</th>
                                         <th class="td-one-action">Ações</th>
                                     </tr>
                                 </thead>
@@ -109,6 +110,7 @@
                                             <td>@cond.MAQN_NM_PROVEDOR</td>
                                             <td>@CrossCutting.Formatters.DecimalFormatter(cond.MAQN_PC_DEBITO)</td>
                                             <td>@CrossCutting.Formatters.DecimalFormatter(cond.MAQN_PC_CREDITO)</td>
+                                            <td>@CrossCutting.Formatters.DecimalFormatter(cond.MAQN_PC_ANTECIPACAO.Value)</td>
                                             <td class="td-one-action">
                                                 @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
                                                 {

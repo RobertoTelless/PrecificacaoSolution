@@ -13,6 +13,14 @@ namespace DataServices.Repositories
 {
     public class EmpresaMaquinaRepository : RepositoryBase<EMPRESA_MAQUINA>, IEmpresaMaquinaRepository
     {
+        public EMPRESA_MAQUINA CheckExist(EMPRESA_MAQUINA tarefa, Int32 idUsu)
+        {
+            IQueryable<EMPRESA_MAQUINA> query = Db.EMPRESA_MAQUINA;
+            query = query.Where(p => p.EMPR_CD_ID == tarefa.EMPR_CD_ID);
+            query = query.Where(p => p.MAQN_CD_ID == tarefa.MAQN_CD_ID);
+            return query.FirstOrDefault();
+        }
+
         public List<EMPRESA_MAQUINA> GetAllItens()
         {
             return Db.EMPRESA_MAQUINA.ToList();

@@ -24,11 +24,13 @@ namespace ApplicationServices.Interfaces
         List<MAQUINA> GetAllMaquinas(Int32 idAss);
         List<REGIME_TRIBUTARIO> GetAllRegimes();
         EMPRESA_ANEXO GetAnexoById(Int32 id);
+        List<UF> GetAllUF();
+        UF GetUFbySigla(String sigla);
 
         EMPRESA_MAQUINA GetMaquinaById(Int32 id);
         REGIME_TRIBUTARIO GetRegimeById(Int32 id);
         Int32 ValidateEditMaquina(EMPRESA_MAQUINA item);
-        Int32 ValidateCreateMaquina(EMPRESA_MAQUINA item);
+        Int32 ValidateCreateMaquina(EMPRESA_MAQUINA item, Int32 idAss);
         EMPRESA_MAQUINA GetByEmpresaMaquina(Int32 empresa, Int32 maquina);
     }
 }

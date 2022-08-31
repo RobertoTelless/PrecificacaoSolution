@@ -29,7 +29,7 @@
                 <div class="ibox-title">
                     <h5>Máquina de Cartão - Associação</h5>
                 </div>
-                @using (Html.BeginForm("IncluirEmpresaMaquina", "Maquina", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
+                @using (Html.BeginForm("IncluirEmpresaMaquina", "Empresa", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                 {
                     <div class="ibox-content">
                         @Html.AntiForgeryToken()

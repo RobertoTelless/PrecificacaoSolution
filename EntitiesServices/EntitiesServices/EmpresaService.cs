@@ -24,9 +24,10 @@ namespace ModelServices.EntitiesServices
         private readonly IRegimeTributarioRepository _regRepository;
         private readonly IEmpresaAnexoRepository _anexoRepository;
         private readonly IEmpresaMaquinaRepository _emaqRepository;
+        private readonly IUFRepository _ufRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public EmpresaService(IEmpresaRepository baseRepository, ILogRepository logRepository, IMaquinaRepository maqRepository, IRegimeTributarioRepository regRepository, IEmpresaAnexoRepository anexoRepository, IEmpresaMaquinaRepository emaqRepository) : base(baseRepository)
+        public EmpresaService(IEmpresaRepository baseRepository, ILogRepository logRepository, IMaquinaRepository maqRepository, IRegimeTributarioRepository regRepository, IEmpresaAnexoRepository anexoRepository, IEmpresaMaquinaRepository emaqRepository, IUFRepository ufRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
@@ -34,6 +35,7 @@ namespace ModelServices.EntitiesServices
             _regRepository = regRepository;
             _anexoRepository = anexoRepository;
             _emaqRepository = emaqRepository;
+            _ufRepository = ufRepository;
         }
 
         public EMPRESA GetItemById(Int32 id)
@@ -56,6 +58,22 @@ namespace ModelServices.EntitiesServices
         {
             EMPRESA item = _baseRepository.CheckExist(conta, idAss);
             return item;
+        }
+
+        public EMPRESA_MAQUINA CheckExistMaquina(EMPRESA_MAQUINA conta, Int32 idAss)
+        {
+            EMPRESA_MAQUINA item = _emaqRepository.CheckExist(conta, idAss);
+            return item;
+        }
+
+        public List<UF> GetAllUF()
+        {
+            return _ufRepository.GetAllItens();
+        }
+
+        public UF GetUFbySigla(String sigla)
+        {
+            return _ufRepository.GetItemBySigla(sigla);
         }
 
         public EMPRESA_ANEXO GetAnexoById(Int32 id)

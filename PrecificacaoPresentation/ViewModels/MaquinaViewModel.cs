@@ -21,6 +21,8 @@ namespace ERP_Condominios_Solution.ViewModels
         public decimal MAQN_PC_DEBITO { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public decimal MAQN_PC_CREDITO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public decimal MAQN_PC_ANTECIPACAO { get; set; }
         [DataType(DataType.Date, ErrorMessage = "DATA DE VALIDADE Deve ser uma data válida")]
         public System.DateTime MAQN_DT_CADASTRO { get; set; }
         public int MAQN_IN_ATIVO { get; set; }
