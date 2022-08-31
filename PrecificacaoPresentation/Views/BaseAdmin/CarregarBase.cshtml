@@ -87,7 +87,9 @@
                             </div>
                         </div>
                     </div>
-                    @Html.ButtonLinkIndex(text: "Cadastros", action: "MontarTelaDashboardCadastros", controller: "BaseAdmin", buttonClass: "primary")                
+                    @Html.ButtonLinkIndex(text: "Configuração da Empresa", action: "MontarTelaEmpresa", controller: "Empresa", buttonClass: "primary")
+                    @Html.ButtonLinkIndex(text: "Dashboard de Cadastros", action: "MontarTelaDashboardCadastros", controller: "BaseAdmin", buttonClass: "primary")                
+                    @Html.ButtonLinkIndex(text: "Dashboard Financeiro", action: "MontarTelaDashboardFinanceiro", controller: "BaseAdmin", buttonClass: "primary")                
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-12">
@@ -128,7 +130,7 @@
                     </div>
                     @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
                     {
-                        @Html.ButtonLinkIndex(text: "Administração & Empresa", action: "MontarTelaDashboardAdministracao", controller: "BaseAdmin", buttonClass: "success")                
+                        @Html.ButtonLinkIndex(text: "Daasboard de Administração", action: "MontarTelaDashboardAdministracao", controller: "BaseAdmin", buttonClass: "success")                
                     }
                 </div>
             </div>

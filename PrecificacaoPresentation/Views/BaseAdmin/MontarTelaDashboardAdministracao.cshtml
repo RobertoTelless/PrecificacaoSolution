@@ -14,20 +14,16 @@
                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                     <br />
                     <div class="col-lg-12 col-md-12 col-xs-12">
-                        @Html.ButtonLinkIndex(text: "Empresa", action: "MontarTelaEmpresa", controller: "Empresa", buttonClass: "primary")
                         @Html.ButtonLinkIndex(text: "Usuários", action: "MontarTelaUsuario", controller: "Usuario", buttonClass: "primary")
                         @Html.ButtonLinkIndex(text: "Pessoas Externas", action: "MontarTelaPessoaExterna", controller: "PessoaExterna", buttonClass: "primary")
                         @Html.ButtonLinkIndex(text: "Auditoria", action: "MontarTelaLog", controller: "Auditoria", buttonClass: "primary")
                         @Html.ButtonLinkIndex(text: "Notificações", action: "MontarTelaNotificacaoGeral", controller: "Notificacao", buttonClass: "primary")
                         @Html.ButtonLinkIndex(text: "Notícias", action: "MontarTelaNoticia", controller: "Noticia", buttonClass: "primary")
                         @Html.ButtonLinkIndex(text: "Vídeos", action: "MontarTelaVideo", controller: "Video", buttonClass: "primary")
-                        @Html.ButtonLinkIndex(text: "Máquinas de Cartão", action: "MontarTelaMaquina", controller: "Maquina", buttonClass: "success")
-                        @Html.ButtonLinkIndex(text: "Formas de Pagto/Recto.", action: "CarregarDesenvolvimento", controller: "BaseAdmin", buttonClass: "success")
-                        @Html.ButtonLinkIndex(text: "Plataformas de Entrega", action: "MontarTelaPlataformaEntrega", controller: "PlataformaEntrega", buttonClass: "success")
                         @Html.ButtonLinkIndex(text: "Padrões de Mensagens", action: "CarregarDesenvolvimento", controller: "BaseAdmin", buttonClass: "success")
-                        @Html.ButtonLinkIndex(text: "Configuração", action: "MontarTelaConfiguracao", controller: "Configuracao", buttonClass: "success")
+                        @Html.ButtonLinkIndex(text: "Configuração Geral", action: "MontarTelaConfiguracao", controller: "Configuracao", buttonClass: "success")
                         @Html.ButtonLinkIndex(text: "Tabelas Auxiliares", action: "MontarTelaTabelasAuxiliares", controller: "BaseAdmin", buttonClass: "success")
-                        @Html.ButtonLinkIndex(text: "Dashboard", controller: "BaseAdmin", action: "VoltarDashboard")
+                        @Html.ButtonLinkIndex(text: "Voltar", controller: "BaseAdmin", action: "VoltarDashboard")
                     </div>
                     <br /><br />
                 </div>
@@ -107,11 +103,26 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
                             <span class="label label-success pull-right">Hoje</span>
+                            <h5>Usuários</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">@ViewBag.NumUsuarios</h1>
+                            <small>Usuários Cadastrados</small>
+                            <br />
+                            <br />
+                            @Html.ButtonLinkIndex(text: "Ver", controller: "Usuario", action: "MontarTelaUsuario", buttonClass: "white")
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                            <span class="label label-success pull-right">Hoje</span>
                             <h5>Pessoas Externas</h5>
                         </div>
                         <div class="ibox-content">
                             <h1 class="no-margins">@ViewBag.Pessoas</h1>
-                            <small>Contas Ativas</small>
+                            <small>Pessoas Externas</small>
                             <br />
                             <br />
                             @Html.ButtonLinkIndex(text: "Ver", controller: "PessoaExterna", action: "MontarTelaPessoaExterna", buttonClass: "white")
@@ -120,7 +131,7 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:darkseagreen; color:darkblue">
+                        <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
                             <span class="label label-success pull-right">Hoje</span>
                             <h5>Notícias</h5>
                         </div>
@@ -135,7 +146,7 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:darkseagreen; color:darkblue">
+                        <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
                             <span class="label label-success pull-right">Hoje</span>
                             <h5>Vídeos</h5>
                         </div>
@@ -145,36 +156,6 @@
                             <br />
                             <br />
                             @Html.ButtonLinkIndex(text: "Ver", controller: "Video", action: "MontarTelaVideo", buttonClass: "white")
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:goldenrod; color:brown">
-                            <span class="label label-success pull-right">Hoje</span>
-                            <h5>Máquinas</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">@ViewBag.Maquinas</h1>
-                            <small>Máquinas de Cartão</small>
-                            <br />
-                            <br />
-                            @Html.ButtonLinkIndex(text: "Ver", controller: "Maquina", action: "MontarTelaMaquina", buttonClass: "white")
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:goldenrod; color:brown">
-                            <span class="label label-success pull-right">Hoje</span>
-                            <h5>Formas Pag/Rec</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">@ViewBag.FormasPagRec</h1>
-                            <small>Formas de Pag/Rec</small>
-                            <br />
-                            <br />
-                            @Html.ButtonLinkIndex(text: "Ver", controller: "FormaPagRec", action: "MontarTelaFormaPagRec", buttonClass: "white")
                         </div>
                     </div>
                 </div>

@@ -3041,6 +3041,15 @@
     <Content Include="Views\Cliente\EnviarSMSContato.cshtml" />
     <Content Include="Views\Cliente\MontarTelaIndicadoresCliente.cshtml" />
     <Content Include="Views\Empresa\IncluirEmpresaMaquina.cshtml" />
+    <Content Include="Views\BaseAdmin\MontarTelaDashboardFinanceiro.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaCatCliente.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirCatCliente.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\VerCatCliente.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarCatCliente.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaCatFornecedor.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirCatFornecedor.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\VerCatFornecedor.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarCatFornecedor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

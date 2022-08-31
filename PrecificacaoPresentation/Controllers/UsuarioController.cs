@@ -2118,5 +2118,25 @@ namespace ERP_Condominios_Solution.Controllers
             return 0;
         }
 
+        public ActionResult IncluirCargo()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaCargo"] = 2;
+            return RedirectToAction("IncluirCargo", "TabelaAuxiliar");
+        }
+
+        public ActionResult IncluirCargo1()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaCargo"] = 3;
+            return RedirectToAction("IncluirCargo", "TabelaAuxiliar");
+        }
+
     }
 }

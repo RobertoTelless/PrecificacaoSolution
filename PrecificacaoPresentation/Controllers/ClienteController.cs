@@ -636,7 +636,27 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("MontarTelaCliente");
         }
 
-       [HttpGet]
+        public ActionResult IncluirCatCliente()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaCatCliente"] = 2;
+            return RedirectToAction("IncluirCatCliente", "TabelaAuxiliar");
+        }
+
+        public ActionResult IncluirCatCliente1()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaCatCliente"] = 3;
+            return RedirectToAction("IncluirCatCliente", "TabelaAuxiliar");
+        }
+
+        [HttpGet]
         public ActionResult IncluirCliente()
         {
             // Verifica se tem usuario logado

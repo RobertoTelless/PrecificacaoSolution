@@ -212,7 +212,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            return RedirectToAction("MontarTelaDashboardAdministracao", "BaseAdmin");
+            return RedirectToAction("CarregarBase", "BaseAdmin");
         }
 
         [HttpGet]
@@ -401,5 +401,14 @@ namespace ERP_Condominios_Solution.Controllers
                 return View(vm);
             }
         }
+
+        public JsonResult GetRegime(Int32 id)
+        {
+            var forn = baseApp.GetRegimeById(id);
+            var hash = new Hashtable();
+            hash.Add("aliquota", forn.RETR_VL_ALIQUOTA);
+            return Json(hash);
+        }
+
     }
 }

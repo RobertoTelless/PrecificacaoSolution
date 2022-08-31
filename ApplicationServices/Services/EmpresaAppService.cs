@@ -57,6 +57,12 @@ namespace ApplicationServices.Services
             return lista;
         }
 
+        public REGIME_TRIBUTARIO GetRegimeById(Int32 id)
+        {
+            REGIME_TRIBUTARIO lista = _baseService.GetRegimeById(id);
+            return lista;
+        }
+
         public Int32 ExecuteFilter(String nome, Int32 idAss, out List<EMPRESA> objeto)
         {
             try

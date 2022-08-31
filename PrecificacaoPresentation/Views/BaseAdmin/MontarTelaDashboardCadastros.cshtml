@@ -13,12 +13,10 @@
                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                     <br />
                     <div class="col-lg-12 col-md-12 col-xs-12">
-                        @Html.ButtonLinkIndex(text: "Planos de Contas", action: "MontarTelaCC", controller: "CentroCusto", buttonClass: "primary")
-                        @Html.ButtonLinkIndex(text: "Bancos & Contas", action: "MontarTelaBanco", controller: "Banco", buttonClass: "primary")
-                        @Html.ButtonLinkIndex(text: "Clientes", action: "CarregarDesenvolvimento", controller: "BaseAdmin", buttonClass: "success")
+                        @Html.ButtonLinkIndex(text: "Clientes", action: "MontarTelaCliente", controller: "Cliente", buttonClass: "success")
                         @Html.ButtonLinkIndex(text: "Fornecedores", action: "MontarTelaFornecedor", controller: "Fornecedor", buttonClass: "success")
                         @Html.ButtonLinkIndex(text: "Produtos", action: "CarregarDesenvolvimento", controller: "BaseAdmin", buttonClass: "success")
-                        @Html.ButtonLinkIndex(text: "Dashboard Inicial", action: "CarregarBase", controller: "BaseAdmin", buttonClass: "warning")
+                        @Html.ButtonLinkIndex(text: "Voltar", controller: "BaseAdmin", action: "VoltarDashboard")
                     </div>
                     <br /><br />
                 </div>
@@ -47,20 +45,6 @@
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <small class="stats-label">Plano de Contas</small>
-                                    <h4>@ViewBag.Planos</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Bancos</small>
-                                    <h4>@ViewBag.Bancos</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Contas Bancárias</small>
-                                    <h4>@ViewBag.Contas</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-4">
                                     <small class="stats-label">Clientes</small>
                                     <h4>@ViewBag.Clientes</h4>
                                 </div>
@@ -83,52 +67,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
-                            <span class="label label-success pull-right">Hoje</span>
-                            <h5>Plano de Contas</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">@ViewBag.Planos</h1>
-                            <small>Contas Ativas</small>
-                            <br />
-                            <br />
-                            @Html.ButtonLinkIndex(text: "Ver", controller: "PlanoConta", action: "MontarTelaPlanoConta", buttonClass: "white")
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
-                            <span class="label label-success pull-right">Hoje</span>
-                            <h5>Bancos</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">@ViewBag.Bancos</h1>
-                            <small>Bancos</small>
-                            <br />
-                            <br />
-                            @Html.ButtonLinkIndex(text: "Ver", controller: "Banco", action: "MontarTelaBanco", buttonClass: "white")
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
-                            <span class="label label-success pull-right">Hoje</span>
-                            <h5>Contas Bancárias</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">@ViewBag.Contas</h1>
-                            <small>Contas Ativas</small>
-                            <br />
-                            <br />
-                            @Html.ButtonLinkIndex(text: "Ver", controller: "Banco", action: "MontarTelaBanco", buttonClass: "white")
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:goldenrod; color:brown">
+                        <div class="ibox-title"  style="background-color: darkseagreen; color: darkgreen">
                             <span class="label label-success pull-right">Hoje</span>
                             <h5>Clientes</h5>
                         </div>
@@ -143,7 +82,7 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:goldenrod; color:brown">
+                        <div class="ibox-title"  style="background-color:darkseagreen; color:darkgreen">
                             <span class="label label-success pull-right">Hoje</span>
                             <h5>Fornecedores</h5>
                         </div>
@@ -158,7 +97,7 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title"  style="background-color:olivedrab; color:brown">
+                        <div class="ibox-title"  style="background-color:darkseagreen; color:darkgreen">
                             <span class="label label-success pull-right">Hoje</span>
                             <h5>Produtos</h5>
                         </div>
@@ -172,35 +111,10 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
-                        <div class="ibox-title">
-                            <h4>Plano de Conta por Tipo</h4>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="row">
-                                <canvas id="doughnutChartPlanoTipo" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
-                        <div class="ibox-title">
-                            <h4>Contas Bancárias por Tipo</h4>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="row">
-                                <canvas id="doughnutChartContaTipo" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Fornecedores por UF</h4>
                         </div>
@@ -212,7 +126,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Fornecedores por Cidade</h4>
                         </div>
@@ -224,7 +138,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Fornecedores por Categoria</h4>
                         </div>
@@ -238,7 +152,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Clientes por UF</h4>
                         </div>
@@ -250,7 +164,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Clientes por Cidade</h4>
                         </div>
@@ -262,7 +176,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Clientes por Categoria</h4>
                         </div>
@@ -276,7 +190,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Fornecedores por UF</h4>
                         </div>
@@ -307,7 +221,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Fornecedores por UF</h4>
                         </div>
@@ -321,7 +235,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Fornecedores por Cidade</h4>
                         </div>
@@ -352,7 +266,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Fornecedores por Cidade</h4>
                         </div>
@@ -367,7 +281,7 @@
        
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Clientes por UF</h4>
                         </div>
@@ -398,7 +312,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Clientes por UF</h4>
                         </div>
@@ -412,7 +326,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Clientes por Cidade</h4>
                         </div>
@@ -443,7 +357,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkgreen; border-bottom-width: 2px; border-left: solid; border-left-color: darkgreen; border-left-width: 1px; border-right: solid; border-right-color: darkgreen; border-right-width: 1px; border-top: solid; border-top-color: darkgreen; border-top-width: 1px">
                         <div class="ibox-title">
                             <h4>Clientes por Cidade</h4>
                         </div>
@@ -483,54 +397,6 @@
     @Scripts.Render("~/plugins/chartjs")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
 
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $.ajax({
-                url: '../BaseAdmin/GetDadosGraficoPlanoTipo'
-                , type: 'POST'
-                , success: function (result) {
-                var doughnutData = {
-                   labels: result.labels,
-                   datasets: [{
-                     data: result.valores,
-                     backgroundColor: result.cores
-                   }]
-                };
-                var doughnutOptions = {
-                   responsive: true
-                };
-                var ctx4 = document.getElementById("doughnutChartPlanoTipo").getContext("2d");
-                new Chart(ctx4, { type: 'doughnut', data: doughnutData, options: doughnutOptions });
-              }
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $.ajax({
-                url: '../BaseAdmin/GetDadosGraficoContaTipo'
-                , type: 'POST'
-                , success: function (result) {
-                var doughnutData = {
-                   labels: result.labels,
-                   datasets: [{
-                     data: result.valores,
-                     backgroundColor: result.cores
-                   }]
-                };
-                var doughnutOptions = {
-                   responsive: true
-                };
-                var ctx4 = document.getElementById("doughnutChartContaTipo").getContext("2d");
-                new Chart(ctx4, { type: 'doughnut', data: doughnutData, options: doughnutOptions });
-              }
-            });
-        });
-    </script>
     <script type="text/javascript">
         $(document).ready(function () {
 

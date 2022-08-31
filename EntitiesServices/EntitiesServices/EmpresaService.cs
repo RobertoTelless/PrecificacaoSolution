@@ -187,6 +187,11 @@ namespace ModelServices.EntitiesServices
             return _emaqRepository.GetItemById(id);
         }
 
+        public REGIME_TRIBUTARIO GetRegimeById(Int32 id)
+        {
+            return _regRepository.GetItemById(id);
+        }
+
         public Int32 EditMaquina(EMPRESA_MAQUINA item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))

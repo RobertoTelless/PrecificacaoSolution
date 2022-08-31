@@ -579,4 +579,16 @@
   <data name="M0175" xml:space="preserve">
     <value>Impossível excluir este cliente. Existem registros vinculados a ele</value>
   </data>
+  <data name="M0176" xml:space="preserve">
+    <value>Categoria de cliente já cadastrada</value>
+  </data>
+  <data name="M0177" xml:space="preserve">
+    <value>Impossível excluir esta categoria. Existem registros vinculados a ela</value>
+  </data>
+  <data name="M0178" xml:space="preserve">
+    <value>Categoria de fornecedor já cadastrada</value>
+  </data>
+  <data name="M0179" xml:space="preserve">
+    <value>Impossível excluir esta categoria. Existem registros vinculados a ela</value>
+  </data>
 </root>

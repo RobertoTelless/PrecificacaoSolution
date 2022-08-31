@@ -1445,5 +1445,41 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0175", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria de cliente já cadastrada.
+        /// </summary>
+        internal static string M0176 {
+            get {
+                return ResourceManager.GetString("M0176", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta categoria. Existem registros vinculados a ela.
+        /// </summary>
+        internal static string M0177 {
+            get {
+                return ResourceManager.GetString("M0177", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria de fornecedor já cadastrada.
+        /// </summary>
+        internal static string M0178 {
+            get {
+                return ResourceManager.GetString("M0178", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta categoria. Existem registros vinculados a ela.
+        /// </summary>
+        internal static string M0179 {
+            get {
+                return ResourceManager.GetString("M0179", resourceCulture);
+            }
+        }
     }
 }

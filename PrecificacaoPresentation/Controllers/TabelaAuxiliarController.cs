@@ -30,6 +30,9 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly ILogAppService logApp;
         private readonly IGrupoCCAppService gruApp;
         private readonly ISubgrupoAppService subApp;
+        private readonly ICategoriaClienteAppService ccApp;
+        private readonly ICategoriaFornecedorAppService cfApp;
+
         CARGO_USUARIO objetoCargo = new CARGO_USUARIO();
         CARGO_USUARIO objetoAntesCargo = new CARGO_USUARIO();
         List<CARGO_USUARIO> listaMasterCargo = new List<CARGO_USUARIO>();
@@ -39,14 +42,22 @@ namespace ERP_Condominios_Solution.Controllers
         SUBGRUPO_PLANO_CONTA objetoSubgrupo = new SUBGRUPO_PLANO_CONTA();
         SUBGRUPO_PLANO_CONTA objetoAntesSubgrupo = new SUBGRUPO_PLANO_CONTA();
         List<SUBGRUPO_PLANO_CONTA> listaMasterSubgrupo = new List<SUBGRUPO_PLANO_CONTA>();
+        CATEGORIA_CLIENTE objetoCatCliente = new CATEGORIA_CLIENTE();
+        CATEGORIA_CLIENTE objetoAntesCatCliente = new CATEGORIA_CLIENTE();
+        List<CATEGORIA_CLIENTE> listaMasterCatCliente = new List<CATEGORIA_CLIENTE>();
+        CATEGORIA_FORNECEDOR objetoCatFornecedor = new CATEGORIA_FORNECEDOR();
+        CATEGORIA_FORNECEDOR objetoAntesCatFornecedor= new CATEGORIA_FORNECEDOR();
+        List<CATEGORIA_FORNECEDOR> listaMasterCatFornecedor= new List<CATEGORIA_FORNECEDOR>();
         String extensao;
 
-        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps)
+        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps)
         {
             carApp = carApps;
             logApp = logApps;
             gruApp = gruApps;
             subApp = subApps;
+            ccApp = ccApps;
+            cfApp = cfApps;
         }
 
         [HttpGet]
@@ -142,6 +153,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
 
             // Abre view
+            Session["VoltaCargo"] = 1;
             Session["MensCargo"] = 0;
             objetoCargo = new CARGO_USUARIO();
             return View(objetoCargo);
@@ -178,6 +190,14 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaCargo"] == 2)
+            {
+                return RedirectToAction("IncluirUsuario", "Usuario");
+            }
+            if ((Int32)Session["VoltaCargo"] == 3)
+            {
+                return RedirectToAction("VoltarAnexoUsuario", "Usuario");
+            }
             return RedirectToAction("MontarTelaCargo");
         }
 
@@ -1090,8 +1110,686 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("MontarTelaSubgrupo");
         }
 
-    
-    
+        [HttpGet]
+        public ActionResult MontarTelaCatCliente()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaCatCliente"] == null)
+            {
+                listaMasterCatCliente= ccApp.GetAllItens(idAss);
+                Session["ListaCatCliente"] = listaMasterCatCliente;
+            }
+            ViewBag.Listas = (List<CATEGORIA_CLIENTE>)Session["ListaCatCliente"];
+            ViewBag.Title = "CatCliente";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.Cargo = ((List<CATEGORIA_CLIENTE>)Session["ListaCatCliente"]).Count;
+
+            if (Session["MensCatCliente"] != null)
+            {
+                if ((Int32)Session["MensCatCliente"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0176", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCatCliente"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCatCliente"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0177", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["VoltaCatCliente"] = 1;
+            Session["MensCatCliente"] = 0;
+            objetoCatCliente = new CATEGORIA_CLIENTE();
+            return View(objetoCatCliente);
+        }
+
+        public ActionResult RetirarFiltroCatCliente()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["ListaCatCliente"] = null;
+            Session["FiltroCatCliente"] = null;
+            return RedirectToAction("MontarTelaCatCliente");
+        }
+
+        public ActionResult MostrarTudoCatCliente()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterCatCliente= ccApp.GetAllItensAdm(idAss);
+            Session["FiltroCatCliente"] = null;
+            Session["ListaCatCliente"] = listaMasterCatCliente;
+            return RedirectToAction("MontarTelaCatCliente");
+        }
+
+        public ActionResult VoltarBaseCatCliente()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaCatCliente"] == 2)
+            {
+                return RedirectToAction("IncluirCliente", "Cliente");
+            }
+            if ((Int32)Session["VoltaCatCliente"] == 3)
+            {
+                return RedirectToAction("VoltarAnexoCliente", "Cliente");
+            }
+            return RedirectToAction("MontarTelaCatCliente");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirCatCliente()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            CATEGORIA_CLIENTE item = new CATEGORIA_CLIENTE();
+            CategoriaClienteViewModel vm = Mapper.Map<CATEGORIA_CLIENTE, CategoriaClienteViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.CACL_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirCatCliente(CategoriaClienteViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    CATEGORIA_CLIENTE item = Mapper.Map<CategoriaClienteViewModel, CATEGORIA_CLIENTE>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = ccApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensCatCliente"] = 3;
+                        return RedirectToAction("MontarTelaCatCliente");
+                    }
+                    Session["IdVolta"] = item.CACL_CD_ID;
+
+                    // Sucesso
+                    listaMasterCatCliente= new List<CATEGORIA_CLIENTE>();
+                    Session["ListaCatCliente"] = null;
+                    return RedirectToAction("VoltarBaseCatCliente");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VerCatCliente(Int32 id)
+        {
+            
+            // Prepara view
+            CATEGORIA_CLIENTE item = ccApp.GetItemById(id);
+            Session["CatCliente"] = item;
+            Session["IdCatCliente"] = id;
+            CategoriaClienteViewModel vm = Mapper.Map<CATEGORIA_CLIENTE, CategoriaClienteViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult EditarCatCliente(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            CATEGORIA_CLIENTE item = ccApp.GetItemById(id);
+            objetoAntesCatCliente= item;
+            Session["CatCliente"] = item;
+            Session["IdCatCliente"] = id;
+            CategoriaClienteViewModel vm = Mapper.Map<CATEGORIA_CLIENTE, CategoriaClienteViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarCatCliente(CategoriaClienteViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    CATEGORIA_CLIENTE item = Mapper.Map<CategoriaClienteViewModel, CATEGORIA_CLIENTE>(vm);
+                    Int32 volta = ccApp.ValidateEdit(item, objetoAntesCatCliente, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterCatCliente= new List<CATEGORIA_CLIENTE>();
+                    Session["ListaCatCliente"] = null;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirCatCliente(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            CATEGORIA_CLIENTE item = ccApp.GetItemById(id);
+            item.CACL_IN_ATIVO = 0;
+            Int32 volta = ccApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensCatCliente"] = 4;
+                return RedirectToAction("MontarTelaCatCliente");
+            }
+            listaMasterCatCliente = new List<CATEGORIA_CLIENTE>();
+            Session["ListaCatCliente"] = null;
+            return RedirectToAction("MontarTelaCatCliente");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarCatCliente(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            CATEGORIA_CLIENTE item = ccApp.GetItemById(id);
+            item.CACL_IN_ATIVO = 1;
+            Int32 volta = ccApp.ValidateReativar(item, usuario);
+            listaMasterCatCliente = new List<CATEGORIA_CLIENTE>();
+            Session["ListaCatCliente"] = null;
+            return RedirectToAction("MontarTelaCatCliente");
+        }
+
+        [HttpGet]
+        public ActionResult MontarTelaCatFornecedor()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaCatFornecedor"] == null)
+            {
+                listaMasterCatFornecedor= cfApp.GetAllItens(idAss);
+                Session["ListaCatFornecedor"] = listaMasterCatFornecedor;
+            }
+            ViewBag.Listas = (List<CATEGORIA_FORNECEDOR>)Session["ListaCatFornecedor"];
+            ViewBag.Title = "CatFornecedor";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.Cargo = ((List<CATEGORIA_FORNECEDOR >)Session["ListaCatFornecedor"]).Count;
+
+            if (Session["MensCatFornecedor"] != null)
+            {
+                if ((Int32)Session["MensCatFornecedor"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0178", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCatFornecedor"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCatFornecedor"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0179", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["VoltaCatFornecedor"] = 1;
+            Session["MensCatFornecedor"] = 0;
+            objetoCatFornecedor = new CATEGORIA_FORNECEDOR();
+            return View(objetoCatFornecedor);
+        }
+
+        public ActionResult RetirarFiltroCatFornecedor()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["ListaCatFornecedor"] = null;
+            Session["FiltroCatFornecedor"] = null;
+            return RedirectToAction("MontarTelaCatFornecedor");
+        }
+
+        public ActionResult MostrarTudoCatFornecedor()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterCatFornecedor = cfApp.GetAllItensAdm(idAss);
+            Session["FiltroCatFornecedor"] = null;
+            Session["ListaCatFornecedor"] = listaMasterCatFornecedor;
+            return RedirectToAction("MontarTelaCatFornecedor");
+        }
+
+        public ActionResult VoltarBaseCatFornecedor()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaCatFornecedor"] == 2)
+            {
+                return RedirectToAction("IncluirFornecedor", "Fornecedor");
+            }
+            if ((Int32)Session["VoltaCatFornecedor"] == 3)
+            {
+                return RedirectToAction("VoltarAnexoFornecedor", "Fornecedor");
+            }
+            return RedirectToAction("MontarTelaCatFornecedor");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirCatFornecedor()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatFornecedor");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            CATEGORIA_FORNECEDOR item = new CATEGORIA_FORNECEDOR();
+            CategoriaFornecedorViewModel vm = Mapper.Map<CATEGORIA_FORNECEDOR, CategoriaFornecedorViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.CAFO_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirCatFornecedor(CategoriaFornecedorViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    CATEGORIA_FORNECEDOR item = Mapper.Map<CategoriaFornecedorViewModel, CATEGORIA_FORNECEDOR>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = cfApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensCatFornecedor"] = 3;
+                        return RedirectToAction("MontarTelaCatFornecedor");
+                    }
+                    Session["IdVolta"] = item.CAFO_CD_ID;
+
+                    // Sucesso
+                    listaMasterCatFornecedor = new List<CATEGORIA_FORNECEDOR>();
+                    Session["ListaCatFornecedor"] = null;
+                    return RedirectToAction("VoltarBaseCatFornecedor");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VerCatFornecedor(Int32 id)
+        {
+            
+            // Prepara view
+            CATEGORIA_FORNECEDOR item = cfApp.GetItemById(id);
+            Session["CatFornecedor"] = item;
+            Session["IdCatFornecedor"] = id;
+            CategoriaFornecedorViewModel vm = Mapper.Map<CATEGORIA_FORNECEDOR, CategoriaFornecedorViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult EditarCatFornecedor(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatFornecedor");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            CATEGORIA_FORNECEDOR item = cfApp.GetItemById(id);
+            objetoAntesCatFornecedor = item;
+            Session["CatFornecedor"] = item;
+            Session["IdCatFornecedor"] = id;
+            CategoriaFornecedorViewModel vm = Mapper.Map<CATEGORIA_FORNECEDOR, CategoriaFornecedorViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarCatFornecedor(CategoriaFornecedorViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    CATEGORIA_FORNECEDOR item = Mapper.Map<CategoriaFornecedorViewModel, CATEGORIA_FORNECEDOR>(vm);
+                    Int32 volta = cfApp.ValidateEdit(item, objetoAntesCatFornecedor, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterCatFornecedor= new List<CATEGORIA_FORNECEDOR>();
+                    Session["ListaCatFornecedor"] = null;
+                    return RedirectToAction("MontarTelaCatFornecedor");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirCatFornecedor(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatFornecedor");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            CATEGORIA_FORNECEDOR item = cfApp.GetItemById(id);
+            item.CAFO_IN_ATIVO = 0;
+            Int32 volta = cfApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensCatFornecedor"] = 4;
+                return RedirectToAction("MontarTelaCatFornecedor");
+            }
+            listaMasterCatFornecedor = new List<CATEGORIA_FORNECEDOR>();
+            Session["ListaCatFornecedor"] = null;
+            return RedirectToAction("MontarTelaCatFornecedor");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarCatFornecedor(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatFornecedor");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            CATEGORIA_FORNECEDOR item = cfApp.GetItemById(id);
+            item.CAFO_IN_ATIVO = 1;
+            Int32 volta = cfApp.ValidateReativar(item, usuario);
+            listaMasterCatFornecedor= new List<CATEGORIA_FORNECEDOR>();
+            Session["ListaCatFornecedor"] = null;
+            return RedirectToAction("MontarTelaCatFornecedor");
+        }
+
     
     }
 }

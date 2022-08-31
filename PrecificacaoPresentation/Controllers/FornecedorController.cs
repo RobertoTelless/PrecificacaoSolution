@@ -496,6 +496,16 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("IncluirCatFornecedor", "TabelaAuxiliar");
         }
 
+        public ActionResult IncluirCatFornecedor1()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaCatFornecedor"] = 3;
+            return RedirectToAction("IncluirCatFornecedor", "TabelaAuxiliar");
+        }
+
         public ActionResult VoltarDashboard()
         {
             if ((String)Session["Ativa"] == null)

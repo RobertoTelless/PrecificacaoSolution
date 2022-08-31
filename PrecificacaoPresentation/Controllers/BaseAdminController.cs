@@ -1180,5 +1180,40 @@ namespace ERP_Condominios_Solution.Controllers
             return Json(result);
         }
 
+        public ActionResult MontarTelaDashboardFinanceiro()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            UsuarioViewModel vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
+
+            // Carrega valores dos cadastros
+            List<BANCO> banco = banApp.GetAllItens(idAss);
+            Int32 bancos = banco.Count;
+            List<PLANO_CONTA> plano = ccApp.GetAllItens(idAss);
+            Int32 planos = plano.Count;
+            List<CONTA_BANCO> conta = cbApp.GetAllItens(idAss);
+            Int32 contas = conta.Count;
+
+            Session["Bancos"] = bancos;
+            Session["Planos"] = planos;
+            Session["Contas"] = contas;
+
+            ViewBag.Bancos = bancos;
+            ViewBag.Planos = planos;
+            ViewBag.Contas = contas;
+
+            Session["PlanoCredito"] = plano.Where(p => p.CECU_IN_TIPO == 1).ToList().Count;
+            Session["PlanoDebito"] = plano.Where(p => p.CECU_IN_TIPO == 2).ToList().Count;
+            Session["ContaCorrente"] = conta.Where(p => p.TICO_CD_ID == 1).ToList().Count;
+            Session["ContaPoupanca"] = conta.Where(p => p.TICO_CD_ID == 2).ToList().Count;
+            Session["ContaInvestimento"] = conta.Where(p => p.TICO_CD_ID == 3).ToList().Count;
+
+            return View(vm);
+        }
+
     }
 }

@@ -171,8 +171,13 @@
                                                         </div>
                                                         <div class="col-lg-3 col-md-3 col-xs-12">
                                                             Categoria*
-                                                            @Html.DropDownListFor(m => m.CAFO_CD_ID, (SelectList)ViewBag.Cats, "Selecionar", new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.CAFO_CD_ID, "", new { @style = "color:red" })
+                                                            <div class="input-group">
+                                                                @Html.DropDownListFor(m => m.CAFO_CD_ID, (SelectList)ViewBag.Cats, "Selecionar", new { @class = "form-control", autofocus = true })
+                                                                @Html.ValidationMessageFor(m => m.CAFO_CD_ID, "", new { @style = "color:red" })
+                                                                <span class="input-group-addon">
+                                                                    @Html.TableLinkAction("IncluirCatFornecedor1", "Fornecedor", null, "glyphicon glyphicon-plus", "Adicionar Categoria")
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                         @*<div class=" col-lg-3 col-md-3 col-xs-12">
                                                             Filial*
@@ -312,8 +317,13 @@
                                                         </div>
                                                         <div class="col-lg-3 col-md-3 col-xs-12">
                                                             Categoria*
-                                                            @Html.DropDownListFor(m => m.CAFO_CD_ID, (SelectList)ViewBag.Cats, "Selecionar", new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.CAFO_CD_ID, "", new { @style = "color:red" })
+                                                            <div class="input-group">
+                                                                @Html.DropDownListFor(m => m.CAFO_CD_ID, (SelectList)ViewBag.Cats, "Selecionar", new { @class = "form-control", autofocus = true })
+                                                                @Html.ValidationMessageFor(m => m.CAFO_CD_ID, "", new { @style = "color:red" })
+                                                                <span class="input-group-addon">
+                                                                    @Html.TableLinkAction("IncluirCatFornecedor1", "Fornecedor", null, "glyphicon glyphicon-plus", "Adicionar Categoria")
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                         @*<div class=" col-lg-3 col-md-3 col-xs-12">
                                                             Filial*
