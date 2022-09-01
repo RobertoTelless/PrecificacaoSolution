@@ -24,13 +24,13 @@ namespace EntitiesServices.Model
         public int MAQN_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
         public string MAQN_NM_NOME { get; set; }
+        public string MAQN_NM_EXIBE { get; set; }
         public string MAQN_NM_PROVEDOR { get; set; }
         public decimal MAQN_PC_DEBITO { get; set; }
         public decimal MAQN_PC_CREDITO { get; set; }
+        public Nullable<decimal> MAQN_PC_ANTECIPACAO { get; set; }
         public System.DateTime MAQN_DT_CADASTRO { get; set; }
         public int MAQN_IN_ATIVO { get; set; }
-        public Nullable<decimal> MAQN_PC_ANTECIPACAO { get; set; }
-        public string MAQN_NM_EXIBE { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

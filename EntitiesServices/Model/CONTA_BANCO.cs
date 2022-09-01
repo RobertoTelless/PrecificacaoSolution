@@ -33,7 +33,6 @@ namespace EntitiesServices.Model
         public string COBA_NM_AGENCIA { get; set; }
         public string COBA_NR_CONTA { get; set; }
         public string COBA_NR_DIGITO_CONTA { get; set; }
-        public string COBA_NM_NOME_EXIBE { get; set; }
         public string COBA_NM_GERENTE { get; set; }
         public string COBA_NR_TELEFONE { get; set; }
         public System.DateTime COBA_DT_ABERTURA { get; set; }
@@ -42,6 +41,7 @@ namespace EntitiesServices.Model
         public int COBA_IN_CONTA_PADRAO { get; set; }
         public System.DateTime COBA_DT_CADASTRO { get; set; }
         public int COBA_IN_ATIVO { get; set; }
+        public string COBA_NM_NOME_EXIBE { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual BANCO BANCO { get; set; }

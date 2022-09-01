@@ -23,8 +23,8 @@ namespace EntitiesServices.Model
     
         public int RETR_CD_ID { get; set; }
         public string RETR_NM_NOME { get; set; }
-        public int RETR_IN_ATIVO { get; set; }
         public Nullable<decimal> RETR_VL_ALIQUOTA { get; set; }
+        public int RETR_IN_ATIVO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }

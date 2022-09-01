@@ -16,7 +16,7 @@ namespace EntitiesServices.Model
     {
         public int FOPR_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
-        public int EMPR_CD_ID { get; set; }
+        public Nullable<int> EMPR_CD_ID { get; set; }
         public int COBA_CD_ID { get; set; }
         public int FOPA_IN_TIPO_FORMA { get; set; }
         public string FOPR_NM_NOME_FORMA { get; set; }

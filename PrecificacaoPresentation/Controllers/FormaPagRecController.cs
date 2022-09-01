@@ -132,6 +132,16 @@ namespace ERP_Condominios_Solution.Controllers
             return View(objetoFP);
         }
 
+        public ActionResult RetirarFiltroFormaPagamento()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["ListaForma"] = null;
+            return RedirectToAction("MontarTelaFormaPagamento");
+        }
+
         public ActionResult MostrarTudoFormaPagamento()
         {
             if ((String)Session["Ativa"] == null)
@@ -139,7 +149,8 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
-            Session["ListaForma"] = null;
+            listaMasterFP = fpApp.GetAllItensAdm(idAss);
+            Session["ListaForma"] = listaMasterFP;
             return RedirectToAction("MontarTelaFormaPagamento");
         }
 
@@ -182,7 +193,7 @@ namespace ERP_Condominios_Solution.Controllers
             
             // Prepara view
             FORMA_PAGTO_RECTO item = new FORMA_PAGTO_RECTO();
-            ViewBag.Contas = new SelectList(cbApp.GetAllItens(idAss), "COBA_CD_ID", "COBA_NM_NOME_EXIBE_OLD");
+            ViewBag.Contas = new SelectList(cbApp.GetAllItens(idAss), "COBA_CD_ID", "COBA_NM_NOME_EXIBE");
             List<SelectListItem> tipo = new List<SelectListItem>();
             tipo.Add(new SelectListItem() { Text = "Pagamento", Value = "1" });
             tipo.Add(new SelectListItem() { Text = "Recebimento", Value = "2" });

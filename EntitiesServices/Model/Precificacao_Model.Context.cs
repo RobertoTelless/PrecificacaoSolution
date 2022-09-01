@@ -49,11 +49,24 @@ namespace EntitiesServices.Model
         public virtual DbSet<CONTA_BANCO_ANEXO> CONTA_BANCO_ANEXO { get; set; }
         public virtual DbSet<CONTA_BANCO_CONTATO> CONTA_BANCO_CONTATO { get; set; }
         public virtual DbSet<CONTA_BANCO_LANCAMENTO> CONTA_BANCO_LANCAMENTO { get; set; }
+        public virtual DbSet<CRM> CRM { get; set; }
+        public virtual DbSet<CRM_ACAO> CRM_ACAO { get; set; }
+        public virtual DbSet<CRM_ANEXO> CRM_ANEXO { get; set; }
+        public virtual DbSet<CRM_COMENTARIO> CRM_COMENTARIO { get; set; }
+        public virtual DbSet<CRM_CONTATO> CRM_CONTATO { get; set; }
+        public virtual DbSet<CRM_ORIGEM> CRM_ORIGEM { get; set; }
+        public virtual DbSet<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
+        public virtual DbSet<CRM_PEDIDO_VENDA_ACOMPANHAMENTO> CRM_PEDIDO_VENDA_ACOMPANHAMENTO { get; set; }
+        public virtual DbSet<CRM_PEDIDO_VENDA_ANEXO> CRM_PEDIDO_VENDA_ANEXO { get; set; }
+        public virtual DbSet<CRM_PEDIDO_VENDA_ITEM> CRM_PEDIDO_VENDA_ITEM { get; set; }
         public virtual DbSet<CUSTO_FIXO> CUSTO_FIXO { get; set; }
         public virtual DbSet<EMPRESA> EMPRESA { get; set; }
         public virtual DbSet<EMPRESA_ANEXO> EMPRESA_ANEXO { get; set; }
+        public virtual DbSet<EMPRESA_MAQUINA> EMPRESA_MAQUINA { get; set; }
         public virtual DbSet<FICHA_TECNICA> FICHA_TECNICA { get; set; }
         public virtual DbSet<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
+        public virtual DbSet<FORMA_ENVIO> FORMA_ENVIO { get; set; }
+        public virtual DbSet<FORMA_FRETE> FORMA_FRETE { get; set; }
         public virtual DbSet<FORMA_PAGTO_RECTO> FORMA_PAGTO_RECTO { get; set; }
         public virtual DbSet<FORNECEDOR> FORNECEDOR { get; set; }
         public virtual DbSet<FORNECEDOR_ANEXO> FORNECEDOR_ANEXO { get; set; }
@@ -63,6 +76,8 @@ namespace EntitiesServices.Model
         public virtual DbSet<GRUPO_PLANO_CONTA> GRUPO_PLANO_CONTA { get; set; }
         public virtual DbSet<LOG> LOG { get; set; }
         public virtual DbSet<MAQUINA> MAQUINA { get; set; }
+        public virtual DbSet<MOTIVO_CANCELAMENTO> MOTIVO_CANCELAMENTO { get; set; }
+        public virtual DbSet<MOTIVO_ENCERRAMENTO> MOTIVO_ENCERRAMENTO { get; set; }
         public virtual DbSet<NOTICIA> NOTICIA { get; set; }
         public virtual DbSet<NOTICIA_COMENTARIO> NOTICIA_COMENTARIO { get; set; }
         public virtual DbSet<NOTIFICACAO> NOTIFICACAO { get; set; }
@@ -91,11 +106,18 @@ namespace EntitiesServices.Model
         public virtual DbSet<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }
         public virtual DbSet<TEMPLATE> TEMPLATE { get; set; }
         public virtual DbSet<TEMPLATE_EMAIL> TEMPLATE_EMAIL { get; set; }
+        public virtual DbSet<TEMPLATE_PROPOSTA> TEMPLATE_PROPOSTA { get; set; }
         public virtual DbSet<TEMPLATE_SMS> TEMPLATE_SMS { get; set; }
+        public virtual DbSet<TIPO_ACAO> TIPO_ACAO { get; set; }
         public virtual DbSet<TIPO_CONTA> TIPO_CONTA { get; set; }
         public virtual DbSet<TIPO_CONTRIBUINTE> TIPO_CONTRIBUINTE { get; set; }
+        public virtual DbSet<TIPO_CRM> TIPO_CRM { get; set; }
         public virtual DbSet<TIPO_PESSOA> TIPO_PESSOA { get; set; }
         public virtual DbSet<TIPO_TAREFA> TIPO_TAREFA { get; set; }
+        public virtual DbSet<TIPO_TRANSPORTE> TIPO_TRANSPORTE { get; set; }
+        public virtual DbSet<TIPO_VEICULO> TIPO_VEICULO { get; set; }
+        public virtual DbSet<TRANSPORTADORA> TRANSPORTADORA { get; set; }
+        public virtual DbSet<TRANSPORTADORA_ANEXO> TRANSPORTADORA_ANEXO { get; set; }
         public virtual DbSet<UF> UF { get; set; }
         public virtual DbSet<UNIDADE> UNIDADE { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
@@ -103,27 +125,5 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         public virtual DbSet<VIDEO> VIDEO { get; set; }
         public virtual DbSet<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
-        public virtual DbSet<CRM> CRM { get; set; }
-        public virtual DbSet<CRM_ACAO> CRM_ACAO { get; set; }
-        public virtual DbSet<CRM_ANEXO> CRM_ANEXO { get; set; }
-        public virtual DbSet<CRM_COMENTARIO> CRM_COMENTARIO { get; set; }
-        public virtual DbSet<CRM_CONTATO> CRM_CONTATO { get; set; }
-        public virtual DbSet<CRM_ORIGEM> CRM_ORIGEM { get; set; }
-        public virtual DbSet<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
-        public virtual DbSet<CRM_PEDIDO_VENDA_ACOMPANHAMENTO> CRM_PEDIDO_VENDA_ACOMPANHAMENTO { get; set; }
-        public virtual DbSet<CRM_PEDIDO_VENDA_ANEXO> CRM_PEDIDO_VENDA_ANEXO { get; set; }
-        public virtual DbSet<CRM_PEDIDO_VENDA_ITEM> CRM_PEDIDO_VENDA_ITEM { get; set; }
-        public virtual DbSet<EMPRESA_MAQUINA> EMPRESA_MAQUINA { get; set; }
-        public virtual DbSet<FORMA_ENVIO> FORMA_ENVIO { get; set; }
-        public virtual DbSet<FORMA_FRETE> FORMA_FRETE { get; set; }
-        public virtual DbSet<MOTIVO_CANCELAMENTO> MOTIVO_CANCELAMENTO { get; set; }
-        public virtual DbSet<MOTIVO_ENCERRAMENTO> MOTIVO_ENCERRAMENTO { get; set; }
-        public virtual DbSet<TEMPLATE_PROPOSTA> TEMPLATE_PROPOSTA { get; set; }
-        public virtual DbSet<TIPO_ACAO> TIPO_ACAO { get; set; }
-        public virtual DbSet<TIPO_CRM> TIPO_CRM { get; set; }
-        public virtual DbSet<TIPO_TRANSPORTE> TIPO_TRANSPORTE { get; set; }
-        public virtual DbSet<TIPO_VEICULO> TIPO_VEICULO { get; set; }
-        public virtual DbSet<TRANSPORTADORA> TRANSPORTADORA { get; set; }
-        public virtual DbSet<TRANSPORTADORA_ANEXO> TRANSPORTADORA_ANEXO { get; set; }
     }
 }

@@ -91,10 +91,6 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            if ((Int32)Session["VoltaDash"] == 1)
-            {
-                return RedirectToAction("MontarTelaDashboardFinanceiro", "BaseAdmin");
-            }
             return RedirectToAction("MontarTelaDashboardFinanceiro", "BaseAdmin");
         }
 

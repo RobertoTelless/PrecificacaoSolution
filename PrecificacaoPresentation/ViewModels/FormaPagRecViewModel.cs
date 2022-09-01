@@ -11,7 +11,7 @@ namespace ERP_Condominios_Solution.ViewModels
     {
         [Key]
         public int FOPR_CD_ID { get; set; }
-        public int EMPR_CD_ID { get; set; }
+        public Nullable<int> EMPR_CD_ID { get; set; }
         public int COBA_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo TIPO DE FORMA obrigatorio")]
         public int FOPA_IN_TIPO_FORMA { get; set; }
