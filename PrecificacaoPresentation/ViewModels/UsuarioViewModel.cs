@@ -23,7 +23,7 @@ namespace ERP_Condominios_Solution.ViewModels
         [StringLength(50, MinimumLength = 1, ErrorMessage = "O NOME deve ter no minimo 1 e no máximo 50 caracteres.")]
         public string USUA_NM_NOME { get; set; }
         [Required(ErrorMessage = "Campo LOGIN obrigatorio")]
-        [StringLength(10, MinimumLength = 1, ErrorMessage = "O LOGIN deve ter no minimo 1 e no máximo 10 caracteres.")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "O LOGIN deve ter no minimo 1 e no máximo 50 caracteres.")]
         public string USUA_NM_LOGIN { get; set; }
         [StringLength(150, ErrorMessage = "O E-MAIL deve ter no máximo 150 caracteres.")]
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Deve ser um e-mail válido")]
