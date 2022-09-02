@@ -695,7 +695,7 @@ namespace ERP_Condominios_Solution.Controllers
             List<FORNECEDOR> forn = fornApp.GetAllItens(idAss);
             Int32 forns = forn.Count;
             List<CLIENTE> cliente = cliApp.GetAllItens(idAss);
-            Int32 clientes = forn.Count;
+            Int32 clientes = cliente.Count;
 
             Session["Bancos"] = bancos;
             Session["Planos"] = planos;
@@ -735,7 +735,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Recupera fornecedores por Cidade
             List<ModeloViewModel> lista3 = new List<ModeloViewModel>();
-            List<String> cids = forn.Select(p => p.FORN_NM_CIDADE).Distinct().ToList();
+            List<String> cids = forn.Select(p => p.FORN_NM_CIDADE.ToUpper()).Distinct().ToList();
             foreach (String item in cids)
             {
                 Int32 num = forn.Where(p => p.FORN_NM_CIDADE == item).ToList().Count;
@@ -769,7 +769,7 @@ namespace ERP_Condominios_Solution.Controllers
             ufs = fornApp.GetAllUF().ToList();
             foreach (UF item in ufs)
             {
-                Int32 num = forn.Where(p => p.UF_CD_ID == item.UF_CD_ID).ToList().Count;
+                Int32 num = cliente.Where(p => p.UF_CD_ID == item.UF_CD_ID).ToList().Count;
                 if (num > 0)
                 {
                     ModeloViewModel mod = new ModeloViewModel();

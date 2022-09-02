@@ -361,7 +361,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Listas = (List<FORNECEDOR>)Session["ListaFornecedor"];
             ViewBag.Title = "Fornecedores";
             ViewBag.Cats = new SelectList(fornApp.GetAllTipos(idAss).OrderBy(x => x.CAFO_NM_NOME), "CAFO_CD_ID", "CAFO_NM_NOME");
-            ViewBag.Tipos = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.Tipos = new SelectList(fornApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "EMPR_CD_ID", "EMPR_NM_NOME");
             ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             Session["IncluirForn"] = 0;
@@ -551,7 +551,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Prepara listas
             ViewBag.Cats = new SelectList(fornApp.GetAllTipos(idAss).OrderBy(x => x.CAFO_NM_NOME), "CAFO_CD_ID", "CAFO_NM_NOME");
-            ViewBag.Tipos = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.Tipos = new SelectList(fornApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             //ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
             Session["VoltaProp"] = 4;
@@ -562,6 +562,7 @@ namespace ERP_Condominios_Solution.Controllers
             vm.FORN_DT_CADASTRO = DateTime.Today;
             vm.FORN_IN_ATIVO = 1;
             vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.EMPR_CD_ID = null;
             return View(vm);
         }
 
@@ -574,7 +575,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
             ViewBag.Cats = new SelectList(fornApp.GetAllTipos(idAss).OrderBy(x => x.CAFO_NM_NOME), "CAFO_CD_ID", "CAFO_NM_NOME");
-            ViewBag.Tipos = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.Tipos = new SelectList(fornApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             //ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
             if (ModelState.IsValid)
@@ -704,7 +705,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Prepara view
             ViewBag.Cats = new SelectList(fornApp.GetAllTipos(idAss).OrderBy(x => x.CAFO_NM_NOME), "CAFO_CD_ID", "CAFO_NM_NOME");
-            ViewBag.Tipos = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.Tipos = new SelectList(fornApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             //ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
             ViewBag.Incluir = (Int32)Session["IncluirForn"];
@@ -729,7 +730,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
             ViewBag.Cats = new SelectList(fornApp.GetAllTipos(idAss).OrderBy(x => x.CAFO_NM_NOME), "CAFO_CD_ID", "CAFO_NM_NOME");
-            ViewBag.Tipos = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.Tipos = new SelectList(fornApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             //ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
             if (ModelState.IsValid)
@@ -919,7 +920,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Listas = (List<FORNECEDOR>)Session["ListaFornecedor"];
             ViewBag.Title = "Fornecedores";
             ViewBag.Cats = new SelectList(fornApp.GetAllTipos(idAss).OrderBy(x => x.CAFO_NM_NOME), "CAFO_CD_ID", "CAFO_NM_NOME");
-            ViewBag.Tipos = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.Tipos = new SelectList(fornApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
 
             // Indicadores
@@ -2143,7 +2144,7 @@ namespace ERP_Condominios_Solution.Controllers
             pdfDoc.Add(line1);
 
             // Observações
-            Chunk chunk1 = new Chunk("Observações: " + aten.FORN_TX_OBSERVACOES, FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK));
+            Chunk chunk1 = new Chunk("Observações: " + aten.FORN_TX_OBSERVACAO, FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK));
             pdfDoc.Add(chunk1);
 
             // Pedidos de Compra
@@ -2244,159 +2245,8 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("VoltarAnexoCliente");
         }
 
-        //public ActionResult VerPagamentosAtraso()
-        //{
-        //    if (SessionMocks.UserCredentials == null)
-        //    {
-        //        return RedirectToAction("Login", "ControleAcesso");
-        //    }
-
-        //    if (SessionMocks.listaPag == null)
-        //    {
-        //        listaMasterPag = cpApp.GetItensAtrasoFornecedor().GroupBy(x => x.FORN_CD_ID).Select(x => x.First()).ToList();
-        //        SessionMocks.listaPag = listaMasterPag;
-        //    }
-        //    if (SessionMocks.listaPag.Count == 0)
-        //    {
-        //        listaMasterPag = cpApp.GetItensAtrasoFornecedor().GroupBy(x => x.FORN_CD_ID).Select(x => x.First()).ToList();
-        //        SessionMocks.listaPag = listaMasterPag;
-        //    }
-
-        //    ViewBag.Atrasos = SessionMocks.listaCP.Select(x => x.FORN_CD_ID).Distinct().ToList().Count;
-        //    ViewBag.Perfil = SessionMocks.UserCredentials.PERFIL.PERF_SG_SIGLA;
-        //    ViewBag.Inativos = fornApp.GetAllItensAdm().Where(p => p.FORN_IN_ATIVO == 0).ToList().Count;
-        //    ViewBag.SemPedidos = SessionMocks.listaFornecedor.Where(p => p.ITEM_PEDIDO_COMPRA.Count == 0 || p.ITEM_PEDIDO_COMPRA == null).ToList().Count;
-
-        //    if (Session["MensAtrasoFornecedor"] != null)
-        //    {
-        //        if ((Int32)Session["MensAtrasoFornecedor"] == 1)
-        //        {
-        //            ModelState.AddModelError("", SystemBR_Resource.ResourceManager.GetString("M0010", CultureInfo.CurrentCulture));
-        //            Session["MensAtrasoFornecedor"] = 0;
-        //        }
-        //    }
-
-        //    ViewBag.Listas = SessionMocks.listaPag;
-        //    CONTA_PAGAR cr = new CONTA_PAGAR();
-        //    return View(cr);
-        //}
-
-        [HttpPost]
-        //public ActionResult FiltrarPagamentoAtrasado(CONTA_PAGAR item)
-        //{
-        //    if (SessionMocks.UserCredentials == null)
-        //    {
-        //        return RedirectToAction("Login", "ControleAcesso");
-        //    }
-        //    try
-        //    {
-        //        // Executa a operação
-        //        List<CONTA_PAGAR> listaObj = new List<CONTA_PAGAR>();
-        //        SessionMocks.filtroCP = item;
-        //        Int32 volta = cpApp.ExecuteFilterAtraso(item.FORNECEDOR.FORN_NM_NOME, item.CAPA_DT_VENCIMENTO, out listaObj);
-
-        //        // Verifica retorno
-        //        if (volta == 1)
-        //        {
-        //            Session["MensAtrasoFornecedor"] = 1;
-        //        }
-
-        //        // Sucesso
-        //        SessionMocks.listaPag = listaObj;
-        //        return RedirectToAction("VerPagamentosAtraso");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = ex.Message;
-        //        return RedirectToAction("VerPagamentosAtraso");
-        //    }
-        //}
-
         [HttpGet]
-        //public ActionResult RetirarFiltroAtraso()
-        //{
-        //    if (SessionMocks.UserCredentials == null)
-        //    {
-        //        return RedirectToAction("Login", "ControleAcesso");
-        //    }
-        //    SessionMocks.listaPag = null;
-        //    return RedirectToAction("VerPagamentosAtraso");
-        //}
-
-        //public ActionResult VerFornecedorInativos()
-        //{
-        //    if ((String)Session["Ativa"] == null)
-        //    {
-        //        return RedirectToAction("Login", "ControleAcesso");
-        //    }
-        //    Int32 idAss = (Int32)Session["IdAssinante"];
-
-        //    if (Session["ListaFornecedoresInativo"] == null)
-        //    {
-        //        Session["ListaFornecedoresInativo"] = fornApp.GetAllItensAdm(idAss).Where(x => x.FORN_IN_ATIVO == 0).ToList();
-        //    }
-        //    if (((List<FORNECEDOR>)Session["ListaFornecedoresInativo"]).Count == 0)
-        //    {
-        //        Session["ListaFornecedoresInativo"] = fornApp.GetAllItensAdm(idAss).Where(x => x.FORN_IN_ATIVO == 0).ToList();
-        //    }
-        //    USUARIO usuario = (USUARIO)Session["UserCredentials"];
-
-        //    //ViewBag.Atrasos = SessionMocks.listaCP.Select(x => x.FORN_CD_ID).Distinct().ToList().Count;
-        //    ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
-        //    ViewBag.Inativos = fornApp.GetAllItensAdm(idAss).Where(p => p.FORN_IN_ATIVO == 0).ToList().Count;
-        //    ViewBag.SemPedidos = fornApp.GetAllItens(idAss).Where(p => p.ITEM_PEDIDO_COMPRA.Count == 0 || p.ITEM_PEDIDO_COMPRA == null).ToList().Count;
-
-        //    ViewBag.Listas = (List<FORNECEDOR>)Session["ListaFornecedoresInativo"];
-        //    ViewBag.Title = "Fornecedores";
-        //    ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
-
-        //    if (Session["MensFornecedorInativos"] != null)
-        //    {
-        //        if ((Int32)Session["MensFornecedorInativos"] == 1)
-        //        {
-        //            ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0010", CultureInfo.CurrentCulture));
-        //            Session["MensFornecedorInativos"] = 0;
-        //        }
-        //    }
-
-        //    // Abre view
-        //    FORNECEDOR forn = new FORNECEDOR();
-        //    return View(forn);
-        //}
-
-        //[HttpPost]
-        //public ActionResult FiltrarInativos(FORNECEDOR item)
-        //{
-        //    if ((String)Session["Ativa"] == null)
-        //    {
-        //        return RedirectToAction("Login", "ControleAcesso");
-        //    }
-        //    try
-        //    {
-        //        // Executa a operação
-        //        Int32 idAss = (Int32)Session["IdAssinante"];
-        //        List<FORNECEDOR> listaObj = new List<FORNECEDOR>();
-        //        Int32 volta = fornApp.ExecuteFilter(null, null, item.FORN_NM_NOME, null, null, null, item.FORN_NM_CIDADE, item.UF_CD_ID, null, 0, idAss, out listaObj);
-
-        //        // Verifica retorno
-        //        if (volta == 1)
-        //        {
-        //            Session["MensFornecedorInativos"] = 1;
-        //        }
-
-        //        // Sucesso
-        //        Session["ListaFornecedoresInativo"] = listaObj;
-        //        return RedirectToAction("VerFornecedorInativos");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = ex.Message;
-        //        return RedirectToAction("VerFornecedorInativos");
-        //    }
-        //}
-
-
-        public ActionResult IncluirComentarioFornecedor()
+        public ActionResult IncluirAnotacao()
         {
             if ((String)Session["Ativa"] == null)
             {
@@ -2415,7 +2265,7 @@ namespace ERP_Condominios_Solution.Controllers
         }
 
         [HttpPost]
-        public ActionResult IncluirComentarioFornecedor(FornecedorAnotacaoViewModel vm)
+        public ActionResult IncluirAnotacao(FornecedorAnotacaoViewModel vm)
         {
             if ((String)Session["Ativa"] == null)
             {
@@ -3018,17 +2868,20 @@ namespace ERP_Condominios_Solution.Controllers
             foreach (UF item in ufs)
             {
                 Int32 num = forns.Where(p => p.UF_CD_ID == item.UF_CD_ID).ToList().Count;
-                ModeloViewModel mod = new ModeloViewModel();
-                mod.Nome = item.UF_NM_NOME;
-                mod.Valor = num;
-                lista2.Add(mod);
+                if (num > 0)
+                {
+                    ModeloViewModel mod = new ModeloViewModel();
+                    mod.Nome = item.UF_NM_NOME;
+                    mod.Valor = num;
+                    lista2.Add(mod);
+                }
             }
             ViewBag.ListaFornUF = lista2;
             Session["ListaFornUF"] = lista2;
 
             // Recupera fornecedores por Cidade
             List<ModeloViewModel> lista3 = new List<ModeloViewModel>();
-            List<String> cids = forns.Select(p => p.FORN_NM_CIDADE).Distinct().ToList();
+            List<String> cids = forns.Select(p => p.FORN_NM_CIDADE.ToUpper()).Distinct().ToList();
             foreach (String item in cids)
             {
                 Int32 num = forns.Where(p => p.FORN_NM_CIDADE == item).ToList().Count;
@@ -3046,13 +2899,16 @@ namespace ERP_Condominios_Solution.Controllers
             foreach (CATEGORIA_FORNECEDOR item in cats)
             {
                 Int32 num = forns.Where(p => p.CAFO_CD_ID == item.CAFO_CD_ID).ToList().Count;
-                ModeloViewModel mod = new ModeloViewModel();
-                mod.Nome = item.CAFO_NM_NOME;
-                mod.Valor = num;
-                lista2.Add(mod);
+                if (num > 0)
+                {
+                    ModeloViewModel mod = new ModeloViewModel();
+                    mod.Nome = item.CAFO_NM_NOME;
+                    mod.Valor = num;
+                    lista4.Add(mod);
+                }
             }
-            ViewBag.ListaFornCats = lista2;
-            Session["ListaFornCats"] = lista2;
+            ViewBag.ListaFornCats = lista4;
+            Session["ListaFornCats"] = lista4;
 
             // Recupera Fornecedores com Pagto em atraso
             ViewBag.ListaFornAtraso = null;

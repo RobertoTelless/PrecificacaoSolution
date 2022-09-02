@@ -157,29 +157,6 @@
                                         <div class="row" style="width: 100%;">
                                             <div class="col-lg-2 col-md-2 col-xs-12">
                                                 <div style="text-align: center; margin-top: 20px; line-height: 10px;">
-                                                    @Html.HiddenFor(m => m.ASSI_CD_ID)
-                                                    @Html.HiddenFor(m => m.USUA_AQ_FOTO)
-                                                    @Html.HiddenFor(m => m.USUA_CD_ID)
-                                                    @Html.HiddenFor(m => m.USUA_DT_ACESSO)
-                                                    @Html.HiddenFor(m => m.USUA_DT_ALTERACAO)
-                                                    @Html.HiddenFor(m => m.USUA_DT_BLOQUEADO)
-                                                    @Html.HiddenFor(m => m.USUA_DT_CADASTRO)
-                                                    @Html.HiddenFor(m => m.USUA_DT_TROCA_SENHA)
-                                                    @Html.HiddenFor(m => m.USUA_DT_ULTIMA_FALHA)
-                                                    @Html.HiddenFor(m => m.USUA_IN_ATIVO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_BLOQUEADO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_LOGADO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_LOGIN_PROVISORIO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_PROVISORIO)
-                                                    @Html.HiddenFor(m => m.USUA_NM_NOVA_SENHA)
-                                                    @Html.HiddenFor(m => m.USUA_NM_SENHA)
-                                                    @Html.HiddenFor(m => m.USUA_NM_SENHA_CONFIRMA)
-                                                    @Html.HiddenFor(m => m.USUA_NR_ACESSOS)
-                                                    @Html.HiddenFor(m => m.USUA_NR_CELULAR)
-                                                    @Html.HiddenFor(m => m.USUA_NR_FALHAS)
-                                                    @Html.HiddenFor(m => m.USUA_NR_TELEFONE)
-                                                    @Html.HiddenFor(m => m.USUA_TX_OBSERVACOES)
-                                                    @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                     @if (!String.IsNullOrEmpty(Model.USUA_AQ_FOTO))
                                                     {
                                                         <img src="@Url.Content(Model.USUA_AQ_FOTO)" style="width: auto; height: auto; max-height: 110px; max-width: 90px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@Model.USUA_NM_NOME', '@Url.Content(Model.USUA_AQ_FOTO)')">

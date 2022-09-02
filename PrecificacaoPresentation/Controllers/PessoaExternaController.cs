@@ -955,7 +955,7 @@ namespace ERP_Condominios_Solution.Controllers
             PessoaExternaAnotacaoViewModel vm = Mapper.Map<PESSOA_EXTERNA_ANOTACAO, PessoaExternaAnotacaoViewModel>(coment);
             vm.PEAN_DT_ANOTACAO = DateTime.Now;
             vm.PEAN_IN_ATIVO = 1;
-            vm.PEEX_CD_ID = item.CARG_CD_ID;
+            vm.PEEX_CD_ID = item.PEEX_CD_ID;
             vm.USUARIO = usuarioLogado;
             vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
             return View(vm);

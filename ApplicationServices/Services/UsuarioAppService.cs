@@ -243,15 +243,15 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica existencia prévia
-                USUARIO usu = _usuarioService.GetByEmail(usuario.USUA_EM_EMAIL, usuarioLogado.ASSI_CD_ID);
-                if (usu != null)
-                {
-                    if (usu.USUA_CD_ID != usuario.USUA_CD_ID)
-                    {
-                        return 2;
-                    }
-                }
-                usu = _usuarioService.GetByLogin(usuario.USUA_NM_LOGIN, usuarioLogado.ASSI_CD_ID);
+                //USUARIO usu = _usuarioService.GetByEmail(usuario.USUA_EM_EMAIL, usuarioLogado.ASSI_CD_ID);
+                //if (usu != null)
+                //{
+                //    if (usu.USUA_CD_ID != usuario.USUA_CD_ID)
+                //    {
+                //        return 2;
+                //    }
+                //}
+                USUARIO usu = _usuarioService.GetByLogin(usuario.USUA_NM_LOGIN, usuarioLogado.ASSI_CD_ID);
                 if (usu != null)
                 {
                     if (usu.USUA_CD_ID != usuario.USUA_CD_ID)

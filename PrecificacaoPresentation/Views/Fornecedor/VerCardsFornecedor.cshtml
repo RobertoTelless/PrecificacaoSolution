@@ -103,21 +103,35 @@
                             {
                                 foreach (var cond in (ViewBag.Listas as List<EntitiesServices.Model.FORNECEDOR>))
                                 {
-                                    <div class="col-lg-4">  
+                                    <div class="col-lg-3">  
                                         <div style="height: 250px;" class="contact-box">
                                             <a href="@Url.Action("EditarFornecedor", "Fornecedor", new { id = cond.FORN_CD_ID })"></a>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-3">
+                                                @if (!String.IsNullOrEmpty(cond.FORN_AQ_LOGOTIPO))
+                                                {
+                                                    <div class="text-center">
+                                                        <img alt="image" class="img-circle m-t-xs img-responsive" src="@Url.Content(cond.FORN_AQ_LOGOTIPO)" style="width: auto; height: auto; max-height: 50px; max-width: 50px;">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="text-center">
+                                                        <img src="~/Imagens/Base/icone_imagem.jpg" style="width: auto; height: auto; max-height: 55px; max-width: 45px;">
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="col-sm-9">
                                                 <h3><strong>@cond.FORN_NM_NOME</strong></h3>
                                                 <p><i class="fa fa-envelope"></i> <a href="@Url.Action("EnviarEMailFornecedor", "Fornecedor", new { id = cond.FORN_CD_ID})">@cond.FORN_EM_EMAIL</a> </p>
                                                 <address>
                                                         @cond.FORN_NM_ENDERECO<br>
                                                         @if (cond.UF != null)
                                                         {
-                                                            @cond.FORN_NM_BAIRRO  @cond.FORN_NM_CIDADE   @cond.UF.UF_SG_SIGLA<br>
+                                                            @cond.FORN_NM_BAIRRO @cond.FORN_NM_CIDADE  @cond.UF.UF_SG_SIGLA<br>
                                                         }
                                                         else
                                                         {
-                                                            @cond.FORN_NM_BAIRRO   @cond.FORN_NM_CIDADE<br>
+                                                            @cond.FORN_NM_BAIRRO @cond.FORN_NM_CIDADE<br>
                                                         }
                                                         @cond.FORN_NR_CEP<br>
                                                     <abbr title="Telefone">P:</abbr> @cond.FORN_NR_TELEFONE <br />

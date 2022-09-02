@@ -122,6 +122,10 @@
                                     <div class="panel-body">
                                         @using (Html.BeginForm("EditarFornecedor", "Fornecedor", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                                         {
+                                            <div class="form-group">
+                                                @Html.ButtonActionSubmit(text: "Confirma edição de Fornecedor", htmlAttributes: new { id = "basictoast", style = "margin-bottom: -35px;" })
+                                            </div>
+                                            <br />
                                             <div class="row" style="width: 100%;">
                                                 <div class="col-lg-1 col-md-1 col-xs-12">
                                                     <div style="text-align: center; margin-top: 25px; line-height: 10px;">
@@ -268,6 +272,9 @@
                                     <div class="panel-body">
                                         @using (Html.BeginForm("EditarFornecedor", "Fornecedor", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                                         {
+                                            <div class="form-group">
+                                                @Html.ButtonActionSubmit(text: "Confirma edição de Fornecedor", htmlAttributes: new { id = "basictoast", style = "margin-bottom: -35px;" })
+                                            </div>
                                             <div class="row" style="width: 100%;">
                                                 <div class="col-lg-1 col-md-1 col-xs-12">
                                                     <div style="text-align: center; margin-top: 25px; line-height: 10px;">
@@ -744,7 +751,8 @@
                                     </div>
                                     <br />
                                     <div class="form-group">
-                                        @Html.ButtonLinkIndex(text: "Incluir Nova Anotação", action: "IncluirComentarioFornecedor", controller: "Fornecedor")
+                                        @Html.ButtonLinkIndex(text: "Incluir Novo Acompanhamento", action: "IncluirAnotacao", controller: "Fornecedor")
+                                        @*@Html.ButtonLinkIndex(text: "Incluir Nova Anotação", action: "IncluirAnotacao", controller: "Fornecedor")*@
                                     </div>
                                 </div>
                             </div>

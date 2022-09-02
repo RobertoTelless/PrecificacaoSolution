@@ -13,7 +13,7 @@ namespace ERP_Condominios_Solution.ViewModels
         [Key]
         public int FORN_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
-        public int EMPR_CD_ID { get; set; }
+        public Nullable<int> EMPR_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo CATEGORIA obrigatorio")]
         public int CAFO_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo TIPO DE PESSOA obrigatorio")]

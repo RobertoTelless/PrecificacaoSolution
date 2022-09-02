@@ -3050,6 +3050,8 @@
     <Content Include="Views\TabelaAuxiliar\IncluirCatFornecedor.cshtml" />
     <Content Include="Views\TabelaAuxiliar\VerCatFornecedor.cshtml" />
     <Content Include="Views\TabelaAuxiliar\EditarCatFornecedor.cshtml" />
+    <Content Include="Views\Fornecedor\IncluirComentario.cshtml" />
+    <Content Include="Views\Fornecedor\IncluirAnotacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
