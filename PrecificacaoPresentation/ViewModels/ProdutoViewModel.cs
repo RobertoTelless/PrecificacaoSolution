@@ -87,6 +87,10 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<decimal> PROD_VL_IPI_FIXO { get; set; }
         public Nullable<System.DateTime> PROD_DT_CADASTRO { get; set; }
         public Nullable<int> PROD_IN_ATIVO { get; set; }
+        [StringLength(50, ErrorMessage = "A LOCALIZAÇÃO deve conter no máximo 50 caracteres.")]
+        public string PROD_NM_LOCALIZACAO_ESTOQUE { get; set; }
+        [StringLength(5000, ErrorMessage = "A OBSERVAÇÃO deve conter no máximo 5000 caracteres.")]
+        public string PROD_TX_OBSERVACOES { get; set; }
 
         public Nullable<int> EntradaSaida { get; set; }
 

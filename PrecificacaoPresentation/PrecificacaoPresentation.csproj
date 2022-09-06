@@ -247,6 +247,7 @@
     <Compile Include="Controllers\NotificacaoController.cs" />
     <Compile Include="Controllers\PessoaExternaController.cs" />
     <Compile Include="Controllers\PlataformaEntregaController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\TabelaAuxiliarController.cs" />
     <Compile Include="Controllers\TarefaController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
@@ -3066,6 +3067,22 @@
     <Content Include="Views\TabelaAuxiliar\EditarCatFornecedor.cshtml" />
     <Content Include="Views\Fornecedor\IncluirComentario.cshtml" />
     <Content Include="Views\Fornecedor\IncluirAnotacao.cshtml" />
+    <Content Include="Views\Produto\MontarTelaProduto.cshtml" />
+    <Content Include="Views\Produto\IncluirProduto.cshtml" />
+    <Content Include="Views\Produto\EditarProduto.cshtml" />
+    <Content Include="Views\Produto\ConsultarProduto.cshtml" />
+    <Content Include="Views\Produto\VerCardsProduto.cshtml" />
+    <Content Include="Views\Produto\VerAnexoProduto.cshtml" />
+    <Content Include="Views\Produto\VerMovimentacaoEstoqueProduto.cshtml" />
+    <Content Include="Views\Produto\VerProdutosPontoPedido.cshtml" />
+    <Content Include="Views\Produto\VerProdutosEstoqueZerado.cshtml" />
+    <Content Include="Views\Produto\VerProdutosEstoqueNegativo.cshtml" />
+    <Content Include="Views\Produto\EditarProdutoFornecedor.cshtml" />
+    <Content Include="Views\Produto\IncluirProdutoFornecedor.cshtml" />
+    <Content Include="Views\Produto\EditarProdutoKit.cshtml" />
+    <Content Include="Views\Produto\IncluirProdutoKit.cshtml" />
+    <Content Include="Views\Produto\EnviarEMailContato.cshtml" />
+    <Content Include="Views\Produto\EnviarSMSContato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

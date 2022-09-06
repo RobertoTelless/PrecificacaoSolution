@@ -22,5 +22,6 @@ namespace EntitiesServices.Model
     
         public virtual FICHA_TECNICA FICHA_TECNICA { get; set; }
         public virtual PRODUTO_TABELA_PRECO PRODUTO_TABELA_PRECO { get; set; }
+        public virtual PRODUTO PRODUTO { get; set; }
     }
 }

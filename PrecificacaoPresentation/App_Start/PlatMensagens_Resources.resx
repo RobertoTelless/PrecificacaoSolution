@@ -594,4 +594,13 @@
   <data name="M0180" xml:space="preserve">
     <value>Máquina de cartão já associada à empresa</value>
   </data>
+  <data name="M0181" xml:space="preserve">
+    <value>Produto já cadastrado</value>
+  </data>
+  <data name="M0182" xml:space="preserve">
+    <value>Código de barra já utilizado</value>
+  </data>
+  <data name="M0183" xml:space="preserve">
+    <value>Impossível excluir este produto. Existem registros vinculados a ele</value>
+  </data>
 </root>

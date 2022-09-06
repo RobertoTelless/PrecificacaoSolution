@@ -25,6 +25,8 @@ namespace EntitiesServices.Model
             this.PRODUTO_KIT = new HashSet<PRODUTO_KIT>();
             this.PRODUTO_TABELA_PRECO = new HashSet<PRODUTO_TABELA_PRECO>();
             this.PRODUTO_ULTIMOS_CUSTOS = new HashSet<PRODUTO_ULTIMOS_CUSTOS>();
+            this.FICHA_TECNICA = new HashSet<FICHA_TECNICA>();
+            this.FICHA_TECNICA_DETALHE = new HashSet<FICHA_TECNICA_DETALHE>();
         }
     
         public int PROD_CD_ID { get; set; }
@@ -69,6 +71,8 @@ namespace EntitiesServices.Model
         public Nullable<decimal> PROD_VL_IPI_FIXO { get; set; }
         public Nullable<System.DateTime> PROD_DT_CADASTRO { get; set; }
         public Nullable<int> PROD_IN_ATIVO { get; set; }
+        public string PROD_NM_LOCALIZACAO_ESTOQUE { get; set; }
+        public string PROD_TX_OBSERVACOES { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_PRODUTO CATEGORIA_PRODUTO { get; set; }
@@ -92,5 +96,9 @@ namespace EntitiesServices.Model
         public virtual ICollection<PRODUTO_ULTIMOS_CUSTOS> PRODUTO_ULTIMOS_CUSTOS { get; set; }
         public virtual UNIDADE UNIDADE { get; set; }
         public virtual SUBCATEGORIA_PRODUTO SUBCATEGORIA_PRODUTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FICHA_TECNICA> FICHA_TECNICA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
     }
 }

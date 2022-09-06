@@ -1490,5 +1490,32 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0180", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Produto já cadastrado.
+        /// </summary>
+        internal static string M0181 {
+            get {
+                return ResourceManager.GetString("M0181", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Código de barra já utilizado.
+        /// </summary>
+        internal static string M0182 {
+            get {
+                return ResourceManager.GetString("M0182", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este produto. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0183 {
+            get {
+                return ResourceManager.GetString("M0183", resourceCulture);
+            }
+        }
     }
 }

@@ -42,5 +42,6 @@ namespace EntitiesServices.Model
         public virtual PRODUTO_TABELA_PRECO PRODUTO_TABELA_PRECO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
+        public virtual PRODUTO PRODUTO { get; set; }
     }
 }

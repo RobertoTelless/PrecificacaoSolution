@@ -42,50 +42,65 @@
                 </ul>
             </li>
 
+            @*Empresa*@
+            <li>
+                <a href="@Url.Action("CarregarBase", "BaseAdmin")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">Administração</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Cadastros", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "MontarTelaEmpresa")"><a href="@Url.Action("MontarTelaEmpresa", "Empresa")">Dados da Empresa</a></li>
+                </ul>
+            </li>
+
+            @*cadastros*@
+            <li>
+                <a href="@Url.Action("CarregarBase", "BaseAdmin")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">Administração</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Cadastros", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "MontarTelaMaquina")"><a href="@Url.Action("MontarTelaMaquina", "Maquina")">Máquinas Cartões</a></li>
+                    <li class="@Html.IsSelected(action: "MontarTelaPlataformaEntrega")"><a href="@Url.Action("MontarTelaPlataformaEntrega", "PlataformaEntrega")">Plataformas Entrega</a></li>
+                    <li class="@Html.IsSelected(action: "MontarTelaCliente")"><a href="@Url.Action("MontarTelaCliente", "Cliente")">Clientes</a></li>
+                    <li class="@Html.IsSelected(action: "MontarTelaFornecedor")"><a href="@Url.Action("MontarTelaFornecedor", "Fornecedor")">Fornecedores</a></li>
+                    <li class="@Html.IsSelected(action: "CarregarDesenvolvimento")"><a href="@Url.Action("CarregarDesenvolvimento", "BaseAdmin")">Produtos</a></li>
+                </ul>
+            </li>
+
+            @*Financeiro*@
+            <li>
+                <a href="@Url.Action("CarregarBase", "BaseAdmin")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">Administração</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Cadastros", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "MontarTelaCC")"><a href="@Url.Action("MontarTelaCC", "CentroCusto")">Plano Contas</a></li>
+                    <li class="@Html.IsSelected(action: "MontarTelaBanco")"><a href="@Url.Action("MontarTelaBanco", "Banco")">Bancos & Contas</a></li>
+                    <li class="@Html.IsSelected(action: "MontarTelaFormaPagamento")"><a href="@Url.Action("MontarTelaFormaPagamento", "FormaPagRec")">Formas Pag/Rec</a></li>
+                </ul>
+            </li>
+
             @*Administração*@
             @if (((EntitiesServices.Model.PERFIL)Session["Perfil"]).PERF_SG_SIGLA  == "ADM" || ((EntitiesServices.Model.PERFIL)Session["Perfil"]).PERF_SG_SIGLA  == "GER")
             {
                 <li>
                     <a href="@Url.Action("CarregarBase", "BaseAdmin")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">Administração</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Cadastros", cssClass: "in")">
-                        <li class="@Html.IsSelected(action: "MontarTelaEmpresa")"><a href="@Url.Action("MontarTelaEmpresa", "Empresa")">Dados da Empresa</a></li>
                         <li class="@Html.IsSelected(action: "MontarTelaLog")"><a href="@Url.Action("MontarTelaLog", "Auditoria")">Auditoria</a></li>
                         <li class="@Html.IsSelected(action: "MontarTelaUsuario")"><a href="@Url.Action("MontarTelaUsuario", "Usuario")">Usuários</a></li>
                         <li class="@Html.IsSelected(action: "MontarTelaPessoaExterna")"><a href="@Url.Action("MontarTelaPessoaExterna", "PessoaExterna")">Pessoas Externas</a></li>
                         <li class="@Html.IsSelected(action: "MontarTelaNotificacaoGeral")"><a href="@Url.Action("MontarTelaNotificacaoGeral", "Notificacao")">Notificações</a></li>
                         <li class="@Html.IsSelected(action: "MontarTelaNoticia")"><a href="@Url.Action("MontarTelaNoticia", "Noticia")">Notícias</a></li>
-                        <li class="@Html.IsSelected(action: "MontarTelaFormaPagRec")"><a href="@Url.Action("MontarTelaFormaPagRec", "FormaPagRec")">Formas Pag/Rec.</a></li>
-                        <li class="@Html.IsSelected(action: "MontarTelaMaquina")"><a href="@Url.Action("MontarTelaMaquina", "Maquina")">Máquinas</a></li>
-                        <li class="@Html.IsSelected(action: "MontarTelaPlataformaEntrega")"><a href="@Url.Action("MontarTelaPlataformaEntrega", "PlataformaEntrega")">Plats.Entrega</a></li>
+                        <li class="@Html.IsSelected(action: "MontarTelaVideo")"><a href="@Url.Action("MontarTelaVideo", "Video")">Vídeos</a></li>
                         <li class="@Html.IsSelected(action: "MontarTelaTemplate")"><a href="@Url.Action("MontarTelaTemplate", "Template")">Padrões Mensagens</a></li>
-                        <li class="@Html.IsSelected(action: "CarregarBase")"><a href="@Url.Action("CarregarBase", "BaseAdmin")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">Cadastros Auxiliares</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level collapse @Html.IsSelected(controller: "BaseAdmin", cssClass: "in")">
-                                <li class="@Html.IsSelected(action: "MontarTelaCargo")"><a href="@Url.Action("MontarTelaCargo", "TabelaAuxiliar")">Cargos</a></li>
-                                <li class="@Html.IsSelected(action: "MontarTelaCatAgenda")"><a href="@Url.Action("MontarTelaCatAgenda", "TabelaAuxiliar")">Cats. Agenda</a></li>
-                                <li class="@Html.IsSelected(action: "MontarTelaCatNotificacao")"><a href="@Url.Action("MontarTelaCatNotificacao", "TabelaAuxiliar")">Cats. Notificação</a></li>
-                                <li class="@Html.IsSelected(action: "MontarTelaCatUsuario")"><a href="@Url.Action("MontarTelaCatUsuario", "TabelaAuxiliar")">Cats. Usuário</a></li>
-                                <li class="@Html.IsSelected(action: "MontarTelaCatNotificacao")"><a href="@Url.Action("MontarTelaCatNotificacao", "TabelaAuxiliar")">Categoria Usuário</a></li>
-                                <li class="@Html.IsSelected(action: "MontarTelaCatNotificacao")"><a href="@Url.Action("MontarTelaCatNotificacao", "TabelaAuxiliar")">Categoria Usuário</a></li>
-                                <li class="@Html.IsSelected(action: "MontarTelaCatNotificacao")"><a href="@Url.Action("MontarTelaCatNotificacao", "TabelaAuxiliar")">Categoria Usuário</a></li>
-                            </ul>                    
-                        </li>                 
+                        <li class="@Html.IsSelected(action: "MontarTelaConfiguracao")"><a href="@Url.Action("MontarTelaConfiguracao", "Noticia")">Configuração</a></li>
+                        <li class="@Html.IsSelected(action: "MontarTelaTabelasAuxiliares")"><a href="@Url.Action("MontarTelaTabelasAuxiliares", "TabelaAuxiliar")">Tabelas Auxiliares</a></li>
                     </ul>
                 </li>
             }        
 
             @*Configuração*@
-            @if (((EntitiesServices.Model.PERFIL)Session["Perfil"]).PERF_SG_SIGLA == "ADM")
-            {
-                <li>
-                    <a href="@Url.Action("CarregarBase", "BaseAdmin")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">Configurações</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Cadastros", cssClass: "in")">
-                        @if (((EntitiesServices.Model.PERFIL)Session["Perfil"]).PERF_SG_SIGLA  == "ADM" || ((EntitiesServices.Model.PERFIL)Session["Perfil"]).PERF_SG_SIGLA  == "GER")
-                        {
-                            <li class="@Html.IsSelected(action: "MontarTelaConfiguracao")"><a href="@Url.Action("MontarTelaConfiguracao", "Configuracao")">Configurações</a></li>
-                        }
-                    </ul>
-                </li>
-            }
+            <li>
+                <a href="@Url.Action("CarregarBase", "BaseAdmin")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">Configurações</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Cadastros", cssClass: "in")">
+                    @if (((EntitiesServices.Model.PERFIL)Session["Perfil"]).PERF_SG_SIGLA  == "ADM" || ((EntitiesServices.Model.PERFIL)Session["Perfil"]).PERF_SG_SIGLA  == "GER")
+                    {
+                        <li class="@Html.IsSelected(action: "MontarTelaConfiguracao")"><a href="@Url.Action("MontarTelaConfiguracao", "Configuracao")">Configurações</a></li>
+                    }
+                </ul>
+            </li>
 
             @*Institucional*@
             <li>
