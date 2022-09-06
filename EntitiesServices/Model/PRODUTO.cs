@@ -18,6 +18,7 @@ namespace EntitiesServices.Model
         public PRODUTO()
         {
             this.CRM_PEDIDO_VENDA_ITEM = new HashSet<CRM_PEDIDO_VENDA_ITEM>();
+            this.MOVIMENTO_ESTOQUE_PRODUTO = new HashSet<MOVIMENTO_ESTOQUE_PRODUTO>();
             this.PRODUTO_ANEXO = new HashSet<PRODUTO_ANEXO>();
             this.PRODUTO_ESTOQUE_EMPRESA = new HashSet<PRODUTO_ESTOQUE_EMPRESA>();
             this.PRODUTO_FORNECEDOR = new HashSet<PRODUTO_FORNECEDOR>();
@@ -31,6 +32,8 @@ namespace EntitiesServices.Model
         public int CAPR_CD_ID { get; set; }
         public int SCPR_CD_ID { get; set; }
         public int UNID_CD_ID { get; set; }
+        public Nullable<int> PROR_CD_ID { get; set; }
+        public Nullable<int> TAMA_CD_ID { get; set; }
         public string PROD_AQ_FOTO { get; set; }
         public Nullable<int> PROD_IN_TIPO_PRODUTO { get; set; }
         public Nullable<int> PROD_IN_COMPOSTO { get; set; }
@@ -66,12 +69,15 @@ namespace EntitiesServices.Model
         public Nullable<decimal> PROD_VL_IPI_FIXO { get; set; }
         public Nullable<System.DateTime> PROD_DT_CADASTRO { get; set; }
         public Nullable<int> PROD_IN_ATIVO { get; set; }
-        public Nullable<int> PROR_CD_ID { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_PRODUTO CATEGORIA_PRODUTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM_PEDIDO_VENDA_ITEM> CRM_PEDIDO_VENDA_ITEM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
+        public virtual PRODUTO_ORIGEM PRODUTO_ORIGEM { get; set; }
+        public virtual TAMANHO TAMANHO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUTO_ANEXO> PRODUTO_ANEXO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

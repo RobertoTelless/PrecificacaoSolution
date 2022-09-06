@@ -38,8 +38,10 @@ namespace EntitiesServices.Model
             this.LOG = new HashSet<LOG>();
             this.MOTIVO_CANCELAMENTO = new HashSet<MOTIVO_CANCELAMENTO>();
             this.MOTIVO_ENCERRAMENTO = new HashSet<MOTIVO_ENCERRAMENTO>();
+            this.MOVIMENTO_ESTOQUE_PRODUTO = new HashSet<MOVIMENTO_ESTOQUE_PRODUTO>();
             this.PLANO_CONTA = new HashSet<PLANO_CONTA>();
             this.SUBGRUPO_PLANO_CONTA = new HashSet<SUBGRUPO_PLANO_CONTA>();
+            this.TAMANHO = new HashSet<TAMANHO>();
             this.TEMPLATE = new HashSet<TEMPLATE>();
             this.TEMPLATE_EMAIL = new HashSet<TEMPLATE_EMAIL>();
             this.TEMPLATE_PROPOSTA = new HashSet<TEMPLATE_PROPOSTA>();
@@ -64,6 +66,7 @@ namespace EntitiesServices.Model
             this.PRODUTO = new HashSet<PRODUTO>();
             this.TAREFA = new HashSet<TAREFA>();
             this.USUARIO = new HashSet<USUARIO>();
+            this.SUBCATEGORIA_PRODUTO = new HashSet<SUBCATEGORIA_PRODUTO>();
         }
     
         public int ASSI_CD_ID { get; set; }
@@ -118,9 +121,13 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MOTIVO_ENCERRAMENTO> MOTIVO_ENCERRAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PLANO_CONTA> PLANO_CONTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SUBGRUPO_PLANO_CONTA> SUBGRUPO_PLANO_CONTA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TAMANHO> TAMANHO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEMPLATE> TEMPLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -169,5 +176,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<TAREFA> TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO> USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SUBCATEGORIA_PRODUTO> SUBCATEGORIA_PRODUTO { get; set; }
     }
 }

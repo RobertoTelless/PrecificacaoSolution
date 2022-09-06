@@ -29,6 +29,7 @@ namespace EntitiesServices.Model
             this.CRM_PEDIDO_VENDA_ACOMPANHAMENTO = new HashSet<CRM_PEDIDO_VENDA_ACOMPANHAMENTO>();
             this.FORNECEDOR_ANOTACOES = new HashSet<FORNECEDOR_ANOTACOES>();
             this.LOG = new HashSet<LOG>();
+            this.MOVIMENTO_ESTOQUE_PRODUTO = new HashSet<MOVIMENTO_ESTOQUE_PRODUTO>();
             this.NOTICIA_COMENTARIO = new HashSet<NOTICIA_COMENTARIO>();
             this.NOTIFICACAO = new HashSet<NOTIFICACAO>();
             this.PESSOA_EXTERNA_ANOTACAO = new HashSet<PESSOA_EXTERNA_ANOTACAO>();
@@ -98,6 +99,8 @@ namespace EntitiesServices.Model
         public virtual ICollection<FORNECEDOR_ANOTACOES> FORNECEDOR_ANOTACOES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LOG> LOG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTICIA_COMENTARIO> NOTICIA_COMENTARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

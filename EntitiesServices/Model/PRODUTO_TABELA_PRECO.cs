@@ -23,13 +23,14 @@ namespace EntitiesServices.Model
     
         public int PRTP_CD_ID { get; set; }
         public int PROD_CD_ID { get; set; }
-        public int EMPR_CD_ID { get; set; }
+        public Nullable<int> EMPR_CD_ID { get; set; }
         public Nullable<decimal> PRTP_VL_PRECO { get; set; }
         public Nullable<decimal> PRTP_VL_PRECO_PROMOCAO { get; set; }
         public Nullable<decimal> PRTP_VL_DESCONTO_MAXIMO { get; set; }
         public Nullable<decimal> PRTP_VL_MARKUP { get; set; }
         public Nullable<System.DateTime> PRTP_DT_REAJUSTE { get; set; }
         public Nullable<int> PRTP_IN_ATIVO { get; set; }
+        public Nullable<decimal> PRTP_VL_CUSTO { get; set; }
     
         public virtual EMPRESA EMPRESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -78,6 +78,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<MAQUINA> MAQUINA { get; set; }
         public virtual DbSet<MOTIVO_CANCELAMENTO> MOTIVO_CANCELAMENTO { get; set; }
         public virtual DbSet<MOTIVO_ENCERRAMENTO> MOTIVO_ENCERRAMENTO { get; set; }
+        public virtual DbSet<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
         public virtual DbSet<NOTICIA> NOTICIA { get; set; }
         public virtual DbSet<NOTICIA_COMENTARIO> NOTICIA_COMENTARIO { get; set; }
         public virtual DbSet<NOTIFICACAO> NOTIFICACAO { get; set; }
@@ -95,12 +96,14 @@ namespace EntitiesServices.Model
         public virtual DbSet<PRODUTO_ESTOQUE_EMPRESA> PRODUTO_ESTOQUE_EMPRESA { get; set; }
         public virtual DbSet<PRODUTO_FORNECEDOR> PRODUTO_FORNECEDOR { get; set; }
         public virtual DbSet<PRODUTO_KIT> PRODUTO_KIT { get; set; }
+        public virtual DbSet<PRODUTO_ORIGEM> PRODUTO_ORIGEM { get; set; }
         public virtual DbSet<PRODUTO_TABELA_PRECO> PRODUTO_TABELA_PRECO { get; set; }
         public virtual DbSet<PRODUTO_ULTIMOS_CUSTOS> PRODUTO_ULTIMOS_CUSTOS { get; set; }
         public virtual DbSet<REGIME_TRIBUTARIO> REGIME_TRIBUTARIO { get; set; }
         public virtual DbSet<SEXO> SEXO { get; set; }
         public virtual DbSet<SUBCATEGORIA_PRODUTO> SUBCATEGORIA_PRODUTO { get; set; }
         public virtual DbSet<SUBGRUPO_PLANO_CONTA> SUBGRUPO_PLANO_CONTA { get; set; }
+        public virtual DbSet<TAMANHO> TAMANHO { get; set; }
         public virtual DbSet<TAREFA> TAREFA { get; set; }
         public virtual DbSet<TAREFA_ACOMPANHAMENTO> TAREFA_ACOMPANHAMENTO { get; set; }
         public virtual DbSet<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }

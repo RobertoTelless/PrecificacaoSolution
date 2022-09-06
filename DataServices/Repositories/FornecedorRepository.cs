@@ -63,15 +63,7 @@ namespace DataServices.Repositories
         {
             List<FORNECEDOR> lista = new List<FORNECEDOR>();
             IQueryable<FORNECEDOR> query = Db.FORNECEDOR;
-            if (ativo != null)
-            {
-                query = query.Where(p => p.FORN_IN_ATIVO == ativo);
-            }
-            else
-            {
-                query = query.Where(p => p.FORN_IN_ATIVO == 1);
-            }
-            if (catId != null)
+            if (catId > 0)
             {
                 query = query.Where(p => p.CATEGORIA_FORNECEDOR.CAFO_CD_ID == catId);
             }

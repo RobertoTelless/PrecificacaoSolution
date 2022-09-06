@@ -24,9 +24,11 @@ namespace EntitiesServices.Model
         public int CAPR_CD_ID { get; set; }
         public string SCPR_NM_NOME { get; set; }
         public int SCPR_IN_ATIVO { get; set; }
+        public Nullable<int> ASSI_CD_ID { get; set; }
     
         public virtual CATEGORIA_PRODUTO CATEGORIA_PRODUTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUTO> PRODUTO { get; set; }
+        public virtual ASSINANTE ASSINANTE { get; set; }
     }
 }

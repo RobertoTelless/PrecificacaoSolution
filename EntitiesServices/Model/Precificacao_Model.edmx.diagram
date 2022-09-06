@@ -4,107 +4,110 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ab440c990ea940989ba3b17ed3bd02ee" Name="Diagram1">
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.AGENDA" Width="1.5" PointX="5.25" PointY="118.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.AGENDA_ANEXO" Width="1.5" PointX="7.5" PointY="97.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE" Width="1.5" PointX="0.75" PointY="130.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.BANCO" Width="1.5" PointX="3" PointY="93.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CARGO_USUARIO" Width="1.5" PointX="3" PointY="96.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_AGENDA" Width="1.5" PointX="3" PointY="99.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_CLIENTE" Width="1.5" PointX="3" PointY="102.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_CUSTO_FIXO" Width="1.5" PointX="3" PointY="105.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_FORNECEDOR" Width="1.5" PointX="3" PointY="108.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_NOTIFICACAO" Width="1.5" PointX="3" PointY="111.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_PRODUTO" Width="1.5" PointX="3" PointY="114.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_USUARIO" Width="1.5" PointX="3" PointY="117.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE" Width="1.5" PointX="5.25" PointY="144.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_ANEXO" Width="1.5" PointX="7.5" PointY="152.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_ANOTACAO" Width="1.5" PointX="16.5" PointY="132.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_CONTATO" Width="1.5" PointX="7.5" PointY="156" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_QUADRO_SOCIETARIO" Width="1.5" PointX="7.5" PointY="159.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_REFERENCIA" Width="1.5" PointX="7.5" PointY="163.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.COMISSAO_CARGO" Width="1.5" PointX="5.25" PointY="96.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONFIGURACAO" Width="1.5" PointX="3" PointY="120.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO" Width="1.5" PointX="5.25" PointY="111.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_ANEXO" Width="1.5" PointX="7.5" PointY="110" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_CONTATO" Width="1.5" PointX="7.5" PointY="106.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_LANCAMENTO" Width="1.5" PointX="7.5" PointY="101.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM" Width="1.5" PointX="13.5" PointY="151.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ACAO" Width="1.5" PointX="18.75" PointY="150.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ANEXO" Width="1.5" PointX="15.75" PointY="159.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_COMENTARIO" Width="1.5" PointX="18.75" PointY="130.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_CONTATO" Width="1.5" PointX="15.75" PointY="165" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ORIGEM" Width="1.5" PointX="3" PointY="135.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA" Width="1.5" PointX="21.75" PointY="143.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ACOMPANHAMENTO" Width="1.5" PointX="24" PointY="131.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ANEXO" Width="1.5" PointX="24" PointY="152.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ITEM" Width="1.5" PointX="24" PointY="138.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.CUSTO_FIXO" Width="1.5" PointX="5.25" PointY="104.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA" Width="1.5" PointX="8.25" PointY="142.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA_ANEXO" Width="1.5" PointX="10.5" PointY="153.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA_MAQUINA" Width="1.5" PointX="13.5" PointY="148.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FICHA_TECNICA" Width="1.5" PointX="21" PointY="134.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FICHA_TECNICA_DETALHE" Width="1.5" PointX="23.25" PointY="135.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_ENVIO" Width="1.5" PointX="3" PointY="147.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_FRETE" Width="1.5" PointX="3" PointY="150.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_PAGTO_RECTO" Width="1.5" PointX="16.5" PointY="135.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR" Width="1.5" PointX="8.25" PointY="120.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_ANEXO" Width="1.5" PointX="10.5" PointY="133.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_ANOTACOES" Width="1.5" PointX="13.5" PointY="117.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_CONTATO" Width="1.5" PointX="10.5" PointY="146.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_QUADRO_SOCIETARIO" Width="1.5" PointX="10.5" PointY="149.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.GRUPO_PLANO_CONTA" Width="1.5" PointX="3" PointY="153.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.LOG" Width="1.5" PointX="15.5" PointY="121" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.MAQUINA" Width="1.5" PointX="3" PointY="157" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOTIVO_CANCELAMENTO" Width="1.5" PointX="3" PointY="161.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOTIVO_ENCERRAMENTO" Width="1.5" PointX="3" PointY="164.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTICIA" Width="1.5" PointX="3" PointY="167.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTICIA_COMENTARIO" Width="1.5" PointX="15.5" PointY="143.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTIFICACAO" Width="1.5" PointX="5.25" PointY="129.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTIFICACAO_ANEXO" Width="1.5" PointX="7.5" PointY="130.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.OUTRO_CUSTO_VARIAVEL" Width="1.5" PointX="3" PointY="172.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PERFIL" Width="1.5" PointX="9" PointY="94.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PERIODICIDADE_TAREFA" Width="1.5" PointX="3" PointY="89.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA" Width="1.5" PointX="8.25" PointY="115.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO" Width="1.5" PointX="10.5" PointY="105.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" Width="1.5" PointX="13.5" PointY="113.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLANO_CONTA" Width="1.5" PointX="5.25" PointY="139.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLATAFORMA_ENTREGA" Width="1.5" PointX="3" PointY="175.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO" Width="1.5" PointX="10.5" PointY="121.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ANEXO" Width="1.5" PointX="12.75" PointY="123.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ESTOQUE_EMPRESA" Width="1.5" PointX="15.75" PointY="139.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_FORNECEDOR" Width="1.5" PointX="15.75" PointY="125.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_KIT" Width="1.5" PointX="12.75" PointY="130.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_TABELA_PRECO" Width="1.5" PointX="18.75" PointY="134.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ULTIMOS_CUSTOS" Width="1.5" PointX="12.75" PointY="138.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.REGIME_TRIBUTARIO" Width="1.5" PointX="6" PointY="136" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.SEXO" Width="1.5" PointX="3" PointY="145.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.SUBCATEGORIA_PRODUTO" Width="1.5" PointX="5.25" PointY="126.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA" Width="1.5" PointX="8.25" PointY="138" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA" Width="1.5" PointX="16.5" PointY="151.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA_ACOMPANHAMENTO" Width="1.5" PointX="21.75" PointY="130.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA_ANEXO" Width="1.5" PointX="18.75" PointY="156.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE" Width="1.5" PointX="3" PointY="179.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_EMAIL" Width="1.5" PointX="3" PointY="184.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_PROPOSTA" Width="1.5" PointX="3" PointY="188.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_SMS" Width="1.5" PointX="3" PointY="192.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_ACAO" Width="1.5" PointX="3" PointY="195.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CONTA" Width="1.5" PointX="3" PointY="124.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CONTRIBUINTE" Width="1.5" PointX="3" PointY="198.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CRM" Width="1.5" PointX="3" PointY="201.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_PESSOA" Width="1.5" PointX="3" PointY="142.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_TAREFA" Width="1.5" PointX="3" PointY="204.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_TRANSPORTE" Width="1.5" PointX="8.25" PointY="134.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_VEICULO" Width="1.5" PointX="8.25" PointY="167.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TRANSPORTADORA" Width="1.5" PointX="10.5" PointY="137.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.TRANSPORTADORA_ANEXO" Width="1.5" PointX="12.75" PointY="141.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.UF" Width="1.5" PointX="6" PointY="167" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.UNIDADE" Width="1.5" PointX="8.25" PointY="91.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO" Width="1.5" PointX="11.25" PointY="108.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO_ANEXO" Width="1.5" PointX="13.5" PointY="133.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO_ANOTACAO" Width="1.5" PointX="13.5" PointY="126.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO" Width="1.5" PointX="3" PointY="215.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO_COMENTARIO" Width="1.5" PointX="13.5" PointY="162.625" IsExpanded="true" />
+      <Diagram DiagramId="e5f66dfefaaa4f07bfac11bd4752c80a" Name="Diagram1">
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.AGENDA" Width="1.5" PointX="5.25" PointY="121.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.AGENDA_ANEXO" Width="1.5" PointX="7.5" PointY="102.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE" Width="1.5" PointX="0.75" PointY="133.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.BANCO" Width="1.5" PointX="3" PointY="95.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CARGO_USUARIO" Width="1.5" PointX="3" PointY="98.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_AGENDA" Width="1.5" PointX="3" PointY="101.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_CLIENTE" Width="1.5" PointX="3" PointY="104.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_CUSTO_FIXO" Width="1.5" PointX="3" PointY="107.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_FORNECEDOR" Width="1.5" PointX="3" PointY="110.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_NOTIFICACAO" Width="1.5" PointX="3" PointY="113.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_PRODUTO" Width="1.5" PointX="3" PointY="116.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_USUARIO" Width="1.5" PointX="3" PointY="119.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE" Width="1.5" PointX="5.25" PointY="147.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_ANEXO" Width="1.5" PointX="7.5" PointY="154.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_ANOTACAO" Width="1.5" PointX="16.5" PointY="137.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_CONTATO" Width="1.5" PointX="7.5" PointY="158.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_QUADRO_SOCIETARIO" Width="1.5" PointX="7.5" PointY="162.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_REFERENCIA" Width="1.5" PointX="7.5" PointY="165.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.COMISSAO_CARGO" Width="1.5" PointX="5.25" PointY="98.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONFIGURACAO" Width="1.5" PointX="3" PointY="122.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO" Width="1.5" PointX="8.25" PointY="110.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_ANEXO" Width="1.5" PointX="10.5" PointY="107.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_CONTATO" Width="1.5" PointX="10.5" PointY="103.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_LANCAMENTO" Width="1.5" PointX="10.5" PointY="128.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM" Width="1.5" PointX="15.5" PointY="155.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ACAO" Width="1.5" PointX="20.75" PointY="154.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ANEXO" Width="1.5" PointX="17.75" PointY="163.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_COMENTARIO" Width="1.5" PointX="18.75" PointY="141.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_CONTATO" Width="1.5" PointX="17.75" PointY="168.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ORIGEM" Width="1.5" PointX="3" PointY="137.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA" Width="1.5" PointX="23.75" PointY="149.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ACOMPANHAMENTO" Width="1.5" PointX="26" PointY="137.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ANEXO" Width="1.5" PointX="26" PointY="157.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ITEM" Width="1.5" PointX="26" PointY="149.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CUSTO_FIXO" Width="1.5" PointX="5.25" PointY="106.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA" Width="1.5" PointX="8.25" PointY="144.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA_ANEXO" Width="1.5" PointX="10.5" PointY="154" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA_MAQUINA" Width="1.5" PointX="10.5" PointY="157.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FICHA_TECNICA" Width="1.5" PointX="21" PointY="145.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FICHA_TECNICA_DETALHE" Width="1.5" PointX="23.25" PointY="146.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_ENVIO" Width="1.5" PointX="3" PointY="149.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_FRETE" Width="1.5" PointX="3" PointY="152.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_PAGTO_RECTO" Width="1.5" PointX="13.5" PointY="131.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR" Width="1.5" PointX="5.25" PointY="127" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_ANEXO" Width="1.5" PointX="7.5" PointY="131.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_ANOTACOES" Width="1.5" PointX="13.5" PointY="123.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_CONTATO" Width="1.5" PointX="7.5" PointY="134.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_QUADRO_SOCIETARIO" Width="1.5" PointX="7.5" PointY="106.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.GRUPO_PLANO_CONTA" Width="1.5" PointX="3" PointY="155.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.LOG" Width="1.5" PointX="16.5" PointY="129" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MAQUINA" Width="1.5" PointX="3" PointY="159.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOTIVO_CANCELAMENTO" Width="1.5" PointX="3" PointY="163.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOTIVO_ENCERRAMENTO" Width="1.5" PointX="3" PointY="166.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOVIMENTO_ESTOQUE_PRODUTO" Width="1.5" PointX="19.5" PointY="136" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTICIA" Width="1.5" PointX="3" PointY="169.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTICIA_COMENTARIO" Width="1.5" PointX="16.5" PointY="146.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTIFICACAO" Width="1.5" PointX="8.25" PointY="125.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTIFICACAO_ANEXO" Width="1.5" PointX="10.5" PointY="132.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.OUTRO_CUSTO_VARIAVEL" Width="1.5" PointX="3" PointY="174.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PERFIL" Width="1.5" PointX="9" PointY="99" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PERIODICIDADE_TAREFA" Width="1.5" PointX="3" PointY="91.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA" Width="1.5" PointX="8.25" PointY="118.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO" Width="1.5" PointX="10.5" PointY="111.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" Width="1.5" PointX="13.5" PointY="119.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLANO_CONTA" Width="1.5" PointX="5.25" PointY="143.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLATAFORMA_ENTREGA" Width="1.5" PointX="3" PointY="177.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO" Width="1.5" PointX="10.5" PointY="141.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ANEXO" Width="1.5" PointX="12.75" PointY="152.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ESTOQUE_EMPRESA" Width="1.5" PointX="15.75" PointY="149.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_FORNECEDOR" Width="1.5" PointX="15.75" PointY="133.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_KIT" Width="1.5" PointX="12.75" PointY="157" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ORIGEM" Width="1.5" PointX="8.25" PointY="169.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_TABELA_PRECO" Width="1.5" PointX="18.75" PointY="145.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ULTIMOS_CUSTOS" Width="1.5" PointX="12.75" PointY="160" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.REGIME_TRIBUTARIO" Width="1.5" PointX="6" PointY="139.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SEXO" Width="1.5" PointX="3" PointY="146.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SUBCATEGORIA_PRODUTO" Width="1.5" PointX="5.25" PointY="116.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA" Width="1.5" PointX="8.25" PointY="140.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAMANHO" Width="1.5" PointX="3" PointY="181.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA" Width="1.5" PointX="18.5" PointY="155.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA_ACOMPANHAMENTO" Width="1.5" PointX="21.75" PointY="138" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA_ANEXO" Width="1.5" PointX="20.75" PointY="160.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE" Width="1.5" PointX="3" PointY="184.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_EMAIL" Width="1.5" PointX="3" PointY="189.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_PROPOSTA" Width="1.5" PointX="3" PointY="193.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_SMS" Width="1.5" PointX="3" PointY="197.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_ACAO" Width="1.5" PointX="3" PointY="200.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CONTA" Width="1.5" PointX="6" PointY="112.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CONTRIBUINTE" Width="1.5" PointX="3" PointY="203.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CRM" Width="1.5" PointX="3" PointY="206.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_PESSOA" Width="1.5" PointX="3" PointY="144" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_TAREFA" Width="1.5" PointX="3" PointY="209.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_TRANSPORTE" Width="1.5" PointX="11.25" PointY="137.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_VEICULO" Width="1.5" PointX="11.25" PointY="163.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TRANSPORTADORA" Width="1.5" PointX="13.5" PointY="140.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TRANSPORTADORA_ANEXO" Width="1.5" PointX="15.75" PointY="142.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.UF" Width="1.5" PointX="6" PointY="169.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.UNIDADE" Width="1.5" PointX="8.25" PointY="172.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO" Width="1.5" PointX="11.25" PointY="115.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO_ANEXO" Width="1.5" PointX="13.5" PointY="136.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO_ANOTACAO" Width="1.5" PointX="13.5" PointY="148.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO" Width="1.5" PointX="3" PointY="220.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO_COMENTARIO" Width="1.5" PointX="13.5" PointY="168.375" IsExpanded="true" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_ANEXO_AGENDA" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_CATEGORIA_AGENDA" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_TAREFA" ManuallyRouted="false" />
@@ -131,8 +134,10 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_LOG_ASSINANTE" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_MOTIVO_CANCELAMENTO_ASSINANTE" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_MOTIVO_ENCERRAMENTO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOVIMENTO_ESTOQUE_PRODUTO_ASSINANTE" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PLANO_CONTA_ASSINANTE" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TAMANHO_ASSINANTE" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_ASSINANTE" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_EMAIL_ASSINANTE" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_PROPOSTA_ASSINANTE" ManuallyRouted="false" />
@@ -223,6 +228,7 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA_EMPRESA" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_UF" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_FORNECEDOR_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOVIMENTO_ESTOQUE_PRODUTO_EMPRESA" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_EMPR" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKEMPRESA834470" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKFORMA_PAGT560718" ManuallyRouted="false" />
@@ -244,6 +250,8 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT396583" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKSUBGRUPO_P567299" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_LOG_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOVIMENTO_ESTOQUE_PRODUTO_PRODUTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOVIMENTO_ESTOQUE_PRODUTO_USUARIO" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKNOTICIA_CO334260" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKNOTICIA_CO92730" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKNOTIFICACA419021" ManuallyRouted="false" />
@@ -254,6 +262,8 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT936913" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PRODUTO_PRODUTO_ORIGEM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PRODUTO_TAMANHO" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_AN539356" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_ES321900" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_FO895314" ManuallyRouted="false" />
@@ -275,6 +285,7 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN416650" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SUBCATEGORIA_PRODUTO_ASSINANTE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

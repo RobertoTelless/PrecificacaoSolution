@@ -198,6 +198,7 @@
     <Compile Include="EntitiesServices\BancoService.cs" />
     <Compile Include="EntitiesServices\CategoriaClienteService.cs" />
     <Compile Include="EntitiesServices\CategoriaFornecedorService.cs" />
+    <Compile Include="EntitiesServices\CategoriaProdutoService.cs" />
     <Compile Include="EntitiesServices\CentroCustoService.cs" />
     <Compile Include="EntitiesServices\ClienteCnpjService.cs" />
     <Compile Include="EntitiesServices\ClienteService.cs" />
@@ -205,6 +206,14 @@
     <Compile Include="EntitiesServices\FornecedorCnpjService.cs" />
     <Compile Include="EntitiesServices\FornecedorService.cs" />
     <Compile Include="EntitiesServices\GrupoCCService.cs" />
+    <Compile Include="EntitiesServices\MovimentoEstoqueProdutoService.cs" />
+    <Compile Include="EntitiesServices\ProdutoEstoqueFilialService.cs" />
+    <Compile Include="EntitiesServices\ProdutoMovimentoEstoqueService.cs" />
+    <Compile Include="EntitiesServices\ProdutoService.cs" />
+    <Compile Include="EntitiesServices\ProdutoTabelaPrecoService.cs" />
+    <Compile Include="EntitiesServices\SubCategoriaProdutoService.cs" />
+    <Compile Include="EntitiesServices\TamanhoService.cs" />
+    <Compile Include="EntitiesServices\UnidadeService.cs" />
     <Compile Include="EntitiesServices\VideoService.cs" />
     <Compile Include="EntitiesServices\SubgrupoService.cs" />
     <Compile Include="EntitiesServices\TipoTarefaService.cs" />
@@ -232,6 +241,7 @@
     <Compile Include="Interfaces\Repositories\IBancoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaClienteRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaFornecedorRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICategoriaProdutoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICentroCustoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteCnpjRepository.cs" />
@@ -244,6 +254,7 @@
     <Compile Include="Interfaces\Repositories\IEmpresaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAgendaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFichaTecnicaDetalheRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFornecedorAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteAnotacaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFornecedorCnpjRepository.cs" />
@@ -251,8 +262,20 @@
     <Compile Include="Interfaces\Repositories\IFornecedorRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGrupoCCRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFornecedorAnotacaoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IMovimentoEstoqueProdutoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProdutoAnexoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProdutoEstoqueFilialRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProdutoFornecedorRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProdutoKitRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProdutoMovimentoEstoqueRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProdutoOrigemRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProdutoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProdutoTabelaPrecoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISexoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ISubcategoriaProdutoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITamanhoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoContribuinteRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUnidadeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVideoComentarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVideoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISubgrupoRepository.cs" />
@@ -295,6 +318,7 @@
     <Compile Include="Interfaces\Services\ICargoService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaClienteService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaFornecedorService.cs" />
+    <Compile Include="Interfaces\Services\ICategoriaProdutoService.cs" />
     <Compile Include="Interfaces\Services\ICentroCustoService.cs" />
     <Compile Include="Interfaces\Services\IClienteCnpjService.cs" />
     <Compile Include="Interfaces\Services\IClienteService.cs" />
@@ -302,6 +326,14 @@
     <Compile Include="Interfaces\Services\IFornecedorCnpjService.cs" />
     <Compile Include="Interfaces\Services\IFornecedorService.cs" />
     <Compile Include="Interfaces\Services\IGrupoCCService.cs" />
+    <Compile Include="Interfaces\Services\IMovimentoEstoqueProdutoService.cs" />
+    <Compile Include="Interfaces\Services\IProdutoEstoqueFilialService.cs" />
+    <Compile Include="Interfaces\Services\IProdutoMovimentoEstoqueService.cs" />
+    <Compile Include="Interfaces\Services\IProdutoService.cs" />
+    <Compile Include="Interfaces\Services\IProdutoTabelaPrecoService.cs" />
+    <Compile Include="Interfaces\Services\ISubCategoriaProdutoService.cs" />
+    <Compile Include="Interfaces\Services\ITamanhoService.cs" />
+    <Compile Include="Interfaces\Services\IUnidadeService.cs" />
     <Compile Include="Interfaces\Services\IVideoService.cs" />
     <Compile Include="Interfaces\Services\ISubgrupoService.cs" />
     <Compile Include="Interfaces\Services\ITipoTarefaService.cs" />
@@ -483,6 +515,9 @@
     <Compile Include="Model\MOTIVO_ENCERRAMENTO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\MOVIMENTO_ESTOQUE_PRODUTO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\NOTICIA.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
@@ -549,6 +584,9 @@
     <Compile Include="Model\PRODUTO_KIT.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PRODUTO_ORIGEM.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\PRODUTO_TABELA_PRECO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
@@ -565,6 +603,9 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SUBGRUPO_PLANO_CONTA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TAMANHO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TAREFA.cs">

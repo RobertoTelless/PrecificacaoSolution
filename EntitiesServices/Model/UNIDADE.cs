@@ -22,8 +22,10 @@ namespace EntitiesServices.Model
         }
     
         public int UNID_CD_ID { get; set; }
+        public Nullable<int> ASSI_CD_ID { get; set; }
         public string UNID_NM_NOME { get; set; }
         public string UNID_SG_SIGLA { get; set; }
+        public Nullable<int> UNID_IN_TIPO_UNIDADE { get; set; }
         public int UNID_IN_ATIVO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

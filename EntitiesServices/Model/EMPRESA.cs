@@ -22,6 +22,7 @@ namespace EntitiesServices.Model
             this.EMPRESA_ANEXO = new HashSet<EMPRESA_ANEXO>();
             this.EMPRESA_MAQUINA = new HashSet<EMPRESA_MAQUINA>();
             this.FORNECEDOR = new HashSet<FORNECEDOR>();
+            this.MOVIMENTO_ESTOQUE_PRODUTO = new HashSet<MOVIMENTO_ESTOQUE_PRODUTO>();
             this.TRANSPORTADORA = new HashSet<TRANSPORTADORA>();
             this.FORMA_PAGTO_RECTO = new HashSet<FORMA_PAGTO_RECTO>();
             this.PRODUTO_ESTOQUE_EMPRESA = new HashSet<PRODUTO_ESTOQUE_EMPRESA>();
@@ -69,6 +70,8 @@ namespace EntitiesServices.Model
         public virtual UF UF { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FORNECEDOR> FORNECEDOR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANSPORTADORA> TRANSPORTADORA { get; set; }
         public virtual REGIME_TRIBUTARIO REGIME_TRIBUTARIO { get; set; }
