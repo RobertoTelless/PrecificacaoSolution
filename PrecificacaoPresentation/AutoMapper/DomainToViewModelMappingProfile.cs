@@ -52,6 +52,18 @@ namespace MvcMapping.Mappers
             CreateMap<CLIENTE_CONTATO, ClienteContatoViewModel>();
             CreateMap<CLIENTE_REFERENCIA, ClienteReferenciaViewModel>();
             CreateMap<EMPRESA_MAQUINA, EmpresaMaquinaViewModel>();
+            CreateMap<CATEGORIA_PRODUTO, CategoriaProdutoViewModel>();
+            CreateMap<TAMANHO, TamanhoViewModel>();
+            CreateMap<UNIDADE, UnidadeViewModel>();
+            CreateMap<SUBCATEGORIA_PRODUTO, SubCategoriaProdutoViewModel>();
+            //CreateMap<PRODUTO_BARCODE, ProdutoBarcodeViewModel>();
+            CreateMap<PRODUTO_FORNECEDOR, ProdutoFornecedorViewModel>();
+            //CreateMap<PRODUTO_GRADE, ProdutoGradeViewModel>();
+            CreateMap<PRODUTO_TABELA_PRECO, ProdutoTabelaPrecoViewModel>();
+            CreateMap<PRODUTO, ProdutoViewModel>();
+            //CreateMap<FICHA_TECNICA, FichaTecnicaViewModel>();
+            //CreateMap<FICHA_TECNICA_DETALHE, FichaTecnicaDetalheViewModel>();
+            CreateMap<PRODUTO_KIT, ProdutoKitViewModel>();
 
         }
     }

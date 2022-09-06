@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using EntitiesServices.Model;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class TamanhoViewModel
     {
@@ -18,7 +18,7 @@ namespace ERP_CRM_Solution.ViewModels
         public Nullable<int> TAMA_IN_ATIVO { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRODUTO_GRADE> PRODUTO_GRADE { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<PRODUTO_GRADE> PRODUTO_GRADE { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace DataServices.Repositories
 
         public PRODUTO_KIT GetItemById(Int32 id)
         {
-            IQueryable<PRODUTO_KIT> query = Db.PRODUTO_KIT.Where(p => p.PRKI_CD_KIT == id);
+            IQueryable<PRODUTO_KIT> query = Db.PRODUTO_KIT.Where(p => p.PRKT_CD_ID == id);
             return query.FirstOrDefault();
         }
 

@@ -120,6 +120,11 @@
           <Property Name="CAPR_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
           <Property Name="CAPR_NM_NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CAPR_IN_EXPEDICAO" Type="int" />
+          <Property Name="CAPR_IN_FOOD" Type="int" />
+          <Property Name="CAPR_IN_GRADE" Type="int" />
+          <Property Name="CAPR_IN_TAMANHO" Type="int" />
+          <Property Name="CAPR_IN_SEO" Type="int" />
           <Property Name="CAPR_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CATEGORIA_USUARIO">
@@ -4637,6 +4642,11 @@
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKCATEGORIA_171360" FromRole="CATEGORIA_PRODUTO" ToRole="ASSINANTE" />
           <NavigationProperty Name="PRODUTO" Relationship="Self.FKPRODUTO88682" FromRole="CATEGORIA_PRODUTO" ToRole="PRODUTO" />
           <NavigationProperty Name="SUBCATEGORIA_PRODUTO" Relationship="Self.FKSUBCATEGOR381994" FromRole="CATEGORIA_PRODUTO" ToRole="SUBCATEGORIA_PRODUTO" />
+          <Property Name="CAPR_IN_EXPEDICAO" Type="Int32" />
+          <Property Name="CAPR_IN_FOOD" Type="Int32" />
+          <Property Name="CAPR_IN_GRADE" Type="Int32" />
+          <Property Name="CAPR_IN_TAMANHO" Type="Int32" />
+          <Property Name="CAPR_IN_SEO" Type="Int32" />
         </EntityType>
         <EntityType Name="CATEGORIA_USUARIO">
           <Key>
@@ -9364,6 +9374,11 @@
           <EntitySetMapping Name="CATEGORIA_PRODUTO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CATEGORIA_PRODUTO">
               <MappingFragment StoreEntitySet="CATEGORIA_PRODUTO">
+                <ScalarProperty Name="CAPR_IN_SEO" ColumnName="CAPR_IN_SEO" />
+                <ScalarProperty Name="CAPR_IN_TAMANHO" ColumnName="CAPR_IN_TAMANHO" />
+                <ScalarProperty Name="CAPR_IN_GRADE" ColumnName="CAPR_IN_GRADE" />
+                <ScalarProperty Name="CAPR_IN_FOOD" ColumnName="CAPR_IN_FOOD" />
+                <ScalarProperty Name="CAPR_IN_EXPEDICAO" ColumnName="CAPR_IN_EXPEDICAO" />
                 <ScalarProperty Name="CAPR_CD_ID" ColumnName="CAPR_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CAPR_NM_NOME" ColumnName="CAPR_NM_NOME" />
