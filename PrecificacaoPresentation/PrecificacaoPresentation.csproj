@@ -649,6 +649,14 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagens\1\Assinante\Foto\FotoOficial.jpg" />
+    <Content Include="Imagens\1\Clientes\1\Fotos\a1.jpg" />
+    <Content Include="Imagens\1\Clientes\2\Anexos\full_height.jpg" />
+    <Content Include="Imagens\1\Clientes\2\Fotos\a1.jpg" />
+    <Content Include="Imagens\1\Clientes\3\Anexos\Tela_SD.jpg" />
+    <Content Include="Imagens\1\Clientes\3\Fotos\a4.jpg" />
+    <Content Include="Imagens\1\Clientes\4\Fotos\Drogarias_pacheco_logo_450.png" />
+    <Content Include="Imagens\1\Clientes\5\Fotos\amoedo.png" />
+    <Content Include="Imagens\1\Clientes\6\Fotos\a3.jpg" />
     <Content Include="Imagens\1\Fornecedores\3\Fotos\a4.jpg" />
     <Content Include="Imagens\1\Fornecedores\4\Fotos\ambev-logo.png" />
     <Content Include="Imagens\1\Fornecedores\5\Fotos\tecnomedi.jpg" />
@@ -2081,6 +2089,7 @@
     <Content Include="Imagens\1\Notificacao\3\Anexos\Notificacao_3_18082022.pdf" />
     <Content Include="Imagens\1\Tarefa\13\Anexos\Usuario_Planilha.xlsx" />
     <Content Include="Imagens\1\Fornecedores\4\Anexos\CORREÇÕES DA PLATAFORMA _ Respostas.docx" />
+    <Content Include="Imagens\1\Clientes\4\Anexos\FornecedorLista_02092022.pdf" />
     <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\WebPrecificacao - Web Deploy.pubxml" />
@@ -3116,7 +3125,9 @@
     <Folder Include="Imagens\1\Agenda\6\Anexos\" />
     <Folder Include="Imagens\1\Agenda\7\Anexos\" />
     <Folder Include="Imagens\1\Agenda\8\Anexos\" />
-    <Folder Include="Imagens\1\Clientes\" />
+    <Folder Include="Imagens\1\Clientes\1\Anexos\" />
+    <Folder Include="Imagens\1\Clientes\5\Anexos\" />
+    <Folder Include="Imagens\1\Clientes\6\Anexos\" />
     <Folder Include="Imagens\1\Empresa\1\Anexos\" />
     <Folder Include="Imagens\1\Fornecedores\3\Anexos\" />
     <Folder Include="Imagens\1\Fornecedores\5\Anexos\" />
