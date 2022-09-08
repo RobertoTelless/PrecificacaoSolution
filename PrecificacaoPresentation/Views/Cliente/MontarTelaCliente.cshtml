@@ -173,7 +173,7 @@
                                 @Html.ButtonLinkIndex(text: "Gerar Planilha", action: "GerarClientePlanilha", controller: "Cliente")
                                 @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
                                 {
-                                    @Html.ButtonLinkIndex(text: "Indicadores", action: "MontarTelaIndicadoresClientes", controller: "Cliente", buttonClass: "success")
+                                    @Html.ButtonLinkIndex(text: "Indicadores", action: "MontarTelaIndicadoresCliente", controller: "Cliente", buttonClass: "success")
                                 }
                                 @Html.ButtonLinkIndex(text: "Voltar", controller: "Cliente", action: "VoltarDash")
                             </div>

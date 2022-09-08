@@ -319,7 +319,7 @@ namespace ERP_Condominios_Solution.Controllers
                     qs.CLIENTE.CLIE_NR_NUMERO = jObject["address"]["number"].ToString();
                     qs.CLIENTE.CLIE_NM_BAIRRO = jObject["address"]["neighborhood"].ToString();
                     qs.CLIENTE.CLIE_NM_CIDADE = jObject["address"]["city"].ToString();
-                    qs.CLIENTE.UF_CD_ID = ((List<UF>)Session["UFs"]).Where(x => x.UF_SG_SIGLA == jObject["address"]["state"].ToString()).Select(x => x.UF_CD_ID).FirstOrDefault();
+                    qs.CLIENTE.UF_CD_ID = baseApp.GetAllUF().Where(x => x.UF_SG_SIGLA == jObject["address"]["state"].ToString()).Select(x => x.UF_CD_ID).FirstOrDefault();
                     qs.CLIENTE.CLIE_NR_INSCRICAO_ESTADUAL = jObject["sintegra"]["home_state_registration"].ToString();
                     qs.CLIENTE.CLIE_NR_TELEFONE = jObject["phone"].ToString();
                     qs.CLIENTE.CLIE_NR_TELEFONE_ADICIONAL = jObject["phone_alt"].ToString();
@@ -343,7 +343,7 @@ namespace ERP_Condominios_Solution.Controllers
                         qs.CLIENTE.CLIE_NR_NUMERO = jObject["address"]["number"].ToString();
                         qs.CLIENTE.CLIE_NM_BAIRRO = jObject["address"]["neighborhood"].ToString();
                         qs.CLIENTE.CLIE_NM_CIDADE = jObject["address"]["city"].ToString();
-                        qs.CLIENTE.UF_CD_ID = ((List<UF>)Session["UFs"]).Where(x => x.UF_SG_SIGLA == jObject["address"]["state"].ToString()).Select(x => x.UF_CD_ID).FirstOrDefault();
+                        qs.CLIENTE.UF_CD_ID = baseApp.GetAllUF().Where(x => x.UF_SG_SIGLA == jObject["address"]["state"].ToString()).Select(x => x.UF_CD_ID).FirstOrDefault();
                         qs.CLIENTE.CLIE_NR_INSCRICAO_ESTADUAL = jObject["sintegra"]["home_state_registration"].ToString();
                         qs.CLIENTE.CLIE_NR_TELEFONE = jObject["phone"].ToString();
                         qs.CLIENTE.CLIE_NR_TELEFONE_ADICIONAL = jObject["phone_alt"].ToString();
@@ -462,8 +462,8 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Listas = (List<CLIENTE>)Session["ListaCliente"];
             ViewBag.Title = "Clientes";
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACL_CD_ID", "CACL_NM_NOME");
-            ViewBag.Emoresas = new SelectList(filApp.GetAllItens(idAss), "EMPR_CD_ID", "EMPR_NM_NOME");
-            ViewBag.UF = new SelectList((List<UF>)Session["UFs"], "UF_CD_ID", "UF_NM_NOME");
+            ViewBag.Empresas = new SelectList(filApp.GetAllItens(idAss), "EMPR_CD_ID", "EMPR_NM_NOME");
+            ViewBag.UF = new SelectList(baseApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             Session["Cliente"] = null;
             Session["IncluirCliente"] = 0;
 
@@ -697,7 +697,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 ViewBag.Filiais = new SelectList(filiais, "EMPR_CD_ID", "EMPR_NM_NOME");
             }
-            ViewBag.TiposPessoa = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.TiposPessoa = new SelectList(baseApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.TiposCont = new SelectList(baseApp.GetAllContribuinte(idAss), "TICO_CD_ID", "TICO_NM_NOME");
             ViewBag.Regimes = new SelectList(baseApp.GetAllRegimes(idAss), "RETR_CD_ID", "RETR_NM_NOME");
             ViewBag.Sexo = new SelectList(baseApp.GetAllSexo(), "SEXO_CD_ID", "SEXO_NM_NOME");
@@ -726,7 +726,7 @@ namespace ERP_Condominios_Solution.Controllers
         public ActionResult IncluirCliente(ClienteViewModel vm)
         {
             Int32 idAss = (Int32)Session["IdAssinante"];
-            ViewBag.TiposPessoa = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.TiposPessoa = new SelectList(baseApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.TiposCont = new SelectList(baseApp.GetAllContribuinte(idAss), "TICO_CD_ID", "TICO_NM_NOME");
             ViewBag.Regimes = new SelectList(baseApp.GetAllRegimes(idAss), "RETR_CD_ID", "RETR_NM_NOME");
             ViewBag.Sexo = new SelectList(baseApp.GetAllSexo(), "SEXO_CD_ID", "SEXO_NM_NOME");
@@ -867,7 +867,7 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
 
             // Prepara view
-            ViewBag.TiposPessoa = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.TiposPessoa = new SelectList(baseApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.TiposCont = new SelectList(baseApp.GetAllContribuinte(idAss), "TICO_CD_ID", "TICO_NM_NOME");
             ViewBag.Regimes = new SelectList(baseApp.GetAllRegimes(idAss), "RETR_CD_ID", "RETR_NM_NOME");
             ViewBag.Sexo = new SelectList(baseApp.GetAllSexo(), "SEXO_CD_ID", "SEXO_NM_NOME");
@@ -926,7 +926,7 @@ namespace ERP_Condominios_Solution.Controllers
         public ActionResult EditarCliente(ClienteViewModel vm)
         {
             Int32 idAss = (Int32)Session["IdAssinante"];
-            ViewBag.TiposPessoa = new SelectList((List<TIPO_PESSOA>)Session["TiposPessoas"], "TIPE_CD_ID", "TIPE_NM_NOME");
+            ViewBag.TiposPessoa = new SelectList(baseApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.TiposCont = new SelectList(baseApp.GetAllContribuinte(idAss), "TICO_CD_ID", "TICO_NM_NOME");
             ViewBag.Regimes = new SelectList(baseApp.GetAllRegimes(idAss), "RETR_CD_ID", "RETR_NM_NOME");
             ViewBag.Sexo = new SelectList(baseApp.GetAllSexo(), "SEXO_CD_ID", "SEXO_NM_NOME");
@@ -1118,7 +1118,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Title = "Clientes";
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACL_CD_ID", "CACL_NM_NOME");
             ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
-            ViewBag.UF = new SelectList((List<UF>)Session["UFs"], "UF_CD_ID", "UF_NM_NOME");
+            ViewBag.UF = new SelectList(baseApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             Session["Cliente"] = null;
             //List<SelectListItem> ativo = new List<SelectListItem>();
             //ativo.Add(new SelectListItem() { Text = "Ativo", Value = "1" });
@@ -4015,20 +4015,23 @@ namespace ERP_Condominios_Solution.Controllers
             foreach (UF item in ufs)
             {
                 Int32 num = forns.Where(p => p.UF_CD_ID == item.UF_CD_ID).ToList().Count;
-                ModeloViewModel mod = new ModeloViewModel();
-                mod.Nome = item.UF_NM_NOME;
-                mod.Valor = num;
-                lista2.Add(mod);
+                if (num > 0)
+                {
+                    ModeloViewModel mod = new ModeloViewModel();
+                    mod.Nome = item.UF_NM_NOME;
+                    mod.Valor = num;
+                    lista2.Add(mod);
+                }
             }
             ViewBag.ListaClienteUF = lista2;
             Session["ListaClienteUF"] = lista2;
 
             // Recupera clientes por Cidade
             List<ModeloViewModel> lista3 = new List<ModeloViewModel>();
-            List<String> cids = forns.Select(p => p.CLIE_NM_CIDADE).Distinct().ToList();
+            List<String> cids = forns.Select(p => p.CLIE_NM_CIDADE.ToUpper()).Distinct().ToList();
             foreach (String item in cids)
             {
-                Int32 num = forns.Where(p => p.CLIE_NM_CIDADE == item).ToList().Count;
+                Int32 num = forns.Where(p => p.CLIE_NM_CIDADE.ToUpper() == item).ToList().Count;
                 ModeloViewModel mod = new ModeloViewModel();
                 mod.Nome = item;
                 mod.Valor = num;
@@ -4037,25 +4040,28 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.ListaClienteCidade = lista3;
             Session["ListaClienteCidade"] = lista3;
 
-            // Recupera clientes por Categoria
+            // Recupera Clientes por Categoria
             List<ModeloViewModel> lista4 = new List<ModeloViewModel>();
             List<CATEGORIA_CLIENTE> cats = baseApp.GetAllTipos(idAss).ToList();
             foreach (CATEGORIA_CLIENTE item in cats)
             {
                 Int32 num = forns.Where(p => p.CACL_CD_ID == item.CACL_CD_ID).ToList().Count;
-                ModeloViewModel mod = new ModeloViewModel();
-                mod.Nome = item.CACL_NM_NOME;
-                mod.Valor = num;
-                lista2.Add(mod);
+                if (num > 0)
+                {
+                    ModeloViewModel mod = new ModeloViewModel();
+                    mod.Nome = item.CACL_NM_NOME;
+                    mod.Valor = num;
+                    lista4.Add(mod);
+                }
             }
-            ViewBag.ListaClienteCats = lista2;
-            Session["ListaClienteCats"] = lista2;
+            ViewBag.ListaClienteCats = lista4;
+            Session["ListaClienteCats"] = lista4;
 
             // Recupera Clientes com Pagto em atraso
-            ViewBag.ListaFornAtraso = null;
+            ViewBag.ListaClienteAtraso = null;
 
             // Recupera Clientes com mais pedidos
-            ViewBag.ListaFornPedidos = null;
+            ViewBag.ListaClientePedidos = null;
             return View(vm);
         }
 
@@ -4108,6 +4114,8 @@ namespace ERP_Condominios_Solution.Controllers
             cor.Add("#359E18");
             cor.Add("#FFAE00");
             cor.Add("#FF7F00");
+            cor.Add("#FFA113");
+            cor.Add("#FFB798");
             Int32 i = 1;
 
             foreach (ModeloViewModel item in lista)
@@ -4126,8 +4134,16 @@ namespace ERP_Condominios_Solution.Controllers
                 {
                     cor.Add("#FF7F00");
                 }
+                else if (i == 4)
+                {
+                    cor.Add("#FFA113");
+                }
+                else if (i == 5)
+                {
+                    cor.Add("#FF7C32");
+                }
                 i++;
-                if (i > 3)
+                if (i > 5)
                 {
                     i = 1;
                 }
@@ -4149,6 +4165,8 @@ namespace ERP_Condominios_Solution.Controllers
             cor.Add("#359E18");
             cor.Add("#FFAE00");
             cor.Add("#FF7F00");
+            cor.Add("#FFA113");
+            cor.Add("#FFB798");
             Int32 i = 1;
 
             foreach (ModeloViewModel item in lista)
@@ -4167,8 +4185,16 @@ namespace ERP_Condominios_Solution.Controllers
                 {
                     cor.Add("#FF7F00");
                 }
+                else if (i == 4)
+                {
+                    cor.Add("#FFA113");
+                }
+                else if (i == 5)
+                {
+                    cor.Add("#FF7C32");
+                }
                 i++;
-                if (i > 3)
+                if (i > 5)
                 {
                     i = 1;
                 }
@@ -4190,6 +4216,8 @@ namespace ERP_Condominios_Solution.Controllers
             cor.Add("#359E18");
             cor.Add("#FFAE00");
             cor.Add("#FF7F00");
+            cor.Add("#FFA113");
+            cor.Add("#FFB798");
             Int32 i = 1;
 
             foreach (ModeloViewModel item in lista)
@@ -4208,8 +4236,16 @@ namespace ERP_Condominios_Solution.Controllers
                 {
                     cor.Add("#FF7F00");
                 }
+                else if (i == 4)
+                {
+                    cor.Add("#FFA113");
+                }
+                else if (i == 5)
+                {
+                    cor.Add("#FF7C32");
+                }
                 i++;
-                if (i > 3)
+                if (i > 5)
                 {
                     i = 1;
                 }

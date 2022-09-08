@@ -13,7 +13,6 @@ namespace ERP_Condominios_Solution.ViewModels
         [Key]
         public int CLIE_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
-        [Required(ErrorMessage = "Campo FILIAL obrigatorio")]
         public Nullable<int> EMPR_CD_ID { get; set; }
         public Nullable<int> USUA_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo CATEGORIA obrigatorio")]

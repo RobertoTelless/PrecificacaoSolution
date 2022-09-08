@@ -112,7 +112,21 @@
                                     <div class="col-lg-4">  
                                         <div style="height: 250px;" class="contact-box">
                                             <a href="@Url.Action("EditarCliente", "Cliente", new { id = cond.CLIE_CD_ID })"></a>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-3">
+                                                @if (!String.IsNullOrEmpty(cond.CLIE_AQ_FOTO))
+                                                {
+                                                    <div class="text-center">
+                                                        <img alt="image" class="img-circle m-t-xs img-responsive" src="@Url.Content(cond.CLIE_AQ_FOTO)" style="width: auto; height: auto; max-height: 50px; max-width: 50px;">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="text-center">
+                                                        <img src="~/Imagens/Base/icone_imagem.jpg" style="width: auto; height: auto; max-height: 55px; max-width: 45px;">
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="col-sm-9">
                                                 <h3><strong>@cond.CLIE_NM_NOME</strong></h3>
                                                 <p><i class="fa fa-envelope"></i> <a href="@Url.Action("EnviarEMailCliente", "Cliente", new { id = cond.CLIE_CD_ID})">@cond.CLIE_NM_EMAIL</a> </p>
                                                 <address>

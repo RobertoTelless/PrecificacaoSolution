@@ -108,7 +108,7 @@
                                 {
                                     <li class=""><a data-toggle="tab" href="#tab-5">Dados Pessoais</a></li>
                                 }
-                                <li class=""><a data-toggle="tab" href="#tab-6">Dados Comerciais</a></li>
+                                @*<li class=""><a data-toggle="tab" href="#tab-6">Dados Comerciais</a></li>*@
                                 <li class=""><a data-toggle="tab" href="#tab-7">Observações</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-8">Indicadores</a></li>
                             }
@@ -128,7 +128,7 @@
                                 {
                                     <li class=""><a data-toggle="tab" href="#tab-5">Dados Pessoais</a></li>
                                 }
-                                <li class=""><a data-toggle="tab" href="#tab-6">Dados Comerciais</a></li>
+                                @*<li class=""><a data-toggle="tab" href="#tab-6">Dados Comerciais</a></li>*@
                                 <li class=""><a data-toggle="tab" href="#tab-7">Observações</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-8">Indicadores</a></li>
                             }
@@ -217,7 +217,7 @@
                                                         <div class="col-lg-3 col-md-3 col-xs-12">
                                                             Categoria*
                                                             <div class="input-group">
-                                                                @Html.DropDownListFor(m => m.CACL_CD_ID, (SelectList)ViewBag.Cats, "Selecionar", new { @class = "form-control", autofocus = true })
+                                                                @Html.DropDownListFor(m => m.CACL_CD_ID, (SelectList)ViewBag.Tipos, "Selecionar", new { @class = "form-control", autofocus = true })
                                                                 @Html.ValidationMessageFor(m => m.CACL_CD_ID, "", new { @style = "color:red" })
                                                                 <span class="input-group-addon">
                                                                     @Html.TableLinkAction("IncluirCatCliente1", "Cliente", null, "glyphicon glyphicon-plus", "Adicionar Categoria")
@@ -406,7 +406,7 @@
                                                         <div class="col-lg-3 col-md-3 col-xs-12">
                                                             Categoria*
                                                             <div class="input-group">
-                                                                @Html.DropDownListFor(m => m.CACL_CD_ID, (SelectList)ViewBag.Cats, "Selecionar", new { @class = "form-control", autofocus = true })
+                                                                @Html.DropDownListFor(m => m.CACL_CD_ID, (SelectList)ViewBag.Tipos, "Selecionar", new { @class = "form-control", autofocus = true })
                                                                 @Html.ValidationMessageFor(m => m.CACL_CD_ID, "", new { @style = "color:red" })
                                                                 <span class="input-group-addon">
                                                                     @Html.TableLinkAction("IncluirCatCliente1", "Cliente", null, "glyphicon glyphicon-plus", "Adicionar Categoria")
@@ -1235,7 +1235,7 @@
                                 </div>
 
                                 @*Dados Comerciais*@
-                                <div id="tab-6" class="tab-pane">
+                                @*<div id="tab-6" class="tab-pane">
                                     <div class="panel-body">
                                         @using (Html.BeginForm("EditarCliente", "Cliente", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                                         {
@@ -1311,7 +1311,7 @@
                                             </div>
                                         }
                                     </div>
-                                </div>
+                                </div>*@
 
 
                                 @*Observações*@
