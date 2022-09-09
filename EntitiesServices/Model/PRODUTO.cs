@@ -73,6 +73,16 @@ namespace EntitiesServices.Model
         public Nullable<int> PROD_IN_ATIVO { get; set; }
         public string PROD_NM_LOCALIZACAO_ESTOQUE { get; set; }
         public string PROD_TX_OBSERVACOES { get; set; }
+        public Nullable<int> PROD_QN_RESERVA_ESTOQUE { get; set; }
+        public string PROD_NR_FATOR_CONVERSAO { get; set; }
+        public Nullable<decimal> PROD_QN_PESO_LIQUIDO { get; set; }
+        public Nullable<decimal> PROD_QN_PESO_BRUTO { get; set; }
+        public Nullable<int> PROD_NR_DIAS_PREPARACAO { get; set; }
+        public Nullable<int> PROD_IN_TIPO_EMBALAGEM { get; set; }
+        public Nullable<decimal> PROD_NR_ALTURA { get; set; }
+        public Nullable<decimal> PROD_NR_LARGURA { get; set; }
+        public Nullable<decimal> PROD_NR_COMPRIMENTO { get; set; }
+        public Nullable<decimal> PROD_NR_DIAMETRO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_PRODUTO CATEGORIA_PRODUTO { get; set; }

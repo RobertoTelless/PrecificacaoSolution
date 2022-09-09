@@ -1024,6 +1024,7 @@
           <Property Name="PROD_QN_QUANTIDADE_MINIMA" Type="int" Nullable="false" />
           <Property Name="PROD_QN_QUANTIDADE_MAXIMA" Type="int" Nullable="false" />
           <Property Name="PROD_QN_ESTOQUE" Type="int" Nullable="false" />
+          <Property Name="PROD_QN_RESERVA_ESTOQUE" Type="int" />
           <Property Name="PROD_NM_LOCALIZACAO_ESTOQUE" Type="varchar" MaxLength="50" />
           <Property Name="PROD_DT_ULTIMA_MOVIMENTACAO" Type="date" />
           <Property Name="PROD_VL_ULTIMO_CUSTO" Type="decimal" Precision="19" Scale="2" />
@@ -1039,7 +1040,16 @@
           <Property Name="PROD_NR_GTIN_EAN_TRIB" Type="varchar" MaxLength="50" />
           <Property Name="PROD_NM_UNIDADE_TRIBUTARIA" Type="varchar" MaxLength="50" />
           <Property Name="PROD_NR_ENQUADRE_IPI" Type="varchar" MaxLength="50" />
+          <Property Name="PROD_NR_FATOR_CONVERSAO" Type="varchar" MaxLength="50" />
           <Property Name="PROD_VL_IPI_FIXO" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="PROD_QN_PESO_LIQUIDO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_QN_PESO_BRUTO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_NR_DIAS_PREPARACAO" Type="int" />
+          <Property Name="PROD_IN_TIPO_EMBALAGEM" Type="int" />
+          <Property Name="PROD_NR_ALTURA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_NR_LARGURA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_NR_COMPRIMENTO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_NR_DIAMETRO" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PROD_DT_CADASTRO" Type="date" />
           <Property Name="PROD_TX_OBSERVACOES" Type="text" />
           <Property Name="PROD_IN_ATIVO" Type="int" />
@@ -5785,6 +5795,16 @@
           <Property Name="PROD_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="FICHA_TECNICA" Relationship="Db_PrecificacaoModel.FK_FICHA_TECNICA_PRODUTO" FromRole="PRODUTO" ToRole="FICHA_TECNICA" />
           <NavigationProperty Name="FICHA_TECNICA_DETALHE" Relationship="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_PRODUTO" FromRole="PRODUTO" ToRole="FICHA_TECNICA_DETALHE" />
+          <Property Name="PROD_QN_RESERVA_ESTOQUE" Type="Int32" />
+          <Property Name="PROD_NR_FATOR_CONVERSAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_QN_PESO_LIQUIDO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_QN_PESO_BRUTO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_NR_DIAS_PREPARACAO" Type="Int32" />
+          <Property Name="PROD_IN_TIPO_EMBALAGEM" Type="Int32" />
+          <Property Name="PROD_NR_ALTURA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_NR_LARGURA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_NR_COMPRIMENTO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_NR_DIAMETRO" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="PRODUTO_ANEXO">
           <Key>
@@ -10384,6 +10404,16 @@
           <EntitySetMapping Name="PRODUTO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.PRODUTO">
               <MappingFragment StoreEntitySet="PRODUTO">
+                <ScalarProperty Name="PROD_NR_DIAMETRO" ColumnName="PROD_NR_DIAMETRO" />
+                <ScalarProperty Name="PROD_NR_COMPRIMENTO" ColumnName="PROD_NR_COMPRIMENTO" />
+                <ScalarProperty Name="PROD_NR_LARGURA" ColumnName="PROD_NR_LARGURA" />
+                <ScalarProperty Name="PROD_NR_ALTURA" ColumnName="PROD_NR_ALTURA" />
+                <ScalarProperty Name="PROD_IN_TIPO_EMBALAGEM" ColumnName="PROD_IN_TIPO_EMBALAGEM" />
+                <ScalarProperty Name="PROD_NR_DIAS_PREPARACAO" ColumnName="PROD_NR_DIAS_PREPARACAO" />
+                <ScalarProperty Name="PROD_QN_PESO_BRUTO" ColumnName="PROD_QN_PESO_BRUTO" />
+                <ScalarProperty Name="PROD_QN_PESO_LIQUIDO" ColumnName="PROD_QN_PESO_LIQUIDO" />
+                <ScalarProperty Name="PROD_NR_FATOR_CONVERSAO" ColumnName="PROD_NR_FATOR_CONVERSAO" />
+                <ScalarProperty Name="PROD_QN_RESERVA_ESTOQUE" ColumnName="PROD_QN_RESERVA_ESTOQUE" />
                 <ScalarProperty Name="PROD_TX_OBSERVACOES" ColumnName="PROD_TX_OBSERVACOES" />
                 <ScalarProperty Name="PROD_NM_LOCALIZACAO_ESTOQUE" ColumnName="PROD_NM_LOCALIZACAO_ESTOQUE" />
                 <ScalarProperty Name="PROD_CD_ID" ColumnName="PROD_CD_ID" />

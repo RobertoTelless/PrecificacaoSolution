@@ -91,8 +91,94 @@ namespace ERP_Condominios_Solution.ViewModels
         public string PROD_NM_LOCALIZACAO_ESTOQUE { get; set; }
         [StringLength(5000, ErrorMessage = "A OBSERVAÇÃO deve conter no máximo 5000 caracteres.")]
         public string PROD_TX_OBSERVACOES { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<int> PROD_QN_RESERVA_ESTOQUE { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> PROD_QN_PESO_LIQUIDO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> PROD_QN_PESO_BRUTO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<int> PROD_NR_DIAS_PREPARACAO { get; set; }
+        public Nullable<int> PROD_IN_TIPO_EMBALAGEM { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> PROD_NR_ALTURA { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> PROD_NR_LARGURA { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> PROD_NR_COMPRIMENTO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> PROD_NR_DIAMETRO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public string PROD_NR_FATOR_CONVERSAO { get; set; }
 
         public Nullable<int> EntradaSaida { get; set; }
+
+        public string UltimoCusto
+        {
+            get
+            {
+                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_ULTIMO_CUSTO.Value);
+            }
+            set
+            {
+                PROD_VL_ULTIMO_CUSTO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string PrecoVenda
+        {
+            get
+            {
+                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_VENDA.Value);
+            }
+            set
+            {
+                PROD_VL_PRECO_VENDA = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string PrecoPromocao
+        {
+            get
+            {
+                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_PROMOCAO.Value);
+            }
+            set
+            {
+                PROD_VL_PRECO_PROMOCAO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string PrecoMinimo
+        {
+            get
+            {
+                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_MINIMO.Value);
+            }
+            set
+            {
+                PROD_VL_PRECO_MINIMO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string MarkupMinimo
+        {
+            get
+            {
+                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_MARKUP_MINIMO.Value);
+            }
+            set
+            {
+                PROD_VL_MARKUP_MINIMO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string MarkupPadrao
+        {
+            get
+            {
+                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_MARKUP_PADRAO.Value);
+            }
+            set
+            {
+                PROD_VL_MARKUP_PADRAO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
 
         public bool AvisaMinima 
         {
@@ -110,42 +196,6 @@ namespace ERP_Condominios_Solution.ViewModels
             }
         }
 
-        [RegularExpression(@"^[0-9]+([,][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
-        public Nullable<decimal> PrecoVenda
-        {
-            get
-            {
-                return PROD_VL_PRECO_VENDA;
-            }
-            set
-            {
-                PROD_VL_PRECO_VENDA = value;
-            }
-        }
-        [RegularExpression(@"^[0-9]+([,][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
-        public Nullable<decimal> PrecoPromocao
-        {
-            get
-            {
-                return PROD_VL_PRECO_PROMOCAO;
-            }
-            set
-            {
-                PROD_VL_PRECO_PROMOCAO = value;
-            }
-        }
-        //[RegularExpression(@"^[0-9]+([,][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
-        //public Nullable<int> Garantia
-        //{
-        //    get
-        //    {
-        //        return PROD_NR_GARANTIA;
-        //    }
-        //    set
-        //    {
-        //        PROD_NR_GARANTIA = value;
-        //    }
-        //}
         [RegularExpression(@"^[0-9]+([,][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<int> QuantidadeMaxima
         {
@@ -190,98 +240,6 @@ namespace ERP_Condominios_Solution.ViewModels
             }
         }
 
-        //public bool BalancaPDV
-        //{
-        //    get
-        //    {
-        //        if (PROD_IN_BALANCA_PDV == 1)
-        //        {
-        //            return true;
-        //        }
-        //        return false;
-        //    }
-        //    set
-        //    {
-        //        PROD_IN_BALANCA_PDV = (value == true) ? 1 : 0;
-        //    }
-        //}
-
-        //public bool BalancaRetaguarda
-        //{
-        //    get
-        //    {
-        //        if (PROD_IN_BALANCA_RETAGUARDA == 1)
-        //        {
-        //            return true;
-        //        }
-        //        return false;
-        //    }
-        //    set
-        //    {
-        //        PROD_IN_BALANCA_RETAGUARDA = (value == true) ? 1 : 0;
-        //    }
-        //}
-        //public bool ProdutoTipoCombo
-        //{
-        //    get
-        //    {
-        //        if (PROD_IN_TIPO_COMBO-- == 1)
-        //        {
-        //            return true;
-        //        }
-        //        return false;
-        //    }
-        //    set
-        //    {
-        //        PROD_IN_TIPO_COMBO = (value == true) ? 1 : 0;
-        //    }
-        //}
-        //public bool ProdutoOpcaoCombo
-        //{
-        //    get
-        //    {
-        //        if (PROD_IN_OPCAO_COMBO-- == 1)
-        //        {
-        //            return true;
-        //        }
-        //        return false;
-        //    }
-        //    set
-        //    {
-        //        PROD_IN_OPCAO_COMBO = (value == true) ? 1 : 0;
-        //    }
-        //}
-        //public bool CobrarMaior
-        //{
-        //    get
-        //    {
-        //        if (PROD_IN_COBRAR_MAIOR == 1)
-        //        {
-        //            return true;
-        //        }
-        //        return false;
-        //    }
-        //    set
-        //    {
-        //        PROD_IN_COBRAR_MAIOR = (value == true) ? 1 : 0;
-        //    }
-        //}
-        //public bool ArquivoTexto
-        //{
-        //    get
-        //    {
-        //        if (PROD_IN_GERAR_ARQUIVO == 1)
-        //        {
-        //            return true;
-        //        }
-        //        return false;
-        //    }
-        //    set
-        //    {
-        //        PROD_IN_GERAR_ARQUIVO = (value == true) ? 1 : 0;
-        //    }
-        //}
-
         public String Tipo
         {
             get
@@ -316,49 +274,10 @@ namespace ERP_Condominios_Solution.ViewModels
         public virtual ICollection<PRODUTO_ULTIMOS_CUSTOS> PRODUTO_ULTIMOS_CUSTOS { get; set; }
         public virtual UNIDADE UNIDADE { get; set; }
         public virtual SUBCATEGORIA_PRODUTO SUBCATEGORIA_PRODUTO { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FICHA_TECNICA> FICHA_TECNICA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
 
     }
 }
