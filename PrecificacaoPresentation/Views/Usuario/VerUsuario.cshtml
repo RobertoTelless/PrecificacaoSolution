@@ -111,9 +111,9 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#tab-1">Dados Gerais</a></li>
                             <li class=""><a data-toggle="tab" href="#tab-2">Fotografia e Anexos</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-3">Informações de Acessos</a></li>
+                            @*<li class=""><a data-toggle="tab" href="#tab-3">Informações de Acessos</a></li>*@
                             <li class=""><a data-toggle="tab" href="#tab-4">Observações</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-5">Indicadores</a></li>
+                            @*<li class=""><a data-toggle="tab" href="#tab-5">Indicadores</a></li>*@
                         </ul>
                         <div class="tab-content">
                             @*Dados Gerais*@
@@ -274,7 +274,7 @@
                             </div>
 
                             @*Informações de Acesso*@
-                            <div id="tab-3" class="tab-pane">
+                            @*<div id="tab-3" class="tab-pane">
                                 <div class="panel-body">
                                     @using (Html.BeginForm("EditarUsuario", "Usuario", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id="pwd-container1" }))
                                     {
@@ -332,7 +332,7 @@
                                     }
 
                                 </div>
-                            </div>
+                            </div>*@
 
                             @*Observações*@
                             <div id="tab-4" class="tab-pane">
@@ -352,11 +352,11 @@
                             </div>
 
                             @*Indicadores*@
-                            <div id="tab-5" class="tab-pane">
+                            @*<div id="tab-5" class="tab-pane">
                                 <div class="panel-body">
 
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>

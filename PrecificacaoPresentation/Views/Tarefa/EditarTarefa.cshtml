@@ -147,14 +147,30 @@
                                                         @Html.TextBoxFor(m => m.TARE_NM_LOCAL, new { @class = "form-control", autofocus = true })
                                                         @Html.ValidationMessageFor(m => m.TARE_NM_LOCAL, "", new { @style = "color:red" })
                                                     </div>
-                                                    <div class="col-lg-3 col-md-3 col-xs-12">
-                                                        Periodicidade
-                                                        @Html.TextBoxFor(m => m.PERIODICIDADE_TAREFA.PETA_NM_NOME, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Repetições
-                                                        @Html.TextBoxFor(m => m.TARE_NR_PERIODICIDADE_QUANTIDADE, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
-                                                    </div>
+                                                    @if (Model.TARE_IN_TAREFA_PAI == null)
+                                                    {
+                                                        <div class="col-lg-3 col-md-3 col-xs-12">
+                                                            Periodicidade
+                                                            @Html.DropDownListFor(m => m.PETA_CD_ID, (SelectList)ViewBag.Periodicidade, "Selecionar", new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PETA_CD_ID, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Repetições
+                                                            @Html.TextBoxFor(m => m.TARE_NR_PERIODICIDADE_QUANTIDADE, new { @class = "form-control touchspin2", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.TARE_NR_PERIODICIDADE_QUANTIDADE, "", new { @style = "color:red" })
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="col-lg-3 col-md-3 col-xs-12">
+                                                            Periodicidade
+                                                            @Html.TextBoxFor(m => m.PERIODICIDADE_TAREFA.PETA_NM_NOME, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Repetições
+                                                            @Html.TextBoxFor(m => m.TARE_NR_PERIODICIDADE_QUANTIDADE, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                        </div>
+                                                    }
                                                 </div>
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                     <div class="col-lg-12 col-md-12 col-xs-12">

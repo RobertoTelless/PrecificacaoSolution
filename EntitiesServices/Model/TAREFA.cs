@@ -40,6 +40,7 @@ namespace EntitiesServices.Model
         public byte[] TARE_TX_OBSERVACOES { get; set; }
         public int TARE_IN_ATIVO { get; set; }
         public string TARE_TEX_OBSERVACAO { get; set; }
+        public Nullable<int> TARE_IN_TAREFA_PAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }

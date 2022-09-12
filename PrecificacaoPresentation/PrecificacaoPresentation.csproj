@@ -3031,7 +3031,6 @@
     <Content Include="Views\Video\MontarTelaUsuario.cshtml" />
     <Content Include="Views\Video\MontarTelaVideo.cshtml" />
     <Content Include="Views\Video\IncluirVideo.cshtml" />
-    <Content Include="Views\BaseAdmin\CarregarBase - Cópia .cshtml" />
     <Content Include="Views\Video\EditarVideo.cshtml" />
     <Content Include="Views\Video\IncluirComentario.cshtml" />
     <Content Include="Views\Fornecedor\MontarTelaFornecedor.cshtml" />

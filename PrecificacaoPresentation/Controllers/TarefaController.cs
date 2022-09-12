@@ -400,7 +400,7 @@ namespace ERP_Condominios_Solution.Controllers
             vm.TARE_DT_ESTIMADA = DateTime.Today.Date.AddDays(5);
             vm.TARE_IN_PRIORIDADE = 1;
             vm.TARE_IN_STATUS = 1;
-            vm.TARE_IN_AVISA = 1;
+            vm.TARE_IN_AVISA = 1;           
             vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
             return View(vm);
         }
@@ -439,12 +439,13 @@ namespace ERP_Condominios_Solution.Controllers
                     TAREFA item = Mapper.Map<TarefaViewModel, TAREFA>(vm);
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
 
-                    if (item.TARE_NR_PERIODICIDADE_QUANTIDADE != null || item.TARE_NR_PERIODICIDADE_QUANTIDADE == 0)
+                    if (item.TARE_NR_PERIODICIDADE_QUANTIDADE != null || item.TARE_NR_PERIODICIDADE_QUANTIDADE > 0)
                     {
                         DateTime dtAgenda = (DateTime)item.TARE_DT_ESTIMADA;
                         DateTime dtTarefa = (DateTime)item.TARE_DT_CADASTRO;
                         TAREFA tarefa = new TAREFA();
                         Int32 tare = 0;
+                        Int32 pai = 0;
 
                         for (var i = 0; i < item.TARE_NR_PERIODICIDADE_QUANTIDADE; i++)
                         {
@@ -453,6 +454,7 @@ namespace ERP_Condominios_Solution.Controllers
                                 Int32 volta = baseApp.ValidateCreate(item, usuarioLogado);
                                 Session["PeriTarefa"] = item.PERIODICIDADE_TAREFA;
                                 tare = item.TARE_CD_ID;
+                                pai = item.TARE_CD_ID;
 
                                 // Verifica retorno
                                 if (volta == 1)
@@ -484,6 +486,7 @@ namespace ERP_Condominios_Solution.Controllers
                                 tarefa.TARE_NR_PERIODICIDADE_QUANTIDADE = item.TARE_NR_PERIODICIDADE_QUANTIDADE;
                                 tarefa.TARE_DT_CADASTRO = dtTarefa;
                                 tarefa.TARE_DT_ESTIMADA = dtAgenda;
+                                tarefa.TARE_IN_TAREFA_PAI = pai;
                                 tarefa.TARE_NM_TITULO = $"{item.TARE_NM_TITULO} #{i}";
 
                                 Int32 volta = baseApp.ValidateCreate(tarefa, usuarioLogado);
@@ -632,6 +635,7 @@ namespace ERP_Condominios_Solution.Controllers
             // Prepara view
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "TITR_CD_ID", "TITR_NM_NOME");
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss), "USUA_CD_ID", "USUA_NM_NOME");
+            ViewBag.Periodicidade = new SelectList(baseApp.GetAllPeriodicidade(), "PETA_CD_ID", "PETA_NM_NOME");
             List<SelectListItem> status = new List<SelectListItem>();
             status.Add(new SelectListItem() { Text = "Pendente", Value = "1" });
             status.Add(new SelectListItem() { Text = "Em Andamento", Value = "2" });
@@ -654,6 +658,14 @@ namespace ERP_Condominios_Solution.Controllers
             if ((Int32)Session["MensTarefa"] == 11)
             {
                 ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0024", CultureInfo.CurrentCulture));
+            }
+            if ((Int32)Session["MensTarefa"] == 20)
+            {
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0013", CultureInfo.CurrentCulture));
+            }
+            if ((Int32)Session["MensTarefa"] == 21)
+            {
+                ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0014", CultureInfo.CurrentCulture));
             }
 
             TAREFA item = baseApp.GetItemById(id);
@@ -678,6 +690,7 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "TITR_CD_ID", "TITR_NM_NOME");
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss), "USUA_CD_ID", "USUA_NM_NOME");
+            ViewBag.Periodicidade = new SelectList(baseApp.GetAllPeriodicidade(), "PETA_CD_ID", "PETA_NM_NOME");
             List<SelectListItem> status = new List<SelectListItem>();
             status.Add(new SelectListItem() { Text = "Pendente", Value = "1" });
             status.Add(new SelectListItem() { Text = "Em Andamento", Value = "2" });
@@ -691,6 +704,7 @@ namespace ERP_Condominios_Solution.Controllers
             prior.Add(new SelectListItem() { Text = "Alta", Value = "3" });
             prior.Add(new SelectListItem() { Text = "Urgente", Value = "4" });
             ViewBag.Prioridade = new SelectList(prior, "Value", "Text");
+
             if (ModelState.IsValid)
             {
                 try
@@ -703,12 +717,12 @@ namespace ERP_Condominios_Solution.Controllers
                     // Verifica retorno
                     if (volta == 1)
                     {
-                        ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0013", CultureInfo.CurrentCulture));
+                        Session["MensTarefa"] = 20;
                         return View(vm);
                     }
                     if (volta == 2)
                     {
-                        ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0014", CultureInfo.CurrentCulture));
+                        Session["MensTarefa"] = 21;
                         return View(vm);
                     }
 
@@ -731,6 +745,115 @@ namespace ERP_Condominios_Solution.Controllers
                         {
                             ag.AGEN_IN_STATUS = 3;
                             Int32 volta1 = agenApp.ValidateEdit(ag, ag, usuarioLogado);
+                        }
+                    }
+
+                    // Acerta alteração da periodicidade/repetições
+                    TAREFA antes = (TAREFA)Session["Tarefa"];
+                    Session["PeriTarefa"] = item.PERIODICIDADE_TAREFA;
+                    if (antes.PETA_CD_ID != item.PETA_CD_ID || antes.TARE_NR_PERIODICIDADE_QUANTIDADE != item.TARE_NR_PERIODICIDADE_QUANTIDADE)
+                    {
+                        // Exclui tarefas e agendas derivadas
+                        List<TAREFA> tfs = baseApp.GetByUser(usuarioLogado.USUA_CD_ID);
+                        List<AGENDA> agendas = agenApp.GetAllItens(idAss);
+                        tfs = tfs.Where(p => p.TARE_IN_TAREFA_PAI == item.TARE_CD_ID).ToList();
+                        foreach (TAREFA tf in tfs)
+                        {
+                            tf.TARE_IN_ATIVO = 0;
+                            Int32 volta1 = baseApp.ValidateEdit(tf, tf);
+
+                            List<AGENDA> ags = agendas.Where(p => p.TARE_CD_ID == tf.TARE_CD_ID).ToList();
+                            foreach (AGENDA ag in ags)
+                            {
+                                ag.AGEN_IN_ATIVO = 0;
+                                volta1 = agenApp.ValidateEdit(ag, ag, usuarioLogado);
+                            }
+                        }
+
+                        //Recria tarefas e agendas derivadas
+                        if (item.TARE_NR_PERIODICIDADE_QUANTIDADE != null || item.TARE_NR_PERIODICIDADE_QUANTIDADE > 0)
+                        {
+                            Int32? dias = ((PERIODICIDADE_TAREFA)Session["PeriTarefa"]).PETA_NR_DIAS;
+                            Double dia = Convert.ToDouble(dias);
+                            DateTime dtAgenda = item.TARE_DT_ESTIMADA.AddDays(dia);
+                            DateTime dtTarefa = item.TARE_DT_CADASTRO.AddDays(dia);
+
+                            TAREFA tarefa = new TAREFA();
+                            Int32 tare = 0;
+                            Int32 pai = item.TARE_CD_ID;
+
+                            for (var i = 1; i < item.TARE_NR_PERIODICIDADE_QUANTIDADE; i++)
+                            {
+                                tarefa = new TAREFA();
+                                tarefa.USUA_CD_ID = item.USUA_CD_ID;
+                                tarefa.TITR_CD_ID = item.TITR_CD_ID;
+                                tarefa.TARE_DS_DESCRICAO = item.TARE_DS_DESCRICAO;
+                                tarefa.TARE_IN_STATUS = item.TARE_IN_STATUS;
+                                tarefa.TARE_IN_PRIORIDADE = item.TARE_IN_PRIORIDADE;
+                                tarefa.TARE_IN_ATIVO = item.TARE_IN_ATIVO;
+                                tarefa.TARE_DT_REALIZADA = item.TARE_DT_REALIZADA;
+                                tarefa.TARE_TX_OBSERVACOES = item.TARE_TX_OBSERVACOES;
+                                tarefa.TARE_NM_LOCAL = item.TARE_NM_LOCAL;
+                                tarefa.TARE_IN_AVISA = item.TARE_IN_AVISA;
+                                tarefa.ASSI_CD_ID = item.ASSI_CD_ID;
+                                tarefa.PETA_CD_ID = item.PETA_CD_ID;
+                                tarefa.TARE_NR_PERIODICIDADE_QUANTIDADE = item.TARE_NR_PERIODICIDADE_QUANTIDADE;
+                                tarefa.TARE_DT_CADASTRO = dtTarefa;
+                                tarefa.TARE_DT_ESTIMADA = dtAgenda;
+                                tarefa.TARE_IN_TAREFA_PAI = pai;
+                                tarefa.TARE_NM_TITULO = $"{item.TARE_NM_TITULO} #{i}";
+
+                                Int32 volta6 = baseApp.ValidateCreate(tarefa, usuarioLogado);
+                                tare = tarefa.TARE_CD_ID;
+
+                                AGENDA ag = new AGENDA();
+                                ag.USUA_CD_ID = item.USUA_CD_ID;
+                                ag.AGEN_CD_USUARIO = item.USUA_CD_ID;
+                                ag.AGEN_DT_DATA = dtAgenda;
+                                ag.AGEN_HR_HORA = dtAgenda.AddHours(12).TimeOfDay;
+                                ag.AGEN_IN_ATIVO = 1;
+                                ag.AGEN_IN_STATUS = 1;
+                                ag.AGEN_NM_TITULO = item.TARE_NM_TITULO + (i == 0 ? String.Empty : "#" + i.ToString());
+                                ag.AGEN_DS_DESCRICAO = item.TARE_NM_TITULO;
+                                ag.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
+                                ag.TARE_CD_ID = tare;
+                                ag.CAAG_CD_ID = 1;
+                                Int32 voltaAg = agenApp.ValidateCreate(ag, usuarioLogado);
+
+                                // Cria pastas Tarefa
+                                String caminho = "/Imagens/" + usuarioLogado.ASSI_CD_ID.ToString() + "/Tarefa/" + tare.ToString() + "/Anexos/";
+                                Directory.CreateDirectory(Server.MapPath(caminho));
+
+                                // Cria pastas Agenda
+                                String agCaminho = "/Imagens/" + usuarioLogado.ASSI_CD_ID.ToString() + "/Agenda/" + ag.AGEN_CD_ID.ToString() + "/Anexos/";
+                                Directory.CreateDirectory(Server.MapPath(agCaminho));
+
+                                dias = ((PERIODICIDADE_TAREFA)Session["PeriTarefa"]).PETA_NR_DIAS;
+                                dia = Convert.ToDouble(dias);
+                                dtAgenda = dtAgenda.AddDays(dia);
+                                dtTarefa = dtTarefa.AddDays(dia);
+                            }
+                        }
+                        else
+                        {
+                            AGENDA ag = new AGENDA();
+                            ag.USUA_CD_ID = item.USUA_CD_ID;
+                            ag.AGEN_CD_USUARIO = item.USUA_CD_ID;
+                            ag.AGEN_DT_DATA = item.TARE_DT_ESTIMADA;
+                            ag.AGEN_HR_HORA = item.TARE_DT_ESTIMADA.AddHours(12).TimeOfDay;
+                            ag.AGEN_IN_ATIVO = 1;
+                            ag.AGEN_IN_STATUS = 1;
+                            ag.AGEN_NM_TITULO = item.TARE_NM_TITULO;
+                            ag.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
+                            ag.AGEN_DS_DESCRICAO = item.TARE_NM_TITULO;
+                            ag.TARE_CD_ID = item.TARE_CD_ID;
+                            ag.CAAG_CD_ID = 1;
+
+                            Int32 voltaAg = agenApp.ValidateCreate(ag, usuarioLogado);
+
+                            // Cria pastas Agenda
+                            String agCaminho = "/Imagens/" + usuarioLogado.ASSI_CD_ID.ToString() + "/Agenda/" + ag.AGEN_CD_ID.ToString() + "/Anexos/";
+                            Directory.CreateDirectory(Server.MapPath(agCaminho));
                         }
                     }
 

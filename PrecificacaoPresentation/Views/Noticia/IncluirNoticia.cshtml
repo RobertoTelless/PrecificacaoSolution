@@ -5,17 +5,17 @@
 }
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="page-title"> 
-        <h3 class="title">Notícias</h3> 
+        <h3 class="title">Avisos</h3> 
         <br />
         <ol class="breadcrumb">
             <li>
                 <a href="@Url.Action("CarregarBase", "BaseAdmin")">Dashboard</a>
             </li>
             <li>
-                <a href="@Url.Action("MontarTelaNoticia", "Noticia")">Notícias</a>
+                <a href="@Url.Action("MontarTelaNoticia", "Noticia")">Avisos</a>
             </li>
             <li class="active">
-                <strong>Notícias - Inclusão</strong>
+                <strong>Avisos - Inclusão</strong>
             </li>
         </ol>
         <br />
@@ -24,7 +24,7 @@
         <div class="col-lg-12 col-md-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Notícias - Inclusão</h5>
+                    <h5>Avisos - Inclusão</h5>
                 </div>
                 @using (Html.BeginForm("IncluirNoticia", "Noticia", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id="pwd-container1" }))
                 {
@@ -77,15 +77,15 @@
                             </div>
                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">                
                                 <div class="col-lg-12 col-md-12 col-xs-12">
-                                    Conteúdo da Notícia
+                                    Texto do Aviso
                                     @Html.TextAreaFor(m => m.NOTC_TX_NOTICIA, new { @class = "form-control", style = "width: 100%; height: 500px;", autofocus = true})
                                     @Html.ValidationMessageFor(m => m.NOTC_TX_NOTICIA, "",new { @style="color:red" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.ButtonActionSubmit(text: "Confirma Inclusão da Notícia", htmlAttributes: new { id = "basictoast" })
-                            @Html.ButtonLinkIndex(text: "Cancelar", action: "VoltarBaseNoticia", controller: "Noticia")
+                            @Html.ButtonActionSubmit(text: "Confirma Inclusão do Aviso", htmlAttributes: new { id = "basictoast" })
+                            @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarBaseNoticia", controller: "Noticia")
                         </div>
                     </div>
                 }

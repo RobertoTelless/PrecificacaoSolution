@@ -218,11 +218,11 @@
                     <br />
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Notícias</h5>
+                            <h5>Avisos</h5>
                         </div>
                         <div class="ibox-content ibox-heading">
-                            <h3><i class="fa fa-newspaper-o"></i> Novas Notícias</h3>
-                            <small><i class="fa fa-tim"></i> Você tem @((Int32)Session["NoticiasNumero"]) novas notícias </small>
+                            <h3><i class="fa fa-newspaper-o"></i> Novos Avisos</h3>
+                            <small><i class="fa fa-tim"></i> Você tem @((Int32)Session["NoticiasNumero"]) Novos Avisos </small>
                         </div>
                         <div class="ibox-content">
                             @using (Html.BeginForm("CarregarBase", "BaseAdmnin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
@@ -271,7 +271,7 @@
                                     }
                                 }
                                 <div class="form-group">
-                                    @Html.ButtonLinkIndex(text: "Ir Para Notícias", action: "MontarTelaUsuario", controller: "Noticia")
+                                    @Html.ButtonLinkIndex(text: "Ir Para Avisos", action: "MontarTelaUsuario", controller: "Noticia")
                                 </div>
                             }
                         </div>
