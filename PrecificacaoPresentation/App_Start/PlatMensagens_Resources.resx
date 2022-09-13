@@ -603,4 +603,7 @@
   <data name="M0183" xml:space="preserve">
     <value>Impossível excluir este produto. Existem registros vinculados a ele</value>
   </data>
+  <data name="M0184" xml:space="preserve">
+    <value>Produto composto deve obrigatóriamente ter uma ficha técnica</value>
+  </data>
 </root>

@@ -228,6 +228,7 @@ namespace Presentation.Start
             kernel.Bind<IProdutoTabelaPrecoRepository>().To<ProdutoTabelaPrecoRepository>();
             kernel.Bind<IMovimentoEstoqueProdutoRepository>().To<MovimentoEstoqueProdutoRepository>();
             kernel.Bind<IProdutoKitRepository>().To<ProdutoKitRepository>();
+            kernel.Bind<IFichaTecnicaDetalheRepository>().To<FichaTecnicaDetalheRepository>();
 
         }
     }

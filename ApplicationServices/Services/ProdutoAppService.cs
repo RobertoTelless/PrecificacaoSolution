@@ -193,7 +193,20 @@ namespace ApplicationServices.Services
                 item.PROD_QN_ESTOQUE = item.PROD_QN_QUANTIDADE_INICIAL.Value;
                 item.PROD_DT_ULTIMA_MOVIMENTACAO = DateTime.Today;
 
+                // Cria linha de estoque
                 MOVIMENTO_ESTOQUE_PRODUTO movto = new MOVIMENTO_ESTOQUE_PRODUTO();
+                movto.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                movto.PROD_CD_ID = item.PROD_CD_ID;
+                movto.MOEP_DS_JUSTIFICATIVA = "Estoque inicial";
+                movto.MOEP_DT_MOVIMENTO = DateTime.Today.Date;
+                movto.MOEP_IN_ATIVO = 1;
+                movto.MOEP_IN_CHAVE_ORIGEM = 0;
+                movto.MOEP_IN_OPERACAO = 1;
+                movto.MOEP_IN_ORIGEM = "Estoque Inicial";
+                movto.MOEP_IN_TIPO_MOVIMENTO = 1;
+                movto.MOEP_QN_QUANTIDADE = item.PROD_QN_QUANTIDADE_INICIAL.Value;
+                movto.USUA_CD_ID = usuario.USUA_CD_ID;
+
 
                 // Monta Log
                 LOG log = new LOG
@@ -206,25 +219,12 @@ namespace ApplicationServices.Services
                     LOG_TX_TEXTO = Serialization.SerializeJSON<PRODUTO>(item)
                 };
 
-                // Atualiza preços
-
                 // Persiste produto
                 Int32 volta = _baseService.Create(item, log, movto);
 
-                // Cria linha de estoque
-                List<EMPRESA> filiais = _filService.GetAllItens(usuario.ASSI_CD_ID);
-                foreach (var filial in filiais)
-                {
-                    PRODUTO_ESTOQUE_EMPRESA est = new PRODUTO_ESTOQUE_EMPRESA();
-                    est.EMPR_CD_ID = filial.EMPR_CD_ID;
-                    est.PREE_DS_JUSTIFICATIVA = null;
-                    est.PREE_DT_ULTIMO_MOVIMENTO = DateTime.Today.Date;
-                    est.PREE_VL_MARKUP = 0;
-                    est.PREE_QN_ESTOQUE = 0;
-                    est.PREF_QN_QUANTIDADE_ALTERADA = 0;
-                    est.PROD_CD_ID = item.PROD_CD_ID;
-                    Int32 volta1 = _estService.Create(est);
-                }
+                // Persiste estoque
+                movto.PROD_CD_ID = item.PROD_CD_ID;
+                volta = _movService.Create(movto, log);
                 return volta;
             }
             catch (Exception ex)

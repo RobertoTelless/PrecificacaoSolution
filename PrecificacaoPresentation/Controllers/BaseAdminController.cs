@@ -37,6 +37,7 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly ICentroCustoAppService ccApp;
         private readonly IFornecedorAppService fornApp;
         private readonly IClienteAppService cliApp;
+        private readonly IProdutoAppService proApp;
 
         private String msg;
         private Exception exception;
@@ -44,7 +45,7 @@ namespace ERP_Condominios_Solution.Controllers
         USUARIO objetoAntes = new USUARIO();
         List<USUARIO> listaMaster = new List<USUARIO>();
 
-        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps, IBancoAppService banApps, IContaBancariaAppService cbApps, ICentroCustoAppService ccApps, IFornecedorAppService fornApps, IClienteAppService cliApps)
+        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps, IBancoAppService banApps, IContaBancariaAppService cbApps, ICentroCustoAppService ccApps, IFornecedorAppService fornApps, IClienteAppService cliApps, IProdutoAppService proApps)
         {
             baseApp = baseApps;
             logApp = logApps;
@@ -63,6 +64,7 @@ namespace ERP_Condominios_Solution.Controllers
             ccApp = ccApps;
             fornApp = fornApps;
             cliApp = cliApps;
+            proApp = proApps;
         }
 
         public ActionResult CarregarAdmin()
@@ -499,7 +501,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 // Carrega notificações
                 List<NOTIFICACAO> notificacoes = (List<NOTIFICACAO>)Session["Notificacoes"];
-                List<NOTIFICACAO> naoLidas = notificacoes.Where(p => p.NOTC_IN_VISTA == 0).ToList();
+                List<NOTIFICACAO> naoLidas = notificacoes.Where(p => p.NOTC_IN_VISTA == 0).OrderByDescending(p => p.NOTC_DT_EMISSAO).ToList();
                 foreach (NOTIFICACAO item in naoLidas)
                 {
                     MensagemWidgetViewModel mens = new MensagemWidgetViewModel();
@@ -516,7 +518,7 @@ namespace ERP_Condominios_Solution.Controllers
 
                 // Carrega Agenda
                 List<AGENDA> agendas = (List<AGENDA>)Session["Agendas"];
-                List<AGENDA> hoje = agendas.Where(p => p.AGEN_DT_DATA == DateTime.Today.Date).ToList();
+                List<AGENDA> hoje = agendas.Where(p => p.AGEN_DT_DATA == DateTime.Today.Date).OrderByDescending(p => p.AGEN_DT_DATA).ToList();
                 foreach (AGENDA item in hoje)
                 {
                     MensagemWidgetViewModel mens = new MensagemWidgetViewModel();
@@ -533,6 +535,7 @@ namespace ERP_Condominios_Solution.Controllers
 
                 // Carrega Tarefas
                 List<TAREFA> tarefas = (List<TAREFA>)Session["ListaPendentes"];
+                tarefas = tarefas.OrderByDescending(p => p.TARE_DT_ESTIMADA).ToList();
                 foreach (TAREFA item in tarefas)
                 {
                     MensagemWidgetViewModel mens = new MensagemWidgetViewModel();
@@ -592,6 +595,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.ListaMensagem = listaMensagens;
             MensagemWidgetViewModel mod = new MensagemWidgetViewModel();
             return View(mod);
+
         }
 
         public ActionResult RetirarFiltroCentralMensagens()
@@ -696,19 +700,22 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 forns = forn.Count;
             List<CLIENTE> cliente = cliApp.GetAllItens(idAss);
             Int32 clientes = cliente.Count;
+            List<PRODUTO> produto = proApp.GetAllItens(idAss);
+            Int32 produtos = produto.Count;
 
             Session["Bancos"] = bancos;
             Session["Planos"] = planos;
             Session["Contas"] = contas;
             Session["Fornecedores"] = forns;
             Session["Clientes"] = clientes;
+            Session["Produto"] = produtos;
 
             ViewBag.Bancos = bancos;
             ViewBag.Planos = planos;
             ViewBag.Contas = contas;
             ViewBag.Clientes = clientes;
             ViewBag.Fornecedores = forns;
-            ViewBag.Produtos = 0;
+            ViewBag.Produtos = produtos;
 
             Session["PlanoCredito"] = plano.Where(p => p.CECU_IN_TIPO == 1).ToList().Count;
             Session["PlanoDebito"] = plano.Where(p => p.CECU_IN_TIPO == 2).ToList().Count;

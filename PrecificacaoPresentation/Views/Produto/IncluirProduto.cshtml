@@ -114,7 +114,6 @@
                                                     @Html.ValidationMessageFor(m => m.Composto, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
-                                            <h5 style="color:brown; font-weight: bold">Para incluir mais de um código de barras neste produto, termine a inclusão e vá para a edição de produtos</h5>
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Código (SKU)
@@ -194,28 +193,28 @@
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">
                                                     Preço Venda (R$)
-                                                    @Html.TextBoxFor(m => m.PrecoVenda, new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.PrecoVenda, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.PROD_VL_PRECO_VENDA, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_VL_PRECO_VENDA, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Preço Promoção (R$)
-                                                    @Html.TextBoxFor(m => m.PrecoPromocao, new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.PrecoPromocao, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.PROD_VL_PRECO_PROMOCAO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_VL_PRECO_PROMOCAO, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Preço Mínimo (R$)
-                                                    @Html.TextBoxFor(m => m.PrecoMinimo, new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.PrecoMinimo, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.PROD_VL_PRECO_MINIMO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_VL_PRECO_MINIMO, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Markup Mínimo (%)
-                                                    @Html.TextBoxFor(m => m.MarkupMinimo, new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.MarkupMinimo, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.PROD_VL_MARKUP_MINIMO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_VL_MARKUP_MINIMO, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Markup Padrão (%)
-                                                    @Html.TextBoxFor(m => m.MarkupPadrao, new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.MarkupPadrao, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.PROD_VL_MARKUP_PADRAO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_VL_MARKUP_PADRAO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
                                         </div>
@@ -265,66 +264,63 @@
                                 </div>
 
                                 @*Informações Tributarias*@
-                                @if((Int32)Session["PermVenda"] == 1)
-                                {
-                                    <div id="tab-5" class="tab-pane">
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                    <div class="col-lg-12 col-md-12 col-xs-12">
-                                                        Origem
-                                                        @Html.DropDownListFor(m => m.PROR_CD_ID, (SelectList)ViewBag.Origens, "Selecionar", new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROR_CD_ID, "", new { @style = "color:red" })
-                                                    </div>
+                                <div id="tab-5" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                <div class="col-lg-12 col-md-12 col-xs-12">
+                                                    Origem
+                                                    @Html.DropDownListFor(m => m.PROR_CD_ID, (SelectList)ViewBag.Origens, "Selecionar", new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROR_CD_ID, "", new { @style = "color:red" })
                                                 </div>
-                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        NCM
-                                                        @Html.TextBoxFor(m => m.PROD_NR_NCM, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROD_NR_NCM, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        GTIN/EAN
-                                                        @Html.TextBoxFor(m => m.PROD_CD_GTIN_EAN, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROD_CD_GTIN_EAN, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        GTIN/EAN Trib.
-                                                        @Html.TextBoxFor(m => m.PROD_NR_GTIN_EAN_TRIB, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROD_NR_GTIN_EAN_TRIB, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        CEST
-                                                        @Html.TextBoxFor(m => m.PROD_NR_CEST, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROD_NR_CEST, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-4 col-xs-12">
-                                                        Unidade Tributável
-                                                        @Html.TextBoxFor(m => m.PROD_NM_UNIDADE_TRIBUTARIA, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROD_NM_UNIDADE_TRIBUTARIA, "", new { @style = "color:red" })
-                                                    </div>
+                                            </div>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    NCM
+                                                    @Html.TextBoxFor(m => m.PROD_NR_NCM, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_NR_NCM, "", new { @style = "color:red" })
                                                 </div>
-                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Fator de Conversão
-                                                        @Html.TextBoxFor(m => m.PROD_NR_FATOR_CONVERSAO, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROD_NR_FATOR_CONVERSAO, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Cod.Enquadre IPI
-                                                        @Html.TextBoxFor(m => m.PROD_NR_ENQUADRE_IPI, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROD_NR_ENQUADRE_IPI, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Valor IPI Fixo (R$)
-                                                        @Html.TextBoxFor(m => m.PROD_VL_IPI_FIXO, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PROD_VL_IPI_FIXO, "", new { @style = "color:red" })
-                                                    </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    GTIN/EAN
+                                                    @Html.TextBoxFor(m => m.PROD_CD_GTIN_EAN, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_CD_GTIN_EAN, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    GTIN/EAN Trib.
+                                                    @Html.TextBoxFor(m => m.PROD_NR_GTIN_EAN_TRIB, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_NR_GTIN_EAN_TRIB, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    CEST
+                                                    @Html.TextBoxFor(m => m.PROD_NR_CEST, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_NR_CEST, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-xs-12">
+                                                    Unidade Tributável
+                                                    @Html.TextBoxFor(m => m.PROD_NM_UNIDADE_TRIBUTARIA, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_NM_UNIDADE_TRIBUTARIA, "", new { @style = "color:red" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Fator de Conversão
+                                                    @Html.TextBoxFor(m => m.PROD_NR_FATOR_CONVERSAO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_NR_FATOR_CONVERSAO, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Cod.Enquadre IPI
+                                                    @Html.TextBoxFor(m => m.PROD_NR_ENQUADRE_IPI, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_NR_ENQUADRE_IPI, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Valor IPI Fixo (R$)
+                                                    @Html.TextBoxFor(m => m.PROD_VL_IPI_FIXO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_VL_IPI_FIXO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                }
+                                </div>
 
                                 @*Expedição*@
                                 <div id="tab-6" class="tab-pane">

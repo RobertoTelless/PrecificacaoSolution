@@ -313,6 +313,7 @@ namespace ERP_Condominios_Solution.Controllers
             Session["VoltaEstoque"] = 0;
             Session["FlagVoltaProd"] = 1;
             Session["Clonar"] = 0;
+            Session["MensProduto"] = 0;
             return View(objetoProd);
         }
 
@@ -565,14 +566,6 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             Session["ListaPrecoProduto"] = null;
 
-            // Verifica possibilidade
-            Int32 num = prodApp.GetAllItens(idAss).Count;
-            if ((Int32)Session["NumProduto"] <= num)
-            {
-                Session["MensProduto"] = 50;
-                return RedirectToAction("MontarTelaProduto", "Produto");
-            }
-
             // Prepara listas
             ViewBag.Tipos = new SelectList(cpApp.GetAllItens(idAss).OrderBy(x => x.CAPR_NM_NOME).ToList<CATEGORIA_PRODUTO>(), "CAPR_CD_ID", "CAPR_NM_NOME");
             ViewBag.Subs = new SelectList(prodApp.GetAllSubs(idAss).OrderBy(x => x.SCPR_NM_NOME).ToList<SUBCATEGORIA_PRODUTO>(), "SCPR_CD_ID", "SCPR_NM_NOME");
@@ -600,6 +593,12 @@ namespace ERP_Condominios_Solution.Controllers
             vm.PROD_DT_CADASTRO = DateTime.Today;
             vm.PROD_IN_ATIVO = 1;
             vm.PROD_IN_TIPO_PRODUTO = 1;
+            vm.PROD_VL_PRECO_VENDA = 0;
+            vm.PROD_VL_MARKUP_MINIMO = 0;
+            vm.PROD_VL_MARKUP_PADRAO = 0;
+            vm.PROD_VL_PRECO_MINIMO = 0;
+            vm.PROD_VL_PRECO_PROMOCAO = 0;
+            vm.PROD_VL_ULTIMO_CUSTO = 0;
             return View(vm);
         }
 
@@ -717,12 +716,9 @@ namespace ERP_Condominios_Solution.Controllers
                     }
 
                     vm.PROD_CD_ID = item.PROD_CD_ID;
-                    //if (Session["ListaPrecoProduto"] != null)
-                    //{
-                    //    IncluirTabelaProduto(vm, tabelaProduto);
-                    //}
                     Session["IdProduto"] = item.PROD_CD_ID;
                     Session["IdVolta"] = item.PROD_CD_ID;
+                    Session["MensProduto"] = 0;
 
                     // Sucesso
                     if (item.PROD_IN_COMPOSTO == 0)
@@ -884,10 +880,10 @@ namespace ERP_Condominios_Solution.Controllers
             // Recupera preços
 
             // Exibe mensagem
-            //if (item.PROD_IN_COMPOSTO == 1 & item.FICHA_TECNICA.Count == 0)
-            //{
-            //    ModelState.AddModelError("", SMS_Mensagens.ResourceManager.GetString("M0119", CultureInfo.CurrentCulture));
-            //}
+            if (item.PROD_IN_COMPOSTO == 1 & item.FICHA_TECNICA.Count == 0)
+            {
+                ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0184", CultureInfo.CurrentCulture));
+            }
 
             if ((Int32)Session["MensProduto"] == 2)
             {

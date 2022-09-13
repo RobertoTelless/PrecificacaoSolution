@@ -1517,5 +1517,14 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0183", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Produto composto deve obrigatóriamente ter uma ficha técnica.
+        /// </summary>
+        internal static string M0184 {
+            get {
+                return ResourceManager.GetString("M0184", resourceCulture);
+            }
+        }
     }
 }

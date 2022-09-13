@@ -392,37 +392,35 @@
                                                             @Html.ValidationMessageFor(m => m.AvisaMinima, "", new { @style = "color:red" })
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                            <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">
-                                                                Preço Venda (R$)
-                                                                @Html.TextBoxFor(m => m.PrecoVenda, new { @class = "form-control", autofocus = true })
-                                                                @Html.ValidationMessageFor(m => m.PrecoVenda, "", new { @style = "color:red" })
-                                                            </div>
-                                                            <div class="col-lg-2 col-md-2 col-xs-12">
-                                                                Preço Promoção (R$)
-                                                                @Html.TextBoxFor(m => m.PrecoPromocao, new { @class = "form-control", autofocus = true })
-                                                                @Html.ValidationMessageFor(m => m.PrecoPromocao, "", new { @style = "color:red" })
-                                                            </div>
-                                                            <div class="col-lg-2 col-md-2 col-xs-12">
-                                                                Preço Mínimo (R$)
-                                                                @Html.TextBoxFor(m => m.PrecoMinimo, new { @class = "form-control", autofocus = true })
-                                                                @Html.ValidationMessageFor(m => m.PrecoMinimo, "", new { @style = "color:red" })
-                                                            </div>
-                                                            <div class="col-lg-2 col-md-2 col-xs-12">
-                                                                Markup Mínimo (%)
-                                                                @Html.TextBoxFor(m => m.MarkupMinimo, new { @class = "form-control", autofocus = true })
-                                                                @Html.ValidationMessageFor(m => m.MarkupMinimo, "", new { @style = "color:red" })
-                                                            </div>
-                                                            <div class="col-lg-2 col-md-2 col-xs-12">
-                                                                Markup Padrão (%)
-                                                                @Html.TextBoxFor(m => m.MarkupPadrao, new { @class = "form-control", autofocus = true })
-                                                                @Html.ValidationMessageFor(m => m.MarkupPadrao, "", new { @style = "color:red" })
-                                                            </div>
-                                                            <div class="col-lg-2 col-md-2 col-xs-12">
-                                                                Último Custo (R$)
-                                                                @Html.TextBoxFor(m => m.UltimoCusto, new { @class = "form-control", autofocus = true, @readonly = "readonly"  })
-                                                            </div>
+                                                    <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                        <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">
+                                                            Preço Venda (R$)
+                                                            @Html.TextBoxFor(m => m.PROD_VL_PRECO_VENDA, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PROD_VL_PRECO_VENDA, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Preço Promoção (R$)
+                                                            @Html.TextBoxFor(m => m.PROD_VL_PRECO_PROMOCAO, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PROD_VL_PRECO_PROMOCAO, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Preço Mínimo (R$)
+                                                            @Html.TextBoxFor(m => m.PROD_VL_PRECO_MINIMO, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PROD_VL_PRECO_MINIMO, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Markup Mínimo (%)
+                                                            @Html.TextBoxFor(m => m.PROD_VL_MARKUP_MINIMO, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PROD_VL_MARKUP_MINIMO, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Markup Padrão (%)
+                                                            @Html.TextBoxFor(m => m.PROD_VL_MARKUP_PADRAO, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PROD_VL_MARKUP_PADRAO, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Último Custo (R$)
+                                                            @Html.TextBoxFor(m => m.PROD_VL_ULTIMO_CUSTO, new { @class = "form-control", autofocus = true, @readonly = "readonly"  })
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1244,8 +1242,8 @@
                                                                         <th>Data</th>
                                                                         <th>Operação</th>
                                                                         <th>Origem</th>
-                                                                        <th>Tipo de Operação</th>
                                                                         <th>Quantidade</th>
+                                                                        <th>Movimentação</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -1289,8 +1287,8 @@
                                                                             {
                                                                                 <td><span class="badge badge-warning">Manual</span></td>
                                                                             }
-                                                                            <td>@cond.MOEP_IN_ORIGEM</td>
                                                                             <td>@cond.MOEP_QN_QUANTIDADE</td>
+                                                                            <td>@cond.MOEP_IN_ORIGEM</td>
                                                                         </tr>
                                                                     }
                                                                 </tbody>
