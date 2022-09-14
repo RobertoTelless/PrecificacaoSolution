@@ -84,6 +84,39 @@ namespace ERP_Condominios_Solution.ViewModels
                 USUA_IN_BLOQUEADO = (value == true) ? 1 : 0;
             }
         }
+        public String Bloqueado
+        {
+            get
+            {
+                if (USUA_IN_BLOQUEADO == 1)
+                {
+                    return "Sim";
+                }
+                return "Não";
+            }
+        }
+        public String LoginProv
+        {
+            get
+            {
+                if (USUA_IN_LOGIN_PROVISORIO == 1)
+                {
+                    return "Sim";
+                }
+                return "Não";
+            }
+        }
+        public String SenhaProv
+        {
+            get
+            {
+                if (USUA_IN_PROVISORIO == 1)
+                {
+                    return "Sim";
+                }
+                return "Não";
+            }
+        }
         public bool LoginProvisorio
         {
             get

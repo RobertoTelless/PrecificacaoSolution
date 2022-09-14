@@ -174,7 +174,7 @@
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                    <div class="col-lg-5 col-md-5 col-xs-12">
+                                                    <div class="col-lg-4 col-md-4 col-xs-12">
                                                         @Html.HiddenFor(m => m.ASSI_CD_ID)
                                                         @Html.HiddenFor(m => m.USUA_CD_ID)
                                                         @Html.HiddenFor(m => m.USUA_DT_ACESSO)
@@ -355,44 +355,52 @@
                                     {
                                         <div class="row">
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">                
-                                                <div class="col-lg-2 col-md-2 col-xs-12">                                
-                                                    @Html.HiddenFor(m => m.PERF_CD_ID)
-                                                    @Html.HiddenFor(m => m.USUA_AQ_FOTO)
-                                                    @Html.HiddenFor(m => m.USUA_CD_ID)
-                                                    @Html.HiddenFor(m => m.USUA_IN_ATIVO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_ATIVO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_BLOQUEADO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_LOGADO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_LOGIN_PROVISORIO)
-                                                    @Html.HiddenFor(m => m.USUA_IN_PROVISORIO)
-                                                    @Html.HiddenFor(m => m.CARG_CD_ID)
-                                                    @Html.HiddenFor(m => m.USUA_EM_EMAIL)
-                                                    @Html.HiddenFor(m => m.USUA_NM_LOGIN)
-                                                    @Html.HiddenFor(m => m.USUA_NM_NOME)
-                                                    @Html.HiddenFor(m => m.USUA_NM_NOVA_SENHA)
-                                                    @Html.HiddenFor(m => m.USUA_NM_SENHA)
-                                                    @Html.HiddenFor(m => m.USUA_NM_SENHA_CONFIRMA)
-                                                    @Html.HiddenFor(m => m.USUA_TX_OBSERVACOES)
-                                                    @Html.HiddenFor(m => m.CAUS_CD_ID)
-                                                    @Html.HiddenFor(m => m.USUA_AQ_FOTO)
-                                                    Bloqueado?
-                                                    <br />
-                                                    @Html.CheckBoxFor(m => m.Bloqueio, new { @class = "checkbox i-checks", autofocus = true, @readonly="readonly" })
-                                                </div>  
+                                                @if (Model.USUA_IN_BLOQUEADO == 1)
+                                                {
+                                                    <div class="col-lg-2 col-md-2 col-xs-12" style="color: brown; font-weight: bold">                                
+                                                        Bloqueado?
+                                                        @Html.TextBoxFor(m => m.Bloqueado, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                    </div>  
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">                                
+                                                        Bloqueado?
+                                                        @Html.TextBoxFor(m => m.Bloqueado, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                    </div>  
+                                                }
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Data do Bloqueio
                                                     @Html.TextBoxFor(m => m.USUA_DT_BLOQUEADO,"{0:dd/MM/yyyy}", new { @class = "form-control", autofocus = true, @readonly="readonly" })
                                                 </div>
-                                                <div class="col-lg-2 col-md-2 col-xs-12">
-                                                    Senha Provisória?
-                                                    <br />
-                                                    @Html.CheckBoxFor(m => m.Provisoria, new { @class = "checkbox i-checks", autofocus = true, @readonly="readonly"})
-                                                </div>                                                
-                                                <div class="col-lg-3 col-md-3 col-xs-12">
-                                                    Login com Senha Provisória?
-                                                    <br />
-                                                    @Html.CheckBoxFor(m => m.LoginProvisorio, new { @class = "checkbox i-checks", autofocus = true, @readonly="readonly"})
-                                                </div>                                                
+                                                @if (Model.USUA_IN_PROVISORIO == 1)
+                                                {
+                                                    <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">                                
+                                                        Senha Provisória?
+                                                        @Html.TextBoxFor(m => m.SenhaProv, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                    </div>  
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">                                
+                                                        Senha Provisória?
+                                                        @Html.TextBoxFor(m => m.SenhaProv, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                    </div>  
+                                                }
+                                                @if (Model.USUA_IN_LOGIN_PROVISORIO == 1)
+                                                {
+                                                    <div class="col-lg-2 col-md-2 col-xs-12" style="color: darkblue; font-weight: bold">                                
+                                                        Login com Senha Provisória?
+                                                        @Html.TextBoxFor(m => m.LoginProv, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                    </div>  
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">                                
+                                                        Login com Senha Provisória?
+                                                        @Html.TextBoxFor(m => m.LoginProv, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                    </div>  
+                                                }
                                             </div>
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">              
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
