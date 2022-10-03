@@ -70,7 +70,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-tasks"></i>  <span class="label label-warning">@((Int32)Session["TarefasPendentes"])</span>
+                    <i class="fa fa-check-square-o"></i>  <span class="label label-warning">@((Int32)Session["TarefasPendentes"])</span>
                 </a>
                 <ul class="dropdown-menu dropdown-messages">
                     @foreach (var cond in (((List<TAREFA>)Session["ListaPendentes"]) as List<EntitiesServices.Model.TAREFA>).Take(5))

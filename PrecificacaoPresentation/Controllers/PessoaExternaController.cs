@@ -60,6 +60,16 @@ namespace ERP_Condominios_Solution.Controllers
             return View();
         }
 
+        public ActionResult IncluirCargo()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaCargo"] = 10;
+            return RedirectToAction("IncluirCargo", "TabelaAuxiliar");
+        }
+
         [HttpGet]
         public ActionResult MontarTelaPessoaExterna()
         {
@@ -445,7 +455,7 @@ namespace ERP_Condominios_Solution.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditarUsuario(PessoaExternaViewModel vm)
+        public ActionResult EditarPessoaExterna(PessoaExternaViewModel vm)
         {
             Int32 idAss = (Int32)Session["IdAssinante"];
             ViewBag.Perfis = new SelectList((List<PERFIL>)Session["Perfis"], "PERF_CD_ID", "PERF_NM_NOME");

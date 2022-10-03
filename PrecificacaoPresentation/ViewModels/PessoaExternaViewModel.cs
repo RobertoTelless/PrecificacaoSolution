@@ -15,7 +15,6 @@ namespace ERP_Condominios_Solution.ViewModels
         public int CARG_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo NOME obrigatorio")]
         public string PEEX_NM_NOME { get; set; }
-        [Required(ErrorMessage = "Campo CPF obrigatorio")]
         [StringLength(20, ErrorMessage = "O CPF deve ter no máximo 20 caracteres.")]
         public string PEEX_NR_CPF { get; set; }
         [StringLength(20, ErrorMessage = "O RG deve ter no máximo 20 caracteres.")]

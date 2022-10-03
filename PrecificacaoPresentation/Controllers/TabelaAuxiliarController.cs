@@ -198,6 +198,10 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("VoltarAnexoUsuario", "Usuario");
             }
+            if ((Int32)Session["VoltaCargo"] == 10)
+            {
+                return RedirectToAction("IncluirPessoaExterna", "PessoaExterna");
+            }
             return RedirectToAction("MontarTelaCargo");
         }
 
@@ -267,7 +271,7 @@ namespace ERP_Condominios_Solution.Controllers
                     // Sucesso
                     listaMasterCargo = new List<CARGO_USUARIO>();
                     Session["ListaCargo"] = null;
-                    return RedirectToAction("MontarTelaCargo");
+                    return RedirectToAction("VoltarBaseCargo");
                 }
                 catch (Exception ex)
                 {

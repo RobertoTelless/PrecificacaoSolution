@@ -815,46 +815,13 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
 
-            //Verifica possibilidade
-            Int32 num = baseApp.GetAllItens(idAss).Count;
-            if ((Int32)Session["NumUsuarios"] <= num)
-            {
-                Session["MensUsuario"] = 50;
-                return RedirectToAction("MontarTelaUsuario", "Usuario");
-            }
-
             // Executar
             USUARIO item = baseApp.GetItemById(id);
             objetoAntes = (USUARIO)Session["Usuario"];
+            item.USUA_IN_ATIVO = 1;
+            item.USUA_DT_ALTERACAO = DateTime.Today;
 
-            USUARIO en = new USUARIO();
-            en.USUA_CD_ID = item.USUA_CD_ID;
-            en.ASSI_CD_ID = item.ASSI_CD_ID;
-            en.PERF_CD_ID = item.PERF_CD_ID;
-            en.CARG_CD_ID = item.CARG_CD_ID;
-            en.USUA_NM_NOME = item.USUA_NM_NOME;
-            en.USUA_NM_LOGIN = item.USUA_NM_LOGIN;
-            en.USUA_EM_EMAIL = item.USUA_EM_EMAIL;
-            en.USUA_NR_TELEFONE = item.USUA_NR_TELEFONE;
-            en.USUA_NR_CELULAR = item.USUA_NR_CELULAR;
-            en.USUA_NM_SENHA = item.USUA_NM_SENHA;
-            en.USUA_NM_SENHA_CONFIRMA = item.USUA_NM_SENHA_CONFIRMA;
-            en.USUA_NM_NOVA_SENHA = item.USUA_NM_NOVA_SENHA;
-            en.USUA_IN_PROVISORIO = item.USUA_IN_PROVISORIO;
-            en.USUA_IN_LOGIN_PROVISORIO = item.USUA_IN_LOGIN_PROVISORIO;
-            en.USUA_DT_TROCA_SENHA = item.USUA_DT_TROCA_SENHA;
-            en.USUA_DT_ACESSO = item.USUA_DT_ACESSO;
-            en.USUA_DT_ULTIMA_FALHA = item.USUA_DT_ULTIMA_FALHA;
-            en.USUA_DT_CADASTRO = item.USUA_DT_CADASTRO;
-            en.USUA_NR_ACESSOS = item.USUA_NR_ACESSOS;
-            en.USUA_NR_FALHAS = item.USUA_NR_FALHAS;
-            en.USUA_TX_OBSERVACOES = item.USUA_TX_OBSERVACOES;
-            en.USUA_AQ_FOTO = item.USUA_AQ_FOTO;
-            en.USUA_IN_LOGADO = item.USUA_IN_LOGADO;
-            en.USUA_IN_ATIVO = 1;
-            en.USUA_DT_ALTERACAO = DateTime.Today;
-
-            Int32 volta = baseApp.ValidateReativar(en, usuario);
+            Int32 volta = baseApp.ValidateReativar(item, usuario);
             listaMaster = new List<USUARIO>();
             Session["ListaUsuario"] = null;
             if (Session["FiltroUsuario"] != null)

@@ -38,6 +38,43 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <span class="label label-primary pull-right">Hoje</span>
+                            <h5>Painel de Tarefas e Compromissos</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Total de Tarefas</small>
+                                    <h4>@((Int32)Session["Tarefas"])</h4>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Tarefas Abertas</small>
+                                    <h4>@((Int32)Session["TarefasPendentes"])</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    @Html.ButtonLinkIndex(text: "Tarefas", action: "MontarTelaTarefa", controller: "Tarefa")
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Agenda Hoje</small>
+                                    <h4>@((Int32)Session["NumAgendasHoje"])</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Agenda</small>
+                                    <h4>@((Int32)Session["NumAgendas"])</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    @Html.ButtonLinkIndex(text: "Agenda", action: "MontarTelaAgendaCalendario", controller: "Agenda")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @*<div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-primary pull-right">Hoje</span>
                             <h5>Atividade do usuário</h5>
                         </div>
                         <div class="ibox-content">
@@ -86,53 +123,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                     @Html.ButtonLinkIndex(text: "Configuração da Empresa", action: "MontarTelaEmpresa", controller: "Empresa", buttonClass: "primary")
-                    @Html.ButtonLinkIndex(text: "Dashboard de Cadastros", action: "MontarTelaDashboardCadastros", controller: "BaseAdmin", buttonClass: "primary")                
-                    @Html.ButtonLinkIndex(text: "Dashboard Financeiro", action: "MontarTelaDashboardFinanceiro", controller: "BaseAdmin", buttonClass: "primary")                
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <span class="label label-primary pull-right">Hoje</span>
-                            <h5>Painel de Tarefas e Compromissos</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Total de Tarefas</small>
-                                    <h4>@((Int32)Session["Tarefas"])</h4>
-                                </div>
-
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Tarefas Abertas</small>
-                                    <h4>@((Int32)Session["TarefasPendentes"])</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    @Html.ButtonLinkIndex(text: "Tarefas", action: "MontarTelaTarefa", controller: "Tarefa")
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Agenda Hoje</small>
-                                    <h4>@((Int32)Session["NumAgendasHoje"])</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Agenda</small>
-                                    <h4>@((Int32)Session["NumAgendas"])</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    @Html.ButtonLinkIndex(text: "Agenda", action: "MontarTelaAgendaCalendario", controller: "Agenda")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @Html.ButtonLinkIndex(text: "Cadastros", action: "MontarTelaDashboardCadastros", controller: "BaseAdmin", buttonClass: "primary")                
+                    @Html.ButtonLinkIndex(text: "Financeiro", action: "MontarTelaDashboardFinanceiro", controller: "BaseAdmin", buttonClass: "primary")                
                     @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
                     {
-                        @Html.ButtonLinkIndex(text: "Daasboard de Administração", action: "MontarTelaDashboardAdministracao", controller: "BaseAdmin", buttonClass: "success")                
+                        @Html.ButtonLinkIndex(text: "Administração", action: "MontarTelaDashboardAdministracao", controller: "BaseAdmin", buttonClass: "success")                
                     }
                 </div>
+
             </div>
 
             <div class="row">

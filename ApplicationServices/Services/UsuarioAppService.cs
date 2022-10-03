@@ -385,7 +385,7 @@ namespace ApplicationServices.Services
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
                     ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "ReatUSUA",
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_TEXTO = "Reativar " + usuario.USUA_NM_NOME,
                     LOG_IN_ATIVO = 1
                 };
 

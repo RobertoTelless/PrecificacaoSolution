@@ -43,7 +43,7 @@ namespace DataServices.Repositories
 
         public USUARIO GetItemById(Int32 id)
         {
-            IQueryable<USUARIO> query = Db.USUARIO.Where(p => p.USUA_IN_ATIVO == 1);
+            IQueryable<USUARIO> query = Db.USUARIO;
             query = query.Where(p => p.USUA_CD_ID == id);
             query = query.Include(p => p.PERFIL);
             query = query.Include(p => p.NOTIFICACAO);
@@ -67,7 +67,8 @@ namespace DataServices.Repositories
             IQueryable<USUARIO> query = Db.USUARIO.Where(p => p.USUA_IN_ATIVO == 1);
             query = query.Where(p => p.USUA_IN_BLOQUEADO == 0);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
-            return query.ToList();
+            List<USUARIO> lista = query.ToList();
+            return lista;
         }
 
         public List<USUARIO> GetAllItensBloqueados(Int32 idAss)

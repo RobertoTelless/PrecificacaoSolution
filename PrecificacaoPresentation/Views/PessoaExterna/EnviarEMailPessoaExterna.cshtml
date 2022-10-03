@@ -5,7 +5,7 @@
 }
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="page-title"> 
-        <h3 class="title">Pessoas Externas</h3> 
+        <h3 class="title">Funções Temporárias</h3> 
         <br />
         <ol class="breadcrumb">
             <li>
@@ -15,10 +15,10 @@
                 <a href="@Url.Action("MontarTelaDashboardAdministracao", "BaseAdmin")">Dashboard - Administração</a>
             </li>
             <li>
-                <a href="@Url.Action("MontarTelaPessoaExterna", "PessoaExterna")">Pessoas Externas</a>
+                <a href="@Url.Action("MontarTelaPessoaExterna", "PessoaExterna")">Funções Temporárias</a>
             </li>
             <li class="active">
-                <strong>Pessoas Externas - Enviar E-Mail</strong>
+                <strong>Funções Temporárias - Enviar E-Mail</strong>
             </li>
         </ol>
         <br />
@@ -28,7 +28,7 @@
         <div class="col-lg-12 col-md-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Pessoas Externas - Enviar E-Mail</h5>
+                    <h5>Funções Temporárias - Enviar E-Mail</h5>
                 </div>
                 @using (Html.BeginForm("EnviarEMailPessoaExterna", "PessoaExterna", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id="pwd-container1" }))
                 {
