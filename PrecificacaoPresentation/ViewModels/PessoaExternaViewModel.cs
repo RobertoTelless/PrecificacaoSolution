@@ -12,6 +12,7 @@ namespace ERP_Condominios_Solution.ViewModels
         [Key]
         public int PEEX_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
+        [Required(ErrorMessage = "Campo CARGO obrigatorio")]
         public int CARG_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo NOME obrigatorio")]
         public string PEEX_NM_NOME { get; set; }

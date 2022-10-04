@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <div class="widget style1 blue-bg">
                 <div class="row vertical-align">
                     @if (Model.USUA_IN_BLOQUEADO == 1)
@@ -120,7 +120,7 @@
                         }
                         if (Model.USUA_IN_ATIVO == 1)
                         {
-                            <button alt="Desativar" class="btn btn-sm btn-warning demo2" onclick="ShowModalExcluir('/Usuario/DesativarUsuario/@Model.USUA_CD_ID', '@Model.USUA_NM_NOME')" title="Bloquear">Desativar</button>
+                            <button alt="Desativar" class="btn btn-sm btn-warning demo2" onclick="ShowModalExcluir('/Usuario/DesativarUsuario/@Model.USUA_CD_ID', '@Model.USUA_NM_NOME')" title="Bloquear">Excluir</button>
                         }
                         else
                         {

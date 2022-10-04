@@ -574,6 +574,7 @@ namespace ERP_Condominios_Solution.Controllers
                     listaMensagens.Add(mens);
                 }
                 Session["ListaMensagem"] = listaMensagens;
+                Session["ListaMensagemGeral"] = listaMensagens;
             }
             else
             {
@@ -621,7 +622,7 @@ namespace ERP_Condominios_Solution.Controllers
             try
             {
                 // Executa a operação
-                List<MensagemWidgetViewModel> listaObj = (List<MensagemWidgetViewModel>)Session["ListaMensagem"];
+                List<MensagemWidgetViewModel> listaObj = (List<MensagemWidgetViewModel>)Session["ListaMensagemGeral"];
                 if (item.TipoMensagem != null)
                 {
                     listaObj = listaObj.Where(p => p.TipoMensagem == item.TipoMensagem).ToList();

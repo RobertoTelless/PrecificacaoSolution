@@ -666,6 +666,7 @@
     <Content Include="Imagens\1\Tarefa\13\Anexos\299455621_5357592100993228_7887279121792776763_n.jpg" />
     <Content Include="Imagens\1\Tarefa\4\Anexos\299136059_10229555299814975_5235234925343145656_n.jpg" />
     <Content Include="Imagens\1\Tarefa\5\Anexos\299136059_10229555299814975_5235234925343145656_n.jpg" />
+    <Content Include="Imagens\1\Usuario\15\Fotos\image_2021-04-08_13-28-54.png" />
     <Content Include="Imagens\1\Usuario\1\Anexos\full_height.jpg" />
     <Content Include="Imagens\1\Usuario\1\Foto\FotoOficial.jpg" />
     <Content Include="Imagens\1\Usuario\2\Anexos\dashboard4_1.jpg" />
@@ -3156,6 +3157,7 @@
     <Folder Include="Imagens\1\Usuario\10\Fotos\" />
     <Folder Include="Imagens\1\Usuario\11\Anexos\" />
     <Folder Include="Imagens\1\Usuario\11\Fotos\" />
+    <Folder Include="Imagens\1\Usuario\15\Anexos\" />
     <Folder Include="Imagens\1\Usuario\3\Anexos\" />
     <Folder Include="Imagens\1\Usuario\4\Anexos\" />
     <Folder Include="Imagens\1\Usuario\4\Fotos\" />

@@ -16,5 +16,6 @@ namespace MvcMapping.Mappers
                 x.AddProfile<ViewModelToDomainMappingProfile>();
             });
         }
+
     }
 }
