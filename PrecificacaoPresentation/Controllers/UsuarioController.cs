@@ -378,6 +378,7 @@ namespace ERP_Condominios_Solution.Controllers
         [HttpPost]
         public ActionResult IncluirUsuario(UsuarioViewModel vm)
         {
+            // Mensagens
             Int32 idAss = (Int32)Session["IdAssinante"];
             ViewBag.Perfis = new SelectList((List<PERFIL>)Session["Perfis"], "PERF_CD_ID", "PERF_NM_NOME");
             ViewBag.Cargos = new SelectList(baseApp.GetAllCargos(idAss), "CARG_CD_ID", "CARG_NM_NOME");
@@ -395,32 +396,38 @@ namespace ERP_Condominios_Solution.Controllers
                     if (volta == 1)
                     {
                         Session["MensUsuario"] = 3;
-                        return RedirectToAction("MontarTelaUsuario");
+                        ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0009", CultureInfo.CurrentCulture));
+                        return View(vm);
                     }
                     if (volta == 2)
                     {
                         Session["MensUsuario"] = 4;
-                        return RedirectToAction("MontarTelaUsuario");
+                        ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0001", CultureInfo.CurrentCulture));
+                        return View(vm);
                     }
                     if (volta == 3)
                     {
                         Session["MensUsuario"] = 5;
-                        return RedirectToAction("MontarTelaUsuario");
+                        ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0110", CultureInfo.CurrentCulture));
+                        return View(vm);
                     }
                     if (volta == 4 )
                     {
                         Session["MensUsuario"] = 6;
-                        return RedirectToAction("MontarTelaUsuario");
+                        ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0111", CultureInfo.CurrentCulture));
+                        return View(vm);
                     }
                     if (volta == 5)
                     {
                         Session["MensUsuario"] = 7;
-                        return RedirectToAction("MontarTelaUsuario");
+                        ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0097", CultureInfo.CurrentCulture));
+                        return View(vm);
                     }
                     if (volta == 6)
                     {
                         Session["MensUsuario"] = 10;
-                        return RedirectToAction("MontarTelaUsuario");
+                        ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0158", CultureInfo.CurrentCulture));
+                        return View(vm);
                     }
 
                     // Carrega foto e processa alteracao

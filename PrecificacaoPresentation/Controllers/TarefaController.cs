@@ -439,7 +439,7 @@ namespace ERP_Condominios_Solution.Controllers
                     TAREFA item = Mapper.Map<TarefaViewModel, TAREFA>(vm);
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
 
-                    if (item.TARE_NR_PERIODICIDADE_QUANTIDADE != null || item.TARE_NR_PERIODICIDADE_QUANTIDADE > 0)
+                    if (item.TARE_NR_PERIODICIDADE_QUANTIDADE != null || item.TARE_NR_PERIODICIDADE_QUANTIDADE == 0)
                     {
                         DateTime dtAgenda = (DateTime)item.TARE_DT_ESTIMADA;
                         DateTime dtTarefa = (DateTime)item.TARE_DT_CADASTRO;
@@ -459,12 +459,12 @@ namespace ERP_Condominios_Solution.Controllers
                                 // Verifica retorno
                                 if (volta == 1)
                                 {
-                                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
+                                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
                                     return View(vm);
                                 }
                                 if (volta == 2)
                                 {
-                                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0094", CultureInfo.CurrentCulture));
+                                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0094", CultureInfo.CurrentCulture));
                                     return View(vm);
                                 }
                             }
@@ -561,7 +561,7 @@ namespace ERP_Condominios_Solution.Controllers
                         // Verifica retorno
                         if (volta1 == 1)
                         {
-                            ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
+                            ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0058", CultureInfo.CurrentCulture));
                             return View(vm);
                         }
 
@@ -672,6 +672,7 @@ namespace ERP_Condominios_Solution.Controllers
             objetoAntes = item;
             Session["Tarefa"] = item;
             Session["IdVolta"] = id;
+            Session["StatusAnterior"] = item.TARE_IN_STATUS;
             ViewBag.Status = (item.TARE_IN_STATUS == 1 ? "Pendente" : (item.TARE_IN_STATUS == 2 ? "Em Andamento" : (item.TARE_IN_STATUS == 3 ? "Suspensa" : (item.TARE_IN_STATUS == 4 ? "Cancelada" : "Encerrada"))));
             ViewBag.StatusCor = (item.TARE_IN_STATUS == 1 ? "red-bg" : (item.TARE_IN_STATUS == 2 ? "blue-bg" : (item.TARE_IN_STATUS == 2 ? "blue-bg" : (item.TARE_IN_STATUS == 3 ? "yellow-bg" : "navy-bg"))));
             ViewBag.Prior = (item.TARE_IN_PRIORIDADE == 1 ? "Normal" : (item.TARE_IN_PRIORIDADE == 2 ? "Baixa" : (item.TARE_IN_PRIORIDADE == 3 ? "Alta" : "Urgente")));
@@ -727,6 +728,19 @@ namespace ERP_Condominios_Solution.Controllers
                     }
 
                     // Acerta agenda
+                    if (item.TARE_IN_STATUS == 1 || item.TARE_IN_STATUS == 2)
+                    {
+                        if ((Int32)Session["StatusAnterior"] == 3)
+                        {
+                            List<AGENDA> ags = agenApp.GetAllItens(idAss);
+                            ags = ags.Where(p => p.TARE_CD_ID == item.TARE_CD_ID).ToList();
+                            foreach (AGENDA ag in ags)
+                            {
+                                ag.AGEN_IN_STATUS = 1;
+                                Int32 volta1 = agenApp.ValidateEdit(ag, ag, usuarioLogado);
+                            }
+                        }
+                    }
                     if (item.TARE_IN_STATUS == 3)
                     {
                         List<AGENDA> ags = agenApp.GetAllItens(idAss);

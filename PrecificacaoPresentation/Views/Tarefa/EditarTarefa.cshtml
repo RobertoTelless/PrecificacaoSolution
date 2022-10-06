@@ -351,7 +351,7 @@
                             @*Status e Encerramento*@
                             <div id="tab-4" class="tab-pane">
                                 <div class="panel-body">
-                                    @if (Model.TARE_IN_STATUS != 3 && Model.TARE_IN_STATUS != 5)
+                                    @if (Model.TARE_IN_STATUS != 4 && Model.TARE_IN_STATUS != 5)
                                     {
                                         using (Html.BeginForm("EditarTarefa", "Tarefa", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container5" }))
                                         {
@@ -391,7 +391,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.ButtonActionSubmit(text: "Confirma Edição da tarefa", htmlAttributes: new { id = "basictoast", style = "margin-left: 15px" })
+                                @Html.ButtonActionSubmit(text: "Confirma Edição do Status da Tarefa", htmlAttributes: new { id = "basictoast", style = "margin-left: 15px" })
                                 @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarBaseTarefa", controller: "Tarefa")
                             </div>
                         </div>
