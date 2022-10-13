@@ -34,18 +34,15 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly IClienteAppService baseApp;
         private readonly ILogAppService logApp;
         private readonly IEmpresaAppService filApp;
-        //private readonly IContaReceberAppService crApp;
         private readonly IUsuarioAppService usuApp;
         private readonly IClienteCnpjAppService ccnpjApp;
         private readonly IConfiguracaoAppService confApp;
-        //private readonly ICRMAppService crmApp;
 
         private String msg;
         private Exception exception;
         CLIENTE objeto = new CLIENTE();
         CLIENTE objetoAntes = new CLIENTE();
         List<CLIENTE> listaMaster = new List<CLIENTE>();
-        //List<CONTA_RECEBER> listaMasterRec = new List<CONTA_RECEBER>();
         String extensao;
 
         public ClienteController(IClienteAppService baseApps, ILogAppService logApps, IEmpresaAppService filApps, IUsuarioAppService usuApps, IClienteCnpjAppService ccnpjApps, IConfiguracaoAppService confApps)
@@ -56,7 +53,6 @@ namespace ERP_Condominios_Solution.Controllers
             usuApp = usuApps;
             ccnpjApp = ccnpjApps;
             confApp = confApps;
-            //crmApp = crmApps;
         }
 
         [HttpGet]
@@ -475,8 +471,8 @@ namespace ERP_Condominios_Solution.Controllers
             //ViewBag.Inativos = baseApp.GetAllItensAdm(idAss).Where(p => p.CLIE_IN_ATIVO == 0).ToList().Count;
             //ViewBag.SemPedidos = baseApp.GetAllItens(idAss).Where(p => p.PEDIDO_VENDA.Count == 0 || p.PEDIDO_VENDA == null).ToList().Count;
             //ViewBag.ContasAtrasos = SessionMocks.listaCR;
-            ViewBag.ContasAtrasos = 0;
-            ViewBag.SemPedidos = 0;
+            ViewBag.ComPedidos = 0;
+            ViewBag.Pendentes = 0;
             ViewBag.CodigoCliente = Session["IdCliente"];
 
             if (Session["MensCliente"] != null)
@@ -683,14 +679,6 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             var filiais = filApp.GetAllItens(idAss);
 
-            // Verifica possibilidade
-            //Int32 num = baseApp.GetAllItens(idAss).Count;
-            //if ((Int32)Session["NumClientes"] <= num)
-            //{
-            //    Session["MensCliente"] = 50;
-            //    return RedirectToAction("MontarTelaCliente", "Cliente");
-            //}
-
             // Prepara listas
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACL_CD_ID", "CACL_NM_NOME");
             if (filiais.Count != 0)
@@ -703,12 +691,6 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Sexo = new SelectList(baseApp.GetAllSexo(), "SEXO_CD_ID", "SEXO_NM_NOME");
             ViewBag.UF = new SelectList(baseApp.GetAllUF(), "UF_CD_ID", "UF_SG_SIGLA");
             ViewBag.Usuarios = new SelectList((List<USUARIO>)Session["Usuarios"], "USUA_CD_ID", "USUA_NM_NOME");
-
-            //List<SelectListItem> situacao = new List<SelectListItem>();
-            //situacao.Add(new SelectListItem() { Text = "Ativa", Value = "Ativa" });
-            //situacao.Add(new SelectListItem() { Text = "Inativa", Value = "Inativa" });
-            //situacao.Add(new SelectListItem() { Text = "Outros", Value = "Outros" });
-            //ViewBag.Situacoes = new SelectList(situacao, "Value", "Text");
 
             // Prepara view
             Session["ClienteNovo"] = 0;
@@ -735,11 +717,6 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACL_CD_ID", "CACL_NM_NOME");
 
-            //List<SelectListItem> situacao = new List<SelectListItem>();
-            //situacao.Add(new SelectListItem() { Text = "Ativa", Value = "Ativa" });
-            //situacao.Add(new SelectListItem() { Text = "Inativa", Value = "Inativa" });
-            //situacao.Add(new SelectListItem() { Text = "Outros", Value = "Outros" });
-            //ViewBag.Situacoes = new SelectList(situacao, "Value", "Text");
             if (ModelState.IsValid)
             {
                 try
@@ -876,12 +853,6 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACL_CD_ID", "CACL_NM_NOME");
 
-            //List<SelectListItem> situacao = new List<SelectListItem>();
-            //situacao.Add(new SelectListItem() { Text = "Ativa", Value = "Ativa" });
-            //situacao.Add(new SelectListItem() { Text = "Inativa", Value = "Inativa" });
-            //situacao.Add(new SelectListItem() { Text = "Outros", Value = "Outros" });
-            //ViewBag.Situacoes = new SelectList(situacao, "Value", "Text");
-
             // Recupera cliente
             CLIENTE item = baseApp.GetItemById(id);
             ViewBag.QuadroSoci = ccnpjApp.GetByCliente(item);
@@ -934,12 +905,6 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Usuarios = new SelectList((List<USUARIO>)Session["Usuarios"], "USUA_CD_ID", "USUA_NM_NOME");
             ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACL_CD_ID", "CACL_NM_NOME");
-
-            //List<SelectListItem> situacao = new List<SelectListItem>();
-            //situacao.Add(new SelectListItem() { Text = "Ativa", Value = "Ativa" });
-            //situacao.Add(new SelectListItem() { Text = "Inativa", Value = "Inativa" });
-            //situacao.Add(new SelectListItem() { Text = "Outros", Value = "Outros" });
-            //ViewBag.Situacoes = new SelectList(situacao, "Value", "Text");
             CLIENTE cli = baseApp.GetItemById(vm.CLIE_CD_ID);
             ViewBag.QuadroSoci = ccnpjApp.GetByCliente(cli);
 
@@ -986,10 +951,10 @@ namespace ERP_Condominios_Solution.Controllers
                     {
                         return RedirectToAction("VerClientesInativos");
                     }
-                    if ((Int32)Session["VoltaCRM"] == 11)
-                    {
-                        return RedirectToAction("VoltarAcompanhamentoCRM", "CRM");
-                    }
+                    //if ((Int32)Session["VoltaCRM"] == 11)
+                    //{
+                    //    return RedirectToAction("VoltarAcompanhamentoCRM", "CRM");
+                    //}
                     return RedirectToAction("MontarTelaCliente");
                 }
                 catch (Exception ex)
