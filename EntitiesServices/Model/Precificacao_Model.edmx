@@ -1006,6 +1006,7 @@
           <Property Name="UNID_CD_ID" Type="int" Nullable="false" />
           <Property Name="PROR_CD_ID" Type="int" />
           <Property Name="TAMA_CD_ID" Type="int" />
+          <Property Name="TIEM_CD_ID" Type="int" />
           <Property Name="PROD_AQ_FOTO" Type="varchar" MaxLength="250" />
           <Property Name="PROD_IN_TIPO_PRODUTO" Type="int" />
           <Property Name="PROD_IN_COMPOSTO" Type="int" />
@@ -1053,6 +1054,8 @@
           <Property Name="PROD_DT_CADASTRO" Type="date" />
           <Property Name="PROD_TX_OBSERVACOES" Type="text" />
           <Property Name="PROD_IN_ATIVO" Type="int" />
+          <Property Name="PROD_QN_QUANTIDADE_ALTERADA" Type="int" />
+          <Property Name="PROD_DS_JUSTIFICATIVA" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="PRODUTO_ANEXO">
           <Key>
@@ -1325,6 +1328,24 @@
           <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
           <Property Name="TICR_NM_NOME" Type="varchar" MaxLength="50" />
           <Property Name="TICR_IN_ATIVO" Type="int" />
+        </EntityType>
+        <EntityType Name="TIPO_EMBALAGEM">
+          <Key>
+            <PropertyRef Name="TIEM_CD_ID" />
+          </Key>
+          <Property Name="TIEM_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" />
+          <Property Name="TIEM_NM_NOME" Type="varchar" MaxLength="50" />
+          <Property Name="TIEM_DS_DESCRICAO" Type="varchar" MaxLength="500" />
+          <Property Name="TIEM_NR_ALTURA" Type="int" />
+          <Property Name="TIEM_NR_LARGURA" Type="int" />
+          <Property Name="TIEM_NR_COMPRIMENTO" Type="int" />
+          <Property Name="TIEM_NR_DIAMETRO" Type="int" />
+          <Property Name="TIIEM_VL_CUSTO_UNITARIO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TIEM_NR_ESTOQUE" Type="int" />
+          <Property Name="TIEM_ESTOQUE_INICIAL" Type="int" />
+          <Property Name="TIEM_VLCUSTO_REPASSADO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TIEM_IN_ATIVO" Type="int" />
         </EntityType>
         <EntityType Name="TIPO_PESSOA">
           <Key>
@@ -2586,6 +2607,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PRODUTO_TIPO_EMBALAGEM">
+          <End Role="TIPO_EMBALAGEM" Type="Self.TIPO_EMBALAGEM" Multiplicity="0..1" />
+          <End Role="PRODUTO" Type="Self.PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_EMBALAGEM">
+              <PropertyRef Name="TIEM_CD_ID" />
+            </Principal>
+            <Dependent Role="PRODUTO">
+              <PropertyRef Name="TIEM_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SUBCATEGORIA_PRODUTO_ASSINANTE">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
           <End Role="SUBCATEGORIA_PRODUTO" Type="Self.SUBCATEGORIA_PRODUTO" Multiplicity="*" />
@@ -3757,6 +3790,7 @@
           <EntitySet Name="TIPO_CONTA" EntityType="Self.TIPO_CONTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPO_CONTRIBUINTE" EntityType="Self.TIPO_CONTRIBUINTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPO_CRM" EntityType="Self.TIPO_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_EMBALAGEM" EntityType="Self.TIPO_EMBALAGEM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPO_PESSOA" EntityType="Self.TIPO_PESSOA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPO_TAREFA" EntityType="Self.TIPO_TAREFA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPO_TRANSPORTE" EntityType="Self.TIPO_TRANSPORTE" Schema="dbo" store:Type="Tables" />
@@ -4128,6 +4162,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_PRODUTO_TAMANHO" Association="Self.FK_PRODUTO_TAMANHO">
             <End Role="TAMANHO" EntitySet="TAMANHO" />
+            <End Role="PRODUTO" EntitySet="PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUTO_TIPO_EMBALAGEM" Association="Self.FK_PRODUTO_TIPO_EMBALAGEM">
+            <End Role="TIPO_EMBALAGEM" EntitySet="TIPO_EMBALAGEM" />
             <End Role="PRODUTO" EntitySet="PRODUTO" />
           </AssociationSet>
           <AssociationSet Name="FK_SUBCATEGORIA_PRODUTO_ASSINANTE" Association="Self.FK_SUBCATEGORIA_PRODUTO_ASSINANTE">
@@ -5806,6 +5844,10 @@
           <Property Name="PROD_NR_LARGURA" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PROD_NR_COMPRIMENTO" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PROD_NR_DIAMETRO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TIEM_CD_ID" Type="Int32" />
+          <NavigationProperty Name="TIPO_EMBALAGEM" Relationship="Db_PrecificacaoModel.FK_PRODUTO_TIPO_EMBALAGEM" FromRole="PRODUTO" ToRole="TIPO_EMBALAGEM" />
+          <Property Name="PROD_QN_QUANTIDADE_ALTERADA" Type="Int32" />
+          <Property Name="PROD_DS_JUSTIFICATIVA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRODUTO_ANEXO">
           <Key>
@@ -9304,6 +9346,11 @@
             <End Role="PRODUTO" EntitySet="PRODUTO" />
             <End Role="FICHA_TECNICA_DETALHE" EntitySet="FICHA_TECNICA_DETALHE" />
           </AssociationSet>
+          <EntitySet Name="TIPO_EMBALAGEM" EntityType="Db_PrecificacaoModel.TIPO_EMBALAGEM" />
+          <AssociationSet Name="FK_PRODUTO_TIPO_EMBALAGEM" Association="Db_PrecificacaoModel.FK_PRODUTO_TIPO_EMBALAGEM">
+            <End Role="TIPO_EMBALAGEM" EntitySet="TIPO_EMBALAGEM" />
+            <End Role="PRODUTO" EntitySet="PRODUTO" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_SUBCATEGORIA_PRODUTO_ASSINANTE">
           <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
@@ -9338,6 +9385,37 @@
             </Principal>
             <Dependent Role="FICHA_TECNICA_DETALHE">
               <PropertyRef Name="PROD_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TIPO_EMBALAGEM">
+          <Key>
+            <PropertyRef Name="TIEM_CD_ID" />
+          </Key>
+          <Property Name="TIEM_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
+          <Property Name="TIEM_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TIEM_DS_DESCRICAO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TIEM_NR_ALTURA" Type="Int32" />
+          <Property Name="TIEM_NR_LARGURA" Type="Int32" />
+          <Property Name="TIEM_NR_COMPRIMENTO" Type="Int32" />
+          <Property Name="TIEM_NR_DIAMETRO" Type="Int32" />
+          <Property Name="TIIEM_VL_CUSTO_UNITARIO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TIEM_NR_ESTOQUE" Type="Int32" />
+          <Property Name="TIEM_VLCUSTO_REPASSADO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TIEM_IN_ATIVO" Type="Int32" />
+          <NavigationProperty Name="PRODUTO" Relationship="Db_PrecificacaoModel.FK_PRODUTO_TIPO_EMBALAGEM" FromRole="TIPO_EMBALAGEM" ToRole="PRODUTO" />
+          <Property Name="TIEM_ESTOQUE_INICIAL" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_PRODUTO_TIPO_EMBALAGEM">
+          <End Type="Db_PrecificacaoModel.TIPO_EMBALAGEM" Role="TIPO_EMBALAGEM" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_EMBALAGEM">
+              <PropertyRef Name="TIEM_CD_ID" />
+            </Principal>
+            <Dependent Role="PRODUTO">
+              <PropertyRef Name="TIEM_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10406,6 +10484,9 @@
           <EntitySetMapping Name="PRODUTO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.PRODUTO">
               <MappingFragment StoreEntitySet="PRODUTO">
+                <ScalarProperty Name="PROD_DS_JUSTIFICATIVA" ColumnName="PROD_DS_JUSTIFICATIVA" />
+                <ScalarProperty Name="PROD_QN_QUANTIDADE_ALTERADA" ColumnName="PROD_QN_QUANTIDADE_ALTERADA" />
+                <ScalarProperty Name="TIEM_CD_ID" ColumnName="TIEM_CD_ID" />
                 <ScalarProperty Name="PROD_NR_DIAMETRO" ColumnName="PROD_NR_DIAMETRO" />
                 <ScalarProperty Name="PROD_NR_COMPRIMENTO" ColumnName="PROD_NR_COMPRIMENTO" />
                 <ScalarProperty Name="PROD_NR_LARGURA" ColumnName="PROD_NR_LARGURA" />
@@ -10948,6 +11029,25 @@
                 <ScalarProperty Name="VICO_DT_COMENTARIO" ColumnName="VICO_DT_COMENTARIO" />
                 <ScalarProperty Name="VICO_TX_COMENTARIO" ColumnName="VICO_TX_COMENTARIO" />
                 <ScalarProperty Name="VICO_IN_ATIVO" ColumnName="VICO_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_EMBALAGEM">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.TIPO_EMBALAGEM">
+              <MappingFragment StoreEntitySet="TIPO_EMBALAGEM">
+                <ScalarProperty Name="TIEM_ESTOQUE_INICIAL" ColumnName="TIEM_ESTOQUE_INICIAL" />
+                <ScalarProperty Name="TIEM_IN_ATIVO" ColumnName="TIEM_IN_ATIVO" />
+                <ScalarProperty Name="TIEM_VLCUSTO_REPASSADO" ColumnName="TIEM_VLCUSTO_REPASSADO" />
+                <ScalarProperty Name="TIEM_NR_ESTOQUE" ColumnName="TIEM_NR_ESTOQUE" />
+                <ScalarProperty Name="TIIEM_VL_CUSTO_UNITARIO" ColumnName="TIIEM_VL_CUSTO_UNITARIO" />
+                <ScalarProperty Name="TIEM_NR_DIAMETRO" ColumnName="TIEM_NR_DIAMETRO" />
+                <ScalarProperty Name="TIEM_NR_COMPRIMENTO" ColumnName="TIEM_NR_COMPRIMENTO" />
+                <ScalarProperty Name="TIEM_NR_LARGURA" ColumnName="TIEM_NR_LARGURA" />
+                <ScalarProperty Name="TIEM_NR_ALTURA" ColumnName="TIEM_NR_ALTURA" />
+                <ScalarProperty Name="TIEM_DS_DESCRICAO" ColumnName="TIEM_DS_DESCRICAO" />
+                <ScalarProperty Name="TIEM_NM_NOME" ColumnName="TIEM_NM_NOME" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="TIEM_CD_ID" ColumnName="TIEM_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

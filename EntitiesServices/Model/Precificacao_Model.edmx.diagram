@@ -288,6 +288,8 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_SUBCATEGORIA_PRODUTO_ASSINANTE" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_FICHA_TECNICA_PRODUTO" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_PRODUTO" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_EMBALAGEM" Width="1.5" PointX="0.75" PointY="1" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PRODUTO_TIPO_EMBALAGEM" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -220,6 +220,7 @@
     <Compile Include="Repositories\ProdutoTabelaPrecoRepository.cs" />
     <Compile Include="Repositories\SexoRepository.cs" />
     <Compile Include="Repositories\SubcategoriaProdutoRepository.cs" />
+    <Compile Include="Repositories\TipoEmbalagemRepository.cs" />
     <Compile Include="Repositories\TamanhoRepository.cs" />
     <Compile Include="Repositories\TipoContribuinteRepository.cs" />
     <Compile Include="Repositories\UnidadeRepository.cs" />

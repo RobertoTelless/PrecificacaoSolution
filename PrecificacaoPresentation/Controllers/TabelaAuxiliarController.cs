@@ -32,6 +32,7 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly ISubgrupoAppService subApp;
         private readonly ICategoriaClienteAppService ccApp;
         private readonly ICategoriaFornecedorAppService cfApp;
+        private readonly ITipoEmbalagemAppService teApp;
 
         CARGO_USUARIO objetoCargo = new CARGO_USUARIO();
         CARGO_USUARIO objetoAntesCargo = new CARGO_USUARIO();
@@ -48,9 +49,12 @@ namespace ERP_Condominios_Solution.Controllers
         CATEGORIA_FORNECEDOR objetoCatFornecedor = new CATEGORIA_FORNECEDOR();
         CATEGORIA_FORNECEDOR objetoAntesCatFornecedor= new CATEGORIA_FORNECEDOR();
         List<CATEGORIA_FORNECEDOR> listaMasterCatFornecedor= new List<CATEGORIA_FORNECEDOR>();
+        TIPO_EMBALAGEM objetoTipoEmbalagem = new TIPO_EMBALAGEM();
+        TIPO_EMBALAGEM objetoAntesTipoEmbalagem = new TIPO_EMBALAGEM();
+        List<TIPO_EMBALAGEM> listaMasterTipoEmbalagem = new List<TIPO_EMBALAGEM>();
         String extensao;
 
-        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps)
+        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps, ITipoEmbalagemAppService teApps)
         {
             carApp = carApps;
             logApp = logApps;
@@ -58,6 +62,7 @@ namespace ERP_Condominios_Solution.Controllers
             subApp = subApps;
             ccApp = ccApps;
             cfApp = cfApps;
+            teApp = teApps;
         }
 
         [HttpGet]
@@ -1794,6 +1799,339 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("MontarTelaCatFornecedor");
         }
 
-    
+        [HttpGet]
+        public ActionResult MontarTelaTipoEmbalagem()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaTipoEmbalagem"] == null)
+            {
+                listaMasterTipoEmbalagem = teApp.GetAllItens(idAss);
+                Session["ListaTipoEmbalagem"] = listaMasterTipoEmbalagem;
+            }
+            ViewBag.Listas = (List<TIPO_EMBALAGEM>)Session["ListaTipoEmbalagem"];
+            ViewBag.Title = "TipoEmbalagem";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.TipoEmbalagem = ((List<TIPO_EMBALAGEM>)Session["ListaTipoEmbalagem"]).Count;
+
+            if (Session["MensTipoEmbalagem"] != null)
+            {
+                if ((Int32)Session["MensTipoEmbalagem"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0185", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensTipoEmbalagem"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensTipoEmbalagem"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0186", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["VoltaTipoEmbalagem"] = 1;
+            Session["MensTipoEmbalagem"] = 0;
+            objetoTipoEmbalagem = new TIPO_EMBALAGEM();
+            return View(objetoTipoEmbalagem);
+        }
+
+        public ActionResult RetirarFiltroTipoEmbalagem()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["ListaTipoEmbalagem"] = null;
+            Session["FiltroTipoEmbalagem"] = null;
+            return RedirectToAction("MontarTelaTipoEmbalagem");
+        }
+
+        public ActionResult MostrarTudoTipoEmbalagem()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterTipoEmbalagem= teApp.GetAllItensAdm(idAss);
+            Session["FiltroTipoEmbalagem"] = null;
+            Session["ListaTipoEmbalagem"] = listaMasterTipoEmbalagem;
+            return RedirectToAction("MontarTelaTipoEmbalagem");
+        }
+
+        public ActionResult VoltarBaseTipoEmbalagem()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaTipoEmbalagem"] == 2)
+            {
+                return RedirectToAction("IncluirProduto", "Produto");
+            }
+            if ((Int32)Session["VoltaTipoEmbalagem"] == 3)
+            {
+                return RedirectToAction("VoltarAnexoProduto", "Produto");
+            }
+            return RedirectToAction("MontarTelaTipoEmbalagem");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirTipoEmbalagem()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCargo");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            TIPO_EMBALAGEM item = new TIPO_EMBALAGEM();
+            TipoEmbalagemViewModel vm = Mapper.Map<TIPO_EMBALAGEM, TipoEmbalagemViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.TIEM_IN_ATIVO = 1;
+            vm.TIEM_NR_ESTOQUE = 0;
+            vm.TIIEM_VL_CUSTO_UNITARIO = 0;
+            vm.TIEM_VLCUSTO_REPASSADO = 0;
+            vm.TIEM_ESTOQUE_INICIAL = 0;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirTipoEmbalagem(TipoEmbalagemViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    TIPO_EMBALAGEM item = Mapper.Map<TipoEmbalagemViewModel, TIPO_EMBALAGEM>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = teApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensTipoEmbalagem"] = 3;
+                        return RedirectToAction("MontarTelaTipoEmbalagem");
+                    }
+                    Session["IdVolta"] = item.TIEM_CD_ID;
+
+                    // Sucesso
+                    listaMasterTipoEmbalagem = new List<TIPO_EMBALAGEM>();
+                    Session["ListaTipoEmbalagem"] = null;
+                    return RedirectToAction("VoltarBaseTipoEmbalagem");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditarTipoEmbalagem(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCargo");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            TIPO_EMBALAGEM item = teApp.GetItemById(id);
+            objetoAntesTipoEmbalagem = item;
+            Session["TipoEmbalagem"] = item;
+            Session["IdTipoEmbalagem"] = id;
+            TipoEmbalagemViewModel vm = Mapper.Map<TIPO_EMBALAGEM, TipoEmbalagemViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarTipoEmbalagem(TipoEmbalagemViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    TIPO_EMBALAGEM item = Mapper.Map<TipoEmbalagemViewModel, TIPO_EMBALAGEM>(vm);
+                    Int32 volta = teApp.ValidateEdit(item, objetoAntesTipoEmbalagem, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterTipoEmbalagem = new List<TIPO_EMBALAGEM>();
+                    Session["ListaTipoEmbalagem"] = null;
+                    return RedirectToAction("MontarTelaTipoEmbalagem");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirTipoEmbalagem(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCargo");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            TIPO_EMBALAGEM item = teApp.GetItemById(id);
+            objetoAntesTipoEmbalagem = item;
+            item.TIEM_IN_ATIVO = 0;
+            Int32 volta = teApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensTipoEmbalagem"] = 4;
+                return RedirectToAction("MontarTelaTipoEmbalagem");
+            }
+            listaMasterTipoEmbalagem = new List<TIPO_EMBALAGEM>();
+            Session["ListaTipoEmbalagem"] = null;
+            return RedirectToAction("MontarTelaTipoEmbalagem");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarTipoEmbalagem(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCargo");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            TIPO_EMBALAGEM item = teApp.GetItemById(id);
+            objetoAntesTipoEmbalagem = item;
+            item.TIEM_IN_ATIVO = 1;
+            Int32 volta = teApp.ValidateReativar(item, usuario);
+            listaMasterTipoEmbalagem = new List<TIPO_EMBALAGEM>();
+            Session["ListaTipoEmbalagem"] = null;
+            return RedirectToAction("MontarTelaTipoEmbalagem");
+        }
+
     }
 }

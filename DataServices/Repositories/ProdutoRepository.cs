@@ -136,44 +136,39 @@ namespace DataServices.Repositories
             return lista;
         }
 
-        public List<PRODUTO_ESTOQUE_EMPRESA> ExecuteFilterEstoque(Int32? filial, String nome, String marca, String codigo, String barcode, Int32? categoria, Int32? tipo, Int32 idAss)
+        public List<PRODUTO> ExecuteFilterEstoque(Int32? filial, String nome, String marca, String codigo, String barcode, Int32? categoria, Int32? tipo, Int32 idAss)
         {
-            List<PRODUTO_ESTOQUE_EMPRESA> lista = new List<PRODUTO_ESTOQUE_EMPRESA>();
-            IQueryable<PRODUTO_ESTOQUE_EMPRESA> query = Db.PRODUTO_ESTOQUE_EMPRESA;
-            if (filial != null)
-            {
-                query = query.Where(p => p.EMPR_CD_ID == filial);
-            }
+            List<PRODUTO> lista = new List<PRODUTO>();
+            IQueryable<PRODUTO> query = Db.PRODUTO;
             if (tipo != null)
             {
-                query = query.Where(p => p.PRODUTO.PROD_IN_TIPO_PRODUTO == tipo);
+                query = query.Where(p => p.PROD_IN_TIPO_PRODUTO == tipo);
             }
             if (!String.IsNullOrEmpty(nome))
             {
-                query = query.Where(p => p.PRODUTO.PROD_NM_NOME.Contains(nome));
+                query = query.Where(p => p.PROD_NM_NOME.Contains(nome));
             }
             if (!String.IsNullOrEmpty(marca))
             {
-                query = query.Where(p => p.PRODUTO.PROD_NM_MARCA.Contains(marca));
+                query = query.Where(p => p.PROD_NM_MARCA.Contains(marca));
             }
             if (!String.IsNullOrEmpty(codigo))
             {
-                query = query.Where(p => p.PRODUTO.PROD_CD_CODIGO.Contains(codigo));
+                query = query.Where(p => p.PROD_CD_CODIGO.Contains(codigo));
             }
             if (!String.IsNullOrEmpty(barcode))
             {
-                query = query.Where(p => p.PRODUTO.PROD_CD_CODIGO == barcode);
+                query = query.Where(p => p.PROD_BC_BARCODE == barcode);
             }
             if (categoria != null)
             {
-                query = query.Where(p => p.PRODUTO.CATEGORIA_PRODUTO.CAPR_CD_ID == categoria);
+                query = query.Where(p => p.CATEGORIA_PRODUTO.CAPR_CD_ID == categoria);
             }
             if (query != null)
             {
-                //query = query.Where(p => p.PREF_IN_ATIVO == 1);
-                query = query.Where(p => p.PRODUTO.ASSI_CD_ID == idAss);
-                query = query.OrderBy(a => a.PRODUTO.PROD_NM_NOME);
-                lista = query.ToList<PRODUTO_ESTOQUE_EMPRESA>();
+                query = query.Where(p => p.ASSI_CD_ID == idAss);
+                query = query.OrderBy(a => a.PROD_NM_NOME);
+                lista = query.ToList<PRODUTO>();
             }
             return lista;
         }

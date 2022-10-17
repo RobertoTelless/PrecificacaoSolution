@@ -128,5 +128,6 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         public virtual DbSet<VIDEO> VIDEO { get; set; }
         public virtual DbSet<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
+        public virtual DbSet<TIPO_EMBALAGEM> TIPO_EMBALAGEM { get; set; }
     }
 }

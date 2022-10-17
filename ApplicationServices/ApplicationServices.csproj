@@ -217,6 +217,7 @@
     <Compile Include="Interfaces\IProdutoEstoqueFilialAppService.cs" />
     <Compile Include="Interfaces\IProdutoTabelaPrecoAppService.cs" />
     <Compile Include="Interfaces\ISubCategoriaProdutoAppService.cs" />
+    <Compile Include="Interfaces\ITipoEmbalagemAppService.cs" />
     <Compile Include="Interfaces\ITamanhoAppService.cs" />
     <Compile Include="Interfaces\IUnidadeAppService.cs" />
     <Compile Include="Interfaces\IVideoAppService.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Services\ProdutoEstoqueFilialAppService.cs" />
     <Compile Include="Services\ProdutoTabelaPrecoAppService.cs" />
     <Compile Include="Services\SubcategoriaProdutoAppService.cs" />
+    <Compile Include="Services\TipoEmbalagemAppService.cs" />
     <Compile Include="Services\TamanhoAppService.cs" />
     <Compile Include="Services\UnidadeAppService.cs" />
     <Compile Include="Services\VideoAppService.cs" />

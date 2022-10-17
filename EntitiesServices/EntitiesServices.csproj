@@ -212,6 +212,7 @@
     <Compile Include="EntitiesServices\ProdutoService.cs" />
     <Compile Include="EntitiesServices\ProdutoTabelaPrecoService.cs" />
     <Compile Include="EntitiesServices\SubCategoriaProdutoService.cs" />
+    <Compile Include="EntitiesServices\TipoEmbalagemService.cs" />
     <Compile Include="EntitiesServices\TamanhoService.cs" />
     <Compile Include="EntitiesServices\UnidadeService.cs" />
     <Compile Include="EntitiesServices\VideoService.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="Interfaces\Repositories\IProdutoTabelaPrecoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISubcategoriaProdutoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITipoEmbalagemRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITamanhoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoContribuinteRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUnidadeRepository.cs" />
@@ -332,6 +334,7 @@
     <Compile Include="Interfaces\Services\IProdutoService.cs" />
     <Compile Include="Interfaces\Services\IProdutoTabelaPrecoService.cs" />
     <Compile Include="Interfaces\Services\ISubCategoriaProdutoService.cs" />
+    <Compile Include="Interfaces\Services\ITipoEmbalagemService.cs" />
     <Compile Include="Interfaces\Services\ITamanhoService.cs" />
     <Compile Include="Interfaces\Services\IUnidadeService.cs" />
     <Compile Include="Interfaces\Services\IVideoService.cs" />
@@ -639,6 +642,9 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIPO_CRM.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TIPO_EMBALAGEM.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIPO_PESSOA.cs">

@@ -1526,5 +1526,23 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0184", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tipo de embalagem já cadastrado.
+        /// </summary>
+        internal static string M0185 {
+            get {
+                return ResourceManager.GetString("M0185", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este tipo de embalagem. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0186 {
+            get {
+                return ResourceManager.GetString("M0186", resourceCulture);
+            }
+        }
     }
 }

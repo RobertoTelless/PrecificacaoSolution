@@ -110,6 +110,10 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<decimal> PROD_NR_DIAMETRO { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public string PROD_NR_FATOR_CONVERSAO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<int> PROD_QN_QUANTIDADE_ALTERADA { get; set; }
+        [StringLength(500, ErrorMessage = "A JUSTIFICATIVA deve conter no máximo 500 caracteres.")]
+        public string PROD_DS_JUSTIFICATIVA { get; set; }
 
         public Nullable<int> EntradaSaida { get; set; }
 
@@ -117,66 +121,66 @@ namespace ERP_Condominios_Solution.ViewModels
         {
             get
             {
-                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_ULTIMO_CUSTO.Value);
+                return PROD_VL_ULTIMO_CUSTO.HasValue ? CrossCutting.Formatters.DecimalFormatter(PROD_VL_ULTIMO_CUSTO.Value) : string.Empty;
             }
             set
             {
-                PROD_VL_ULTIMO_CUSTO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+                PROD_VL_ULTIMO_CUSTO = value != null ? Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true)) : 0;
             }
         }
         public string PrecoVenda
         {
             get
             {
-                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_VENDA.Value);
+                return PROD_VL_PRECO_VENDA.HasValue ? CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_VENDA.Value) : string.Empty;
             }
             set
             {
-                PROD_VL_PRECO_VENDA = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+                PROD_VL_PRECO_VENDA = value != null ? Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true)) : 0;
             }
         }
         public string PrecoPromocao
         {
             get
             {
-                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_PROMOCAO.Value);
+                return PROD_VL_PRECO_PROMOCAO.HasValue ? CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_PROMOCAO.Value) : string.Empty;
             }
             set
             {
-                PROD_VL_PRECO_PROMOCAO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+                PROD_VL_PRECO_PROMOCAO = value != null ? Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true)) : 0;
             }
         }
         public string PrecoMinimo
         {
             get
             {
-                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_MINIMO.Value);
+                return PROD_VL_PRECO_MINIMO.HasValue ? CrossCutting.Formatters.DecimalFormatter(PROD_VL_PRECO_MINIMO.Value) : string.Empty;
             }
             set
             {
-                PROD_VL_PRECO_MINIMO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+                PROD_VL_PRECO_MINIMO = value != null ? Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true)) : 0;
             }
         }
         public string MarkupMinimo
         {
             get
             {
-                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_MARKUP_MINIMO.Value);
+                return PROD_VL_MARKUP_MINIMO.HasValue ? CrossCutting.Formatters.DecimalFormatter(PROD_VL_MARKUP_MINIMO.Value) : string.Empty;
             }
             set
             {
-                PROD_VL_MARKUP_MINIMO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+                PROD_VL_MARKUP_MINIMO = value != null ? Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true)) : 0;
             }
         }
         public string MarkupPadrao
         {
             get
             {
-                return CrossCutting.Formatters.DecimalFormatter(PROD_VL_MARKUP_PADRAO.Value);
+                return PROD_VL_MARKUP_PADRAO.HasValue ? CrossCutting.Formatters.DecimalFormatter(PROD_VL_MARKUP_PADRAO.Value) : string.Empty;
             }
             set
             {
-                PROD_VL_MARKUP_PADRAO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+                PROD_VL_MARKUP_PADRAO = value != null ? Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true)) : 0;
             }
         }
 
@@ -193,6 +197,18 @@ namespace ERP_Condominios_Solution.ViewModels
             set
             {
                 PROD_IN_AVISA_MINIMO = (value == true) ? 1 : 0;
+            }
+        }
+
+        public string ValorIPIFixo
+        {
+            get
+            {
+                return PROD_VL_IPI_FIXO.HasValue ? CrossCutting.Formatters.DecimalFormatter(PROD_VL_IPI_FIXO.Value) : string.Empty;
+            }
+            set
+            {
+                PROD_VL_IPI_FIXO = value != null ? Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true)) : 0;
             }
         }
 

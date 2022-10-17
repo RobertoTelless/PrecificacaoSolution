@@ -606,4 +606,10 @@
   <data name="M0184" xml:space="preserve">
     <value>Produto composto deve obrigatóriamente ter uma ficha técnica</value>
   </data>
+  <data name="M0185" xml:space="preserve">
+    <value>Tipo de embalagem já cadastrado</value>
+  </data>
+  <data name="M0186" xml:space="preserve">
+    <value>Impossível excluir este tipo de embalagem. Existem registros vinculados a ele</value>
+  </data>
 </root>

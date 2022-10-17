@@ -62,6 +62,7 @@ namespace MvcMapping.Mappers
             CreateMap<ProdutoTabelaPrecoViewModel, PRODUTO_TABELA_PRECO>();
             CreateMap<ProdutoViewModel, PRODUTO>();
             CreateMap<ProdutoKitViewModel, PRODUTO_KIT>();
+            CreateMap<TipoEmbalagemViewModel, TIPO_EMBALAGEM>();
 
         }
     }

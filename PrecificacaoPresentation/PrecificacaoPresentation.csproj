@@ -239,6 +239,7 @@
     <Compile Include="Controllers\ConfiguracaoController.cs" />
     <Compile Include="Controllers\ControleAcessoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FormaPagRecController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -280,11 +281,14 @@
     <Compile Include="ViewModels\EmpresaMaquinaViewModel.cs" />
     <Compile Include="ViewModels\FornecedorContatoViewModel.cs" />
     <Compile Include="ViewModels\FornecedorViewModel.cs" />
+    <Compile Include="ViewModels\MovimentacaoAvulsaGridViewModel.cs" />
+    <Compile Include="ViewModels\MovimentacaoAvulsaViewModel.cs" />
     <Compile Include="ViewModels\ProdutoFornecedorViewModel.cs" />
     <Compile Include="ViewModels\ProdutoKitViewModel.cs" />
     <Compile Include="ViewModels\ProdutoTabelaPrecoViewModel.cs" />
     <Compile Include="ViewModels\ProdutoViewModel.cs" />
     <Compile Include="ViewModels\SubcategoriaProdutoViewModel.cs" />
+    <Compile Include="ViewModels\TipoEmbalagemViewModel.cs" />
     <Compile Include="ViewModels\TamanhoViewModel.cs" />
     <Compile Include="ViewModels\UnidadeViewModel.cs" />
     <Compile Include="ViewModels\VideoComentarioViewModel.cs" />
@@ -3095,6 +3099,15 @@
     <Content Include="Views\Produto\IncluirProdutoKit.cshtml" />
     <Content Include="Views\Produto\EnviarEMailContato.cshtml" />
     <Content Include="Views\Produto\EnviarSMSContato.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaTipoEmbalagem.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirTipoEmbalagem.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarTipoEmbalagem.cshtml" />
+    <Content Include="Views\Estoque\MontarTelaDashboardEstoque.cshtml" />
+    <Content Include="Views\Estoque\MontarTelaEstoqueProduto.cshtml" />
+    <Content Include="Views\Estoque\AcertoManualProduto.cshtml" />
+    <Content Include="Views\Estoque\VerMovimentacaoEstoqueProdutoNova.cshtml" />
+    <Content Include="Views\Estoque\MontarTelaMovimentacaoAvulsa.cshtml" />
+    <Content Include="Views\Estoque\IncluirMovimentacaoAvulsa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

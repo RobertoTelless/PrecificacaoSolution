@@ -83,6 +83,9 @@ namespace EntitiesServices.Model
         public Nullable<decimal> PROD_NR_LARGURA { get; set; }
         public Nullable<decimal> PROD_NR_COMPRIMENTO { get; set; }
         public Nullable<decimal> PROD_NR_DIAMETRO { get; set; }
+        public Nullable<int> TIEM_CD_ID { get; set; }
+        public Nullable<int> PROD_QN_QUANTIDADE_ALTERADA { get; set; }
+        public string PROD_DS_JUSTIFICATIVA { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_PRODUTO CATEGORIA_PRODUTO { get; set; }
@@ -110,5 +113,6 @@ namespace EntitiesServices.Model
         public virtual ICollection<FICHA_TECNICA> FICHA_TECNICA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
+        public virtual TIPO_EMBALAGEM TIPO_EMBALAGEM { get; set; }
     }
 }

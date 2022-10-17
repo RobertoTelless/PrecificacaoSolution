@@ -135,7 +135,7 @@ namespace ApplicationServices.Services
             return lista;
         }
 
-        public Int32 ExecuteFilter(Int32? catId, Int32? subId, String nome, String marca, String codigo, String cod, Int32? filial, Int32 ativo,  Int32? tipo, Int32 idAss, out List<PRODUTO> objeto)
+        public Int32 ExecuteFilter(Int32? catId, Int32? subId, String nome, String marca, String codigo, String cod, Int32? filial, Int32? ativo,  Int32? tipo, Int32 idAss, out List<PRODUTO> objeto)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(catId, subId, nome, marca, codigo, cod, filial, ativo, tipo, idAss);
+                objeto = _baseService.ExecuteFilter(catId, subId, nome, marca, codigo, cod, filial, ativo.Value, tipo, idAss);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -156,11 +156,11 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ExecuteFilterEstoque(Int32? filial, String nome, String marca, String codigo, String barcode, Int32? categoria, Int32? tipo, Int32 idAss, out List<PRODUTO_ESTOQUE_EMPRESA> objeto)
+        public Int32 ExecuteFilterEstoque(Int32? filial, String nome, String marca, String codigo, String barcode, Int32? categoria, Int32? tipo, Int32 idAss, out List<PRODUTO> objeto)
         {
             try
             {
-                objeto = new List<PRODUTO_ESTOQUE_EMPRESA>();
+                objeto = new List<PRODUTO>();
                 Int32 volta = 0;
 
                 // Processa filtro
@@ -629,6 +629,56 @@ namespace ApplicationServices.Services
                 // Persiste
                 Int32 volta = _baseService.CreateKit(item);
                 return volta;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public Int32 ValidateEditEstoque(PRODUTO item, PRODUTO itemAntes, USUARIO usuario)
+        {
+            try
+            {
+                Int32 operacao = item.PROD_QN_ESTOQUE < item.PROD_QN_QUANTIDADE_ALTERADA ? 1 : 2;
+                Int32 quant = 0;
+                Int32 tipo = 0;
+                if (item.PROD_QN_QUANTIDADE_ALTERADA > item.PROD_QN_ESTOQUE)
+                {
+                    quant = (Int32)item.PROD_QN_QUANTIDADE_ALTERADA - (Int32)item.PROD_QN_ESTOQUE;
+                    tipo = 1;
+                }
+                else
+                {
+                    quant = (Int32)item.PROD_QN_ESTOQUE - (Int32)item.PROD_QN_QUANTIDADE_ALTERADA;
+                    tipo = 2;
+                }
+
+                MOVIMENTO_ESTOQUE_PRODUTO movto = new MOVIMENTO_ESTOQUE_PRODUTO();
+                movto.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                movto.MOEP_DT_MOVIMENTO = DateTime.Today;
+                movto.MOEP_IN_ATIVO = 1;
+                movto.MOEP_IN_CHAVE_ORIGEM = 0;
+                movto.MOEP_IN_OPERACAO = operacao;
+                movto.MOEP_IN_ORIGEM = "Acerto Manual";
+                movto.MOEP_IN_TIPO_MOVIMENTO = tipo;
+                movto.MOEP_QN_QUANTIDADE = quant;
+                movto.PROD_CD_ID = item.PROD_CD_ID;
+                movto.USUA_CD_ID = usuario.USUA_CD_ID;
+                movto.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                movto.MOEP_QN_ANTES = Convert.ToInt32(item.PROD_QN_ESTOQUE);
+                movto.MOEP_QN_ALTERADA = Convert.ToInt32(item.PROD_QN_ESTOQUE - item.PROD_QN_QUANTIDADE_ALTERADA);
+                movto.MOEP_QN_DEPOIS = quant;
+                movto.MOEP_DS_JUSTIFICATIVA = item.PROD_DS_JUSTIFICATIVA;
+
+                // Persiste estoque
+                Int32 volta = _movService.Create(movto);
+
+                item.PROD_QN_ESTOQUE = item.PROD_QN_QUANTIDADE_ALTERADA.Value;
+                item.PROD_DT_ULTIMA_MOVIMENTACAO = DateTime.Now.Date;
+
+                // Persiste
+                return _baseService.Edit(item);
             }
             catch (Exception ex)
             {

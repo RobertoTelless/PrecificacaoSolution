@@ -398,7 +398,7 @@ namespace ERP_Condominios_Solution.Controllers
         }
 
         [HttpPost]
-        public ActionResult FiltrarEstoqueProduto(PRODUTO_ESTOQUE_EMPRESA item)
+        public ActionResult FiltrarEstoqueProduto(PRODUTO item)
         {
             try
             {
@@ -411,8 +411,8 @@ namespace ERP_Condominios_Solution.Controllers
                 Int32 idAss = (Int32)Session["IdAssinante"];
                 Session["FiltroEstoque"] = item;
                 Int32? idFilial = null;
-                List<PRODUTO_ESTOQUE_EMPRESA> listaObj = new List<PRODUTO_ESTOQUE_EMPRESA>();
-                Int32 volta = prodApp.ExecuteFilterEstoque(idFilial, item.PRODUTO.PROD_NM_NOME, item.PRODUTO.PROD_NM_MARCA, item.PRODUTO.PROD_CD_CODIGO, item.PRODUTO.PROD_CD_CODIGO, item.PRODUTO.CAPR_CD_ID, item.PRODUTO.PROD_IN_TIPO_PRODUTO.Value, idAss, out listaObj);
+                List<PRODUTO> listaObj = new List<PRODUTO>();
+                Int32 volta = prodApp.ExecuteFilterEstoque(idFilial, item.PROD_NM_NOME, item.PROD_NM_MARCA, item.PROD_CD_CODIGO, item.PROD_CD_CODIGO, item.CAPR_CD_ID, item.PROD_IN_TIPO_PRODUTO.Value, idAss, out listaObj);
 
                 // Verifica retorno
                 if (volta == 1)
@@ -423,7 +423,7 @@ namespace ERP_Condominios_Solution.Controllers
                 // Sucesso
                 if ((Int32)Session["VoltaConsulta"] == 2)
                 {
-                    listaObj = listaObj.Where(x => x.PREE_QN_ESTOQUE < x.PRODUTO.PROD_QN_QUANTIDADE_MINIMA).ToList();
+                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
                     if (listaObj == null || listaObj.Count == 0)
                     {
                         Session["MensFiltroEstoque"] = 1;
@@ -434,7 +434,7 @@ namespace ERP_Condominios_Solution.Controllers
                 }
                 if ((Int32)Session["VoltaConsulta"] == 3)
                 {
-                    listaObj = listaObj.Where(x => x.PREE_QN_ESTOQUE == 0).ToList();
+                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE == 0).ToList();
                     if (listaObj == null || listaObj.Count == 0)
                     {
                         Session["MensFiltroEstoque"] = 1;
@@ -445,7 +445,7 @@ namespace ERP_Condominios_Solution.Controllers
                 }
                 if ((Int32)Session["VoltaConsulta"] == 4)
                 {
-                    listaObj = listaObj.Where(x => x.PREE_QN_ESTOQUE < 0).ToList();
+                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE < 0).ToList();
                     if (listaObj == null || listaObj.Count == 0)
                     {
                         Session["MensFiltroEstoque"] = 1;
@@ -638,7 +638,6 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
             Hashtable result = new Hashtable();
-            vm.PROD_QN_QUANTIDADE_INICIAL = 0;
 
             ViewBag.Tipos = new SelectList(cpApp.GetAllItens(idAss).OrderBy(x => x.CAPR_NM_NOME).ToList<CATEGORIA_PRODUTO>(), "CAPR_CD_ID", "CAPR_NM_NOME");
             ViewBag.Subs = new SelectList(prodApp.GetAllSubs(idAss).OrderBy(x => x.SCPR_NM_NOME).ToList<SUBCATEGORIA_PRODUTO>(), "SCPR_CD_ID", "SCPR_NM_NOME");
@@ -686,7 +685,7 @@ namespace ERP_Condominios_Solution.Controllers
                     if (item.PROD_AQ_FOTO == null)
                     {
                         item.PROD_AQ_FOTO = "~/Imagens/Base/icone_imagem.jpg";
-                        volta = prodApp.ValidateEdit(item, item, usuarioLogado);
+                        volta = prodApp.ValidateEdit(item, item);
                     }
 
                     // Cria pastas
@@ -916,6 +915,11 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.CatGrade = item.CATEGORIA_PRODUTO.CAPR_IN_GRADE;
             ViewBag.CatSEO = item.CATEGORIA_PRODUTO.CAPR_IN_SEO;
             ViewBag.CatTamanho = item.CATEGORIA_PRODUTO.CAPR_IN_TAMANHO;
+
+            ViewBag.Pedidos = 0;
+            ViewBag.Conta = 0;
+            ViewBag.Vendas = 0;
+            ViewBag.Quantidade = item.PROD_QN_ESTOQUE;
 
             // Exibe
             Session["VoltaConsulta"] = 1;
