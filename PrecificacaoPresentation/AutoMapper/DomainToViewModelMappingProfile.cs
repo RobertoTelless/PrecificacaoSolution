@@ -65,6 +65,9 @@ namespace MvcMapping.Mappers
             //CreateMap<FICHA_TECNICA_DETALHE, FichaTecnicaDetalheViewModel>();
             CreateMap<PRODUTO_KIT, ProdutoKitViewModel>();
             CreateMap<TIPO_EMBALAGEM, TipoEmbalagemViewModel>();
+            CreateMap<MOVIMENTO_ESTOQUE_PRODUTO, MovimentoEstoqueProdutoViewModel>();
+
+
         }
     }
 }

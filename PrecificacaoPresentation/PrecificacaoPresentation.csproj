@@ -281,6 +281,7 @@
     <Compile Include="ViewModels\EmpresaMaquinaViewModel.cs" />
     <Compile Include="ViewModels\FornecedorContatoViewModel.cs" />
     <Compile Include="ViewModels\FornecedorViewModel.cs" />
+    <Compile Include="ViewModels\MovimentoEstoqueProdutoViewModel.cs" />
     <Compile Include="ViewModels\MovimentacaoAvulsaGridViewModel.cs" />
     <Compile Include="ViewModels\MovimentacaoAvulsaViewModel.cs" />
     <Compile Include="ViewModels\ProdutoFornecedorViewModel.cs" />
@@ -3104,7 +3105,6 @@
     <Content Include="Views\TabelaAuxiliar\EditarTipoEmbalagem.cshtml" />
     <Content Include="Views\Estoque\MontarTelaDashboardEstoque.cshtml" />
     <Content Include="Views\Estoque\MontarTelaEstoqueProduto.cshtml" />
-    <Content Include="Views\Estoque\AcertoManualProduto.cshtml" />
     <Content Include="Views\Estoque\VerMovimentacaoEstoqueProdutoNova.cshtml" />
     <Content Include="Views\Estoque\MontarTelaMovimentacaoAvulsa.cshtml" />
     <Content Include="Views\Estoque\IncluirMovimentacaoAvulsa.cshtml" />

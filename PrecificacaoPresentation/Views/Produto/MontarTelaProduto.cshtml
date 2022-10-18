@@ -52,7 +52,6 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">@ViewBag.Produtos</h1>
-                        <div class="stat-percent font-bold text-navy">32% <i class="fa fa-level-up"></i></div>
                         <small>Produtos Exibidos</small>
                         <br />
                         <br />
@@ -69,7 +68,6 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">@ViewBag.PontoPedido</h1>
-                        <div class="stat-percent font-bold text-navy">22% <i class="fa fa-level-up"></i></div>
                         <small>Ponto de Pedido</small>
                         <br />
                         <br />
@@ -85,7 +83,6 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">@ViewBag.EstoqueZerado</h1>
-                        <div class="stat-percent font-bold text-navy">22% <i class="fa fa-level-up"></i></div>
                         <small>Estoque Zerado</small>
                         <br />
                         <br />
@@ -101,7 +98,6 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">@ViewBag.EstoqueNegativo</h1>
-                        <div class="stat-percent font-bold text-navy">22% <i class="fa fa-level-up"></i></div>
                         <small>Estoque Negativo</small>
                         <br />
                         <br />
@@ -263,11 +259,13 @@
                                                         @Html.TableLinkDetails(cond.PROD_CD_ID, "EditarProduto", "fa-edit", "Editar")
                                                         if (cond.PROD_IN_ATIVO == 1)
                                                         {
-                                                            @Html.TableLinkDetails(cond.PROD_CD_ID, "ExcluirProduto", "fa-trash-o", "Desativar") }
+                                                            <span style="color: #337ab7; cursor:pointer;" alt="Excluir" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Produto/ExcluirProduto/@cond.PROD_CD_ID')" title="Excluir"></span>
+                                                        }
                                                         else
                                                         {
-                                                            @Html.TableLinkDetails(cond.PROD_CD_ID, "ReativarProduto", "fa-refresh", "Reativar")}
+                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Produto/ReativarProduto/@cond.PROD_CD_ID')" title="Reativar"></span>
                                                         }
+                                                    }
                                                     else
                                                     {
                                                         @Html.TableLinkDetails(cond.PROD_CD_ID, "ConsultarProduto", "fa-search", "Consultar")
@@ -322,11 +320,13 @@
                                                         @Html.TableLinkDetails(cond.PROD_CD_ID, "EditarProduto", "fa-edit", "Editar")
                                                         if (cond.PROD_IN_ATIVO == 1)
                                                         {
-                                                            @Html.TableLinkDetails(cond.PROD_CD_ID, "ExcluirProduto", "fa-trash-o", "Desativar") }
+                                                            <span style="color: #337ab7; cursor:pointer;" alt="Excluir" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Produto/ExcluirProduto/@cond.PROD_CD_ID')" title="Excluir"></span>
+                                                        }
                                                         else
                                                         {
-                                                            @Html.TableLinkDetails(cond.PROD_CD_ID, "ReativarProduto", "fa-refresh", "Reativar")}
+                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Produto/ReativarProduto/@cond.PROD_CD_ID')" title="Reativar"></span>
                                                         }
+                                                    }
                                                     else
                                                     {
                                                         @Html.TableLinkDetails(cond.PROD_CD_ID, "ConsultarProduto", "fa-search", "Consultar")
@@ -377,7 +377,30 @@
     @Scripts.Render("~/plugins/jasnyBootstrap")
     @Scripts.Render("~/plugins/sweetAlert")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    <script>
+        $(function () {
+            limpaModal();
+        });
 
+        function limpaModal() {
+            $('#btnModal').remove();
+            $('#modalTitle').remove();
+        }
+
+        function ShowModalExcluir(url) {
+            $('#modal').find('.modal-footer').prepend('<a id="btnModal" alt="Desativar" class="btn btn-primary" href="' + url + '" target="_self" title="Desativar">Confirmar</a>');
+            $('#modal').find('.modal-body').html('Confirma exclusão de Produto?');
+            $('#modal').find('.modal-header').prepend('<h5 id="modalTitle" class="modal-title">Confimar Exclusão</h5>');
+            $('#modal').modal('show');
+        }
+
+        function ShowModalReativar(url) {
+            $('#modal').find('.modal-footer').prepend('<a id="btnModal" alt="Reativar" class="btn btn-primary" href="' + url + '" target="_self" title="Reativar">Confirmar</a>');
+            $('#modal').find('.modal-body').html('Confirma reativação de Produto?');
+            $('#modal').find('.modal-header').prepend('<h5 id="modalTitle" class="modal-title">Confimar Reativação</h5>');
+            $('#modal').modal('show');
+        }
+    </script>
     <script>
         function mostrarDesc(desc) {
             $('#modalDescBody').html(desc);

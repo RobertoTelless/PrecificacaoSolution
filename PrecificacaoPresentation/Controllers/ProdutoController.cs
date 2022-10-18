@@ -1018,6 +1018,7 @@ namespace ERP_Condominios_Solution.Controllers
             objetoProdAntes = item;
             Session["Produto"]  = item;
             Session["IdVolta"]  = id;
+            Session["IdProduto"] = id;
             ProdutoViewModel vm = Mapper.Map<PRODUTO, ProdutoViewModel>(item);
             return View(vm);
         }

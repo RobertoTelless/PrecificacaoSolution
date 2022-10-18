@@ -918,19 +918,22 @@ namespace ERP_Condominios_Solution.Controllers
         public SelectList GetTipoEntrada()
         {
             List<SelectListItem> tipoEntrada = new List<SelectListItem>();
+            tipoEntrada.Add(new SelectListItem() { Text = "Entrada Avulsa", Value = "1" }); 
             tipoEntrada.Add(new SelectListItem() { Text = "Devolução de Cliente", Value = "2" });
-            tipoEntrada.Add(new SelectListItem() { Text = "Entrada", Value = "1" }); // Apenas Produto
+            tipoEntrada.Add(new SelectListItem() { Text = "Acerto de Estoque", Value = "3" });
+            tipoEntrada.Add(new SelectListItem() { Text = "Outras Entradas", Value = "4" });
             return new SelectList(tipoEntrada, "Value", "Text");
         }
 
         public SelectList GetTipoSaida()
         {
             List<SelectListItem> tipoSaida = new List<SelectListItem>();
+            tipoSaida.Add(new SelectListItem() { Text = "Saída Avulsa", Value = "1" });
             tipoSaida.Add(new SelectListItem() { Text = "Devolução para fornecedor", Value = "2" });
-            tipoSaida.Add(new SelectListItem() { Text = "Saída", Value = "1" }); 
             tipoSaida.Add(new SelectListItem() { Text = "Perda ou Roubo", Value = "3" });
             tipoSaida.Add(new SelectListItem() { Text = "Descarte", Value = "4" });
-            tipoSaida.Add(new SelectListItem() { Text = "Outras saídas", Value = "5" });
+            tipoSaida.Add(new SelectListItem() { Text = "Acerto de Estoque", Value = "5" });
+            tipoSaida.Add(new SelectListItem() { Text = "Outras Saídas", Value = "6" });
             return new SelectList(tipoSaida, "Value", "Text");
         }
 
@@ -1181,611 +1184,96 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
             ViewBag.Fornecedores = new SelectList(fornApp.GetAllItens(idAss).OrderBy(x => x.FORN_NM_NOME).ToList<FORNECEDOR>(), "FORN_CD_ID", "FORN_NM_NOME");
 
-            MovimentacaoAvulsaViewModel vm = new MovimentacaoAvulsaViewModel();
-            vm.MOVMT_DT_MOVIMENTO = DateTime.Now;
-            if (Session["MovAvulsaVM"] != null)
-            {
-                vm = (MovimentacaoAvulsaViewModel)Session["MovAvulsaVM"];
-                Session["MovAvulsaVM"] = null;
-            }
-
+            MovimentoEstoqueProdutoViewModel vm = new MovimentoEstoqueProdutoViewModel();
+            vm.MOEP_DT_MOVIMENTO = DateTime.Now;
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.MOEP_IN_ATIVO = 1;
+            vm.MOEP_IN_CHAVE_ORIGEM = 0;
+            vm.MOEP_IN_ORIGEM = "Movimentação Avulsa";
+            vm.USUA_CD_ID = usuario.USUA_CD_ID;
             return View(vm);
         }
 
-        //[HttpPost]
-        //public ActionResult IncluirMovimentacaoAvulsa(MovimentacaoAvulsaViewModel vm)
-        //{
-        //    if ((String)Session["Ativa"] == null)
-        //    {
-        //        return RedirectToAction("Login", "ControleAcesso");
-        //    }
-        //    var usuario = (USUARIO)Session["UserCredentials"];
-        //    Int32 idAss = (Int32)Session["IdAssinante"];
-        //    ViewBag.Title = "Lançamentos - Produtos";
-        //    List<SelectListItem> lista = new List<SelectListItem>();
-        //    lista.Add(new SelectListItem() { Text = "Entrada", Value = "1" });
-        //    lista.Add(new SelectListItem() { Text = "Saída", Value = "2" });
-        //    ViewBag.ListaMovimentoProd = (List<MOVIMENTO_ESTOQUE_PRODUTO>)Session["ListaMovimentoProduto"];
-        //    ViewBag.Lista = new SelectList(lista, "Value", "Text");
-        //    ViewBag.Entradas = GetTipoEntrada();
-        //    ViewBag.Saidas = GetTipoSaida();
-        //    ViewBag.ListaProdutos = new SelectList(prodApp.GetAllItens(idAss).Where(x => x.PROD_IN_COMPOSTO == 0).OrderBy(x => x.PROD_NM_NOME).ToList<PRODUTO>(), "PROD_CD_ID", "PROD_NM_NOME");
-        //    ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
-        //    ViewBag.Fornecedores = new SelectList(fornApp.GetAllItens(idAss).OrderBy(x => x.FORN_NM_NOME).ToList<FORNECEDOR>(), "FORN_CD_ID", "FORN_NM_NOME");
+        [HttpPost]
+        public ActionResult IncluirMovimentacaoAvulsa(MovimentoEstoqueProdutoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            var usuario = (USUARIO)Session["UserCredentials"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Title = "Lançamentos - Produtos";
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem() { Text = "Entrada", Value = "1" });
+            lista.Add(new SelectListItem() { Text = "Saída", Value = "2" });
+            ViewBag.ListaMovimentoProd = (List<MOVIMENTO_ESTOQUE_PRODUTO>)Session["ListaMovimentoProduto"];
+            ViewBag.Lista = new SelectList(lista, "Value", "Text");
+            ViewBag.Entradas = GetTipoEntrada();
+            ViewBag.Saidas = GetTipoSaida();
+            ViewBag.ListaProdutos = new SelectList(prodApp.GetAllItens(idAss).Where(x => x.PROD_IN_COMPOSTO == 0).OrderBy(x => x.PROD_NM_NOME).ToList<PRODUTO>(), "PROD_CD_ID", "PROD_NM_NOME");
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+            ViewBag.Fornecedores = new SelectList(fornApp.GetAllItens(idAss).OrderBy(x => x.FORN_NM_NOME).ToList<FORNECEDOR>(), "FORN_CD_ID", "FORN_NM_NOME");
 
-        //    var listaMvmtProd = new List<MOVIMENTO_ESTOQUE_PRODUTO>();
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (vm.REGISTROS == null)
-        //        {
-        //            ModelState.AddModelError("", "Nenhum registro adicionado para inclusão");
-        //            return View(vm);
-        //        }
+            if (ModelState.IsValid)
+            {
+                MOVIMENTO_ESTOQUE_PRODUTO item = Mapper.Map<MovimentoEstoqueProdutoViewModel, MOVIMENTO_ESTOQUE_PRODUTO>(vm);
+                USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
 
-        //            for (var i = 0; i < vm.REGISTROS.Count(); i++)
-        //            {
-        //                try
-        //                {
-        //                    Int32 qnAntes = 0;
-        //                    MOVIMENTO_ESTOQUE_PRODUTO mov = new MOVIMENTO_ESTOQUE_PRODUTO();
-        //                    PRODUTO_ESTOQUE_FILIAL pef = pefApp.GetByProdFilial(vm.REGISTROS[i], vm.FILI_CD_ID);
+                Int32 volta = moepApp.ValidateCreate(item, usuarioLogado);
 
-        //                    if (pef == null)
-        //                    {
-        //                        pef = new PRODUTO_ESTOQUE_FILIAL();
-        //                        pef.FILI_CD_ID = vm.FILI_CD_ID;
-        //                        pef.PROD_CD_ID = vm.REGISTROS[i];
-        //                        pef.PREF_QN_QUANTIDADE_ALTERADA = 0;
-        //                        pef.PREF_QN_ESTOQUE = 0;
-        //                        pef.PREF_IN_ATIVO = 1;
-        //                        pef.PREF_DS_JUSTIFICATIVA = vm.MOVMT_DS_JUSTIFICATIVA;
-        //                        pef.PREF_DT_ULTIMO_MOVIMENTO = DateTime.Now;
+                // Verifica retorno
+                if (volta == 1)
+                {
+                    Session["MensProduto"] = 3;
+                    return RedirectToAction("MontarTelaProduto");
+                }
 
-        //                        Int32 v = pefApp.ValidateCreate(pef, usuario);
-        //                        pef = pefApp.GetByProdFilial(vm.REGISTROS[i], vm.FILI_CD_ID);
-        //                    }
-
-        //                    PRODUTO_ESTOQUE_FILIAL pefAntes = pef;
-        //                    qnAntes = pef.PREF_QN_ESTOQUE == null ? 0 : (Int32)pef.PREF_QN_ESTOQUE;
-
-        //                    if (vm.MOVMT_IN_OPERACAO == 1)
-        //                    {
-        //                        if (vm.MOVMT_IN_TIPO_MOVIMENTO_ENTRADA == null)
-        //                        {
-        //                            ModelState.AddModelError("", "Campo TIPO DE MOVIMENTAÇÃO obrigatorio");
-        //                            return View(vm);
-        //                        }
-
-        //                        pef.PREF_QN_QUANTIDADE_ALTERADA = vm.QUANTIDADE[i];
-        //                        pef.PREF_QN_ESTOQUE = pef.PREF_QN_ESTOQUE + pef.PREF_QN_QUANTIDADE_ALTERADA;
-        //                        pef.PREF_DT_ULTIMO_MOVIMENTO = DateTime.Now;
-        //                    }
-        //                    else if (vm.MOVMT_IN_OPERACAO == 2)
-        //                    {
-        //                        if (vm.MOVMT_IN_TIPO_MOVIMENTO_SAIDA == null)
-        //                        {
-        //                            ModelState.AddModelError("", "Campo TIPO DE MOVIMENTAÇÃO obrigatorio");
-        //                            return View(vm);
-        //                        }
-        //                        pef.PREF_QN_QUANTIDADE_ALTERADA = vm.QUANTIDADE[i];
-        //                        pef.PREF_QN_ESTOQUE = pef.PREF_QN_ESTOQUE - pef.PREF_QN_QUANTIDADE_ALTERADA;
-        //                        pef.PREF_DT_ULTIMO_MOVIMENTO = DateTime.Now;
-        //                    }
-        //                    else if (vm.MOVMT_IN_OPERACAO == 3)
-        //                    {
-        //                        pef.PREF_QN_QUANTIDADE_ALTERADA = pef.PREF_QN_ESTOQUE;
-        //                        pef.PREF_QN_ESTOQUE = 0;
-        //                        pef.PREF_DT_ULTIMO_MOVIMENTO = DateTime.Now;
-        //                    }
-        //                    else if (vm.MOVMT_IN_OPERACAO == 4)
-        //                    {
-        //                        PRODUTO_ESTOQUE_FILIAL pefDestino = pefApp.GetByProdFilial(vm.REGISTROS[i], (Int32)vm.FILI_DESTINO_CD_ID);
-
-        //                        if (pefDestino == null)
-        //                        {
-        //                            pefDestino = new PRODUTO_ESTOQUE_FILIAL();
-        //                            pefDestino.FILI_CD_ID = vm.FILI_CD_ID;
-        //                            pefDestino.PROD_CD_ID = vm.REGISTROS[i];
-        //                            pefDestino.PREF_QN_ESTOQUE = 0;
-        //                            pefDestino.PREF_QN_QUANTIDADE_ALTERADA = 0;
-        //                            pefDestino.PREF_IN_ATIVO = 1;
-        //                            pefDestino.PREF_DS_JUSTIFICATIVA = vm.MOVMT_DS_JUSTIFICATIVA;
-        //                            pefDestino.PREF_DT_ULTIMO_MOVIMENTO = DateTime.Now;
-
-        //                            Int32 v = pefApp.ValidateCreate(pefDestino, usuario);
-        //                            pefDestino = pefApp.CheckExist(pefDestino,idAss);
-        //                        }
-        //                        PRODUTO_ESTOQUE_FILIAL pefDestinoAntes = pefDestino;
-        //                        qnAntes = pefDestino.PREF_QN_ESTOQUE == null ? 0 : (Int32)pefDestino.PREF_QN_ESTOQUE;
-        //                        pef.PREF_QN_QUANTIDADE_ALTERADA = vm.QUANTIDADE[i];
-        //                        pef.PREF_QN_ESTOQUE = pef.PREF_QN_ESTOQUE - pef.PREF_QN_QUANTIDADE_ALTERADA;
-        //                        pef.PREF_DT_ULTIMO_MOVIMENTO = DateTime.Now;
-
-        //                        pefDestino.PREF_QN_QUANTIDADE_ALTERADA = vm.QUANTIDADE[i];
-        //                        pefDestino.PREF_QN_ESTOQUE = pefDestino.PREF_QN_ESTOQUE + pefDestino.PREF_QN_QUANTIDADE_ALTERADA;
-        //                        pefDestino.PREF_DT_ULTIMO_MOVIMENTO = DateTime.Now;
-
-        //                        Int32 voltaPefDestino = pefApp.ValidateEdit(pefDestino, pefDestinoAntes, usuario);
-        //                    }
-
-        //                    mov.MOEP_QN_ANTES = qnAntes;
-        //                    mov.MOEP_QN_DEPOIS = pef.PREF_QN_ESTOQUE;
-        //                    mov.MOEP_IN_OPERACAO = vm.MOVMT_IN_OPERACAO;
-        //                    if (vm.MOVMT_IN_OPERACAO == 1)
-        //                    {
-        //                        mov.MOEP_IN_TIPO_MOVIMENTO = 1;
-        //                        mov.MOEP_IN_ORIGEM = GetTipoEntrada().Where(x => x.Value == vm.MOVMT_IN_TIPO_MOVIMENTO_ENTRADA.ToString()).Select(x => x.Text).First();
-        //                    }
-        //                    else if (vm.MOVMT_IN_OPERACAO == 2)
-        //                    {
-        //                        mov.MOEP_IN_TIPO_MOVIMENTO = 2;
-        //                        mov.MOEP_IN_ORIGEM = GetTipoSaida().Where(x => x.Value == vm.MOVMT_IN_TIPO_MOVIMENTO_SAIDA.ToString()).Select(x => x.Text).First();
-        //                    }
-        //                    else if(vm.MOVMT_IN_OPERACAO == 3)
-        //                    {
-        //                        mov.MOEP_IN_TIPO_MOVIMENTO = 2;
-        //                        mov.MOEP_IN_ORIGEM = "Zeramento de Estoque";
-        //                    }
-        //                    else if(vm.MOVMT_IN_OPERACAO == 4)
-        //                    {
-        //                        mov.MOEP_IN_TIPO_MOVIMENTO = 2;
-        //                        mov.MOEP_IN_ORIGEM = "Tranferência entre filiais";
-        //                    }
-        //                    mov.MOEP_IN_CHAVE_ORIGEM = 1;
-        //                    mov.PROD_CD_ID = vm.REGISTROS[i];
-        //                    mov.MOEP_QN_QUANTIDADE = vm.QUANTIDADE[i];
-        //                    mov.MOEP_DT_MOVIMENTO = vm.MOVMT_DT_MOVIMENTO;
-        //                    mov.FILI_CD_ID = vm.FILI_CD_ID;
-        //                    mov.MOEP_DS_JUSTIFICATIVA = vm.MOVMT_DS_JUSTIFICATIVA;
-        //                    mov.MOEP_IN_ATIVO = 1;
-        //                    mov.ASSI_CD_ID = usuario.ASSI_CD_ID;
-        //                    mov.USUA_CD_ID = usuario.USUA_CD_ID;
-        //                    mov.MOEP_QN_ANTES = 0;
-        //                    mov.MOEP_QN_ALTERADA = vm.QUANTIDADE[i];
-        //                    mov.MOEP_QN_DEPOIS = vm.QUANTIDADE[i];
-        //                    listaMvmtProd.Add(mov);
-
-        //                    // Se Transferencia...
-        //                    if (vm.MOVMT_IN_OPERACAO == 4)
-        //                    {
-
-        //                    }
-
-        //                    Int32 voltaPef = pefApp.ValidateEdit(pef, pefAntes, usuario);
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    ViewBag.Message = ex.Message;
-        //                    return View();
-        //                }
-        //            }
-
-        //            Int32 volta = moepApp.ValidateCreateLista(listaMvmtProd);
-
-        //            foreach (var lp in listaMvmtProd)
-        //            {
-        //                lp.PRODUTO = prodApp.GetById(lp.PROD_CD_ID);
-        //                lp.FILIAL = filApp.GetById(lp.FILI_CD_ID);
-        //            }
-
-        //            ViewBag.flagProdIns = 1;
-        //            ViewBag.ListaMovimento = listaMvmtProd;
-        //            Session["ListaMovimentoProduto"] = listaMvmtProd;
-        //            Session["ListaProdEstoqueFilial"] = null;
-        //            if (vm.btnVolta == null)
-        //            {
-        //                return View();
-        //            }
-        //            else
-        //            {
-        //                return RedirectToAction("MontarTelaMovimentacaoAvulsa");
-        //            }
-        //    }
-        //    else
-        //    {
-        //        return View(vm);
-        //    }
-        //}
-
-        //[HttpGet]
-        //public ActionResult GerarRelatorioMovimentacaoAvulsa(Int32 id)
-        //{
-            
-        //    MovimentacaoAvulsaGridViewModel vm = (MovimentacaoAvulsaGridViewModel)Session["FiltroMovimentacaoAvulsa"];
-
-        //    Int32 filtroProdIns = vm.ProdutoInsumo == null ? 1 : (Int32)vm.ProdutoInsumo;
-
-        //    var listaMvmtProd = new List<MOVIMENTO_ESTOQUE_PRODUTO>();
-        //    var filtroProd = new MOVIMENTO_ESTOQUE_PRODUTO();
-        //    String data = DateTime.Today.Date.ToShortDateString();
-        //    data = data.Substring(0, 2) + data.Substring(3, 2) + data.Substring(6, 4);
-        //    String nomeRel = "MvmtAvulsaLista" + "_" + data + ".pdf";
-        //    String titulo = "Movimentações Avulsas - Listagem";
-        //    String operacao = String.Empty;
-        //    String tipomvmt = String.Empty;
-        //    String operacaoFiltro = String.Empty;
-        //    String tipomvmtFiltro = String.Empty;
-        //    if (Session["ListaMovimentoProduto"] != null)
-        //    {
-        //        if (id == 1)
-        //        {
-        //            listaMvmtProd = (List<MOVIMENTO_ESTOQUE_PRODUTO>)Session["ListaMovimentoProduto"];
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("MontarTelaMovimentacaoAvulsa");
-        //        }
-        //    }
-        //    Font meuFont = FontFactory.GetFont("Arial", 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-        //    Font meuFont1 = FontFactory.GetFont("Arial", 9, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-        //    Font meuFont2 = FontFactory.GetFont("Arial", 12, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-
-        //    // Cria documento
-        //    Document pdfDoc = new Document(PageSize.A4.Rotate(), 10, 10, 10, 10);
-        //    PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-        //    pdfDoc.Open();
-
-        //    // Linha horizontal
-        //    Paragraph line = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
-        //    pdfDoc.Add(line);
-
-        //    // Cabeçalho
-        //    PdfPTable table = new PdfPTable(5);
-        //    table.WidthPercentage = 100;
-        //    table.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-        //    table.SpacingBefore = 1f;
-        //    table.SpacingAfter = 1f;
-
-        //    PdfPCell cell = new PdfPCell();
-        //    cell.Border = 0;
-        //    Image image = Image.GetInstance(Server.MapPath("~/Images/5.png"));
-        //    image.ScaleAbsolute(50, 50);
-        //    cell.AddElement(image);
-        //    table.AddCell(cell);
-
-        //    cell = new PdfPCell(new Paragraph(titulo, meuFont2))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_CENTER
-        //    };
-        //    cell.Border = 0;
-        //    cell.Colspan = 4;
-        //    table.AddCell(cell);
-        //    pdfDoc.Add(table);
-
-        //    // Linha Horizontal
-        //    Paragraph line1 = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
-        //    pdfDoc.Add(line1);
-        //    line1 = new Paragraph("  ");
-        //    pdfDoc.Add(line1);
-
-        //    // Grid
-        //    table = new PdfPTable(new float[] { 100f, 100f, 150f, 80f, 40f, 100f, 100f, 40f });
-        //    table.WidthPercentage = 100;
-        //    table.HorizontalAlignment = 0;
-        //    table.SpacingBefore = 1f;
-        //    table.SpacingAfter = 1f;
-
-        //    String info = String.Empty;
-        //    if (filtroProdIns == 1)
-        //    {
-        //        info = "Produtos selecionados pelos parametros de filtro abaixo";
-        //    }
-        //    else if (filtroProdIns == 2)
-        //    {
-        //        info = "Insumos selecionados pelos parametros de filtro abaixo";
-        //    }
-
-        //    cell = new PdfPCell(new Paragraph(info, meuFont1))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.Colspan = 8;
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-
-        //    cell = new PdfPCell(new Paragraph("Operação", meuFont))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-        //    cell = new PdfPCell(new Paragraph("Tipo de Movimentação", meuFont))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-        //    cell = new PdfPCell(new Paragraph("Data do Movimento", meuFont))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-        //    cell = new PdfPCell(new Paragraph("Produto", meuFont))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-        //    cell = new PdfPCell(new Paragraph("Filial", meuFont))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-        //    cell = new PdfPCell(new Paragraph("Quantidade Antes", meuFont))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-        //    cell = new PdfPCell(new Paragraph("Quantidade Alterada", meuFont))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-        //    cell = new PdfPCell(new Paragraph("Quantidade Depois", meuFont))
-        //    {
-        //        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //        HorizontalAlignment = Element.ALIGN_LEFT
-        //    };
-        //    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-        //    table.AddCell(cell);
-
-        //    foreach (var prod in listaMvmtProd)
-        //    {
-        //        if (prod.MOEP_IN_TIPO_MOVIMENTO == 1)
-        //        {
-        //            operacao = "Entrada";
-        //        }
-        //        else if (prod.MOEP_IN_TIPO_MOVIMENTO == 2)
-        //        {
-        //            operacao = "Saída";
-        //        }
-        //        else if (prod.MOEP_IN_TIPO_MOVIMENTO == 3)
-        //        {
-        //            operacao = "Zeramento de Estoque";
-        //        }
-        //        else if (prod.MOEP_IN_TIPO_MOVIMENTO == 4)
-        //        {
-        //            operacao = "Transferência entre Filiais";
-        //        }
-        //        cell = new PdfPCell(new Paragraph(String.IsNullOrEmpty(operacao) ? "-" : operacao, meuFont))
-        //        {
-        //            VerticalAlignment = Element.ALIGN_MIDDLE,
-        //            HorizontalAlignment = Element.ALIGN_LEFT
-        //        };
-        //        table.AddCell(cell);
-
-        //        if (prod.MOEP_IN_TIPO_MOVIMENTO == 1)
-        //        {
-        //            if (prod.MOEP_IN_CHAVE_ORIGEM == 1)
-        //            {
-        //                tipomvmt = "Devolução";
-        //            }
-        //            else if (prod.MOEP_IN_CHAVE_ORIGEM == 2)
-        //            {
-        //                tipomvmt = "Retorno de conserto";
-        //            }
-        //            else if (prod.MOEP_IN_CHAVE_ORIGEM == 2)
-        //            {
-        //                tipomvmt = "Reclassificação";
-        //            }
-        //            else
-        //            {
-        //                tipomvmt = "-";
-        //            }
-        //        }
-        //        else if (prod.MOEP_IN_TIPO_MOVIMENTO == 2)
-        //        {
-        //            if (prod.MOEP_IN_CHAVE_ORIGEM == 1)
-        //            {
-        //                tipomvmt = "Devolução do fornecedor";
-        //            }
-        //            else if (prod.MOEP_IN_CHAVE_ORIGEM == 2)
-        //            {
-        //                tipomvmt = "Remessa para conserto";
-        //            }
-        //            else if (prod.MOEP_IN_CHAVE_ORIGEM == 3)
-        //            {
-        //                tipomvmt = "Baixa de insumos para produção";
-        //            }
-        //            else if (prod.MOEP_IN_CHAVE_ORIGEM == 4)
-        //            {
-        //                tipomvmt = "Reclassificação";
-        //            }
-        //            else if (prod.MOEP_IN_CHAVE_ORIGEM == 5)
-        //            {
-        //                tipomvmt = "Perda ou roubo";
-        //            }
-        //            else if (prod.MOEP_IN_CHAVE_ORIGEM == 6)
-        //            {
-        //                tipomvmt = "Descarte";
-        //            }
-        //            else if (prod.MOEP_IN_CHAVE_ORIGEM == 7)
-        //            {
-        //                tipomvmt = "Outras saídas";
-        //            }
-        //            else
-        //            {
-        //                tipomvmt = "-";
-        //            }
-        //        }
-        //        else
-        //        {
-        //            tipomvmt = "Tranferência entre filiais";
-        //        }
-        //        cell = new PdfPCell(new Paragraph(String.IsNullOrEmpty(tipomvmt) ? "-" : tipomvmt, meuFont))
-        //        {
-        //            VerticalAlignment = Element.ALIGN_MIDDLE,
-        //            HorizontalAlignment = Element.ALIGN_LEFT
-        //        };
-        //        table.AddCell(cell);
-        //        cell = new PdfPCell(new Paragraph(prod.MOEP_DT_MOVIMENTO == null ? "-" : prod.MOEP_DT_MOVIMENTO.ToString("dd/MM/yyyy"), meuFont))
-        //        {
-        //            VerticalAlignment = Element.ALIGN_MIDDLE,
-        //            HorizontalAlignment = Element.ALIGN_LEFT
-        //        };
-        //        table.AddCell(cell);
-        //        cell = new PdfPCell(new Paragraph(String.IsNullOrEmpty(prod.PRODUTO.PROD_NM_NOME) ? "-" : prod.PRODUTO.PROD_NM_NOME, meuFont))
-        //        {
-        //            VerticalAlignment = Element.ALIGN_MIDDLE,
-        //            HorizontalAlignment = Element.ALIGN_LEFT
-        //        };
-        //        table.AddCell(cell);
-        //        if (prod.FILIAL != null)
-        //        {
-        //            cell = new PdfPCell(new Paragraph(prod.FILIAL.FILI_NM_NOME, meuFont))
-        //            {
-        //                VerticalAlignment = Element.ALIGN_MIDDLE,
-        //                HorizontalAlignment = Element.ALIGN_LEFT
-        //            };
-        //            table.AddCell(cell);
-        //        }
-        //        else
-        //        {
-        //            cell = new PdfPCell(new Paragraph("Sem Filial", meuFont))
-        //            {
-        //                VerticalAlignment = Element.ALIGN_MIDDLE,
-        //                HorizontalAlignment = Element.ALIGN_LEFT
-        //            };
-        //            table.AddCell(cell);
-        //        }
-        //        cell = new PdfPCell(new Paragraph(prod.MOEP_QN_ANTES.ToString(), meuFont))
-        //        {
-        //            VerticalAlignment = Element.ALIGN_MIDDLE,
-        //            HorizontalAlignment = Element.ALIGN_LEFT
-        //        };
-        //        table.AddCell(cell);
-        //        cell = new PdfPCell(new Paragraph(prod.MOEP_QN_QUANTIDADE.ToString(), meuFont))
-        //        {
-        //            VerticalAlignment = Element.ALIGN_MIDDLE,
-        //            HorizontalAlignment = Element.ALIGN_LEFT
-        //        };
-        //        table.AddCell(cell);
-        //        cell = new PdfPCell(new Paragraph(prod.MOEP_QN_DEPOIS.ToString(), meuFont))
-        //        {
-        //            VerticalAlignment = Element.ALIGN_MIDDLE,
-        //            HorizontalAlignment = Element.ALIGN_LEFT
-        //        };
-        //        table.AddCell(cell);
-        //    }
-        //    pdfDoc.Add(table);
-
-        //    // Linha Horizontal
-        //    Paragraph line2 = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
-        //    pdfDoc.Add(line2);
-
-        //    // Rodapé
-        //    Chunk chunk1 = new Chunk("Parâmetros de filtro: ", FontFactory.GetFont("Arial", 10, Font.NORMAL, BaseColor.BLACK));
-        //    pdfDoc.Add(chunk1);
-
-        //    String parametros = String.Empty;
-        //    Int32 ja = 0;
-
-        //    if (vm.MOVMT_IN_TIPO_MOVIMENTO != null)
-        //    {
-        //        parametros += "Operacao: " + operacaoFiltro;
-        //        ja = 1;
-        //    }
-        //    if (vm.MOVMT_DT_MOVIMENTO_INICIAL != DateTime.MinValue && vm.MOVMT_DT_MOVIMENTO_INICIAL != null)
-        //    {
-        //        if (ja == 0)
-        //        {
-        //            parametros += "Data Inicial: " + vm.MOVMT_DT_MOVIMENTO_INICIAL.Value.ToString("dd/MM/yyyy");
-        //            ja = 1;
-        //        }
-        //        else
-        //        {
-        //            parametros += "e Data Inicial: " + vm.MOVMT_DT_MOVIMENTO_INICIAL.Value.ToString("dd/MM/yyyy");
-        //        }
-        //    }
-        //    if (vm.MOVMT_DT_MOVIMENTO_FINAL != DateTime.MinValue && vm.MOVMT_DT_MOVIMENTO_FINAL != null)
-        //    {
-        //        if (ja == 0)
-        //        {
-        //            parametros += "Data Final: " + vm.MOVMT_DT_MOVIMENTO_FINAL.Value.ToString("dd/MM/yyyy");
-        //            ja = 1;
-        //        }
-        //        else
-        //        {
-        //            parametros += "e Data Final: " + vm.MOVMT_DT_MOVIMENTO_FINAL.Value.ToString("dd/MM/yyyy");
-        //        }
-        //    }
-        //    if (vm.FILI_CD_ID != null)
-        //    {
-        //        var nmefilial = filApp.GetById(vm.FILI_CD_ID).FILI_NM_NOME;
-        //        if (ja == 0)
-        //        {
-        //            parametros += "Filial: " + nmefilial;
-        //            ja = 1;
-        //        }
-        //        else
-        //        {
-        //            parametros += "e Filial: " + nmefilial;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (ja == 0)
-        //        {
-        //            parametros += "Filial: Sem Filial";
-        //            ja = 1;
-        //        }
-        //        else
-        //        {
-        //            parametros += "e Filial: Sem Filial";
-        //        }
-        //    }
-        //    if (vm.MOVMT_IN_CHAVE_ORIGEM != null)
-        //    {
-        //        if (ja == 0)
-        //        {
-        //            parametros += "Tipo de Movimento: " + tipomvmtFiltro;
-        //            ja = 1;
-        //        }
-        //        else
-        //        {
-        //            parametros += "e Tipo de Movimento: " + tipomvmtFiltro;
-        //        }
-        //    }
-        //    if (ja == 0)
-        //    {
-        //        parametros = "Nenhum filtro definido.";
-        //    }
-        //    Chunk chunk = new Chunk(parametros, FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK));
-        //    pdfDoc.Add(chunk);
-
-        //    // Linha Horizontal
-        //    Paragraph line3 = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
-        //    pdfDoc.Add(line3);
-
-        //    // Finaliza
-        //    pdfWriter.CloseStream = false;
-        //    pdfDoc.Close();
-        //    Response.Buffer = true;
-        //    Response.ContentType = "application/pdf";
-        //    Response.AddHeader("content-disposition", "attachment;filename=" + nomeRel);
-        //    Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        //    Response.Write(pdfDoc);
-        //    Response.End();
-
-        //    return RedirectToAction("MontarTelaMovimentacaoAvulsa");
-        //}
+                // Acerta estoque
+                PRODUTO prod = prodApp.GetItemById(item.PROD_CD_ID);
+                if (item.MOEP_IN_TIPO_MOVIMENTO == 1)
+                {
+                    prod.PROD_QN_ESTOQUE = prod.PROD_QN_ESTOQUE + item.MOEP_QN_QUANTIDADE;                  
+                }
+                else
+                {
+                    prod.PROD_QN_ESTOQUE = prod.PROD_QN_ESTOQUE - item.MOEP_QN_QUANTIDADE;
+                }
+                prod.PROD_DT_ULTIMA_MOVIMENTACAO = DateTime.Now;
+                Int32 volta1 = prodApp.ValidateEdit(prod, prod, usuarioLogado);
 
 
+                // Retorno
+                Session["ListaProdEstoque"] = null;
+                return RedirectToAction("IncluirMovimentacaoAvulsa");
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        public ActionResult ConsultarProduto(Int32 id)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            return RedirectToAction("ConsultarProduto", "Produto", new { id = id });
+        }
 
 
+        [HttpPost]
+        public ActionResult FiltrarMovimentacaoEstoqueProdutoNova(ProdutoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["FiltroMvmtProd"] = true;
+            Session["EntradaSaida"] = vm.EntradaSaida;
+            return RedirectToAction("VerMovimentacaoEstoqueProdutoNova", new { id = (Int32)Session["IdMovimento"] });
+        }
 
     }
 }
