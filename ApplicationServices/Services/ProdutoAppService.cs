@@ -201,7 +201,7 @@ namespace ApplicationServices.Services
                 movto.MOEP_DT_MOVIMENTO = DateTime.Today.Date;
                 movto.MOEP_IN_ATIVO = 1;
                 movto.MOEP_IN_CHAVE_ORIGEM = 0;
-                movto.MOEP_IN_OPERACAO = 1;
+                movto.MOEP_IN_OPERACAO = 5;
                 movto.MOEP_IN_ORIGEM = "Estoque Inicial";
                 movto.MOEP_IN_TIPO_MOVIMENTO = 1;
                 movto.MOEP_QN_QUANTIDADE = item.PROD_QN_QUANTIDADE_INICIAL.Value;

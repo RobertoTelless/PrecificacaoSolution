@@ -833,6 +833,7 @@
           <Property Name="MOEP_QN_DEPOIS" Type="int" />
           <Property Name="MOEP_QN_ALTERADA" Type="int" />
           <Property Name="MOEP_IN_OPERACAO" Type="int" />
+          <Property Name="MOEP_IN_OPERACO_SAIDA" Type="int" />
         </EntityType>
         <EntityType Name="NOTICIA">
           <Key>
@@ -5584,6 +5585,7 @@
           <NavigationProperty Name="EMPRESA" Relationship="Self.FK_MOVIMENTO_ESTOQUE_PRODUTO_EMPRESA" FromRole="MOVIMENTO_ESTOQUE_PRODUTO" ToRole="EMPRESA" />
           <NavigationProperty Name="PRODUTO" Relationship="Self.FK_MOVIMENTO_ESTOQUE_PRODUTO_PRODUTO" FromRole="MOVIMENTO_ESTOQUE_PRODUTO" ToRole="PRODUTO" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_MOVIMENTO_ESTOQUE_PRODUTO_USUARIO" FromRole="MOVIMENTO_ESTOQUE_PRODUTO" ToRole="USUARIO" />
+          <Property Name="MOEP_IN_OPERACO_SAIDA" Type="Int32" />
         </EntityType>
         <EntityType Name="NOTICIA">
           <Key>
@@ -10289,6 +10291,7 @@
           <EntitySetMapping Name="MOVIMENTO_ESTOQUE_PRODUTO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.MOVIMENTO_ESTOQUE_PRODUTO">
               <MappingFragment StoreEntitySet="MOVIMENTO_ESTOQUE_PRODUTO">
+                <ScalarProperty Name="MOEP_IN_OPERACO_SAIDA" ColumnName="MOEP_IN_OPERACO_SAIDA" />
                 <ScalarProperty Name="MOEP_CD_ID" ColumnName="MOEP_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="EMPR_CD_ID" ColumnName="EMPR_CD_ID" />

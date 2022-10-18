@@ -36,8 +36,8 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<int> MOEP_QN_DEPOIS { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<int> MOEP_QN_ALTERADA { get; set; }
-        [Required(ErrorMessage = "Campo OPERAÇÃO obrigatorio")]
         public Nullable<int> MOEP_IN_OPERACAO { get; set; }
+        public Nullable<int> MOEP_IN_OPERACO_SAIDA { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }

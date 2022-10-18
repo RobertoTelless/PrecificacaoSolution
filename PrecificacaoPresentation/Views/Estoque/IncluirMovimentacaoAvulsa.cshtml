@@ -48,8 +48,13 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-2 col-md-2 col-xs-12">
+                                @Html.HiddenFor(x => x.ASSI_CD_ID)
+                                @Html.HiddenFor(x => x.MOEP_IN_ATIVO)
+                                @Html.HiddenFor(x => x.MOEP_IN_CHAVE_ORIGEM)
+                                @Html.HiddenFor(x => x.MOEP_IN_ORIGEM)
+                                @Html.HiddenFor(x => x.USUA_CD_ID)
                                 Operação*
-                                @Html.DropDownListFor(x => x.MOEP_IN_TIPO_MOVIMENTO, (SelectList)ViewBag.Lista, "Selecionar", new { @class = "form-control", , onchange = "ValidaDiv($(this).val())" , id = "operacao", autofocus = true  })
+                                @Html.DropDownListFor(x => x.MOEP_IN_TIPO_MOVIMENTO, (SelectList)ViewBag.Lista, "Selecionar", new { @class = "form-control", onchange = "ValidaDiv($(this).val())" , id = "operacao", autofocus = true  })
                                 @Html.ValidationMessageFor(m => m.MOEP_IN_TIPO_MOVIMENTO, "", new { @style = "color:red" })
                             </div>
                             <div id="entradas" class="col-lg-2 col-md-2 col-xs-12" style="display:none">
@@ -59,8 +64,8 @@
                             </div>
                             <div id="saidas" class="col-lg-2 col-md-2 col-xs-12" style="display:none">
                                 Tipo de Movimentação*
-                                @Html.DropDownListFor(x => x.MOEP_IN_OPERACAO, (SelectList)ViewBag.Saidas, "Selecionar", new { @class = "form-control", id = "tipoSaida", autofocus = true  })
-                                @Html.ValidationMessageFor(m => m.MOEP_IN_OPERACAO, "", new { @style = "color:red" })
+                                @Html.DropDownListFor(x => x.MOEP_IN_OPERACO_SAIDA, (SelectList)ViewBag.Saidas, "Selecionar", new { @class = "form-control", id = "tipoSaida", autofocus = true  })
+                                @Html.ValidationMessageFor(m => m.MOEP_IN_OPERACO_SAIDA, "", new { @style = "color:red" })
                             </div>
                             <div class="col-lg-2 col-md-2 col-xs-12">
                                 Data*
@@ -73,7 +78,7 @@
                                     <option>Selecionar</option>
                                 </select>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-xs-12">
+                            <div class="col-lg-1 col-md-1 col-xs-12">
                                 Quantidade*
                                 @Html.TextBoxFor(m => m.MOEP_QN_QUANTIDADE, new { @class = "form-control", id = "quant", autofocus = true  })
                                 @Html.ValidationMessageFor(m => m.MOEP_QN_QUANTIDADE, "", new { @style = "color:red" })

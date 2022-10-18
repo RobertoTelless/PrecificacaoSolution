@@ -59,8 +59,8 @@
                                     <th>Tipo</th>
                                     <th>Produto</th>
                                     <th>Data</th>
+                                    <th>Movimentação</th>
                                     <th>Operação</th>
-                                    <th>Origem</th>
                                     <th>Descrição</th>
                                     <th>Quantidade</th>
                                 </tr>
@@ -79,42 +79,67 @@
                                         }
                                         <td>@cond.PRODUTO.PROD_NM_NOME</td>
                                         <td>@cond.MOEP_DT_MOVIMENTO.ToShortDateString()</td>
-                                        @if (cond.MOEP_IN_OPERACAO == 1)
+
+                                        @if (cond.MOEP_IN_TIPO_MOVIMENTO == 1)
                                         {
                                             <td><span class="badge badge-primary">Entrada</span></td>
                                         }
-                                        else if (cond.MOEP_IN_OPERACAO == 2)
+                                        else if (cond.MOEP_IN_TIPO_MOVIMENTO == 2)
                                         {
                                             <td><span class="badge badge-success">Saída</span></td>
                                         }
+
+                                        @if (cond.MOEP_IN_TIPO_MOVIMENTO == 1)
+                                        {
+                                            if (cond.MOEP_IN_OPERACAO == 1)
+                                            {
+                                                <td><span class="badge badge-primary">Entrada Avulsa</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACAO == 2)
+                                            {
+                                                <td><span class="badge badge-success">Devolução de Cliente</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACAO == 3)
+                                            {
+                                                <td><span class="badge badge-sucess">Acerto de Estoque</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACAO == 4)
+                                            {
+                                                <td><span class="badge badge-warning">Outras Entradas</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACAO == 5)
+                                            {
+                                                <td><span class="badge badge-warning-light">Estoque Inicial</span></td>
+                                            }
+                                        }
                                         else
                                         {
-                                            <td><span class="badge badge-warning">Manual</span></td>
+                                            if (cond.MOEP_IN_OPERACO_SAIDA == 1)
+                                            {
+                                                <td><span class="badge badge-primary">Saída Avulsa</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACO_SAIDA == 2)
+                                            {
+                                                <td><span class="badge badge-sucess">Devolução para Fornecedor</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACO_SAIDA == 3)
+                                            {
+                                                <td><span class="badge badge-danger">Perda ou Roubo</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACO_SAIDA == 4)
+                                            {
+                                                <td><span class="badge badge-warning">Descarte</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACO_SAIDA == 5)
+                                            {
+                                                <td><span class="badge badge-sucess">Acerto de Estoque</span></td>
+                                            }
+                                            else if (cond.MOEP_IN_OPERACO_SAIDA == 6)
+                                            {
+                                                <td><span class="badge badge-warning-light">Outras Saídas</span></td>
+                                            }
                                         }
-                                        @if (cond.MOEP_IN_CHAVE_ORIGEM == 1)
-                                        {
-                                            <td><span class="badge badge-primary">Lançamento Avulso</span></td>
-                                        }
-                                        else if (cond.MOEP_IN_CHAVE_ORIGEM == 2)
-                                        {
-                                            <td><span class="badge badge-primary">Inventário</span></td>
-                                        }
-                                        else if (cond.MOEP_IN_CHAVE_ORIGEM == 3)
-                                        {
-                                            <td><span class="badge badge-sucess">Compra</span></td>
-                                        }
-                                        else if (cond.MOEP_IN_CHAVE_ORIGEM == 4)
-                                        {
-                                            <td><span class="badge badge-warning">Venda</span></td>
-                                        }
-                                        else if (cond.MOEP_IN_CHAVE_ORIGEM == 5)
-                                        {
-                                            <td><span class="badge badge-sucess">Compra Expressa</span></td>
-                                        }
-                                        else
-                                        {
-                                            <td><span class="badge badge-sucess">Manual</span></td>
-                                        }
+
                                         <td>@cond.MOEP_DS_JUSTIFICATIVA</td>
                                         <td>@cond.MOEP_QN_QUANTIDADE</td>
                                     </tr>

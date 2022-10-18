@@ -16,7 +16,7 @@
                     <div class="col-lg-12 col-md-12 col-xs-12">
                         @Html.ButtonLinkIndex(text: "Produtos", action: "MontarTelaProduto", controller: "Produto", buttonClass: "success")
                         @Html.ButtonLinkIndex(text: "Consulta Estoque", action: "MontarTelaEstoqueProduto", controller: "Estoque", buttonClass: "primary")
-                        @Html.ButtonLinkIndex(text: "Dashboard", controller: "Estoque", action: "Voltar")
+                        @Html.ButtonLinkIndex(text: "Dashboard", controller: "BaseAdmin", action: "CarregarBase")
                     </div>
                     <br /><br />
                 </div>
@@ -31,7 +31,6 @@
                             <img alt="image" class="img-circle" src="@Url.Content(Model.USUA_AQ_FOTO)" style="width: auto; height: auto; max-height: 90px; max-width: 90px;">
                         </div>
                         <p class="font-bold">@((String)Session["NomeGreeting"])</p>
-
                         <div class="text-center">
                             @Html.ButtonLinkIndex(text: "Perfil", action: "MontarTelaPerfilUsuario", controller: "Usuario", buttonClass: "btn btn-xs btn-white")
                         </div>
@@ -115,7 +114,7 @@
                     </div>
                 </div>
             </div>
-
+            <br />
             <div class="row">
                 <div class="col-lg-2">
                     <div class="ibox float-e-margins">

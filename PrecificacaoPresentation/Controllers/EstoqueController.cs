@@ -48,6 +48,7 @@ namespace ERP_Condominios_Solution.Controllers
         List<PRODUTO> listaMasterProd = new List<PRODUTO>();
         String extensao;
 
+
         public EstoqueController(
             IProdutoAppService prodApps
             , ILogAppService logApps
@@ -147,11 +148,6 @@ namespace ERP_Condominios_Solution.Controllers
                     Session["MensEstoque"] = 2;
                     return RedirectToAction("MontarTelaEstoqueProduto", "Estoque");
                 }
-                if ((Int32)Session["PermMens"] == 0)
-                {
-                    Session["MensPermissao"] = 2;
-                    return RedirectToAction("CarregarBase", "BaseAdmin");
-                }
             }
             else
             {
@@ -167,10 +163,18 @@ namespace ERP_Condominios_Solution.Controllers
             List<MOVIMENTO_ESTOQUE_PRODUTO> listaMes = listaTotal.Where(p => p.MOEP_DT_MOVIMENTO.Month == DateTime.Today.Date.Month & p.MOEP_DT_MOVIMENTO.Year == DateTime.Today.Date.Year).ToList();
             List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesEntrada = listaMes.Where(p => p.MOEP_IN_TIPO_MOVIMENTO == 1).ToList();
             List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesSaida = listaMes.Where(p => p.MOEP_IN_TIPO_MOVIMENTO == 2).ToList();
-            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesCompra = listaMes.Where(p => p.MOEP_IN_TIPO_MOVIMENTO == 5).ToList();
-            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesZeramento = listaMes.Where(p => p.MOEP_IN_TIPO_MOVIMENTO == 3).ToList();
-            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesDevolucao = listaMes.Where(p => p.MOEP_IN_TIPO_MOVIMENTO == 4).ToList();
-            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesPerdas = listaMes.Where(p => p.MOEP_IN_TIPO_MOVIMENTO == 6).ToList();
+
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesEntradaAvulsa = listaMesEntrada.Where(p => p.MOEP_IN_OPERACAO == 1).ToList();
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesEntradaDevol = listaMesEntrada.Where(p => p.MOEP_IN_OPERACAO == 2).ToList();
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesEntradaAcerto = listaMesEntrada.Where(p => p.MOEP_IN_OPERACAO == 3).ToList();
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesEntradaOutra = listaMesEntrada.Where(p => p.MOEP_IN_OPERACAO == 4).ToList();
+
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesSaidaAvulsa = listaMesSaida.Where(p => p.MOEP_IN_OPERACO_SAIDA == 1).ToList();
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesSaidaDevol = listaMesSaida.Where(p => p.MOEP_IN_OPERACO_SAIDA == 2).ToList();
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesSaidaPerda = listaMesSaida.Where(p => p.MOEP_IN_OPERACO_SAIDA == 3).ToList();
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesSaidaDescarte = listaMesSaida.Where(p => p.MOEP_IN_OPERACO_SAIDA == 4).ToList();
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesSaidaAcerto = listaMesSaida.Where(p => p.MOEP_IN_OPERACO_SAIDA == 5).ToList();
+            List<MOVIMENTO_ESTOQUE_PRODUTO> listaMesSaidaOutra = listaMesSaida.Where(p => p.MOEP_IN_OPERACO_SAIDA == 6).ToList();
 
             // Produtos
             List<PRODUTO> prodTotal = prodApp.GetAllItens(idAss);
@@ -200,9 +204,9 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Mes = listaMes;
             ViewBag.MesSum = listaMes.Count;
             ViewBag.MesEntrada = listaMesEntrada;
-            ViewBag.MesEntradaSum = (listaMesEntrada.Count) + (listaMesCompra.Count);
+            ViewBag.MesEntradaSum = (listaMesEntrada.Count);
             ViewBag.MesSaida = listaMesSaida;
-            ViewBag.MesSaidaSum = (listaMesSaida.Count) + (listaMesZeramento.Count);
+            ViewBag.MesSaidaSum = (listaMesSaida.Count);
 
             // Resumo Mes 
             List<DateTime> datas = listaMes.Select(p => p.MOEP_DT_MOVIMENTO.Date).Distinct().ToList();
@@ -217,15 +221,22 @@ namespace ERP_Condominios_Solution.Controllers
             }
             ViewBag.ListaMov = lista;
             ViewBag.ListaMovSum = lista.Count;
+            Session["ListaMes"] = listaMes;
             Session["ListaDatas"] = datas;
             Session["ListaMovResumo"] = lista;
             Session["Entradas"] = listaMesEntrada.Count;
+            Session["EntradasAvulsa"] = listaMesEntradaAvulsa.Count;
+            Session["EntradasDevol"] = listaMesEntradaDevol.Count;
+            Session["EntradasAcerto"] = listaMesEntradaAcerto.Count;
+            Session["EntradasOutra"] = listaMesEntradaOutra.Count;
+
             Session["Saidas"] = (listaMesSaida.Count);
-            Session["Zeramento"] = (listaMesZeramento.Count);
-            Session["Devol"] = (listaMesDevolucao.Count);
-            Session["Compra"] = (listaMesCompra.Count);
-            Session["Perdas"] = (listaMesPerdas.Count);
-            Session["ListaMes"] = listaMes;
+            Session["SaidasAvulsa"] = listaMesSaidaAvulsa.Count;
+            Session["SaidasDevol"] = listaMesSaidaDevol.Count;
+            Session["SaidasAcerto"] = listaMesSaidaAcerto.Count;
+            Session["SaidasPerdas"] = listaMesSaidaPerda.Count;
+            Session["SaidasDescarte"] = listaMesSaidaDescarte.Count;
+            Session["SaidasOutra"] = listaMesSaidaOutra.Count;
 
             // Resumo Tipo  
             List<ModeloViewModel> lista1 = new List<ModeloViewModel>();
@@ -234,25 +245,52 @@ namespace ERP_Condominios_Solution.Controllers
             mod.Valor = listaMesEntrada.Count;
             lista1.Add(mod);
             mod = new ModeloViewModel();
+            mod.Data = "Entradas Avulsas";
+            mod.Valor = listaMesEntradaAvulsa.Count;
+            lista1.Add(mod);
+            mod = new ModeloViewModel();
+            mod.Data = "Devolução Cliente";
+            mod.Valor = listaMesEntradaDevol.Count;
+            lista1.Add(mod);
+            mod = new ModeloViewModel();
+            mod.Data = "Entradas - Acerto";
+            mod.Valor = listaMesEntradaAcerto.Count;
+            lista1.Add(mod);
+            mod = new ModeloViewModel();
+            mod.Data = "Outras Entradas";
+            mod.Valor = listaMesEntradaOutra.Count;
+            lista1.Add(mod);
+
+
+            mod = new ModeloViewModel();
             mod.Data = "Saídas";
             mod.Valor = listaMesSaida.Count;
             lista1.Add(mod);
             mod = new ModeloViewModel();
-            mod.Data = "Compra Expressa";
-            mod.Valor = listaMesCompra.Count;
+            mod.Data = "Saídas Avulsas";
+            mod.Valor = listaMesSaidaAvulsa.Count;
             lista1.Add(mod);
             mod = new ModeloViewModel();
-            mod.Data = "Zeramento de Estoque";
-            mod.Valor = listaMesZeramento.Count;
+            mod.Data = "Devolução Fornecedor";
+            mod.Valor = listaMesSaidaDevol.Count;
             lista1.Add(mod);
             mod = new ModeloViewModel();
-            mod.Data = "Devolução";
-            mod.Valor = listaMesDevolucao.Count;
+            mod.Data = "Saídas - Acerto";
+            mod.Valor = listaMesSaidaAcerto.Count;
             lista1.Add(mod);
             mod = new ModeloViewModel();
             mod.Data = "Perdas";
-            mod.Valor = listaMesPerdas.Count;
+            mod.Valor = listaMesSaidaPerda.Count;
             lista1.Add(mod);
+            mod = new ModeloViewModel();
+            mod.Data = "Descartes";
+            mod.Valor = listaMesSaidaDescarte.Count;
+            lista1.Add(mod);
+            mod = new ModeloViewModel();
+            mod.Data = "Outras Saídas";
+            mod.Valor = listaMesSaidaOutra.Count;
+            lista1.Add(mod);
+
             ViewBag.ListaSituacao = lista1;
             Session["ListaSituacao"] = lista1;
             Session["VoltaDash"] = 3;
@@ -268,31 +306,50 @@ namespace ERP_Condominios_Solution.Controllers
             List<Int32> quant = new List<Int32>();
             List<String> cor = new List<String>();
 
-            Int32 q1 = (Int32)Session["Entradas"];
-            Int32 q2 = (Int32)Session["Saidas"];
-            Int32 q3 = (Int32)Session["Zeramento"];
-            Int32 q4 = (Int32)Session["Devol"];
-            Int32 q5 = (Int32)Session["Compra"];
-            Int32 q6 = (Int32)Session["Perdas"];
+            Int32 q1 = (Int32)Session["EntradasAvulsa"];
+            Int32 q2 = (Int32)Session["EntradasDevol"];
+            Int32 q3 = (Int32)Session["EntradasAcerto"];
+            Int32 q4 = (Int32)Session["EntradasOutra"];
 
-            desc.Add("Entradas");
+            Int32 q5 = (Int32)Session["SaidasAvulsa"];
+            Int32 q6 = (Int32)Session["SaidasDevol"];
+            Int32 q7 = (Int32)Session["SaidasAcerto"];
+            Int32 q8 = (Int32)Session["SaidasPerdas"];
+            Int32 q9 = (Int32)Session["SaidasDescarte"];
+            Int32 q10 = (Int32)Session["SaidasOutra"];
+
+
+            desc.Add("Entradas Avulsas");
             quant.Add(q1);
-            cor.Add("#359E18");
-            desc.Add("Saídas");
+            cor.Add("#cd9d6d");
+            desc.Add("Devoluções Clientes");
             quant.Add(q2);
-            cor.Add("#FFAE00");
-            desc.Add("Zeramento de Estoque");
+            cor.Add("#cdc36d");
+            desc.Add("Entradas - Acertos");
             quant.Add(q3);
-            cor.Add("#FF7F00");
-            desc.Add("Devoluções");
+            cor.Add("#a0cfff");
+            desc.Add("Entradas - Outras");
             quant.Add(q4);
-            cor.Add("#D63131");
-            desc.Add("Compras Expressas");
+            cor.Add("#bda5d4");
+
+            desc.Add("Saídas Avulsas");
             quant.Add(q5);
-            cor.Add("#27A1C6");
-            desc.Add("Perdas");
+            cor.Add("#cd9aa3");
+            desc.Add("Devoluções Fornecedores");
             quant.Add(q6);
-            cor.Add("#27A2EF");
+            cor.Add("#cdc9e3");
+            desc.Add("Saídas - Acertos");
+            quant.Add(q7);
+            cor.Add("#a0c112");
+            desc.Add("Saídas - Perdas");
+            quant.Add(q8);
+            cor.Add("#a0b23e");
+            desc.Add("Saídas - Descartes");
+            quant.Add(q9);
+            cor.Add("#a0e25a");
+            desc.Add("Saídas - Outras");
+            quant.Add(q10);
+            cor.Add("#bdb2af");
 
             Hashtable result = new Hashtable();
             result.Add("labels", desc);
@@ -361,6 +418,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Title = "Estoque";
             ViewBag.Cats = new SelectList(cpApp.GetAllItens(idAss).OrderBy(x => x.CAPR_NM_NOME).ToList<CATEGORIA_PRODUTO>(), "CAPR_CD_ID", "CAPR_NM_NOME");
             ViewBag.Subs = new SelectList(prodApp.GetAllSubs(idAss).OrderBy(x => x.SCPR_NM_NOME).ToList<SUBCATEGORIA_PRODUTO>(), "SCPR_CD_ID", "SCPR_NM_NOME");
+            List<PRODUTO> prods = (List<PRODUTO>)Session["ListaProdEstoque"];
 
             // Indicadores
             ViewBag.Produtos = ((List<PRODUTO>)Session["ListaProdEstoque"]).Count;
@@ -369,6 +427,13 @@ namespace ERP_Condominios_Solution.Controllers
             prodIns.Add(new SelectListItem() { Text = "Produto", Value = "1" });
             prodIns.Add(new SelectListItem() { Text = "Insumo", Value = "2" });
             ViewBag.ProdutoInsumo = new SelectList(prodIns, "Value", "Text");
+
+            List<PRODUTO> pontoPedido = prods.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
+            List<PRODUTO> estoqueZerado = prods.Where(x => x.PROD_QN_ESTOQUE == 0).ToList();
+            List<PRODUTO> estoqueNegativo = prods.Where(x => x.PROD_QN_ESTOQUE < 0).ToList();
+            ViewBag.PontoPedido = pontoPedido.Count;
+            ViewBag.EstoqueZerado = estoqueZerado.Count;
+            ViewBag.EstoqueNegativo= estoqueNegativo.Count;
 
             // Mansagem
             if ((Int32)Session["MensEstoque"] == 1)
@@ -543,7 +608,7 @@ namespace ERP_Condominios_Solution.Controllers
             pdfDoc.Add(line1);
 
             // Grid
-            table = new PdfPTable(new float[] { 50f, 150f, 60f, 60f, 60f, 50f, 50f, 20f });
+            table = new PdfPTable(new float[] { 50f, 150f, 60f, 60f, 60f, 50f, 50f });
             table.WidthPercentage = 100;
             table.HorizontalAlignment = 0;
             table.SpacingBefore = 1f;
@@ -554,7 +619,7 @@ namespace ERP_Condominios_Solution.Controllers
                 VerticalAlignment = Element.ALIGN_MIDDLE,
                 HorizontalAlignment = Element.ALIGN_LEFT
             };
-            cell.Colspan = 8;
+            cell.Colspan = 7;
             cell.BackgroundColor = BaseColor.LIGHT_GRAY;
             table.AddCell(cell);
 
@@ -608,19 +673,12 @@ namespace ERP_Condominios_Solution.Controllers
             };
             cell.BackgroundColor = BaseColor.LIGHT_GRAY;
             table.AddCell(cell);
-            cell = new PdfPCell(new Paragraph("Foto", meuFont))
-            {
-                VerticalAlignment = Element.ALIGN_MIDDLE,
-                HorizontalAlignment = Element.ALIGN_LEFT
-            };
-            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
-            table.AddCell(cell);
 
             foreach (PRODUTO item in lista)
             {
                 if (item.PROD_IN_TIPO_PRODUTO == 1)
                 {
-                    cell = new PdfPCell(new Paragraph("Produto", meuFont4))
+                    cell = new PdfPCell(new Paragraph("Produto", meuFont3))
                     {
                         VerticalAlignment = Element.ALIGN_MIDDLE,
                         HorizontalAlignment = Element.ALIGN_LEFT
@@ -636,7 +694,6 @@ namespace ERP_Condominios_Solution.Controllers
                     };
                     table.AddCell(cell);
                 }
-
                 cell = new PdfPCell(new Paragraph(item.PROD_NM_NOME, meuFont))
                 {
                     VerticalAlignment = Element.ALIGN_MIDDLE,
@@ -679,23 +736,23 @@ namespace ERP_Condominios_Solution.Controllers
                 };
                 table.AddCell(cell);
 
-                if (item.PROD_AQ_FOTO != null)
-                {
-                    Image foto = Image.GetInstance(Server.MapPath(item.PROD_AQ_FOTO));
-                    cell = new PdfPCell(foto, true);
-                    cell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                    cell.HorizontalAlignment = Element.ALIGN_LEFT;
-                    table.AddCell(cell);
-                }
-                else
-                {
-                    cell = new PdfPCell(new Paragraph(" - ", meuFont))
-                    {
-                        VerticalAlignment = Element.ALIGN_MIDDLE,
-                        HorizontalAlignment = Element.ALIGN_LEFT
-                    };
-                    table.AddCell(cell);
-                }
+                //if (item.PROD_AQ_FOTO != null)
+                //{
+                //    Image foto = Image.GetInstance(Server.MapPath(item.PROD_AQ_FOTO));
+                //    cell = new PdfPCell(foto, true);
+                //    cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                //    cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                //    table.AddCell(cell);
+                //}
+                //else
+                //{
+                //    cell = new PdfPCell(new Paragraph(" - ", meuFont))
+                //    {
+                //        VerticalAlignment = Element.ALIGN_MIDDLE,
+                //        HorizontalAlignment = Element.ALIGN_LEFT
+                //    };
+                //    table.AddCell(cell);
+                //}
             }
             pdfDoc.Add(table);
 
@@ -929,7 +986,7 @@ namespace ERP_Condominios_Solution.Controllers
         {
             List<SelectListItem> tipoSaida = new List<SelectListItem>();
             tipoSaida.Add(new SelectListItem() { Text = "Saída Avulsa", Value = "1" });
-            tipoSaida.Add(new SelectListItem() { Text = "Devolução para fornecedor", Value = "2" });
+            tipoSaida.Add(new SelectListItem() { Text = "Devolução para Fornecedor", Value = "2" });
             tipoSaida.Add(new SelectListItem() { Text = "Perda ou Roubo", Value = "3" });
             tipoSaida.Add(new SelectListItem() { Text = "Descarte", Value = "4" });
             tipoSaida.Add(new SelectListItem() { Text = "Acerto de Estoque", Value = "5" });
@@ -1240,7 +1297,7 @@ namespace ERP_Condominios_Solution.Controllers
                     prod.PROD_QN_ESTOQUE = prod.PROD_QN_ESTOQUE - item.MOEP_QN_QUANTIDADE;
                 }
                 prod.PROD_DT_ULTIMA_MOVIMENTACAO = DateTime.Now;
-                Int32 volta1 = prodApp.ValidateEdit(prod, prod, usuarioLogado);
+                Int32 volta1 = prodApp.ValidateEdit(prod, prod);
 
 
                 // Retorno

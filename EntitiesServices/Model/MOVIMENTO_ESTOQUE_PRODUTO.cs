@@ -30,6 +30,7 @@ namespace EntitiesServices.Model
         public Nullable<int> MOEP_QN_DEPOIS { get; set; }
         public Nullable<int> MOEP_QN_ALTERADA { get; set; }
         public Nullable<int> MOEP_IN_OPERACAO { get; set; }
+        public Nullable<int> MOEP_IN_OPERACO_SAIDA { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }

@@ -146,7 +146,7 @@ namespace ERP_Condominios_Solution.Controllers
             Session["MensBanco"] = 0;
             Session["MensConta"] = 0;
             Session["MensVideo"] = 0;
-
+            Session["MensEstoque"] = 0;
             Session["VoltaNotificacao"] = 3;
             Session["VoltaNoticia"] = 1;
 

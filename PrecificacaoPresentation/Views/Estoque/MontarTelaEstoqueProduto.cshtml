@@ -52,7 +52,6 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">@ViewBag.Produtos</h1>
-                        <div class="stat-percent font-bold text-navy">32% <i class="fa fa-level-up"></i></div>
                         <small>Produtos Exibidos</small>
                         <br />
                         <br />
@@ -69,7 +68,6 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">@ViewBag.PontoPedido</h1>
-                        <div class="stat-percent font-bold text-navy">22% <i class="fa fa-level-up"></i></div>
                         <small>Ponto de Pedido</small>
                         <br />
                         <br />
@@ -85,7 +83,6 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">@ViewBag.EstoqueZerado</h1>
-                        <div class="stat-percent font-bold text-navy">22% <i class="fa fa-level-up"></i></div>
                         <small>Estoque Zerado</small>
                         <br />
                         <br />
@@ -101,7 +98,6 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">@ViewBag.EstoqueNegativo</h1>
-                        <div class="stat-percent font-bold text-navy">22% <i class="fa fa-level-up"></i></div>
                         <small>Estoque Negativo</small>
                         <br />
                         <br />
@@ -147,7 +143,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-xs-12">
                                 Tipo
-                                @Html.DropDownListFor(m => m.PROD_IN_TIPO_PRODUTO, (SelectList)ViewBag.Tipos, new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.PROD_IN_TIPO_PRODUTO, (SelectList)ViewBag.ProdutoInsumo, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
@@ -242,14 +238,8 @@
                                                 <td><img src="~/Images/gallery/10s.jpg" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.PROD_NM_NOME', '/Images/gallery/10s.jpg')"></td>
                                             }
                                             <td class="td-one-action">
-                                                @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
-                                                {
-                                                    @Html.TableLinkDetails(cond.PROD_CD_ID, "VerMovimentacaoEstoqueProdutoNova", "fa-edit", "Movimentações")
-                                                }
-                                                else
-                                                {
-                                                    @Html.TableLinkDetails(cond.PROD_CD_ID, "ConsultarProduto", "fa-search", "Ver Produto")
-                                                }
+                                                @Html.TableLinkDetails(cond.PROD_CD_ID, "VerMovimentacaoEstoqueProdutoNova", "fa-list-ul", "Movimentações")
+                                                @Html.TableLinkDetails(cond.PROD_CD_ID, "ConsultarProduto", "fa-search", "Ver Produto")
                                             </td>
                                         </tr>
 
