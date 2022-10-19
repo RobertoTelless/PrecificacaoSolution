@@ -22,6 +22,7 @@ namespace EntitiesServices.Model
             this.FORNECEDOR_CONTATO = new HashSet<FORNECEDOR_CONTATO>();
             this.FORNECEDOR_ANEXO = new HashSet<FORNECEDOR_ANEXO>();
             this.PRODUTO_FORNECEDOR = new HashSet<PRODUTO_FORNECEDOR>();
+            this.CONTA_PAGAR = new HashSet<CONTA_PAGAR>();
         }
     
         public int FORN_CD_ID { get; set; }
@@ -67,5 +68,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<FORNECEDOR_ANEXO> FORNECEDOR_ANEXO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUTO_FORNECEDOR> PRODUTO_FORNECEDOR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CONTA_PAGAR> CONTA_PAGAR { get; set; }
     }
 }

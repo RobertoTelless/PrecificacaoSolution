@@ -294,6 +294,40 @@
         <EntityTypeShape EntityType="Db_PrecificacaoModel.FUNIL_ETAPA" Width="1.5" PointX="5.25" PointY="86.375" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_FUNIL_ASSINANTE" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_FUNIL_ETAPA_FUNIL" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_PAGAR" Width="1.5" PointX="15.75" PointY="113.875" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_PAGAR_ANEXO" Width="1.5" PointX="18" PointY="118.25" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_PAGAR_PARCELA" Width="1.5" PointX="18" PointY="122.25" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_PAGAR_RATEIO" Width="1.5" PointX="19" PointY="130.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_RECEBER" Width="1.5" PointX="26" PointY="122.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_RECEBER_ANEXO" Width="1.5" PointX="28.25" PointY="124.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_RECEBER_PARCELA" Width="1.5" PointX="28.25" PointY="127.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_RECEBER_RATEIO" Width="1.5" PointX="28.25" PointY="133.875" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_CONTA_BANCO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_CONTA_BANCO1" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_PARCELA_CONTA_BANCO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CONTA_BANCO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_ANEXO_CONTA_PAGAR" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_CENTRO_CUSTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_FORMA_PAGTO_RECTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_FORNECEDOR" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_PARCELA_CONTA_PAGAR" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_PERIODICIDADE_TAREFA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_RATEIO_CONTA_PAGAR" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_PARCELA_FORMA_PAGTO_RECTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_RATEIO_CENTRO_CUSTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_ANEXO_CONTA_RECEBER" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CENTRO_CUSTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CRM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CRM_PEDIDO_VENDA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_FORMA_PAGTO_RECTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_PARCELA_CONTA_RECEBER" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_PERIODICIDADE_TAREFA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_RATEIO_CONTA_RECEBER" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_RATEIO_CENTRO_CUSTO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

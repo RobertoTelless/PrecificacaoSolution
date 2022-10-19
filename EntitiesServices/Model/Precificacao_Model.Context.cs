@@ -131,5 +131,13 @@ namespace EntitiesServices.Model
         public virtual DbSet<TIPO_EMBALAGEM> TIPO_EMBALAGEM { get; set; }
         public virtual DbSet<FUNIL> FUNIL { get; set; }
         public virtual DbSet<FUNIL_ETAPA> FUNIL_ETAPA { get; set; }
+        public virtual DbSet<CONTA_PAGAR> CONTA_PAGAR { get; set; }
+        public virtual DbSet<CONTA_PAGAR_ANEXO> CONTA_PAGAR_ANEXO { get; set; }
+        public virtual DbSet<CONTA_PAGAR_PARCELA> CONTA_PAGAR_PARCELA { get; set; }
+        public virtual DbSet<CONTA_PAGAR_RATEIO> CONTA_PAGAR_RATEIO { get; set; }
+        public virtual DbSet<CONTA_RECEBER> CONTA_RECEBER { get; set; }
+        public virtual DbSet<CONTA_RECEBER_ANEXO> CONTA_RECEBER_ANEXO { get; set; }
+        public virtual DbSet<CONTA_RECEBER_PARCELA> CONTA_RECEBER_PARCELA { get; set; }
+        public virtual DbSet<CONTA_RECEBER_RATEIO> CONTA_RECEBER_RATEIO { get; set; }
     }
 }
