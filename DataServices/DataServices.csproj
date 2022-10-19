@@ -202,6 +202,7 @@
     <Compile Include="Repositories\ContaBancariaLancamentoRepository.cs" />
     <Compile Include="Repositories\EmpresaMaquinaRepository.cs" />
     <Compile Include="Repositories\FichaTecnicaDetalheRepository.cs" />
+    <Compile Include="Repositories\FichaTecnicaRepository.cs" />
     <Compile Include="Repositories\FornecedorAnexoRepository.cs" />
     <Compile Include="Repositories\ClienteAnotacaoRepository.cs" />
     <Compile Include="Repositories\FornecedorCnpjRepository.cs" />

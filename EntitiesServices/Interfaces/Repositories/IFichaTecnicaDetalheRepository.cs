@@ -11,6 +11,5 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<FICHA_TECNICA_DETALHE> GetAllItens();
         FICHA_TECNICA_DETALHE GetItemById(Int32 id);
-
     }
 }

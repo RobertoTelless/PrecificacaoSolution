@@ -621,6 +621,7 @@
           </Key>
           <Property Name="FITE_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PROD_CD_ID" Type="int" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" />
           <Property Name="FITE_CD_FICHA_PAI" Type="int" Nullable="false" />
           <Property Name="FITE_AQ_FOTO_APRESENTACAO" Type="varchar" MaxLength="250" />
           <Property Name="FITE_NM_NOME" Type="varchar" MaxLength="100" />
@@ -755,6 +756,41 @@
           <Property Name="FOQS_NM_QUALIFICACAO_REP_LEGAL" Type="varchar" MaxLength="100" />
           <Property Name="FOQS_NM_NOME" Type="varchar" MaxLength="100" />
           <Property Name="FOQS_IN_ATIVO" Type="int" />
+        </EntityType>
+        <EntityType Name="FUNIL">
+          <Key>
+            <PropertyRef Name="FUNI_CD_ID" />
+          </Key>
+          <Property Name="FUNI_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="FUNI_NM_NOME" Type="varchar" MaxLength="100" />
+          <Property Name="FUNI_SG_SIGLA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FUNI_DS_DESCRICAO" Type="varchar" MaxLength="500" />
+          <Property Name="FUNI_IN_ACOES" Type="int" />
+          <Property Name="FUNI_IN_CONTATO" Type="int" />
+          <Property Name="FUNI_IN_PROPOSTA" Type="int" />
+          <Property Name="FUNI_IN_AGENDA" Type="int" />
+          <Property Name="FUNI_DT_CADASTRO" Type="date" Nullable="false" />
+          <Property Name="FUNI_IN_FIXO" Type="int" />
+          <Property Name="FUNI_IN_CLIENTE" Type="int" />
+          <Property Name="FUNI_IN_RESPONSAVEL" Type="int" />
+          <Property Name="FUNI_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FUNIL_ETAPA">
+          <Key>
+            <PropertyRef Name="FUET_CD_ID" />
+          </Key>
+          <Property Name="FUET_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FUNI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="FUET_NM_NOME" Type="varchar" MaxLength="50" />
+          <Property Name="FUET_SG_SIGLA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FUET_DS_DESCRICAO" Type="varchar" MaxLength="500" />
+          <Property Name="FUET_IN_ORDEM" Type="int" />
+          <Property Name="FUET_IN_ENCERRA" Type="int" Nullable="false" />
+          <Property Name="FUET_IN_PROPOSTA" Type="int" />
+          <Property Name="FUET_IN_EMAIL" Type="int" />
+          <Property Name="FUET_IN_SMS" Type="int" />
+          <Property Name="FUET_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="GRUPO_PLANO_CONTA">
           <Key>
@@ -2428,6 +2464,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FUNIL_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="FUNIL" Type="Self.FUNIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="FUNIL">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNIL_ETAPA_FUNIL">
+          <End Role="FUNIL" Type="Self.FUNIL" Multiplicity="1" />
+          <End Role="FUNIL_ETAPA" Type="Self.FUNIL_ETAPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNIL">
+              <PropertyRef Name="FUNI_CD_ID" />
+            </Principal>
+            <Dependent Role="FUNIL_ETAPA">
+              <PropertyRef Name="FUNI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GRUPO_PLANO_CONTA_ASSINANTE">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
           <End Role="GRUPO_PLANO_CONTA" Type="Self.GRUPO_PLANO_CONTA" Multiplicity="*" />
@@ -3749,6 +3809,8 @@
           <EntitySet Name="FORNECEDOR_ANOTACOES" EntityType="Self.FORNECEDOR_ANOTACOES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FORNECEDOR_CONTATO" EntityType="Self.FORNECEDOR_CONTATO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FORNECEDOR_QUADRO_SOCIETARIO" EntityType="Self.FORNECEDOR_QUADRO_SOCIETARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FUNIL" EntityType="Self.FUNIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FUNIL_ETAPA" EntityType="Self.FUNIL_ETAPA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GRUPO_PLANO_CONTA" EntityType="Self.GRUPO_PLANO_CONTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOG" EntityType="Self.LOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MAQUINA" EntityType="Self.MAQUINA" Schema="dbo" store:Type="Tables" />
@@ -4104,6 +4166,14 @@
           <AssociationSet Name="FK_FORNECEDOR_UF" Association="Self.FK_FORNECEDOR_UF">
             <End Role="UF" EntitySet="UF" />
             <End Role="FORNECEDOR" EntitySet="FORNECEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNIL_ASSINANTE" Association="Self.FK_FUNIL_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="FUNIL" EntitySet="FUNIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNIL_ETAPA_FUNIL" Association="Self.FK_FUNIL_ETAPA_FUNIL">
+            <End Role="FUNIL" EntitySet="FUNIL" />
+            <End Role="FUNIL_ETAPA" EntitySet="FUNIL_ETAPA" />
           </AssociationSet>
           <AssociationSet Name="FK_GRUPO_PLANO_CONTA_ASSINANTE" Association="Self.FK_GRUPO_PLANO_CONTA_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
@@ -4634,6 +4704,7 @@
           <NavigationProperty Name="TAREFA" Relationship="Self.FKTAREFA157283" FromRole="ASSINANTE" ToRole="TAREFA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKUSUARIO561404" FromRole="ASSINANTE" ToRole="USUARIO" />
           <NavigationProperty Name="SUBCATEGORIA_PRODUTO" Relationship="Db_PrecificacaoModel.FK_SUBCATEGORIA_PRODUTO_ASSINANTE" FromRole="ASSINANTE" ToRole="SUBCATEGORIA_PRODUTO" />
+          <NavigationProperty Name="FUNIL" Relationship="Db_PrecificacaoModel.FK_FUNIL_ASSINANTE" FromRole="ASSINANTE" ToRole="FUNIL" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -5342,6 +5413,7 @@
           <NavigationProperty Name="PRODUTO_TABELA_PRECO" Relationship="Self.FKFICHA_TECN788090" FromRole="FICHA_TECNICA" ToRole="PRODUTO_TABELA_PRECO" />
           <NavigationProperty Name="FICHA_TECNICA_DETALHE" Relationship="Self.FKFICHA_TECN922412" FromRole="FICHA_TECNICA" ToRole="FICHA_TECNICA_DETALHE" />
           <NavigationProperty Name="PRODUTO" Relationship="Db_PrecificacaoModel.FK_FICHA_TECNICA_PRODUTO" FromRole="FICHA_TECNICA" ToRole="PRODUTO" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
         </EntityType>
         <EntityType Name="FICHA_TECNICA_DETALHE">
           <Key>
@@ -9353,6 +9425,16 @@
             <End Role="TIPO_EMBALAGEM" EntitySet="TIPO_EMBALAGEM" />
             <End Role="PRODUTO" EntitySet="PRODUTO" />
           </AssociationSet>
+          <EntitySet Name="FUNIL" EntityType="Db_PrecificacaoModel.FUNIL" />
+          <EntitySet Name="FUNIL_ETAPA" EntityType="Db_PrecificacaoModel.FUNIL_ETAPA" />
+          <AssociationSet Name="FK_FUNIL_ASSINANTE" Association="Db_PrecificacaoModel.FK_FUNIL_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="FUNIL" EntitySet="FUNIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNIL_ETAPA_FUNIL" Association="Db_PrecificacaoModel.FK_FUNIL_ETAPA_FUNIL">
+            <End Role="FUNIL" EntitySet="FUNIL" />
+            <End Role="FUNIL_ETAPA" EntitySet="FUNIL_ETAPA" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_SUBCATEGORIA_PRODUTO_ASSINANTE">
           <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
@@ -9418,6 +9500,68 @@
             </Principal>
             <Dependent Role="PRODUTO">
               <PropertyRef Name="TIEM_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FUNIL">
+          <Key>
+            <PropertyRef Name="FUNI_CD_ID" />
+          </Key>
+          <Property Name="FUNI_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="FUNI_NM_NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FUNI_SG_SIGLA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUNI_DS_DESCRICAO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FUNI_IN_ACOES" Type="Int32" />
+          <Property Name="FUNI_IN_CONTATO" Type="Int32" />
+          <Property Name="FUNI_IN_PROPOSTA" Type="Int32" />
+          <Property Name="FUNI_IN_AGENDA" Type="Int32" />
+          <Property Name="FUNI_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FUNI_IN_FIXO" Type="Int32" />
+          <Property Name="FUNI_IN_CLIENTE" Type="Int32" />
+          <Property Name="FUNI_IN_RESPONSAVEL" Type="Int32" />
+          <Property Name="FUNI_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_FUNIL_ASSINANTE" FromRole="FUNIL" ToRole="ASSINANTE" />
+          <NavigationProperty Name="FUNIL_ETAPA" Relationship="Db_PrecificacaoModel.FK_FUNIL_ETAPA_FUNIL" FromRole="FUNIL" ToRole="FUNIL_ETAPA" />
+        </EntityType>
+        <EntityType Name="FUNIL_ETAPA">
+          <Key>
+            <PropertyRef Name="FUET_CD_ID" />
+          </Key>
+          <Property Name="FUET_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FUNI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="FUET_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUET_SG_SIGLA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUET_DS_DESCRICAO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FUET_IN_ORDEM" Type="Int32" />
+          <Property Name="FUET_IN_ENCERRA" Type="Int32" Nullable="false" />
+          <Property Name="FUET_IN_PROPOSTA" Type="Int32" />
+          <Property Name="FUET_IN_EMAIL" Type="Int32" />
+          <Property Name="FUET_IN_SMS" Type="Int32" />
+          <Property Name="FUET_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FUNIL" Relationship="Db_PrecificacaoModel.FK_FUNIL_ETAPA_FUNIL" FromRole="FUNIL_ETAPA" ToRole="FUNIL" />
+        </EntityType>
+        <Association Name="FK_FUNIL_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.FUNIL" Role="FUNIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="FUNIL">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNIL_ETAPA_FUNIL">
+          <End Type="Db_PrecificacaoModel.FUNIL" Role="FUNIL" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.FUNIL_ETAPA" Role="FUNIL_ETAPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNIL">
+              <PropertyRef Name="FUNI_CD_ID" />
+            </Principal>
+            <Dependent Role="FUNIL_ETAPA">
+              <PropertyRef Name="FUNI_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10078,6 +10222,7 @@
           <EntitySetMapping Name="FICHA_TECNICA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.FICHA_TECNICA">
               <MappingFragment StoreEntitySet="FICHA_TECNICA">
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="FITE_CD_ID" ColumnName="FITE_CD_ID" />
                 <ScalarProperty Name="PROD_CD_ID" ColumnName="PROD_CD_ID" />
                 <ScalarProperty Name="FITE_CD_FICHA_PAI" ColumnName="FITE_CD_FICHA_PAI" />
@@ -11051,6 +11196,43 @@
                 <ScalarProperty Name="TIEM_NM_NOME" ColumnName="TIEM_NM_NOME" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="TIEM_CD_ID" ColumnName="TIEM_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUNIL">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.FUNIL">
+              <MappingFragment StoreEntitySet="FUNIL">
+                <ScalarProperty Name="FUNI_IN_ATIVO" ColumnName="FUNI_IN_ATIVO" />
+                <ScalarProperty Name="FUNI_IN_RESPONSAVEL" ColumnName="FUNI_IN_RESPONSAVEL" />
+                <ScalarProperty Name="FUNI_IN_CLIENTE" ColumnName="FUNI_IN_CLIENTE" />
+                <ScalarProperty Name="FUNI_IN_FIXO" ColumnName="FUNI_IN_FIXO" />
+                <ScalarProperty Name="FUNI_DT_CADASTRO" ColumnName="FUNI_DT_CADASTRO" />
+                <ScalarProperty Name="FUNI_IN_AGENDA" ColumnName="FUNI_IN_AGENDA" />
+                <ScalarProperty Name="FUNI_IN_PROPOSTA" ColumnName="FUNI_IN_PROPOSTA" />
+                <ScalarProperty Name="FUNI_IN_CONTATO" ColumnName="FUNI_IN_CONTATO" />
+                <ScalarProperty Name="FUNI_IN_ACOES" ColumnName="FUNI_IN_ACOES" />
+                <ScalarProperty Name="FUNI_DS_DESCRICAO" ColumnName="FUNI_DS_DESCRICAO" />
+                <ScalarProperty Name="FUNI_SG_SIGLA" ColumnName="FUNI_SG_SIGLA" />
+                <ScalarProperty Name="FUNI_NM_NOME" ColumnName="FUNI_NM_NOME" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="FUNI_CD_ID" ColumnName="FUNI_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUNIL_ETAPA">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.FUNIL_ETAPA">
+              <MappingFragment StoreEntitySet="FUNIL_ETAPA">
+                <ScalarProperty Name="FUET_IN_ATIVO" ColumnName="FUET_IN_ATIVO" />
+                <ScalarProperty Name="FUET_IN_SMS" ColumnName="FUET_IN_SMS" />
+                <ScalarProperty Name="FUET_IN_EMAIL" ColumnName="FUET_IN_EMAIL" />
+                <ScalarProperty Name="FUET_IN_PROPOSTA" ColumnName="FUET_IN_PROPOSTA" />
+                <ScalarProperty Name="FUET_IN_ENCERRA" ColumnName="FUET_IN_ENCERRA" />
+                <ScalarProperty Name="FUET_IN_ORDEM" ColumnName="FUET_IN_ORDEM" />
+                <ScalarProperty Name="FUET_DS_DESCRICAO" ColumnName="FUET_DS_DESCRICAO" />
+                <ScalarProperty Name="FUET_SG_SIGLA" ColumnName="FUET_SG_SIGLA" />
+                <ScalarProperty Name="FUET_NM_NOME" ColumnName="FUET_NM_NOME" />
+                <ScalarProperty Name="FUNI_CD_ID" ColumnName="FUNI_CD_ID" />
+                <ScalarProperty Name="FUET_CD_ID" ColumnName="FUET_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,4 +16,5 @@ namespace ModelServices.Interfaces.Repositories
         List<FICHA_TECNICA> GetAllItensAdm(Int32 idAss);
         List<FICHA_TECNICA> ExecuteFilter(Int32? prodId, Int32? cat, String descricao, Int32 idAss);
     }
+
 }

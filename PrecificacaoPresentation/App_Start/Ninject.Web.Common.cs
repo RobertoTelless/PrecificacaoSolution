@@ -109,6 +109,7 @@ namespace Presentation.Start
             kernel.Bind<IProdutotabelaPrecoAppService>().To<ProdutoTabelaPrecoAppService>();
             kernel.Bind<IMovimentoEstoqueProdutoAppService>().To<MovimentoEstoqueProdutoAppService>();
             kernel.Bind<ITipoEmbalagemAppService>().To<TipoEmbalagemAppService>();
+            kernel.Bind<IFichaTecnicaAppService>().To<FichaTecnicaAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -154,6 +155,7 @@ namespace Presentation.Start
             kernel.Bind<IProdutoTabelaPrecoService>().To<ProdutoTabelaPrecoService>();
             kernel.Bind<IMovimentoEstoqueProdutoService>().To<MovimentoEstoqueProdutoService>();
             kernel.Bind<ITipoEmbalagemService>().To<TipoEmbalagemService>();
+            kernel.Bind<IFichaTecnicaService>().To<FichaTecnicaService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -232,6 +234,7 @@ namespace Presentation.Start
             kernel.Bind<IProdutoKitRepository>().To<ProdutoKitRepository>();
             kernel.Bind<IFichaTecnicaDetalheRepository>().To<FichaTecnicaDetalheRepository>();
             kernel.Bind<ITipoEmbalagemRepository>().To<TipoEmbalagemRepository>();
+            kernel.Bind<IFichaTecnicaRepository>().To<FichaTecnicaRepository>();
 
         }
     }

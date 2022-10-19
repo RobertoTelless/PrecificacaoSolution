@@ -21,7 +21,7 @@ namespace ModelServices.EntitiesServices
         private readonly IFichaTecnicaRepository _baseRepository;
         private readonly ILogRepository _logRepository;
         private readonly IFichaTecnicaDetalheRepository _detRepository;
-        protected ERP_CRMEntities Db = new ERP_CRMEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public FichaTecnicaService(IFichaTecnicaRepository baseRepository, ILogRepository logRepository, IFichaTecnicaDetalheRepository detRepository) : base(baseRepository)
         {

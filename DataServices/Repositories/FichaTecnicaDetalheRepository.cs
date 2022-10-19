@@ -20,6 +20,5 @@ namespace DataServices.Repositories
             IQueryable<FICHA_TECNICA_DETALHE> query = Db.FICHA_TECNICA_DETALHE.Where(p => p.FITD_CD_ID == id);
             return query.FirstOrDefault();
         }
-
     }
 }

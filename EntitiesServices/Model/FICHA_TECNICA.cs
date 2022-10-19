@@ -35,6 +35,7 @@ namespace EntitiesServices.Model
         public Nullable<decimal> FITE_PC_PERCENTUAL_PERDA { get; set; }
         public Nullable<System.DateTime> FITE_DT_CADASTRO { get; set; }
         public Nullable<int> FITE_IN_ATIVO { get; set; }
+        public Nullable<int> ASSI_CD_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FICHA_TECNICA> FICHA_TECNICA1 { get; set; }

@@ -209,6 +209,7 @@
     <Compile Include="Interfaces\IClienteAppService.cs" />
     <Compile Include="Interfaces\IClienteCnpjAppService.cs" />
     <Compile Include="Interfaces\IContaBancariaAppService.cs" />
+    <Compile Include="Interfaces\IFichaTecnicaAppService.cs" />
     <Compile Include="Interfaces\IFornecedorAppService.cs" />
     <Compile Include="Interfaces\IFornecedorCnpjAppService.cs" />
     <Compile Include="Interfaces\IGrupoCCAppService.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Services\ClienteAppService.cs" />
     <Compile Include="Services\ClienteCnpjAppService.cs" />
     <Compile Include="Services\ContaBancariaAppService.cs" />
+    <Compile Include="Services\FichaTecnicaAppService.cs" />
     <Compile Include="Services\FornecedorAppService.cs" />
     <Compile Include="Services\FornecedorCnpjAppService.cs" />
     <Compile Include="Services\GrupoCCAppService.cs" />

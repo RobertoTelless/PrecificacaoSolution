@@ -25,5 +25,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         
         Int32 EditInsumo(FICHA_TECNICA_DETALHE item);
         Int32 CreateInsumo(FICHA_TECNICA_DETALHE item);
+
     }
 }

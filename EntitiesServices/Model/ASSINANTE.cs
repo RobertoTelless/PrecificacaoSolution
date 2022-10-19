@@ -67,6 +67,7 @@ namespace EntitiesServices.Model
             this.TAREFA = new HashSet<TAREFA>();
             this.USUARIO = new HashSet<USUARIO>();
             this.SUBCATEGORIA_PRODUTO = new HashSet<SUBCATEGORIA_PRODUTO>();
+            this.FUNIL = new HashSet<FUNIL>();
         }
     
         public int ASSI_CD_ID { get; set; }
@@ -178,5 +179,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<USUARIO> USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SUBCATEGORIA_PRODUTO> SUBCATEGORIA_PRODUTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FUNIL> FUNIL { get; set; }
     }
 }

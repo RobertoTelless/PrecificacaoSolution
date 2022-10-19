@@ -240,6 +240,7 @@
     <Compile Include="Controllers\ControleAcessoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />
+    <Compile Include="Controllers\FichaTecnicaController.cs" />
     <Compile Include="Controllers\FormaPagRecController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -277,6 +278,8 @@
     <Compile Include="ViewModels\ContaBancariaLancamentoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaViewModel.cs" />
     <Compile Include="ViewModels\ClienteComentarioViewModel.cs" />
+    <Compile Include="ViewModels\FichaTecnicaDetalheViewModel.cs" />
+    <Compile Include="ViewModels\FichaTecnicaViewModel.cs" />
     <Compile Include="ViewModels\FornecedorComentarioViewModel.cs" />
     <Compile Include="ViewModels\EmpresaMaquinaViewModel.cs" />
     <Compile Include="ViewModels\FornecedorContatoViewModel.cs" />
@@ -3110,6 +3113,13 @@
     <Content Include="Views\Estoque\VerMovimentacaoEstoqueProdutoNova.cshtml" />
     <Content Include="Views\Estoque\MontarTelaMovimentacaoAvulsa.cshtml" />
     <Content Include="Views\Estoque\IncluirMovimentacaoAvulsa.cshtml" />
+    <Content Include="Views\FichaTecnica\MontarTelaFT.cshtml" />
+    <Content Include="Views\FichaTecnica\IncluirFT.cshtml" />
+    <Content Include="Views\FichaTecnica\EditarInsumoFT.cshtml" />
+    <Content Include="Views\FichaTecnica\EditarFT.cshtml" />
+    <Content Include="Views\FichaTecnica\VisualizarEditarFTProduto.cshtml" />
+    <Content Include="Views\FichaTecnica\IncluirInsumoFT.cshtml" />
+    <Content Include="Views\FichaTecnica\CriarFichaTecnicaProduto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

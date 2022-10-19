@@ -204,6 +204,32 @@ namespace ERP_Condominios_Solution.Controllers
             return Json(listResult);
         }
 
+        [HttpPost]
+        public JsonResult BuscaNomeComposto(String nome)
+        {
+            List<Hashtable> listResult = new List<Hashtable>();
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            List<PRODUTO> lista = prodApp.GetAllItens(idAss);
+
+            if (nome != null)
+            {
+                List<PRODUTO> lstProduto = lista.Where(x => x.PROD_IN_COMPOSTO == 2 & x.PROD_NM_NOME != null && x.PROD_NM_NOME.ToLower().Contains(nome.ToLower())).ToList<PRODUTO>();
+
+                if (lstProduto != null)
+                {
+                    foreach (var item in lstProduto)
+                    {
+                        Hashtable result = new Hashtable();
+                        result.Add("id", item.PROD_CD_ID);
+                        result.Add("text", item.PROD_NM_NOME);
+                        listResult.Add(result);
+                    }
+                }
+            }
+            Session["Produtos"] = lista;
+            return Json(listResult);
+        }
+
         [HttpGet]
         public ActionResult MontarTelaProduto()
         {
@@ -1209,7 +1235,7 @@ namespace ERP_Condominios_Solution.Controllers
                 Int32 idFT = prod.FICHA_TECNICA.FirstOrDefault().FITE_CD_ID;
                 return RedirectToAction("EditarFT", "FichaTecnica", new { id = idFT });
             }
-            return RedirectToAction("EditarProduto");
+            return RedirectToAction("VoltarAnexoProduto");
         }
 
         public FileResult DownloadProduto(Int32 id)

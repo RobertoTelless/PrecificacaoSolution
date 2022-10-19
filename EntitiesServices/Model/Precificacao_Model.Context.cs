@@ -129,5 +129,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<VIDEO> VIDEO { get; set; }
         public virtual DbSet<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
         public virtual DbSet<TIPO_EMBALAGEM> TIPO_EMBALAGEM { get; set; }
+        public virtual DbSet<FUNIL> FUNIL { get; set; }
+        public virtual DbSet<FUNIL_ETAPA> FUNIL_ETAPA { get; set; }
     }
 }

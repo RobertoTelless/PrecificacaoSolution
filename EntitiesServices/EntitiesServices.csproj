@@ -203,6 +203,7 @@
     <Compile Include="EntitiesServices\ClienteCnpjService.cs" />
     <Compile Include="EntitiesServices\ClienteService.cs" />
     <Compile Include="EntitiesServices\ContaBancariaService.cs" />
+    <Compile Include="EntitiesServices\FichaTecnicaService.cs" />
     <Compile Include="EntitiesServices\FornecedorCnpjService.cs" />
     <Compile Include="EntitiesServices\FornecedorService.cs" />
     <Compile Include="EntitiesServices\GrupoCCService.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Interfaces\Repositories\IAgendaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFichaTecnicaDetalheRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFichaTecnicaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFornecedorAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteAnotacaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFornecedorCnpjRepository.cs" />
@@ -325,6 +327,7 @@
     <Compile Include="Interfaces\Services\IClienteCnpjService.cs" />
     <Compile Include="Interfaces\Services\IClienteService.cs" />
     <Compile Include="Interfaces\Services\IContaBancariaService.cs" />
+    <Compile Include="Interfaces\Services\IFichaTecnicaService.cs" />
     <Compile Include="Interfaces\Services\IFornecedorCnpjService.cs" />
     <Compile Include="Interfaces\Services\IFornecedorService.cs" />
     <Compile Include="Interfaces\Services\IGrupoCCService.cs" />
@@ -501,6 +504,12 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\FORNECEDOR_QUADRO_SOCIETARIO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FUNIL.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FUNIL_ETAPA.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GRUPO_PLANO_CONTA.cs">

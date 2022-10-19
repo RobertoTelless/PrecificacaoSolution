@@ -290,6 +290,10 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_PRODUTO" />
         <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_EMBALAGEM" Width="1.5" PointX="0.75" PointY="1" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PRODUTO_TIPO_EMBALAGEM" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FUNIL" Width="1.5" PointX="3" PointY="86" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FUNIL_ETAPA" Width="1.5" PointX="5.25" PointY="86.375" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FUNIL_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FUNIL_ETAPA_FUNIL" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
