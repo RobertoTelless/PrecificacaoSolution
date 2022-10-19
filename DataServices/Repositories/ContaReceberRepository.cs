@@ -20,7 +20,7 @@ namespace DataServices.Repositories
             query = query.Include(p => p.CLIENTE);
             query = query.Include(p => p.CONTA_BANCO);
             query = query.Include(p => p.CONTA_RECEBER_ANEXO);
-            query = query.Include(p => p.FILIAL);
+            //query = query.Include(p => p.FILIAL);
             query = query.Include(p => p.USUARIO);
             query = query.Include(p => p.CONTA_RECEBER_PARCELA);
             return query.FirstOrDefault();
@@ -127,7 +127,7 @@ namespace DataServices.Repositories
             }
             if (conta != null)
             {
-                query = query.Where(p => p.FORMA_PAGAMENTO.COBA_CD_ID == conta);
+                query = query.Where(p => p.FORMA_PAGTO_RECTO.COBA_CD_ID == conta);
             }
             if (query != null)
             {

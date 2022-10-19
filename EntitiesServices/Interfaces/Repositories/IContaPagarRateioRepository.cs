@@ -12,5 +12,6 @@ namespace ModelServices.Interfaces.Repositories
         CONTA_PAGAR_RATEIO CheckExist(CONTA_PAGAR_RATEIO item);
         List<CONTA_PAGAR_RATEIO> GetAllItens();
         CONTA_PAGAR_RATEIO GetItemById(Int32 id);
+
     }
 }

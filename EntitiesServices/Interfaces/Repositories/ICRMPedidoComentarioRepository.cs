@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<CRM_PEDIDO_VENDA_ACOMPANHAMENTO> GetAllItens();
         CRM_PEDIDO_VENDA_ACOMPANHAMENTO GetItemById(Int32 id);
+
     }
 }

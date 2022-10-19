@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<CRM_ACAO> GetAllItens(Int32 idAss);
         CRM_ACAO GetItemById(Int32 id);
+
     }
 }

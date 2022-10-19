@@ -72,10 +72,10 @@ namespace DataServices.Repositories
             {
                 query = query.Where(p => p.CLIENTE.CLIE_NM_NOME.Contains(busca) || p.CLIENTE.CLIE_NM_RAZAO.Contains(busca) || p.CLIENTE.CLIE_NR_CPF.Contains(busca));
             }
-            if (filial > 0)
-            {
-                query = query.Where(p => p.FILI_CD_ID == filial);
-            }
+            //if (filial > 0)
+            //{
+            //    query = query.Where(p => p.FILI_CD_ID == filial);
+            //}
             if (usuario > 0)
             {
                 query = query.Where(p => p.USUA_CD_ID == usuario);

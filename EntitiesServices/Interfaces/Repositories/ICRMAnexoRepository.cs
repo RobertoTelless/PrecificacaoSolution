@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<CRM_ANEXO> GetAllItens();
         CRM_ANEXO GetItemById(Int32 id);
+
     }
 }

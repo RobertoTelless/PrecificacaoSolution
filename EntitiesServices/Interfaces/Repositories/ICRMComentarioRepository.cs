@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<CRM_COMENTARIO> GetAllItens();
         CRM_COMENTARIO GetItemById(Int32 id);
+
     }
 }

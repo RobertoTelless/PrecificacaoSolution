@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<CRM_COMENTARIO> query = Db.CRM_COMENTARIO.Where(p => p.CRCM_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

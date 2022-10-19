@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<CONTA_PAGAR_ANEXO> query = Db.CONTA_PAGAR_ANEXO.Where(p => p.CPAN_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

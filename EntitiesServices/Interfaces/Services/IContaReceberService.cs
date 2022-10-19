@@ -26,7 +26,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<CONTA_RECEBER> GetAReceberMes(DateTime mes, Int32 idAss);
         List<CONTA_RECEBER> GetItensAtrasoCliente(Int32 idAss);
 
-        //List<TIPO_TAG> GetAllTags();
         CONTA_RECEBER_ANEXO GetAnexoById(Int32 id);
         CONTA_RECEBER_PARCELA GetParcelaById(Int32 id);
         CONFIGURACAO CarregaConfiguracao(Int32 assinante);
@@ -38,7 +37,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<CONTA_RECEBER> ExecuteFilterRecebimentoMes(Int32? clieId, Int32? ccId, String desc, DateTime? emissao, DateTime? venc, DateTime? liqui, Int32 idAss);
         List<CONTA_RECEBER> ExecuteFilterAReceberMes(Int32? clieId, Int32? ccId, String desc, DateTime? emissao, DateTime? venc, Int32 idAss);
         List<CONTA_RECEBER> ExecuteFilterCRAtrasos(Int32? clieId, Int32? ccId, String desc, DateTime? emissao, DateTime? venc, Int32 idAss);
-        List<CONTA_RECEBER> ExecuteFilterAtrasos(String nome, String cidade, Int32? uf, Int32 idAss);
-    
+        List<CONTA_RECEBER> ExecuteFilterAtrasos(String nome, String cidade, Int32? uf, Int32 idAss);    
     }
 }

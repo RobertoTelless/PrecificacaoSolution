@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<CRM_ANEXO> query = Db.CRM_ANEXO.Where(p => p.CRAN_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

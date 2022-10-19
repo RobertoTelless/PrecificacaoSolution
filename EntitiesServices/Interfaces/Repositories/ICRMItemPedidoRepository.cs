@@ -11,7 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<CRM_PEDIDO_VENDA_ITEM> GetAllItens();
         CRM_PEDIDO_VENDA_ITEM GetItemById(Int32 id);
-        CRM_PEDIDO_VENDA_ITEM GetItemByProduto(Int32 id);
-    
+        CRM_PEDIDO_VENDA_ITEM GetItemByProduto(Int32 id);    
     }
 }

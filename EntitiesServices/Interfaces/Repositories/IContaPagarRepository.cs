@@ -20,7 +20,6 @@ namespace ModelServices.Interfaces.Repositories
         List<CONTA_PAGAR> GetPagamentosMes(DateTime mes, Int32 idAss);
         List<CONTA_PAGAR> GetAPagarMes(DateTime mes, Int32 idAss);
         List<CONTA_PAGAR> GetItensAtrasoFornecedor(Int32 idAss);
-
     }
 
 }

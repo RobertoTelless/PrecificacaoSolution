@@ -20,5 +20,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         CRM_ORIGEM GetItemById(Int32 id);
         List<CRM_ORIGEM> GetAllItens(Int32 idAss);
         List<CRM_ORIGEM> GetAllItensAdm(Int32 idAss);
+
     }
 }

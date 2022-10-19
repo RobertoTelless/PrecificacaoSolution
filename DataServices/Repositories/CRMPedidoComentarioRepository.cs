@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<CRM_PEDIDO_VENDA_ACOMPANHAMENTO> query = Db.CRM_PEDIDO_VENDA_ACOMPANHAMENTO.Where(p => p.CRPC_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

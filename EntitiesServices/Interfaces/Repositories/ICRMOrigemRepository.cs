@@ -13,5 +13,6 @@ namespace ModelServices.Interfaces.Repositories
         CRM_ORIGEM GetItemById(Int32 id);
         CRM_ORIGEM CheckExist(CRM_ORIGEM item, Int32 idAss);
         List<CRM_ORIGEM> GetAllItensAdm(Int32 idAss);
+
     }
 }

@@ -79,7 +79,7 @@ namespace DataServices.Repositories
         public List<CONTA_PAGAR> GetAllItens(Int32 idAss)
         {
             IQueryable<CONTA_PAGAR> query = Db.CONTA_PAGAR.Where(p => p.CAPA_IN_ATIVO == 1);
-            query = query.Include(p => p.CENTRO_CUSTO);
+            query = query.Include(p => p.PLANO_CONTA);
             query = query.Include(p => p.FORNECEDOR);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             return query.ToList();
@@ -103,7 +103,7 @@ namespace DataServices.Repositories
         public List<CONTA_PAGAR> GetAllItensAdm(Int32 idAss)
         {
             IQueryable<CONTA_PAGAR> query = Db.CONTA_PAGAR;
-            query = query.Include(p => p.CENTRO_CUSTO);
+            query = query.Include(p => p.PLANO_CONTA);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
             query = query.Include(p => p.FORNECEDOR);
             return query.ToList();
@@ -151,7 +151,7 @@ namespace DataServices.Repositories
             }
             if (conta != null)
             {
-                query = query.Where(p => p.FORMA_PAGAMENTO.COBA_CD_ID == conta);
+                query = query.Where(p => p.FORMA_PAGTO_RECTO.COBA_CD_ID == conta);
             }
             if (atraso != null)
             {
@@ -168,7 +168,7 @@ namespace DataServices.Repositories
             {
                 query = query.Where(p => p.ASSI_CD_ID == idAss);
                 query = query.Where(p => p.CAPA_IN_ATIVO == 1);
-                query = query.Include(p => p.CENTRO_CUSTO);
+                query = query.Include(p => p.PLANO_CONTA);
                 query = query.Include(p => p.FORNECEDOR);
                 query = query.OrderBy(a => a.CAPA_DT_VENCIMENTO);
                 lista = query.ToList<CONTA_PAGAR>();

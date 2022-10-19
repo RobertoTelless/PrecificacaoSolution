@@ -15,5 +15,6 @@ namespace ModelServices.Interfaces.Repositories
         CRM_PEDIDO_VENDA GetItemById(Int32 id);
         CRM_PEDIDO_VENDA GetItemByNumero(String num, Int32 idAss);
         List<CRM_PEDIDO_VENDA> ExecuteFilter(String busca, Int32? status, DateTime? inicio, DateTime? final, Int32? filial, Int32? usuario, Int32 idAss);
+    
     }
 }

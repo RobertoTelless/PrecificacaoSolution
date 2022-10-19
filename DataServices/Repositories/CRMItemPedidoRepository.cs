@@ -26,5 +26,6 @@ namespace DataServices.Repositories
             IQueryable<CRM_PEDIDO_VENDA_ITEM> query = Db.CRM_PEDIDO_VENDA_ITEM.Where(p => p.PROD_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }

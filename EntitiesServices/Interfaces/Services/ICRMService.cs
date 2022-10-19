@@ -44,13 +44,7 @@ namespace ModelServices.Interfaces.EntitiesServices
         Int32 EditAcao(CRM_ACAO item);
         Int32 CreateAcao(CRM_ACAO item);
 
-        CRM_PROPOSTA_ACOMPANHAMENTO GetPropostaComentarioById(Int32 id);
-        List<CRM_PROPOSTA> GetAllPropostas(Int32 idAss);
-        CRM_PROPOSTA GetPropostaById(Int32 id);
-        Int32 EditProposta(CRM_PROPOSTA item);
-        Int32 CreateProposta(CRM_PROPOSTA item);
         List<TEMPLATE_PROPOSTA> GetAllTemplateProposta(Int32 idAss);
-        CRM_PROPOSTA_ANEXO GetAnexoPropostaById(Int32 id);
         TEMPLATE_PROPOSTA GetTemplateById(Int32 id);
 
         List<CRM_PEDIDO_VENDA> GetAllPedidosGeral(Int32 idAss);
@@ -61,7 +55,7 @@ namespace ModelServices.Interfaces.EntitiesServices
         Int32 EditPedido(CRM_PEDIDO_VENDA item);
         Int32 CreatePedido(CRM_PEDIDO_VENDA item);
         CRM_PEDIDO_VENDA_ANEXO GetAnexoPedidoById(Int32 id);
-        List<FILIAL> GetAllFilial(Int32 idAss);
+        //List<FILIAL> GetAllFilial(Int32 idAss);
         CRM_PEDIDO_VENDA GetPedidoByNumero(String num, Int32 idAss);
         List<FORMA_ENVIO> GetAllFormasEnvio(Int32 idAss);
         List<FORMA_FRETE> GetAllFormasFrete(Int32 idAss);

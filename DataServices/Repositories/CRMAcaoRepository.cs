@@ -26,6 +26,7 @@ namespace DataServices.Repositories
             IQueryable<CRM_ACAO> query = Db.CRM_ACAO.Where(p => p.CRAC_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

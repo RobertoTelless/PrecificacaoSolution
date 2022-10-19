@@ -18,6 +18,5 @@ namespace ModelServices.Interfaces.EntitiesServices
 
         CONTA_PAGAR_PARCELA GetItemById(Int32 id);
         List<CONTA_PAGAR_PARCELA> GetAllItens(Int32 idAss);
-
     }
 }

@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<CRM_CONTATO> query = Db.CRM_CONTATO.Where(p => p.CRCO_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

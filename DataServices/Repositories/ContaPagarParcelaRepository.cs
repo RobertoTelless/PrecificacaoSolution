@@ -25,9 +25,10 @@ namespace DataServices.Repositories
         {
             IQueryable<CONTA_PAGAR_PARCELA> query = Db.CONTA_PAGAR_PARCELA.Where(p => p.CPPA_CD_ID == id);
             query = query.Include(p => p.CONTA_PAGAR);
-            query = query.Include(p => p.CONTA_PAGAR.FORMA_PAGAMENTO);
+            query = query.Include(p => p.CONTA_PAGAR.FORMA_PAGTO_RECTO);
             return query.FirstOrDefault();
         }
+
     }
 
 }
