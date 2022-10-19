@@ -3117,9 +3117,7 @@
     <Content Include="Views\FichaTecnica\IncluirFT.cshtml" />
     <Content Include="Views\FichaTecnica\EditarInsumoFT.cshtml" />
     <Content Include="Views\FichaTecnica\EditarFT.cshtml" />
-    <Content Include="Views\FichaTecnica\VisualizarEditarFTProduto.cshtml" />
     <Content Include="Views\FichaTecnica\IncluirInsumoFT.cshtml" />
-    <Content Include="Views\FichaTecnica\CriarFichaTecnicaProduto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
