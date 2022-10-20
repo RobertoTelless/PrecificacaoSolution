@@ -38,6 +38,8 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly IFornecedorAppService fornApp;
         private readonly IClienteAppService cliApp;
         private readonly IProdutoAppService proApp;
+        private readonly IContaPagarAppService cpApp;
+        private readonly IContaReceberAppService crApp;
 
         private String msg;
         private Exception exception;
@@ -45,7 +47,7 @@ namespace ERP_Condominios_Solution.Controllers
         USUARIO objetoAntes = new USUARIO();
         List<USUARIO> listaMaster = new List<USUARIO>();
 
-        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps, IBancoAppService banApps, IContaBancariaAppService cbApps, ICentroCustoAppService ccApps, IFornecedorAppService fornApps, IClienteAppService cliApps, IProdutoAppService proApps)
+        public BaseAdminController(IUsuarioAppService baseApps, ILogAppService logApps, INoticiaAppService notApps, ITarefaAppService tarApps, INotificacaoAppService notfApps, IUsuarioAppService usuApps, IAgendaAppService ageApps, IConfiguracaoAppService confApps, IVideoAppService vidApps, IPessoaExternaAppService pesApps, IMaquinaAppService maqApps, IFormaPagRecAppService forApps, IBancoAppService banApps, IContaBancariaAppService cbApps, ICentroCustoAppService ccApps, IFornecedorAppService fornApps, IClienteAppService cliApps, IProdutoAppService proApps, IContaPagarAppService cpApps, IContaReceberAppService crApps)
         {
             baseApp = baseApps;
             logApp = logApps;
@@ -65,6 +67,8 @@ namespace ERP_Condominios_Solution.Controllers
             fornApp = fornApps;
             cliApp = cliApps;
             proApp = proApps;
+            cpApp = cpApps;
+            crApp = crApps;
         }
 
         public ActionResult CarregarAdmin()
@@ -1200,40 +1204,282 @@ namespace ERP_Condominios_Solution.Controllers
             return Json(result);
         }
 
+        [HttpGet]
         public ActionResult MontarTelaDashboardFinanceiro()
         {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
             if ((String)Session["Ativa"] == null)
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
             Int32 idAss = (Int32)Session["IdAssinante"];
             UsuarioViewModel vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
 
-            // Carrega valores dos cadastros
-            List<BANCO> banco = banApp.GetAllItens(idAss);
-            Int32 bancos = banco.Count;
-            List<PLANO_CONTA> plano = ccApp.GetAllItens(idAss);
-            Int32 planos = plano.Count;
-            List<CONTA_BANCO> conta = cbApp.GetAllItens(idAss);
-            Int32 contas = conta.Count;
+            // Recupera listas CP
+            List<CONTA_PAGAR> pag = cpApp.GetAllItens(idAss);
 
-            Session["Bancos"] = bancos;
-            Session["Planos"] = planos;
-            Session["Contas"] = contas;
+            Decimal pago = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CAPA_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CAPA_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_PAGAR_PARCELA == null).Sum(p => p.CAPA_VL_VALOR_PAGO).Value;
+            pago += (Decimal)pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_DT_QUITACAO.Value.Month == DateTime.Now.Month & x.CPPA_DT_QUITACAO.Value.Year == DateTime.Now.Year & x.CPPA_IN_QUITADA == 1).Sum(p => p.CPPA_VL_VALOR);
+            ViewBag.Pago = pago;
 
-            ViewBag.Bancos = bancos;
-            ViewBag.Planos = planos;
-            ViewBag.Contas = contas;
+            Decimal sumPagar = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 0 & p.CAPA_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CAPA_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & (p.CONTA_PAGAR_PARCELA == null || p.CONTA_PAGAR_PARCELA.Count == 0)).Sum(p => p.CAPA_VL_VALOR).Value;
+            sumPagar += (Decimal)pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 0 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_DT_VENCIMENTO.Value.Month == DateTime.Now.Month & x.CPPA_DT_VENCIMENTO.Value.Year == DateTime.Now.Year & x.CPPA_IN_QUITADA == 0).Sum(p => p.CPPA_VL_VALOR);
+            ViewBag.APagar = sumPagar;
 
-            Session["PlanoCredito"] = plano.Where(p => p.CECU_IN_TIPO == 1).ToList().Count;
-            Session["PlanoDebito"] = plano.Where(p => p.CECU_IN_TIPO == 2).ToList().Count;
-            Session["ContaCorrente"] = conta.Where(p => p.TICO_CD_ID == 1).ToList().Count;
-            Session["ContaPoupanca"] = conta.Where(p => p.TICO_CD_ID == 2).ToList().Count;
-            Session["ContaInvestimento"] = conta.Where(p => p.TICO_CD_ID == 3).ToList().Count;
+            Decimal sumAtrasoCP = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_NR_ATRASO > 0 & p.CAPA_DT_VENCIMENTO < DateTime.Today.Date & (p.CONTA_PAGAR_PARCELA == null || p.CONTA_PAGAR_PARCELA.Count == 0)).Sum(p => p.CAPA_VL_VALOR).Value;
+            sumAtrasoCP += pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_NR_ATRASO > 0 & x.CPPA_DT_VENCIMENTO.Value.Date < DateTime.Now.Date).Sum(p => p.CPPA_VL_VALOR).Value;
+            ViewBag.Atraso = sumAtrasoCP;
 
+            Int32 pagos = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CAPA_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CAPA_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_PAGAR_PARCELA == null).ToList().Count;
+            pagos += pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_DT_QUITACAO.Value.Month == DateTime.Now.Month & x.CPPA_DT_QUITACAO.Value.Year == DateTime.Now.Year & x.CPPA_IN_QUITADA == 1).ToList().Count;
+
+            Int32 atrasos = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_NR_ATRASO > 0 & p.CAPA_DT_VENCIMENTO < DateTime.Today.Date & (p.CONTA_PAGAR_PARCELA == null || p.CONTA_PAGAR_PARCELA.Count == 0)).Count();
+            atrasos += pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_NR_ATRASO > 0 & x.CPPA_DT_VENCIMENTO.Value.Date < DateTime.Now.Date).ToList().Count;
+
+            Int32 pendentes = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 0 & p.CAPA_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CAPA_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & (p.CONTA_PAGAR_PARCELA == null || p.CONTA_PAGAR_PARCELA.Count == 0)).ToList().Count;
+            pendentes += pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 0 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_DT_VENCIMENTO.Value.Month == DateTime.Now.Month & x.CPPA_DT_VENCIMENTO.Value.Year == DateTime.Now.Year & x.CPPA_IN_QUITADA == 0).ToList().Count;
+
+            Session["TotalCP"] = pag.Count;
+            Session["APagarMes"] = pendentes;
+            Session["Atraso"] = atrasos;
+            Session["PagoMes"] = pagos;
+
+            // Resumo Mes Pagamentos
+            List<DateTime> datasCP = pag.Where(m => m.CAPA_IN_ATIVO == 1 & m.CAPA_IN_LIQUIDADA == 1 & (m.CONTA_PAGAR_PARCELA == null || m.CONTA_PAGAR_PARCELA.Count == 0)).Select(p => p.CAPA_DT_LIQUIDACAO.Value.Date).Distinct().ToList();
+            List<DateTime> datasParc = pag.Where(m => m.CAPA_IN_ATIVO == 1 & m.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_IN_QUITADA == 1).Select(p => p.CPPA_DT_QUITACAO.Value.Date).Distinct().ToList();
+            List<DateTime> datas = datasCP.Concat(datasParc).Distinct().ToList();
+
+            List<ModeloViewModel> lista = new List<ModeloViewModel>();
+            List<CONTA_PAGAR> lista5 = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1).ToList();
+            foreach (DateTime item in datasCP)
+            {
+                List<CONTA_PAGAR> lista10 = lista5.Where(p => p.CAPA_DT_LIQUIDACAO.Value.Date == item.Date).ToList();
+                Decimal conta = lista10.Sum(p => p.CAPA_VL_VALOR_PAGO).Value;
+
+                ModeloViewModel mod1 = new ModeloViewModel();
+                mod1.DataEmissao = item;
+                mod1.ValorDec = conta;
+                lista.Add(mod1);
+            }
+            ViewBag.ListaPagDia = lista;
+            ViewBag.ContaPagDia = lista.Count;
+            Session["ListaDatas"] = datasCP;
+            Session["ListaPagResumo"] = lista;
+
+            List<ModeloViewModel> listaX = new List<ModeloViewModel>();
+            List<CONTA_PAGAR_PARCELA> lista6 = pag.Where(p => p.CAPA_IN_ATIVO == 1).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_IN_QUITADA == 1).ToList();
+            foreach (DateTime item in datasParc)
+            {
+                List<CONTA_PAGAR_PARCELA> lista10 = lista6.Where(p => p.CPPA_DT_QUITACAO.Value.Date == item.Date).ToList();
+                Decimal conta = lista10.Sum(p => p.CPPA_VL_VALOR_PAGO).Value;
+
+                ModeloViewModel mod1 = new ModeloViewModel();
+                mod1.DataEmissao = item;
+                mod1.ValorDec = conta;
+                listaX.Add(mod1);
+            }
+            ViewBag.ListaPagDiaParc = listaX;
+            ViewBag.ContaPagDiaParg = listaX.Count;
+            Session["ListaDatasParc"] = datasParc;
+            Session["ListaPagResumoParc"] = listaX;
+
+            // Resumo CP Situacao  
+            List<ModeloViewModel> lista1 = new List<ModeloViewModel>();
+            ModeloViewModel mod = new ModeloViewModel();
+            mod.Data = "Liquidados";
+            mod.Valor = pagos;
+            lista1.Add(mod);
+            mod = new ModeloViewModel();
+            mod.Data = "Em Atraso";
+            mod.Valor = atrasos;
+            lista1.Add(mod);
+            mod = new ModeloViewModel();
+            mod.Data = "Pendentes";
+            mod.Valor = pendentes;
+            lista1.Add(mod);
+            ViewBag.ListaCPSituacao = lista1;
+            Session["ListaCPSituacao"] = lista1;
+            Session["VoltaDash"] = 3;
+
+            // Recupera listas CR
+            List<CONTA_RECEBER> rec = crApp.GetAllItens(idAss);
+
+            Decimal aReceberDia = (Decimal)rec.Where(x => x.CARE_IN_ATIVO == 1 & x.CARE_IN_LIQUIDADA == 0 & x.CARE_DT_VENCIMENTO.Value.Date == DateTime.Now.Date & (x.CONTA_RECEBER_PARCELA == null || x.CONTA_RECEBER_PARCELA.Count == 0)).Sum(x => x.CARE_VL_SALDO);
+            aReceberDia += (Decimal)rec.Where(x => x.CARE_IN_ATIVO == 1 & x.CARE_IN_LIQUIDADA == 0 & x.CARE_DT_VENCIMENTO.Value.Day == DateTime.Now.Day & x.CONTA_RECEBER_PARCELA != null).SelectMany(x => x.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_VL_VALOR != null & x.CRPA_DT_VENCIMENTO.Value.Date == DateTime.Now.Date & x.CRPA_IN_QUITADA == 0).Sum(x => x.CRPA_VL_VALOR);
+            ViewBag.CRS = aReceberDia;
+
+            Decimal recebido = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year).Sum(p => p.CARE_VL_VALOR_LIQUIDADO).Value;
+            recebido += (Decimal)rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_RECEBER_PARCELA != null).SelectMany(p => p.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_VL_VALOR != null & x.CRPA_DT_VENCIMENTO.Value.Month == DateTime.Now.Month & x.CRPA_DT_VENCIMENTO.Value.Year == DateTime.Now.Year & x.CRPA_IN_QUITADA == 1).Sum(p => p.CRPA_VL_VALOR);
+            ViewBag.Recebido = recebido;
+
+            Decimal sumReceber = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 0 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & (p.CONTA_RECEBER_PARCELA == null || p.CONTA_RECEBER_PARCELA.Count == 0)).Sum(p => p.CARE_VL_VALOR);
+            sumReceber += (Decimal)rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 0 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_RECEBER_PARCELA != null).SelectMany(p => p.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_VL_VALOR != null & x.CRPA_DT_VENCIMENTO.Value.Month == DateTime.Now.Month & x.CRPA_DT_VENCIMENTO.Value.Year == DateTime.Now.Year & x.CRPA_IN_QUITADA == 0).Sum(p => p.CRPA_VL_VALOR);
+            ViewBag.AReceber = sumReceber;
+
+            Decimal sumAtraso = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_NR_ATRASO > 0 & p.CARE_DT_VENCIMENTO < DateTime.Today.Date & (p.CONTA_RECEBER_PARCELA == null || p.CONTA_RECEBER_PARCELA.Count == 0)).Sum(p => p.CARE_VL_VALOR);
+            sumAtraso += (Decimal)rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CONTA_RECEBER_PARCELA != null).SelectMany(p => p.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_NR_ATRASO > 0 & x.CRPA_DT_VENCIMENTO.Value.Date < DateTime.Now.Date).Sum(p => p.CRPA_VL_VALOR);
+            ViewBag.AtrasoCR = sumAtraso;
+
+            Int32 recebidas = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year).ToList().Count;
+            recebidas += rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_RECEBER_PARCELA != null).SelectMany(p => p.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_VL_VALOR != null & x.CRPA_DT_VENCIMENTO.Value.Month == DateTime.Now.Month & x.CRPA_DT_VENCIMENTO.Value.Year == DateTime.Now.Year & x.CRPA_IN_QUITADA == 1).ToList().Count;
+
+            Int32 atrasosCR = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_NR_ATRASO > 0 & p.CARE_DT_VENCIMENTO < DateTime.Today.Date & (p.CONTA_RECEBER_PARCELA == null || p.CONTA_RECEBER_PARCELA.Count == 0)).Count();
+            atrasosCR += rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CONTA_RECEBER_PARCELA != null).SelectMany(p => p.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_NR_ATRASO > 0 & x.CRPA_DT_VENCIMENTO.Value.Date < DateTime.Now.Date).ToList().Count;
+
+            Int32 pendentesCR = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 0 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & (p.CONTA_RECEBER_PARCELA == null || p.CONTA_RECEBER_PARCELA.Count == 0)).ToList().Count;
+            pendentesCR += rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 0 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_RECEBER_PARCELA != null).SelectMany(p => p.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_VL_VALOR != null & x.CRPA_DT_VENCIMENTO.Value.Month == DateTime.Now.Month & x.CRPA_DT_VENCIMENTO.Value.Year == DateTime.Now.Year & x.CRPA_IN_QUITADA == 0).ToList().Count;
+
+            Session["TotalCR"] = rec.Count;
+            Session["Recebido"] = recebidas;
+            Session["AReceber"] = pendentesCR;
+            Session["AtrasoCR"] = atrasosCR;
+
+            // Resumo Mes Recebimentos
+            List<DateTime> datasCR = rec.Where(m => m.CARE_DT_DATA_LIQUIDACAO != null).Select(p => p.CARE_DT_DATA_LIQUIDACAO.Value.Date).Distinct().ToList();
+            List<ModeloViewModel> listaCR = new List<ModeloViewModel>();
+            foreach (DateTime item in datasCR)
+            {
+                CONTA_RECEBER cr = rec.Where(p => p.CARE_DT_DATA_LIQUIDACAO == item).FirstOrDefault();
+                Decimal? conta = rec.Where(p => p.CARE_DT_DATA_LIQUIDACAO == item).Sum(p => p.CARE_VL_VALOR_RECEBIDO);
+                ModeloViewModel mod1 = new ModeloViewModel();
+                mod1.DataEmissao = item;
+                mod1.ValorDec = conta.Value;
+                listaCR.Add(mod1);
+            }
+            ViewBag.ListaRecDia = listaCR;
+            ViewBag.ContaRecDia = listaCR.Count;
+            Session["ListaDatasCR"] = datasCR;
+            Session["ListaRecResumo"] = listaCR;
+
+            // Resumo CR Situacao  
+            List<ModeloViewModel> lista2 = new List<ModeloViewModel>();
+            ModeloViewModel mod2 = new ModeloViewModel();
+            mod2.Data = "Recebidas";
+            mod2.Valor = recebidas;
+            lista2.Add(mod2);
+            mod2 = new ModeloViewModel();
+            mod2.Data = "Em Atraso";
+            mod2.Valor = atrasosCR;
+            lista2.Add(mod2);
+            mod2 = new ModeloViewModel();
+            mod2.Data = "Pendentes";
+            mod2.Valor = pendentesCR;
+            lista2.Add(mod2);
+            ViewBag.ListaCRSituacao = lista2;
+            Session["ListaCRSituacao"] = lista2;
+            Session["VoltaDash"] = 3;
+            Session["ListaForma"] = null;
             return View(vm);
         }
 
+        public JsonResult GetDadosGraficoCPSituacao()
+        {
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+
+            Int32 q1 = (Int32)Session["APagarMes"];
+            Int32 q2 = (Int32)Session["Atraso"];
+            Int32 q3 = (Int32)Session["PagoMes"];
+
+            desc.Add("A Pagar (Mês)");
+            quant.Add(q1);
+            cor.Add("#359E18");
+            desc.Add("Em Atraso");
+            quant.Add(q2);
+            cor.Add("#FFAE00");
+            desc.Add("Pago (Mês)");
+            quant.Add(q3);
+            cor.Add("#FF7F00");
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosGraficoCP()
+        {
+            List<ModeloViewModel> listaCP1 = (List<ModeloViewModel>)Session["ListaPagResumo"];
+            List<String> dias = new List<String>();
+            List<Decimal> valor = new List<Decimal>();
+            dias.Add(" ");
+            valor.Add(0);
+
+            foreach (ModeloViewModel item in listaCP1)
+            {
+                dias.Add(item.DataEmissao.ToShortDateString());
+                valor.Add(item.ValorDec);
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("dias", dias);
+            result.Add("valores", valor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosGraficoCRESituacao()
+        {
+            List<String> desc = new List<String>();
+            List<Int32> quant = new List<Int32>();
+            List<String> cor = new List<String>();
+
+            Int32 q1 = (Int32)Session["Recebido"];
+            Int32 q2 = (Int32)Session["AtrasoCR"];
+            Int32 q3 = (Int32)Session["AReceber"];
+
+            desc.Add("Recebido (Mês)");
+            quant.Add(q1);
+            cor.Add("#359E18");
+            desc.Add("Em Atraso");
+            quant.Add(q2);
+            cor.Add("#FFAE00");
+            desc.Add("A Receber (Mês)");
+            quant.Add(q3);
+            cor.Add("#FF7F00");
+
+            Hashtable result = new Hashtable();
+            result.Add("labels", desc);
+            result.Add("valores", quant);
+            result.Add("cores", cor);
+            return Json(result);
+        }
+
+        public JsonResult GetDadosGraficoCR()
+        {
+            List<ModeloViewModel> listaCP1 = (List<ModeloViewModel>)Session["ListaRecResumo"];
+            List<String> dias = new List<String>();
+            List<Decimal> valor = new List<Decimal>();
+            dias.Add(" ");
+            valor.Add(0);
+
+            foreach (ModeloViewModel item in listaCP1)
+            {
+                dias.Add(item.DataEmissao.ToShortDateString());
+                valor.Add(item.ValorDec);
+            }
+
+            Hashtable result = new Hashtable();
+            result.Add("dias", dias);
+            result.Add("valores", valor);
+            return Json(result);
+        }
     }
 }

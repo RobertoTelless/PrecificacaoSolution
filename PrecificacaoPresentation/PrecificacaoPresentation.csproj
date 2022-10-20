@@ -237,7 +237,10 @@
     <Compile Include="Controllers\CentroCustoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ConfiguracaoController.cs" />
+    <Compile Include="Controllers\ContaPagarController.cs" />
+    <Compile Include="Controllers\ContaReceberController.cs" />
     <Compile Include="Controllers\ControleAcessoController.cs" />
+    <Compile Include="Controllers\CRMController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FichaTecnicaController.cs" />
@@ -3222,6 +3225,9 @@
     <Folder Include="Imagens\1\Usuario\8\Anexos\" />
     <Folder Include="Imagens\1\Usuario\9\Anexos\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\ContaPagar\" />
+    <Folder Include="Views\ContaReceber\" />
+    <Folder Include="Views\CRM\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Template\" />
   </ItemGroup>
