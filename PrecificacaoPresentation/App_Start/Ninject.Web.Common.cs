@@ -113,6 +113,14 @@ namespace Presentation.Start
             kernel.Bind<ITipoAcaoAppService>().To<TipoAcaoAppService>();
             kernel.Bind<IMotivoCancelamentoAppService>().To<MotivoCancelamentoAppService>();
             kernel.Bind<IMotivoEncerramentoAppService>().To<MotivoEncerramentoAppService>();
+            kernel.Bind<IContaPagarAppService>().To<ContaPagarAppService>();
+            kernel.Bind<IContaPagarParcelaAppService>().To<ContaPagarParcelaAppService>();
+            kernel.Bind<IContaPagarRateioAppService>().To<ContaPagarRateioAppService>();
+            kernel.Bind<IContaReceberAppService>().To<ContaReceberAppService>();
+            kernel.Bind<IContaReceberParcelaAppService>().To<ContaReceberParcelaAppService>();
+            kernel.Bind<IContaReceberRateioAppService>().To<ContaReceberRateioAppService>();
+            kernel.Bind<ICRMAppService>().To<CRMAppService>();
+            kernel.Bind<ICRMOrigemAppService>().To<CRMOrigemAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -162,6 +170,14 @@ namespace Presentation.Start
             kernel.Bind<ITipoAcaoService>().To<ITipoAcaoService>();
             kernel.Bind<IMotivoCancelamentoService>().To<MotivoCancelamentoService>();
             kernel.Bind<IMotivoEncerramentoService>().To<MotivoEncerramentoService>();
+            kernel.Bind<IContaPagarService>().To<ContaPagarService>();
+            kernel.Bind<IContaPagarParcelaService>().To<ContaPagarParcelaService>();
+            kernel.Bind<IContaPagarRateioService>().To<ContaPagarRateioService>();
+            kernel.Bind<IContaReceberService>().To<ContaReceberService>();
+            kernel.Bind<IContaReceberParcelaService>().To<ContaReceberParcelaService>();
+            kernel.Bind<IContaReceberRateioService>().To<ContaReceberRateioService>();
+            kernel.Bind<ICRMService>().To<CRMService>();
+            kernel.Bind<ICRMOrigemService>().To<CRMOrigemService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -244,7 +260,24 @@ namespace Presentation.Start
             kernel.Bind<ITipoAcaoRepository>().To<TipoAcaoRepository>();
             kernel.Bind<IMotivoCancelamentoRepository>().To<MotivoCancelamentoRepository>();
             kernel.Bind<IMotivoEncerramentoRepository>().To<MotivoEncerramentoRepository>();
-
+            kernel.Bind<IContaPagarRepository>().To<ContaPagarRepository>();
+            kernel.Bind<IContaPagarParcelaRepository>().To<ContaPagarParcelaRepository>();
+            kernel.Bind<IContaPagarRateioRepository>().To<ContaPagarRateioRepository>();
+            kernel.Bind<IContaPagarAnexoRepository>().To<ContaPagarAnexoRepository>();
+            kernel.Bind<IContaReceberRepository>().To<ContaReceberRepository>();
+            kernel.Bind<IContaReceberParcelaRepository>().To<ContaReceberParcelaRepository>();
+            kernel.Bind<IContaReceberRateioRepository>().To<ContaReceberRateioRepository>();
+            kernel.Bind<IContaReceberAnexoRepository>().To<ContaReceberAnexoRepository>();
+            kernel.Bind<ICRMAcaoRepository>().To<CRMAcaoRepository>();
+            kernel.Bind<ICRMAnexoRepository>().To<CRMAnexoRepository>();
+            kernel.Bind<ICRMComentarioRepository>().To<CRMComentarioRepository>();
+            kernel.Bind<ICRMContatoRepository>().To<CRMContatoRepository>();
+            kernel.Bind<ICRMItemPedidoRepository>().To<CRMItemPedidoRepository>();
+            kernel.Bind<ICRMOrigemRepository>().To<CRMOrigemRepository>();
+            kernel.Bind<ICRMPedidoAnexoRepository>().To<CRMPedidoAnexoRepository>();
+            kernel.Bind<ICRMPedidoComentarioRepository>().To<CRMPedidoComentarioRepository>();
+            kernel.Bind<ICRMPedidoRepository>().To<CRMPedidoRepository>();
+            kernel.Bind<ICRMRepository>().To<CRMRepository>();
         }
     }
 }

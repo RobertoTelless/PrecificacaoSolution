@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using EntitiesServices.Model;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class ContaReceberParcelaViewModel
     {
@@ -30,6 +30,51 @@ namespace ERP_CRM_Solution.ViewModels
         public Nullable<decimal> CRPA_VL_TAXAS { get; set; }
         public Nullable<int> CRPA_IN_QUITADA { get; set; }
         public string CRPA_NR_PARCELA { get; set; }
+
+        public string ValorDesconto
+        {
+            get
+            {
+                return CRPA_VL_DESCONTO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPA_VL_DESCONTO.Value) : string.Empty;
+            }
+            set
+            {
+                CRPA_VL_DESCONTO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Juros
+        {
+            get
+            {
+                return CRPA_VL_JUROS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPA_VL_JUROS.Value) : string.Empty;
+            }
+            set
+            {
+                CRPA_VL_JUROS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Taxas
+        {
+            get
+            {
+                return CRPA_VL_TAXAS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPA_VL_TAXAS.Value) : string.Empty;
+            }
+            set
+            {
+                CRPA_VL_TAXAS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Valor
+        {
+            get
+            {
+                return CRPA_VL_VALOR.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPA_VL_VALOR.Value) : string.Empty;
+            }
+            set
+            {
+                CRPA_VL_VALOR = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
 
         public virtual CONTA_RECEBER CONTA_RECEBER { get; set; }
 

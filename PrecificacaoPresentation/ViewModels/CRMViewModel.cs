@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using EntitiesServices.Model;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class CRMViewModel
     {
@@ -90,6 +90,28 @@ namespace ERP_CRM_Solution.ViewModels
                 CRM1_IN_ENTREGA_CONFIRMADA = (value == true) ? 1 : 0;
             }
         }
+        public string ValorFinal
+        {
+            get
+            {
+                return CRM1_VL_VALOR_FINAL.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRM1_VL_VALOR_FINAL.Value) : string.Empty;
+            }
+            set
+            {
+                CRM1_VL_VALOR_FINAL = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string ValorInicial
+        {
+            get
+            {
+                return CRM1_VL_VALOR_INICIAL.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRM1_VL_VALOR_INICIAL.Value) : string.Empty;
+            }
+            set
+            {
+                CRM1_VL_VALOR_INICIAL = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }
@@ -102,17 +124,15 @@ namespace ERP_CRM_Solution.ViewModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM_CONTATO> CRM_CONTATO { get; set; }
         public virtual CRM_ORIGEM CRM_ORIGEM { get; set; }
-        public virtual MENSAGENS MENSAGENS { get; set; }
+        //public virtual MENSAGENS MENSAGENS { get; set; }
         public virtual MOTIVO_CANCELAMENTO MOTIVO_CANCELAMENTO { get; set; }
         public virtual MOTIVO_ENCERRAMENTO MOTIVO_ENCERRAMENTO { get; set; }
         public virtual TIPO_CRM TIPO_CRM { get; set; }
         public virtual USUARIO USUARIO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ATENDIMENTO_CRM> ATENDIMENTO_CRM { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<ATENDIMENTO_CRM> ATENDIMENTO_CRM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CRM_PROPOSTA> CRM_PROPOSTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

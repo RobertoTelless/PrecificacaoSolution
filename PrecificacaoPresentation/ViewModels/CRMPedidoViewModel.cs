@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using EntitiesServices.Model;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class CRMPedidoViewModel
     {
@@ -115,6 +115,83 @@ namespace ERP_CRM_Solution.ViewModels
             set
             {
                 CRPV_IN_GERAR_CR = (value == true) ? 1 : 0;
+            }
+        }
+        public string Valor
+        {
+            get
+            {
+                return CRPV_VL_VALOR.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPV_VL_VALOR.Value) : string.Empty;
+            }
+            set
+            {
+                CRPV_VL_VALOR = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Desconto
+        {
+            get
+            {
+                return CRPV_VL_DESCONTO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPV_VL_DESCONTO.Value) : string.Empty;
+            }
+            set
+            {
+                CRPV_VL_DESCONTO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Frete
+        {
+            get
+            {
+                return CRPV_VL_FRETE.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPV_VL_FRETE.Value) : string.Empty;
+            }
+            set
+            {
+                CRPV_VL_FRETE = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string TotalItens
+        {
+            get
+            {
+                return CRPV_VL_TOTAL_ITENS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPV_VL_TOTAL_ITENS.Value) : string.Empty;
+            }
+            set
+            {
+                CRPV_VL_TOTAL_ITENS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string IPI
+        {
+            get
+            {
+                return CRPV_VL_IPI.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPV_VL_IPI.Value) : string.Empty;
+            }
+            set
+            {
+                CRPV_VL_IPI = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string ICMS
+        {
+            get
+            {
+                return CRPV_VL_ICMS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPV_VL_ICMS.Value) : string.Empty;
+            }
+            set
+            {
+                CRPV_VL_ICMS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string TotalPedido
+        {
+            get
+            {
+                return CRPV_TOTAL_PEDIDO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPV_TOTAL_PEDIDO.Value) : string.Empty;
+            }
+            set
+            {
+                CRPV_TOTAL_PEDIDO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
             }
         }
 

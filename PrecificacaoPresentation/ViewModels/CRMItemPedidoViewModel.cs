@@ -6,7 +6,7 @@ using System.Web;
 using EntitiesServices.Model;
 using EntitiesServices.Attributes;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class CRMItemPedidoViewModel
     {
@@ -37,9 +37,43 @@ namespace ERP_CRM_Solution.ViewModels
         public Nullable<int> SERV_CD_ID { get; set; }
         public Nullable<int> CRPI_IN_DIFERENCA { get; set; }
 
+        public string PrecoTotal
+        {
+            get
+            {
+                return CRPI_VL_PRECO_TOTAL.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPI_VL_PRECO_TOTAL.Value) : string.Empty;
+            }
+            set
+            {
+                CRPI_VL_PRECO_TOTAL = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string PrecoAjustado
+        {
+            get
+            {
+                return CRPI_VL_PRECO_AJUSTADO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPI_VL_PRECO_AJUSTADO.Value) : string.Empty;
+            }
+            set
+            {
+                CRPI_VL_PRECO_AJUSTADO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Desconto
+        {
+            get
+            {
+                return CRPI_VL_DESCONTO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CRPI_VL_DESCONTO.Value) : string.Empty;
+            }
+            set
+            {
+                CRPI_VL_DESCONTO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+
         public virtual CRM_PEDIDO_VENDA CRM_PEDIDO_VENDA { get; set; }
         public virtual PRODUTO PRODUTO { get; set; }
-        public virtual SERVICO SERVICO { get; set; }
+        //public virtual SERVICO SERVICO { get; set; }
         public virtual UNIDADE UNIDADE { get; set; }
     }
 }

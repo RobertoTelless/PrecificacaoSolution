@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using EntitiesServices.Model;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class ContaReceberViewModel
     {
@@ -128,19 +128,85 @@ namespace ERP_CRM_Solution.ViewModels
             }
         }
 
+        public string ValorRecebido
+        {
+            get
+            {
+                return CARE_VL_VALOR_RECEBIDO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CARE_VL_VALOR_RECEBIDO.Value) : string.Empty;
+            }
+            set
+            {
+                CARE_VL_VALOR_RECEBIDO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string ValorLiquidado
+        {
+            get
+            {
+                return CARE_VL_VALOR_LIQUIDADO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CARE_VL_VALOR_LIQUIDADO.Value) : string.Empty;
+            }
+            set
+            {
+                CARE_VL_VALOR_LIQUIDADO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string ValorDesconto
+        {
+            get
+            {
+                return CARE_VL_DESCONTO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CARE_VL_DESCONTO.Value) : string.Empty;
+            }
+            set
+            {
+                CARE_VL_DESCONTO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Juros
+        {
+            get
+            {
+                return CARE_VL_JUROS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CARE_VL_JUROS.Value) : string.Empty;
+            }
+            set
+            {
+                CARE_VL_JUROS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Taxas
+        {
+            get
+            {
+                return CARE_VL_TAXAS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CARE_VL_TAXAS.Value) : string.Empty;
+            }
+            set
+            {
+                CARE_VL_TAXAS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Valor
+        {
+            get
+            {
+                return CARE_VL_VALOR.HasValue ? CrossCutting.Formatters.DecimalFormatter(CARE_VL_VALOR.Value) : string.Empty;
+            }
+            set
+            {
+                CARE_VL_VALOR = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+
         public virtual ASSINANTE ASSINANTE { get; set; }
-        public virtual CENTRO_CUSTO CENTRO_CUSTO { get; set; }
+        public virtual PLANO_CONTA PLANO_CONTA { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual CONTA_BANCO CONTA_BANCO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_RECEBER_ANEXO> CONTA_RECEBER_ANEXO { get; set; }
         public virtual CRM CRM { get; set; }
-        public virtual CRM_PROPOSTA CRM_PROPOSTA { get; set; }
-        public virtual FILIAL FILIAL { get; set; }
-        public virtual FORMA_PAGAMENTO FORMA_PAGAMENTO { get; set; }
+        //public virtual FILIAL FILIAL { get; set; }
+        public virtual FORMA_PAGTO_RECTO FORMA_PAGTO_RECTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_RECEBER_PARCELA> CONTA_RECEBER_PARCELA { get; set; }
-        public virtual PERIODICIDADE PERIODICIDADE { get; set; }
+        public virtual PERIODICIDADE_TAREFA PERIODICIDADE_TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_RECEBER_RATEIO> CONTA_RECEBER_RATEIO { get; set; }
         public virtual USUARIO USUARIO { get; set; }

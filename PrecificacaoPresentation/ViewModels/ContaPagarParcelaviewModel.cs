@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using EntitiesServices.Model;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class ContaPagarParcelaViewModel
     {
@@ -52,8 +52,69 @@ namespace ERP_CRM_Solution.ViewModels
             }
         }
 
+        public string ValorPago
+        {
+            get
+            {
+                return CPPA_VL_VALOR_PAGO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CPPA_VL_VALOR_PAGO.Value) : string.Empty;
+            }
+            set
+            {
+                CPPA_VL_VALOR_PAGO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string ValorDesconto
+        {
+            get
+            {
+                return CPPA_VL_DESCONTO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CPPA_VL_DESCONTO.Value) : string.Empty;
+            }
+            set
+            {
+                CPPA_VL_DESCONTO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Juros
+        {
+            get
+            {
+                return CPPA_VL_JUROS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CPPA_VL_JUROS.Value) : string.Empty;
+            }
+            set
+            {
+                CPPA_VL_JUROS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Taxas
+        {
+            get
+            {
+                return CPPA_VL_TAXAS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CPPA_VL_TAXAS.Value) : string.Empty;
+            }
+            set
+            {
+                CPPA_VL_TAXAS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Valor
+        {
+            get
+            {
+                return CPPA_VL_VALOR.HasValue ? CrossCutting.Formatters.DecimalFormatter(CPPA_VL_VALOR.Value) : string.Empty;
+            }
+            set
+            {
+                CPPA_VL_VALOR = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+
+
+
+
+
+
         public virtual CONTA_PAGAR CONTA_PAGAR { get; set; }
         public virtual CONTA_BANCO CONTA_BANCO { get; set; }
-        public virtual FORMA_PAGAMENTO FORMA_PAGAMENTO { get; set; }
+        public virtual FORMA_PAGTO_RECTO FORMA_PAGTO_RECTO { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using EntitiesServices.Model;
 
-namespace ERP_CRM_Solution.ViewModels
+namespace ERP_Condominios_Solution.ViewModels
 {
     public class ContaPagarViewModel
     {
@@ -20,7 +20,7 @@ namespace ERP_CRM_Solution.ViewModels
         [Required(ErrorMessage = "Campo FORMA DE PAGAMENTO obrigatorio")]
         public Nullable<int> FOPA_CD_ID { get; set; }
         public Nullable<int> PERI_CD_ID { get; set; }
-        [Required(ErrorMessage = "Campo CENTRO DE CUSTO obrigatorio")]
+        [Required(ErrorMessage = "Campo PLANO DE CONTA obrigatorio")]
         public Nullable<int> CECU_CD_ID { get; set; }
         public Nullable<int> ASSI_CD_ID { get; set; }
 
@@ -146,16 +146,94 @@ namespace ERP_CRM_Solution.ViewModels
             }
         }
 
-        public virtual CENTRO_CUSTO CENTRO_CUSTO { get; set; }
+        public string ValorPago
+        {
+            get
+            {
+                return CAPA_VL_VALOR_PAGO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CAPA_VL_VALOR_PAGO.Value) : string.Empty;
+            }
+            set
+            {
+                CAPA_VL_VALOR_PAGO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string ValorDesconto
+        {
+            get
+            {
+                return CAPA_VL_DESCONTO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CAPA_VL_DESCONTO.Value) : string.Empty;
+            }
+            set
+            {
+                CAPA_VL_DESCONTO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Juros
+        {
+            get
+            {
+                return CAPA_VL_JUROS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CAPA_VL_JUROS.Value) : string.Empty;
+            }
+            set
+            {
+                CAPA_VL_JUROS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Taxas
+        {
+            get
+            {
+                return CAPA_VL_TAXAS.HasValue ? CrossCutting.Formatters.DecimalFormatter(CAPA_VL_TAXAS.Value) : string.Empty;
+            }
+            set
+            {
+                CAPA_VL_TAXAS = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Valor
+        {
+            get
+            {
+                return CAPA_VL_VALOR.HasValue ? CrossCutting.Formatters.DecimalFormatter(CAPA_VL_VALOR.Value) : string.Empty;
+            }
+            set
+            {
+                CAPA_VL_VALOR = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string Saldo
+        {
+            get
+            {
+                return CAPA_VL_SALDO.HasValue ? CrossCutting.Formatters.DecimalFormatter(CAPA_VL_SALDO.Value) : string.Empty;
+            }
+            set
+            {
+                CAPA_VL_SALDO = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+        public string ValorParcial
+        {
+            get
+            {
+                return CAPA_VL_PARCIAL.HasValue ? CrossCutting.Formatters.DecimalFormatter(CAPA_VL_PARCIAL.Value) : string.Empty;
+            }
+            set
+            {
+                CAPA_VL_PARCIAL = Convert.ToDecimal(CrossCutting.CommonHelpers.GetOnlyDigits(value, true));
+            }
+        }
+
+
+        public virtual PLANO_CONTA PLANO_CONTA { get; set; }
         public virtual CONTA_BANCO CONTA_BANCO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_PAGAR_ANEXO> CONTA_PAGAR_ANEXO { get; set; }
-        public virtual FORMA_PAGAMENTO FORMA_PAGAMENTO { get; set; }
+        public virtual FORMA_PAGTO_RECTO FORMA_PAGTO_RECTO { get; set; }
         public virtual FORNECEDOR FORNECEDOR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_PAGAR_PARCELA> CONTA_PAGAR_PARCELA { get; set; }
-        public virtual PEDIDO_COMPRA PEDIDO_COMPRA { get; set; }
-        public virtual PERIODICIDADE PERIODICIDADE { get; set; }
+        public virtual PERIODICIDADE_TAREFA PERIODICIDADE_TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_PAGAR_RATEIO> CONTA_PAGAR_RATEIO { get; set; }
         public virtual USUARIO USUARIO { get; set; }

@@ -71,6 +71,19 @@ namespace MvcMapping.Mappers
             CreateMap<TIPO_ACAO, TipoAcaoViewModel>();
             CreateMap<MOTIVO_CANCELAMENTO, MotivoCancelamentoViewModel>();
             CreateMap<MOTIVO_ENCERRAMENTO, MotivoEncerramentoViewModel>();
+            CreateMap<CONTA_PAGAR, ContaPagarViewModel>();
+            CreateMap<CONTA_PAGAR_PARCELA, ContaPagarParcelaViewModel>();
+            CreateMap<CONTA_PAGAR_RATEIO, ContaPagarRateioViewModel>();
+            CreateMap<CONTA_RECEBER, ContaReceberViewModel>();
+            CreateMap<CONTA_RECEBER_PARCELA, ContaReceberParcelaViewModel>();
+            CreateMap<CRM, CRMViewModel>();
+            CreateMap<CRM_ACAO, CRMAcaoViewModel>();
+            CreateMap<CRM_COMENTARIO, CRMComentarioViewModel>();
+            CreateMap<CRM_CONTATO, CRMContatoViewModel>();
+            CreateMap<CRM_PEDIDO_VENDA_ITEM, CRMItemPedidoViewModel>();
+            CreateMap<CRM_ORIGEM, CRMOrigemViewModel>();
+            CreateMap<CRM_PEDIDO_VENDA_ACOMPANHAMENTO, CRMPedidoComentarioViewModel>();
+            CreateMap<CRM_PEDIDO_VENDA, CRMPedidoViewModel>();
 
 
         }

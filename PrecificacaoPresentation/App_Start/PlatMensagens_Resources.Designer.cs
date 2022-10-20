@@ -1598,5 +1598,293 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0192", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A soma das parcelas nao bate com o valor total informado.
+        /// </summary>
+        internal static string M0193 {
+            get {
+                return ResourceManager.GetString("M0193", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Conta a Pagar já cadastrada.
+        /// </summary>
+        internal static string M0194 {
+            get {
+                return ResourceManager.GetString("M0194", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não é possível excluir esse lançamento. Existem informações vinculadas a ele.
+        /// </summary>
+        internal static string M0195 {
+            get {
+                return ResourceManager.GetString("M0195", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de inicio de parcelamento menor que a data corrente.
+        /// </summary>
+        internal static string M0196 {
+            get {
+                return ResourceManager.GetString("M0196", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Numero de parcelas menor do que 2.
+        /// </summary>
+        internal static string M0197 {
+            get {
+                return ResourceManager.GetString("M0197", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento recorrente não pode ser parcelado.
+        /// </summary>
+        internal static string M0198 {
+            get {
+                return ResourceManager.GetString("M0198", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data inicial das ocorrências não definida.
+        /// </summary>
+        internal static string M0199 {
+            get {
+                return ResourceManager.GetString("M0199", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de início do parcelamento deve ser especificada.
+        /// </summary>
+        internal static string M0200 {
+            get {
+                return ResourceManager.GetString("M0200", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de liquidacao maior que a data corrente.
+        /// </summary>
+        internal static string M0201 {
+            get {
+                return ResourceManager.GetString("M0201", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Soma dos itens diferente do valor total.
+        /// </summary>
+        internal static string M0202 {
+            get {
+                return ResourceManager.GetString("M0202", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossivel pagar parcial um lancamento parcelado.
+        /// </summary>
+        internal static string M0203 {
+            get {
+                return ResourceManager.GetString("M0203", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Valor parcial maior que o valor total.
+        /// </summary>
+        internal static string M0204 {
+            get {
+                return ResourceManager.GetString("M0204", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Valor parcial igual ao valor total.
+        /// </summary>
+        internal static string M0205 {
+            get {
+                return ResourceManager.GetString("M0205", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossivel liquidar um lancamento parcelado. As parcelas devem ser liquidadas individualmente.
+        /// </summary>
+        internal static string M0206 {
+            get {
+                return ResourceManager.GetString("M0206", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossivel parcelar lancamento com pagamento parcial.
+        /// </summary>
+        internal static string M0207 {
+            get {
+                return ResourceManager.GetString("M0207", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Soma dos percentuais de rateio maior do que 100.
+        /// </summary>
+        internal static string M0208 {
+            get {
+                return ResourceManager.GetString("M0208", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Valor parcial igual ao valor do lancamento. Va para liquidacao de lancamento ao inves de pagamento parcial.
+        /// </summary>
+        internal static string M0209 {
+            get {
+                return ResourceManager.GetString("M0209", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não há nenhum registro com data de vencimento para a data atual.
+        /// </summary>
+        internal static string M0210 {
+            get {
+                return ResourceManager.GetString("M0210", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Recebimento recorrente não pode ser parcelado.
+        /// </summary>
+        internal static string M0211 {
+            get {
+                return ResourceManager.GetString("M0211", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data inicial das ocorrências não definida.
+        /// </summary>
+        internal static string M0212 {
+            get {
+                return ResourceManager.GetString("M0212", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Sua pesquisa não retornou nenhum resultado - Tente outras opções de pesquisa.
+        /// </summary>
+        internal static string M0213 {
+            get {
+                return ResourceManager.GetString("M0213", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossivel excluir esta conta. Existem lancamentos de CONTAS A RECEBER vinculados a ela.
+        /// </summary>
+        internal static string M0214 {
+            get {
+                return ResourceManager.GetString("M0214", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data nao pode ser maior do que a data corrente.
+        /// </summary>
+        internal static string M0215 {
+            get {
+                return ResourceManager.GetString("M0215", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A soma das parcelas nao bate com o valor total informado.
+        /// </summary>
+        internal static string M0216 {
+            get {
+                return ResourceManager.GetString("M0216", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Um lancamento parcelado nao pode ter pagamento parcial.
+        /// </summary>
+        internal static string M0217 {
+            get {
+                return ResourceManager.GetString("M0217", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O valor do pagamento parcial nao pode ser maior que o valor do lancamento.
+        /// </summary>
+        internal static string M0218 {
+            get {
+                return ResourceManager.GetString("M0218", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Valor parcial igual ao valor do lancamento. Va para liquidacao de lancamento ao inves de pagamento parcial.
+        /// </summary>
+        internal static string M0219 {
+            get {
+                return ResourceManager.GetString("M0219", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de inicio nao pode ser menor que a data corrente.
+        /// </summary>
+        internal static string M0220 {
+            get {
+                return ResourceManager.GetString("M0220", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossivel fazer pagamento parcial de um lancamento parcelado.
+        /// </summary>
+        internal static string M0221 {
+            get {
+                return ResourceManager.GetString("M0221", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossivel parcelar um lancamento com pagamento parcial.
+        /// </summary>
+        internal static string M0222 {
+            get {
+                return ResourceManager.GetString("M0222", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data nao pode ser maior do que a data corrente.
+        /// </summary>
+        internal static string M0223 {
+            get {
+                return ResourceManager.GetString("M0223", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Forma de pagamento não informada.
+        /// </summary>
+        internal static string M0224 {
+            get {
+                return ResourceManager.GetString("M0224", resourceCulture);
+            }
+        }
     }
 }
