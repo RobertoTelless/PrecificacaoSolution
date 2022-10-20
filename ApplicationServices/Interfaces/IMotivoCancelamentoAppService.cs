@@ -18,6 +18,5 @@ namespace ApplicationServices.Interfaces
         List<MOTIVO_CANCELAMENTO> GetAllItens(Int32 idAss);
         MOTIVO_CANCELAMENTO GetItemById(Int32 id);
         List<MOTIVO_CANCELAMENTO> GetAllItensAdm(Int32 idAss);
-
     }
 }

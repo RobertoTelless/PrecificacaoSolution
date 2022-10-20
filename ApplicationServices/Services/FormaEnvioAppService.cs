@@ -23,9 +23,9 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<FORMA_ENVIO> GetAllItens()
+        public List<FORMA_ENVIO> GetAllItens(Int32 idAss)
         {
-            return _baseService.GetAllItens();
+            return _baseService.GetAllItens(idAss);
         }
     }
 }

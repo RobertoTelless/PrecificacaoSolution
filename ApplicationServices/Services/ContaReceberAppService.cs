@@ -21,9 +21,9 @@ namespace ApplicationServices.Services
         private readonly IContaBancariaService _cbService;
         private readonly IPeriodicidadeService _perService;
         private readonly IContaReceberRateioService _ratService;
-        private readonly IFormaPagamentoService _fopaService;
+        private readonly IFormaPagRecAppService _fopaService;
 
-        public ContaReceberAppService(IContaReceberService baseService, INotificacaoService notiService, IUsuarioService usuService, IContaBancariaService cbService, IPeriodicidadeService perService, IContaReceberRateioService ratService, IFormaPagamentoService fopaService) : base(baseService)
+        public ContaReceberAppService(IContaReceberService baseService, INotificacaoService notiService, IUsuarioService usuService, IContaBancariaService cbService, IPeriodicidadeService perService, IContaReceberRateioService ratService, IFormaPagRecAppService fopaService) : base(baseService)
         {
             _baseService = baseService;
             _notiService = notiService;
@@ -217,11 +217,11 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddCARE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_RECEBER>(item)
                 };
 
                 if (item.CARE_DT_INICIO_PARCELA != null)
@@ -267,17 +267,16 @@ namespace ApplicationServices.Services
                 {
                     // Gera Notificação
                     NOTIFICACAO noti = new NOTIFICACAO();
-                    noti.NOTI_DT_EMISSAO = DateTime.Now;
-                    noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                    noti.NOTI_IN_NIVEL = 1;
-                    noti.NOTI_IN_VISTA = 0;
-                    noti.NOTI_NM_TITULO = "Contas a Receber - Criação do Lançamento Recorrente";
-                    noti.NOTI_IN_ATIVO = 1;
-                    noti.NOTI_TX_TEXTO = "O lançamento recorrente " + item.CARE_NR_DOCUMENTO + " foi criado em " + DateTime.Today.Date.ToLongDateString() + " com " + recorrente.ToString() + " ocorrências,  sob sua responsabilidade.";
+                    noti.NOTC_DT_EMISSAO = DateTime.Now;
+                    noti.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                    noti.NOTC_IN_NIVEL = 1;
+                    noti.NOTC_IN_VISTA = 0;
+                    noti.NOTC_NM_TITULO = "Contas a Receber - Criação do Lançamento Recorrente";
+                    noti.NOTC_IN_ATIVO = 1;
+                    noti.NOTC_TX_NOTIFICACAO = "O lançamento recorrente " + item.CARE_NR_DOCUMENTO + " foi criado em " + DateTime.Today.Date.ToLongDateString() + " com " + recorrente.ToString() + " ocorrências,  sob sua responsabilidade.";
                     noti.USUA_CD_ID = item.USUA_CD_ID.Value;
                     noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
                     noti.CANO_CD_ID = 1;
-                    noti.NOTI_IN_STATUS = 0;
 
                     // Persiste notificação
                     Int32 volta3 = _notiService.Create(noti);
@@ -309,11 +308,9 @@ namespace ApplicationServices.Services
                         cp.CARE_TX_OBSERVACOES = item.CARE_TX_OBSERVACOES;
                         cp.CECU_CD_ID = item.CECU_CD_ID;
                         cp.COBA_CD_ID = item.COBA_CD_ID;
-                        cp.FOPA_CD_ID = item.FOPA_CD_ID;
+                        cp.FOPR_CD_ID = item.FOPR_CD_ID;
                         cp.CLIE_CD_ID = item.CLIE_CD_ID;
-                        cp.PEVE_CD_ID = item.PEVE_CD_ID;
-                        cp.PERI_CD_ID = item.PERI_CD_ID;
-                        cp.TITA_CD_ID = item.TITA_CD_ID;
+                        cp.PETA_CD_ID = item.PETA_CD_ID;
                         cp.USUA_CD_ID = item.USUA_CD_ID;
                         cp.CARE_VL_VALOR = item.CARE_VL_VALOR;
                         cp.CARE_IN_ATIVO = 1;
@@ -335,17 +332,16 @@ namespace ApplicationServices.Services
                 {
                     // Gera Notificação
                     NOTIFICACAO noti2 = new NOTIFICACAO();
-                    noti2.NOTI_DT_EMISSAO = DateTime.Today;
-                    noti2.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                    noti2.NOTI_IN_NIVEL = 1;
-                    noti2.NOTI_IN_VISTA = 0;
-                    noti2.NOTI_NM_TITULO = "Contas a Receber - Criação do Lançamento";
-                    noti2.NOTI_IN_ATIVO = 1;
-                    noti2.NOTI_TX_TEXTO = "O lançamento " + item.CARE_NR_DOCUMENTO + " foi criado em " + DateTime.Today.Date.ToLongDateString() + " sob sua responsabilidade.";
-                    noti2.USUA_CD_ID = usuario.USUA_CD_ID;
+                    noti2.NOTC_DT_EMISSAO = DateTime.Now;
+                    noti2.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                    noti2.NOTC_IN_NIVEL = 1;
+                    noti2.NOTC_IN_VISTA = 0;
+                    noti2.NOTC_NM_TITULO = "Contas a Receber - Criação do Lançamento";
+                    noti2.NOTC_IN_ATIVO = 1;
+                    noti2.NOTC_TX_NOTIFICACAO = "O lançamento " + item.CARE_NR_DOCUMENTO + " foi criado em " + DateTime.Today.Date.ToLongDateString() + " sob sua responsabilidade.";
+                    noti2.USUA_CD_ID = item.USUA_CD_ID.Value;
                     noti2.ASSI_CD_ID = usuario.ASSI_CD_ID;
                     noti2.CANO_CD_ID = 1;
-                    noti2.NOTI_IN_STATUS = 0;
 
                     // Persiste Lancamento CR
                     volta = _baseService.Create(item);
@@ -358,7 +354,7 @@ namespace ApplicationServices.Services
                     {
                         CONTA_RECEBER rec = _baseService.GetItemById(item.CARE_CD_ID);
                         DateTime dataParcela = rec.CARE_DT_INICIO_PARCELA.Value;
-                        PERIODICIDADE period = _perService.GetItemById(item.PERI_CD_ID.Value);
+                        PERIODICIDADE_TAREFA period = _perService.GetItemById(item.PETA_CD_ID.Value);
                         if (dataParcela.Date <= DateTime.Today.Date)
                         {
                             dataParcela = dataParcela.AddMonths(1);
@@ -378,7 +374,7 @@ namespace ApplicationServices.Services
                             parc.CRPA_IN_PARCELA = i;
                             parc.CRPA_DS_DESCRICAO = rec.CARE_DS_DESCRICAO;
                             rec.CONTA_RECEBER_PARCELA.Add(parc);
-                            dataParcela = dataParcela.AddDays(period.PERI_NR_DIAS);
+                            dataParcela = dataParcela.AddDays(period.PETA_NR_DIAS.Value);
                         }
                         volta = _baseService.Edit(rec);
                     }
@@ -472,9 +468,9 @@ namespace ApplicationServices.Services
                     }
 
                     // Monta lançamento bancário
-                    FORMA_PAGAMENTO forma = _fopaService.GetItemById((Int32)item.FOPA_CD_ID);
+                    FORMA_PAGTO_RECTO forma = _fopaService.GetItemById((Int32)item.FOPR_CD_ID);
                     CONTA_BANCO conta = _cbService.GetItemById((Int32)forma.COBA_CD_ID);
-                    conta.COBA_VL_SALDO_ATUAL += item.CARE_VL_VALOR_RECEBIDO;
+                    conta.COBA_VL_SALDO_ATUAL += item.CARE_VL_VALOR_RECEBIDO.Value;
                     CONTA_BANCO_LANCAMENTO lanc = new CONTA_BANCO_LANCAMENTO();
                     lanc.COBA_CD_ID = conta.COBA_CD_ID;
                     lanc.CBLA_DS_DESCRICAO = item.CARE_DS_DESCRICAO;
@@ -495,21 +491,20 @@ namespace ApplicationServices.Services
                     conta.CONTA_BANCO_LANCAMENTO.Add(lanc);
 
                     // Gera Notificação
-                    NOTIFICACAO noti = new NOTIFICACAO();
-                    noti.NOTI_DT_EMISSAO = DateTime.Today;
-                    noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                    noti.NOTI_IN_NIVEL = 1;
-                    noti.NOTI_IN_VISTA = 0;
-                    noti.NOTI_NM_TITULO = "Contas a Receber - Liquidação do Lançamento";
-                    noti.NOTI_IN_ATIVO = 1;
-                    noti.NOTI_TX_TEXTO = "O lançamento " + item.CARE_CD_ID.ToString() + " foi luiquidado em " + DateTime.Today.Date.ToLongDateString();
-                    noti.USUA_CD_ID = usuario.USUA_CD_ID;
-                    noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
-                    noti.CANO_CD_ID = 1;
-                    noti.NOTI_IN_STATUS = 0;
+                    NOTIFICACAO noti1 = new NOTIFICACAO();
+                    noti1.NOTC_DT_EMISSAO = DateTime.Now;
+                    noti1.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                    noti1.NOTC_IN_NIVEL = 1;
+                    noti1.NOTC_IN_VISTA = 0;
+                    noti1.NOTC_NM_TITULO = "Contas a Receber - Liquidação do Lançamento";
+                    noti1.NOTC_IN_ATIVO = 1;
+                    noti1.NOTC_TX_NOTIFICACAO = "O lançamento " + item.CARE_CD_ID.ToString() + " foi luiquidado em " + DateTime.Today.Date.ToLongDateString();
+                    noti1.USUA_CD_ID = item.USUA_CD_ID.Value;
+                    noti1.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                    noti1.CANO_CD_ID = 1;
 
                     // Envia notificação
-                    Int32 volta = _notiService.Create(noti);
+                    Int32 volta = _notiService.Create(noti1);
 
                     // Persiste lancamento Bancario
                     volta = _cbService.Edit(conta);
@@ -558,9 +553,9 @@ namespace ApplicationServices.Services
                     item.CARE_VL_VALOR_RECEBIDO = item.CARE_VL_PARCIAL.Value;
 
                     // Monta lançamento bancário
-                    FORMA_PAGAMENTO forma = _fopaService.GetItemById(item.FOPA_CD_ID.Value);
-                    CONTA_BANCO conta = _cbService.GetItemById(forma.COBA_CD_ID.Value);
-                    conta.COBA_VL_SALDO_ATUAL += item.CARE_VL_PARCIAL;
+                    FORMA_PAGTO_RECTO forma = _fopaService.GetItemById(item.FOPR_CD_ID.Value);
+                    CONTA_BANCO conta = _cbService.GetItemById(forma.COBA_CD_ID);
+                    conta.COBA_VL_SALDO_ATUAL += item.CARE_VL_PARCIAL.Value;
                     CONTA_BANCO_LANCAMENTO lanc = new CONTA_BANCO_LANCAMENTO();
                     lanc.COBA_CD_ID = conta.COBA_CD_ID;
                     lanc.CBLA_DS_DESCRICAO = "Pagamento Parcial - " + item.CARE_DS_DESCRICAO;
@@ -574,17 +569,16 @@ namespace ApplicationServices.Services
 
                     // Gera Notificação
                     NOTIFICACAO noti1 = new NOTIFICACAO();
-                    noti1.NOTI_DT_EMISSAO = DateTime.Today;
-                    noti1.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                    noti1.NOTI_IN_NIVEL = 1;
-                    noti1.NOTI_IN_VISTA = 0;
-                    noti1.NOTI_NM_TITULO = "Contas a Receber - Pagamento Parcial";
-                    noti1.NOTI_IN_ATIVO = 1;
-                    noti1.NOTI_TX_TEXTO = "O lançamento " + item.CARE_CD_ID.ToString() + " foi parcialmente liquidado em " + DateTime.Today.Date.ToLongDateString();
-                    noti1.USUA_CD_ID = usuario.USUA_CD_ID;
+                    noti1.NOTC_DT_EMISSAO = DateTime.Now;
+                    noti1.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                    noti1.NOTC_IN_NIVEL = 1;
+                    noti1.NOTC_IN_VISTA = 0;
+                    noti1.NOTC_NM_TITULO = "Contas a Receber - Pagamento Parcial";
+                    noti1.NOTC_IN_ATIVO = 1;
+                    noti1.NOTC_TX_NOTIFICACAO = "O lançamento " + item.CARE_CD_ID.ToString() + " foi parcialmente liquidado em " + DateTime.Today.Date.ToLongDateString();
+                    noti1.USUA_CD_ID = item.USUA_CD_ID.Value;
                     noti1.ASSI_CD_ID = usuario.ASSI_CD_ID;
                     noti1.CANO_CD_ID = 1;
-                    noti1.NOTI_IN_STATUS = 0;
 
                     // Envia notificação
                     Int32 volta1 = _notiService.Create(noti1);
@@ -640,21 +634,20 @@ namespace ApplicationServices.Services
                     item.CARE_IN_PARCELADA = 1;
 
                     // Gera Notificação
-                    NOTIFICACAO noti3 = new NOTIFICACAO();
-                    noti3.NOTI_DT_EMISSAO = DateTime.Today;
-                    noti3.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                    noti3.NOTI_IN_NIVEL = 1;
-                    noti3.NOTI_IN_VISTA = 0;
-                    noti3.NOTI_NM_TITULO = "Contas a Receber - Parcelamento";
-                    noti3.NOTI_IN_ATIVO = 1;
-                    noti3.NOTI_TX_TEXTO = "O lançamento " + item.CARE_CD_ID.ToString() + " foi parcelado em " + DateTime.Today.Date.ToLongDateString();
-                    noti3.USUA_CD_ID = usuario.USUA_CD_ID;
-                    noti3.ASSI_CD_ID = usuario.ASSI_CD_ID;
-                    noti3.CANO_CD_ID = 1;
-                    noti3.NOTI_IN_STATUS = 0;
+                    NOTIFICACAO noti1 = new NOTIFICACAO();
+                    noti1.NOTC_DT_EMISSAO = DateTime.Now;
+                    noti1.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                    noti1.NOTC_IN_NIVEL = 1;
+                    noti1.NOTC_IN_VISTA = 0;
+                    noti1.NOTC_NM_TITULO = "Contas a Receber - Parcelamento";
+                    noti1.NOTC_IN_ATIVO = 1;
+                    noti1.NOTC_TX_NOTIFICACAO = "O lançamento " + item.CARE_CD_ID.ToString() + " foi parcelado em " + DateTime.Today.Date.ToLongDateString();
+                    noti1.USUA_CD_ID = item.USUA_CD_ID.Value;
+                    noti1.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                    noti1.CANO_CD_ID = 1;
 
                     // Envia notificação
-                    Int32 volta3 = _notiService.Create(noti3);
+                    Int32 volta3 = _notiService.Create(noti1);
 
                     // Persiste Lancamento CR
                     volta3 =  _baseService.Edit(item);
@@ -662,7 +655,7 @@ namespace ApplicationServices.Services
                     // Cria Parcelas
                     CONTA_RECEBER rec = _baseService.GetItemById(item.CARE_CD_ID);
                     DateTime dataParcela = rec.CARE_DT_INICIO_PARCELA.Value;
-                    PERIODICIDADE period = _perService.GetItemById(item.PERI_CD_ID.Value);
+                    PERIODICIDADE_TAREFA period = _perService.GetItemById(item.PETA_CD_ID.Value);
                     if (dataParcela.Date <= DateTime.Today.Date)
                     {
                         dataParcela = dataParcela.AddMonths(1);
@@ -682,7 +675,7 @@ namespace ApplicationServices.Services
                         parc.CRPA_IN_PARCELA = i;
                         parc.CRPA_DS_DESCRICAO = rec.CARE_DS_DESCRICAO;
                         rec.CONTA_RECEBER_PARCELA.Add(parc);
-                        dataParcela = dataParcela.AddDays(period.PERI_NR_DIAS);
+                        dataParcela = dataParcela.AddDays(period.PETA_NR_DIAS.Value);
                     }
                     volta3 = _baseService.Edit(rec);
                     return 0;
@@ -693,21 +686,20 @@ namespace ApplicationServices.Services
                 item.CARE_IN_ATIVO = 1;
 
                 // Gera Notificação
-                NOTIFICACAO noti2 = new NOTIFICACAO();
-                noti2.NOTI_DT_EMISSAO = DateTime.Today;
-                noti2.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                noti2.NOTI_IN_NIVEL = 1;
-                noti2.NOTI_IN_VISTA = 0;
-                noti2.NOTI_NM_TITULO = "Contas a Receber - Alteração do Lançamento";
-                noti2.NOTI_IN_ATIVO = 1;
-                noti2.NOTI_TX_TEXTO = "O lançamento " + item.CARE_CD_ID.ToString() + " foi alterado em " + DateTime.Today.Date.ToLongDateString();
-                noti2.USUA_CD_ID = usuario.USUA_CD_ID;
-                noti2.ASSI_CD_ID = usuario.ASSI_CD_ID;
-                noti2.CANO_CD_ID = 1;
-                noti2.NOTI_IN_STATUS = 0;
+                NOTIFICACAO noti = new NOTIFICACAO();
+                noti.NOTC_DT_EMISSAO = DateTime.Now;
+                noti.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                noti.NOTC_IN_NIVEL = 1;
+                noti.NOTC_IN_VISTA = 0;
+                noti.NOTC_NM_TITULO = "Contas a Receber - Alteração do Lançamento";
+                noti.NOTC_IN_ATIVO = 1;
+                noti.NOTC_TX_NOTIFICACAO = "O lançamento " + item.CARE_CD_ID.ToString() + " foi alterado em " + DateTime.Today.Date.ToLongDateString();
+                noti.USUA_CD_ID = item.USUA_CD_ID.Value;
+                noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                noti.CANO_CD_ID = 1;
 
                 // Persiste notificação
-                Int32 volta2 = _notiService.Create(noti2);
+                Int32 volta2 = _notiService.Create(noti);
 
                 // Persiste
                 return _baseService.Edit(item);
@@ -742,34 +734,33 @@ namespace ApplicationServices.Services
                 lanc.CBLA_IN_ORIGEM = 2;
                 lanc.CBLA_IN_TIPO = 1;
                 lanc.CBLA_NR_NUMERO = item.CARE_NR_DOCUMENTO;
-                lanc.CBLA_VL_VALOR = item.CARE_VL_VALOR_LIQUIDADO;
-                lanc.COBA_CD_ID = item.FORMA_PAGAMENTO.COBA_CD_ID.Value;
+                lanc.CBLA_VL_VALOR = item.CARE_VL_VALOR_LIQUIDADO.Value;
+                lanc.COBA_CD_ID = item.FORMA_PAGTO_RECTO.COBA_CD_ID;
                 item.CONTA_BANCO.CONTA_BANCO_LANCAMENTO.Add(lanc);
 
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditCARE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<CONTA_RECEBER>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_RECEBER>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<CONTA_RECEBER>(itemAntes)
                 };
 
                 // Gera Notificação
                 NOTIFICACAO noti = new NOTIFICACAO();
-                noti.NOTI_DT_EMISSAO = DateTime.Today;
-                noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                noti.NOTI_IN_NIVEL = 1;
-                noti.NOTI_IN_VISTA = 0;
-                noti.NOTI_NM_TITULO = "Contas a Receber - Recebimento";
-                noti.NOTI_IN_ATIVO = 1;
-                noti.NOTI_TX_TEXTO = "O lançamento " + item.CARE_CD_ID.ToString() + " com vencimento em " + item.CARE_DT_VENCIMENTO.Value.ToLongDateString() + " de " + item.CARE_NM_FAVORECIDO + " foi liquidado em " + item.CARE_DT_DATA_LIQUIDACAO.Value.ToLongDateString() + " sendo recebido R$" + item.CARE_VL_VALOR_LIQUIDADO.Value.ToString() + " - Valor original a recceber R$" + item.CARE_VL_VALOR.ToString();
-                noti.USUA_CD_ID = usuario.USUA_CD_ID;
+                noti.NOTC_DT_EMISSAO = DateTime.Now;
+                noti.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                noti.NOTC_IN_NIVEL = 1;
+                noti.NOTC_IN_VISTA = 0;
+                noti.NOTC_NM_TITULO = "Contas a Receber - Recebimento";
+                noti.NOTC_IN_ATIVO = 1;
+                noti.NOTC_TX_NOTIFICACAO = "O lançamento " + item.CARE_CD_ID.ToString() + " com vencimento em " + item.CARE_DT_VENCIMENTO.Value.ToLongDateString() + " de " + item.CARE_NM_FAVORECIDO + " foi liquidado em " + item.CARE_DT_DATA_LIQUIDACAO.Value.ToLongDateString() + " sendo recebido R$" + item.CARE_VL_VALOR_LIQUIDADO.Value.ToString() + " - Valor original a recceber R$" + item.CARE_VL_VALOR.ToString();
+                noti.USUA_CD_ID = item.USUA_CD_ID.Value;
                 noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
                 noti.CANO_CD_ID = 1;
-                noti.NOTI_IN_STATUS = 0;             
 
                 // Persiste notificação
                 Int32 volta = _notiService.Create(noti);
@@ -798,34 +789,33 @@ namespace ApplicationServices.Services
                 lanc.CBLA_IN_ORIGEM = 2;
                 lanc.CBLA_IN_TIPO = 1;
                 lanc.CBLA_NR_NUMERO = item.CARE_CD_ID.ToString();
-                lanc.CBLA_VL_VALOR = item.CARE_VL_VALOR_LIQUIDADO;
-                lanc.COBA_CD_ID = item.FORMA_PAGAMENTO.COBA_CD_ID.Value;
+                lanc.CBLA_VL_VALOR = item.CARE_VL_VALOR_LIQUIDADO.Value;
+                lanc.COBA_CD_ID = item.FORMA_PAGTO_RECTO.COBA_CD_ID;
                 item.CONTA_BANCO.CONTA_BANCO_LANCAMENTO.Add(lanc);
 
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditCARE",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<CONTA_RECEBER>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_RECEBER>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<CONTA_RECEBER>(itemAntes)
                 };
 
                 // Gera Notificação
                 NOTIFICACAO noti = new NOTIFICACAO();
-                noti.NOTI_DT_EMISSAO = DateTime.Today;
-                noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                noti.NOTI_IN_NIVEL = 1;
-                noti.NOTI_IN_VISTA = 0;
-                noti.NOTI_NM_TITULO = "Contas a Receber - Recebimento";
-                noti.NOTI_IN_ATIVO = 1;
-                noti.NOTI_TX_TEXTO = "O lançamento " + item.CARE_CD_ID.ToString() + " com vencimento em " + item.CARE_DT_VENCIMENTO.Value.ToLongDateString() + " de " + item.CARE_NM_FAVORECIDO + " foi liquidado em " + item.CARE_DT_DATA_LIQUIDACAO.Value.ToLongDateString() + " sendo recebido R$" + item.CARE_VL_VALOR_LIQUIDADO.Value.ToString() + " - Valor original a recceber R$" + item.CARE_VL_VALOR.ToString();
-                noti.USUA_CD_ID = usuario.USUA_CD_ID;
+                noti.NOTC_DT_EMISSAO = DateTime.Now;
+                noti.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                noti.NOTC_IN_NIVEL = 1;
+                noti.NOTC_IN_VISTA = 0;
+                noti.NOTC_NM_TITULO = "Contas a Receber - Recebimento";
+                noti.NOTC_IN_ATIVO = 1;
+                noti.NOTC_TX_NOTIFICACAO = "O lançamento " + item.CARE_CD_ID.ToString() + " com vencimento em " + item.CARE_DT_VENCIMENTO.Value.ToLongDateString() + " de " + item.CARE_NM_FAVORECIDO + " foi liquidado em " + item.CARE_DT_DATA_LIQUIDACAO.Value.ToLongDateString() + " sendo recebido R$" + item.CARE_VL_VALOR_LIQUIDADO.Value.ToString() + " - Valor original a recceber R$" + item.CARE_VL_VALOR.ToString();
+                noti.USUA_CD_ID = item.USUA_CD_ID.Value;
                 noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
                 noti.CANO_CD_ID = 1;
-                noti.NOTI_IN_STATUS = 0;
 
                 // Persiste notificação
                 Int32 volta = _notiService.Create(noti);
@@ -848,17 +838,6 @@ namespace ApplicationServices.Services
                 // Acerta campos
                 item.CARE_IN_ATIVO = 0;
 
-                // Monta Log
-                //LOG log = new LOG
-                //{
-                //    LOG_DT_DATA = DateTime.Now,
-                //    USUA_CD_ID = usuario.USUA_CD_ID,
-                //    ASSI_CD_ID = SessionMocks.IdAssinante,
-                //    LOG_IN_ATIVO = 1,
-                //    LOG_NM_OPERACAO = "DelCARE",
-                //    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER>(item)
-                //};
-
                 // Persiste
                 return _baseService.Edit(item);
             }
@@ -876,17 +855,6 @@ namespace ApplicationServices.Services
 
                 // Acerta campos
                 item.CARE_IN_ATIVO = 1;
-
-                // Monta Log
-                //LOG log = new LOG
-                //{
-                //    LOG_DT_DATA = DateTime.Now,
-                //    USUA_CD_ID = usuario.USUA_CD_ID,
-                //    ASSI_CD_ID = SessionMocks.IdAssinante,
-                //    LOG_IN_ATIVO = 1,
-                //    LOG_NM_OPERACAO = "ReatCARE",
-                //    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER>(item)
-                //};
 
                 // Persiste
                 return _baseService.Edit(item);

@@ -1544,5 +1544,59 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0186", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tipo de ação já cadastrado.
+        /// </summary>
+        internal static string M0187 {
+            get {
+                return ResourceManager.GetString("M0187", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este tipo de ação. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0188 {
+            get {
+                return ResourceManager.GetString("M0188", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Motivo de Cancelamento já cadastrado.
+        /// </summary>
+        internal static string M0189 {
+            get {
+                return ResourceManager.GetString("M0189", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este motivo de cancelamento. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0190 {
+            get {
+                return ResourceManager.GetString("M0190", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Motivo de Encerramento já cadastrado.
+        /// </summary>
+        internal static string M0191 {
+            get {
+                return ResourceManager.GetString("M0191", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este motivo de encerramento. Existem registros vinculados a ele.
+        /// </summary>
+        internal static string M0192 {
+            get {
+                return ResourceManager.GetString("M0192", resourceCulture);
+            }
+        }
     }
 }

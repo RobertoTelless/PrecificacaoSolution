@@ -110,6 +110,9 @@ namespace Presentation.Start
             kernel.Bind<IMovimentoEstoqueProdutoAppService>().To<MovimentoEstoqueProdutoAppService>();
             kernel.Bind<ITipoEmbalagemAppService>().To<TipoEmbalagemAppService>();
             kernel.Bind<IFichaTecnicaAppService>().To<FichaTecnicaAppService>();
+            kernel.Bind<ITipoAcaoAppService>().To<TipoAcaoAppService>();
+            kernel.Bind<IMotivoCancelamentoAppService>().To<MotivoCancelamentoAppService>();
+            kernel.Bind<IMotivoEncerramentoAppService>().To<MotivoEncerramentoAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -156,6 +159,9 @@ namespace Presentation.Start
             kernel.Bind<IMovimentoEstoqueProdutoService>().To<MovimentoEstoqueProdutoService>();
             kernel.Bind<ITipoEmbalagemService>().To<TipoEmbalagemService>();
             kernel.Bind<IFichaTecnicaService>().To<FichaTecnicaService>();
+            kernel.Bind<ITipoAcaoService>().To<ITipoAcaoService>();
+            kernel.Bind<IMotivoCancelamentoService>().To<MotivoCancelamentoService>();
+            kernel.Bind<IMotivoEncerramentoService>().To<MotivoEncerramentoService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -235,6 +241,9 @@ namespace Presentation.Start
             kernel.Bind<IFichaTecnicaDetalheRepository>().To<FichaTecnicaDetalheRepository>();
             kernel.Bind<ITipoEmbalagemRepository>().To<TipoEmbalagemRepository>();
             kernel.Bind<IFichaTecnicaRepository>().To<FichaTecnicaRepository>();
+            kernel.Bind<ITipoAcaoRepository>().To<TipoAcaoRepository>();
+            kernel.Bind<IMotivoCancelamentoRepository>().To<MotivoCancelamentoRepository>();
+            kernel.Bind<IMotivoEncerramentoRepository>().To<MotivoEncerramentoRepository>();
 
         }
     }

@@ -18,6 +18,5 @@ namespace ApplicationServices.Interfaces
         List<MOTIVO_ENCERRAMENTO> GetAllItens(Int32 idAss);
         MOTIVO_ENCERRAMENTO GetItemById(Int32 id);
         List<MOTIVO_ENCERRAMENTO> GetAllItensAdm(Int32 idAss);
-
     }
 }

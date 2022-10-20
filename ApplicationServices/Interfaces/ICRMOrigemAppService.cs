@@ -18,6 +18,5 @@ namespace ApplicationServices.Interfaces
         List<CRM_ORIGEM> GetAllItens(Int32 idAss);
         CRM_ORIGEM GetItemById(Int32 id);
         List<CRM_ORIGEM> GetAllItensAdm(Int32 idAss);
-
     }
 }

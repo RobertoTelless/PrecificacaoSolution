@@ -9,6 +9,7 @@ namespace ApplicationServices.Interfaces
 {
     public interface IFormaFreteAppService : IAppServiceBase<FORMA_FRETE>
     {
-        List<FORMA_FRETE> GetAllItens();
+        List<FORMA_FRETE> GetAllItens(Int32 idAss);
+
     }
 }

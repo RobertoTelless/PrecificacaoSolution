@@ -23,9 +23,9 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<FORMA_FRETE> GetAllItens()
+        public List<FORMA_FRETE> GetAllItens(Int32 idAss)
         {
-            return _baseService.GetAllItens();
+            return _baseService.GetAllItens(idAss);
         }
     }
 }

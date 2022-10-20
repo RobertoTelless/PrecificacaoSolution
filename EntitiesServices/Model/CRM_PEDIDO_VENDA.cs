@@ -70,6 +70,9 @@ namespace EntitiesServices.Model
         public Nullable<decimal> CRPV_VL_TOTAL { get; set; }
         public Nullable<int> MOEN_CD_ID { get; set; }
         public Nullable<int> CRPV_IN_NUMERO_GERADO { get; set; }
+        public Nullable<System.DateTime> CRPV_DT_FATURAMENTO { get; set; }
+        public Nullable<System.DateTime> CRPV_DT_EXPEDICAO { get; set; }
+        public Nullable<System.DateTime> CRPV_DT_ENTREGA { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }

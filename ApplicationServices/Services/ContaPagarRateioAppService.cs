@@ -54,12 +54,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddCPRA",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_PAGAR_RATEIO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_PAGAR_RATEIO>(item)
                 };
 
                 Int32 volta = _baseService.Create(item);
@@ -105,17 +105,6 @@ namespace ApplicationServices.Services
 
                 // Acerta campos
                 item.CRPA_IN_ATIVO = 1;
-
-                // Monta Log
-                //LOG log = new LOG
-                //{
-                //    LOG_DT_DATA = DateTime.Now,
-                //    USUA_CD_ID = usuario.USUA_CD_ID,
-                //    ASSI_CD_ID = SessionMocks.IdAssinante,
-                //    LOG_IN_ATIVO = 1,
-                //    LOG_NM_OPERACAO = "ReatCARE",
-                //    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER>(item)
-                //};
 
                 // Persiste
                 return _baseService.Edit(item);

@@ -18,6 +18,5 @@ namespace ApplicationServices.Interfaces
         List<TIPO_ACAO> GetAllItens(Int32 idAss);
         TIPO_ACAO GetItemById(Int32 id);
         List<TIPO_ACAO> GetAllItensAdm(Int32 idAss);
-
     }
 }

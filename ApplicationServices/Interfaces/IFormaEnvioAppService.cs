@@ -9,6 +9,7 @@ namespace ApplicationServices.Interfaces
 {
     public interface IFormaEnvioAppService : IAppServiceBase<FORMA_ENVIO>
     {
-        List<FORMA_ENVIO> GetAllItens();
+        List<FORMA_ENVIO> GetAllItens(Int32 idAss);
+
     }
 }

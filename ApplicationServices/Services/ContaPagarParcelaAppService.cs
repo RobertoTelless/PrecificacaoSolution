@@ -19,12 +19,12 @@ namespace ApplicationServices.Services
         private readonly IContaPagarParcelaService _baseService;
         private readonly IContaBancariaService _cbService;
         private readonly INotificacaoService _notiService;
-        private readonly IFormaPagamentoAppService _fpService;
+        private readonly IFormaPagRecAppService _fpService;
         private readonly IContaPagarService _cpService;
         private readonly IUsuarioService _usuService;
         private readonly IConfiguracaoAppService _conService;
 
-        public ContaPagarParcelaAppService(IContaPagarParcelaService baseService, IContaBancariaService cbService, INotificacaoService notiService, IFormaPagamentoAppService fpService, IContaPagarService cpService, IUsuarioService usuService, IConfiguracaoAppService conService): base(baseService)
+        public ContaPagarParcelaAppService(IContaPagarParcelaService baseService, IContaBancariaService cbService, INotificacaoService notiService, IFormaPagRecAppService fpService, IContaPagarService cpService, IUsuarioService usuService, IConfiguracaoAppService conService): base(baseService)
         {
             _baseService = baseService;
             _cbService = cbService;
@@ -58,12 +58,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddCPPA",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_PAGAR_PARCELA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_PAGAR_PARCELA>(item)
                 };
 
                 Int32 volta = _baseService.Create(item);
@@ -101,11 +101,11 @@ namespace ApplicationServices.Services
 
                     // Monta lançamento bancário
                     CONTA_PAGAR cp = _cpService.GetItemById(item.CAPA_CD_ID);
-                    FORMA_PAGAMENTO forma = _fpService.GetItemById(cp.FOPA_CD_ID.Value);
-                    CONTA_BANCO conta = _cbService.GetItemById(forma.COBA_CD_ID.Value);
-                    conta.COBA_VL_SALDO_ATUAL -= item.CPPA_VL_VALOR_PAGO;
+                    FORMA_PAGTO_RECTO forma = _fpService.GetItemById(cp.FOPR_CD_ID.Value);
+                    CONTA_BANCO conta = _cbService.GetItemById(forma.COBA_CD_ID);
+                    conta.COBA_VL_SALDO_ATUAL -= item.CPPA_VL_VALOR_PAGO.Value;
                     CONTA_BANCO_LANCAMENTO lanc = new CONTA_BANCO_LANCAMENTO();
-                    lanc.COBA_CD_ID = forma.COBA_CD_ID.Value;
+                    lanc.COBA_CD_ID = forma.COBA_CD_ID;
                     lanc.CBLA_DS_DESCRICAO = item.CPPA_DS_DESCRICAO;
                     lanc.CBLA_DT_LANCAMENTO = item.CPPA_DT_QUITACAO.Value;
                     lanc.CBLA_IN_ATIVO = 1;
@@ -117,17 +117,16 @@ namespace ApplicationServices.Services
 
                     // Gera Notificação
                     NOTIFICACAO noti = new NOTIFICACAO();
-                    noti.NOTI_DT_EMISSAO = DateTime.Today;
-                    noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                    noti.NOTI_IN_NIVEL = 1;
-                    noti.NOTI_IN_VISTA = 0;
-                    noti.NOTI_NM_TITULO = "Contas a Pagar - Liquidação de Parcela";
-                    noti.NOTI_IN_ATIVO = 1;
-                    noti.NOTI_TX_TEXTO = "A parcela " + item.CPPA_NR_PARCELA + " do lançamento " + item.CONTA_PAGAR.CAPA_DS_DESCRICAO + " foi liquidada em " + DateTime.Today.Date.ToLongDateString();
+                    noti.NOTC_DT_EMISSAO = DateTime.Today;
+                    noti.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                    noti.NOTC_IN_NIVEL = 1;
+                    noti.NOTC_IN_VISTA = 0;
+                    noti.NOTC_NM_TITULO = "Contas a Pagar - Liquidação de Parcela";
+                    noti.NOTC_IN_ATIVO = 1;
+                    noti.NOTC_TX_NOTIFICACAO = "A parcela " + item.CPPA_NR_PARCELA + " do lançamento " + item.CONTA_PAGAR.CAPA_DS_DESCRICAO + " foi liquidada em " + DateTime.Today.Date.ToLongDateString();
                     noti.USUA_CD_ID = usuario.USUA_CD_ID;
                     noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
                     noti.CANO_CD_ID = 1;
-                    noti.NOTI_IN_STATUS = 0;
 
                     // Envia notificação
                     Int32 volta = _notiService.Create(noti);
@@ -164,7 +163,7 @@ namespace ApplicationServices.Services
                     mensagem.ASSUNTO = "Pagamento de Lançamento - Conta a Pagar";
                     mensagem.CORPO = emailBody;
                     mensagem.DEFAULT_CREDENTIALS = false;
-                    mensagem.EMAIL_DESTINO = cp.USUARIO.USUA_NM_EMAIL;
+                    mensagem.EMAIL_DESTINO = cp.USUARIO.USUA_EM_EMAIL;
                     mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
                     mensagem.ENABLE_SSL = true;
                     mensagem.NOME_EMISSOR = usuario.USUA_NM_NOME;
@@ -178,52 +177,6 @@ namespace ApplicationServices.Services
                     // Envia mensagem
                     Int32 voltaMail = CommunicationPackage.SendEmail(mensagem);
 
-                    // Monta token
-                    //String text = conf.CONF_SG_LOGIN_SMS + ":" + conf.CONF_SG_SENHA_SMS;
-                    //byte[] textBytes = Encoding.UTF8.GetBytes(text);
-                    //String token = Convert.ToBase64String(textBytes);
-                    //String auth = "Basic " + token;
-
-                    // Prepara texto
-                    //String texto = _usuService.GetTemplate("SMSCPAG").TEMP_TX_CORPO; ;
-                    //texto = texto.Replace("{Nome}", cp.USUARIO.USUA_NM_NOME);
-                    //texto = texto.Replace("{Numero}", cp.CAPA_NR_DOCUMENTO);
-                    //texto = texto.Replace("{Emissor}", usuario.ASSINANTE.ASSI_NM_NOME);
-                    //String smsBody = texto;
-                    //String erro = null;
-
-                    // inicia processo
-                    //String resposta = String.Empty;
-
-                    // Monta destinatarios
-                    //try
-                    //{
-                    //    String listaDest = "55" + Regex.Replace(item.CONTA_PAGAR.USUARIO.USUA_NR_CELULAR, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled).ToString();
-                    //    var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://api-v2.smsfire.com.br/sms/send/bulk");
-                    //    httpWebRequest.Headers["Authorization"] = auth;
-                    //    httpWebRequest.ContentType = "application/json";
-                    //    httpWebRequest.Method = "POST";
-                    //    String customId = Cryptography.GenerateRandomPassword(8);
-                    //    String data = String.Empty;
-                    //    String json = String.Empty;
-
-                    //    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                    //    {
-                    //        json = String.Concat("{\"destinations\": [{\"to\": \"", listaDest, "\", \"text\": \"", texto, "\", \"customId\": \"" + customId + "\", \"from\": \"ERPSys\"}]}");
-                    //        streamWriter.Write(json);
-                    //    }
-
-                    //    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                    //    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                    //    {
-                    //        var result = streamReader.ReadToEnd();
-                    //        resposta = result;
-                    //    }
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    erro = ex.Message;
-                    //}
 
                     // Acerta saldo
                     return 0;
@@ -248,12 +201,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelCPPC",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_PAGAR_PARCELA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_PAGAR_PARCELA>(item)
                 };
 
                 // Persiste
@@ -277,12 +230,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatCPPC",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_PAGAR_PARCELA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_PAGAR_PARCELA>(item)
                 };
 
                 // Persiste

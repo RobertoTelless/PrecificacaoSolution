@@ -682,6 +682,9 @@
           <Property Name="CRPV_VL_TOTAL" Type="decimal" Precision="20" Scale="2" StoreGeneratedPattern="Computed" />
           <Property Name="MOEN_CD_ID" Type="int" />
           <Property Name="CRPV_IN_NUMERO_GERADO" Type="int" />
+          <Property Name="CRPV_DT_FATURAMENTO" Type="date" />
+          <Property Name="CRPV_DT_EXPEDICAO" Type="date" />
+          <Property Name="CRPV_DT_ENTREGA" Type="date" />
         </EntityType>
         <EntityType Name="CRM_PEDIDO_VENDA_ACOMPANHAMENTO">
           <Key>
@@ -5863,6 +5866,9 @@
           <NavigationProperty Name="TRANSPORTADORA" Relationship="Self.FK_CRM_PEDIDO_VENDA_TRANSPORTADORA" FromRole="CRM_PEDIDO_VENDA" ToRole="TRANSPORTADORA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CRM_PEDIDO_VENDA_USUARIO" FromRole="CRM_PEDIDO_VENDA" ToRole="USUARIO" />
           <NavigationProperty Name="CONTA_RECEBER" Relationship="Db_PrecificacaoModel.FK_CONTA_RECEBER_CRM_PEDIDO_VENDA" FromRole="CRM_PEDIDO_VENDA" ToRole="CONTA_RECEBER" />
+          <Property Name="CRPV_DT_FATURAMENTO" Type="DateTime" Precision="0" />
+          <Property Name="CRPV_DT_EXPEDICAO" Type="DateTime" Precision="0" />
+          <Property Name="CRPV_DT_ENTREGA" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="CRM_PEDIDO_VENDA_ACOMPANHAMENTO">
           <Key>
@@ -11313,6 +11319,9 @@
           <EntitySetMapping Name="CRM_PEDIDO_VENDA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CRM_PEDIDO_VENDA">
               <MappingFragment StoreEntitySet="CRM_PEDIDO_VENDA">
+                <ScalarProperty Name="CRPV_DT_ENTREGA" ColumnName="CRPV_DT_ENTREGA" />
+                <ScalarProperty Name="CRPV_DT_EXPEDICAO" ColumnName="CRPV_DT_EXPEDICAO" />
+                <ScalarProperty Name="CRPV_DT_FATURAMENTO" ColumnName="CRPV_DT_FATURAMENTO" />
                 <ScalarProperty Name="CRPV_CD_ID" ColumnName="CRPV_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CRM1_CD_ID" ColumnName="CRM1_CD_ID" />

@@ -33,6 +33,9 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly ICategoriaClienteAppService ccApp;
         private readonly ICategoriaFornecedorAppService cfApp;
         private readonly ITipoEmbalagemAppService teApp;
+        private readonly ITipoAcaoAppService taApp;
+        private readonly IMotivoCancelamentoAppService mcApp;
+        private readonly IMotivoEncerramentoAppService meApp;
 
         CARGO_USUARIO objetoCargo = new CARGO_USUARIO();
         CARGO_USUARIO objetoAntesCargo = new CARGO_USUARIO();
@@ -52,9 +55,18 @@ namespace ERP_Condominios_Solution.Controllers
         TIPO_EMBALAGEM objetoTipoEmbalagem = new TIPO_EMBALAGEM();
         TIPO_EMBALAGEM objetoAntesTipoEmbalagem = new TIPO_EMBALAGEM();
         List<TIPO_EMBALAGEM> listaMasterTipoEmbalagem = new List<TIPO_EMBALAGEM>();
+        TIPO_ACAO objetoTipoAcao = new TIPO_ACAO();
+        TIPO_ACAO objetoAntesTipoAcao = new TIPO_ACAO();
+        List<TIPO_ACAO> listaMasterTipoAcao = new List<TIPO_ACAO>();
+        MOTIVO_CANCELAMENTO objetoMotCancelamento = new MOTIVO_CANCELAMENTO();
+        MOTIVO_CANCELAMENTO objetoAntesMotCancelamento = new MOTIVO_CANCELAMENTO();
+        List<MOTIVO_CANCELAMENTO> listaMasterMotCancelamento = new List<MOTIVO_CANCELAMENTO>();
+        MOTIVO_ENCERRAMENTO objetoMotEncerramento = new MOTIVO_ENCERRAMENTO();
+        MOTIVO_ENCERRAMENTO objetoAntesMotEncerramento = new MOTIVO_ENCERRAMENTO();
+        List<MOTIVO_ENCERRAMENTO> listaMasterMotEncerramento = new List<MOTIVO_ENCERRAMENTO>();
         String extensao;
 
-        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps, ITipoEmbalagemAppService teApps)
+        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps, ITipoEmbalagemAppService teApps, ITipoAcaoAppService taApps, IMotivoCancelamentoAppService mcApps, IMotivoEncerramentoAppService meApps)
         {
             carApp = carApps;
             logApp = logApps;
@@ -63,6 +75,9 @@ namespace ERP_Condominios_Solution.Controllers
             ccApp = ccApps;
             cfApp = cfApps;
             teApp = teApps;
+            taApp = taApps;
+            mcApp = mcApps;
+            meApp = meApps;
         }
 
         [HttpGet]
@@ -2131,6 +2146,1014 @@ namespace ERP_Condominios_Solution.Controllers
             listaMasterTipoEmbalagem = new List<TIPO_EMBALAGEM>();
             Session["ListaTipoEmbalagem"] = null;
             return RedirectToAction("MontarTelaTipoEmbalagem");
+        }
+
+        [HttpGet]
+        public ActionResult MontarTelaTipoAcao()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaTipoAcao"] == null)
+            {
+                listaMasterTipoAcao = taApp.GetAllItens(idAss);
+                Session["ListaTipoAcao"] = listaMasterTipoAcao;
+            }
+            ViewBag.Listas = (List<TIPO_ACAO>)Session["ListaTipoAcao"];
+            ViewBag.Title = "TipoAcao";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.TipoAcao = ((List<TIPO_ACAO>)Session["ListaTipoAcao"]).Count;
+
+            if (Session["MensTipoAcao"] != null)
+            {
+                if ((Int32)Session["MensTipoAcao"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0187", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensTipoAcao"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensTipoAcao"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0188", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["VoltaTipoAcao"] = 1;
+            Session["MensTipoAcao"] = 0;
+            objetoTipoAcao = new TIPO_ACAO();
+            return View(objetoTipoAcao);
+        }
+
+        public ActionResult RetirarFiltroTipoAcao()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Session["ListaTipoAcao"] = null;
+            Session["FiltroTipoAcao"] = null;
+            return RedirectToAction("MontarTelaTipoAcao");
+        }
+
+        public ActionResult MostrarTudoTipoAcao()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterTipoAcao= taApp.GetAllItensAdm(idAss);
+            Session["FiltroTipoAcao"] = null;
+            Session["ListaTipoAcao"] = listaMasterTipoAcao;
+            return RedirectToAction("MontarTelaTipoAcao");
+        }
+
+        public ActionResult VoltarBaseTipoAcao()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaTipoAcao"] == 2)
+            {
+                return RedirectToAction("IncluirAcao", "CRM");
+            }
+            if ((Int32)Session["VoltaTipoAcao"] == 3)
+            {
+                return RedirectToAction("AcompanhamentoProcessoCRM", "CRM");
+            }
+            return RedirectToAction("MontarTelaTipoAcao");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirTipoAcao()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaTipoAcao");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            TIPO_ACAO item = new TIPO_ACAO();
+            TipoAcaoViewModel vm = Mapper.Map<TIPO_ACAO, TipoAcaoViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.TIAC_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirTipoAcao(TipoAcaoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    TIPO_ACAO item = Mapper.Map<TipoAcaoViewModel, TIPO_ACAO>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = taApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensTipoAcao"] = 3;
+                        return RedirectToAction("MontarTelaTipoAcao");
+                    }
+                    Session["IdVolta"] = item.TIAC_CD_ID;
+
+                    // Sucesso
+                    listaMasterTipoAcao = new List<TIPO_ACAO>();
+                    Session["ListaTipoAcao"] = null;
+                    return RedirectToAction("MontarTelaTipoAcao");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VerTipoAcao(Int32 id)
+        {
+            
+            // Prepara view
+            TIPO_ACAO item = taApp.GetItemById(id);
+            objetoAntesTipoAcao = item;
+            Session["TipoAcao"] = item;
+            Session["IdTipoAcao"] = id;
+            TipoAcaoViewModel vm = Mapper.Map<TIPO_ACAO, TipoAcaoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult EditarTipoAcao(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaTipoAcao");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            TIPO_ACAO item = taApp.GetItemById(id);
+            objetoAntesTipoAcao = item;
+            Session["TipoAcao"] = item;
+            Session["IdTipoAcao"] = id;
+            TipoAcaoViewModel vm = Mapper.Map<TIPO_ACAO, TipoAcaoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarTipoAcao(TipoAcaoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    TIPO_ACAO item = Mapper.Map<TipoAcaoViewModel, TIPO_ACAO>(vm);
+                    Int32 volta = taApp.ValidateEdit(item, objetoAntesTipoAcao, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterTipoAcao = new List<TIPO_ACAO>();
+                    Session["ListaTipoAcao"] = null;
+                    return RedirectToAction("MontarTelaTipoAcao");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirTipoAcao(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaTipoAcao");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            TIPO_ACAO item = taApp.GetItemById(id);
+            objetoAntesTipoAcao = item;
+            item.TIAC_IN_ATIVO = 0;
+            Int32 volta = taApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensTipoAcao"] = 4;
+                return RedirectToAction("MontarTelaTipoAcao");
+            }
+            listaMasterTipoAcao = new List<TIPO_ACAO>();
+            Session["ListaTipoAcao"] = null;
+            return RedirectToAction("MontarTelaTipoAcao");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarTipoAcao(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaTipoAcao");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            TIPO_ACAO item = taApp.GetItemById(id);
+            item.TIAC_IN_ATIVO = 1;
+            objetoAntesTipoAcao = item;
+            Int32 volta = taApp.ValidateReativar(item, usuario);
+            listaMasterTipoAcao = new List<TIPO_ACAO>();
+            Session["ListaTipoAcao"] = null;
+            return RedirectToAction("MontarTelaTipoAcao");
+        }
+
+        [HttpGet]
+        public ActionResult MontarTelaMotCancelamento()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaMotCancelamento"] == null)
+            {
+                listaMasterMotCancelamento = mcApp.GetAllItens(idAss);
+                Session["ListaMotCancelamento"] = listaMasterMotCancelamento;
+            }
+            ViewBag.Listas = (List<MOTIVO_CANCELAMENTO>)Session["ListaMotCancelamento"];
+            ViewBag.Title = "MotCancelamento";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.Cargo = ((List<MOTIVO_CANCELAMENTO>)Session["ListaMotCancelamento"]).Count;
+
+            if (Session["MensMotCancelamento"] != null)
+            {
+                if ((Int32)Session["MensMotCancelamento"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0189", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensMotCancelamento"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensMotCancelamento"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0190", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["VoltaMotCancelamento"] = 1;
+            Session["MensMotCancelamento"] = 0;
+            objetoMotCancelamento = new MOTIVO_CANCELAMENTO();
+            return View(objetoMotCancelamento);
+        }
+
+        public ActionResult RetirarFiltroMotCancelamento()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Session["ListaMotCancelamento"] = null;
+            return RedirectToAction("MontarTelaMotCancelamento");
+        }
+
+        public ActionResult MostrarTudoMotCancelamento()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterMotCancelamento = mcApp.GetAllItensAdm(idAss);
+            Session["ListaMotCancelamento"] = listaMasterMotCancelamento;
+            return RedirectToAction("MontarTelaMotCancelamento");
+        }
+
+        public ActionResult VoltarBaseMotCancelamento()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaMotCancelamento"] == 2)
+            {
+                return RedirectToAction("VoltarCancelarPedido", "CRM");
+            }
+            if ((Int32)Session["VoltaMotCancelamento"] == 3)
+            {
+                return RedirectToAction("VoltarCancelarProcessoCRM", "CRM");
+            }
+            return RedirectToAction("MontarTelaMotCancelamento");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirMotCancelamento()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaMotCancelamento");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            MOTIVO_CANCELAMENTO item = new MOTIVO_CANCELAMENTO();
+            MotivoCancelamentoViewModel vm = Mapper.Map<MOTIVO_CANCELAMENTO, MotivoCancelamentoViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.MOCA_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirMotCancelamento(MotivoCancelamentoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    MOTIVO_CANCELAMENTO item = Mapper.Map<MotivoCancelamentoViewModel, MOTIVO_CANCELAMENTO>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = mcApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensMotCancelamento"] = 3;
+                        return RedirectToAction("MontarTelaMotCancelamento");
+                    }
+                    Session["IdVolta"] = item.MOCA_CD_ID;
+
+                    // Sucesso
+                    listaMasterMotCancelamento = new List<MOTIVO_CANCELAMENTO>();
+                    Session["ListaMotCancelamento"] = null;
+                    return RedirectToAction("VoltarBaseMotCancelamento");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VerMotCancelamento(Int32 id)
+        {
+            
+            // Prepara view
+            MOTIVO_CANCELAMENTO item = mcApp.GetItemById(id);
+            objetoAntesMotCancelamento = item;
+            Session["MotCancelamento"] = item;
+            Session["IdMotCancelamento"] = id;
+            MotivoCancelamentoViewModel vm = Mapper.Map<MOTIVO_CANCELAMENTO, MotivoCancelamentoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult EditarMotCancelamento(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaMotCancelamento");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            MOTIVO_CANCELAMENTO item = mcApp.GetItemById(id);
+            objetoAntesMotCancelamento = item;
+            Session["MotCancelamento"] = item;
+            Session["IdMotCancelamento"] = id;
+            MotivoCancelamentoViewModel vm = Mapper.Map<MOTIVO_CANCELAMENTO, MotivoCancelamentoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarMotCancelamento(MotivoCancelamentoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    MOTIVO_CANCELAMENTO item = Mapper.Map<MotivoCancelamentoViewModel, MOTIVO_CANCELAMENTO>(vm);
+                    Int32 volta = mcApp.ValidateEdit(item, objetoAntesMotCancelamento, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterMotCancelamento = new List<MOTIVO_CANCELAMENTO>();
+                    Session["ListaMotCancelamento"] = null;
+                    return RedirectToAction("MontarTelaMotCancelamento");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirMotCancelamento(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaMotCancelamento");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            MOTIVO_CANCELAMENTO item = mcApp.GetItemById(id);
+            objetoAntesMotCancelamento = item;
+            item.MOCA_IN_ATIVO = 0;
+            Int32 volta = mcApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensMotCancelamento"] = 4;
+                return RedirectToAction("MontarTelaMotCancelamento");
+            }
+            listaMasterMotCancelamento = new List<MOTIVO_CANCELAMENTO>();
+            Session["ListaMotCancelamento"] = null;
+            return RedirectToAction("MontarTelaMotCancelamento");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarMotCancelamento(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaMotCancelamento");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            MOTIVO_CANCELAMENTO item = mcApp.GetItemById(id);
+            item.MOCA_IN_ATIVO = 1;
+            objetoAntesMotCancelamento = item;
+            Int32 volta = mcApp.ValidateReativar(item, usuario);
+            listaMasterMotCancelamento = new List<MOTIVO_CANCELAMENTO>();
+            Session["ListaMotCancelamento"] = null;
+            return RedirectToAction("MontarTelaMotCancelamento");
+        }
+
+        [HttpGet]
+        public ActionResult MontarTelaMotEncerramento()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaMotEncerramento"] == null)
+            {
+                listaMasterMotEncerramento = meApp.GetAllItens(idAss);
+                Session["ListaMotEncerramento"] = listaMasterMotEncerramento;
+            }
+            ViewBag.Listas = (List<MOTIVO_ENCERRAMENTO>)Session["ListaMotEncerramento"];
+            ViewBag.Title = "MotEncerramento";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.Cargo = ((List<MOTIVO_ENCERRAMENTO>)Session["ListaMotEncerramento"]).Count;
+
+            if (Session["MensMotEncerramento"] != null)
+            {
+                if ((Int32)Session["MensMotEncerramento"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0191", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensMotEncerramento"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensMotEncerramento"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0192", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["VoltaMotEncerramento"] = 1;
+            Session["MensMotEncerramento"] = 0;
+            objetoMotEncerramento = new MOTIVO_ENCERRAMENTO();
+            return View(objetoMotEncerramento);
+        }
+
+        public ActionResult RetirarFiltroMotEncerramento()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Session["ListaMotEncerramento"] = null;
+            return RedirectToAction("MontarTelaMotEncerramento");
+        }
+
+        public ActionResult MostrarTudoMotEncerramento()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterMotEncerramento = meApp.GetAllItensAdm(idAss);
+            Session["ListaMotEncerramento"] = listaMasterMotEncerramento;
+            return RedirectToAction("MontarTelaMotEncerramento");
+        }
+
+        public ActionResult VoltarBaseMotEncerramento()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaMotEncerramento"] == 2)
+            {
+                return RedirectToAction("VoltarEncerrarProcessoCRM", "CRM");
+            }
+            return RedirectToAction("MontarTelaMotEncerramento");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirMotEncerramento()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaMotEncerramento");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            MOTIVO_ENCERRAMENTO item = new MOTIVO_ENCERRAMENTO();
+            MotivoEncerramentoViewModel vm = Mapper.Map<MOTIVO_ENCERRAMENTO, MotivoEncerramentoViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.MOEN_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirMotEncerramento(MotivoEncerramentoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    MOTIVO_ENCERRAMENTO item = Mapper.Map<MotivoEncerramentoViewModel, MOTIVO_ENCERRAMENTO>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = meApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensMotEncerramento"] = 3;
+                        return RedirectToAction("MontarTelaMotEncerramento");
+                    }
+                    Session["IdVolta"] = item.MOEN_CD_ID;
+
+                    // Sucesso
+                    listaMasterMotEncerramento = new List<MOTIVO_ENCERRAMENTO>();
+                    Session["ListaMotEncerramento"] = null;
+                    return RedirectToAction("VoltarBaseMotEncerramento");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditarMotEncerramento(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaMotEncerramento");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            MOTIVO_ENCERRAMENTO item = meApp.GetItemById(id);
+            objetoAntesMotEncerramento = item;
+            Session["MotEncerramento"] = item;
+            Session["IdMotEncerramento"] = id;
+            MotivoEncerramentoViewModel vm = Mapper.Map<MOTIVO_ENCERRAMENTO, MotivoEncerramentoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarMotEncerramento(MotivoEncerramentoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    MOTIVO_ENCERRAMENTO item = Mapper.Map<MotivoEncerramentoViewModel, MOTIVO_ENCERRAMENTO>(vm);
+                    Int32 volta = meApp.ValidateEdit(item, objetoAntesMotEncerramento, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterMotEncerramento = new List<MOTIVO_ENCERRAMENTO>();
+                    Session["ListaMotEncerramento"] = null;
+                    return RedirectToAction("MontarTelaMotEncerramento");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirMotEncerramento(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCargo");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            MOTIVO_ENCERRAMENTO item = meApp.GetItemById(id);
+            objetoAntesMotEncerramento = item;
+            item.MOEN_IN_ATIVO = 0;
+            Int32 volta = meApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensMotEncerramento"] = 4;
+                return RedirectToAction("MontarTelaMotEncerramento");
+            }
+            listaMasterMotEncerramento = new List<MOTIVO_ENCERRAMENTO>();
+            Session["ListaMotEncerramento"] = null;
+            return RedirectToAction("MontarTelaMotEncerramento");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarMotEncerramento(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaMotEncerramento");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            MOTIVO_ENCERRAMENTO item = meApp.GetItemById(id);
+            item.MOEN_CD_ID = 1;
+            objetoAntesMotEncerramento = item;
+            Int32 volta = meApp.ValidateReativar(item, usuario);
+            listaMasterMotEncerramento = new List<MOTIVO_ENCERRAMENTO>();
+            Session["ListaMotEncerramento"] = null;
+            return RedirectToAction("MontarTelaMotEncerramento");
         }
 
     }

@@ -43,18 +43,7 @@ namespace ApplicationServices.Interfaces
         Int32 ValidateEditAcao(CRM_ACAO item);
         Int32 ValidateCreateAcao(CRM_ACAO item, USUARIO usuario);
 
-        CRM_PROPOSTA_ACOMPANHAMENTO GetPropostaComentarioById(Int32 id);
-        List<CRM_PROPOSTA> GetAllPropostas(Int32 idAss);
-        CRM_PROPOSTA GetPropostaById(Int32 id);
-        Int32 ValidateEditProposta(CRM_PROPOSTA item);
-        Int32 ValidateCreateProposta(CRM_PROPOSTA item);
         List<TEMPLATE_PROPOSTA> GetAllTemplateProposta(Int32 idAss);
-        Int32 ValidateCancelarProposta(CRM_PROPOSTA item);
-        Int32 ValidateReprovarProposta(CRM_PROPOSTA item);
-        Int32 ValidateAprovarProposta(CRM_PROPOSTA item);
-        Int32 ValidateEnviarProposta(CRM_PROPOSTA item);
-        Int32 ValidateAprovarPropostaDireto(CRM_PROPOSTA item);
-        CRM_PROPOSTA_ANEXO GetAnexoPropostaById(Int32 id);
         TEMPLATE_PROPOSTA GetTemplateById(Int32 id);
 
         List<CRM_PEDIDO_VENDA> GetAllPedidosGeral(Int32 idAss);
@@ -65,7 +54,7 @@ namespace ApplicationServices.Interfaces
         Int32 ValidateEditPedido(CRM_PEDIDO_VENDA item);
         Int32 ValidateCreatePedido(CRM_PEDIDO_VENDA item);
         CRM_PEDIDO_VENDA_ANEXO GetAnexoPedidoById(Int32 id);
-        List<FILIAL> GetAllFilial(Int32 idAss);
+        //List<FILIAL> GetAllFilial(Int32 idAss);
         CRM_PEDIDO_VENDA GetPedidoByNumero(String num, Int32 idAss);
         List<FORMA_ENVIO> GetAllFormasEnvio(Int32 idAss);
         List<FORMA_FRETE> GetAllFormasFrete(Int32 idAss);

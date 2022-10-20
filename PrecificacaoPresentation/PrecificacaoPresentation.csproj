@@ -284,6 +284,7 @@
     <Compile Include="ViewModels\EmpresaMaquinaViewModel.cs" />
     <Compile Include="ViewModels\FornecedorContatoViewModel.cs" />
     <Compile Include="ViewModels\FornecedorViewModel.cs" />
+    <Compile Include="ViewModels\MotivoCancelamentoViewModel.cs" />
     <Compile Include="ViewModels\MovimentoEstoqueProdutoViewModel.cs" />
     <Compile Include="ViewModels\MovimentacaoAvulsaGridViewModel.cs" />
     <Compile Include="ViewModels\MovimentacaoAvulsaViewModel.cs" />
@@ -292,6 +293,8 @@
     <Compile Include="ViewModels\ProdutoTabelaPrecoViewModel.cs" />
     <Compile Include="ViewModels\ProdutoViewModel.cs" />
     <Compile Include="ViewModels\SubcategoriaProdutoViewModel.cs" />
+    <Compile Include="ViewModels\MotivoEncerramentoViewModel.cs" />
+    <Compile Include="ViewModels\TipoAcaoViewModel.cs" />
     <Compile Include="ViewModels\TipoEmbalagemViewModel.cs" />
     <Compile Include="ViewModels\TamanhoViewModel.cs" />
     <Compile Include="ViewModels\UnidadeViewModel.cs" />
@@ -3118,6 +3121,15 @@
     <Content Include="Views\FichaTecnica\EditarInsumoFT.cshtml" />
     <Content Include="Views\FichaTecnica\EditarFT.cshtml" />
     <Content Include="Views\FichaTecnica\IncluirInsumoFT.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaTipoAcao.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirTipoAcao.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarTipoAcao.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaMotCancelamento.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirMotCancelamento.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarMotCancelamento.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaMotEncerramento.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirMotEncerramento.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarMotEncerramento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

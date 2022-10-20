@@ -612,4 +612,22 @@
   <data name="M0186" xml:space="preserve">
     <value>Impossível excluir este tipo de embalagem. Existem registros vinculados a ele</value>
   </data>
+  <data name="M0187" xml:space="preserve">
+    <value>Tipo de ação já cadastrado</value>
+  </data>
+  <data name="M0188" xml:space="preserve">
+    <value>Impossível excluir este tipo de ação. Existem registros vinculados a ele</value>
+  </data>
+  <data name="M0189" xml:space="preserve">
+    <value>Motivo de Cancelamento já cadastrado</value>
+  </data>
+  <data name="M0190" xml:space="preserve">
+    <value>Impossível excluir este motivo de cancelamento. Existem registros vinculados a ele</value>
+  </data>
+  <data name="M0191" xml:space="preserve">
+    <value>Motivo de Encerramento já cadastrado</value>
+  </data>
+  <data name="M0192" xml:space="preserve">
+    <value>Impossível excluir este motivo de encerramento. Existem registros vinculados a ele</value>
+  </data>
 </root>

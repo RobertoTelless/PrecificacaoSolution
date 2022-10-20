@@ -17,10 +17,10 @@ namespace ApplicationServices.Services
         private readonly IContaReceberParcelaService _baseService;
         private readonly IContaBancariaService _cbService;
         private readonly INotificacaoService _notiService;
-        private readonly IFormaPagamentoService _fopaService;
+        private readonly IFormaPagRecAppService _fopaService;
         private readonly IContaReceberService _crService;
 
-        public ContaReceberParcelaAppService(IContaReceberParcelaService baseService, IContaBancariaService cbService, INotificacaoService notiService, IFormaPagamentoService fopaService, IContaReceberService crService) : base(baseService)
+        public ContaReceberParcelaAppService(IContaReceberParcelaService baseService, IContaBancariaService cbService, INotificacaoService notiService, IFormaPagRecAppService fopaService, IContaReceberService crService) : base(baseService)
         {
             _baseService = baseService;
             _cbService = cbService;
@@ -52,12 +52,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddCRPA",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER_PARCELA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<CONTA_RECEBER_PARCELA>(item)
                 };
 
                 Int32 volta = _baseService.Create(item);
@@ -95,13 +95,13 @@ namespace ApplicationServices.Services
 
                     // Monta lançamento bancário
                     CONTA_RECEBER cr = _crService.GetItemById(item.CARE_CD_ID);
-                    if (cr.FOPA_CD_ID == null)
+                    if (cr.FOPR_CD_ID == null)
                     {
                         return 3;
                     }
-                    FORMA_PAGAMENTO forma = _fopaService.GetItemById(cr.FOPA_CD_ID.Value);
-                    CONTA_BANCO conta = _cbService.GetItemById(forma.COBA_CD_ID.Value);
-                    conta.COBA_VL_SALDO_ATUAL += item.CRPA_VL_VALOR;
+                    FORMA_PAGTO_RECTO forma = _fopaService.GetItemById(cr.FOPR_CD_ID.Value);
+                    CONTA_BANCO conta = _cbService.GetItemById(forma.COBA_CD_ID);
+                    conta.COBA_VL_SALDO_ATUAL += item.CRPA_VL_VALOR.Value;
                     CONTA_BANCO_LANCAMENTO lanc = new CONTA_BANCO_LANCAMENTO();
                     lanc.COBA_CD_ID = conta.COBA_CD_ID;
                     lanc.CBLA_DS_DESCRICAO = item.CRPA_DS_DESCRICAO;
@@ -115,17 +115,16 @@ namespace ApplicationServices.Services
 
                     // Gera Notificação
                     NOTIFICACAO noti = new NOTIFICACAO();
-                    noti.NOTI_DT_EMISSAO = DateTime.Today;
-                    noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
-                    noti.NOTI_IN_NIVEL = 1;
-                    noti.NOTI_IN_VISTA = 0;
-                    noti.NOTI_NM_TITULO = "Contas a Receber - Liquidação de Parcela";
-                    noti.NOTI_IN_ATIVO = 1;
-                    noti.NOTI_TX_TEXTO = "A parcela " + item.CRPA_NR_PARCELA + " do lançamento " + cr.CARE_DS_DESCRICAO + " foi liquidada em " + DateTime.Today.Date.ToLongDateString();
+                    noti.NOTC_DT_EMISSAO = DateTime.Now;
+                    noti.NOTC_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
+                    noti.NOTC_IN_NIVEL = 1;
+                    noti.NOTC_IN_VISTA = 0;
+                    noti.NOTC_NM_TITULO = "Contas a Receber - Liquidação de Parcela";
+                    noti.NOTC_IN_ATIVO = 1;
+                    noti.NOTC_TX_NOTIFICACAO = "A parcela " + item.CRPA_NR_PARCELA + " do lançamento " + cr.CARE_DS_DESCRICAO + " foi liquidada em " + DateTime.Today.Date.ToLongDateString();
                     noti.USUA_CD_ID = usuario.USUA_CD_ID;
                     noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
                     noti.CANO_CD_ID = 1;
-                    noti.NOTI_IN_STATUS = 0;
 
                     // Envia notificação
                     Int32 volta = _notiService.Create(noti);
@@ -155,17 +154,6 @@ namespace ApplicationServices.Services
                 // Acerta campos
                 item.CRPA_IN_ATIVO = 0;
 
-                // Monta Log
-                //LOG log = new LOG
-                //{
-                //    LOG_DT_DATA = DateTime.Now,
-                //    USUA_CD_ID = usuario.USUA_CD_ID,
-                //    ASSI_CD_ID = SessionMocks.IdAssinante,
-                //    LOG_IN_ATIVO = 1,
-                //    LOG_NM_OPERACAO = "DelCARE",
-                //    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER>(item)
-                //};
-
                 // Persiste
                 return _baseService.Edit(item);
             }
@@ -183,17 +171,6 @@ namespace ApplicationServices.Services
 
                 // Acerta campos
                 item.CRPA_IN_ATIVO = 1;
-
-                // Monta Log
-                //LOG log = new LOG
-                //{
-                //    LOG_DT_DATA = DateTime.Now,
-                //    USUA_CD_ID = usuario.USUA_CD_ID,
-                //    ASSI_CD_ID = SessionMocks.IdAssinante,
-                //    LOG_IN_ATIVO = 1,
-                //    LOG_NM_OPERACAO = "ReatCARE",
-                //    LOG_TX_REGISTRO = Serialization.SerializeJSON<CONTA_RECEBER>(item)
-                //};
 
                 // Persiste
                 return _baseService.Edit(item);
