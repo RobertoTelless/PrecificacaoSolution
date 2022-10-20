@@ -204,7 +204,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public virtual ICollection<CRM_PEDIDO_VENDA_ACOMPANHAMENTO> CRM_PEDIDO_VENDA_ACOMPANHAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM_PEDIDO_VENDA_ANEXO> CRM_PEDIDO_VENDA_ANEXO { get; set; }
-        public virtual FILIAL FILIAL { get; set; }
+        //public virtual FILIAL FILIAL { get; set; }
         public virtual FORMA_ENVIO FORMA_ENVIO { get; set; }
         public virtual FORMA_FRETE FORMA_FRETE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
