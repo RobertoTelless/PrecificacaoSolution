@@ -1464,11 +1464,28 @@ namespace ERP_Condominios_Solution.Controllers
         [HttpGet]
         public ActionResult ExcluirRateio(Int32 id)
         {
-
-            // Verifica se tem usuario logado
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
             CONTA_PAGAR cp = (CONTA_PAGAR)Session["ContaPagar"];
             CONTA_PAGAR_RATEIO rl = ratApp.GetItemById(id);
             Int32 volta = ratApp.ValidateDelete(rl);
+            Session["IdVoltaTrab"] = 3;
+            return RedirectToAction("VoltarAnexoCP");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarRateio(Int32 id)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+            CONTA_PAGAR cp = (CONTA_PAGAR)Session["ContaPagar"];
+            CONTA_PAGAR_RATEIO rl = ratApp.GetItemById(id);
+            Int32 volta = ratApp.ValidateReativar(rl, usuarioLogado);
             Session["IdVoltaTrab"] = 3;
             return RedirectToAction("VoltarAnexoCP");
         }
