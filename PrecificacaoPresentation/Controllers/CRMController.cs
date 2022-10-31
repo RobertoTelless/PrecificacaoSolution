@@ -57,19 +57,19 @@ namespace ERP_Condominios_Solution.Controllers
         DIARIO_PROCESSO objetoDiario = new DIARIO_PROCESSO();
         DIARIO_PROCESSO objetoAntesDiario = new DIARIO_PROCESSO();
         String extensao;
-        public CRMController(ICRMAppService baseApps, ILogAppService logApps, IUsuarioAppService usuApps, IConfiguracaoAppService confApps, IMensagemAppService menApps, IAgendaAppService ageApps, IClienteAppService cliApps, ITemplateEMailAppService temaApps, ITemplateAppService tempApps, ICRMDiarioAppService diaApps, IFunilAppService funApps, ITemplatePropostaAppService tpApps)
+
+        public CRMController(ICRMAppService baseApps, ILogAppService logApps, IUsuarioAppService usuApps, IConfiguracaoAppService confApps, IAgendaAppService ageApps, IClienteAppService cliApps, ITemplateEMailAppService temaApps, ITemplateAppService tempApps, ICRMDiarioAppService diaApps, ITemplatePropostaAppService tpApps)
         {
             baseApp = baseApps;
             logApp = logApps;
             usuApp = usuApps;
             confApp = confApps;
-            menApp = menApps;
+            //menApp = menApps;
             ageApp = ageApps;
             cliApp = cliApps;
             temaApp = temaApps;
             tempApp = tempApps;
             diaApp = diaApps;
-            funApp = funApps;
             tpApp = tpApps;
         }
 
@@ -129,7 +129,6 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Title = "CRM";
 
             ViewBag.Origem = new SelectList(baseApp.GetAllOrigens(idAss).OrderBy(p => p.CROR_NM_NOME), "CROR_CD_ID", "CROR_NM_NOME");
-            ViewBag.Funis = new SelectList(funApp.GetAllItens(idAss).Where(m => m.FUNIL_ETAPA.Count > 0).OrderBy(p => p.FUNI_NM_NOME), "FUNI_CD_ID", "FUNI_NM_NOME");
             List<SelectListItem> visao = new List<SelectListItem>();
             visao.Add(new SelectListItem() { Text = "Lista", Value = "1" });
             visao.Add(new SelectListItem() { Text = "Kanban", Value = "2" });
@@ -278,7 +277,6 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Listas = (List<CRM>)Session["ListaCRM"];
             ViewBag.Title = "CRM";
             ViewBag.Origem = new SelectList(baseApp.GetAllOrigens(idAss).OrderBy(p => p.CROR_NM_NOME), "CROR_CD_ID", "CROR_NM_NOME");
-            ViewBag.Funis = new SelectList(funApp.GetAllItens(idAss).Where(m => m.FUNIL_ETAPA.Count > 0).OrderBy(p => p.FUNI_NM_NOME), "FUNI_CD_ID", "FUNI_NM_NOME");
             List<SelectListItem> visao = new List<SelectListItem>();
             visao.Add(new SelectListItem() { Text = "Lista", Value = "1" });
             visao.Add(new SelectListItem() { Text = "Kanban", Value = "2" });
@@ -347,13 +345,6 @@ namespace ERP_Condominios_Solution.Controllers
                     ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0048", CultureInfo.CurrentCulture));
                 }
             }
-
-            // Recupera etapas do funil
-
-
-
-
-
 
             // Abre view
             Session["IdCRM"] = null;
@@ -367,139 +358,6 @@ namespace ERP_Condominios_Solution.Controllers
             return View(objeto);
         }
         
-        [HttpGet]
-        public ActionResult MontarTelaKanbanCRM_Nova(Int32 id)
-        {
-            // Verifica se tem usuario logado
-            USUARIO usuario = new USUARIO();
-            if ((String)Session["Ativa"] == null)
-            {
-                return RedirectToAction("Logout", "ControleAcesso");
-            }
-            if ((USUARIO)Session["UserCredentials"] != null)
-            {
-                usuario = (USUARIO)Session["UserCredentials"];
-
-                // Verfifica permissão
-                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
-                {
-                    Session["MensPermissao"] = 2;
-                    return RedirectToAction("CarregarBase", "BaseAdmin");
-                }
-            }
-            else
-            {
-                return RedirectToAction("Logout", "ControleAcesso");
-            }
-            Int32 idAss = (Int32)Session["IdAssinante"];
-
-
-            // Carrega listas
-            if ((List<CRM>)Session["ListaCRM"] == null)
-            {
-                listaMaster = baseApp.GetAllItens(idAss);
-                Session["ListaCRM"] = listaMaster;
-            }
-            Session["CRM"] = null;
-            ViewBag.Listas = (List<CRM>)Session["ListaCRM"];
-            ViewBag.Title = "CRM";
-            ViewBag.Origem = new SelectList(baseApp.GetAllOrigens(idAss).OrderBy(p => p.CROR_NM_NOME), "CROR_CD_ID", "CROR_NM_NOME");
-            ViewBag.Funis = new SelectList(funApp.GetAllItens(idAss).Where(m => m.FUNIL_ETAPA.Count > 0).OrderBy(p => p.FUNI_NM_NOME), "FUNI_CD_ID", "FUNI_NM_NOME");
-            List<SelectListItem> visao = new List<SelectListItem>();
-            visao.Add(new SelectListItem() { Text = "Lista", Value = "1" });
-            visao.Add(new SelectListItem() { Text = "Kanban", Value = "2" });
-            ViewBag.Visao = new SelectList(visao, "Value", "Text");
-            List<SelectListItem> adic = new List<SelectListItem>();
-            adic.Add(new SelectListItem() { Text = "Ativos", Value = "1" });
-            adic.Add(new SelectListItem() { Text = "Arquivados", Value = "2" });
-            adic.Add(new SelectListItem() { Text = "Cancelados", Value = "3" });
-            adic.Add(new SelectListItem() { Text = "Falhados", Value = "4" });
-            adic.Add(new SelectListItem() { Text = "Sucesso", Value = "5" });
-            adic.Add(new SelectListItem() { Text = "Faturamento", Value = "6" });
-            adic.Add(new SelectListItem() { Text = "Expedição", Value = "7" });
-            adic.Add(new SelectListItem() { Text = "Entregue", Value = "8" });
-            ViewBag.Adic = new SelectList(adic, "Value", "Text");
-            List<SelectListItem> fav = new List<SelectListItem>();
-            fav.Add(new SelectListItem() { Text = "Sim", Value = "1" });
-            fav.Add(new SelectListItem() { Text = "Não", Value = "0" });
-            ViewBag.Favorito = new SelectList(fav, "Value", "Text");
-            List<SelectListItem> temp = new List<SelectListItem>();
-            temp.Add(new SelectListItem() { Text = "Fria", Value = "1" });
-            temp.Add(new SelectListItem() { Text = "Morna", Value = "2" });
-            temp.Add(new SelectListItem() { Text = "Quente", Value = "3" });
-            temp.Add(new SelectListItem() { Text = "Muito Quente", Value = "4" });
-            ViewBag.Temp = new SelectList(temp, "Value", "Text");
-            Session["IncluirCRM"] = 0;
-
-            // Indicadores
-            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
-
-            if (Session["MensCRM"] != null)
-            {
-                if ((Int32)Session["MensCRM"] == 2)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
-                }
-                if ((Int32)Session["MensCRM"] == 3)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0035", CultureInfo.CurrentCulture));
-                }
-                if ((Int32)Session["MensCRM"] == 4)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0036", CultureInfo.CurrentCulture));
-                }
-                if ((Int32)Session["MensCRM"] == 30)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0037", CultureInfo.CurrentCulture));
-                }
-                if ((Int32)Session["MensCRM"] == 31)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0038", CultureInfo.CurrentCulture));
-                }
-                if ((Int32)Session["MensCRM"] == 60)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0043", CultureInfo.CurrentCulture));
-                }
-                if ((Int32)Session["MensCRM"] == 61)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0046", CultureInfo.CurrentCulture));
-                }
-                if ((Int32)Session["MensCRM"] == 62)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0047", CultureInfo.CurrentCulture));
-                }
-                if ((Int32)Session["MensCRM"] == 63)
-                {
-                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0048", CultureInfo.CurrentCulture));
-                }
-            }
-
-            // Recupera etapas do funil
-            FUNIL funil = funApp.GetItemById(id);
-            Session["IdFunil"] = id;
-            Int32 numEtapas = funil.FUNIL_ETAPA.Count;
-            ViewBag.NumEtapas = numEtapas;
-            Int32 i = 1;
-            String nome = String.Empty;
-            foreach (FUNIL_ETAPA item in funil.FUNIL_ETAPA)
-            {
-                nome = "Session" + i.ToString();
-                Session[nome] = item.FUET_NM_NOME;
-                i++;
-            }
-
-            // Abre view
-            Session["IdCRM"] = null;
-            Session["VoltaCRM"] = 2;
-            Session["IncluirCliente"] = 0;
-            objeto = new CRM();
-            if (Session["FiltroCRM"] != null)
-            {
-                objeto = (CRM)Session["FiltroCRM"];
-            }
-            return View(objeto);
-        }
-
         public ActionResult RetirarFiltroCRM()
         {
 
@@ -526,7 +384,7 @@ namespace ERP_Condominios_Solution.Controllers
                 // Executa a operação
                 List<CRM> listaObj = new List<CRM>();
                 Session["FiltroCRM"] = item;
-                Int32 volta = baseApp.ExecuteFilter(item.CRM1_IN_STATUS, item.CRM1_DT_CRIACAO, item.CRM1_DT_CANCELAMENTO, item.ORIG_CD_ID, item.CRM1_IN_ATIVO, item.CRM1_NM_NOME, item.CRM1_DS_DESCRICAO, item.CRM1_IN_ESTRELA, item.CRM1_NR_TEMPERATURA, item.FUNI_CD_ID, idAss, out listaObj);
+                Int32 volta = baseApp.ExecuteFilter(item.CRM1_IN_STATUS, item.CRM1_DT_CRIACAO, item.CRM1_DT_CANCELAMENTO, item.ORIG_CD_ID, item.CRM1_IN_ATIVO, item.CRM1_NM_NOME, item.CRM1_DS_DESCRICAO, item.CRM1_IN_ESTRELA, item.CRM1_NR_TEMPERATURA, idAss, out listaObj);
 
                 // Verifica retorno
                 if (volta == 1)
@@ -589,7 +447,6 @@ namespace ERP_Condominios_Solution.Controllers
             Session["VoltaCRM"] = 0;
             return RedirectToAction("MontarTelaCRM");
         }
-
 
         [HttpGet]
         public ActionResult ExcluirProcesso(Int32 id)
@@ -823,7 +680,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             PdfPCell cell = new PdfPCell();
             cell.Border = 0;
-            Image image = Image.GetInstance(Server.MapPath("~/Images/CRM_Icon2.jpg"));
+            Image image = Image.GetInstance(Server.MapPath("~/Images/Precificacao_Favicon.png"));
             image.ScaleAbsolute(50, 50);
             cell.AddElement(image);
             table.AddCell(cell);
@@ -1338,7 +1195,6 @@ namespace ERP_Condominios_Solution.Controllers
             // Prepara listas
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss).OrderBy(p => p.USUA_NM_NOME), "USUA_CD_ID", "USUA_NM_NOME");
             ViewBag.Origem = new SelectList(baseApp.GetAllOrigens(idAss).OrderBy(p => p.CROR_NM_NOME), "CROR_CD_ID", "CROR_NM_NOME");
-            ViewBag.Funis = new SelectList(funApp.GetAllItens(idAss).Where(m => m.FUNIL_ETAPA.Count > 0).OrderBy(p => p.FUNI_NM_NOME), "FUNI_CD_ID", "FUNI_NM_NOME");
             List<SelectListItem> fav = new List<SelectListItem>();
             fav.Add(new SelectListItem() { Text = "Sim", Value = "1" });
             fav.Add(new SelectListItem() { Text = "Não", Value = "0" });
@@ -1386,7 +1242,6 @@ namespace ERP_Condominios_Solution.Controllers
 
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss).OrderBy(p => p.USUA_NM_NOME), "USUA_CD_ID", "USUA_NM_NOME");
             ViewBag.Origem = new SelectList(baseApp.GetAllOrigens(idAss).OrderBy(p => p.CROR_NM_NOME), "CROR_CD_ID", "CROR_NM_NOME");
-            ViewBag.Funis = new SelectList(funApp.GetAllItens(idAss).Where(m => m.FUNIL_ETAPA.Count > 0).OrderBy(p => p.FUNI_NM_NOME), "FUNI_CD_ID", "FUNI_NM_NOME");
             List<SelectListItem> fav = new List<SelectListItem>();
             fav.Add(new SelectListItem() { Text = "Sim", Value = "1" });
             fav.Add(new SelectListItem() { Text = "Não", Value = "0" });
@@ -1402,13 +1257,6 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 try
                 {
-                    // Verifica Funil
-                    if (vm.FUNI_CD_ID == null || vm.FUNI_CD_ID == 0)
-                    {
-                        FUNIL funil = funApp.GetAllItens(idAss).Where(p => p.FUNI_IN_FIXO == 1).FirstOrDefault();
-                        vm.FUNI_CD_ID = funil.FUNI_CD_ID;
-                    }                  
-                    
                     // Verifica cliente
                     if (vm.CLIE_CD_ID == null || vm.CLIE_CD_ID == 0)
                     {

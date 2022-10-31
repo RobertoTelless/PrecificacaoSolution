@@ -214,6 +214,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CRMSys_Base.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRMSys_Base.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\ERP_Condominio_Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3176,6 +3181,13 @@
     <Content Include="Views\ContaReceber\ParcelarCR.cshtml" />
     <Content Include="Views\ContaReceber\LiquidarParcelaCR.cshtml" />
     <Content Include="Views\CRM\MontarTelaCRM.cshtml" />
+    <Content Include="Views\CRM\MontarTelaKanbanCRM.cshtml" />
+    <Content Include="Views\CRM\IncluirProcessoCRM.cshtml" />
+    <Content Include="Views\CRM\VerAnexoCRM.cshtml" />
+    <Content Include="Views\CRM\VerAnexoCRMPedido.cshtml" />
+    <Content Include="Views\CRM\CancelarProcessoCRM.cshtml" />
+    <Content Include="Views\CRM\EnviarParaExpedicaoCRM.cshtml" />
+    <Content Include="Views\CRM\EnviarExpedicaoCRM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3306,6 +3318,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="App_Start\CRMSys_Base.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CRMSys_Base.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="App_Start\ERP_Condominio_Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ERP_Condominio_Resource.Designer.cs</LastGenOutput>
