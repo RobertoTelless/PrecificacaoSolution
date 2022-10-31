@@ -69,6 +69,9 @@ namespace EntitiesServices.Model
             this.SUBCATEGORIA_PRODUTO = new HashSet<SUBCATEGORIA_PRODUTO>();
             this.FUNIL = new HashSet<FUNIL>();
             this.CONTA_RECEBER = new HashSet<CONTA_RECEBER>();
+            this.CATEGORIA_SERVICO = new HashSet<CATEGORIA_SERVICO>();
+            this.FILIAL = new HashSet<FILIAL>();
+            this.SERVICO = new HashSet<SERVICO>();
         }
     
         public int ASSI_CD_ID { get; set; }
@@ -184,5 +187,11 @@ namespace EntitiesServices.Model
         public virtual ICollection<FUNIL> FUNIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_RECEBER> CONTA_RECEBER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CATEGORIA_SERVICO> CATEGORIA_SERVICO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FILIAL> FILIAL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SERVICO> SERVICO { get; set; }
     }
 }

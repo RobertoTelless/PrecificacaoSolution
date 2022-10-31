@@ -258,6 +258,7 @@
     <Compile Include="Interfaces\Repositories\ICategoriaClienteRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaFornecedorRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaProdutoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICategoriaServicoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICentroCustoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteCnpjRepository.cs" />
@@ -447,6 +448,9 @@
     <Compile Include="Model\CATEGORIA_PRODUTO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CATEGORIA_SERVICO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CATEGORIA_USUARIO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
@@ -558,6 +562,9 @@
     <Compile Include="Model\FICHA_TECNICA_DETALHE.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\FILIAL.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\FORMA_ENVIO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
@@ -604,6 +611,9 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\MOVIMENTO_ESTOQUE_PRODUTO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NOMENCLATURA_BRAS_SERVICOS.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\NOTICIA.cs">
@@ -682,6 +692,15 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\REGIME_TRIBUTARIO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SERVICO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SERVICO_ANEXO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SERVICO_TABELA_PRECO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SEXO.cs">

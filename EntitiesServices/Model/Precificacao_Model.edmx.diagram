@@ -328,6 +328,23 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_RATEIO_CONTA_RECEBER" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_USUARIO" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_RATEIO_CENTRO_CUSTO" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_SERVICO" Width="1.5" PointX="3" PointY="140.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FILIAL" Width="1.5" PointX="23.25" PointY="163.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOMENCLATURA_BRAS_SERVICOS" Width="1.5" PointX="18.25" PointY="172.5" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SERVICO" Width="1.5" PointX="20.5" PointY="164.5" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SERVICO_ANEXO" Width="1.5" PointX="22.75" PointY="171.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SERVICO_TABELA_PRECO" Width="1.5" PointX="25.5" PointY="165.375" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_SERVICO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FILIAL_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_CATEGORIA_SERVICO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FILIAL_UF" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_FILIAL" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_TABELA_PRECO_FILIAL" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_NOMENCLATURA_BRAS_SERVICOS" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_ANEXO_SERVICO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_TABELA_PRECO_SERVICO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_UNIDADE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

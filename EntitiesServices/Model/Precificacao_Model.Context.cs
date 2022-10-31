@@ -139,5 +139,11 @@ namespace EntitiesServices.Model
         public virtual DbSet<CONTA_RECEBER_ANEXO> CONTA_RECEBER_ANEXO { get; set; }
         public virtual DbSet<CONTA_RECEBER_PARCELA> CONTA_RECEBER_PARCELA { get; set; }
         public virtual DbSet<CONTA_RECEBER_RATEIO> CONTA_RECEBER_RATEIO { get; set; }
+        public virtual DbSet<CATEGORIA_SERVICO> CATEGORIA_SERVICO { get; set; }
+        public virtual DbSet<FILIAL> FILIAL { get; set; }
+        public virtual DbSet<NOMENCLATURA_BRAS_SERVICOS> NOMENCLATURA_BRAS_SERVICOS { get; set; }
+        public virtual DbSet<SERVICO> SERVICO { get; set; }
+        public virtual DbSet<SERVICO_ANEXO> SERVICO_ANEXO { get; set; }
+        public virtual DbSet<SERVICO_TABELA_PRECO> SERVICO_TABELA_PRECO { get; set; }
     }
 }
