@@ -20,5 +20,6 @@ namespace DataServices.Repositories
             IQueryable<TRANSPORTADORA_ANEXO> query = Db.TRANSPORTADORA_ANEXO.Where(p => p.TRAX_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }

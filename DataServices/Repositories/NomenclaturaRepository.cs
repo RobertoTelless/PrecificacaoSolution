@@ -22,5 +22,6 @@ namespace DataServices.Repositories
             IQueryable<NOMENCLATURA_BRAS_SERVICOS> query = Db.NOMENCLATURA_BRAS_SERVICOS;
             return query.ToList();
         }
+
     }
 }

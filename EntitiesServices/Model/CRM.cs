@@ -23,6 +23,7 @@ namespace EntitiesServices.Model
             this.CRM_CONTATO = new HashSet<CRM_CONTATO>();
             this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
             this.CONTA_RECEBER = new HashSet<CONTA_RECEBER>();
+            this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
         }
     
         public int CRM1_CD_ID { get; set; }
@@ -76,5 +77,7 @@ namespace EntitiesServices.Model
         public virtual USUARIO USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_RECEBER> CONTA_RECEBER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
     }
 }

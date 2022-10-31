@@ -145,5 +145,6 @@ namespace EntitiesServices.Model
         public virtual DbSet<SERVICO> SERVICO { get; set; }
         public virtual DbSet<SERVICO_ANEXO> SERVICO_ANEXO { get; set; }
         public virtual DbSet<SERVICO_TABELA_PRECO> SERVICO_TABELA_PRECO { get; set; }
+        public virtual DbSet<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
     }
 }

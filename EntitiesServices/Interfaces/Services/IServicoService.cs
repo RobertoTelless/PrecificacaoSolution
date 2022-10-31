@@ -25,5 +25,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<CATEGORIA_SERVICO> GetAllTipos(Int32 idAss);
         List<NOMENCLATURA_BRAS_SERVICOS> GetAllNBSE();
         SERVICO_ANEXO GetAnexoById(Int32 id);
+
     }
 }

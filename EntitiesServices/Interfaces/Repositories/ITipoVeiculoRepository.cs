@@ -12,5 +12,6 @@ namespace ModelServices.Interfaces.Repositories
         List<TIPO_VEICULO> GetAllItens(Int32 idAss);
         TIPO_VEICULO GetItemById(Int32 id);
         List<TIPO_VEICULO> GetAllItensAdm(Int32 idAss);
+
     }
 }

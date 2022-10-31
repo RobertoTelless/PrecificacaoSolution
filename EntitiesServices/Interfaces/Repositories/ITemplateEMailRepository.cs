@@ -15,5 +15,6 @@ namespace ModelServices.Interfaces.Repositories
         List<TEMPLATE_EMAIL> GetAllItensAdm(Int32 idAss);
         List<TEMPLATE_EMAIL> ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss);
         TEMPLATE_EMAIL CheckExist(TEMPLATE_EMAIL item, Int32 idAss);
+
     }
 }

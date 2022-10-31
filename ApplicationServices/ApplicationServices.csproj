@@ -202,6 +202,7 @@
     <Compile Include="Interfaces\ICategoriaClienteAppService.cs" />
     <Compile Include="Interfaces\ICategoriaFornecedorAppService.cs" />
     <Compile Include="Interfaces\ICategoriaProdutoAppService.cs" />
+    <Compile Include="Interfaces\ICategoriaServicoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaUsuarioAppService.cs" />
     <Compile Include="Interfaces\ICategoriaNotificacaoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaAgendaAppService.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Interfaces\IContaReceberParcelaAppService.cs" />
     <Compile Include="Interfaces\IContaReceberRateioAppService.cs" />
     <Compile Include="Interfaces\ICRMAppService.cs" />
+    <Compile Include="Interfaces\ICRMDiarioAppService.cs" />
     <Compile Include="Interfaces\ICRMOrigemAppService.cs" />
     <Compile Include="Interfaces\IFichaTecnicaAppService.cs" />
     <Compile Include="Interfaces\IFormaEnvioAppService.cs" />
@@ -229,10 +231,16 @@
     <Compile Include="Interfaces\IProdutoAppService.cs" />
     <Compile Include="Interfaces\IProdutoEstoqueFilialAppService.cs" />
     <Compile Include="Interfaces\IProdutoTabelaPrecoAppService.cs" />
+    <Compile Include="Interfaces\IServicoAppService.cs" />
+    <Compile Include="Interfaces\IServicoTabelaPrecoAppService.cs" />
     <Compile Include="Interfaces\ISubCategoriaProdutoAppService.cs" />
+    <Compile Include="Interfaces\ITemplateEMailAppService.cs" />
+    <Compile Include="Interfaces\ITemplatePropostalAppService.cs" />
+    <Compile Include="Interfaces\ITemplateSMSAppService.cs" />
     <Compile Include="Interfaces\ITipoAcaoAppService.cs" />
     <Compile Include="Interfaces\ITipoEmbalagemAppService.cs" />
     <Compile Include="Interfaces\ITamanhoAppService.cs" />
+    <Compile Include="Interfaces\ITransportadoraAppService.cs" />
     <Compile Include="Interfaces\IUnidadeAppService.cs" />
     <Compile Include="Interfaces\IVideoAppService.cs" />
     <Compile Include="Interfaces\IPlataformaEntregaAppService.cs" />
@@ -258,6 +266,7 @@
     <Compile Include="Services\CategoriaClienteAppService.cs" />
     <Compile Include="Services\CategoriaFornecedorAppService.cs" />
     <Compile Include="Services\CategoriaProdutoAppService.cs" />
+    <Compile Include="Services\CategoriaServicoAppService.cs" />
     <Compile Include="Services\CentroCustoAppService.cs" />
     <Compile Include="Services\ClienteAppService.cs" />
     <Compile Include="Services\ClienteCnpjAppService.cs" />
@@ -269,6 +278,7 @@
     <Compile Include="Services\ContaReceberParcelaAppService.cs" />
     <Compile Include="Services\ContaReceberrRateioAppService.cs" />
     <Compile Include="Services\CRMAppService.cs" />
+    <Compile Include="Services\CRMDiarioAppService.cs" />
     <Compile Include="Services\CRMOrigemAppService.cs" />
     <Compile Include="Services\FichaTecnicaAppService.cs" />
     <Compile Include="Services\FormaEnvioAppService.cs" />
@@ -282,10 +292,16 @@
     <Compile Include="Services\ProdutoAppService.cs" />
     <Compile Include="Services\ProdutoEstoqueFilialAppService.cs" />
     <Compile Include="Services\ProdutoTabelaPrecoAppService.cs" />
+    <Compile Include="Services\ServicoAppService.cs" />
+    <Compile Include="Services\ServicoTabelaPrecoAppService.cs" />
     <Compile Include="Services\SubcategoriaProdutoAppService.cs" />
+    <Compile Include="Services\TemplateEMailAppService.cs" />
+    <Compile Include="Services\TemplatePropostaAppService.cs" />
+    <Compile Include="Services\TemplateSMSAppService.cs" />
     <Compile Include="Services\TipoAcaoAppService.cs" />
     <Compile Include="Services\TipoEmbalagemAppService.cs" />
     <Compile Include="Services\TamanhoAppService.cs" />
+    <Compile Include="Services\TransportadoraAppService.cs" />
     <Compile Include="Services\UnidadeAppService.cs" />
     <Compile Include="Services\VideoAppService.cs" />
     <Compile Include="Services\PlataformaEntregaAppService.cs" />

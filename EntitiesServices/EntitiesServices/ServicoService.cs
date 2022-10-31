@@ -23,7 +23,7 @@ namespace ModelServices.EntitiesServices
         private readonly ICategoriaServicoRepository _tipoRepository;
         private readonly IServicoAnexoRepository _anexoRepository;
         private readonly INomencBrasServicosRepository _nbseRepository;
-        protected ERP_CRMEntities Db = new ERP_CRMEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public ServicoService(IServicoRepository baseRepository, ILogRepository logRepository, ICategoriaServicoRepository tipoRepository, IServicoAnexoRepository anexoRepository, INomencBrasServicosRepository nbseRepository) : base(baseRepository)
         {

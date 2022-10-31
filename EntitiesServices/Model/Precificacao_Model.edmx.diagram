@@ -345,6 +345,15 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_ANEXO_SERVICO" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_TABELA_PRECO_SERVICO" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_UNIDADE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.DIARIO_PROCESSO" Width="1.5" PointX="26" PointY="140.75" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_AGENDA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_ACAO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_COMENTARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_USUARIO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

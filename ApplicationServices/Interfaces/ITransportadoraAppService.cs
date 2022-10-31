@@ -27,5 +27,6 @@ namespace ApplicationServices.Interfaces
         Int32 ExecuteFilter(Int32? veic, Int32? tran, String nome, String cnpj, String email, String cidade, String uf, Int32 idAss, out List<TRANSPORTADORA> objeto);
         List<TIPO_VEICULO> GetAllTipoVeiculo(Int32 idAss);
         List<TIPO_TRANSPORTE> GetAllTipoTransporte(Int32 idAss);
+    
     }
 }

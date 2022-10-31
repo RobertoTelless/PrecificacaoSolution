@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<TRANSPORTADORA_ANEXO> GetAllItens();
         TRANSPORTADORA_ANEXO GetItemById(Int32 id);
+
     }
 }

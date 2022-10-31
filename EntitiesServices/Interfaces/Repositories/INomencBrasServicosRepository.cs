@@ -12,5 +12,6 @@ namespace ModelServices.Interfaces.Repositories
         List<NOMENCLATURA_BRAS_SERVICOS> GetAllItens();
         NOMENCLATURA_BRAS_SERVICOS GetItemById(Int32 id);
         List<NOMENCLATURA_BRAS_SERVICOS> GetAllItensAdm();
+
     }
 }

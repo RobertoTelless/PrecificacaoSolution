@@ -143,12 +143,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddTRAN",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TRANSPORTADORA>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TRANSPORTADORA>(item)
                 };
 
                 // Persiste
@@ -190,13 +190,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditTRAN",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TRANSPORTADORA>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<TRANSPORTADORA>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TRANSPORTADORA>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<TRANSPORTADORA>(itemAntes)
                 };
 
                 // Persiste
@@ -256,12 +256,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelTRAN",
-                    LOG_TX_REGISTRO = "Nome: " + item.TRAN_NM_NOME
+                    LOG_TX_TEXTO = "Nome: " + item.TRAN_NM_NOME
                 };
 
                 // Persiste
@@ -285,12 +285,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatTRAN",
-                    LOG_TX_REGISTRO = "Nome: " + item.TRAN_NM_NOME
+                    LOG_TX_TEXTO = "Nome: " + item.TRAN_NM_NOME
                 };
 
                 // Persiste

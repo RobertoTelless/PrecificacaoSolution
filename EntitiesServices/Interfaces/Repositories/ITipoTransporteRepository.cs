@@ -12,5 +12,6 @@ namespace ModelServices.Interfaces.Repositories
         List<TIPO_TRANSPORTE> GetAllItens(Int32 idAss);
         TIPO_TRANSPORTE GetItemById(Int32 id);
         List<TIPO_TRANSPORTE> GetAllItensAdm(Int32 idAss);
+
     }
 }

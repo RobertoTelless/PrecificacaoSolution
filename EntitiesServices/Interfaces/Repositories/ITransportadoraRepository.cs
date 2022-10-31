@@ -15,5 +15,6 @@ namespace ModelServices.Interfaces.Repositories
         List<TRANSPORTADORA> GetAllItens(Int32 idAss);
         List<TRANSPORTADORA> GetAllItensAdm(Int32 idAss);
         List<TRANSPORTADORA> ExecuteFilter(Int32? veic, Int32? tran, String nome, String cnpj, String email, String cidade, String uf, Int32 idAss);
+   
     }
 }

@@ -651,6 +651,11 @@
           <Property Name="FOEN_CD_ID" Type="int" />
           <Property Name="FOFR_CD_ID" Type="int" />
           <Property Name="USUA_CD_ID" Type="int" />
+          <Property Name="PLEN_CD_ID" Type="int" />
+          <Property Name="TEPR_CD_ID" Type="int" />
+          <Property Name="MOCA_CD_ID" Type="int" />
+          <Property Name="MOEN_CD_ID" Type="int" />
+          <Property Name="TRAN_CD_ID" Type="int" />
           <Property Name="CRPV_DT_VALIDADE" Type="date" Nullable="false" />
           <Property Name="CRPV_DT_PEDIDO" Type="date" Nullable="false" />
           <Property Name="CRPV_TX_INTRODUCAO" Type="text" />
@@ -670,7 +675,6 @@
           <Property Name="CRPV_TX_CONDICOES_COMERCIAIS" Type="text" />
           <Property Name="CRPV_IN_PRAZO_ENTREGA" Type="int" />
           <Property Name="CRPV_TX_OBSERVACAO" Type="text" />
-          <Property Name="CRPV_IN_ATIVO" Type="int" Nullable="false" />
           <Property Name="CRPV_DT_ENVIO" Type="date" />
           <Property Name="CRPV_DS_ENVIO" Type="varchar" MaxLength="5000" />
           <Property Name="CRPV_LK_LINK" Type="varchar" MaxLength="150" />
@@ -681,19 +685,16 @@
           <Property Name="CRPV_DT_APROVACAO" Type="date" />
           <Property Name="CRPV_DS_APROVACAO" Type="varchar" MaxLength="5000" />
           <Property Name="CRPV_NM_NOME" Type="varchar" MaxLength="100" />
-          <Property Name="TRAN_CD_ID" Type="int" />
-          <Property Name="TEPR_CD_ID" Type="int" />
-          <Property Name="MOCA_CD_ID" Type="int" />
           <Property Name="CRPV_IN_GERAR_CR" Type="int" />
           <Property Name="CRPV_IN_GEROU_NF" Type="int" />
           <Property Name="CRPV_NR_NOTA_FISCAL" Type="varchar" MaxLength="50" />
           <Property Name="CRPV_VL_VALOR" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CRPV_VL_TOTAL" Type="decimal" Precision="20" Scale="2" StoreGeneratedPattern="Computed" />
-          <Property Name="MOEN_CD_ID" Type="int" />
           <Property Name="CRPV_IN_NUMERO_GERADO" Type="int" />
           <Property Name="CRPV_DT_FATURAMENTO" Type="date" />
           <Property Name="CRPV_DT_EXPEDICAO" Type="date" />
           <Property Name="CRPV_DT_ENTREGA" Type="date" />
+          <Property Name="CRPV_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CRM_PEDIDO_VENDA_ACOMPANHAMENTO">
           <Key>
@@ -756,6 +757,23 @@
           <Property Name="CUFX_VL_VALOR" Type="decimal" Precision="19" Scale="2" />
           <Property Name="CUFX_DT_CADASTRO" Type="date" />
           <Property Name="CUFX_IN_ATIVO" Type="int" />
+        </EntityType>
+        <EntityType Name="DIARIO_PROCESSO">
+          <Key>
+            <PropertyRef Name="DIPR_CD_ID" />
+          </Key>
+          <Property Name="DIPR_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="CRM1_CD_ID" Type="int" Nullable="false" />
+          <Property Name="CRPV_CD_ID" Type="int" />
+          <Property Name="CRAC_CD_ID" Type="int" />
+          <Property Name="CRCM_CD_ID" Type="int" />
+          <Property Name="AGEN_CD_ID" Type="int" />
+          <Property Name="DIPR_DT_DATA" Type="date" Nullable="false" />
+          <Property Name="DIPR_NM_OPERACAO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIPR_DS_DESCRICAO" Type="varchar" MaxLength="500" />
+          <Property Name="DIPR_DT_DUMMY" Type="date" />
         </EntityType>
         <EntityType Name="EMPRESA">
           <Key>
@@ -2830,6 +2848,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA">
+          <End Role="PLATAFORMA_ENTREGA" Type="Self.PLATAFORMA_ENTREGA" Multiplicity="0..1" />
+          <End Role="CRM_PEDIDO_VENDA" Type="Self.CRM_PEDIDO_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLATAFORMA_ENTREGA">
+              <PropertyRef Name="PLEN_CD_ID" />
+            </Principal>
+            <Dependent Role="CRM_PEDIDO_VENDA">
+              <PropertyRef Name="PLEN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CRM_PEDIDO_VENDA_TEMPLATE_PROPOSTA">
           <End Role="TEMPLATE_PROPOSTA" Type="Self.TEMPLATE_PROPOSTA" Multiplicity="0..1" />
           <End Role="CRM_PEDIDO_VENDA" Type="Self.CRM_PEDIDO_VENDA" Multiplicity="*" />
@@ -2886,6 +2916,90 @@
               <PropertyRef Name="USUA_CD_ID" />
             </Principal>
             <Dependent Role="CRM">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_AGENDA">
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="0..1" />
+          <End Role="DIARIO_PROCESSO" Type="Self.DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGENDA">
+              <PropertyRef Name="AGEN_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="AGEN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="DIARIO_PROCESSO" Type="Self.DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_CRM">
+          <End Role="CRM" Type="Self.CRM" Multiplicity="1" />
+          <End Role="DIARIO_PROCESSO" Type="Self.DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM">
+              <PropertyRef Name="CRM1_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="CRM1_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_CRM_ACAO">
+          <End Role="CRM_ACAO" Type="Self.CRM_ACAO" Multiplicity="0..1" />
+          <End Role="DIARIO_PROCESSO" Type="Self.DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_ACAO">
+              <PropertyRef Name="CRAC_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="CRAC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_CRM_COMENTARIO">
+          <End Role="CRM_COMENTARIO" Type="Self.CRM_COMENTARIO" Multiplicity="0..1" />
+          <End Role="DIARIO_PROCESSO" Type="Self.DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_COMENTARIO">
+              <PropertyRef Name="CRCM_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="CRCM_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA">
+          <End Role="CRM_PEDIDO_VENDA" Type="Self.CRM_PEDIDO_VENDA" Multiplicity="0..1" />
+          <End Role="DIARIO_PROCESSO" Type="Self.DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_PEDIDO_VENDA">
+              <PropertyRef Name="CRPV_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="CRPV_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="DIARIO_PROCESSO" Type="Self.DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
               <PropertyRef Name="USUA_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -4531,6 +4645,7 @@
           <EntitySet Name="CRM_PEDIDO_VENDA_ANEXO" EntityType="Self.CRM_PEDIDO_VENDA_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CRM_PEDIDO_VENDA_ITEM" EntityType="Self.CRM_PEDIDO_VENDA_ITEM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CUSTO_FIXO" EntityType="Self.CUSTO_FIXO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIARIO_PROCESSO" EntityType="Self.DIARIO_PROCESSO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA_ANEXO" EntityType="Self.EMPRESA_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA_MAQUINA" EntityType="Self.EMPRESA_MAQUINA" Schema="dbo" store:Type="Tables" />
@@ -4935,6 +5050,10 @@
             <End Role="MOTIVO_ENCERRAMENTO" EntitySet="MOTIVO_ENCERRAMENTO" />
             <End Role="CRM_PEDIDO_VENDA" EntitySet="CRM_PEDIDO_VENDA" />
           </AssociationSet>
+          <AssociationSet Name="FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA" Association="Self.FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA">
+            <End Role="PLATAFORMA_ENTREGA" EntitySet="PLATAFORMA_ENTREGA" />
+            <End Role="CRM_PEDIDO_VENDA" EntitySet="CRM_PEDIDO_VENDA" />
+          </AssociationSet>
           <AssociationSet Name="FK_CRM_PEDIDO_VENDA_TEMPLATE_PROPOSTA" Association="Self.FK_CRM_PEDIDO_VENDA_TEMPLATE_PROPOSTA">
             <End Role="TEMPLATE_PROPOSTA" EntitySet="TEMPLATE_PROPOSTA" />
             <End Role="CRM_PEDIDO_VENDA" EntitySet="CRM_PEDIDO_VENDA" />
@@ -4954,6 +5073,34 @@
           <AssociationSet Name="FK_CRM_USUARIO" Association="Self.FK_CRM_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_AGENDA" Association="Self.FK_DIARIO_PROCESSO_AGENDA">
+            <End Role="AGENDA" EntitySet="AGENDA" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_ASSINANTE" Association="Self.FK_DIARIO_PROCESSO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_CRM" Association="Self.FK_DIARIO_PROCESSO_CRM">
+            <End Role="CRM" EntitySet="CRM" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_CRM_ACAO" Association="Self.FK_DIARIO_PROCESSO_CRM_ACAO">
+            <End Role="CRM_ACAO" EntitySet="CRM_ACAO" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_CRM_COMENTARIO" Association="Self.FK_DIARIO_PROCESSO_CRM_COMENTARIO">
+            <End Role="CRM_COMENTARIO" EntitySet="CRM_COMENTARIO" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA" Association="Self.FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA">
+            <End Role="CRM_PEDIDO_VENDA" EntitySet="CRM_PEDIDO_VENDA" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_USUARIO" Association="Self.FK_DIARIO_PROCESSO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
           </AssociationSet>
           <AssociationSet Name="FK_EMPRESA_ANEXO_EMPRESA" Association="Self.FK_EMPRESA_ANEXO_EMPRESA">
             <End Role="EMPRESA" EntitySet="EMPRESA" />
@@ -5516,6 +5663,7 @@
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_AGENDA_USUARIO" FromRole="AGENDA" ToRole="USUARIO" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKAGENDA22330" FromRole="AGENDA" ToRole="ASSINANTE" />
           <NavigationProperty Name="USUARIO1" Relationship="Self.FKAGENDA418024" FromRole="AGENDA" ToRole="USUARIO" />
+          <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_AGENDA" FromRole="AGENDA" ToRole="DIARIO_PROCESSO" />
         </EntityType>
         <EntityType Name="AGENDA_ANEXO">
           <Key>
@@ -5597,6 +5745,7 @@
           <NavigationProperty Name="CATEGORIA_SERVICO" Relationship="Db_PrecificacaoModel.FK_CATEGORIA_SERVICO_ASSINANTE" FromRole="ASSINANTE" ToRole="CATEGORIA_SERVICO" />
           <NavigationProperty Name="FILIAL" Relationship="Db_PrecificacaoModel.FK_FILIAL_ASSINANTE" FromRole="ASSINANTE" ToRole="FILIAL" />
           <NavigationProperty Name="SERVICO" Relationship="Db_PrecificacaoModel.FK_SERVICO_ASSINANTE" FromRole="ASSINANTE" ToRole="SERVICO" />
+          <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_ASSINANTE" FromRole="ASSINANTE" ToRole="DIARIO_PROCESSO" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -6006,6 +6155,7 @@
           <NavigationProperty Name="TIPO_CRM" Relationship="Self.FK_CRM_TIPO_CRM" FromRole="CRM" ToRole="TIPO_CRM" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CRM_USUARIO" FromRole="CRM" ToRole="USUARIO" />
           <NavigationProperty Name="CONTA_RECEBER" Relationship="Db_PrecificacaoModel.FK_CONTA_RECEBER_CRM" FromRole="CRM" ToRole="CONTA_RECEBER" />
+          <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM" FromRole="CRM" ToRole="DIARIO_PROCESSO" />
         </EntityType>
         <EntityType Name="CRM_ACAO">
           <Key>
@@ -6029,6 +6179,7 @@
           <NavigationProperty Name="TIPO_ACAO" Relationship="Self.FK_CRM_ACAO_TIPO_ACAO" FromRole="CRM_ACAO" ToRole="TIPO_ACAO" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CRM_ACAO_USUARIO" FromRole="CRM_ACAO" ToRole="USUARIO" />
           <NavigationProperty Name="USUARIO1" Relationship="Self.FK_CRM_ACAO_USUARIO1" FromRole="CRM_ACAO" ToRole="USUARIO" />
+          <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_ACAO" FromRole="CRM_ACAO" ToRole="DIARIO_PROCESSO" />
         </EntityType>
         <EntityType Name="CRM_ANEXO">
           <Key>
@@ -6055,6 +6206,7 @@
           <Property Name="CRCM_IN_ATIVO" Type="Int32" />
           <NavigationProperty Name="CRM" Relationship="Self.FK_CRM_COMENTARIO_CRM" FromRole="CRM_COMENTARIO" ToRole="CRM" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CRM_COMENTARIO_USUARIO" FromRole="CRM_COMENTARIO" ToRole="USUARIO" />
+          <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_COMENTARIO" FromRole="CRM_COMENTARIO" ToRole="DIARIO_PROCESSO" />
         </EntityType>
         <EntityType Name="CRM_CONTATO">
           <Key>
@@ -6150,6 +6302,9 @@
           <Property Name="CRPV_DT_FATURAMENTO" Type="DateTime" Precision="0" />
           <Property Name="CRPV_DT_EXPEDICAO" Type="DateTime" Precision="0" />
           <Property Name="CRPV_DT_ENTREGA" Type="DateTime" Precision="0" />
+          <Property Name="PLEN_CD_ID" Type="Int32" />
+          <NavigationProperty Name="PLATAFORMA_ENTREGA" Relationship="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA" FromRole="CRM_PEDIDO_VENDA" ToRole="PLATAFORMA_ENTREGA" />
+          <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA" FromRole="CRM_PEDIDO_VENDA" ToRole="DIARIO_PROCESSO" />
         </EntityType>
         <EntityType Name="CRM_PEDIDO_VENDA_ACOMPANHAMENTO">
           <Key>
@@ -6755,6 +6910,7 @@
           <Property Name="PLEN_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PLEN_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FKPLATAFORMA785659" FromRole="PLATAFORMA_ENTREGA" ToRole="ASSINANTE" />
+          <NavigationProperty Name="CRM_PEDIDO_VENDA" Relationship="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA" FromRole="PLATAFORMA_ENTREGA" ToRole="CRM_PEDIDO_VENDA" />
         </EntityType>
         <EntityType Name="PRODUTO">
           <Key>
@@ -7330,6 +7486,7 @@
           <NavigationProperty Name="USUARIO_ANOTACAO1" Relationship="Self.FKUSUARIO_AN728680" FromRole="USUARIO" ToRole="USUARIO_ANOTACAO" />
           <NavigationProperty Name="CONTA_PAGAR" Relationship="Db_PrecificacaoModel.FK_CONTA_PAGAR_USUARIO" FromRole="USUARIO" ToRole="CONTA_PAGAR" />
           <NavigationProperty Name="CONTA_RECEBER" Relationship="Db_PrecificacaoModel.FK_CONTA_RECEBER_USUARIO" FromRole="USUARIO" ToRole="CONTA_RECEBER" />
+          <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_USUARIO" FromRole="USUARIO" ToRole="DIARIO_PROCESSO" />
         </EntityType>
         <EntityType Name="USUARIO_ANEXO">
           <Key>
@@ -10513,6 +10670,39 @@
             <End Role="UNIDADE" EntitySet="UNIDADE" />
             <End Role="SERVICO" EntitySet="SERVICO" />
           </AssociationSet>
+          <AssociationSet Name="FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA" Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA">
+            <End Role="PLATAFORMA_ENTREGA" EntitySet="PLATAFORMA_ENTREGA" />
+            <End Role="CRM_PEDIDO_VENDA" EntitySet="CRM_PEDIDO_VENDA" />
+          </AssociationSet>
+          <EntitySet Name="DIARIO_PROCESSO" EntityType="Db_PrecificacaoModel.DIARIO_PROCESSO" />
+          <AssociationSet Name="FK_DIARIO_PROCESSO_AGENDA" Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_AGENDA">
+            <End Role="AGENDA" EntitySet="AGENDA" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_ASSINANTE" Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_CRM" Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM">
+            <End Role="CRM" EntitySet="CRM" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_CRM_ACAO" Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_ACAO">
+            <End Role="CRM_ACAO" EntitySet="CRM_ACAO" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_CRM_COMENTARIO" Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_COMENTARIO">
+            <End Role="CRM_COMENTARIO" EntitySet="CRM_COMENTARIO" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA" Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA">
+            <End Role="CRM_PEDIDO_VENDA" EntitySet="CRM_PEDIDO_VENDA" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIARIO_PROCESSO_USUARIO" Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_SUBCATEGORIA_PRODUTO_ASSINANTE">
           <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
@@ -11415,6 +11605,126 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA">
+          <End Type="Db_PrecificacaoModel.PLATAFORMA_ENTREGA" Role="PLATAFORMA_ENTREGA" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.CRM_PEDIDO_VENDA" Role="CRM_PEDIDO_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLATAFORMA_ENTREGA">
+              <PropertyRef Name="PLEN_CD_ID" />
+            </Principal>
+            <Dependent Role="CRM_PEDIDO_VENDA">
+              <PropertyRef Name="PLEN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DIARIO_PROCESSO">
+          <Key>
+            <PropertyRef Name="DIPR_CD_ID" />
+          </Key>
+          <Property Name="DIPR_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CRM1_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CRPV_CD_ID" Type="Int32" />
+          <Property Name="CRAC_CD_ID" Type="Int32" />
+          <Property Name="CRCM_CD_ID" Type="Int32" />
+          <Property Name="AGEN_CD_ID" Type="Int32" />
+          <Property Name="DIPR_DT_DATA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DIPR_NM_OPERACAO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIPR_DS_DESCRICAO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DIPR_DT_DUMMY" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="AGENDA" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_AGENDA" FromRole="DIARIO_PROCESSO" ToRole="AGENDA" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_ASSINANTE" FromRole="DIARIO_PROCESSO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="CRM" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM" FromRole="DIARIO_PROCESSO" ToRole="CRM" />
+          <NavigationProperty Name="CRM_ACAO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_ACAO" FromRole="DIARIO_PROCESSO" ToRole="CRM_ACAO" />
+          <NavigationProperty Name="CRM_COMENTARIO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_COMENTARIO" FromRole="DIARIO_PROCESSO" ToRole="CRM_COMENTARIO" />
+          <NavigationProperty Name="CRM_PEDIDO_VENDA" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA" FromRole="DIARIO_PROCESSO" ToRole="CRM_PEDIDO_VENDA" />
+          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_USUARIO" FromRole="DIARIO_PROCESSO" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="FK_DIARIO_PROCESSO_AGENDA">
+          <End Type="Db_PrecificacaoModel.AGENDA" Role="AGENDA" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.DIARIO_PROCESSO" Role="DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGENDA">
+              <PropertyRef Name="AGEN_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="AGEN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.DIARIO_PROCESSO" Role="DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_CRM">
+          <End Type="Db_PrecificacaoModel.CRM" Role="CRM" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.DIARIO_PROCESSO" Role="DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM">
+              <PropertyRef Name="CRM1_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="CRM1_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_CRM_ACAO">
+          <End Type="Db_PrecificacaoModel.CRM_ACAO" Role="CRM_ACAO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.DIARIO_PROCESSO" Role="DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_ACAO">
+              <PropertyRef Name="CRAC_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="CRAC_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_CRM_COMENTARIO">
+          <End Type="Db_PrecificacaoModel.CRM_COMENTARIO" Role="CRM_COMENTARIO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.DIARIO_PROCESSO" Role="DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_COMENTARIO">
+              <PropertyRef Name="CRCM_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="CRCM_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA">
+          <End Type="Db_PrecificacaoModel.CRM_PEDIDO_VENDA" Role="CRM_PEDIDO_VENDA" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.DIARIO_PROCESSO" Role="DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_PEDIDO_VENDA">
+              <PropertyRef Name="CRPV_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="CRPV_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIARIO_PROCESSO_USUARIO">
+          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.DIARIO_PROCESSO" Role="DIARIO_PROCESSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="DIARIO_PROCESSO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -11897,6 +12207,7 @@
           <EntitySetMapping Name="CRM_PEDIDO_VENDA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CRM_PEDIDO_VENDA">
               <MappingFragment StoreEntitySet="CRM_PEDIDO_VENDA">
+                <ScalarProperty Name="PLEN_CD_ID" ColumnName="PLEN_CD_ID" />
                 <ScalarProperty Name="CRPV_DT_ENTREGA" ColumnName="CRPV_DT_ENTREGA" />
                 <ScalarProperty Name="CRPV_DT_EXPEDICAO" ColumnName="CRPV_DT_EXPEDICAO" />
                 <ScalarProperty Name="CRPV_DT_FATURAMENTO" ColumnName="CRPV_DT_FATURAMENTO" />
@@ -13379,6 +13690,24 @@
                 <ScalarProperty Name="FILI_CD_ID" ColumnName="FILI_CD_ID" />
                 <ScalarProperty Name="SERV_CD_ID" ColumnName="SERV_CD_ID" />
                 <ScalarProperty Name="SETP_CD_ID" ColumnName="SETP_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIARIO_PROCESSO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.DIARIO_PROCESSO">
+              <MappingFragment StoreEntitySet="DIARIO_PROCESSO">
+                <ScalarProperty Name="DIPR_DT_DUMMY" ColumnName="DIPR_DT_DUMMY" />
+                <ScalarProperty Name="DIPR_DS_DESCRICAO" ColumnName="DIPR_DS_DESCRICAO" />
+                <ScalarProperty Name="DIPR_NM_OPERACAO" ColumnName="DIPR_NM_OPERACAO" />
+                <ScalarProperty Name="DIPR_DT_DATA" ColumnName="DIPR_DT_DATA" />
+                <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
+                <ScalarProperty Name="CRCM_CD_ID" ColumnName="CRCM_CD_ID" />
+                <ScalarProperty Name="CRAC_CD_ID" ColumnName="CRAC_CD_ID" />
+                <ScalarProperty Name="CRPV_CD_ID" ColumnName="CRPV_CD_ID" />
+                <ScalarProperty Name="CRM1_CD_ID" ColumnName="CRM1_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="DIPR_CD_ID" ColumnName="DIPR_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -121,6 +121,11 @@ namespace Presentation.Start
             kernel.Bind<IContaReceberRateioAppService>().To<ContaReceberRateioAppService>();
             kernel.Bind<ICRMAppService>().To<CRMAppService>();
             kernel.Bind<ICRMOrigemAppService>().To<CRMOrigemAppService>();
+            kernel.Bind<ICategoriaServicoAppService>().To<CategoriaServicoAppService>();
+            kernel.Bind<IServicoAppService>().To<ServicoAppService>();
+            kernel.Bind<ITransportadoraAppService>().To<TransportadoraAppService>();
+            kernel.Bind<ITemplateEMailAppService>().To<TemplateEMailAppService>();
+            kernel.Bind<ITemplateSMSAppService>().To<TemplateSMSAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -178,6 +183,11 @@ namespace Presentation.Start
             kernel.Bind<IContaReceberRateioService>().To<ContaReceberRateioService>();
             kernel.Bind<ICRMService>().To<CRMService>();
             kernel.Bind<ICRMOrigemService>().To<CRMOrigemService>();
+            kernel.Bind<ICategoriaServicoService>().To<CategoriaServicoService>();
+            kernel.Bind<IServicoService>().To<ServicoService>();
+            kernel.Bind<ITransportadoraService>().To<TransportadoraService>();
+            kernel.Bind<ITemplateEMailService>().To<TemplateEMailService>();
+            kernel.Bind<ITemplateSMSService>().To<TemplateSMSService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -278,6 +288,18 @@ namespace Presentation.Start
             kernel.Bind<ICRMPedidoComentarioRepository>().To<CRMPedidoComentarioRepository>();
             kernel.Bind<ICRMPedidoRepository>().To<CRMPedidoRepository>();
             kernel.Bind<ICRMRepository>().To<CRMRepository>();
+            kernel.Bind<ICategoriaServicoRepository>().To<CategoriaServicoRepository>();
+            kernel.Bind<IServicoRepository>().To<ServicoRepository>();
+            kernel.Bind<ITransportadoraRepository>().To<TransportadoraRepository>();
+            kernel.Bind<IFilialRepository>().To<FilialRepository>();
+            kernel.Bind<INomencBrasServicosRepository>().To<NomencBrasServicosRepository>();
+            kernel.Bind<INomenclaturaRepository>().To<INomenclaturaRepository>();
+            kernel.Bind<ITipoVeiculoRepository>().To<TipoVeiculoRepository>();
+            kernel.Bind<ITipoTransporteRepository>().To<TipoTransporteRepository>();
+            kernel.Bind<ITemplateEMailRepository>().To<TemplateEMailRepository>();
+            kernel.Bind<ITemplateSMSRepository>().To<ITemplateSMSRepository>();
+
+
         }
     }
 }

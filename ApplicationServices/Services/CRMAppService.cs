@@ -104,6 +104,12 @@ namespace ApplicationServices.Services
             return lista;
         }
 
+        public List<PLATAFORMA_ENTREGA> GetAllPlataformas(Int32 idAss)
+        {
+            List<PLATAFORMA_ENTREGA> lista = _baseService.GetAllPlataformas(idAss);
+            return lista;
+        }
+
         public List<TEMPLATE_PROPOSTA> GetAllTemplateProposta(Int32 id)
         {
             List<TEMPLATE_PROPOSTA> lista = _baseService.GetAllTemplateProposta(id);

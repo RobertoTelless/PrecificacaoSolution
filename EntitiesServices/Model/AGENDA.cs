@@ -18,6 +18,7 @@ namespace EntitiesServices.Model
         public AGENDA()
         {
             this.AGENDA_ANEXO = new HashSet<AGENDA_ANEXO>();
+            this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
         }
     
         public int AGEN_CD_ID { get; set; }
@@ -42,5 +43,7 @@ namespace EntitiesServices.Model
         public virtual USUARIO USUARIO { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual USUARIO USUARIO1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
     }
 }

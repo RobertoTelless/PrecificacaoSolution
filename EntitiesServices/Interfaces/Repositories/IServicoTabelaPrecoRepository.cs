@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         SERVICO_TABELA_PRECO CheckExist(Int32 fili, Int32 servico, Int32 idAss);
         SERVICO_TABELA_PRECO GetByServFilial(Int32 id, Int32 fili, Int32 idAss);
+
     }
 }

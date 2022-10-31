@@ -102,12 +102,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddSERV",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<SERVICO>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<SERVICO>(item)
                 };
 
                 // Persiste
@@ -128,13 +128,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditSERV",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<SERVICO>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<SERVICO>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<SERVICO>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<SERVICO>(itemAntes)
                 };
 
                 // Persiste
@@ -165,14 +165,6 @@ namespace ApplicationServices.Services
             try
             {
                 // Verifica integridade referencial
-                if (item.ATENDIMENTO.Count > 0)
-                {
-                    return 1;
-                }
-                if (item.ORDEM_SERVICO.Count > 0)
-                {
-                    return 1;
-                }
 
                 // Ajusta objetos
 
@@ -182,12 +174,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelSERV",
-                    LOG_TX_REGISTRO = item.SERV_CD_ID.ToString() + "|" + item.SERV_CD_CODIGO.ToString() + "|" + item.SERV_DS_DESCRICAO + "|" + item.SERV_NM_NOME + "|" + item.SERV_NR_DURACAO.ToString() + "|" + item.SERV_NR_DURACAO_EXPRESSA.ToString()
+                    LOG_TX_TEXTO = item.SERV_CD_ID.ToString() + "|" + item.SERV_CD_CODIGO.ToString() + "|" + item.SERV_DS_DESCRICAO + "|" + item.SERV_NM_NOME + "|" + item.SERV_NR_DURACAO.ToString() + "|" + item.SERV_NR_DURACAO_EXPRESSA.ToString()
                 };
 
                 // Persiste
@@ -211,12 +203,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatSERV",
-                    LOG_TX_REGISTRO = item.SERV_CD_ID.ToString() + "|" + item.SERV_CD_CODIGO.ToString() + "|" + item.SERV_DS_DESCRICAO + "|" + item.SERV_NM_NOME + "|" + item.SERV_NR_DURACAO.ToString() + "|" + item.SERV_NR_DURACAO_EXPRESSA.ToString()
+                    LOG_TX_TEXTO = item.SERV_CD_ID.ToString() + "|" + item.SERV_CD_CODIGO.ToString() + "|" + item.SERV_DS_DESCRICAO + "|" + item.SERV_NM_NOME + "|" + item.SERV_NR_DURACAO.ToString() + "|" + item.SERV_NR_DURACAO_EXPRESSA.ToString()
                 };
 
                 // Persiste

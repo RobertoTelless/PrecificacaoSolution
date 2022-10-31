@@ -29,5 +29,6 @@ namespace DataServices.Repositories
             query = query.Where(x => x.SERV_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }

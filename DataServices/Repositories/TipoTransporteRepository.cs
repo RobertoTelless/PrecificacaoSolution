@@ -31,6 +31,7 @@ namespace DataServices.Repositories
             IQueryable<TIPO_TRANSPORTE> query = Db.TIPO_TRANSPORTE.Where(p => p.TITR_IN_ATIVO == 1);
             return query.ToList();
         }
+
     }
 }
  

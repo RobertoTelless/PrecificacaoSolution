@@ -14,5 +14,6 @@ namespace ModelServices.Interfaces.Repositories
         List<SERVICO> GetAllItens(Int32 idAss);
         List<SERVICO> GetAllItensAdm(Int32 idAss);
         List<SERVICO> ExecuteFilter(Int32? catId, String nome, String descricao, String referencia, Int32 idAss);
+
     }
 }

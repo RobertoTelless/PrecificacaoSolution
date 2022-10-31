@@ -38,10 +38,11 @@ namespace ModelServices.EntitiesServices
         private readonly IFormaEnvioRepository _fenvRepository;
         private readonly IFormaFreteRepository _fretRepository;
         //private readonly IFilialRepository _filRepository;
+        private readonly IPlataformaEntregaRepository _platRepository;
 
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public CRMService(ICRMRepository baseRepository, ILogRepository logRepository, ITipoCRMRepository tipoRepository, ICRMAnexoRepository anexoRepository, IUsuarioRepository usuRepository, ICRMOrigemRepository oriRepository, IMotivoCancelamentoRepository mcRepository, IMotivoEncerramentoRepository meRepository, ITipoAcaoRepository taRepository, ICRMAcaoRepository acaRepository, ICRMContatoRepository conRepository, ICRMComentarioRepository comRepository, ITemplatePropostaRepository tpRepository, ICRMPedidoAnexoRepository anepeRepository, ICRMPedidoComentarioRepository compeRepository, ICRMPedidoRepository pedRepository, ICRMItemPedidoRepository itepeRepository, IFormaEnvioRepository fenvRepository, IFormaFreteRepository fretRepository) : base(baseRepository)
+        public CRMService(ICRMRepository baseRepository, ILogRepository logRepository, ITipoCRMRepository tipoRepository, ICRMAnexoRepository anexoRepository, IUsuarioRepository usuRepository, ICRMOrigemRepository oriRepository, IMotivoCancelamentoRepository mcRepository, IMotivoEncerramentoRepository meRepository, ITipoAcaoRepository taRepository, ICRMAcaoRepository acaRepository, ICRMContatoRepository conRepository, ICRMComentarioRepository comRepository, ITemplatePropostaRepository tpRepository, ICRMPedidoAnexoRepository anepeRepository, ICRMPedidoComentarioRepository compeRepository, ICRMPedidoRepository pedRepository, ICRMItemPedidoRepository itepeRepository, IFormaEnvioRepository fenvRepository, IFormaFreteRepository fretRepository, IPlataformaEntregaRepository platRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
@@ -63,6 +64,7 @@ namespace ModelServices.EntitiesServices
             _fenvRepository = fenvRepository;
             _fretRepository = fretRepository;
             //_filRepository = filRepository;
+            _platRepository = platRepository;
         }
 
         public CRM CheckExist(CRM tarefa, Int32 idUsu,  Int32 idAss)
@@ -156,6 +158,11 @@ namespace ModelServices.EntitiesServices
         public List<FORMA_ENVIO> GetAllFormasEnvio(Int32 idAss)
         {
             return _fenvRepository.GetAllItens(idAss);
+        }
+
+        public List<PLATAFORMA_ENTREGA> GetAllPlataformas(Int32 idAss)
+        {
+            return _platRepository.GetAllItens(idAss);
         }
 
         public List<FORMA_FRETE> GetAllFormasFrete(Int32 idAss)

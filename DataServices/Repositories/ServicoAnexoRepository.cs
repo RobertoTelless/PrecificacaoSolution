@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<SERVICO_ANEXO> query = Db.SERVICO_ANEXO.Where(p => p.SEAN_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

@@ -21,6 +21,7 @@ namespace EntitiesServices.Model
             this.CRM_PEDIDO_VENDA_ANEXO = new HashSet<CRM_PEDIDO_VENDA_ANEXO>();
             this.CRM_PEDIDO_VENDA_ITEM = new HashSet<CRM_PEDIDO_VENDA_ITEM>();
             this.CONTA_RECEBER = new HashSet<CONTA_RECEBER>();
+            this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
         }
     
         public int CRPV_CD_ID { get; set; }
@@ -73,6 +74,7 @@ namespace EntitiesServices.Model
         public Nullable<System.DateTime> CRPV_DT_FATURAMENTO { get; set; }
         public Nullable<System.DateTime> CRPV_DT_EXPEDICAO { get; set; }
         public Nullable<System.DateTime> CRPV_DT_ENTREGA { get; set; }
+        public Nullable<int> PLEN_CD_ID { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }
@@ -92,5 +94,8 @@ namespace EntitiesServices.Model
         public virtual USUARIO USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_RECEBER> CONTA_RECEBER { get; set; }
+        public virtual PLATAFORMA_ENTREGA PLATAFORMA_ENTREGA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
     }
 }

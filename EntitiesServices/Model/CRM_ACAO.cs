@@ -14,6 +14,12 @@ namespace EntitiesServices.Model
     
     public partial class CRM_ACAO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CRM_ACAO()
+        {
+            this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
+        }
+    
         public int CRAC_CD_ID { get; set; }
         public int CRM1_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
@@ -33,5 +39,7 @@ namespace EntitiesServices.Model
         public virtual TIPO_ACAO TIPO_ACAO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
         public virtual USUARIO USUARIO1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
     }
 }

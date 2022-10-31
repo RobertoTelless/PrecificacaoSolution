@@ -84,6 +84,11 @@ namespace MvcMapping.Mappers
             CreateMap<CRM_ORIGEM, CRMOrigemViewModel>();
             CreateMap<CRM_PEDIDO_VENDA_ACOMPANHAMENTO, CRMPedidoComentarioViewModel>();
             CreateMap<CRM_PEDIDO_VENDA, CRMPedidoViewModel>();
+            CreateMap<CATEGORIA_SERVICO, CategoriaServicoViewModel>();
+            CreateMap<SERVICO, ServicoViewModel>();
+            CreateMap<TRANSPORTADORA, TransportadoraViewModel>();
+            CreateMap<TEMPLATE_EMAIL, TemplateEMailViewModel>();
+            CreateMap<TEMPLATE_SMS, TemplateSMSViewModel>();
 
 
         }

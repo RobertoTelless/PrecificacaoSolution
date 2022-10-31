@@ -20,5 +20,6 @@ namespace ApplicationServices.Interfaces
         TEMPLATE_SMS GetItemById(Int32 id);
         List<TEMPLATE_SMS> GetAllItensAdm(Int32 idAss);
         Int32 ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss, out List<TEMPLATE_SMS> objeto);
+
     }
 }

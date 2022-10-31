@@ -41,6 +41,7 @@ namespace EntitiesServices.Model
             this.USUARIO_ANOTACAO1 = new HashSet<USUARIO_ANOTACAO>();
             this.CONTA_PAGAR = new HashSet<CONTA_PAGAR>();
             this.CONTA_RECEBER = new HashSet<CONTA_RECEBER>();
+            this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
         }
     
         public int USUA_CD_ID { get; set; }
@@ -126,5 +127,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<CONTA_PAGAR> CONTA_PAGAR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_RECEBER> CONTA_RECEBER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
     }
 }

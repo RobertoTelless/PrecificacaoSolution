@@ -23,5 +23,6 @@ namespace ApplicationServices.Interfaces
         List<NOMENCLATURA_BRAS_SERVICOS> GetAllNBSE();
         SERVICO_ANEXO GetAnexoById(Int32 id);
         Int32 ExecuteFilter(Int32? catId, String nome, String descricao, String referencia, Int32 idAss, out List<SERVICO> objeto);
+    
     }
 }

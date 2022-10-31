@@ -200,6 +200,7 @@
     <Compile Include="EntitiesServices\CategoriaClienteService.cs" />
     <Compile Include="EntitiesServices\CategoriaFornecedorService.cs" />
     <Compile Include="EntitiesServices\CategoriaProdutoService.cs" />
+    <Compile Include="EntitiesServices\CategoriaServicoService.cs" />
     <Compile Include="EntitiesServices\CentroCustoService.cs" />
     <Compile Include="EntitiesServices\ClienteCnpjService.cs" />
     <Compile Include="EntitiesServices\ClienteService.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="EntitiesServices\ContaReceberParcelaService.cs" />
     <Compile Include="EntitiesServices\ContaReceberRateioService.cs" />
     <Compile Include="EntitiesServices\ContaReceberService.cs" />
+    <Compile Include="EntitiesServices\CRMDiarioService.cs" />
     <Compile Include="EntitiesServices\CRMOrigemService.cs" />
     <Compile Include="EntitiesServices\CRMService.cs" />
     <Compile Include="EntitiesServices\FichaTecnicaService.cs" />
@@ -225,10 +227,16 @@
     <Compile Include="EntitiesServices\ProdutoMovimentoEstoqueService.cs" />
     <Compile Include="EntitiesServices\ProdutoService.cs" />
     <Compile Include="EntitiesServices\ProdutoTabelaPrecoService.cs" />
+    <Compile Include="EntitiesServices\ServicoService.cs" />
+    <Compile Include="EntitiesServices\ServicoTabelaPrecoService.cs" />
     <Compile Include="EntitiesServices\SubCategoriaProdutoService.cs" />
+    <Compile Include="EntitiesServices\TemplateEMailService.cs" />
+    <Compile Include="EntitiesServices\TemplatePropostaService.cs" />
+    <Compile Include="EntitiesServices\TemplateSMSService.cs" />
     <Compile Include="EntitiesServices\TipoAcaoService.cs" />
     <Compile Include="EntitiesServices\TipoEmbalagemService.cs" />
     <Compile Include="EntitiesServices\TamanhoService.cs" />
+    <Compile Include="EntitiesServices\TransportadoraService.cs" />
     <Compile Include="EntitiesServices\UnidadeService.cs" />
     <Compile Include="EntitiesServices\VideoService.cs" />
     <Compile Include="EntitiesServices\SubgrupoService.cs" />
@@ -279,6 +287,7 @@
     <Compile Include="Interfaces\Repositories\ICRMAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICRMComentarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICRMContatoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICRMDiarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICRMItemPedidoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICRMOrigemRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICRMPedidoAnexoRepository.cs" />
@@ -291,6 +300,7 @@
     <Compile Include="Interfaces\Repositories\IContaBancariaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFichaTecnicaDetalheRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFichaTecnicaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFilialRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFormaEnvioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFormaFreteRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFornecedorAnexoRepository.cs" />
@@ -303,6 +313,8 @@
     <Compile Include="Interfaces\Repositories\IMotivoCancelamentoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMotivoEncerramentoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMovimentoEstoqueProdutoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\INomencBrasServicosRepository.cs" />
+    <Compile Include="Interfaces\Repositories\INomenclaturaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProdutoAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProdutoEstoqueFilialRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProdutoFornecedorRepository.cs" />
@@ -311,14 +323,23 @@
     <Compile Include="Interfaces\Repositories\IProdutoOrigemRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProdutoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProdutoTabelaPrecoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IServicoAnexoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IServicoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IServicoTabelaPrecoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISubcategoriaProdutoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITemplateEMailRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITemplatePropostaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITemplateSMSRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoAcaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoCRMRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoEmbalagemRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITamanhoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoContribuinteRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITipoTransporteRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITipoVeiculoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITransportadoraAnexoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITransportadoraRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUnidadeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVideoComentarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVideoRepository.cs" />
@@ -363,6 +384,7 @@
     <Compile Include="Interfaces\Services\ICategoriaClienteService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaFornecedorService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaProdutoService.cs" />
+    <Compile Include="Interfaces\Services\ICategoriaServicoService.cs" />
     <Compile Include="Interfaces\Services\ICentroCustoService.cs" />
     <Compile Include="Interfaces\Services\IClienteCnpjService.cs" />
     <Compile Include="Interfaces\Services\IClienteService.cs" />
@@ -373,6 +395,7 @@
     <Compile Include="Interfaces\Services\IContaReceberParcelaService.cs" />
     <Compile Include="Interfaces\Services\IContaReceberRateioService.cs" />
     <Compile Include="Interfaces\Services\IContaReceberService.cs" />
+    <Compile Include="Interfaces\Services\ICRMDiarioService.cs" />
     <Compile Include="Interfaces\Services\ICRMOrigemService.cs" />
     <Compile Include="Interfaces\Services\ICRMService.cs" />
     <Compile Include="Interfaces\Services\IFichaTecnicaService.cs" />
@@ -388,10 +411,16 @@
     <Compile Include="Interfaces\Services\IProdutoMovimentoEstoqueService.cs" />
     <Compile Include="Interfaces\Services\IProdutoService.cs" />
     <Compile Include="Interfaces\Services\IProdutoTabelaPrecoService.cs" />
+    <Compile Include="Interfaces\Services\IServicoService.cs" />
+    <Compile Include="Interfaces\Services\IServicoTabelaPrecoService.cs" />
     <Compile Include="Interfaces\Services\ISubCategoriaProdutoService.cs" />
+    <Compile Include="Interfaces\Services\ITemplateEMailService.cs" />
+    <Compile Include="Interfaces\Services\ITemplatePropostaService.cs" />
+    <Compile Include="Interfaces\Services\ITemplateSMSService.cs" />
     <Compile Include="Interfaces\Services\ITipoAcaoService.cs" />
     <Compile Include="Interfaces\Services\ITipoEmbalagemService.cs" />
     <Compile Include="Interfaces\Services\ITamanhoService.cs" />
+    <Compile Include="Interfaces\Services\ITransportadoraService.cs" />
     <Compile Include="Interfaces\Services\IUnidadeService.cs" />
     <Compile Include="Interfaces\Services\IVideoService.cs" />
     <Compile Include="Interfaces\Services\ISubgrupoService.cs" />
@@ -545,6 +574,9 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CUSTO_FIXO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DIARIO_PROCESSO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EMPRESA.cs">

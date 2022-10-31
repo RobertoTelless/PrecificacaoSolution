@@ -31,7 +31,6 @@ namespace DataServices.Repositories
             IQueryable<TIPO_VEICULO> query = Db.TIPO_VEICULO.Where(p => p.TIVE_IN_ATIVO == 1);
             return query.ToList();
         }
-
     }
 }
  

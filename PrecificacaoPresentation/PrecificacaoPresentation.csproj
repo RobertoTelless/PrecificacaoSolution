@@ -274,6 +274,7 @@
     <Compile Include="ViewModels\CategoriaClienteViewModel.cs" />
     <Compile Include="ViewModels\CategoriaFornecedorViewModel.cs" />
     <Compile Include="ViewModels\CategoriaProdutoViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaServicoViewModel.cs" />
     <Compile Include="ViewModels\CentroCustoViewModel.cs" />
     <Compile Include="ViewModels\ClienteContatoViewModel.cs" />
     <Compile Include="ViewModels\ClienteReferenciaViewModel.cs" />
@@ -310,11 +311,15 @@
     <Compile Include="ViewModels\ProdutoKitViewModel.cs" />
     <Compile Include="ViewModels\ProdutoTabelaPrecoViewModel.cs" />
     <Compile Include="ViewModels\ProdutoViewModel.cs" />
+    <Compile Include="ViewModels\ServicoViewModel.cs" />
     <Compile Include="ViewModels\SubcategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\MotivoEncerramentoViewModel.cs" />
+    <Compile Include="ViewModels\TemplateEmailViewModel.cs" />
+    <Compile Include="ViewModels\TemplateSMSViewModel.cs" />
     <Compile Include="ViewModels\TipoAcaoViewModel.cs" />
     <Compile Include="ViewModels\TipoEmbalagemViewModel.cs" />
     <Compile Include="ViewModels\TamanhoViewModel.cs" />
+    <Compile Include="ViewModels\TransportadoraViewModel.cs" />
     <Compile Include="ViewModels\UnidadeViewModel.cs" />
     <Compile Include="ViewModels\VideoComentarioViewModel.cs" />
     <Compile Include="ViewModels\VideoViewModel.cs" />
@@ -3170,6 +3175,7 @@
     <Content Include="Views\ContaReceber\EditarCR.cshtml" />
     <Content Include="Views\ContaReceber\ParcelarCR.cshtml" />
     <Content Include="Views\ContaReceber\LiquidarParcelaCR.cshtml" />
+    <Content Include="Views\CRM\MontarTelaCRM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3264,7 +3270,6 @@
     <Folder Include="Imagens\1\Usuario\8\Anexos\" />
     <Folder Include="Imagens\1\Usuario\9\Anexos\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\CRM\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Mensagem\" />
     <Folder Include="Views\Template\" />

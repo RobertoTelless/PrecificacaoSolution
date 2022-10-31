@@ -14,5 +14,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         Int32 Edit(SERVICO_TABELA_PRECO item, Int32 id);
 
         SERVICO_TABELA_PRECO GetByServFilial(Int32 id, Int32 fili, Int32 idAss);
+
     }
 }

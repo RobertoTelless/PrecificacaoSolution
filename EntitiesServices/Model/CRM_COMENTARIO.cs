@@ -14,6 +14,12 @@ namespace EntitiesServices.Model
     
     public partial class CRM_COMENTARIO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CRM_COMENTARIO()
+        {
+            this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
+        }
+    
         public int CRCM_CD_ID { get; set; }
         public int CRM1_CD_ID { get; set; }
         public int USUA_CD_ID { get; set; }
@@ -23,5 +29,7 @@ namespace EntitiesServices.Model
     
         public virtual CRM CRM { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
     }
 }

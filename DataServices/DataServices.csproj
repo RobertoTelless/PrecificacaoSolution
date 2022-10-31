@@ -192,6 +192,7 @@
     <Compile Include="Repositories\CategoriaClienteRepository.cs" />
     <Compile Include="Repositories\CategoriaFornecedorRepository.cs" />
     <Compile Include="Repositories\CategoriaProdutoRepository.cs" />
+    <Compile Include="Repositories\CategoriaServicoRepository.cs" />
     <Compile Include="Repositories\CentroCustoRepository.cs" />
     <Compile Include="Repositories\ClienteAnexoRepository.cs" />
     <Compile Include="Repositories\ClienteCnpjRepository.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Repositories\CRMAnexoRepository.cs" />
     <Compile Include="Repositories\CRMComentarioRepository.cs" />
     <Compile Include="Repositories\CRMContatoRepository.cs" />
+    <Compile Include="Repositories\CRMDiarioRepository.cs" />
     <Compile Include="Repositories\CRMItemPedidoRepository.cs" />
     <Compile Include="Repositories\CRMOrigemRepository.cs" />
     <Compile Include="Repositories\CRMPedidoAnexoRepository.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="Repositories\EmpresaMaquinaRepository.cs" />
     <Compile Include="Repositories\FichaTecnicaDetalheRepository.cs" />
     <Compile Include="Repositories\FichaTecnicaRepository.cs" />
+    <Compile Include="Repositories\FilialRepository.cs" />
     <Compile Include="Repositories\FormaEnvioRepository.cs" />
     <Compile Include="Repositories\FormaFreteRepository.cs" />
     <Compile Include="Repositories\FornecedorAnexoRepository.cs" />
@@ -233,6 +236,8 @@
     <Compile Include="Repositories\MotivoCancelamentoRepository.cs" />
     <Compile Include="Repositories\MotivoEncerramentoRepository.cs" />
     <Compile Include="Repositories\MovimentoEstoqueProdutoRepository.cs" />
+    <Compile Include="Repositories\NomencBrasServicosRepository.cs" />
+    <Compile Include="Repositories\NomenclaturaRepository.cs" />
     <Compile Include="Repositories\ProdutoAnexoRepository.cs" />
     <Compile Include="Repositories\ProdutoEstoqueFilialRepository.cs" />
     <Compile Include="Repositories\ProdutoFornecedorRepository.cs" />
@@ -241,14 +246,23 @@
     <Compile Include="Repositories\ProdutoOrigemRepository.cs" />
     <Compile Include="Repositories\ProdutoRepository.cs" />
     <Compile Include="Repositories\ProdutoTabelaPrecoRepository.cs" />
+    <Compile Include="Repositories\ServicoAnexoRepository.cs" />
+    <Compile Include="Repositories\ServicoRepository.cs" />
+    <Compile Include="Repositories\ServicoTabelaPrecoRepository.cs" />
     <Compile Include="Repositories\SexoRepository.cs" />
     <Compile Include="Repositories\SubcategoriaProdutoRepository.cs" />
+    <Compile Include="Repositories\TemplateEMailRepository.cs" />
     <Compile Include="Repositories\TemplatePropostaRepository.cs" />
+    <Compile Include="Repositories\TemplateSMSRepository.cs" />
     <Compile Include="Repositories\TipoAcaoRepository.cs" />
     <Compile Include="Repositories\TipoCRMRepository.cs" />
     <Compile Include="Repositories\TipoEmbalagemRepository.cs" />
     <Compile Include="Repositories\TamanhoRepository.cs" />
     <Compile Include="Repositories\TipoContribuinteRepository.cs" />
+    <Compile Include="Repositories\TipoTransporteRepository.cs" />
+    <Compile Include="Repositories\TipoVeiculoRepository.cs" />
+    <Compile Include="Repositories\TransportadoraAnexoRepository.cs" />
+    <Compile Include="Repositories\TransportadoraRepository.cs" />
     <Compile Include="Repositories\UnidadeRepository.cs" />
     <Compile Include="Repositories\VideoComentarioRepository.cs" />
     <Compile Include="Repositories\VideoRepository.cs" />

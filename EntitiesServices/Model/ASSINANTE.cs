@@ -72,6 +72,7 @@ namespace EntitiesServices.Model
             this.CATEGORIA_SERVICO = new HashSet<CATEGORIA_SERVICO>();
             this.FILIAL = new HashSet<FILIAL>();
             this.SERVICO = new HashSet<SERVICO>();
+            this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
         }
     
         public int ASSI_CD_ID { get; set; }
@@ -193,5 +194,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<FILIAL> FILIAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SERVICO> SERVICO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
     }
 }

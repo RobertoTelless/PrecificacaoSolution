@@ -21,4 +21,5 @@ namespace ApplicationServices.Interfaces
         List<TEMPLATE_EMAIL> GetAllItensAdm(Int32 idAss);
         Int32 ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss, out List<TEMPLATE_EMAIL> objeto);
     }
+
 }

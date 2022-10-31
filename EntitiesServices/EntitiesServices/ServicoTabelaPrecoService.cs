@@ -19,7 +19,7 @@ namespace ModelServices.EntitiesServices
     public class ServicoTabelaPrecoService : ServiceBase<SERVICO_TABELA_PRECO>, IServicoTabelaPrecoService
     {
         private readonly IServicoTabelaPrecoRepository _baseRepository;
-        protected ERP_CRMEntities Db = new ERP_CRMEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public ServicoTabelaPrecoService(IServicoTabelaPrecoRepository baseRepository) : base(baseRepository)
         {

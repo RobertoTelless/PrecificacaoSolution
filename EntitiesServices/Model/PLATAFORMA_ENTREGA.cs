@@ -14,6 +14,12 @@ namespace EntitiesServices.Model
     
     public partial class PLATAFORMA_ENTREGA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PLATAFORMA_ENTREGA()
+        {
+            this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
+        }
+    
         public int PLEN_CD_ID { get; set; }
         public int ASSI_CD_ID { get; set; }
         public string PLEN_NM_NOME { get; set; }
@@ -27,5 +33,7 @@ namespace EntitiesServices.Model
         public int PLEN_IN_ATIVO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
     }
 }

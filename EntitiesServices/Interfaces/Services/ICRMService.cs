@@ -59,6 +59,7 @@ namespace ModelServices.Interfaces.EntitiesServices
         CRM_PEDIDO_VENDA GetPedidoByNumero(String num, Int32 idAss);
         List<FORMA_ENVIO> GetAllFormasEnvio(Int32 idAss);
         List<FORMA_FRETE> GetAllFormasFrete(Int32 idAss);
+        List<PLATAFORMA_ENTREGA> GetAllPlataformas(Int32 idAss);
 
         CRM_PEDIDO_VENDA_ITEM GetItemPedidoById(Int32 id);
         Int32 EditItemPedido(CRM_PEDIDO_VENDA_ITEM item);
