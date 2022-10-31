@@ -3169,7 +3169,6 @@
     <Content Include="Views\ContaReceber\EditarCR.cshtml" />
     <Content Include="Views\ContaReceber\ParcelarCR.cshtml" />
     <Content Include="Views\ContaReceber\LiquidarParcelaCR.cshtml" />
-    <Content Include="Views\ContaReceber\LiquidarCR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
