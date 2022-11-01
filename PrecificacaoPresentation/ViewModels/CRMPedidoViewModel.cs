@@ -96,6 +96,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public string CRPV_DS_EXPEDICAO { get; set; }
         [StringLength(500, ErrorMessage = "AS INFORMAÇÕES DE ENTREGA deve conter no máximo 500 caracteres.")]
         public string CRPV_DS_ENTREGA { get; set; }
+        public Nullable<int> CRPC_IN_EMAIL { get; set; }
 
         public string NumeroProposta { get; set; }
         public string NomeProposta { get; set; }

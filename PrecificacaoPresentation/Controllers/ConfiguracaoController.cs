@@ -91,6 +91,10 @@ namespace ERP_Condominios_Solution.Controllers
                 CONF_NR_REFRESH_NOTIFICACAO = config.CONF_NR_REFRESH_NOTIFICACAO,
                 CONF_SG_LOGIN_SMS = config.CONF_SG_LOGIN_SMS,
                 CONF_SG_SENHA_SMS = config.CONF_SG_SENHA_SMS,
+                CONF_IN_CNPJ_DUPLICADO = config.CONF_IN_CNPJ_DUPLICADO,
+                CONF_NR_DIAS_ACAO = config.CONF_NR_DIAS_ACAO,
+                CONF_IN_NUMERO_INICIAL_PEDIDO = config.CONF_IN_NUMERO_INICIAL_PEDIDO,
+                CONF_NR_DIAS_PROPOSTA = config.CONF_NR_DIAS_PROPOSTA
             };
 
             return Json(serialConfig);

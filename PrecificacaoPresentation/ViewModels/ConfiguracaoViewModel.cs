@@ -37,6 +37,9 @@ namespace ERP_Condominios_Solution.ViewModels
         public string CONF_SG_LOGIN_SMS { get; set; }
         public string CONF_SG_SENHA_SMS { get; set; }
         public Nullable<int> CONF_IN_CNPJ_DUPLICADO { get; set; }
+        public Nullable<int> CONF_NR_DIAS_ACAO { get; set; }
+        public Nullable<int> CONF_IN_NUMERO_INICIAL_PEDIDO { get; set; }
+        public Nullable<int> CONF_NR_DIAS_PROPOSTA { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
     }

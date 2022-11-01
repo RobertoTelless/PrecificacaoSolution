@@ -35,13 +35,17 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<int> AGEN_IN_STATUS { get; set; }
         public string AGEN_LK_REUNIAO { get; set; }
         public Nullable<int> TARE_CD_ID { get; set; }
+        public Nullable<int> CRM1_CD_ID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA_ANEXO> AGENDA_ANEXO { get; set; }
         public virtual CATEGORIA_AGENDA CATEGORIA_AGENDA { get; set; }
+        public virtual TAREFA TAREFA { get; set; }
         public virtual USUARIO USUARIO { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual USUARIO USUARIO1 { get; set; }
-        public virtual TAREFA TAREFA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
+        public virtual CRM CRM { get; set; }
     }
 }

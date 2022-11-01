@@ -28,6 +28,8 @@ namespace EntitiesServices.Model
         public string TEPR_TX_CABECALHO { get; set; }
         public string TEPR_TX_RODAPE { get; set; }
         public int TEPR_IN_ATIVO { get; set; }
+        public Nullable<int> TEPR_IN_TIPO { get; set; }
+        public Nullable<int> TEPR_IN_FIXO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

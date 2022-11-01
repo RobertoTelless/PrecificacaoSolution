@@ -354,6 +354,7 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_COMENTARIO" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_CRM" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

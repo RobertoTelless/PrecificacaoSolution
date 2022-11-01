@@ -75,6 +75,7 @@ namespace EntitiesServices.Model
         public Nullable<System.DateTime> CRPV_DT_EXPEDICAO { get; set; }
         public Nullable<System.DateTime> CRPV_DT_ENTREGA { get; set; }
         public Nullable<int> PLEN_CD_ID { get; set; }
+        public Nullable<int> CRPC_IN_EMAIL { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }

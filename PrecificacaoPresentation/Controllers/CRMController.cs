@@ -27,6 +27,7 @@ using Canducci.Zip;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace ERP_Condominios_Solution.Controllers
 {
@@ -2382,91 +2383,71 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("AcompanhamentoProcessoCRM", new { id = (Int32)Session["IdCRM"] });
             }
             Int32 novaEtapa = etapaAtual - 1;
+            String etapa = novaEtapa == 1 ? "Prospecção" : novaEtapa == 2 ? "Contato Realizado" : novaEtapa == 3 ? "Proposta Apresentada" : novaEtapa == 4 ? "En Negociação" : "Encerrado";
             crm.CRM1_IN_STATUS = novaEtapa;
             Int32 volta = baseApp.ValidateEdit(crm, crm);
 
             // Processa mensagem
-            FUNIL_ETAPA etapa = funApp.GetEtapaById(novaEtapa);
-            FUNIL funil = funApp.GetItemById(crm.FUNI_CD_ID.Value);
-            if (etapa.FUET_IN_EMAIL == 1)
+            MensagemViewModel vm = new MensagemViewModel();
+            vm.ASSI_CD_ID = idAss;
+            vm.MENS_DT_CRIACAO = DateTime.Now;
+            vm.MENS_IN_ATIVO = 1;
+            vm.NOME = null;
+            vm.ID = crm.CLIE_CD_ID;
+            vm.MODELO = null;
+            vm.USUA_CD_ID = usuario.USUA_CD_ID;
+            vm.MENS_NM_CABECALHO = null;
+            vm.MENS_NM_RODAPE = null;
+            vm.MENS_IN_TIPO = 1;
+            vm.MENS_TX_TEXTO = "Mudança de Status do processo <b style='color: green'>" + crm.CRM1_NM_NOME + "</b> do cliente <b style='color: green'>" + crm.CLIENTE.CLIE_NM_NOME + "</b> para <b style='color: darkblue'>" + etapa + "</b>";
+            Int32 volta1 = ProcessaEnvioEMailGeral(vm, usuario);
+
+            if (crm.USUA_CD_ID != usuario.USUA_CD_ID)
             {
-                if (funil.FUNI_IN_CLIENTE == 1)
-                {
-                    MensagemViewModel vm = new MensagemViewModel();
-                    vm.ASSI_CD_ID = idAss;
-                    vm.MENS_DT_CRIACAO = DateTime.Now;
-                    vm.MENS_IN_ATIVO = 1;
-                    vm.NOME = null;
-                    vm.ID = crm.CLIE_CD_ID;
-                    vm.MODELO = null;
-                    vm.USUA_CD_ID = usuario.USUA_CD_ID;
-                    vm.MENS_NM_CABECALHO = null;
-                    vm.MENS_NM_RODAPE = null;
-                    vm.MENS_IN_TIPO = 1;
-                    vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa.FUET_NM_NOME;
-
-                    Int32 volta1 = ProcessaEnvioEMailGeral(vm, usuario);
-                }
-                if (funil.FUNI_IN_RESPONSAVEL == 1)
-                {
-                    if (crm.USUA_CD_ID != usuario.USUA_CD_ID)
-                    {
-                        MensagemViewModel vm = new MensagemViewModel();
-                        vm.ASSI_CD_ID = idAss;
-                        vm.MENS_DT_CRIACAO = DateTime.Now;
-                        vm.MENS_IN_ATIVO = 1;
-                        vm.NOME = null;
-                        vm.ID = crm.USUA_CD_ID;
-                        vm.MODELO = null;
-                        vm.USUA_CD_ID = usuario.USUA_CD_ID;
-                        vm.MENS_NM_CABECALHO = null;
-                        vm.MENS_NM_RODAPE = null;
-                        vm.MENS_IN_TIPO = 1;
-                        vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa.FUET_NM_NOME;
-
-                        Int32 volta1 = ProcessaEnvioEMailGeral(vm, usuario);
-                    }
-                }
+                vm = new MensagemViewModel();
+                vm.ASSI_CD_ID = idAss;
+                vm.MENS_DT_CRIACAO = DateTime.Now;
+                vm.MENS_IN_ATIVO = 1;
+                vm.NOME = null;
+                vm.ID = crm.USUA_CD_ID;
+                vm.MODELO = null;
+                vm.USUA_CD_ID = usuario.USUA_CD_ID;
+                vm.MENS_NM_CABECALHO = null;
+                vm.MENS_NM_RODAPE = null;
+                vm.MENS_IN_TIPO = 1;
+                vm.MENS_TX_TEXTO = "Mudança de Status do processo <b style='color: green'>" + crm.CRM1_NM_NOME + "</b> do cliente <b style='color: green'>" + crm.CLIENTE.CLIE_NM_NOME + "</b> para <b style='color: darkblue'>" + etapa + "</b>";
+                Int32 volta2 = ProcessaEnvioEMailGeral(vm, usuario);
             }
-            if (etapa.FUET_IN_SMS == 1)
+
+            vm = new MensagemViewModel();
+            vm.ASSI_CD_ID = idAss;
+            vm.MENS_DT_CRIACAO = DateTime.Now;
+            vm.MENS_IN_ATIVO = 1;
+            vm.NOME = null;
+            vm.ID = crm.CLIE_CD_ID;
+            vm.MODELO = null;
+            vm.USUA_CD_ID = usuario.USUA_CD_ID;
+            vm.MENS_NM_CABECALHO = null;
+            vm.MENS_NM_RODAPE = null;
+            vm.MENS_IN_TIPO = 2;
+            vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa;
+            Int32 volta3 = ProcessaEnvioSMSGeral(vm, usuario);
+           
+            if (crm.USUA_CD_ID != usuario.USUA_CD_ID)
             {
-                if (funil.FUNI_IN_CLIENTE == 1)
-                {
-                    MensagemViewModel vm = new MensagemViewModel();
-                    vm.ASSI_CD_ID = idAss;
-                    vm.MENS_DT_CRIACAO = DateTime.Now;
-                    vm.MENS_IN_ATIVO = 1;
-                    vm.NOME = null;
-                    vm.ID = crm.CLIE_CD_ID;
-                    vm.MODELO = null;
-                    vm.USUA_CD_ID = usuario.USUA_CD_ID;
-                    vm.MENS_NM_CABECALHO = null;
-                    vm.MENS_NM_RODAPE = null;
-                    vm.MENS_IN_TIPO = 2;
-                    vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa.FUET_NM_NOME;
-
-                    Int32 volta1 = ProcessaEnvioSMSGeral(vm, usuario);
-                }
-                if (funil.FUNI_IN_RESPONSAVEL == 1)
-                {
-                    if (crm.USUA_CD_ID != usuario.USUA_CD_ID)
-                    {
-                        MensagemViewModel vm = new MensagemViewModel();
-                        vm.ASSI_CD_ID = idAss;
-                        vm.MENS_DT_CRIACAO = DateTime.Now;
-                        vm.MENS_IN_ATIVO = 1;
-                        vm.NOME = null;
-                        vm.ID = crm.USUA_CD_ID;
-                        vm.MODELO = null;
-                        vm.USUA_CD_ID = usuario.USUA_CD_ID;
-                        vm.MENS_NM_CABECALHO = null;
-                        vm.MENS_NM_RODAPE = null;
-                        vm.MENS_IN_TIPO = 2;
-                        vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa.FUET_NM_NOME;
-
-                        Int32 volta1 = ProcessaEnvioSMSGeral(vm, usuario);
-                    }
-                }
+                vm = new MensagemViewModel();
+                vm.ASSI_CD_ID = idAss;
+                vm.MENS_DT_CRIACAO = DateTime.Now;
+                vm.MENS_IN_ATIVO = 1;
+                vm.NOME = null;
+                vm.ID = crm.USUA_CD_ID;
+                vm.MODELO = null;
+                vm.USUA_CD_ID = usuario.USUA_CD_ID;
+                vm.MENS_NM_CABECALHO = null;
+                vm.MENS_NM_RODAPE = null;
+                vm.MENS_IN_TIPO = 2;
+                vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa;
+                Int32 volta4 = ProcessaEnvioSMSGeral(vm, usuario);
             }
             return RedirectToAction("AcompanhamentoProcessoCRM", new { id = (Int32)Session["IdCRM"] });
         }
@@ -2484,97 +2465,77 @@ namespace ERP_Condominios_Solution.Controllers
             // Processa etapa
             CRM crm = baseApp.GetItemById((Int32)Session["IdCRM"]);
             Int32 etapaAtual = crm.CRM1_IN_STATUS;
-            Int32 etapas = (Int32)Session["NumEtapas"];
+            Int32 etapas = 5;
             if (etapaAtual == etapas)
             {
                 return RedirectToAction("AcompanhamentoProcessoCRM", new { id = (Int32)Session["IdCRM"] });
             }
             Int32 novaEtapa = etapaAtual + 1;
+            String etapa = novaEtapa == 1 ? "Prospecção" : novaEtapa == 2 ? "Contato Realizado" : novaEtapa == 3 ? "Proposta Apresentada" : novaEtapa == 4 ? "En Negociação" : "Encerrado";
             crm.CRM1_IN_STATUS = novaEtapa;
             Int32 volta = baseApp.ValidateEdit(crm, crm);
 
             // Processa mensagem
-            FUNIL_ETAPA etapa = funApp.GetEtapaById(novaEtapa);
-            FUNIL funil = funApp.GetItemById(crm.FUNI_CD_ID.Value);
-            if (etapa.FUET_IN_EMAIL == 1)
+            MensagemViewModel vm = new MensagemViewModel();
+            vm.ASSI_CD_ID = idAss;
+            vm.MENS_DT_CRIACAO = DateTime.Now;
+            vm.MENS_IN_ATIVO = 1;
+            vm.NOME = null;
+            vm.ID = crm.CLIE_CD_ID;
+            vm.MODELO = null;
+            vm.USUA_CD_ID = usuario.USUA_CD_ID;
+            vm.MENS_NM_CABECALHO = null;
+            vm.MENS_NM_RODAPE = null;
+            vm.MENS_IN_TIPO = 1;
+            vm.MENS_TX_TEXTO = "Mudança de Status do processo <b style='color: green'>" + crm.CRM1_NM_NOME + "</b> do cliente <b style='color: green'>" + crm.CLIENTE.CLIE_NM_NOME + "</b> para <b style='color: darkblue'>" + etapa + "</b>";
+            Int32 volta1 = ProcessaEnvioEMailGeral(vm, usuario);
+
+            if (crm.USUA_CD_ID != usuario.USUA_CD_ID)
             {
-                if (funil.FUNI_IN_CLIENTE == 1)
-                {
-                    MensagemViewModel vm = new MensagemViewModel();
-                    vm.ASSI_CD_ID = idAss;
-                    vm.MENS_DT_CRIACAO = DateTime.Now;
-                    vm.MENS_IN_ATIVO = 1;
-                    vm.NOME = null;
-                    vm.ID = crm.CLIE_CD_ID;
-                    vm.MODELO = null;
-                    vm.USUA_CD_ID = usuario.USUA_CD_ID;
-                    vm.MENS_NM_CABECALHO = null;
-                    vm.MENS_NM_RODAPE = null;
-                    vm.MENS_IN_TIPO = 1;
-                    vm.MENS_TX_TEXTO = "Mudança de Status do processo <b style='color: green'>" + crm.CRM1_NM_NOME + "</b> do cliente <b style='color: green'>" + crm.CLIENTE.CLIE_NM_NOME + "</b> para <b style='color: darkblue'>" + etapa.FUET_NM_NOME + "</b>";
-
-                    Int32 volta1 = ProcessaEnvioEMailGeral(vm, usuario);
-                }
-                if (funil.FUNI_IN_RESPONSAVEL == 1)
-                {
-                    if (crm.USUA_CD_ID != usuario.USUA_CD_ID)
-                    {
-                        MensagemViewModel vm = new MensagemViewModel();
-                        vm.ASSI_CD_ID = idAss;
-                        vm.MENS_DT_CRIACAO = DateTime.Now;
-                        vm.MENS_IN_ATIVO = 1;
-                        vm.NOME = null;
-                        vm.ID = crm.USUA_CD_ID;
-                        vm.MODELO = null;
-                        vm.USUA_CD_ID = usuario.USUA_CD_ID;
-                        vm.MENS_NM_CABECALHO = null;
-                        vm.MENS_NM_RODAPE = null;
-                        vm.MENS_IN_TIPO = 1;
-                        vm.MENS_TX_TEXTO = "Mudança de Status do processo <b style='color: green'>" + crm.CRM1_NM_NOME + "</b> do cliente <b style='color: green'>" + crm.CLIENTE.CLIE_NM_NOME + "</b> para <b style='color: darkblue'>" + etapa.FUET_NM_NOME + "</b>";
-
-                        Int32 volta1 = ProcessaEnvioEMailGeral(vm, usuario);
-                    }
-                }
+                vm = new MensagemViewModel();
+                vm.ASSI_CD_ID = idAss;
+                vm.MENS_DT_CRIACAO = DateTime.Now;
+                vm.MENS_IN_ATIVO = 1;
+                vm.NOME = null;
+                vm.ID = crm.USUA_CD_ID;
+                vm.MODELO = null;
+                vm.USUA_CD_ID = usuario.USUA_CD_ID;
+                vm.MENS_NM_CABECALHO = null;
+                vm.MENS_NM_RODAPE = null;
+                vm.MENS_IN_TIPO = 1;
+                vm.MENS_TX_TEXTO = "Mudança de Status do processo <b style='color: green'>" + crm.CRM1_NM_NOME + "</b> do cliente <b style='color: green'>" + crm.CLIENTE.CLIE_NM_NOME + "</b> para <b style='color: darkblue'>" + etapa + "</b>";
+                Int32 volta2 = ProcessaEnvioEMailGeral(vm, usuario);
             }
-            if (etapa.FUET_IN_SMS == 1)
+
+            vm = new MensagemViewModel();
+            vm.ASSI_CD_ID = idAss;
+            vm.MENS_DT_CRIACAO = DateTime.Now;
+            vm.MENS_IN_ATIVO = 1;
+            vm.NOME = null;
+            vm.ID = crm.CLIE_CD_ID;
+            vm.MODELO = null;
+            vm.USUA_CD_ID = usuario.USUA_CD_ID;
+            vm.MENS_NM_CABECALHO = null;
+            vm.MENS_NM_RODAPE = null;
+            vm.MENS_IN_TIPO = 2;
+            vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa;
+            Int32 volta3 = ProcessaEnvioSMSGeral(vm, usuario);
+
+            if (crm.USUA_CD_ID != usuario.USUA_CD_ID)
             {
-                if (funil.FUNI_IN_CLIENTE == 1)
-                {
-                    MensagemViewModel vm = new MensagemViewModel();
-                    vm.ASSI_CD_ID = idAss;
-                    vm.MENS_DT_CRIACAO = DateTime.Now;
-                    vm.MENS_IN_ATIVO = 1;
-                    vm.NOME = null;
-                    vm.ID = crm.CLIE_CD_ID;
-                    vm.MODELO = null;
-                    vm.USUA_CD_ID = usuario.USUA_CD_ID;
-                    vm.MENS_NM_CABECALHO = null;
-                    vm.MENS_NM_RODAPE = null;
-                    vm.MENS_IN_TIPO = 2;
-                    vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa.FUET_NM_NOME;
-
-                    Int32 volta1 = ProcessaEnvioSMSGeral(vm, usuario);
-                }
-                if (funil.FUNI_IN_RESPONSAVEL == 1)
-                {
-                    if (crm.USUA_CD_ID != usuario.USUA_CD_ID)
-                    {
-                        MensagemViewModel vm = new MensagemViewModel();
-                        vm.ASSI_CD_ID = idAss;
-                        vm.MENS_DT_CRIACAO = DateTime.Now;
-                        vm.MENS_IN_ATIVO = 1;
-                        vm.NOME = null;
-                        vm.ID = crm.USUA_CD_ID;
-                        vm.MODELO = null;
-                        vm.USUA_CD_ID = usuario.USUA_CD_ID;
-                        vm.MENS_NM_CABECALHO = null;
-                        vm.MENS_NM_RODAPE = null;
-                        vm.MENS_IN_TIPO = 2;
-                        vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa.FUET_NM_NOME;
-
-                        Int32 volta1 = ProcessaEnvioSMSGeral(vm, usuario);
-                    }
-                }
+                vm = new MensagemViewModel();
+                vm.ASSI_CD_ID = idAss;
+                vm.MENS_DT_CRIACAO = DateTime.Now;
+                vm.MENS_IN_ATIVO = 1;
+                vm.NOME = null;
+                vm.ID = crm.USUA_CD_ID;
+                vm.MODELO = null;
+                vm.USUA_CD_ID = usuario.USUA_CD_ID;
+                vm.MENS_NM_CABECALHO = null;
+                vm.MENS_NM_RODAPE = null;
+                vm.MENS_IN_TIPO = 2;
+                vm.MENS_TX_TEXTO = "Mudança de Status do processo " + crm.CRM1_NM_NOME + " do cliente " + crm.CLIENTE.CLIE_NM_NOME + " para " + etapa;
+                Int32 volta4 = ProcessaEnvioSMSGeral(vm, usuario);
             }
             return RedirectToAction("AcompanhamentoProcessoCRM", new { id = (Int32)Session["IdCRM"] });
         }
@@ -2691,7 +2652,7 @@ namespace ERP_Condominios_Solution.Controllers
                     }
 
                     // Atualiza processo
-                    item.CRM1_IN_STATUS = (Int32)Session["EtapaEncerra"];
+                    item.CRM1_IN_STATUS = 5;
                     Int32 volta1 = baseApp.ValidateEditSimples(item, item, usuario);
 
                     // Gera diario
@@ -2706,7 +2667,7 @@ namespace ERP_Condominios_Solution.Controllers
                     Int32 volta3 = diaApp.ValidateCreate(dia);
 
                     // Verifica se tem pedido aprovado
-                    if (item.CRM1_IN_ATIVO == (Int32)Session["EtapaEncerra"])
+                    if (item.CRM1_IN_ATIVO == 5)
                     {
                         CRM crm = baseApp.GetItemById(item.CRM1_CD_ID);
                         CRM_PEDIDO_VENDA pedAprov = crm.CRM_PEDIDO_VENDA.Where(p => p.CRPV_IN_STATUS == 5).FirstOrDefault();
@@ -3291,23 +3252,20 @@ namespace ERP_Condominios_Solution.Controllers
             Session["TipoHistorico"] = 1;
 
             // Recupera dados do funil
-            FUNIL funil = funApp.GetItemById(item.FUNI_CD_ID.Value);
-            Session["TemProposta"] = funil.FUNI_IN_PROPOSTA;
-            Session["Funil"] = funil.FUNI_NM_NOME;
-            List<FUNIL_ETAPA> etapas = funil.FUNIL_ETAPA.ToList();
-            ViewBag.Etapas = etapas.Count;
-            Session["NumEtapas"] = etapas.Count;
+            Session["TemProposta"] = 1;
+            Session["Funil"] = "Padrão";
+            ViewBag.Etapas = 5;
+            Session["NumEtapas"] = 5;
 
             Int32 atual = item.CRM1_IN_STATUS;
-            FUNIL_ETAPA etapaAtual = etapas.Where(p => p.FUET_IN_ORDEM == atual).FirstOrDefault();
-            String nomeEtapa = etapaAtual.FUET_NM_NOME;
+            String nomeEtapa = atual == 1 ? "Prospecção" : atual == 2 ? "Contato Realizado" : atual == 3 ? "Proposta Apresentada" : atual == 4 ? "En Negociação" : "Encerrado";
             ViewBag.NomeEtapa = nomeEtapa;
             Session["EtapaAtual"] = atual;
-            ViewBag.EtapaProposta = etapaAtual.FUET_IN_PROPOSTA;
+            ViewBag.EtapaProposta = 1;
 
-            Int32 encerra = etapaAtual.FUET_IN_ENCERRA;
+            Int32 encerra = 5;
             ViewBag.Encerra = encerra;
-            Int32? etapaEncerra = etapas.Where(p => p.FUET_IN_ENCERRA == 1).FirstOrDefault().FUET_IN_ORDEM;
+            Int32? etapaEncerra = 5;
             Session["EtapaEncerra"] = etapaEncerra;
             ViewBag.EtapaEncerra = etapaEncerra;
 
@@ -3415,111 +3373,6 @@ namespace ERP_Condominios_Solution.Controllers
         {
             return View();
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ExpedicaoProcessoCRM(CRMViewModel vm)
-        //{
-        //    Int32 idAss = (Int32)Session["IdAssinante"];
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            // Criticas
-        //            if ((Int32)Session["FaseExpedicao"] == 1)
-        //            {
-        //                if (vm.TRAN_CD_ID == null)
-        //                {
-        //                    Session["MensCRM"] = 91;
-        //                    return RedirectToAction("VoltarAcompanhamentoCRM");
-        //                }
-        //                if (vm.CRM1_DT_PREVISAO_ENTREGA == null)
-        //                {
-        //                    Session["MensCRM"] = 92;
-        //                    return RedirectToAction("VoltarAcompanhamentoCRM");
-        //                }
-        //            }
-        //            else
-        //            {
-        //                if (vm.CRM1_DT_DATA_SAIDA == null)
-        //                {
-        //                    Session["MensCRM"] = 93;
-        //                    return RedirectToAction("VoltarAcompanhamentoCRM");
-        //                }
-        //            }
-
-        //            // Confirma entrega
-        //            if (vm.Entrega)
-        //            {
-        //                vm.CRM1_IN_ATIVO = 8;
-        //            }
-
-        //            // Executa a operação
-        //            USUARIO usuario = (USUARIO)Session["UserCredentials"];
-        //            CRM item = Mapper.Map<CRMViewModel, CRM>(vm);
-        //            Int32 volta = baseApp.ValidateEdit(item, (CRM)Session["CRM"], usuario);
-
-        //            if (vm.Entrega)
-        //            {
-        //                // Baixa de estoque
-        //                List<CRM_PEDIDO_VENDA> listaPed = baseApp.GetAllPedidos(idAss).Where(p => p.CRM1_CD_ID == item.CRM1_CD_ID).ToList();
-        //                if (listaPed.Count > 0)
-        //                {
-        //                    CRM_PEDIDO_VENDA ped = baseApp.GetPedidoById(listaPed.Where(p => p.CRPV_IN_STATUS == 5).First().CRPV_CD_ID);
-        //                    if (ped != null)
-        //                    {
-        //                        List<CRM_PEDIDO_VENDA_ITEM> prods = ped.CRM_PEDIDO_VENDA_ITEM.ToList();
-        //                        foreach (CRM_PEDIDO_VENDA_ITEM prod in prods)
-        //                        {
-        //                            if (prod.CRPI_IN_TIPO_ITEM == 1)
-        //                            {
-        //                                PRODUTO_ESTOQUE_FILIAL pef = estApp.GetByProdFilial(prod.PROD_CD_ID.Value, ped.FILI_CD_ID);
-        //                                pef.PREF_QN_QUANTIDADE_RESERVADA = pef.PREF_QN_QUANTIDADE_RESERVADA - prod.CRPI_IN_QUANTIDADE;
-        //                                pef.PREF_QN_ESTOQUE = pef.PREF_QN_ESTOQUE - prod.CRPI_IN_QUANTIDADE;
-        //                                Int32 volta1 = estApp.ValidateEdit(pef, pef, usuario);
-
-        //                                // Grava movimentação
-        //                                MOVIMENTO_ESTOQUE_PRODUTO mov = new MOVIMENTO_ESTOQUE_PRODUTO();
-        //                                mov.ASSI_CD_ID = usuario.ASSI_CD_ID;
-        //                                mov.FILI_CD_ID = ped.FILI_CD_ID;
-        //                                mov.PROD_CD_ID = prod.PROD_CD_ID.Value;
-        //                                mov.USUA_CD_ID = usuario.USUA_CD_ID;
-        //                                mov.MOEP_DT_MOVIMENTO = DateTime.Today.Date;
-        //                                mov.MOEP_DS_JUSTIFICATIVA = "Pedido Número: " + ped.CRPV_IN_NUMERO_GERADO.ToString();
-        //                                mov.MOEP_IN_ATIVO = 1;
-        //                                mov.MOEP_IN_CHAVE_ORIGEM = 4;
-        //                                mov.MOEP_IN_ORIGEM = "-";
-        //                                mov.MOEP_IN_OPERACAO = 2;
-        //                                mov.MOEP_QN_QUANTIDADE = prod.CRPI_IN_QUANTIDADE;
-        //                                Int32 volta3 = meApp.ValidateCreate(mov, usuario);
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-
-        //            // Sucesso
-        //            listaMaster = new List<CRM>();
-        //            Session["ListaCRM"] = null;
-        //            Session["IncluirCRM"] = 0;
-        //            Session["FaseExpedicao"] = 2;
-        //            if (vm.Entrega)
-        //            {
-        //                return RedirectToAction("VoltarBaseCRM");
-        //            }
-        //            return RedirectToAction("AcompanhamentoProcessoCRM", new { id = (Int32)Session["IdCRM"] });
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ViewBag.Message = ex.Message;
-        //            return RedirectToAction("AcompanhamentoProcessoCRM", new { id = (Int32)Session["IdCRM"] });
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("AcompanhamentoProcessoCRM", new { id = (Int32)Session["IdCRM"] });
-        //    }
-        //}
 
         [HttpGet]
         public ActionResult EnviarEMailContato(Int32 id)
@@ -4166,7 +4019,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             ViewBag.Nome = usuario.USUA_NM_NOME.Substring(0, usuario.USUA_NM_NOME.IndexOf(" "));
             ViewBag.Foto = usuario.USUA_AQ_FOTO;
-            ViewBag.Cargo = usuario.CARGO.CARG_NM_NOME;
+            ViewBag.Cargo = usuario.CARGO_USUARIO.CARG_NM_NOME;
             //Session["PontoAcao"] = 1;
             return View();
         }
@@ -4718,7 +4571,7 @@ namespace ERP_Condominios_Solution.Controllers
             mensagem.ASSUNTO = "Contato";
             mensagem.CORPO = emailBody;
             mensagem.DEFAULT_CREDENTIALS = false;
-            mensagem.EMAIL_TO_DESTINO = cont.CRCO_NM_EMAIL;
+            mensagem.EMAIL_DESTINO = cont.CRCO_NM_EMAIL;
             mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
             mensagem.ENABLE_SSL = true;
             mensagem.NOME_EMISSOR = usuario.ASSINANTE.ASSI_NM_NOME;
@@ -4783,7 +4636,7 @@ namespace ERP_Condominios_Solution.Controllers
             mensagem.ASSUNTO = "Contato";
             mensagem.CORPO = emailBody;
             mensagem.DEFAULT_CREDENTIALS = false;
-            mensagem.EMAIL_TO_DESTINO = cont.CLIE_NM_EMAIL;
+            mensagem.EMAIL_DESTINO = cont.CLIE_NM_EMAIL;
             mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
             mensagem.ENABLE_SSL = true;
             mensagem.NOME_EMISSOR = usuario.ASSINANTE.ASSI_NM_NOME;
@@ -4867,11 +4720,11 @@ namespace ERP_Condominios_Solution.Controllers
             mensagem.DEFAULT_CREDENTIALS = false;
             if (vm.MENS_IN_TIPO == 1)
             {
-                mensagem.EMAIL_TO_DESTINO = cont.CLIE_NM_EMAIL;
+                mensagem.EMAIL_DESTINO = cont.CLIE_NM_EMAIL;
             }
             if (vm.MENS_IN_TIPO == 2)
             {
-                mensagem.EMAIL_TO_DESTINO = usu.USUA_NM_EMAIL;
+                mensagem.EMAIL_DESTINO = usu.USUA_EM_EMAIL;
             }
             mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
             mensagem.ENABLE_SSL = true;
@@ -4896,78 +4749,11 @@ namespace ERP_Condominios_Solution.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetEtapaFunil(int idFunil)
-        {
-            Int32 idAss = (Int32)Session["IdAssinante"];
-                        
-            //int idFunil = (Int32)Session["IdFunil"];
-
-            //int idFunil = 1;
-
-            // Consulta as etpas do funil
-
-            var listaEtapaFunil = funApp.GetById(idFunil).FUNIL_ETAPA;
-
-            
-            List<Hashtable> etapas = new List<Hashtable>();
-
-            foreach(var item in listaEtapaFunil.OrderBy(x=> x.FUET_IN_ORDEM))
-            {
-                etapas.Add(new Hashtable()
-                {
-                    {"FUET_NM_NOME",item.FUET_NM_NOME }
-                    ,{"FUET_DS_DESCRICAO",item.FUET_DS_DESCRICAO }
-                    ,{"FUET_IN_ENCERRA",item.FUET_IN_ENCERRA }
-                    ,{"FUET_CD_ID",item.FUET_CD_ID }
-                    ,{"FUNI_CD_ID",item.FUNI_CD_ID }
-                });
-            }
-
-            //Consultar os processos
-
-            var listaProcessos = baseApp.GetAllItens(idAss).Where(p => p.FUNI_CD_ID == idFunil).ToList();
-            
-            var processos = new List<Hashtable>();
-
-            foreach (var item in listaProcessos)
-            {
-                var hash = new Hashtable();
-                hash.Add("CRM1_IN_STATUS", item.CRM1_IN_STATUS);
-                hash.Add("CRM1_CD_ID", item.CRM1_CD_ID);
-                hash.Add("CRM1_NM_NOME", item.CRM1_NM_NOME);
-                hash.Add("CRM1_NR_TEMPERATURA", item.CRM1_NR_TEMPERATURA);
-                hash.Add("CLIE_NM_NOME", item.CLIENTE.CLIE_NM_NOME);
-                hash.Add("CLIE_IN_ATIVO", item.CLIENTE.CLIE_IN_ATIVO);
-                hash.Add("CROR_NM_NOME", item.CRM_ORIGEM.CROR_NM_NOME);
-                hash.Add("CRM1_DT_CRIACAO", item.CRM1_DT_CRIACAO.Value.ToString("dd/MM/yyyy"));
-                if (item.CRM1_DT_ENCERRAMENTO != null)
-                {
-                    hash.Add("CRM1_DT_ENCERRAMENTO", item.CRM1_DT_ENCERRAMENTO.Value.ToString("dd/MM/yyyy"));
-                }
-                else
-                {
-                    hash.Add("CRM1_DT_ENCERRAMENTO", "-");
-                }
-                hash.Add("CRM1_NM_CLIENTE", item.CLIENTE.CLIE_NM_NOME);
-                processos.Add(hash);
-            }
-
-
-            return Json(new 
-            {
-                etapas = etapas
-                ,
-                processos = processos
-            });
-        }
-
-        [HttpPost]
         public JsonResult GetProcessos()
         {
             Int32 idAss = (Int32)Session["IdAssinante"];
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
-            //listaMaster = baseApp.GetAllItens(idAss).Where(p => p.FUNI_CD_ID == (Int32)Session["IdFunil"]).ToList();
-            listaMaster = baseApp.GetAllItens(idAss).Where(p => p.FUNI_CD_ID == 1).ToList();
+            listaMaster = baseApp.GetAllItens(idAss).ToList();
             var listaHash = new List<Hashtable>();
             foreach (var item in listaMaster)
             {
@@ -4998,22 +4784,6 @@ namespace ERP_Condominios_Solution.Controllers
             crm.CRM1_DT_ENCERRAMENTO = dtEnc;
             crm.MOEN_CD_ID = 1;
             crm.CRM1_DS_INFORMACOES_ENCERRAMENTO = "Processo Encerrado";
-
-            //CRM item = new CRM();
-            //item.TARE_CD_ID = tarefa.TARE_CD_ID;
-            //item.TARE_DS_DESCRICAO = tarefa.TARE_DS_DESCRICAO;
-            //item.TARE_DT_CADASTRO = tarefa.TARE_DT_CADASTRO;
-            //item.TARE_DT_ESTIMADA = tarefa.TARE_DT_ESTIMADA;
-            //item.TARE_DT_REALIZADA = dtEnc;
-            //item.TARE_IN_ATIVO = tarefa.TARE_IN_ATIVO;
-            //item.TARE_IN_AVISA = tarefa.TARE_IN_AVISA;
-            //item.TARE_IN_PRIORIDADE = tarefa.TARE_IN_PRIORIDADE;
-            //item.TARE_IN_STATUS = tarefa.TARE_IN_STATUS;
-            //item.TARE_NM_LOCAL = tarefa.TARE_NM_LOCAL;
-            //item.TARE_NM_TITULO = tarefa.TARE_NM_TITULO;
-            //item.TARE_TX_OBSERVACOES = tarefa.TARE_TX_OBSERVACOES;
-            //item.TITR_CD_ID = tarefa.TITR_CD_ID;
-            //item.USUA_CD_ID = tarefa.USUA_CD_ID;
 
             try
             {
@@ -5085,7 +4855,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             PdfPCell cell = new PdfPCell();
             cell.Border = 0;
-            Image image = Image.GetInstance(Server.MapPath("~/Imagens/base/CRM_Icon2.jpg"));
+            Image image = Image.GetInstance(Server.MapPath("~/Imagens/base/Precificacao_Favicon.png"));
             image.ScaleAbsolute(50, 50);
             cell.AddElement(image);
             table.AddCell(cell);
@@ -5654,7 +5424,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             PdfPCell cell = new PdfPCell();
             cell.Border = 0;
-            Image image = Image.GetInstance(Server.MapPath("~/Images/CRM_Icon2.jpg"));
+            Image image = Image.GetInstance(Server.MapPath("~/Images/Precificacao_Favicon.png"));
             image.ScaleAbsolute(50, 50);
             cell.AddElement(image);
             table.AddCell(cell);
@@ -6257,11 +6027,6 @@ namespace ERP_Condominios_Solution.Controllers
                     Session["MensCRM"] = 2;
                     return RedirectToAction("MontarTelaCRM", "CRM");
                 }
-                //if ((Int32)Session["PermCRM"] == 0)
-                //{
-                //    Session["MensPermissao"] = 2;
-                //    return RedirectToAction("CarregarBase", "BaseAdmin");
-                //}
             }
             else
             {
@@ -6284,8 +6049,6 @@ namespace ERP_Condominios_Solution.Controllers
             List<CRM_ACAO> acoes = baseApp.GetAllAcoes(idAss);
             List<CRM_ACAO> acoesPend = acoes.Where(p => p.CRAC_IN_STATUS == 1).ToList();
             List<CLIENTE> cli = cliApp.GetAllItens(idAss);
-            //List<CRM_PROPOSTA> props = baseApp.GetAllPropostas(idAss);
-            //List<CRM_PROPOSTA> lmp = props.Where(p => p.CRPR_DT_PROPOSTA.Month == DateTime.Today.Date.Month & p.CRPR_DT_PROPOSTA.Year == DateTime.Today.Date.Year).ToList();
             List<CRM_PEDIDO_VENDA> peds = baseApp.GetAllPedidos(idAss);
             List<CRM_PEDIDO_VENDA> lmp1 = peds.Where(p => p.CRPV_DT_PEDIDO.Month == DateTime.Today.Date.Month & p.CRPV_DT_PEDIDO.Year == DateTime.Today.Date.Year).ToList();
 
@@ -6312,7 +6075,6 @@ namespace ERP_Condominios_Solution.Controllers
             Session["ListaCRMCanc"] = lc;
             Session["ListaCRMAcoes"] = acoes;
             Session["ListaCRMAcoesPend"] = acoesPend;
-            //Session["ListaPropostaMes"] = lmp;
             Session["ListaPedidosMes"] = lmp1;
 
             Session["CRMAtivos"] = la.Count;
@@ -6337,12 +6099,6 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 x = acoes.Where(p => p.CRAC_IN_STATUS == 3).ToList().Count;
             Int32 y = acoes.Where(p => p.CRAC_IN_STATUS == 1).ToList().Count;
 
-            //Session["PropElaboracao"] = props.Where(p => p.CRPR_IN_STATUS == 1).ToList().Count;
-            //Session["PropEnviada"] = props.Where(p => p.CRPR_IN_STATUS == 2).ToList().Count;
-            //Session["PropCancelada"] = props.Where(p => p.CRPR_IN_STATUS == 3).ToList().Count;
-            //Session["PropReprovada"] = props.Where(p => p.CRPR_IN_STATUS == 4).ToList().Count;
-            //Session["PropAprovada"] = props.Where(p => p.CRPR_IN_STATUS == 5).ToList().Count;
-
             Session["PedElaboracao"] = peds.Where(p => p.CRPV_IN_STATUS == 1).ToList().Count;
             Session["PedEnviada"] = peds.Where(p => p.CRPV_IN_STATUS == 2).ToList().Count;
             Session["PedCancelada"] = peds.Where(p => p.CRPV_IN_STATUS == 3).ToList().Count;
@@ -6364,22 +6120,6 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.ContaCRMMes = lm.Count;
             Session["ListaDatasCRM"] = datas;
             Session["ListaCRMMesResumo"] = lista;
-
-            // Resumo Mes Prposta
-            //List<DateTime> datasProp = lmp.Select(p => p.CRPR_DT_PROPOSTA.Date).Distinct().ToList();
-            //List<ModeloViewModel> listaProp = new List<ModeloViewModel>();
-            //foreach (DateTime item in datasProp)
-            //{
-            //    Int32 conta = lmp.Where(p => p.CRPR_DT_PROPOSTA.Date == item).Count();
-            //    ModeloViewModel mod = new ModeloViewModel();
-            //    mod.DataEmissao = item;
-            //    mod.Valor = conta;
-            //    lista.Add(mod);
-            //}
-            //ViewBag.ListaPropostaMes = lista;
-            //ViewBag.ContaPropostaMes = lmp.Count;
-            //Session["ListaDatasProp"] = datasProp;
-            //Session["ListaPropostaMesResumo"] = lista;
 
             // Resumo Mes Pedidos
             List<DateTime> datasPed = lmp1.Select(p => p.CRPV_DT_PEDIDO.Date).Distinct().ToList();
@@ -6435,19 +6175,6 @@ namespace ERP_Condominios_Solution.Controllers
             }
             ViewBag.ListaCRMAcao = lista3;
             Session["ListaCRMAcao"] = lista3;
-
-            // Resumo Propostas
-            //List<ModeloViewModel> lista4 = new List<ModeloViewModel>();
-            //for (int i = 1; i < 6; i++)
-            //{
-            //    Int32 conta = props.Where(p => p.CRPR_IN_STATUS == i).Count();
-            //    ModeloViewModel mod = new ModeloViewModel();
-            //    mod.Data = i == 1 ? "Em Elaboração" : (i == 2 ? "Enviada" : (i == 3 ? "Cancelada" : (i == 4 ? "Reprovada" : "Aprovada")));
-            //    mod.Valor = conta;
-            //    lista3.Add(mod);
-            //}
-            //ViewBag.ListaCRMProp = lista4;
-            //Session["ListaCRMProp"] = lista4;
 
             // Resumo Pedidos
             List<ModeloViewModel> lista5 = new List<ModeloViewModel>();
@@ -7067,7 +6794,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             ViewBag.Nome = usuario.USUA_NM_NOME.Substring(0, usuario.USUA_NM_NOME.IndexOf(" "));
             ViewBag.Foto = usuario.USUA_AQ_FOTO;
-            ViewBag.Cargo = usuario.CARGO.CARG_NM_NOME;
+            ViewBag.Cargo = usuario.CARGO_USUARIO.CARG_NM_NOME;
             Session["PontoPedido"] = 1;
             return View();
         }
@@ -7150,7 +6877,7 @@ namespace ERP_Condominios_Solution.Controllers
             CLIENTE cliente = null;
             String erro = null;
             Int32 volta = 0;
-            ERP_CRMEntities Db = new ERP_CRMEntities();
+            Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
             // Recupera templates
             if (item.TEPR_CD_ID != null)
@@ -7271,7 +6998,7 @@ namespace ERP_Condominios_Solution.Controllers
             mensagem.ASSUNTO = "Proposta #" + item.CRPV_IN_NUMERO_GERADO + " - " + cliente.CLIE_NM_NOME;
             mensagem.CORPO = emailBody;
             mensagem.DEFAULT_CREDENTIALS = false;
-            mensagem.EMAIL_TO_DESTINO = cliente.CLIE_NM_EMAIL;
+            mensagem.EMAIL_DESTINO = cliente.CLIE_NM_EMAIL;
             mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
             mensagem.ENABLE_SSL = true;
             mensagem.NOME_EMISSOR = cliente.ASSINANTE.ASSI_NM_NOME;
@@ -7401,7 +7128,7 @@ namespace ERP_Condominios_Solution.Controllers
             // Prepara view
             CONFIGURACAO conf = confApp.GetItemById(usuario.ASSI_CD_ID);
             ViewBag.Templates = new SelectList(baseApp.GetAllTemplateProposta(idAss).Where(p => p.TEPR_IN_TIPO != 2).OrderByDescending(p => p.TEPR_IN_FIXO), "TEPR_CD_ID", "TEPR_NM_NOME");
-            ViewBag.Filiais = new SelectList(baseApp.GetAllFilial(idAss).OrderBy(p => p.FILI_NM_NOME), "FILI_CD_ID", "FILI_NM_NOME");
+            //ViewBag.Filiais = new SelectList(baseApp.GetAllFilial(idAss).OrderBy(p => p.FILI_NM_NOME), "FILI_CD_ID", "FILI_NM_NOME");
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss).OrderBy(p => p.USUA_NM_NOME), "USUA_CD_ID", "USUA_NM_NOME");
 
             // Recupera número
@@ -7454,7 +7181,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
             ViewBag.Templates = new SelectList(baseApp.GetAllTemplateProposta(idAss).Where(p => p.TEPR_IN_TIPO != 2).OrderByDescending(p => p.TEPR_IN_FIXO), "TEPR_CD_ID", "TEPR_NM_NOME");
-            ViewBag.Filiais = new SelectList(baseApp.GetAllFilial(idAss).OrderBy(p => p.FILI_NM_NOME), "FILI_CD_ID", "FILI_NM_NOME");
+            //ViewBag.Filiais = new SelectList(baseApp.GetAllFilial(idAss).OrderBy(p => p.FILI_NM_NOME), "FILI_CD_ID", "FILI_NM_NOME");
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss).OrderBy(p => p.USUA_NM_NOME), "USUA_CD_ID", "USUA_NM_NOME");
             vm.CLIENTE_NOME = (CLIENTE)Session["ClienteCRM"];
             if (ModelState.IsValid)
@@ -8109,10 +7836,7 @@ namespace ERP_Condominios_Solution.Controllers
                     }
                     // Atualiza status do processo
                     CRM crm = baseApp.GetItemById(item.CRM1_CD_ID.Value);
-                    FUNIL funil = funApp.GetItemById(crm.FUNI_CD_ID.Value);
-                    List<FUNIL_ETAPA> etapas = funil.FUNIL_ETAPA.ToList();
-                    Int32? etapaProposta = etapas.Where(p => p.FUET_IN_PROPOSTA == 1).FirstOrDefault().FUET_IN_ORDEM;
-                    crm.CRM1_IN_STATUS = etapaProposta.Value;
+                    crm.CRM1_IN_STATUS = 3;
                     Int32 volta1 = baseApp.ValidateEdit(crm, crm);
 
                     // Envia pedido
