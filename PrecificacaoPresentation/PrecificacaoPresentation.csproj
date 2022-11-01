@@ -3186,8 +3186,6 @@
     <Content Include="Views\CRM\VerAnexoCRM.cshtml" />
     <Content Include="Views\CRM\VerAnexoCRMPedido.cshtml" />
     <Content Include="Views\CRM\CancelarProcessoCRM.cshtml" />
-    <Content Include="Views\CRM\EnviarParaExpedicaoCRM.cshtml" />
-    <Content Include="Views\CRM\EnviarExpedicaoCRM.cshtml" />
     <Content Include="Views\CRM\EncerrarProcessoCRM.cshtml" />
     <Content Include="Views\CRM\EditarProcessoCRM.cshtml" />
     <Content Include="Views\CRM\VisualizarProcessoCRM.cshtml" />
@@ -3206,7 +3204,6 @@
     <Content Include="Views\CRM\VerProcessosStatusExpansao.cshtml" />
     <Content Include="Views\CRM\EnviarEMailCliente.cshtml" />
     <Content Include="Views\CRM\MontarTelaDashboardCRMNovo.cshtml" />
-    <Content Include="Views\CRM\MontarTelaDashboardVendas.cshtml" />
     <Content Include="Views\CRM\VerPedidosUsuarioCRM.cshtml" />
     <Content Include="Views\CRM\IncluirComentarioPedidoCRM.cshtml" />
     <Content Include="Views\CRM\IncluirPedido.cshtml" />

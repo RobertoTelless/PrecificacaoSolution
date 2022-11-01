@@ -13,7 +13,6 @@ namespace ERP_Condominios_Solution.ViewModels
         public int CRPV_CD_ID { get; set; }
         public Nullable<int> ASSI_CD_ID { get; set; }
         public Nullable<int> CRM1_CD_ID { get; set; }
-        [Required(ErrorMessage = "Campo FILIAL obrigatorio")]
         public int FILI_CD_ID { get; set; }
         public Nullable<int> CLIE_CD_ID { get; set; }
         public Nullable<int> FOEN_CD_ID { get; set; }
