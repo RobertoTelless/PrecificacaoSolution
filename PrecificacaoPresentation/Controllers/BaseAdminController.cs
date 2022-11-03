@@ -153,6 +153,10 @@ namespace ERP_Condominios_Solution.Controllers
             Session["MensEstoque"] = 0;
             Session["VoltaNotificacao"] = 3;
             Session["VoltaNoticia"] = 1;
+            Session["ErroSoma"] = 0;
+            Session["IdCP"] = 0;
+            Session["MensVencimentoCR"] = 0;
+            Session["VoltaCompra"] = 0;
 
             USUARIO usu = new USUARIO();
             UsuarioViewModel vm = new UsuarioViewModel();

@@ -228,7 +228,7 @@ namespace ERP_Condominios_Solution.Controllers
             atrasado.Add(new SelectListItem() { Text = "Sim", Value = "1" });
             atrasado.Add(new SelectListItem() { Text = "Não", Value = "2" });
             ViewBag.Atrasado = new SelectList(atrasado, "Value", "Text");
-            ViewBag.Contas = new SelectList(contaApp.GetAllItens(idAss).OrderBy(p => p.COBA_NM_NOME_EXIBE), "COBA_CD_ID", "COBA_NM_NOME_EXIBE_OLD");
+            ViewBag.Contas = new SelectList(contaApp.GetAllItens(idAss).OrderBy(p => p.COBA_NM_NOME_EXIBE), "COBA_CD_ID", "COBA_NM_NOME_EXIBE");
             if ((Int32)Session["ErroSoma"] == 2)
             {
                 ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0083", CultureInfo.CurrentCulture));
@@ -773,7 +773,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.CC = new SelectList(ccApp.GetAllDespesas(idAss).OrderBy(x => x.CECU_NM_EXIBE).ToList<PLANO_CONTA>(), "CECU_CD_ID", "CECU_NM_EXIBE");
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss), "USUA_CD_ID", "USUA_NM_NOME");
             ViewBag.Contas = new SelectList(contaApp.GetAllItens(idAss).OrderBy(p => p.COBA_NM_NOME_EXIBE), "COBA_CD_ID", "COBA_NM_NOME_EXIBE_OLD");
-            ViewBag.Formas = new SelectList(fpApp.GetAllItens(idAss).Where(p => p.FOPA_IN_TIPO_FORMA == 1 || p.FOPA_IN_TIPO_FORMA == 3).OrderBy(x => x.FOPR_NM_NOME_FORMA).ToList<FORMA_PAGTO_RECTO>(), "FOPR_CD_ID", "FOPR_NM_NOME");
+            ViewBag.Formas = new SelectList(fpApp.GetAllItens(idAss).Where(p => p.FOPA_IN_TIPO_FORMA == 1 || p.FOPA_IN_TIPO_FORMA == 3).OrderBy(x => x.FOPR_NM_NOME_FORMA).ToList<FORMA_PAGTO_RECTO>(), "FOPR_CD_ID", "FOPR_NM_NOME_FORMA");
             ViewBag.Periodicidade = new SelectList(perApp.GetAllItens().OrderBy(p => p.PETA_NM_NOME), "PETA_CD_ID", "PETA_NM_NOME");
             List<SelectListItem> tipoPag = new List<SelectListItem>();
             tipoPag.Add(new SelectListItem() { Text = "Pagamento Recorrente", Value = "1" });
@@ -859,7 +859,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.CC = new SelectList(ccApp.GetAllDespesas(idAss).OrderBy(x => x.CECU_NM_EXIBE).ToList<PLANO_CONTA>(), "CECU_CD_ID", "CECU_NM_EXIBE");
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss), "USUA_CD_ID", "USUA_NM_NOME");
             ViewBag.Contas = new SelectList(contaApp.GetAllItens(idAss).OrderBy(p => p.COBA_NM_NOME_EXIBE), "COBA_CD_ID", "COBA_NM_NOME_EXIBE_OLD");
-            ViewBag.Formas = new SelectList(fpApp.GetAllItens(idAss).Where(p => p.FOPA_IN_TIPO_FORMA == 1 || p.FOPA_IN_TIPO_FORMA == 3).OrderBy(x => x.FOPR_NM_NOME_FORMA).ToList<FORMA_PAGTO_RECTO>(), "FOPR_CD_ID", "FOPR_NM_NOME");
+            ViewBag.Formas = new SelectList(fpApp.GetAllItens(idAss).Where(p => p.FOPA_IN_TIPO_FORMA == 1 || p.FOPA_IN_TIPO_FORMA == 3).OrderBy(x => x.FOPR_NM_NOME_FORMA).ToList<FORMA_PAGTO_RECTO>(), "FOPR_CD_ID", "FOPR_NM_NOME_FORMA");
             ViewBag.Periodicidade = new SelectList(perApp.GetAllItens().OrderBy(p => p.PETA_NM_NOME), "PETA_CD_ID", "PETA_NM_NOME");
             List<SelectListItem> tipoPag = new List<SelectListItem>();
             tipoPag.Add(new SelectListItem() { Text = "Pagamento Recorrente", Value = "1" });
@@ -1001,7 +1001,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.CC = new SelectList(ccApp.GetAllDespesas(idAss).OrderBy(x => x.CECU_NM_EXIBE).ToList<PLANO_CONTA>(), "CECU_CD_ID", "CECU_NM_EXIBE");
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss), "USUA_CD_ID", "USUA_NM_NOME");
             ViewBag.Contas = new SelectList(contaApp.GetAllItens(idAss).OrderBy(p => p.COBA_NM_NOME_EXIBE), "COBA_CD_ID", "COBA_NM_NOME_EXIBE_OLD");
-            ViewBag.Formas = new SelectList(fpApp.GetAllItens(idAss).Where(p => p.FOPA_IN_TIPO_FORMA == 1 || p.FOPA_IN_TIPO_FORMA == 3).OrderBy(x => x.FOPR_NM_NOME_FORMA).ToList<FORMA_PAGTO_RECTO>(), "FOPR_CD_ID", "FOPR_NM_NOME");
+            ViewBag.Formas = new SelectList(fpApp.GetAllItens(idAss).Where(p => p.FOPA_IN_TIPO_FORMA == 1 || p.FOPA_IN_TIPO_FORMA == 3).OrderBy(x => x.FOPR_NM_NOME_FORMA).ToList<FORMA_PAGTO_RECTO>(), "FOPR_CD_ID", "FOPR_NM_NOME_FORMA");
             ViewBag.Periodicidade = new SelectList(perApp.GetAllItens(), "PERI_CD_ID", "PERI_NM_NOME");
             ViewBag.Liquida = 0;
             List<SelectListItem> tipoDoc = new List<SelectListItem>();
@@ -1105,7 +1105,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.CC = new SelectList(ccApp.GetAllDespesas(idAss).OrderBy(x => x.CECU_NM_EXIBE).ToList<PLANO_CONTA>(), "CECU_CD_ID", "CECU_NM_EXIBE");
             ViewBag.Usuarios = new SelectList(usuApp.GetAllItens(idAss), "USUA_CD_ID", "USUA_NM_NOME");
             ViewBag.Contas = new SelectList(contaApp.GetAllItens(idAss).OrderBy(p => p.COBA_NM_NOME_EXIBE), "COBA_CD_ID", "COBA_NM_NOME_EXIBE_OLD");
-            ViewBag.Formas = new SelectList(fpApp.GetAllItens(idAss).Where(p => p.FOPA_IN_TIPO_FORMA == 1 || p.FOPA_IN_TIPO_FORMA == 3).OrderBy(x => x.FOPR_NM_NOME_FORMA).ToList<FORMA_PAGTO_RECTO>(), "FOPR_CD_ID", "FOPR_NM_NOME");
+            ViewBag.Formas = new SelectList(fpApp.GetAllItens(idAss).Where(p => p.FOPA_IN_TIPO_FORMA == 1 || p.FOPA_IN_TIPO_FORMA == 3).OrderBy(x => x.FOPR_NM_NOME_FORMA).ToList<FORMA_PAGTO_RECTO>(), "FOPR_CD_ID", "FOPR_NM_NOME_FORMA");
             ViewBag.Periodicidade = new SelectList(perApp.GetAllItens(), "PERI_CD_ID", "PERI_NM_NOME");
             ViewBag.Liquida = 0;
             List<SelectListItem> tipoDoc = new List<SelectListItem>();
