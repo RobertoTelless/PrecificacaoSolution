@@ -91,13 +91,17 @@
 
                     <div class="tabs-container">
                         <ul class="nav nav-tabs">
-                            <li class="@ViewBag.TabGeral"><a data-toggle="tab" href="#tab-1">Dados Gerais</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-imagens">Foto/Logotipo</a></li>                                
+                            <li class="active"><a data-toggle="tab" href="#tab-1">Dados Gerais</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2">Foto/Logotipo</a></li>                                
                             @if (!Model.Composto)
                             {
-                                <li class=""><a data-toggle="tab" href="#tab-2">Estoque & Preços</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-5">Estoque & Preços</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-3">Fornecedores</a></li>
-                            }                                
+                            }   
+                            @if (Model.Composto)
+                            {
+                                <li class=""><a data-toggle="tab" href="#tab-8">Preços</a></li>
+                            }   
                             <li id="varejoTab" class=""><a data-toggle="tab" href="#tab-4">Dados do Produto</a></li>                                
                             @if (Model.PROD_IN_TIPO_PRODUTO == 1)
                             {
@@ -105,7 +109,7 @@
                             }                                
                             @if (Model.PROD_IN_TIPO_PRODUTO == 1)
                             {
-                                <li id="expTab" class=""><a data-toggle="tab" href="#tab-7">Embalagens</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-7">Embalagens</a></li>
                             }                              
                             <li class=""><a data-toggle="tab" href="#tab-9">Anexos</a></li>                               
                             <li class=""><a data-toggle="tab" href="#tab-11">Observações</a></li>                               
@@ -122,7 +126,7 @@
 
                         <div class="tab-content">
                             @*Dados Gerais*@
-                            <div id="tab-1" class="tab-pane @ViewBag.TabGeral">
+                            <div id="tab-1" class="tab-pane active">
                                 <div class="panel-body">
                                     @using (Html.BeginForm("EditarProduto", "Produto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                                     {
@@ -220,7 +224,10 @@
                                                     </div>
                                                     @if (Model.PROD_IN_TIPO_PRODUTO == 1)
                                                     {
-                                                        @Html.TextBoxFor(m => m.CompostoNome, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Composto?
+                                                            @Html.TextBoxFor(m => m.CompostoNome, new { @class = "form-control", autofocus = true, @readonly="readonly" })
+                                                        </div>
                                                     }
                                                 </div>
                                                 <br />
@@ -238,7 +245,7 @@
                                                             @Html.ValidationMessageFor(m => m.PROD_BC_BARCODE, "", new { @style = "color:red" })
                                                         </div>
                                                     }
-                                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                                    <div class="col-lg-8 col-md-8 col-xs-12">
                                                         Nome*
                                                         @Html.TextBoxFor(m => m.PROD_NM_NOME, new { @class = "form-control", autofocus = true, style="color:green; font-weight: bold" })
                                                         @Html.ValidationMessageFor(m => m.PROD_NM_NOME, "", new { @style = "color:red" })
@@ -247,15 +254,17 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <div class="row">
                                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                                     Descrição
                                                     @Html.TextAreaFor(m => m.PROD_DS_DESCRICAO, new { @class = "form-control", style = "width: 100%; height: 100px;", autofocus = true })
                                                     @Html.ValidationMessageFor(m => m.PROD_DS_DESCRICAO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <div class="row">
                                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                                     Informações do Produto
                                                     @Html.TextAreaFor(m => m.PROD_DS_INFORMACOES, new { @class = "form-control", style = "width: 100%; height: 100px;", autofocus = true })
@@ -263,15 +272,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            @Html.ButtonActionSubmit(text: "Confirma edição de Dados Gerais do Produto", htmlAttributes: new { id = "basictoast" })
+                                        <br /><br />
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <div class="row">
+                                                @Html.ButtonActionSubmit(text: "Confirma edição de Dados Gerais do Produto", htmlAttributes: new { id = "basictoast" })
+                                            </div>
                                         </div>
+
                                     }
                                 </div>
                             </div>
 
                             @*Imagens*@
-                            <div id="tab-imagens" class="tab-pane">
+                            <div id="tab-2" class="tab-pane">
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-10 col-md-10 col-xs-12">
@@ -307,10 +320,10 @@
                                 </div>
                             </div>
 
-                            @*Estoque*@
+                            @*Estoque & Precos*@
                             @if (!Model.Composto)
                             {
-                                <div id="tab-2" class="tab-pane">
+                                <div id="tab-5" class="tab-pane">
                                     <div class="panel-body">
                                         @using (Html.BeginForm("EditarProduto", "Produto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                                         {
@@ -384,40 +397,94 @@
                                                         @Html.ValidationMessageFor(m => m.AvisaMinima, "", new { @style = "color:red" })
                                                     </div>
                                                 </div>
-                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                    <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">
-                                                        Preço Venda (R$)
-                                                        @Html.TextBoxFor(m => m.PrecoVenda, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PrecoVenda, "", new { @style = "color:red" })
+                                                @if (Model.PROD_IN_TIPO_PRODUTO == 1)
+                                                {
+                                                    <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                        <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">
+                                                            Preço Venda (R$)
+                                                            @Html.TextBoxFor(m => m.PrecoVenda, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PrecoVenda, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Preço Promoção (R$)
+                                                            @Html.TextBoxFor(m => m.PrecoPromocao, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PrecoPromocao, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Preço Mínimo (R$)
+                                                            @Html.TextBoxFor(m => m.PrecoMinimo, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PrecoMinimo, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Markup Mínimo (%)
+                                                            @Html.TextBoxFor(m => m.MarkupMinimo, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.MarkupMinimo, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Markup Padrão (%)
+                                                            @Html.TextBoxFor(m => m.MarkupPadrao, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.MarkupPadrao, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Último Custo (R$)
+                                                            @Html.TextBoxFor(m => m.UltimoCusto, new { @class = "form-control", autofocus = true, @readonly = "readonly"  })
+                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Preço Promoção (R$)
-                                                        @Html.TextBoxFor(m => m.PrecoPromocao, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PrecoPromocao, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Preço Mínimo (R$)
-                                                        @Html.TextBoxFor(m => m.PrecoMinimo, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.PrecoMinimo, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Markup Mínimo (%)
-                                                        @Html.TextBoxFor(m => m.MarkupMinimo, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.MarkupMinimo, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Markup Padrão (%)
-                                                        @Html.TextBoxFor(m => m.MarkupPadrao, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.MarkupPadrao, "", new { @style = "color:red" })
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Último Custo (R$)
-                                                        @Html.TextBoxFor(m => m.UltimoCusto, new { @class = "form-control", autofocus = true, @readonly = "readonly"  })
-                                                    </div>
-                                                </div>
+                                                }
                                             </div>
                                             <div class="form-group">
                                                 @Html.ButtonActionSubmit(text: "Confirma edição de Estoque e Preços do Produto", htmlAttributes: new { id = "basictoast" })
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            @*Preços*@
+                            @if (Model.Composto)
+                            {
+                                <div id="tab-8" class="tab-pane">
+                                    <div class="panel-body">
+                                        @using (Html.BeginForm("EditarProduto", "Produto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
+                                        {
+                                            <div class="row">
+                                                @if (Model.PROD_IN_TIPO_PRODUTO == 1)
+                                                {
+                                                    <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                        <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">
+                                                            Preço Venda (R$)
+                                                            @Html.TextBoxFor(m => m.PrecoVenda, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PrecoVenda, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Preço Promoção (R$)
+                                                            @Html.TextBoxFor(m => m.PrecoPromocao, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PrecoPromocao, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Preço Mínimo (R$)
+                                                            @Html.TextBoxFor(m => m.PrecoMinimo, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PrecoMinimo, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Markup Mínimo (%)
+                                                            @Html.TextBoxFor(m => m.MarkupMinimo, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.MarkupMinimo, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Markup Padrão (%)
+                                                            @Html.TextBoxFor(m => m.MarkupPadrao, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.MarkupPadrao, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Último Custo (R$)
+                                                            @Html.TextBoxFor(m => m.UltimoCusto, new { @class = "form-control", autofocus = true, @readonly = "readonly"  })
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.ButtonActionSubmit(text: "Confirma edição de Preços do Produto", htmlAttributes: new { id = "basictoast" })
                                             </div>
                                         }
                                     </div>
@@ -497,7 +564,7 @@
                                                     {
                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                             <br />
-                                                            <img src="@Url.Content(Model.FICHA_TECNICA.FirstOrDefault().FITE_AQ_FOTO_APRESENTACAO)" style="width: auto; height: auto; max-height: 110px; max-width: 90px;">
+                                                            <img src="@Url.Content(Model.FICHA_TECNICA.FirstOrDefault().FITE_AQ_FOTO_APRESENTACAO)" style="width: auto; height: auto; max-height: 220px; max-width: 110px;">
                                                         </div>
                                                     }
                                                     else
@@ -508,36 +575,40 @@
                                                         </div>
                                                     }
                                                 </div>
-                                                <br />
-                                                <br />
-                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            </div>
+                                            <br /><br />
+                                            <div class="row">
+                                                <div class="form-group">
                                                     <div class="col-lg-12 col-md-12 col-xs-12">
                                                         Nome da Composição
                                                         @Html.TextBoxFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_NM_NOME, new { @class = "form-control", @style = "color:green", @readonly = "readonly" })
                                                     </div>
                                                 </div>
-                                                <br />
-                                                <br />
-                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="form-group">
                                                     <div class="col-lg-12 col-md-12 col-xs-12">
-                                                        Modo de Preparo*
-                                                        @Html.TextAreaFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_DS_DESCRICAO, new { @class = "form-control", autofocus = true })
+                                                        Modo de Preparo
+                                                        @Html.TextAreaFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_DS_DESCRICAO, new { @class = "form-control", style = "width: 100%; height: 200px;", autofocus = true, @readonly = "readonly" })
                                                     </div>
                                                 </div>
-                                                <br />
-                                                <br />
-                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="form-group">
                                                     <div class="col-lg-12 col-md-12 col-xs-12">
-                                                        Forma de Apresentação*
-                                                        @Html.TextAreaFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_DS_APRESENTACAO, new { @class = "form-control", autofocus = true })
+                                                        Forma de Apresentação
+                                                        @Html.TextAreaFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_DS_APRESENTACAO, new { @class = "form-control", style = "width: 100%; height: 200px;", autofocus = true, @readonly = "readonly" })
                                                     </div>
                                                 </div>
                                             </div>
                                         }
                                         @if (Model.FICHA_TECNICA.Count > 0)
                                         {
+                                            <br />
                                             <div class="row">
-                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                <div class="form-group">
                                                     <div class="col-lg-12 col-md-12 col-xs-12">
                                                         <h4>Composição do Produto</h4>
                                                         <br />
@@ -790,71 +861,82 @@
                                 </div>
                             }
 
-
                             @*Resumos*@
                             <div id="tab-13" class="tab-pane">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-lg-3">
-                                            <div class="ibox float-e-margins">
-                                                <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
-                                                    <span class="label label-primary pull-right">Hoje</span>
-                                                    <h5>Quantidade em Estoque</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    <h1 class="no-margins">@ViewBag.Quantidade</h1>
-                                                    <small>Estoque Atualizado</small>
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="ibox float-e-margins">
-                                                <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
-                                                    <span class="label label-primary pull-right">Hoje</span>
-                                                    <h5>Pedidos</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    <h1 class="no-margins">@ViewBag.Pedidos</h1>
-                                                    <small>Pedidos Aprovados</small>
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <br />
+                                        @if (Model.PROD_IN_COMPOSTO == 0)
+                                        {
+                                            <div class="col-lg-2">
+                                                <div class="ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px;">
+                                                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                                                        <span class="label label-primary pull-right">Hoje</span>
+                                                        <h5>Estoque</h5>
+                                                    </div>
+                                                    <div class="ibox-content">
+                                                        <h1 class="no-margins">@ViewBag.Quantidade</h1>
+                                                        <small>Estoque Atualizado</small>
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="ibox float-e-margins">
-                                                <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
-                                                    <span class="label label-primary pull-right">Hoje</span>
-                                                    <h5>Quantidade</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    <h1 class="no-margins">@ViewBag.Conta</h1>
-                                                    <small>Quantidade Vendida</small>
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="ibox">
-                                                <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
-                                                    <span class="label label-primary pull-right">Hoje</span>
-                                                    <h5>Evolução de Pedidos</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    <h5>Pedidos Aprovados</h5>
-                                                    <div id="sparkline1"></div>
+                                        }
+                                        @if (Model.PROD_IN_TIPO_PRODUTO == 1)
+                                        {
+                                            <div class="col-lg-2">
+                                                <div class="ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px;">
+                                                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                                                        <span class="label label-primary pull-right">Hoje</span>
+                                                        <h5>Pedidos</h5>
+                                                    </div>
+                                                    <div class="ibox-content">
+                                                        <h1 class="no-margins">@ViewBag.Pedidos</h1>
+                                                        <small>Pedidos Aprovados</small>
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
+                                        @if (Model.PROD_IN_TIPO_PRODUTO == 1)
+                                        {
+                                            <div class="col-lg-2">
+                                                <div class="ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px;">
+                                                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                                                        <span class="label label-primary pull-right">Hoje</span>
+                                                        <h5>Vendas</h5>
+                                                    </div>
+                                                    <div class="ibox-content">
+                                                        <h1 class="no-margins">@ViewBag.Conta</h1>
+                                                        <small>Quantidade Vendida</small>
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.PROD_IN_TIPO_PRODUTO == 1)
+                                        {
+                                            <div class="col-lg-3">
+                                                <div class="ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px;">
+                                                    <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
+                                                        <span class="label label-primary pull-right">Hoje</span>
+                                                        <h5>Evolução de Pedidos</h5>
+                                                    </div>
+                                                    <div class="ibox-content">
+                                                        <h5>Pedidos Aprovados</h5>
+                                                        <div id="sparkline1"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
                                     @*<div class="row">
                                         <div class="col-lg-6">
@@ -953,8 +1035,8 @@
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                     <div class="col-lg-3 col-md-3 col-xs-12">
                                                         Tipo de Embalagem
-                                                        @Html.DropDownListFor(m => m.PROD_IN_TIPO_EMBALAGEM, (SelectList)ViewBag.TiposEmbalagem, "Selecionar", new { @class = "form-control", autofocus = true, @id="emb", onchange = "RecuperaEmbalagem($(this).val())" })
-                                                        @Html.ValidationMessageFor(m => m.PROD_IN_TIPO_EMBALAGEM, "", new { @style = "color:red" })
+                                                        @Html.DropDownListFor(m => m.TIEM_CD_ID, (SelectList)ViewBag.TiposEmbalagem, "Selecionar", new { @class = "form-control", autofocus = true, @id="emb", onchange = "RecuperaEmbalagem($(this).val())" })
+                                                        @Html.ValidationMessageFor(m => m.TIEM_CD_ID, "", new { @style = "color:red" })
                                                     </div>
                                                 </div>
                                             </div>

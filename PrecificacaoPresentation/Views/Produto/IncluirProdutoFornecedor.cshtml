@@ -56,22 +56,26 @@
                                     @Html.ValidationMessageFor(m => m.FORN_CD_ID, "", new { @style = "color:red" })
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-xs-12">
-                                    Prazo de Entrega
+                                    Prazo de Entrega (Dias)
                                     @Html.TextBoxFor(m => m.PRFO_NR_DIAS_ENTREGA, new { @class = "form-control", autofocus = true })
                                     @Html.ValidationMessageFor(m => m.PRFO_NR_DIAS_ENTREGA, "", new { @style = "color:red" })
                                 </div>
                             </div>
 
                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                <div style="display: none;" id="cnpj" class="col-lg-4 col-md-4 col-xs-12">
+                                <div style="display: none;" id="cnpj" class="col-lg-2 col-md-2 col-xs-12">
                                     CNPJ
                                     <input class="form-control" type="text" readonly="readonly" />
                                 </div>
-                                <div style="display: none;" id="email" class="col-lg-4 col-md-4 col-xs-12">
+                                <div style="display: none;" id="cpf" class="col-lg-2 col-md-2 col-xs-12">
+                                    CPF
+                                    <input class="form-control" type="text" readonly="readonly" />
+                                </div>
+                                <div style="display: none;" id="email" class="col-lg-3 col-md-3 col-xs-12">
                                     Email
                                     <input class="form-control" type="text" readonly="readonly" />
                                 </div>
-                                <div style="display: none;" id="tel" class="col-lg-4 col-md-4 col-xs-12">
+                                <div style="display: none;" id="tel" class="col-lg-2 col-md-2 col-xs-12">
                                     Telefone
                                     <input class="form-control" type="text" readonly="readonly" />
                                 </div>
@@ -260,11 +264,13 @@
                 , type: 'POST'
                 , data: data
                 , success: function (r) {
+                    $('#cpf > input').val(r.cpf);
                     $('#cnpj > input').val(r.cnpj);
                     $('#email > input').val(r.email);
                     $('#tel > input').val(r.tel);
 
                     $('#cnpj').show();
+                    $('#cpf').show();
                     $('#email').show();
                     $('#tel').show();
                 }

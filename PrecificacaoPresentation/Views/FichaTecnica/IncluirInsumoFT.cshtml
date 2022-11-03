@@ -50,12 +50,8 @@
                     @Html.DropDownListFor(m => m.PROD_CD_ID, (SelectList)ViewBag.Insumos, "Selecionar", new { @class = "form-control", autofocus = true, onchange = "GetUnidadeInsumo($(this).val())" })
                     @Html.ValidationMessageFor(m => m.PROD_CD_ID, "", new { @style = "color:red" })
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-12">
-                    Unidade*
-                    @Html.TextBox(name: "Unidade", value: null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", id = "unidade" })
-                </div>
                 <div class="col-lg-2 col-md-2 col-xs-12">
-                    Quantidade*
+                    Quantidade (Grama)*
                     @Html.TextBoxFor(m => m.FITD_QN_QUANTIDADE, new { @class = "form-control", autofocus = true })
                     @Html.ValidationMessageFor(m => m.FITD_QN_QUANTIDADE, "", new { @style = "color:red" })
                 </div>

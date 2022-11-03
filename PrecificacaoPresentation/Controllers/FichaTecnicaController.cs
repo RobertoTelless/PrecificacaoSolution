@@ -407,6 +407,7 @@ namespace ERP_Condominios_Solution.Controllers
                         Session["FileQueueFT"] = null;
                     }
 
+                    List<FICHA_TECNICA_DETALHE> lista = (List<FICHA_TECNICA_DETALHE>)Session["ListaFtd"];
                     foreach (var i in (List<FICHA_TECNICA_DETALHE>)Session["ListaFtd"])
                     {
                         var ftd = new FICHA_TECNICA_DETALHE
@@ -1048,7 +1049,7 @@ namespace ERP_Condominios_Solution.Controllers
             pdfDoc.Add(line1);
 
             // Grid
-            table = new PdfPTable(new float[] { 100f, 120f, 120f, 90f});
+            table = new PdfPTable(new float[] { 100f, 120f, 120f, 70f, 70f, 90f});
             table.WidthPercentage = 100;
             table.HorizontalAlignment = 0;
             table.SpacingBefore = 1f;
@@ -1058,7 +1059,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 VerticalAlignment = Element.ALIGN_MIDDLE, HorizontalAlignment = Element.ALIGN_LEFT
             };
-            cell.Colspan = 4;
+            cell.Colspan = 6;
             cell.BackgroundColor = BaseColor.LIGHT_GRAY;
             table.AddCell(cell);
 
@@ -1291,6 +1292,12 @@ namespace ERP_Condominios_Solution.Controllers
             cell.VerticalAlignment = Element.ALIGN_MIDDLE;
             cell.HorizontalAlignment = Element.ALIGN_LEFT;
             table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph(" ", meuFont));
+            cell.Border = 0;
+            cell.Colspan = 5;
+            cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+            table.AddCell(cell);
 
             if (System.IO.File.Exists(Server.MapPath(aten.FITE_AQ_FOTO_APRESENTACAO)))
             {
@@ -1298,7 +1305,7 @@ namespace ERP_Condominios_Solution.Controllers
                 cell.Border = 0;
                 cell.Colspan = 3;
                 image = Image.GetInstance(Server.MapPath(aten.FITE_AQ_FOTO_APRESENTACAO));
-                image.ScaleAbsolute(50, 50);
+                image.ScaleAbsolute(150, 150);
                 cell.AddElement(image);
                 table.AddCell(cell);
             }
@@ -1314,6 +1321,13 @@ namespace ERP_Condominios_Solution.Controllers
             cell = new PdfPCell(new Paragraph(" ", meuFontBold));
             cell.Border = 0;
             cell.Colspan = 2;
+            cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+            table.AddCell(cell);
+
+            cell = new PdfPCell(new Paragraph(" " , meuFont));
+            cell.Border = 0;
+            cell.Colspan = 5;
             cell.VerticalAlignment = Element.ALIGN_MIDDLE;
             cell.HorizontalAlignment = Element.ALIGN_LEFT;
             table.AddCell(cell);
@@ -1362,6 +1376,13 @@ namespace ERP_Condominios_Solution.Controllers
             cell.HorizontalAlignment = Element.ALIGN_LEFT;
             table.AddCell(cell);
 
+            cell = new PdfPCell(new Paragraph(" ", meuFont));
+            cell.Border = 0;
+            cell.Colspan = 5;
+            cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+            table.AddCell(cell);
+
             cell = new PdfPCell(new Paragraph("Instruções de Montagem: ", meuFont));
             cell.Border = 0;
             cell.Colspan = 5;
@@ -1383,6 +1404,13 @@ namespace ERP_Condominios_Solution.Controllers
             cell.HorizontalAlignment = Element.ALIGN_LEFT;
             table.AddCell(cell);
 
+            cell = new PdfPCell(new Paragraph(" ", meuFont));
+            cell.Border = 0;
+            cell.Colspan = 5;
+            cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+            table.AddCell(cell);
+
             cell = new PdfPCell(new Paragraph("Apresentação: ", meuFont));
             cell.Border = 0;
             cell.Colspan = 5;
@@ -1396,11 +1424,14 @@ namespace ERP_Condominios_Solution.Controllers
             cell.VerticalAlignment = Element.ALIGN_MIDDLE;
             cell.HorizontalAlignment = Element.ALIGN_LEFT;
             table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph(" ", meuFont));
+            cell.Border = 0;
+            cell.Colspan = 5;
+            cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+            table.AddCell(cell);
             pdfDoc.Add(table);
 
-            // Linha Horizontal
-            line1 = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
-            pdfDoc.Add(line1);
 
             // Lista de Insumos
             if (aten.FICHA_TECNICA_DETALHE.Count > 0)
@@ -1410,6 +1441,19 @@ namespace ERP_Condominios_Solution.Controllers
                 table.HorizontalAlignment = 0;
                 table.SpacingBefore = 1f;
                 table.SpacingAfter = 1f;
+
+                cell = new PdfPCell(new Paragraph("Insumos", meuFontBold));
+                cell.Border = 0;
+                cell.Colspan = 3;
+                cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Paragraph(" ", meuFont));
+                cell.Border = 0;
+                cell.Colspan = 3;
+                cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                table.AddCell(cell);
 
                 cell = new PdfPCell(new Paragraph("Insumo", meuFont))
                 {
