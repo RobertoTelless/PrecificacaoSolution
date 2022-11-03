@@ -1886,5 +1886,41 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0224", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria de produto já cadastrada.
+        /// </summary>
+        internal static string M0225 {
+            get {
+                return ResourceManager.GetString("M0225", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a SubCategoria de produto já cadastrada.
+        /// </summary>
+        internal static string M0226 {
+            get {
+                return ResourceManager.GetString("M0226", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta subcategoria. Existem registros vinculados a ela..
+        /// </summary>
+        internal static string M0227 {
+            get {
+                return ResourceManager.GetString("M0227", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Quantidade inicial do estoque deve ser informada.
+        /// </summary>
+        internal static string M0228 {
+            get {
+                return ResourceManager.GetString("M0228", resourceCulture);
+            }
+        }
     }
 }

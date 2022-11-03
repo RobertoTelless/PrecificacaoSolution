@@ -43,8 +43,9 @@ namespace ERP_Condominios_Solution.Controllers
         //private readonly IPedidoVendaAppService pvApp;
         private readonly IProdutoEstoqueFilialAppService pefApp;
         private readonly IConfiguracaoAppService confApp;
-        //private readonly IFichaTecnicaAppService ftApp;
-        //private readonly ICRMAppService crmApp;
+        private readonly IFichaTecnicaAppService ftApp;
+        private readonly ICRMAppService crmApp;
+        private readonly ITipoEmbalagemAppService teApp;
 
         private String msg;
         private Exception exception;
@@ -66,8 +67,9 @@ namespace ERP_Condominios_Solution.Controllers
             , IProdutotabelaPrecoAppService tpApps
             , ISubcategoriaProdutoAppService scpApps
             , IConfiguracaoAppService confApps
-            //, IFichaTecnicaAppService ftApps
-            //, ICRMAppService crmApps
+            , IFichaTecnicaAppService ftApps
+            , ICRMAppService crmApps
+            , ITipoEmbalagemAppService teApps
             //, IPedidoVendaAppService pvApps
             , IProdutoEstoqueFilialAppService pefApps)
         {
@@ -81,7 +83,9 @@ namespace ERP_Condominios_Solution.Controllers
             scpApp = scpApps;
             //pvApp = pvApps;
             pefApp = pefApps;
-            //crmApp = crmApps;
+            crmApp = crmApps;
+            ftApp = ftApps;
+            teApp = teApps;
             confApp = confApps;
         }
 
@@ -124,13 +128,13 @@ namespace ERP_Condominios_Solution.Controllers
         public ActionResult IncluirCategoriaProduto()
         {
             Session["CategoriaToProduto"] = true;
-            return RedirectToAction("IncluirCatProduto", "TabelasAuxiliares");
+            return RedirectToAction("IncluirCatProduto", "TabelaAuxiliar");
         }
 
         public ActionResult IncluirSubCategoriaProduto()
         {
             Session["SubCategoriaToProduto"] = true;
-            return RedirectToAction("IncluirSubCatProduto", "TabelasAuxiliares");
+            return RedirectToAction("IncluirSubCatProduto", "TabelaAuxiliar");
         }
 
         //[HttpPost]
@@ -602,13 +606,31 @@ namespace ERP_Condominios_Solution.Controllers
             tipoProduto.Add(new SelectListItem() { Text = "Produto", Value = "1" });
             tipoProduto.Add(new SelectListItem() { Text = "Insumo", Value = "2" });
             ViewBag.TiposProduto = new SelectList(tipoProduto, "Value", "Text");
-            List<SelectListItem> tipoEmbalagem = new List<SelectListItem>();
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Envelope", Value = "1" });
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Caixa", Value = "2" });
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Rolo", Value = "3" });
-            ViewBag.TiposEmbalagem = new SelectList(tipoEmbalagem, "Value", "Text");
+            ViewBag.TiposEmbalagem = new SelectList(teApp.GetAllItens(idAss).OrderBy(p => p.TIEM_NM_NOME), "TIEM_CD_ID", "TIEM_NM_NOME");
+            //List<SelectListItem> tipoEmbalagem = new List<SelectListItem>();
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Envelope", Value = "1" });
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Caixa", Value = "2" });
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Rolo", Value = "3" });
+            //ViewBag.TiposEmbalagem = new SelectList(tipoEmbalagem, "Value", "Text");
+            List<SelectListItem> composto = new List<SelectListItem>();
+            composto.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            composto.Add(new SelectListItem() { Text = "Não", Value = "0" });
+            ViewBag.Composto = new SelectList(composto, "Value", "Text");
 
             // Mensagens
+            if (Session["MensProduto"] != null)
+            {
+                if ((Int32)Session["MensProduto"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0182", CultureInfo.CurrentCulture));
+                    Session["MensProduto"] = 0;
+                }
+                if ((Int32)Session["MensProduto"] == 10)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0228", CultureInfo.CurrentCulture));
+                    Session["MensProduto"] = 0;
+                }
+            }
 
             // Prepara view
             Session["VoltaCatProduto"] = 2;
@@ -625,6 +647,7 @@ namespace ERP_Condominios_Solution.Controllers
             vm.PROD_VL_PRECO_MINIMO = 0;
             vm.PROD_VL_PRECO_PROMOCAO = 0;
             vm.PROD_VL_ULTIMO_CUSTO = 0;
+            vm.PROD_IN_COMPOSTO = 0;
             return View(vm);
         }
 
@@ -674,22 +697,47 @@ namespace ERP_Condominios_Solution.Controllers
             tipoProduto.Add(new SelectListItem() { Text = "Produto", Value = "1" });
             tipoProduto.Add(new SelectListItem() { Text = "Insumo", Value = "2" });
             ViewBag.TiposProduto = new SelectList(tipoProduto, "Value", "Text");
-            List<SelectListItem> tipoEmbalagem = new List<SelectListItem>();
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Envelope", Value = "1" });
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Caixa", Value = "2" });
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Rolo", Value = "3" });
-            ViewBag.TiposEmbalagem = new SelectList(tipoEmbalagem, "Value", "Text");
+            ViewBag.TiposEmbalagem = new SelectList(teApp.GetAllItens(idAss).OrderBy(p => p.TIEM_NM_NOME), "TIEM_CD_ID", "TIEM_NM_NOME");
+            //List<SelectListItem> tipoEmbalagem = new List<SelectListItem>();
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Envelope", Value = "1" });
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Caixa", Value = "2" });
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Rolo", Value = "3" });
+            //ViewBag.TiposEmbalagem = new SelectList(tipoEmbalagem, "Value", "Text");
+            List<SelectListItem> composto = new List<SelectListItem>();
+            composto.Add(new SelectListItem() { Text = "Sim", Value = "1" });
+            composto.Add(new SelectListItem() { Text = "Não", Value = "0" });
+            ViewBag.Composto = new SelectList(composto, "Value", "Text");
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // Critica
+                    if (vm.PROD_IN_COMPOSTO == 0 & vm.PROD_QN_QUANTIDADE_INICIAL == null)
+                    {
+                        ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0228", CultureInfo.CurrentCulture));
+                        return View(vm);
+                    }
+
+                    // Calcula estoque para insumos
+                    if (vm.PROD_IN_TIPO_PRODUTO == 2)
+                    {
+                        Int32 estoque = Convert.ToInt32(vm.PROD_QN_QUANTIDADE_INICIAL * vm.PROD_QN_PESO_LIQUIDO);
+                        Int32 estoqueMax = Convert.ToInt32(vm.PROD_QN_QUANTIDADE_MAXIMA * vm.PROD_QN_PESO_LIQUIDO);
+                        Int32 estoqueMin = Convert.ToInt32(vm.PROD_QN_QUANTIDADE_MINIMA * vm.PROD_QN_PESO_LIQUIDO);
+
+                        vm.PROD_QN_QUANTIDADE_INICIAL = estoque;
+                        vm.PROD_QN_QUANTIDADE_MAXIMA = estoqueMax;
+                        vm.PROD_QN_QUANTIDADE_MINIMA = estoqueMin;
+                    }
+
                     // Executa a operação
                     PRODUTO item = Mapper.Map<ProdutoViewModel, PRODUTO>(vm);
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
                     if (prodApp.CheckExist(item.PROD_BC_BARCODE, item.PROD_CD_CODIGO, idAss) != null)
                     {
                         Session["MensProduto"] = 4;
-                        return RedirectToAction("MontarTelaProduto");
+                        ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0182", CultureInfo.CurrentCulture));
+                        return View(vm);
                     }
                     Int32 volta = prodApp.ValidateCreate(item, usuarioLogado);
 
@@ -889,15 +937,16 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "EMPR_CD_ID", "EMPR_NM_NOME");
             ViewBag.Unidades = new SelectList(unApp.GetAllItens(idAss).Where(x => x.UNID_IN_TIPO_UNIDADE == 1).OrderBy(p => p.UNID_NM_NOME).ToList<UNIDADE>(), "UNID_CD_ID", "UNID_NM_NOME");
             ViewBag.Origens = new SelectList(prodApp.GetAllOrigens(idAss).OrderBy(p => p.PROR_NM_NOME), "PROR_CD_ID", "PROR_NM_NOME");
+            ViewBag.TiposEmbalagem = new SelectList(teApp.GetAllItens(idAss).OrderBy(p => p.TIEM_NM_NOME), "TIEM_CD_ID", "TIEM_NM_NOME");
             List<SelectListItem> tipoProduto = new List<SelectListItem>();
             tipoProduto.Add(new SelectListItem() { Text = "Produto", Value = "1" });
             tipoProduto.Add(new SelectListItem() { Text = "Insumo", Value = "2" });
             ViewBag.TiposProduto = new SelectList(tipoProduto, "Value", "Text");
-            List<SelectListItem> tipoEmbalagem = new List<SelectListItem>();
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Envelope", Value = "1" });
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Caixa", Value = "2" });
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Rolo", Value = "3" });
-            ViewBag.TiposEmbalagem = new SelectList(tipoEmbalagem, "Value", "Text");
+            //List<SelectListItem> tipoEmbalagem = new List<SelectListItem>();
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Envelope", Value = "1" });
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Caixa", Value = "2" });
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Rolo", Value = "3" });
+            //ViewBag.TiposEmbalagem = new SelectList(tipoEmbalagem, "Value", "Text");
             ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
             //Int32 venda = item.ITEM_PEDIDO_VENDA == null ? 0 : item.ITEM_PEDIDO_VENDA.Where(p => p.PEDIDO_VENDA != null && p.PEDIDO_VENDA.PEVE_DT_DATA.Month == DateTime.Today.Month).Sum(m => m.ITPE_QN_QUANTIDADE);
             //ViewBag.Vendas = venda;
@@ -971,15 +1020,16 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "EMPR_CD_ID", "EMPR_NM_NOME");
             ViewBag.Unidades = new SelectList(unApp.GetAllItens(idAss).Where(x => x.UNID_IN_TIPO_UNIDADE == 1).OrderBy(p => p.UNID_NM_NOME).ToList<UNIDADE>(), "UNID_CD_ID", "UNID_NM_NOME");
             ViewBag.Origens = new SelectList(prodApp.GetAllOrigens(idAss).OrderBy(p => p.PROR_NM_NOME), "PROR_CD_ID", "PROR_NM_NOME");
+            ViewBag.TiposEmbalagem = new SelectList(teApp.GetAllItens(idAss).OrderBy(p => p.TIEM_NM_NOME), "TIEM_CD_ID", "TIEM_NM_NOME");
             List<SelectListItem> tipoProduto = new List<SelectListItem>();
             tipoProduto.Add(new SelectListItem() { Text = "Produto", Value = "1" });
             tipoProduto.Add(new SelectListItem() { Text = "Insumo", Value = "2" });
             ViewBag.TiposProduto = new SelectList(tipoProduto, "Value", "Text");
-            List<SelectListItem> tipoEmbalagem = new List<SelectListItem>();
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Envelope", Value = "1" });
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Caixa", Value = "2" });
-            tipoEmbalagem.Add(new SelectListItem() { Text = "Rolo", Value = "3" });
-            ViewBag.TiposEmbalagem = new SelectList(tipoEmbalagem, "Value", "Text");
+            //List<SelectListItem> tipoEmbalagem = new List<SelectListItem>();
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Envelope", Value = "1" });
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Caixa", Value = "2" });
+            //tipoEmbalagem.Add(new SelectListItem() { Text = "Rolo", Value = "3" });
+            //ViewBag.TiposEmbalagem = new SelectList(tipoEmbalagem, "Value", "Text");
             if (ModelState.IsValid)
             {
                 try
@@ -4165,6 +4215,18 @@ namespace ERP_Condominios_Solution.Controllers
             return 0;
         }
 
+        public JsonResult GetEmbalagem(Int32 id)
+        {
+            TIPO_EMBALAGEM forn = teApp.GetItemById(id);
+            var hash = new Hashtable();
+            hash.Add("altura", forn.TIEM_NR_ALTURA);
+            hash.Add("largura", forn.TIEM_NR_LARGURA);
+            hash.Add("comprimento", forn.TIEM_NR_COMPRIMENTO);
+            hash.Add("diametro", forn.TIEM_NR_DIAMETRO);
+            hash.Add("custo", CrossCutting.Formatters.DecimalFormatter(forn.TIIEM_VL_CUSTO_UNITARIO.Value));
+            hash.Add("repasse", CrossCutting.Formatters.DecimalFormatter(forn.TIEM_VLCUSTO_REPASSADO.Value));
+            return Json(hash);
+        }
 
     }
 }

@@ -1,39 +1,38 @@
 ﻿@using Presentation.Extensions
-@model ERP_Condominios_Solution.ViewModels.ProdutoFornecedorViewModel
+@model ERP_Condominios_Solution.ViewModels.SubCategoriaProdutoViewModel
 @{
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="page-title">
-        <h3 class="title">Produtos</h3>
+        <h3 class="title">Tabelas Auxiliares</h3>
         <br />
         <ol class="breadcrumb">
             <li>
-                <a href="@Url.Action("CarregarBase", "BaseAdmin")">Dashboard</a>
+                <a href="@Url.Action("CarregarAdmin", "BaseAdmin")">Dashboard</a>
             </li>
             <li>
-                <a href="@Url.Action("MontarTelaDashboardCadastros", "BaseAdmin")">Dashboard - Cadastros</a>
+                <a href="@Url.Action("MontarTelaDashboardAdministracao", "BaseAdmin")">Dashboard - Administração</a>
             </li>
             <li>
-                <a href="@Url.Action("MontarTelaProduto", "Produto")">Produtos</a>
+                <a href="@Url.Action("MontarTelaTabelasAuxiliares", "BaseAdmin")">Tabelas Auxiliares</a>
             </li>
             <li>
-                <a href="@Url.Action("EditarProduto", "Produto")">Produtos - Edição</a>
+                <a href="@Url.Action("MontarTelaSubCatProduto", "TabelaAuxiliar")">SubCategorias - Produtos</a>
             </li>
             <li class="active">
-                <strong>Fornecedores - Inclusão</strong>
+                <strong>SubCategorias - Produtos - Inclusão</strong>
             </li>
         </ol>
         <br />
     </div>
-
     <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Fornecedores - Inclusão</h5>
+                    <h5>SubCategorias - Produtos - Inclusão</h5>
                 </div>
-                @using (Html.BeginForm("IncluirProdutoFornecedor", "Produto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
+                @using (Html.BeginForm("IncluirSubCatProduto", "TabelaAuxiliar", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id="pwd-container1" }))
                 {
                     <div class="ibox-content">
                         @Html.AntiForgeryToken()
@@ -45,108 +44,64 @@
                             </div>
                         }
                         <div class="row">
-                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                <div class="col-lg-6 col-md-6 col-xs-12">
-                                    @Html.HiddenFor(m => m.PROD_CD_ID)
-                                    @Html.HiddenFor(m => m.PRFO_IN_ATIVO)
-                                    Fornecedor*
-                                    <select name="FORN_CD_ID" id="lstForn" class="form-control" data-val="true" style="display: none;" onchange="GetFornecedor($(this).val())">
-                                        <option>Selecionar</option>
-                                    </select>
-                                    @Html.ValidationMessageFor(m => m.FORN_CD_ID, "", new { @style = "color:red" })
+                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">                
+                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                    Categoria* 
+                                    @Html.DropDownListFor(m => m.CAPR_CD_ID, (SelectList)ViewBag.CatProduto, "Selecionar", new { @class = "form-control", autofocus = true })
+                                    @Html.ValidationMessageFor(m => m.CAPR_CD_ID, "",new { @style="color:red" })
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-xs-12">
-                                    Prazo de Entrega
-                                    @Html.TextBoxFor(m => m.PRFO_NR_DIAS_ENTREGA, new { @class = "form-control", autofocus = true })
-                                    @Html.ValidationMessageFor(m => m.PRFO_NR_DIAS_ENTREGA, "", new { @style = "color:red" })
-                                </div>
-                            </div>
-
-                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                <div style="display: none;" id="cnpj" class="col-lg-4 col-md-4 col-xs-12">
-                                    CNPJ
-                                    <input class="form-control" type="text" readonly="readonly" />
-                                </div>
-                                <div style="display: none;" id="email" class="col-lg-4 col-md-4 col-xs-12">
-                                    Email
-                                    <input class="form-control" type="text" readonly="readonly" />
-                                </div>
-                                <div style="display: none;" id="tel" class="col-lg-4 col-md-4 col-xs-12">
-                                    Telefone
-                                    <input class="form-control" type="text" readonly="readonly" />
+                                <div class="col-lg-4 col-md-4 col-xs-12">
+                                    Nome* 
+                                    @Html.HiddenFor(m => m.ASSI_CD_ID)
+                                    @Html.HiddenFor(m => m.SCPR_IN_ATIVO)
+                                    @Html.TextBoxFor(m => m.SCPR_NM_NOME, new { @class = "form-control", autofocus = true })
+                                    @Html.ValidationMessageFor(m => m.SCPR_NM_NOME, "",new { @style="color:red" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.ButtonActionSubmit(text: "Confirma Inclusão de Fornecedor", htmlAttributes: new { id = "basictoast" })
-                            @Html.ButtonLinkIndex(text: "Cancelar", action: "VoltarAnexoProduto", controller: "Produto")
+                            @Html.ButtonActionSubmit(text: "Confirma Inclusão de SubCategoria", htmlAttributes: new { id = "basictoast" })
+                            @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarBaseSubCatProduto", controller: "TabelaAuxiliar")
                         </div>
                     </div>
                 }
             </div>
-        </div>
+         </div>
     </div>
 </div>
 
 @section Styles {
-    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
-    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-    @Styles.Render("~/plugins/jasnyBootstrapStyles")
+    <link href="~/Content/selectize.css" rel="stylesheet" />
+    @Styles.Render("~/plugins/select2Styles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
     @Styles.Render("~/plugins/toastrStyles")
- <link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
 }
 @section Scripts {
     @Scripts.Render("~/plugins/toastr")
-    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/DataTables")
+    <script type="text/javascript" src="~/Scripts/selectize.js"></script>
     @Scripts.Render("~/bundles/inputmask")
-    @Scripts.Render("~/plugins/jasnyBootstrap")
-    <script src="~/Scripts/plugins/select2/select2.full.min.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>    
+    
+    
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script src="~/Scripts/jquery.inputmask/inputmask.js"></script>
+    <script src="~/Scripts/jquery.inputmask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/jquery.inputmask/inputmask.extensions.js"></script>
+    <script src="~/Scripts/jquery.inputmask/inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js"></script>
+    <script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
 
-    <script>
-        $("#lstForn").select2({
-            //data: filterSelect,
-            ajax: {
-                url: '../Fornecedor/BuscaNomeRazao',
-                type: 'POST',
-                data: function (params) {
-                    var query = {
-                        nome: params.term
-                    }
-                    return query
-                },
-                processResults: function (data) {
-                    console.log(data);
-                    return {
-                        results: data
-                    }
-                }
-            },
-            placeholder: 'Busque por NOME ou RAZÃO SOCIAL',
-            minimumInputLength: 1
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(function () {
-            $("#cpf").mask("999.999.999-99");
-            $("#cnpj").mask("99.999.999/9999-99");
-            $("#cep").mask("99999-999");
-        });
-    </script>
     @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/toastr")
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-
-        });
-    </script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -215,12 +170,12 @@
                     msg = getMessage();
                 }
                 $("#toastrOptions").text("Command: toastr["
-                    + shortCutFunction
-                    + "](\""
-                    + msg
-                    + (title ? "\", \"" + title : '')
-                    + "\")\n\ntoastr.options = "
-                    + JSON.stringify(toastr.options, null, 2)
+                        + shortCutFunction
+                        + "](\""
+                        + msg
+                        + (title ? "\", \"" + title : '')
+                        + "\")\n\ntoastr.options = "
+                        + JSON.stringify(toastr.options, null, 2)
                 );
                 var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
                 $toastlast = $toast;
@@ -249,28 +204,6 @@
         });
     </script>
 
-    <script>
-        function GetFornecedor(id) {
-            var data = {
-                id: id
-            }
-
-            $.ajax({
-                url: '../Produto/GetFornecedor'
-                , type: 'POST'
-                , data: data
-                , success: function (r) {
-                    $('#cnpj > input').val(r.cnpj);
-                    $('#email > input').val(r.email);
-                    $('#tel > input').val(r.tel);
-
-                    $('#cnpj').show();
-                    $('#email').show();
-                    $('#tel').show();
-                }
-            });
-        }
-    </script>
 
     @if (ViewBag.Message != null)
     {

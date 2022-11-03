@@ -126,6 +126,9 @@ namespace Presentation.Start
             kernel.Bind<ITransportadoraAppService>().To<TransportadoraAppService>();
             kernel.Bind<ITemplateEMailAppService>().To<TemplateEMailAppService>();
             kernel.Bind<ITemplateSMSAppService>().To<TemplateSMSAppService>();
+            kernel.Bind<ITemplatePropostaAppService>().To<TemplatePropostaAppService>();
+            kernel.Bind<IFormaEnvioAppService>().To<FormaEnvioAppService>();
+            kernel.Bind<IFormaFreteAppService>().To<FormaFreteAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -172,7 +175,6 @@ namespace Presentation.Start
             kernel.Bind<IMovimentoEstoqueProdutoService>().To<MovimentoEstoqueProdutoService>();
             kernel.Bind<ITipoEmbalagemService>().To<TipoEmbalagemService>();
             kernel.Bind<IFichaTecnicaService>().To<FichaTecnicaService>();
-            kernel.Bind<ITipoAcaoService>().To<ITipoAcaoService>();
             kernel.Bind<IMotivoCancelamentoService>().To<MotivoCancelamentoService>();
             kernel.Bind<IMotivoEncerramentoService>().To<MotivoEncerramentoService>();
             kernel.Bind<IContaPagarService>().To<ContaPagarService>();
@@ -188,6 +190,10 @@ namespace Presentation.Start
             kernel.Bind<ITransportadoraService>().To<TransportadoraService>();
             kernel.Bind<ITemplateEMailService>().To<TemplateEMailService>();
             kernel.Bind<ITemplateSMSService>().To<TemplateSMSService>();
+            kernel.Bind<ITipoAcaoService>().To<TipoAcaoService>();
+            kernel.Bind<ITemplatePropostaService>().To<TemplatePropostaService>();
+            kernel.Bind<IFormaEnvioService>().To<FormaEnvioService>();
+            kernel.Bind<IFormaFreteService>().To<FormaFreteService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -298,6 +304,10 @@ namespace Presentation.Start
             kernel.Bind<ITipoTransporteRepository>().To<TipoTransporteRepository>();
             kernel.Bind<ITemplateEMailRepository>().To<TemplateEMailRepository>();
             kernel.Bind<ITemplateSMSRepository>().To<ITemplateSMSRepository>();
+            kernel.Bind<ITipoCRMRepository>().To<TipoCRMRepository>();
+            kernel.Bind<ITemplatePropostaRepository>().To<TemplatePropostaRepository>();
+            kernel.Bind<IFormaEnvioRepository>().To<FormaEnvioRepository>();
+            kernel.Bind<IFormaFreteRepository>().To<FormaFreteRepository>();
 
 
         }

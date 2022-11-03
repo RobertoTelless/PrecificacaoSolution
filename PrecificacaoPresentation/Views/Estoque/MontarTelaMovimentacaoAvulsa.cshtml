@@ -109,7 +109,7 @@
                                     <th>Tipo de Operação</th>
                                     <th>Data</th>
                                     <th>Nome</th>
-                                    <th>Filial</th>
+                                    @*<th>Filial</th>*@
                                     <th>Quantidade Antes</th>
                                     <th>Quantidade Alterada</th>
                                     <th>Quantidade Depois</th>
@@ -127,15 +127,16 @@
                                             <td style="display: none;">
                                                 <input type="hidden" name="ativo" value="@cond.MOEP_IN_ATIVO" />
                                             </td>
-                                            @if (cond.MOEP_IN_OPERACAO == 1)
+
+                                            @if (cond.MOEP_IN_TIPO_MOVIMENTO == 1)
                                             {
                                                 <td>Entrada</td>
                                             }
-                                            else if (cond.MOEP_IN_OPERACAO == 2)
+                                            else if (cond.MOEP_IN_TIPO_MOVIMENTO == 2)
                                             {
                                                 <td>Saída</td>
                                             }
-                                            else if (cond.MOEP_IN_OPERACAO == 4)
+                                            else if (cond.MOEP_IN_TIPO_MOVIMENTO == 4)
                                             {
                                                 <td>Tranferência entre filiais</td>
                                             }
@@ -143,13 +144,10 @@
                                             {
                                                 <td>Manual</td>
                                             }
+
                                             @if (cond.MOEP_IN_CHAVE_ORIGEM == 1)
                                             {
-                                                <td>Lançamento Avulso</td>
-                                            }
-                                            else if (cond.MOEP_IN_CHAVE_ORIGEM == 2)
-                                            {
-                                                <td>Inventário</td>
+                                                <td>Movimentação Avulsa</td>
                                             }
                                             else if (cond.MOEP_IN_CHAVE_ORIGEM == 3)
                                             {
@@ -167,17 +165,18 @@
                                             {
                                                 <td>Manual</td>
                                             }
+
                                             <td>@cond.MOEP_IN_ORIGEM</td>
                                             <td>@cond.MOEP_DT_MOVIMENTO.ToShortDateString()</td>
                                             <td>@cond.PRODUTO.PROD_NM_NOME</td>
-                                            @if (cond.FILIAL != null)
+                                            @*@if (cond.FILIAL != null)
                                             {
                                                 <td>@cond.FILIAL.FILI_NM_NOME</td>
                                             }
                                             else
                                             {
                                                 <td>-</td>
-                                            }
+                                            }*@
                                             <td>@cond.MOEP_QN_ANTES</td>
                                             <td>@cond.MOEP_QN_ALTERADA</td>
                                             <td>@cond.MOEP_QN_DEPOIS</td>

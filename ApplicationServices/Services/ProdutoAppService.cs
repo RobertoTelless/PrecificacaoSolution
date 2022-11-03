@@ -190,23 +190,16 @@ namespace ApplicationServices.Services
                 // Completa objeto
                 item.PROD_IN_ATIVO = 1;
                 item.ASSI_CD_ID = usuario.ASSI_CD_ID;
-                item.PROD_QN_ESTOQUE = item.PROD_QN_QUANTIDADE_INICIAL.Value;
-                item.PROD_DT_ULTIMA_MOVIMENTACAO = DateTime.Today;
-
-                // Cria linha de estoque
-                MOVIMENTO_ESTOQUE_PRODUTO movto = new MOVIMENTO_ESTOQUE_PRODUTO();
-                movto.ASSI_CD_ID = usuario.ASSI_CD_ID;
-                movto.PROD_CD_ID = item.PROD_CD_ID;
-                movto.MOEP_DS_JUSTIFICATIVA = "Estoque inicial";
-                movto.MOEP_DT_MOVIMENTO = DateTime.Today.Date;
-                movto.MOEP_IN_ATIVO = 1;
-                movto.MOEP_IN_CHAVE_ORIGEM = 0;
-                movto.MOEP_IN_OPERACAO = 5;
-                movto.MOEP_IN_ORIGEM = "Estoque Inicial";
-                movto.MOEP_IN_TIPO_MOVIMENTO = 1;
-                movto.MOEP_QN_QUANTIDADE = item.PROD_QN_QUANTIDADE_INICIAL.Value;
-                movto.USUA_CD_ID = usuario.USUA_CD_ID;
-
+                if (item.PROD_QN_QUANTIDADE_INICIAL != null)
+                {
+                    item.PROD_QN_ESTOQUE = item.PROD_QN_QUANTIDADE_INICIAL.Value;
+                    item.PROD_DT_ULTIMA_MOVIMENTACAO = DateTime.Today;
+                }
+                else
+                {
+                    item.PROD_QN_ESTOQUE = 0;
+                    item.PROD_DT_ULTIMA_MOVIMENTACAO = null;
+                }
 
                 // Monta Log
                 LOG log = new LOG
@@ -220,11 +213,30 @@ namespace ApplicationServices.Services
                 };
 
                 // Persiste produto
-                Int32 volta = _baseService.Create(item, log, movto);
+                Int32 volta = _baseService.Create(item, log, null);
+
+                // Cria linha de estoque
+                if (item.PROD_QN_QUANTIDADE_INICIAL != null)
+                {
+                    MOVIMENTO_ESTOQUE_PRODUTO movto = new MOVIMENTO_ESTOQUE_PRODUTO();
+                    movto.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                    movto.PROD_CD_ID = item.PROD_CD_ID;
+                    movto.MOEP_DS_JUSTIFICATIVA = "Estoque inicial";
+                    movto.MOEP_DT_MOVIMENTO = DateTime.Today.Date;
+                    movto.MOEP_IN_ATIVO = 1;
+                    movto.MOEP_IN_CHAVE_ORIGEM = 0;
+                    movto.MOEP_IN_OPERACAO = 5;
+                    movto.MOEP_IN_ORIGEM = "Estoque Inicial";
+                    movto.MOEP_IN_TIPO_MOVIMENTO = 1;
+                    movto.MOEP_QN_QUANTIDADE = item.PROD_QN_QUANTIDADE_INICIAL.Value;
+                    movto.USUA_CD_ID = usuario.USUA_CD_ID;
+
+                    // Persiste estoque
+                    movto.PROD_CD_ID = item.PROD_CD_ID;
+                    volta = _movService.Create(movto, log);
+                }
 
                 // Persiste estoque
-                movto.PROD_CD_ID = item.PROD_CD_ID;
-                volta = _movService.Create(movto, log);
                 return volta;
             }
             catch (Exception ex)

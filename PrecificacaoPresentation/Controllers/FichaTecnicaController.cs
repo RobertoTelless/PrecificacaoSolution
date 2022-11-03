@@ -287,15 +287,13 @@ namespace ERP_Condominios_Solution.Controllers
         [HttpPost]
         public void MontaListaInsumos(FICHA_TECNICA_DETALHE item)
         {
-            Task.Run(() => {
-                if (Session["ListaFTd"] == null)
-                {
-                    Session["ListaFTd"] = new List<FICHA_TECNICA_DETALHE>();
-                }
-                List<FICHA_TECNICA_DETALHE> lista = (List<FICHA_TECNICA_DETALHE>)Session["ListaFTd"];
-                lista.Add(item);
-                Session["ListaFTd"] = lista; 
-            });
+            if (Session["ListaFTd"] == null)
+            {
+                Session["ListaFTd"] = new List<FICHA_TECNICA_DETALHE>();
+            }
+            List<FICHA_TECNICA_DETALHE> lista = (List<FICHA_TECNICA_DETALHE>)Session["ListaFTd"];
+            lista.Add(item);
+            Session["ListaFTd"] = lista; 
         }
 
         [HttpPost]
@@ -1474,5 +1472,16 @@ namespace ERP_Condominios_Solution.Controllers
             Response.End();
             return RedirectToAction("VoltarAnexoFT");
         }
+
+        public JsonResult GetProduto(Int32 id)
+        {
+            PRODUTO forn = prodApp.GetItemById(id);
+            String nome = "Preparação de " + forn.PROD_NM_NOME;
+
+            var hash = new Hashtable();
+            hash.Add("nome", nome);
+            return Json(hash);
+        }
+
     }
 }

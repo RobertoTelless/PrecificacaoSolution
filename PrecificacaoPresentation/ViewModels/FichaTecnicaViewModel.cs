@@ -18,10 +18,9 @@ namespace ERP_Condominios_Solution.ViewModels
         public int FITE_CD_FICHA_PAI { get; set; }
         [StringLength(250, ErrorMessage = "O NOME DA FOTO deve conter no máximo 250 caracteres.")]
         public string FITE_AQ_FOTO_APRESENTACAO { get; set; }
-        [Required(ErrorMessage = "Campo NOME obrigatorio")]
         [StringLength(100, MinimumLength = 1, ErrorMessage = "O NOME deve conter no minimo 1 e no máximo 100 caracteres.")]
         public string FITE_NM_NOME { get; set; }
-        [Required(ErrorMessage = "Campo FORMA DE MONTAGEM obrigatorio")]
+        [Required(ErrorMessage = "Campo MODO DE PREPARO obrigatorio")]
         [StringLength(5000, MinimumLength = 1, ErrorMessage = "A FORMA DE MONTAGEM deve conter no minimo 1 e no máximo 5000 caracteres.")]
         public string FITE_DS_DESCRICAO { get; set; }
         [Required(ErrorMessage = "Campo FORMA DE APRESENTAÇÃO obrigatorio")]

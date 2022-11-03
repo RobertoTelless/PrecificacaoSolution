@@ -36,6 +36,8 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly ITipoAcaoAppService taApp;
         private readonly IMotivoCancelamentoAppService mcApp;
         private readonly IMotivoEncerramentoAppService meApp;
+        private readonly ICategoriaProdutoAppService cpApp;
+        private readonly ISubcategoriaProdutoAppService spApp;
 
         CARGO_USUARIO objetoCargo = new CARGO_USUARIO();
         CARGO_USUARIO objetoAntesCargo = new CARGO_USUARIO();
@@ -64,9 +66,15 @@ namespace ERP_Condominios_Solution.Controllers
         MOTIVO_ENCERRAMENTO objetoMotEncerramento = new MOTIVO_ENCERRAMENTO();
         MOTIVO_ENCERRAMENTO objetoAntesMotEncerramento = new MOTIVO_ENCERRAMENTO();
         List<MOTIVO_ENCERRAMENTO> listaMasterMotEncerramento = new List<MOTIVO_ENCERRAMENTO>();
+        CATEGORIA_PRODUTO objetoCatProduto = new CATEGORIA_PRODUTO();
+        CATEGORIA_PRODUTO objetoAntesCatProduto = new CATEGORIA_PRODUTO();
+        List<CATEGORIA_PRODUTO> listaMasterCatProduto = new List<CATEGORIA_PRODUTO>();
+        SUBCATEGORIA_PRODUTO objetoSubCatProduto = new SUBCATEGORIA_PRODUTO();
+        SUBCATEGORIA_PRODUTO objetoAntesSubCatProduto = new SUBCATEGORIA_PRODUTO();
+        List<SUBCATEGORIA_PRODUTO> listaMasterSubCatProduto = new List<SUBCATEGORIA_PRODUTO>();
         String extensao;
 
-        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps, ITipoEmbalagemAppService teApps, ITipoAcaoAppService taApps, IMotivoCancelamentoAppService mcApps, IMotivoEncerramentoAppService meApps)
+        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps, ITipoEmbalagemAppService teApps, ITipoAcaoAppService taApps, IMotivoCancelamentoAppService mcApps, IMotivoEncerramentoAppService meApps, ICategoriaProdutoAppService cpApps, ISubcategoriaProdutoAppService spApps)
         {
             carApp = carApps;
             logApp = logApps;
@@ -78,6 +86,8 @@ namespace ERP_Condominios_Solution.Controllers
             taApp = taApps;
             mcApp = mcApps;
             meApp = meApps;
+            cpApp = cpApps;
+            spApp = spApps;
         }
 
         [HttpGet]
@@ -3154,6 +3164,665 @@ namespace ERP_Condominios_Solution.Controllers
             listaMasterMotEncerramento = new List<MOTIVO_ENCERRAMENTO>();
             Session["ListaMotEncerramento"] = null;
             return RedirectToAction("MontarTelaMotEncerramento");
+        }
+
+        [HttpGet]
+        public ActionResult MontarTelaCatProduto()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaCatProduto"] == null)
+            {
+                listaMasterCatProduto= cpApp.GetAllItens(idAss);
+                Session["ListaCatProduto"] = listaMasterCatProduto;
+            }
+            ViewBag.Listas = (List<CATEGORIA_PRODUTO>)Session["ListaCatProduto"];
+            ViewBag.Title = "CatProduto";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.Cargo = ((List<CATEGORIA_PRODUTO>)Session["ListaCatProduto"]).Count;
+
+            if (Session["MensCatProduto"] != null)
+            {
+                if ((Int32)Session["MensCatProduto"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0225", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCatProduto"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCatProduto"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0177", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["VoltaCatProduto"] = 1;
+            Session["MensCatProduto"] = 0;
+            objetoCatProduto = new CATEGORIA_PRODUTO();
+            return View(objetoCatProduto);
+        }
+
+        public ActionResult RetirarFiltroCatProduto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["ListaCatProduto"] = null;
+            Session["FiltroCatProduto"] = null;
+            return RedirectToAction("MontarTelaCatProduto");
+        }
+
+        public ActionResult MostrarTudoCatProduto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterCatProduto= cpApp.GetAllItensAdm(idAss);
+            Session["FiltroCatProduto"] = null;
+            Session["ListaCatProduto"] = listaMasterCatProduto;
+            return RedirectToAction("MontarTelaCatProduto");
+        }
+
+        public ActionResult VoltarBaseCatProduto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaCatProduto"] == 2)
+            {
+                return RedirectToAction("IncluirProduto", "Produto");
+            }
+            if ((Int32)Session["VoltaCatProduto"] == 3)
+            {
+                return RedirectToAction("VoltarAnexoProduto", "Produto");
+            }
+            return RedirectToAction("MontarTelaCatProduto");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirCatProduto()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatProduto");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            CATEGORIA_PRODUTO item = new CATEGORIA_PRODUTO();
+            CategoriaProdutoViewModel vm = Mapper.Map<CATEGORIA_PRODUTO, CategoriaProdutoViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.CAPR_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirCatProduto(CategoriaProdutoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    CATEGORIA_PRODUTO item = Mapper.Map<CategoriaProdutoViewModel, CATEGORIA_PRODUTO>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = cpApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensCatProduto"] = 3;
+                        return RedirectToAction("MontarTelaCatProduto");
+                    }
+                    Session["IdVolta"] = item.CAPR_CD_ID;
+
+                    // Sucesso
+                    listaMasterCatProduto= new List<CATEGORIA_PRODUTO>();
+                    Session["ListaCatProduto"] = null;
+                    return RedirectToAction("VoltarBaseCatProduto");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditarCatProduto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatProduto");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            CATEGORIA_PRODUTO item = cpApp.GetItemById(id);
+            objetoAntesCatProduto= item;
+            Session["CatProduto"] = item;
+            Session["IdCatProduto"] = id;
+            CategoriaProdutoViewModel vm = Mapper.Map<CATEGORIA_PRODUTO, CategoriaProdutoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarCatProduto(CategoriaProdutoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    CATEGORIA_PRODUTO item = Mapper.Map<CategoriaProdutoViewModel, CATEGORIA_PRODUTO>(vm);
+                    Int32 volta = cpApp.ValidateEdit(item, objetoAntesCatProduto, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterCatProduto= new List<CATEGORIA_PRODUTO>();
+                    Session["ListaCatProduto"] = null;
+                    return RedirectToAction("MontarTelaCatProduto");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirCatProduto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatProduto");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            CATEGORIA_PRODUTO item = cpApp.GetItemById(id);
+            item.CAPR_IN_ATIVO = 0;
+            Int32 volta = cpApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensCatProduto"] = 4;
+                return RedirectToAction("MontarTelaCatProduto");
+            }
+            listaMasterCatProduto= new List<CATEGORIA_PRODUTO>();
+            Session["ListaCatProduto"] = null;
+            return RedirectToAction("MontarTelaCatProduto");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarCatProduto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatProduto");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            CATEGORIA_PRODUTO item = cpApp.GetItemById(id);
+            item.CAPR_IN_ATIVO = 1;
+            Int32 volta = cpApp.ValidateReativar(item, usuario);
+            listaMasterCatProduto= new List<CATEGORIA_PRODUTO>();
+            Session["ListaCatProduto"] = null;
+            return RedirectToAction("MontarTelaCatProduto");
+        }
+
+        [HttpGet]
+        public ActionResult MontarTelaSubCatProduto()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaSubCatProduto"] == null)
+            {
+                listaMasterSubCatProduto= spApp.GetAllItens(idAss);
+                Session["ListaSubCatProduto"] = listaMasterSubCatProduto;
+            }
+            ViewBag.Listas = (List<SUBCATEGORIA_PRODUTO>)Session["ListaSubCatProduto"];
+            ViewBag.CatProduto = new SelectList(spApp.GetAllCategorias(idAss), "CAPR_CD_ID", "CAPR_NM_NOME");
+            ViewBag.Title = "SubCatProduto";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.SubCatProduto = ((List<SUBCATEGORIA_PRODUTO>)Session["ListaSubCatProduto"]).Count;
+
+            if (Session["MensSubCatProduto"] != null)
+            {
+                if ((Int32)Session["MensSubCatProduto"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0226", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensSubCatProduto"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensSubCatProduto"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0227", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["MensSubCatProduto"] = 0;
+            objetoSubCatProduto = new SUBCATEGORIA_PRODUTO();
+            return View(objetoSubCatProduto);
+        }
+
+        public ActionResult RetirarFiltroSubCatProduto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["ListaSubCatProduto"] = null;
+            Session["FiltroSubCatProduto"] = null;
+            return RedirectToAction("MontarTelaSubCatProduto");
+        }
+
+        public ActionResult MostrarTudoSubCatProduto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterSubCatProduto = spApp.GetAllItensAdm(idAss);
+            Session["FiltroSubCatProduto"] = null;
+            Session["ListaSubCatProduto"] = listaMasterSubgrupo;
+            return RedirectToAction("MontarTelaSubCatProduto");
+        }
+
+        public ActionResult VoltarBaseSubCatProduto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaSubCatProduto"] == 2)
+            {
+                return RedirectToAction("IncluirProduto", "Produto");
+            }
+            if ((Int32)Session["VoltaSubCatProduto"] == 3)
+            {
+                return RedirectToAction("VoltarAnexoProduto", "Produto");
+            }
+            return RedirectToAction("MontarTelaSubCatProduto");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirSubCatProduto()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaSubCatProduto");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.CatProduto = new SelectList(spApp.GetAllCategorias(idAss), "CAPR_CD_ID", "CAPR_NM_NOME");
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            SUBCATEGORIA_PRODUTO item = new SUBCATEGORIA_PRODUTO();
+            SubCategoriaProdutoViewModel vm = Mapper.Map<SUBCATEGORIA_PRODUTO, SubCategoriaProdutoViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.SCPR_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirSubCatProduto(SubCategoriaProdutoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    SUBCATEGORIA_PRODUTO item = Mapper.Map<SubCategoriaProdutoViewModel, SUBCATEGORIA_PRODUTO>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = spApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensSubCatProduto"] = 3;
+                        return RedirectToAction("MontarTelaSubCatProduto");
+                    }
+                    Session["IdSubCatProduto"] = item.SCPR_CD_ID;
+
+                    // Sucesso
+                    listaMasterSubCatProduto= new List<SUBCATEGORIA_PRODUTO>();
+                    Session["ListaSubCatProduto"] = null;
+                    return RedirectToAction("MontarTelaSubCatProduto");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditarSubCatProduto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaSubCatProduto");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            SUBCATEGORIA_PRODUTO item = spApp.GetItemById(id);
+            objetoAntesSubCatProduto = item;
+            Session["SubCatProduto"] = item;
+            Session["IdSubCatProduto"] = id;
+            SubCategoriaProdutoViewModel vm = Mapper.Map<SUBCATEGORIA_PRODUTO, SubCategoriaProdutoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarSubCatProduto(SubCategoriaProdutoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    SUBCATEGORIA_PRODUTO item = Mapper.Map<SubCategoriaProdutoViewModel, SUBCATEGORIA_PRODUTO>(vm);
+                    Int32 volta = spApp.ValidateEdit(item, objetoAntesSubCatProduto, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterSubCatProduto = new List<SUBCATEGORIA_PRODUTO>();
+                    Session["ListaSubCatProduto"] = null;
+                    return RedirectToAction("MontarTelaSubCatProduto");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirSubCatProduto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaSubCatProduto");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            SUBCATEGORIA_PRODUTO item = spApp.GetItemById(id);
+            objetoAntesSubCatProduto = item;
+            item.SCPR_IN_ATIVO = 0;
+            Int32 volta = spApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensSubCatProduto"] = 4;
+                return RedirectToAction("MontarTelaSubCatProduto");
+            }
+            listaMasterSubCatProduto= new List<SUBCATEGORIA_PRODUTO>();
+            Session["ListaSubCatProduto"] = null;
+            return RedirectToAction("MontarTelaSubCatProduto");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarSubCatProduto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaSubCatProduto");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            SUBCATEGORIA_PRODUTO item = spApp.GetItemById(id);
+            objetoAntesSubCatProduto = item;
+            item.SCPR_IN_ATIVO = 1;
+            Int32 volta = spApp.ValidateDelete(item, usuario);
+            listaMasterSubCatProduto = new List<SUBCATEGORIA_PRODUTO>();
+            Session["ListaSubCatProduto"] = null;
+            return RedirectToAction("MontarTelaSubCatProduto");
         }
 
     }

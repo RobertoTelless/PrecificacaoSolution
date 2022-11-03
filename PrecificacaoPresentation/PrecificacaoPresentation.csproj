@@ -3214,6 +3214,12 @@
     <Content Include="Views\CRM\EditarPedido.cshtml" />
     <Content Include="Views\CRM\VerPedido.cshtml" />
     <Content Include="Views\CRM\MontarTelaHistorico.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaCatProduto.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirCatProduto.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarCatProduto.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaSubCatProduto.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirSubCatProduto.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarSubCatProduto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

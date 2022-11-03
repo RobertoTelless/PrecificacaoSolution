@@ -66,7 +66,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab-2">Estoque & Preços</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-3">Dados do Produto</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-5">Informações Tributárias</a></li>
-                                <li class="" id="expTab"><a data-toggle="tab" href="#tab-6">Expedição</a></li>
+                                <li class="" id="tab-Exp"><a data-toggle="tab" href="#tab-6">Embalagens</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-9">Imagens</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-10">Observações</a></li>
                             </ul>
@@ -109,9 +109,8 @@
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12" id="pc">
                                                     Produto Composto?
-                                                    <br />
-                                                    @Html.CheckBoxFor(m => m.Composto, new { @class = "checkbox i-checks" })
-                                                    @Html.ValidationMessageFor(m => m.Composto, "", new { @style = "color:red" })
+                                                    @Html.DropDownListFor(m => m.PROD_IN_COMPOSTO, (SelectList)ViewBag.Composto, "Selecionar", new { @class = "form-control", autofocus = true, @id = "comp", onchange = "ValidaAbas($(this).val())" })
+                                                    @Html.ValidationMessageFor(m => m.PROD_IN_COMPOSTO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
@@ -176,10 +175,10 @@
                                                     @Html.TextBoxFor(m => m.PROD_QN_QUANTIDADE_MINIMA, new { @class = "form-control", autofocus = true })
                                                     @Html.ValidationMessageFor(m => m.PROD_QN_QUANTIDADE_MINIMA, "", new { @style = "color:red" })
                                                 </div>
-                                                <div class="col-lg-2 col-md-2 col-xs-12">
-                                                    Reserva de Estoque
-                                                    @Html.TextBoxFor(m => m.PROD_QN_RESERVA_ESTOQUE, new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.PROD_QN_RESERVA_ESTOQUE, "", new { @style = "color:red" })
+                                                <div class="col-lg-2 col-md-2 col-xs-12" id="peso">
+                                                    Peso Liquido (Grama)
+                                                    @Html.TextBoxFor(m => m.PROD_QN_PESO_LIQUIDO, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PROD_QN_PESO_LIQUIDO, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Aviso de Limite Mínimo
@@ -221,7 +220,7 @@
                                     </div>
                                 </div>
 
-                                @*Varejo*@
+                                @*Dados do Produto*@
                                 <div id="tab-3" class="tab-pane">
                                     <div class="panel-body">
                                         <div class="row">
@@ -246,11 +245,6 @@
                                                     @Html.TextBoxFor(m => m.PROD_NR_REFERENCIA, new { @class = "form-control", @style = "color:green", autofocus = true })
                                                     @Html.ValidationMessageFor(m => m.PROD_NR_REFERENCIA, "", new { @style = "color:red" })
                                                 </div>
-                                                @*<div class="col-lg-2 col-md-2 col-xs-12" id="ga1">
-                                                    Garantia (dias)
-                                                    @Html.TextBoxFor(m => m.Garantia, new { @class = "form-control touchspin2", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.Garantia, "", new { @style = "color:red" })
-                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -318,7 +312,16 @@
                                 @*Expedição*@
                                 <div id="tab-6" class="tab-pane">
                                     <div class="panel-body">
-                                        <div class="row">
+                                        <div class="row" id="composto">
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                                    Tipo de Embalagem
+                                                    @Html.DropDownListFor(m => m.TIEM_CD_ID, (SelectList)ViewBag.TiposEmbalagem, "Selecionar", new { @class = "form-control", autofocus = true, @id="emb", onchange = "RecuperaEmbalagem($(this).val())" })
+                                                    @Html.ValidationMessageFor(m => m.TIEM_CD_ID, "", new { @style = "color:red" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="normal">
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Código GTIN/EAN
@@ -341,36 +344,41 @@
                                                     @Html.ValidationMessageFor(m => m.PROD_QN_PESO_BRUTO, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
-                                                    Preparação (Dias)
+                                                    Preparação (Horas)
                                                     @Html.TextBoxFor(m => m.PROD_NR_DIAS_PREPARACAO, new { @class = "form-control", autofocus = true })
                                                     @Html.ValidationMessageFor(m => m.PROD_NR_DIAS_PREPARACAO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
 
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                <div class="col-lg-3 col-md-3 col-xs-12">
-                                                    Tipo de Embalagem
-                                                    @Html.DropDownListFor(m => m.PROD_IN_TIPO_EMBALAGEM, (SelectList)ViewBag.TiposEmbalagem, "Selecionar", new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.PROD_IN_TIPO_EMBALAGEM, "", new { @style = "color:red" })
-                                                </div>
-                                                <div id="altura" class="col-lg-2 col-md-2 col-xs-12">
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Altura (cm)
-                                                    @Html.TextBoxFor(m => m.PROD_NR_ALTURA, new { @class = "form-control", autofocus = true, id = "altura" })
+                                                    @Html.TextBoxFor(m => m.PROD_NR_ALTURA, new { @class = "form-control", autofocus = true, id = "altura", @readonly = "readonly" })
                                                     @Html.ValidationMessageFor(m => m.PROD_NR_ALTURA, "", new { @style = "color:red" })
                                                 </div>
-                                                <div id="largura" class="col-lg-2 col-md-2 col-xs-12">
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Largura (cm)
-                                                    @Html.TextBoxFor(m => m.PROD_NR_LARGURA, new { @class = "form-control", autofocus = true, id = "largura" })
+                                                    @Html.TextBoxFor(m => m.PROD_NR_LARGURA, new { @class = "form-control", autofocus = true, id = "largura", @readonly = "readonly" })
                                                     @Html.ValidationMessageFor(m => m.PROD_NR_LARGURA, "", new { @style = "color:red" })
                                                 </div>
-                                                <div id="comprimento" class="col-lg-2 col-md-2 col-xs-12">
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Comprimento (cm)
-                                                    @Html.TextBoxFor(m => m.PROD_NR_COMPRIMENTO, new { @class = "form-control", autofocus = true, id = "comprimento" })
+                                                    @Html.TextBoxFor(m => m.PROD_NR_COMPRIMENTO, new { @class = "form-control", autofocus = true, id = "comprimento", @readonly = "readonly" })
                                                     @Html.ValidationMessageFor(m => m.PROD_NR_COMPRIMENTO, "", new { @style = "color:red" })
                                                 </div>
-                                                <div id="diametro" class="col-lg-2 col-md-2 col-xs-12">
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Diâmetro (cm)
-                                                    @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "diametro" })
+                                                    @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "diametro", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Custo Unitário (R$)
+                                                    @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "unitario", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Custo Repasse (R$)
+                                                    @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "repasse", @readonly = "readonly" })
                                                     @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
@@ -444,24 +452,36 @@
 </div>
 
 @section Styles {
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
     <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/plugins/jasnyBootstrapStyles")
-    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
-    @Styles.Render("~/plugins/touchSpinStyles")
     @Styles.Render("~/plugins/toastrStyles")
+    @*@Styles.Render("~/Content/plugins/summernote/summernote.css")*@
+    <link href="~/Content/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Styles.Render("~/Content/plugins/summernote/summernote.css")
 }
 @section Scripts {
+    <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.datetimepicker"></script>
+    <script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>
     @Scripts.Render("~/plugins/toastr")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/bundles/inputmask")
     @Scripts.Render("~/plugins/jasnyBootstrap")
     @Scripts.Render("~/plugins/sparkline")
-    @Scripts.Render("~/plugins/switchery")
-    @Scripts.Render("~/plugins/touchSpin")
-    @Scripts.Render("~/plugins/iCheck")
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    @*@Scripts.Render("~/Scripts/plugins/summernote/summernote.min.js")*@
+    <script src="~/Scripts/plugins/select2/select2.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>    
     <script src="~/Scripts/uploadAnexo.js"></script>
+    @Scripts.Render("~/plugins/summernote")
+    @Scripts.Render("~/Scripts/plugins/summernote/summernote.min.js")
 
     @*<script type="text/javascript">
         $(document).ready(function () {
@@ -496,21 +516,43 @@
     </script>*@
 
     <script type="text/javascript">
+        function RecuperaEmbalagem(id)
+        {
+            var data = {
+                id: id
+            }
+
+            $.ajax({
+                url: '../Produto/GetEmbalagem'
+                , type: 'POST'
+                , data: data
+                , success: function (r) {
+                    $("#altura").val(r.altura);
+                    $("#largura").val(r.largura);
+                    $("#comprimento").val(r.comprimento);
+                    $("#diametro").val(r.diametro);
+                    $("#unitario").val(r.unitario);
+                    $("#repasse").val(r.repasse);
+                }
+            });
+        $(document).ready(function ()
+        {
+            RecuperaEmbalagem($('#emb').val());
+        });
+    </script>
+
+    <script type="text/javascript">
         function ValidaDiv(valTipo) {
             if (valTipo == '2') {
                 $("#pc").hide();
                 $("#cb1").hide();
                 $("#ga1").hide();
                 $("#foodTab").hide();
-                $("#ecomTab").hide();
-                $("#expTab").hide();
             } else if (valTipo == '1')
                 $("#pc").show();
                 $("#cb1").show();
                 $("#ga1").show();
                 $("#foodTab").show();
-                $("#ecomTab").show();
-                $("#expTab").show();
         }
 
         $(document).ready(function () {
@@ -518,6 +560,27 @@
         });
 
     </script>
+
+    @*<script type="text/javascript">
+        function ValidaAbas(comp) {
+            if (comp == '1') {
+                $("#tab-2").hide();
+                $("#tab-3").hide();
+                $("#composto").show();
+                $("#normal").hide();
+            } else if (comp == '0')
+                $("#tab-2").show();
+                $("#tab-3").show();
+                $("#composto").hide();
+                $("#normal").show();
+        }
+
+        $(document).ready(function () {
+            ValidaAbas($('#comp').val());
+        });
+
+    </script>*@
+
     <script type="text/javascript">
         $(function () {
             $("#cpf").mask("999.999.999-99");

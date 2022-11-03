@@ -103,12 +103,9 @@
                             {
                                 <li class=""><a data-toggle="tab" href="#tab-6">Informações Tributárias</a></li>
                             }                                
-                            @if (!Model.Composto & Model.PROD_IN_TIPO_PRODUTO == 1)
+                            @if (Model.PROD_IN_TIPO_PRODUTO == 1)
                             {
-                                if (ViewBag.CatExpedicao == 1)
-                                {
-                                    <li id="expTab" class=""><a data-toggle="tab" href="#tab-7">Expedição</a></li>
-                                }
+                                <li id="expTab" class=""><a data-toggle="tab" href="#tab-7">Embalagens</a></li>
                             }                              
                             <li class=""><a data-toggle="tab" href="#tab-9">Anexos</a></li>                               
                             <li class=""><a data-toggle="tab" href="#tab-11">Observações</a></li>                               
@@ -223,12 +220,7 @@
                                                     </div>
                                                     @if (Model.PROD_IN_TIPO_PRODUTO == 1)
                                                     {
-                                                        <div class="col-lg-2 col-md-3 col-xs-12">
-                                                            Produto Composto*
-                                                            <br />
-                                                            @Html.CheckBoxFor(m => m.Composto, new { @class = "checkbox i-checks" })
-                                                            @Html.ValidationMessageFor(m => m.Composto, "", new { @style = "color:red" })
-                                                        </div>
+                                                        @Html.TextBoxFor(m => m.CompostoNome, new { @class = "form-control", autofocus = true, @readonly="readonly" })
                                                     }
                                                 </div>
                                                 <br />
@@ -272,7 +264,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            @Html.ButtonActionSubmit(text: "Confirma edição de Produto", htmlAttributes: new { id = "basictoast" })
+                                            @Html.ButtonActionSubmit(text: "Confirma edição de Dados Gerais do Produto", htmlAttributes: new { id = "basictoast" })
                                         </div>
                                     }
                                 </div>
@@ -528,16 +520,16 @@
                                                 <br />
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                     <div class="col-lg-12 col-md-12 col-xs-12">
-                                                        Modo de Montagem
-                                                        @Html.TextAreaFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_DS_DESCRICAO, new { @class = "form-control summernote", autofocus = true })
+                                                        Modo de Preparo*
+                                                        @Html.TextAreaFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_DS_DESCRICAO, new { @class = "form-control", autofocus = true })
                                                     </div>
                                                 </div>
                                                 <br />
                                                 <br />
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                     <div class="col-lg-12 col-md-12 col-xs-12">
-                                                        Modo de Apresentação
-                                                        @Html.TextAreaFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_DS_APRESENTACAO, new { @class = "form-control summernote1", autofocus = true })
+                                                        Forma de Apresentação*
+                                                        @Html.TextAreaFor(m => m.FICHA_TECNICA.FirstOrDefault().FITE_DS_APRESENTACAO, new { @class = "form-control", autofocus = true })
                                                     </div>
                                                 </div>
                                             </div>
@@ -805,7 +797,7 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="ibox float-e-margins">
-                                                <div class="ibox-title">
+                                                <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
                                                     <span class="label label-primary pull-right">Hoje</span>
                                                     <h5>Quantidade em Estoque</h5>
                                                 </div>
@@ -821,7 +813,7 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="ibox float-e-margins">
-                                                <div class="ibox-title">
+                                                <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
                                                     <span class="label label-primary pull-right">Hoje</span>
                                                     <h5>Pedidos</h5>
                                                 </div>
@@ -837,7 +829,7 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="ibox float-e-margins">
-                                                <div class="ibox-title">
+                                                <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
                                                     <span class="label label-primary pull-right">Hoje</span>
                                                     <h5>Quantidade</h5>
                                                 </div>
@@ -853,7 +845,7 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="ibox">
-                                                <div class="ibox-title">
+                                                <div class="ibox-title"  style="background-color:cornflowerblue; color:darkblue">
                                                     <span class="label label-primary pull-right">Hoje</span>
                                                     <h5>Evolução de Pedidos</h5>
                                                 </div>
@@ -950,141 +942,140 @@
                                 </div>
                             </div>
 
-                            @*Expedição*@
-                            @if (ViewBag.CatExpedicao == 1)
-	                        {
-                                if (!Model.Composto & Model.PROD_IN_TIPO_PRODUTO == 1)
-                                {
-                                    <div id="tab-7" class="tab-pane">
-                                        <div class="panel-body">
-                                            @using (Html.BeginForm("EditarProduto", "Produto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
-                                            {
-                                                <div class="row">
-                                                    <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                        <div class="col-lg-2 col-md-2 col-xs-12">
-                                                            Código GTIN/EAN
-                                                            @Html.TextBoxFor(m => m.PROD_CD_GTIN_EAN, new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.PROD_CD_GTIN_EAN, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div class="col-lg-4 col-md-4 col-xs-12">
-                                                            @Html.HiddenFor(x => x.PROD_CD_ID)
-                                                            @Html.HiddenFor(x => x.ASSI_CD_ID)
-                                                            @Html.HiddenFor(x => x.CAPR_CD_ID)
-                                                            @Html.HiddenFor(x => x.UNID_CD_ID)
-                                                            @Html.HiddenFor(x => x.PROD_NM_NOME)
-                                                            @Html.HiddenFor(x => x.PROD_DS_DESCRICAO)
-                                                            @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MINIMA)
-                                                            @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_INICIAL)
-                                                            @Html.HiddenFor(x => x.PROD_QN_ESTOQUE)
-                                                            @Html.HiddenFor(x => x.PROD_DT_ULTIMA_MOVIMENTACAO)
-                                                            @Html.HiddenFor(x => x.PROD_IN_AVISA_MINIMO)
-                                                            @Html.HiddenFor(x => x.PROD_DT_CADASTRO)
-                                                            @Html.HiddenFor(x => x.PROD_IN_ATIVO)
-                                                            @Html.HiddenFor(x => x.PROD_AQ_FOTO)
-                                                            @Html.HiddenFor(x => x.PROD_CD_CODIGO)
-                                                            @Html.HiddenFor(x => x.PROD_IN_TIPO_PRODUTO)
-                                                            @Html.HiddenFor(x => x.PROD_VL_PRECO_VENDA)
-                                                            @Html.HiddenFor(x => x.PROD_VL_PRECO_PROMOCAO)
-                                                            @Html.HiddenFor(x => x.SCPR_CD_ID)
-                                                            @Html.HiddenFor(x => x.PROD_DS_INFORMACOES)
-                                                            @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MAXIMA)
-                                                            @Html.HiddenFor(x => x.PROD_QN_RESERVA_ESTOQUE)
-                                                            @Html.HiddenFor(x => x.PROD_NR_REFERENCIA)
-                                                            @Html.HiddenFor(x => x.PROD_DS_INFORMACAO_NUTRICIONAL)
-                                                            @Html.HiddenFor(x => x.PROD_NR_NCM)
-                                                            @Html.HiddenFor(x => x.PROD_CD_GTIN_EAN)
-                                                            @Html.HiddenFor(x => x.PROD_VL_MARKUP_MINIMO)
-                                                            @Html.HiddenFor(x => x.PROD_VL_PRECO_MINIMO)
-                                                            @Html.HiddenFor(x => x.PROD_VL_MARKUP_PADRAO)
-                                                            @Html.HiddenFor(x => x.PROD_TX_OBSERVACOES)
-                                                            @Html.HiddenFor(x => x.PROD_IN_COMPOSTO)
-                                                            @Html.HiddenFor(x => x.PROD_NM_MARCA)
-                                                            @Html.HiddenFor(x => x.PROD_NM_MODELO)
-                                                            @Html.HiddenFor(x => x.PROD_NM_FABRICANTE)
-                                                            @Html.HiddenFor(x => x.PROD_BC_BARCODE)
-                                                            @Html.HiddenFor(x => x.PROR_CD_ID)
-                                                            @Html.HiddenFor(x => x.PROD_NR_CEST)
-                                                            @Html.HiddenFor(x => x.PROD_NR_GTIN_EAN_TRIB)
-                                                            @Html.HiddenFor(x => x.PROD_NM_UNIDADE_TRIBUTARIA)
-                                                            @Html.HiddenFor(x => x.PROD_NR_FATOR_CONVERSAO)
-                                                            @Html.HiddenFor(x => x.PROD_NR_ENQUADRE_IPI)
-                                                            @Html.HiddenFor(x => x.PROD_VL_IPI_FIXO)
-                                                            @Html.HiddenFor(x => x.Composto)
-                                                            @Html.HiddenFor(x => x.AvisaMinima)
-                                                            @Html.HiddenFor(x => x.PROD_VL_PRECO_MINIMO)
-                                                            @Html.HiddenFor(x => x.PROD_VL_PRECO_PROMOCAO)
-                                                            @Html.HiddenFor(x => x.PROD_VL_PRECO_VENDA)
-                                                            @Html.HiddenFor(x => x.PROD_VL_ULTIMO_CUSTO)
-                                                            Localização do Estoque
-                                                            @Html.TextBoxFor(m => m.PROD_NM_LOCALIZACAO_ESTOQUE, new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.PROD_NM_LOCALIZACAO_ESTOQUE, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div class="col-lg-2 col-md-2 col-xs-12">
-                                                            Peso Líquido (Kg)
-                                                            @Html.TextBoxFor(m => m.PROD_QN_PESO_LIQUIDO, new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.PROD_QN_PESO_LIQUIDO, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div class="col-lg-2 col-md-2 col-xs-12">
-                                                            Peso Bruto (Kg)
-                                                            @Html.TextBoxFor(m => m.PROD_QN_PESO_BRUTO, new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.PROD_QN_PESO_BRUTO, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div class="col-lg-2 col-md-2 col-xs-12">
-                                                            Preparação (Dias)
-                                                            @Html.TextBoxFor(m => m.PROD_NR_DIAS_PREPARACAO, new { @class = "form-control", autofocus = true })
-                                                            @Html.ValidationMessageFor(m => m.PROD_NR_DIAS_PREPARACAO, "", new { @style = "color:red" })
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                        <div class="col-lg-4 col-md-4 col-xs-12">
-                                                            Tipo de Embalagem
-                                                            @Html.DropDownListFor(m => m.PROD_IN_TIPO_EMBALAGEM, (SelectList)ViewBag.TiposEmbalagem, "Selecionar", new { @class = "form-control", id = "tipoEmbalagem" })
-                                                            @Html.ValidationMessageFor(m => m.PROD_IN_TIPO_EMBALAGEM, "", new { @style = "color:red" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                                        <div id="altura" class="col-lg-2 col-md-2 col-xs-12">
-                                                            Altura (cm)
-                                                            @Html.TextBoxFor(m => m.PROD_NR_ALTURA, new { @class = "form-control", autofocus = true, id = "altura" })
-                                                            @Html.ValidationMessageFor(m => m.PROD_NR_ALTURA, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div id="largura" class="col-lg-2 col-md-2 col-xs-12">
-                                                            Largura (cm)
-                                                            @Html.TextBoxFor(m => m.PROD_NR_LARGURA, new { @class = "form-control", autofocus = true, id = "largura" })
-                                                            @Html.ValidationMessageFor(m => m.PROD_NR_LARGURA, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div id="comprimento" class="col-lg-2 col-md-2 col-xs-12">
-                                                            Comprimento (cm)
-                                                            @Html.TextBoxFor(m => m.PROD_NR_COMPRIMENTO, new { @class = "form-control", autofocus = true, id = "comprimento" })
-                                                            @Html.ValidationMessageFor(m => m.PROD_NR_COMPRIMENTO, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div id="diametro" class="col-lg-2 col-md-2 col-xs-12">
-                                                            Diâmetro (cm)
-                                                            @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "diametro" })
-                                                            @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div id="custo" class="col-lg-2 col-md-2 col-xs-12">
-                                                            Custo Unitário (R$)
-                                                            @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "diametro" })
-                                                            @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
-                                                        </div>
-                                                        <div id="custo" class="col-lg-2 col-md-2 col-xs-12">
-                                                            Custo Repasse (R$)
-                                                            @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "diametro" })
-                                                            @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
-                                                        </div>
+                            @*Embalagens*@
+                            @if (Model.PROD_IN_TIPO_PRODUTO == 1)
+                            {
+                                <div id="tab-7" class="tab-pane">
+                                    <div class="panel-body">
+                                        @using (Html.BeginForm("EditarProduto", "Produto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
+                                        {
+                                            <div class="row" id="composto">
+                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                                        Tipo de Embalagem
+                                                        @Html.DropDownListFor(m => m.PROD_IN_TIPO_EMBALAGEM, (SelectList)ViewBag.TiposEmbalagem, "Selecionar", new { @class = "form-control", autofocus = true, @id="emb", onchange = "RecuperaEmbalagem($(this).val())" })
+                                                        @Html.ValidationMessageFor(m => m.PROD_IN_TIPO_EMBALAGEM, "", new { @style = "color:red" })
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    @Html.ButtonActionSubmit(text: "Confirma edição de Dados de Expedição do Produto", htmlAttributes: new { id = "basictoast" })
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Código GTIN/EAN
+                                                        @Html.TextBoxFor(m => m.PROD_CD_GTIN_EAN, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PROD_CD_GTIN_EAN, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                                        @Html.HiddenFor(x => x.PROD_CD_ID)
+                                                        @Html.HiddenFor(x => x.ASSI_CD_ID)
+                                                        @Html.HiddenFor(x => x.CAPR_CD_ID)
+                                                        @Html.HiddenFor(x => x.UNID_CD_ID)
+                                                        @Html.HiddenFor(x => x.PROD_NM_NOME)
+                                                        @Html.HiddenFor(x => x.PROD_DS_DESCRICAO)
+                                                        @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MINIMA)
+                                                        @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_INICIAL)
+                                                        @Html.HiddenFor(x => x.PROD_QN_ESTOQUE)
+                                                        @Html.HiddenFor(x => x.PROD_DT_ULTIMA_MOVIMENTACAO)
+                                                        @Html.HiddenFor(x => x.PROD_IN_AVISA_MINIMO)
+                                                        @Html.HiddenFor(x => x.PROD_DT_CADASTRO)
+                                                        @Html.HiddenFor(x => x.PROD_IN_ATIVO)
+                                                        @Html.HiddenFor(x => x.PROD_AQ_FOTO)
+                                                        @Html.HiddenFor(x => x.PROD_CD_CODIGO)
+                                                        @Html.HiddenFor(x => x.PROD_IN_TIPO_PRODUTO)
+                                                        @Html.HiddenFor(x => x.PROD_VL_PRECO_VENDA)
+                                                        @Html.HiddenFor(x => x.PROD_VL_PRECO_PROMOCAO)
+                                                        @Html.HiddenFor(x => x.SCPR_CD_ID)
+                                                        @Html.HiddenFor(x => x.PROD_DS_INFORMACOES)
+                                                        @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MAXIMA)
+                                                        @Html.HiddenFor(x => x.PROD_QN_RESERVA_ESTOQUE)
+                                                        @Html.HiddenFor(x => x.PROD_NR_REFERENCIA)
+                                                        @Html.HiddenFor(x => x.PROD_DS_INFORMACAO_NUTRICIONAL)
+                                                        @Html.HiddenFor(x => x.PROD_NR_NCM)
+                                                        @Html.HiddenFor(x => x.PROD_CD_GTIN_EAN)
+                                                        @Html.HiddenFor(x => x.PROD_VL_MARKUP_MINIMO)
+                                                        @Html.HiddenFor(x => x.PROD_VL_PRECO_MINIMO)
+                                                        @Html.HiddenFor(x => x.PROD_VL_MARKUP_PADRAO)
+                                                        @Html.HiddenFor(x => x.PROD_TX_OBSERVACOES)
+                                                        @Html.HiddenFor(x => x.PROD_IN_COMPOSTO)
+                                                        @Html.HiddenFor(x => x.PROD_NM_MARCA)
+                                                        @Html.HiddenFor(x => x.PROD_NM_MODELO)
+                                                        @Html.HiddenFor(x => x.PROD_NM_FABRICANTE)
+                                                        @Html.HiddenFor(x => x.PROD_BC_BARCODE)
+                                                        @Html.HiddenFor(x => x.PROR_CD_ID)
+                                                        @Html.HiddenFor(x => x.PROD_NR_CEST)
+                                                        @Html.HiddenFor(x => x.PROD_NR_GTIN_EAN_TRIB)
+                                                        @Html.HiddenFor(x => x.PROD_NM_UNIDADE_TRIBUTARIA)
+                                                        @Html.HiddenFor(x => x.PROD_NR_FATOR_CONVERSAO)
+                                                        @Html.HiddenFor(x => x.PROD_NR_ENQUADRE_IPI)
+                                                        @Html.HiddenFor(x => x.PROD_VL_IPI_FIXO)
+                                                        @Html.HiddenFor(x => x.Composto)
+                                                        @Html.HiddenFor(x => x.AvisaMinima)
+                                                        @Html.HiddenFor(x => x.PROD_VL_PRECO_MINIMO)
+                                                        @Html.HiddenFor(x => x.PROD_VL_PRECO_PROMOCAO)
+                                                        @Html.HiddenFor(x => x.PROD_VL_PRECO_VENDA)
+                                                        @Html.HiddenFor(x => x.PROD_VL_ULTIMO_CUSTO)
+                                                        Localização do Estoque
+                                                        @Html.TextBoxFor(m => m.PROD_NM_LOCALIZACAO_ESTOQUE, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PROD_NM_LOCALIZACAO_ESTOQUE, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Peso Líquido (Kg)
+                                                        @Html.TextBoxFor(m => m.PROD_QN_PESO_LIQUIDO, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PROD_QN_PESO_LIQUIDO, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Peso Bruto (Kg)
+                                                        @Html.TextBoxFor(m => m.PROD_QN_PESO_BRUTO, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PROD_QN_PESO_BRUTO, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Preparação (Horas)
+                                                        @Html.TextBoxFor(m => m.PROD_NR_DIAS_PREPARACAO, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PROD_NR_DIAS_PREPARACAO, "", new { @style = "color:red" })
+                                                    </div>
                                                 </div>
-                                            }
 
-                                        </div>
+                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Altura (cm)
+                                                        @Html.TextBoxFor(m => m.PROD_NR_ALTURA, new { @class = "form-control", autofocus = true, id = "altura", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(m => m.PROD_NR_ALTURA, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Largura (cm)
+                                                        @Html.TextBoxFor(m => m.PROD_NR_LARGURA, new { @class = "form-control", autofocus = true, id = "largura", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(m => m.PROD_NR_LARGURA, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Comprimento (cm)
+                                                        @Html.TextBoxFor(m => m.PROD_NR_COMPRIMENTO, new { @class = "form-control", autofocus = true, id = "comprimento", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(m => m.PROD_NR_COMPRIMENTO, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Diâmetro (cm)
+                                                        @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "diametro", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Custo Unitário (R$)
+                                                        @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "unitario", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Custo Repasse (R$)
+                                                        @Html.TextBoxFor(m => m.PROD_NR_DIAMETRO, new { @class = "form-control", autofocus = true, id = "repasse", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(m => m.PROD_NR_DIAMETRO, "", new { @style = "color:red" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.ButtonActionSubmit(text: "Confirma edição de Dados de Embalagem do Produto", htmlAttributes: new { id = "basictoast" })
+                                            </div>
+                                        }
+
                                     </div>
-                                }
-	                        }
+                                </div>
+                            }
 
                             @*Anexos*@
                             <div id="tab-9" class="tab-pane">
@@ -1260,11 +1251,11 @@
                                                                 {
                                                                     <tr>
                                                                         <td>@cond.MOEP_DT_MOVIMENTO.ToShortDateString()</td>
-                                                                        @if (cond.MOEP_IN_OPERACAO == 1)
+                                                                        @if (cond.MOEP_IN_TIPO_MOVIMENTO == 1)
                                                                         {
                                                                             <td><span class="badge badge-primary">Entrada</span></td>
                                                                         }
-                                                                        else if (cond.MOEP_IN_OPERACAO == 2)
+                                                                        else if (cond.MOEP_IN_TIPO_MOVIMENTO == 2)
                                                                         {
                                                                             <td><span class="badge badge-success">Saída</span></td>
                                                                         }
@@ -1274,11 +1265,7 @@
                                                                         }
                                                                         @if (cond.MOEP_IN_CHAVE_ORIGEM == 1)
                                                                         {
-                                                                            <td><span class="badge badge-primary">Lançamento Avulso</span></td>
-                                                                        }
-                                                                        else if (cond.MOEP_IN_CHAVE_ORIGEM == 2)
-                                                                        {
-                                                                            <td><span class="badge badge-primary">Inventário</span></td>
+                                                                            <td><span class="badge badge-primary">Movimentação Avulsa</span></td>
                                                                         }
                                                                         else if (cond.MOEP_IN_CHAVE_ORIGEM == 3)
                                                                         {
@@ -1304,7 +1291,7 @@
                                                         </table>
                                                         }
                                                         <div class="form-group">
-                                                            @Html.ButtonLinkIndex(text: "Ver Todas as Movimentações", action: "VerMovimentacaoEstoqueProduto", controller: "Produto")
+                                                            @Html.ButtonLinkIndex(text: "Ver Todas as Movimentações", action: "VerMovimentacaoEstoqueProdutoNova", controller: "Produto")
                                                         </div>
                                                     </div>
                                                 </div>

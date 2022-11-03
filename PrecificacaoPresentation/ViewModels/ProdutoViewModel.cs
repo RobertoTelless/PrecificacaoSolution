@@ -48,7 +48,6 @@ namespace ERP_Condominios_Solution.ViewModels
         public string PROD_NM_MODELO { get; set; }
         [StringLength(50, ErrorMessage = "A REFERENCIA deve conter no máximo 50 caracteres.")]
         public string PROD_NR_REFERENCIA { get; set; }
-        [Required(ErrorMessage = "Campo QUANTIDADE INICIAL obrigatorio")]
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<int> PROD_QN_QUANTIDADE_INICIAL { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
@@ -114,6 +113,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<int> PROD_QN_QUANTIDADE_ALTERADA { get; set; }
         [StringLength(500, ErrorMessage = "A JUSTIFICATIVA deve conter no máximo 500 caracteres.")]
         public string PROD_DS_JUSTIFICATIVA { get; set; }
+        public Nullable<int> TIEM_CD_ID { get; set; }
 
         public Nullable<int> EntradaSaida { get; set; }
 
@@ -268,6 +268,18 @@ namespace ERP_Condominios_Solution.ViewModels
             }
         }
 
+        public String CompostoNome
+        {
+            get
+            {
+                if (PROD_IN_COMPOSTO == 1)
+                {
+                    return "Composto";
+                }
+                return "Simples";
+            }
+        }
+
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_PRODUTO CATEGORIA_PRODUTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -294,6 +306,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public virtual ICollection<FICHA_TECNICA> FICHA_TECNICA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
+        public virtual TIPO_EMBALAGEM TIPO_EMBALAGEM { get; set; }
 
     }
 }

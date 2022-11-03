@@ -1245,7 +1245,7 @@ namespace ERP_Condominios_Solution.Controllers
             vm.MOEP_DT_MOVIMENTO = DateTime.Now;
             vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
             vm.MOEP_IN_ATIVO = 1;
-            vm.MOEP_IN_CHAVE_ORIGEM = 0;
+            vm.MOEP_IN_CHAVE_ORIGEM = 1;
             vm.MOEP_IN_ORIGEM = "Movimentação Avulsa";
             vm.USUA_CD_ID = usuario.USUA_CD_ID;
             return View(vm);
