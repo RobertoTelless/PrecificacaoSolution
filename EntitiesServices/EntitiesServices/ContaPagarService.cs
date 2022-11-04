@@ -194,6 +194,10 @@ namespace ModelServices.EntitiesServices
             {
                 try
                 {
+                    item.PLANO_CONTA = null;
+                    item.USUARIO = null;
+                    item.FORMA_PAGTO_RECTO = null;
+                    item.FORNECEDOR = null;
                     CONTA_PAGAR obj = _baseRepository.GetById(item.CAPA_CD_ID);
                     _baseRepository.Detach(obj);
                     _baseRepository.Update(item);

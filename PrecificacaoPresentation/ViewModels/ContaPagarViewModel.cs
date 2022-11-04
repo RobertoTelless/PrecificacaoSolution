@@ -18,8 +18,8 @@ namespace ERP_Condominios_Solution.ViewModels
         [Required(ErrorMessage = "Campo FORNECEDOR obrigatorio")]
         public Nullable<int> FORN_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo FORMA DE PAGAMENTO obrigatorio")]
-        public Nullable<int> FOPA_CD_ID { get; set; }
-        public Nullable<int> PERI_CD_ID { get; set; }
+        public Nullable<int> FOPR_CD_ID { get; set; }
+        public Nullable<int> PETA_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo PLANO DE CONTA obrigatorio")]
         public Nullable<int> CECU_CD_ID { get; set; }
         public Nullable<int> ASSI_CD_ID { get; set; }

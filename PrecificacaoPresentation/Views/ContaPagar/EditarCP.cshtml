@@ -169,11 +169,14 @@
                                                     @Html.HiddenFor(m => m.CAPA_VL_PARCELADO)
                                                     @Html.HiddenFor(m => m.CAPA_VL_TAXAS)
                                                     @Html.HiddenFor(m => m.CAPA_VL_VALOR_PAGO)
-                                                    @Html.HiddenFor(m => m.PERI_CD_ID)
+                                                    @Html.HiddenFor(m => m.PETA_CD_ID)
                                                     @Html.HiddenFor(m => m.USUA_CD_ID)
                                                     @Html.HiddenFor(m => m.CAPA_VL_PARCIAL)
                                                     @Html.HiddenFor(m => m.ASSI_CD_ID)
                                                     @Html.HiddenFor(m => m.FORN_CD_ID)
+                                                    @Html.HiddenFor(m => m.FOPR_CD_ID)
+                                                    @Html.HiddenFor(m => m.CECU_CD_ID)
+                                                    @Html.HiddenFor(m => m.USUA_CD_ID)
                                                     Fornecedor*
                                                     @Html.TextBoxFor(m => m.FORNECEDOR.FORN_NM_NOME, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
                                                 </div>
@@ -181,24 +184,21 @@
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Plano de Contas*
-                                                    @Html.DropDownListFor(m => m.CECU_CD_ID, (SelectList)ViewBag.CC, "Selecionar", new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.CECU_CD_ID, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.PLANO_CONTA.CECU_NM_NOME, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Responsável*
-                                                    @Html.DropDownListFor(m => m.USUA_CD_ID, (SelectList)ViewBag.Usuarios, "Selecionar", new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.USUA_CD_ID, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.USUARIO.USUA_NM_NOME, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Forma de Pagamento*
-                                                    @Html.DropDownListFor(m => m.FOPA_CD_ID, (SelectList)ViewBag.Formas, "Selecionar", new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.FOPA_CD_ID, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.FORMA_PAGTO_RECTO.FOPR_NM_NOME_FORMA, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                                @*<div class="col-lg-3 col-md-3 col-xs-12">
                                                     Tipo de Documento
                                                     @Html.DropDownListFor(m => m.CAPA_IN_TIPO_DOC, (SelectList)ViewBag.TipoDoc, "Selecionar", new { @class = "form-control", autofocus = true })
                                                     @Html.ValidationMessageFor(m => m.CAPA_IN_TIPO_DOC, "", new { @style = "color:red" })
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
 
@@ -229,7 +229,7 @@
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">
                                                     Valor Base (R$)
-                                                    @Html.TextBoxFor(m => m.CAPA_VL_VALOR, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                    @Html.TextBoxFor(m => m.CAPA_VL_VALOR, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12" style="color: brown; font-weight: bold">
                                                     Data de Vencimento*
@@ -314,8 +314,8 @@
                                                         @Html.HiddenFor(m => m.CECU_CD_ID)
                                                         @Html.HiddenFor(m => m.FORN_CD_ID)
                                                         @Html.HiddenFor(m => m.COBA_CD_ID)
-                                                        @Html.HiddenFor(m => m.FOPA_CD_ID)
-                                                        @Html.HiddenFor(m => m.PERI_CD_ID)
+                                                        @Html.HiddenFor(m => m.FOPR_CD_ID)
+                                                        @Html.HiddenFor(m => m.PETA_CD_ID)
                                                         @Html.HiddenFor(m => m.PLCO_CD_ID)
                                                         @Html.HiddenFor(m => m.USUA_CD_ID)
                                                         @Html.HiddenFor(m => m.ASSI_CD_ID)
@@ -561,8 +561,8 @@
                                                         @Html.HiddenFor(m => m.CECU_CD_ID)
                                                         @Html.HiddenFor(m => m.FORN_CD_ID)
                                                         @Html.HiddenFor(m => m.COBA_CD_ID)
-                                                        @Html.HiddenFor(m => m.FOPA_CD_ID)
-                                                        @Html.HiddenFor(m => m.PERI_CD_ID)
+                                                        @Html.HiddenFor(m => m.FOPR_CD_ID)
+                                                        @Html.HiddenFor(m => m.PETA_CD_ID)
                                                         @Html.HiddenFor(m => m.PLCO_CD_ID)
                                                         @Html.HiddenFor(m => m.USUA_CD_ID)
                                                         @Html.HiddenFor(m => m.ASSI_CD_ID)
@@ -668,6 +668,40 @@
                                             <div class="form-group">
                                                 @using (Html.BeginForm("UploadFileLancamentoCP", "ContaPagar", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @id="pwd-container2" }))
                                                 {
+                                                    @Html.HiddenFor(m => m.CAPA_CD_ID)
+                                                    @Html.HiddenFor(m => m.CAPA_DS_DESCRICAO)
+                                                    @Html.HiddenFor(m => m.CAPA_DT_COMPETENCIA)
+                                                    @Html.HiddenFor(m => m.CAPA_DT_LIQUIDACAO)
+                                                    @Html.HiddenFor(m => m.CAPA_IN_LIQUIDADA)
+                                                    @Html.HiddenFor(m => m.CAPA_DT_INICIO_PARCELAS)
+                                                    @Html.HiddenFor(m => m.CAPA_DT_LANCAMENTO)
+                                                    @Html.HiddenFor(m => m.CAPA_DT_VENCIMENTO)
+                                                    @Html.HiddenFor(m => m.CAPA_IN_ATIVO)
+                                                    @Html.HiddenFor(m => m.CAPA_IN_LIQUIDADA)
+                                                    @Html.HiddenFor(m => m.CAPA_IN_PAGA_PARCIAL)
+                                                    @Html.HiddenFor(m => m.CAPA_IN_PARCELADA)
+                                                    @Html.HiddenFor(m => m.CAPA_IN_PARCELAS)
+                                                    @Html.HiddenFor(m => m.CAPA_IN_TIPO_LANCAMENTO)
+                                                    @Html.HiddenFor(m => m.CAPA_NM_FAVORECIDO)
+                                                    @Html.HiddenFor(m => m.CAPA_NM_FORMA_PAGAMENTO)
+                                                    @Html.HiddenFor(m => m.CAPA_NR_DOCUMENTO)
+                                                    @Html.HiddenFor(m => m.CAPA_VL_DESCONTO)
+                                                    @Html.HiddenFor(m => m.CAPA_VL_JUROS)
+                                                    @Html.HiddenFor(m => m.CAPA_VL_PARCELADO)
+                                                    @Html.HiddenFor(m => m.CAPA_VL_SALDO)
+                                                    @Html.HiddenFor(m => m.CAPA_VL_TAXAS)
+                                                    @Html.HiddenFor(m => m.CAPA_VL_VALOR)
+                                                    @Html.HiddenFor(m => m.CAPA_VL_VALOR_PAGO)
+                                                    @Html.HiddenFor(m => m.CECU_CD_ID)
+                                                    @Html.HiddenFor(m => m.FORN_CD_ID)
+                                                    @Html.HiddenFor(m => m.COBA_CD_ID)
+                                                    @Html.HiddenFor(m => m.FOPR_CD_ID)
+                                                    @Html.HiddenFor(m => m.PETA_CD_ID)
+                                                    @Html.HiddenFor(m => m.CECU_CD_ID)
+                                                    @Html.HiddenFor(m => m.USUA_CD_ID)
+                                                    @Html.HiddenFor(m => m.CAPA_VL_PARCIAL)
+                                                    @Html.HiddenFor(m => m.ASSI_CD_ID)
+                                                    @Html.HiddenFor(m => m.CAPA_IN_TIPO_DOC)
                                                     <div class="ibox-content">
                                                         @if (Model.CONTA_PAGAR_ANEXO != null)
 	                                                    {
@@ -863,8 +897,8 @@
                                                     @Html.HiddenFor(m => m.CECU_CD_ID)
                                                     @Html.HiddenFor(m => m.FORN_CD_ID)
                                                     @Html.HiddenFor(m => m.COBA_CD_ID)
-                                                    @Html.HiddenFor(m => m.FOPA_CD_ID)
-                                                    @Html.HiddenFor(m => m.PERI_CD_ID)
+                                                    @Html.HiddenFor(m => m.FOPR_CD_ID)
+                                                    @Html.HiddenFor(m => m.PETA_CD_ID)
                                                     @Html.HiddenFor(m => m.PLCO_CD_ID)
                                                     @Html.HiddenFor(m => m.USUA_CD_ID)
                                                     @Html.HiddenFor(m => m.CAPA_VL_PARCIAL)
@@ -936,8 +970,8 @@
                                                     @Html.HiddenFor(m => m.CECU_CD_ID)
                                                     @Html.HiddenFor(m => m.FORN_CD_ID)
                                                     @Html.HiddenFor(m => m.COBA_CD_ID)
-                                                    @Html.HiddenFor(m => m.FOPA_CD_ID)
-                                                    @Html.HiddenFor(m => m.PERI_CD_ID)
+                                                    @Html.HiddenFor(m => m.FOPR_CD_ID)
+                                                    @Html.HiddenFor(m => m.PETA_CD_ID)
                                                     @Html.HiddenFor(m => m.PLCO_CD_ID)
                                                     @Html.HiddenFor(m => m.USUA_CD_ID)
                                                     @Html.HiddenFor(m => m.CAPA_VL_PARCIAL)

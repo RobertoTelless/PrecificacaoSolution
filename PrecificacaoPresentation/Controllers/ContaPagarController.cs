@@ -243,7 +243,8 @@ namespace ERP_Condominios_Solution.Controllers
             // Indicadores
             List<CONTA_PAGAR> pag = listaCPMaster;
 
-            Decimal pago = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CAPA_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CAPA_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_PAGAR_PARCELA == null).Sum(p => p.CAPA_VL_VALOR_PAGO).Value;
+            List<CONTA_PAGAR> lp1 = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CAPA_DT_LIQUIDACAO != null & p.CAPA_IN_PARCELADA == 0).ToList();
+            Decimal pago = lp1.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CAPA_DT_LIQUIDACAO.Value.Month == DateTime.Today.Date.Month & p.CAPA_DT_LIQUIDACAO.Value.Year == DateTime.Today.Date.Year & p.CAPA_IN_PARCELADA == 0).Sum(p => p.CAPA_VL_VALOR_PAGO).Value;
             pago += (Decimal)pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_DT_QUITACAO.Value.Month == DateTime.Now.Month & x.CPPA_DT_QUITACAO.Value.Year == DateTime.Now.Year & x.CPPA_IN_QUITADA == 1).Sum(p => p.CPPA_VL_VALOR);
             ViewBag.Pago = pago;
 
@@ -255,7 +256,8 @@ namespace ERP_Condominios_Solution.Controllers
             sumAtrasoCP += pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_NR_ATRASO > 0 & x.CPPA_DT_VENCIMENTO.Value.Date < DateTime.Now.Date).Sum(p => p.CPPA_VL_VALOR).Value;
             ViewBag.Atraso = sumAtrasoCP;
 
-            Int32 pagos = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CAPA_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CAPA_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_PAGAR_PARCELA == null).ToList().Count;
+            List<CONTA_PAGAR> lp = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CAPA_DT_LIQUIDACAO != null & p.CAPA_IN_PARCELADA == 0).ToList();
+            Int32 pagos = lp.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CAPA_DT_LIQUIDACAO != null & p.CAPA_DT_LIQUIDACAO.Value.Month == DateTime.Today.Date.Month & p.CAPA_DT_LIQUIDACAO.Value.Year == DateTime.Today.Date.Year & p.CAPA_IN_PARCELADA == 0).ToList().Count;
             pagos += pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_IN_LIQUIDADA == 1 & p.CONTA_PAGAR_PARCELA != null).SelectMany(p => p.CONTA_PAGAR_PARCELA).Where(x => x.CPPA_VL_VALOR != null & x.CPPA_DT_QUITACAO.Value.Month == DateTime.Now.Month & x.CPPA_DT_QUITACAO.Value.Year == DateTime.Now.Year & x.CPPA_IN_QUITADA == 1).ToList().Count;
 
             Int32 atrasos = pag.Where(p => p.CAPA_IN_ATIVO == 1 & p.CAPA_NR_ATRASO > 0 & p.CAPA_DT_VENCIMENTO < DateTime.Today.Date & (p.CONTA_PAGAR_PARCELA == null || p.CONTA_PAGAR_PARCELA.Count == 0)).Count();
@@ -485,7 +487,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            Int32 idNot = (Int32)Session["IdVolta"];
+            Int32 idNot = (Int32)Session["IdCP"];
             Int32 idAss = (Int32)Session["IdAssinante"];
 
             if (file == null)
@@ -549,7 +551,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            Int32 idNot = (Int32)Session["IdVolta"];
+            Int32 idNot = (Int32)Session["IdCP"];
             Int32 idAss = (Int32)Session["IdAssinante"];
 
             if (file == null)
@@ -558,7 +560,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("VoltarAnexoCP");
             }
 
-            CONTA_PAGAR item = cpApp.GetById(idNot);
+            CONTA_PAGAR item = cpApp.GetItemById(idNot);
             USUARIO usu = (USUARIO)Session["UserCredentials"];
             var fileName = Path.GetFileName(file.FileName);
             if (fileName.Length > 250)
@@ -730,7 +732,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            return RedirectToAction("VerCP", new { id = (Int32)Session["IdVolta"] });
+            return RedirectToAction("VerCP", new { id = (Int32)Session["IdCP"] });
         }
 
         public ActionResult VoltarAnexoCP()
@@ -739,7 +741,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            return RedirectToAction("EditarCP", new { id = (Int32)Session["IdVolta"] });
+            return RedirectToAction("EditarCP", new { id = (Int32)Session["IdCP"] });
         }
 
         [HttpGet]
@@ -923,6 +925,7 @@ namespace ERP_Condominios_Solution.Controllers
 
                     // Sucesso
                     Session["IdVolta"] = item.CAPA_CD_ID;
+                    Session["IdCP"] = item.CAPA_CD_ID;
                     Session["VoltaCP"] = item.CAPA_CD_ID;
                     if (Session["FileQueueCP"] != null)
                     {
@@ -1193,7 +1196,7 @@ namespace ERP_Condominios_Solution.Controllers
                         FiltrarCP((CONTA_PAGAR)Session["FiltroCP"], null);
                     }
 
-                    if (vm.CAPA_VL_PARCELADO != null && vm.CAPA_IN_PARCELAS != null && vm.CAPA_DT_INICIO_PARCELAS != null && vm.PERI_CD_ID != null)
+                    if (vm.CAPA_VL_PARCELADO != null && vm.CAPA_IN_PARCELAS != null && vm.CAPA_DT_INICIO_PARCELAS != null && vm.PETA_CD_ID != null)
                     {
                         return RedirectToAction("EditarCP", new { id = vm.CAPA_CD_ID });
                     }

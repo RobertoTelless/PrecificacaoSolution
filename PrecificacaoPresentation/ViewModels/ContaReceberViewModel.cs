@@ -43,13 +43,13 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<System.DateTime> CARE_DT_VENCIMENTO { get; set; }
         public Nullable<int> CARE_NR_ATRASO { get; set; }
         [Required(ErrorMessage = "Campo FORMA DE PAGAMENTO obrigatorio")]
-        public Nullable<int> FOPA_CD_ID { get; set; }
+        public Nullable<int> FOPR_CD_ID { get; set; }
         public string CARE_TX_OBSERVACOES { get; set; }
         public Nullable<int> CARE_IN_PARCELADA { get; set; }
         public Nullable<int> CARE_IN_PARCELAS { get; set; }
         [DataType(DataType.Date, ErrorMessage = "Deve ser uma data válida")]
         public Nullable<System.DateTime> CARE_DT_INICIO_PARCELA { get; set; }
-        public Nullable<int> PERI_CD_ID { get; set; }
+        public Nullable<int> PETA_CD_ID { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<decimal> CARE_VL_PARCELADO { get; set; }
         [Required(ErrorMessage = "Campo NÚMERO DO DOCUMENTO obrigatorio")]

@@ -479,38 +479,38 @@ namespace ApplicationServices.Services
             try
             {
                 //Verificação
-                if (item.PLANO_CONTA != null)
-                {
-                    item.PLANO_CONTA = null;
-                }
-                if (item.CONTA_BANCO != null)
-                {
-                    item.CONTA_BANCO = null;
-                }
-                if (item.CONTA_BANCO1 != null)
-                {
-                    item.CONTA_BANCO1 = null;
-                }
-                if (item.FORMA_PAGTO_RECTO != null)
-                {
-                    item.FORMA_PAGTO_RECTO = null;
-                }
-                if (item.FORNECEDOR != null)
-                {
-                    item.FORNECEDOR = null;
-                }
+                //if (item.PLANO_CONTA != null)
+                //{
+                //    item.PLANO_CONTA = null;
+                //}
+                //if (item.CONTA_BANCO != null)
+                //{
+                //    item.CONTA_BANCO = null;
+                //}
+                //if (item.CONTA_BANCO1 != null)
+                //{
+                //    item.CONTA_BANCO1 = null;
+                //}
+                //if (item.FORMA_PAGTO_RECTO != null)
+                //{
+                //    item.FORMA_PAGTO_RECTO = null;
+                //}
+                //if (item.FORNECEDOR != null)
+                //{
+                //    item.FORNECEDOR = null;
+                //}
                 //if (item.PEDIDO_COMPRA != null)
                 //{
                 //    item.PEDIDO_COMPRA = null;
                 //}
-                if (item.PERIODICIDADE_TAREFA != null)
-                {
-                    item.PERIODICIDADE_TAREFA = null;
-                }
-                if (item.USUARIO != null)
-                {
-                    item.USUARIO = null;
-                }
+                //if (item.PERIODICIDADE_TAREFA != null)
+                //{
+                //    item.PERIODICIDADE_TAREFA = null;
+                //}
+                //if (item.USUARIO != null)
+                //{
+                //    item.USUARIO = null;
+                //}
 
 
                 //  ****** Se for Liquidação
