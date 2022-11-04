@@ -696,6 +696,9 @@
     <Content Include="Imagens\1\Clientes\4\Fotos\Drogarias_pacheco_logo_450.png" />
     <Content Include="Imagens\1\Clientes\5\Fotos\amoedo.png" />
     <Content Include="Imagens\1\Clientes\6\Fotos\a3.jpg" />
+    <Content Include="Imagens\1\ContaPagar\1\Anexos\11925-PEPERONI-FATIADO-SEARA-GOURMET-800G.jpg" />
+    <Content Include="Imagens\1\ContaPagar\1\Anexos\pizza_peperoni.jpeg" />
+    <Content Include="Imagens\1\ContaPagar\1\Anexos\Queijo_Muzarella_LactoPar-4kg.png" />
     <Content Include="Imagens\1\FichaTecnica\1\Apresentacao\QM6UJIBG5Tpizza_peperoni.jpeg" />
     <Content Include="Imagens\1\FichaTecnica\2\Apresentacao\LYGKIMQ49Zbz.jpg" />
     <Content Include="Imagens\1\FichaTecnica\3\Apresentacao\7R3LX43XVDbz.jpg" />
@@ -2153,6 +2156,10 @@
     <Content Include="Imagens\1\Fornecedores\4\Anexos\CORREÇÕES DA PLATAFORMA _ Respostas.docx" />
     <Content Include="Imagens\1\Clientes\4\Anexos\FornecedorLista_02092022.pdf" />
     <Content Include="Imagens\1\Produtos\1\Anexos\NotificacaoLista_09092022.pdf" />
+    <Content Include="Imagens\1\ContaPagar\1\Anexos\FichaTecnica_4_03112022 %281%29.pdf" />
+    <Content Include="Imagens\1\ContaPagar\1\Anexos\ProdutoLista_03112022.pdf" />
+    <Content Include="Imagens\1\ContaPagar\1\Anexos\Produto_9_03112022.pdf" />
+    <Content Include="Imagens\1\ContaPagar\5\Anexos\Produto_9_03112022.pdf" />
     <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\WebPrecificacao - Web Deploy.pubxml" />
@@ -3289,8 +3296,11 @@
     <Folder Include="Imagens\1\Clientes\1\Anexos\" />
     <Folder Include="Imagens\1\Clientes\5\Anexos\" />
     <Folder Include="Imagens\1\Clientes\6\Anexos\" />
-    <Folder Include="Imagens\1\ContaPagar\" />
-    <Folder Include="Imagens\1\ContaReceber\" />
+    <Folder Include="Imagens\1\ContaPagar\0\Anexos\" />
+    <Folder Include="Imagens\1\ContaPagar\10\Anexos\" />
+    <Folder Include="Imagens\1\ContaReceber\0\Anexos\" />
+    <Folder Include="Imagens\1\ContaReceber\1\Anexos\" />
+    <Folder Include="Imagens\1\ContaReceber\2\Anexos\" />
     <Folder Include="Imagens\1\Empresa\1\Anexos\" />
     <Folder Include="Imagens\1\Fornecedores\3\Anexos\" />
     <Folder Include="Imagens\1\Fornecedores\5\Anexos\" />
