@@ -74,7 +74,7 @@
                      </div>
                      <div class="ibox-content">
                          <h1 class="no-margins">@CrossCutting.Formatters.DecimalFormatter(ViewBag.CRS)</h1>
-                         <small>Recebimentos no Dia</small>
+                         <small>A Receber no Dia</small>
                          <br />
                          <br />
                          <br />
@@ -90,10 +90,25 @@
                      </div>
                      <div class="ibox-content">
                          <h1 class="no-margins">@CrossCutting.Formatters.DecimalFormatter(ViewBag.Recebido)</h1>
-                         <small>Recebimentos no Mês</small>
+                         <small>Recebido no Mês</small>
                          <br />
                          <br />
                          @Html.ButtonLinkIndex(text: "Ver", controller: "ContaReceber", action: "VerRecebimentosMes", buttonClass: "white")
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-2">
+                 <div class="ibox float-e-margins">
+                    <div class="ibox-title"  style="background-color: darkseagreen; color: darkgreen">
+                         <span class="label label-primary pull-right">Hoje</span>
+                         <h5>Contas a Receber</h5>
+                     </div>
+                     <div class="ibox-content">
+                         <h1 class="no-margins">@CrossCutting.Formatters.DecimalFormatter(ViewBag.RecebidoDia)</h1>
+                         <small>Recebido no Dia</small>
+                         <br />
+                         <br />
+                         @Html.ButtonLinkIndex(text: "Ver", controller: "ContaReceber", action: "VerRecebimentosDia", buttonClass: "white")
                      </div>
                  </div>
              </div>
@@ -119,7 +134,7 @@
                          <h5>Contas a Receber</h5>
                      </div>
                      <div class="ibox-content">
-                         <h1 class="no-margins">@CrossCutting.Formatters.DecimalFormatter(ViewBag.Atrasos)</h1>
+                         <h1 class="no-margins">@CrossCutting.Formatters.DecimalFormatter(ViewBag.AtrasoCR)</h1>
                          <small>Lançamentos em Atraso</small>
                          <br />
                          <br />

@@ -1348,13 +1348,25 @@ namespace ERP_Condominios_Solution.Controllers
             List<CONTA_RECEBER> lr1 = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_DATA_LIQUIDACAO != null & p.CARE_IN_PARCELADA == 0).ToList();
             if (lr1.Count > 0)
             {
-                Decimal recebido = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_DATA_LIQUIDACAO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_DATA_LIQUIDACAO.Value.Year == DateTime.Today.Date.Year).Sum(p => p.CARE_VL_VALOR_LIQUIDADO).Value;
+                Decimal recebido = lr1.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_DATA_LIQUIDACAO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_DATA_LIQUIDACAO.Value.Year == DateTime.Today.Date.Year).Sum(p => p.CARE_VL_VALOR_RECEBIDO).Value;
                 recebido += (Decimal)rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CONTA_RECEBER_PARCELA != null).SelectMany(p => p.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_VL_VALOR != null & x.CRPA_DT_VENCIMENTO.Value.Month == DateTime.Now.Month & x.CRPA_DT_VENCIMENTO.Value.Year == DateTime.Now.Year & x.CRPA_IN_QUITADA == 1).Sum(p => p.CRPA_VL_VALOR);
                 ViewBag.Recebido = recebido;
             }
             else
             {
                 ViewBag.Recebido = 0;
+            }
+
+            List<CONTA_RECEBER> lr2 = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_DATA_LIQUIDACAO != null & p.CARE_IN_PARCELADA == 0).ToList();
+            if (lr2.Count > 0)
+            {
+                Decimal recebidoDia = lr1.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_DATA_LIQUIDACAO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_DATA_LIQUIDACAO.Value.Year == DateTime.Today.Date.Year & p.CARE_DT_DATA_LIQUIDACAO.Value.Day == DateTime.Today.Date.Day).Sum(p => p.CARE_VL_VALOR_RECEBIDO).Value;
+                recebidoDia += (Decimal)rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 1 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & p.CARE_DT_VENCIMENTO.Value.Day == DateTime.Today.Date.Day & p.CONTA_RECEBER_PARCELA != null).SelectMany(p => p.CONTA_RECEBER_PARCELA).Where(x => x.CRPA_VL_VALOR != null & x.CRPA_DT_VENCIMENTO.Value.Month == DateTime.Now.Month & x.CRPA_DT_VENCIMENTO.Value.Year == DateTime.Now.Year & x.CRPA_IN_QUITADA == 1).Sum(p => p.CRPA_VL_VALOR);
+                ViewBag.RecebidoDia = recebidoDia;
+            }
+            else
+            {
+                ViewBag.RecebidoDia = 0;
             }
 
             Decimal sumReceber = rec.Where(p => p.CARE_IN_ATIVO == 1 & p.CARE_IN_LIQUIDADA == 0 & p.CARE_DT_VENCIMENTO.Value.Month == DateTime.Today.Date.Month & p.CARE_DT_VENCIMENTO.Value.Year == DateTime.Today.Date.Year & (p.CONTA_RECEBER_PARCELA == null || p.CONTA_RECEBER_PARCELA.Count == 0)).Sum(p => p.CARE_VL_VALOR);

@@ -146,12 +146,6 @@
                                     <div class="panel-body">
                                         @using (Html.BeginForm("EditarCR", "ContaReceber", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                                         {
-                                            <div class="row">
-                                                    <div class="form-group">
-                                                        <br />
-                                                        @Html.ButtonLinkIndex(text: "Duplicar Lançamento", action: "DuplicarCR", controller: "ContaReceber", htmlAttributes: new { id = Model.CARE_CD_ID })
-                                                    </div>
-                                                </div>
 
                                             <div class="row">
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
@@ -179,7 +173,7 @@
                                                         @Html.HiddenFor(m => m.CARE_VL_PARCIAL)
                                                         @Html.HiddenFor(m => m.CLIE_CD_ID)
                                                         @Html.HiddenFor(m => m.CECU_CD_ID)
-                                                        Cliente*
+                                                        Cliente
                                                         @Html.TextBoxFor(m => m.CLIENTE.CLIE_NM_NOME, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
                                                     </div>
                                                     <div class="col-lg-4 col-md-4 col-xs-12">
@@ -218,13 +212,12 @@
                                                     </div>
                                                     <div class="col-lg-2 col-md-2 col-xs-12">
                                                         Competência*
-                                                        @Html.TextBoxFor(m => m.CARE_DT_COMPETENCIA, "{0:dd/MM/yyyy}", new { @class = "form-control date-picker", autofocus = true })
+                                                        @Html.TextBoxFor(m => m.CARE_DT_COMPETENCIA, "{0:MM/yyyy}", new { @class = "form-control date-picker", autofocus = true })
                                                         @Html.ValidationMessageFor(m => m.CARE_DT_COMPETENCIA, "", new { @style = "color:red" })
                                                     </div>
                                                     <div class="col-lg-2 col-md-2 col-xs-12">
-                                                        Valor Base (R$)*
+                                                        Valor Base (R$)
                                                         @Html.TextBoxFor(m => m.Valor, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
-                                                        @Html.ValidationMessageFor(m => m.Valor, "", new { @style = "color:red" })
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
@@ -504,11 +497,11 @@
                                                                 @Html.HiddenFor(m => m.CARE_VL_VALOR)
                                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                                     Valor já Pago (R$)
-                                                                    @Html.TextBoxFor(m => m.CARE_VL_PARCIAL, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                                    @Html.TextBoxFor(m => m.CARE_VL_PARCIAL, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
                                                                 </div>
                                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                                     Saldo a Receber (R$)
-                                                                    @Html.TextBoxFor(m => m.CARE_VL_SALDO, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly", @id = "saldo" })
+                                                                    @Html.TextBoxFor(m => m.CARE_VL_SALDO, new { @class = "form-control", autofocus = true, @readonly = "readonly", @id = "saldo" })
                                                                 </div>
                                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                                     Descontos(-) (R$)
@@ -594,6 +587,37 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                @Html.HiddenFor(m => m.ASSI_CD_ID)
+                                                @Html.HiddenFor(m => m.CARE_CD_ID)
+                                                @Html.HiddenFor(m => m.CARE_DS_DESCRICAO)
+                                                @Html.HiddenFor(m => m.CARE_DT_COMPETENCIA)
+                                                @Html.HiddenFor(m => m.CARE_DT_INICIO_PARCELA)
+                                                @Html.HiddenFor(m => m.CARE_DT_LANCAMENTO)
+                                                @Html.HiddenFor(m => m.CARE_DT_VENCIMENTO)
+                                                @Html.HiddenFor(m => m.CARE_IN_ATIVO)
+                                                @Html.HiddenFor(m => m.CARE_IN_LIQUIDADA)
+                                                @Html.HiddenFor(m => m.CARE_IN_PAGA_PARCIAL)
+                                                @Html.HiddenFor(m => m.CARE_IN_PARCELADA)
+                                                @Html.HiddenFor(m => m.CARE_IN_PARCELAS)
+                                                @Html.HiddenFor(m => m.CARE_IN_TIPO_LANCAMENTO)
+                                                @Html.HiddenFor(m => m.CARE_NM_FAVORECIDO)
+                                                @Html.HiddenFor(m => m.CARE_NM_FORMA_PAGAMENTO)
+                                                @Html.HiddenFor(m => m.CARE_NR_ATRASO)
+                                                @Html.HiddenFor(m => m.CARE_NR_DOCUMENTO)
+                                                @Html.HiddenFor(m => m.CARE_TX_OBSERVACOES)
+                                                @Html.HiddenFor(m => m.CARE_VL_DESCONTO)
+                                                @Html.HiddenFor(m => m.CARE_VL_JUROS)
+                                                @Html.HiddenFor(m => m.CARE_VL_PARCELADO)
+                                                @Html.HiddenFor(m => m.CARE_VL_TAXAS)
+                                                @Html.HiddenFor(m => m.CARE_VL_VALOR_LIQUIDADO)
+                                                @Html.HiddenFor(m => m.CECU_CD_ID)
+                                                @Html.HiddenFor(m => m.CLIE_CD_ID)
+                                                @Html.HiddenFor(m => m.COBA_CD_ID)
+                                                @Html.HiddenFor(m => m.FILI_CD_ID)
+                                                @Html.HiddenFor(m => m.FOPR_CD_ID)
+                                                @Html.HiddenFor(m => m.PETA_CD_ID)
+                                                @Html.HiddenFor(m => m.PEVE_CD_ID)
+                                                @Html.HiddenFor(m => m.USUA_CD_ID)
                                                 <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                     <div class="col-lg-2 col-md-2 col-xs-12">
                                                         <div class="input-group">
@@ -637,7 +661,7 @@
                                                         <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                             <div class="col-lg-2 col-md-2 col-xs-12">
                                                                 Valor Total (R$)
-                                                                @Html.TextBoxFor(m => m.CARE_VL_VALOR, "{0:n2}", new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                                @Html.TextBoxFor(m => m.CARE_VL_VALOR, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
                                                             </div>
                                                             <div class="col-lg-2 col-md-2 col-xs-12">
                                                                 Data Recebimento Parcial

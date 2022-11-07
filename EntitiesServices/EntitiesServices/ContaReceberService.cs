@@ -210,6 +210,8 @@ namespace ModelServices.EntitiesServices
             {
                 try
                 {
+                    item.CLIENTE = null;
+                    item.PLANO_CONTA = null;
                     CONTA_RECEBER obj = _baseRepository.GetById(item.CARE_CD_ID);
                     _baseRepository.Detach(obj);
                     _baseRepository.Update(item);
