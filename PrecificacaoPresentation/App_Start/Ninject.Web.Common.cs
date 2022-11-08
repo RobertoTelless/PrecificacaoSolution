@@ -129,6 +129,7 @@ namespace Presentation.Start
             kernel.Bind<ITemplatePropostaAppService>().To<TemplatePropostaAppService>();
             kernel.Bind<IFormaEnvioAppService>().To<FormaEnvioAppService>();
             kernel.Bind<IFormaFreteAppService>().To<FormaFreteAppService>();
+            kernel.Bind<IPedidoCompraAppService>().To<PedidoCompraAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -194,6 +195,7 @@ namespace Presentation.Start
             kernel.Bind<ITemplatePropostaService>().To<TemplatePropostaService>();
             kernel.Bind<IFormaEnvioService>().To<FormaEnvioService>();
             kernel.Bind<IFormaFreteService>().To<FormaFreteService>();
+            kernel.Bind<IPedidoCompraService>().To<PedidoCompraService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -308,6 +310,10 @@ namespace Presentation.Start
             kernel.Bind<ITemplatePropostaRepository>().To<TemplatePropostaRepository>();
             kernel.Bind<IFormaEnvioRepository>().To<FormaEnvioRepository>();
             kernel.Bind<IFormaFreteRepository>().To<FormaFreteRepository>();
+            kernel.Bind<IPedidoCompraRepository>().To<PedidoCompraRepository>();
+            kernel.Bind<IPedidoCompraAnexoRepository>().To<PedidoCompraAnexoRepository>();
+            kernel.Bind<IPedidoCompraAcompanhamentoRepository>().To<PedidoCompraAcompanhamentoRepository>();
+            kernel.Bind<IItemPedidoCompraRepository>().To<ItemPedidoCompraRepository>();
 
 
         }

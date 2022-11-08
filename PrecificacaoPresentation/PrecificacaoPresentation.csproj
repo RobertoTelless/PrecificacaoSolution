@@ -232,6 +232,11 @@
       <DependentUpon>PlatMensagens_Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SMS_Mensagens.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMS_Mensagens.resx</DependentUpon>
+    </Compile>
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
@@ -241,6 +246,7 @@
     <Compile Include="Controllers\BaseAdminController.cs" />
     <Compile Include="Controllers\CentroCustoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\ConfiguracaoController.cs" />
     <Compile Include="Controllers\ContaPagarController.cs" />
     <Compile Include="Controllers\ContaReceberController.cs" />
@@ -308,10 +314,13 @@
     <Compile Include="ViewModels\EmpresaMaquinaViewModel.cs" />
     <Compile Include="ViewModels\FornecedorContatoViewModel.cs" />
     <Compile Include="ViewModels\FornecedorViewModel.cs" />
+    <Compile Include="ViewModels\ItemPedidoCompraViewModel.cs" />
     <Compile Include="ViewModels\MotivoCancelamentoViewModel.cs" />
     <Compile Include="ViewModels\MovimentoEstoqueProdutoViewModel.cs" />
     <Compile Include="ViewModels\MovimentacaoAvulsaGridViewModel.cs" />
     <Compile Include="ViewModels\MovimentacaoAvulsaViewModel.cs" />
+    <Compile Include="ViewModels\PedidoCompraAcompanhamentoViewModel.cs" />
+    <Compile Include="ViewModels\PedidoCompraViewModel.cs" />
     <Compile Include="ViewModels\ProdutoFornecedorViewModel.cs" />
     <Compile Include="ViewModels\ProdutoKitViewModel.cs" />
     <Compile Include="ViewModels\ProdutoTabelaPrecoViewModel.cs" />
@@ -3246,6 +3255,10 @@
     <Content Include="Views\TabelaAuxiliar\MontarTelaSubCatProduto.cshtml" />
     <Content Include="Views\TabelaAuxiliar\IncluirSubCatProduto.cshtml" />
     <Content Include="Views\TabelaAuxiliar\EditarSubCatProduto.cshtml" />
+    <Content Include="Views\Compra\MontarTelaPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\IncluirPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\IncluirCompraExpressa.cshtml" />
+    <Content Include="Views\Compra\EditarPedidoCompra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3298,9 +3311,11 @@
     <Folder Include="Imagens\1\Clientes\6\Anexos\" />
     <Folder Include="Imagens\1\ContaPagar\0\Anexos\" />
     <Folder Include="Imagens\1\ContaPagar\10\Anexos\" />
+    <Folder Include="Imagens\1\ContaPagar\11\Anexos\" />
     <Folder Include="Imagens\1\ContaReceber\0\Anexos\" />
     <Folder Include="Imagens\1\ContaReceber\1\Anexos\" />
     <Folder Include="Imagens\1\ContaReceber\2\Anexos\" />
+    <Folder Include="Imagens\1\ContaReceber\6\Anexos\" />
     <Folder Include="Imagens\1\Empresa\1\Anexos\" />
     <Folder Include="Imagens\1\Fornecedores\3\Anexos\" />
     <Folder Include="Imagens\1\Fornecedores\5\Anexos\" />
@@ -3309,6 +3324,7 @@
     <Folder Include="Imagens\1\Noticias\3\Fotos\" />
     <Folder Include="Imagens\1\Notificacao\1\Anexos\" />
     <Folder Include="Imagens\1\Notificacao\2\Anexos\" />
+    <Folder Include="Imagens\1\PedidoCompra\" />
     <Folder Include="Imagens\1\PessoaExterna\1\Anexos\" />
     <Folder Include="Imagens\1\PessoaExterna\1\Fotos\" />
     <Folder Include="Imagens\1\PessoaExterna\2\Anexos\" />
@@ -3405,6 +3421,10 @@
     <EmbeddedResource Include="App_Start\PlatMensagens_Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PlatMensagens_Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_Start\SMS_Mensagens.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SMS_Mensagens.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

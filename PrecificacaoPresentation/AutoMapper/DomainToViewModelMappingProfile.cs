@@ -89,6 +89,9 @@ namespace MvcMapping.Mappers
             CreateMap<TRANSPORTADORA, TransportadoraViewModel>();
             CreateMap<TEMPLATE_EMAIL, TemplateEMailViewModel>();
             CreateMap<TEMPLATE_SMS, TemplateSMSViewModel>();
+            CreateMap<ITEM_PEDIDO_COMPRA, ItemPedidoCompraViewModel>();
+            CreateMap<PEDIDO_COMPRA, PedidoCompraViewModel>();
+            CreateMap<PEDIDO_COMPRA_ACOMPANHAMENTO, PedidoCompraAcompanhamentoViewModel>();
 
 
         }

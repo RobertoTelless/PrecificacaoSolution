@@ -353,6 +353,22 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN416650" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ITEM_PEDIDO_COMPRA" Width="1.5" PointX="27" PointY="183.5" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PEDIDO_COMPRA" Width="1.5" PointX="24.75" PointY="163.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PEDIDO_COMPRA_ACOMPANHAMENTO" Width="1.5" PointX="27" PointY="156.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PEDIDO_COMPRA_ANEXO" Width="1.5" PointX="27" PointY="168.875" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_FORMA_PAGTO_RECTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ITEM_PEDIDO_COMPRA_FORNECEDOR" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_FORNECEDOR" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ITEM_PEDIDO_COMPRA_PEDIDO_COMPRA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ITEM_PEDIDO_COMPRA_PRODUTO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ITEM_PEDIDO_COMPRA_UNIDADE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ACOMPANHAMENTO_PEDIDO_COMPRA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ANEXO_PEDIDO_COMPRA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_PLANO_CONTA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ACOMPANHAMENTO_USUARIO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

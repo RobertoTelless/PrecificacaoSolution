@@ -223,6 +223,7 @@
     <Compile Include="EntitiesServices\MotivoCancelamentoService.cs" />
     <Compile Include="EntitiesServices\MotivoEncerramentoService.cs" />
     <Compile Include="EntitiesServices\MovimentoEstoqueProdutoService.cs" />
+    <Compile Include="EntitiesServices\PedidoCompraService.cs" />
     <Compile Include="EntitiesServices\ProdutoEstoqueFilialService.cs" />
     <Compile Include="EntitiesServices\ProdutoMovimentoEstoqueService.cs" />
     <Compile Include="EntitiesServices\ProdutoService.cs" />
@@ -310,11 +311,15 @@
     <Compile Include="Interfaces\Repositories\IFornecedorRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGrupoCCRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFornecedorAnotacaoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IItemPedidoCompraRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMotivoCancelamentoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMotivoEncerramentoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMovimentoEstoqueProdutoRepository.cs" />
     <Compile Include="Interfaces\Repositories\INomencBrasServicosRepository.cs" />
     <Compile Include="Interfaces\Repositories\INomenclaturaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPedidoCompraAcompanhamentoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPedidoCompraAnexoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPedidoCompraRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProdutoAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProdutoEstoqueFilialRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProdutoFornecedorRepository.cs" />
@@ -407,6 +412,7 @@
     <Compile Include="Interfaces\Services\IMotivoCancelamentoService.cs" />
     <Compile Include="Interfaces\Services\IMotivoEncerramentoService.cs" />
     <Compile Include="Interfaces\Services\IMovimentoEstoqueProdutoService.cs" />
+    <Compile Include="Interfaces\Services\IPedidoCompraService.cs" />
     <Compile Include="Interfaces\Services\IProdutoEstoqueFilialService.cs" />
     <Compile Include="Interfaces\Services\IProdutoMovimentoEstoqueService.cs" />
     <Compile Include="Interfaces\Services\IProdutoService.cs" />
@@ -630,6 +636,9 @@
     <Compile Include="Model\GRUPO_PLANO_CONTA.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ITEM_PEDIDO_COMPRA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\LOG.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
@@ -661,6 +670,15 @@
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\OUTRO_CUSTO_VARIAVEL.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PEDIDO_COMPRA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PEDIDO_COMPRA_ACOMPANHAMENTO.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PEDIDO_COMPRA_ANEXO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PERFIL.cs">
