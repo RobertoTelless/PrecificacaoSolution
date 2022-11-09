@@ -876,18 +876,10 @@ namespace ERP_Condominios_Solution.Controllers
             }
         }
 
-
-
-
-
-
-
-
-
         [HttpGet]
         public ActionResult ExcluirPedidoCompra(Int32 id)
         {
-            // Verifica se tem usuario logado
+            // Valida acesso
             USUARIO usuario = new USUARIO();
             if ((String)Session["Ativa"] == null)
             {
@@ -910,53 +902,25 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
 
-            // Prepara view
-            Session["MensCompra"] = 0;
+            // Executar
             PEDIDO_COMPRA item = baseApp.GetItemById(id);
-            PedidoCompraViewModel vm = Mapper.Map<PEDIDO_COMPRA, PedidoCompraViewModel>(item);
-            return View(vm);
-        }
-
-        [HttpPost]
-        public ActionResult ExcluirPedidoCompra(PedidoCompraViewModel vm)
-        {
-            if ((String)Session["Ativa"] == null)
+            item.PECO_IN_ATIVO = 0;
+            Int32 volta = baseApp.ValidateDelete(item, usuario);
+            if (volta == 1)
             {
-                return RedirectToAction("Login", "ControleAcesso");
+                Session["MensCompra"] = 4;
+                return RedirectToAction("MontarTelaPedidoCompra", "Compra");
             }
-            Int32 idAss = (Int32)Session["IdAssinante"];
-            USUARIO usuario = (USUARIO)Session["UserCredentials"];
-
-            try
-            {
-                // Executa a operação
-                PEDIDO_COMPRA item = Mapper.Map<PedidoCompraViewModel, PEDIDO_COMPRA>(vm);
-                Int32 volta = baseApp.ValidateDelete(item, usuario);
-
-                // Verifica retorno
-                if (volta == 1)
-                {
-                    Session["MensCompra"] = 4;
-                    return RedirectToAction("MontarTelaPedidoCompra");
-                }
-
-                // Sucesso
-                Session["MensCompra"] = 0;
-                listaMaster = new List<PEDIDO_COMPRA>();
-                Session["ListaCompra"] = null;
-                return RedirectToAction("MontarTelaPedidoCompra");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = ex.Message;
-                return View(objeto);
-            }
+            listaMaster = new List<PEDIDO_COMPRA>();
+            Session["ListaCompra"] = null;
+            Session["FiltroCompra"] = null;
+            return RedirectToAction("MontarTelaPedidoCompra");
         }
 
         [HttpGet]
         public ActionResult ReativarPedidoCompra(Int32 id)
         {
-            // Verifica se tem usuario logado
+            // Valida acesso
             USUARIO usuario = new USUARIO();
             if ((String)Session["Ativa"] == null)
             {
@@ -979,49 +943,14 @@ namespace ERP_Condominios_Solution.Controllers
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
 
-            // Verifica possibilidade
-            Int32 num = baseApp.GetAllItens(idAss).Count;
-            if ((Int32)Session["NumCompra"] <= num)
-            {
-                Session["MensCompra"] = 50;
-                return RedirectToAction("MontarTelaCompra", "Compra");
-            }
-
-            // Prepara view
+            // Executar
             PEDIDO_COMPRA item = baseApp.GetItemById(id);
-            PedidoCompraViewModel vm = Mapper.Map<PEDIDO_COMPRA, PedidoCompraViewModel>(item);
-            return View(vm);
-        }
-
-        [HttpPost]
-        public ActionResult ReativarPedidoCompra(PedidoCompraViewModel vm)
-        {
-
-            try
-            {
-                if ((String)Session["Ativa"] == null)
-                {
-                    return RedirectToAction("Login", "ControleAcesso");
-                }
-                Int32 idAss = (Int32)Session["IdAssinante"];
-                USUARIO usuario = (USUARIO)Session["UserCredentials"];
-
-                // Executa a operação
-                PEDIDO_COMPRA item = Mapper.Map<PedidoCompraViewModel, PEDIDO_COMPRA>(vm);
-                Int32 volta = baseApp.ValidateReativar(item, usuario);
-
-                // Verifica retorno
-
-                // Sucesso
-                listaMaster = new List<PEDIDO_COMPRA>();
-                Session["ListaCompra"] = null;
-                return RedirectToAction("MontarTelaPedidoCompra");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = ex.Message;
-                return View(objeto);
-            }
+            item.PECO_IN_ATIVO = 1;
+            Int32 volta = baseApp.ValidateReativar(item, usuario);
+            listaMaster = new List<PEDIDO_COMPRA>();
+            Session["ListaCompra"] = null;
+            Session["FiltroCompra"] = null;
+            return RedirectToAction("MontarTelaPedidoCompra");
         }
 
         [HttpGet]
@@ -1307,13 +1236,6 @@ namespace ERP_Condominios_Solution.Controllers
                     ModelState.AddModelError("", "Pedido de compra não possui itens");
                     return View((PedidoCompraViewModel)Session["VmAntes"]);
                 }
-                //if ((Int32)Session["EscolheuForn"] == 0)
-                //{
-                //    ModelState.AddModelError("", "Nenhum fornecedor selecionado");
-                //    return View((PedidoCompraViewModel)Session["VmAntes"]);
-                //}
-
-                //item.FORN_CD_ID = (Int32)Session["FornCotacao"];
                 item.FORN_CD_ID = lf.First().FORN_CD_ID;
 
                 Decimal custo = 0;
@@ -1625,7 +1547,7 @@ namespace ERP_Condominios_Solution.Controllers
                     cp.CAPA_VL_VALOR = valor;
                     cp.CAPA_VL_SALDO = valor;
                     cp.CECU_CD_ID = item.CECU_CD_ID;
-                    cp.FOPA_CD_ID = 1;
+                    cp.FOPR_CD_ID = 1;
                     cp.FORN_CD_ID = forn.FORN_CD_ID;
                     cp.PECO_CD_ID = item.PECO_CD_ID;
                     cp.USUA_CD_ID = item.USUA_CD_ID;
@@ -2279,6 +2201,7 @@ namespace ERP_Condominios_Solution.Controllers
         [HttpGet]
         public ActionResult ExcluirItemPedidoCompra(Int32 id)
         {
+            // Valida acesso
             if ((String)Session["Ativa"] == null)
             {
                 return RedirectToAction("Login", "ControleAcesso");
@@ -2286,40 +2209,19 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
 
+            // Executar
             ITEM_PEDIDO_COMPRA item = baseApp.GetItemCompraById(id);
-            ItemPedidoCompraViewModel vm = Mapper.Map<ITEM_PEDIDO_COMPRA, ItemPedidoCompraViewModel>(item);
-            return View(vm);
-        }
+            item.ITPC_IN_ATIVO = 0;
+            Int32 volta = baseApp.ValidateDeleteItemCompra(item);
 
-        [HttpPost]
-        public ActionResult ExcluirItemPedidoCompra(ItemPedidoCompraViewModel vm)
-        {
-            if ((String)Session["Ativa"] == null)
-            {
-                return RedirectToAction("Login", "ControleAcesso");
-            }
-            Int32 idAss = (Int32)Session["IdAssinante"];
-            USUARIO usuario = (USUARIO)Session["UserCredentials"];
-
-            try
-            {
-                // Executa a operação
-                ITEM_PEDIDO_COMPRA item = Mapper.Map<ItemPedidoCompraViewModel, ITEM_PEDIDO_COMPRA>(vm);
-                Int32 volta = baseApp.ValidateDeleteItemCompra(item);
-
-                Session["IdVolta"] = item.PECO_CD_ID;
-                return RedirectToAction("VoltarAnexoPedidoCompra");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = ex.Message;
-                return View(vm);
-            }
+            Session["IdVolta"] = item.PECO_CD_ID;
+            return RedirectToAction("VoltarAnexoPedidoCompra");
         }
 
         [HttpGet]
         public ActionResult ReativarItemPedidoCompra(Int32 id)
         {
+            // Valida acesso
             if ((String)Session["Ativa"] == null)
             {
                 return RedirectToAction("Login", "ControleAcesso");
@@ -2327,45 +2229,13 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
 
+            // Executar
             ITEM_PEDIDO_COMPRA item = baseApp.GetItemCompraById(id);
-            ItemPedidoCompraViewModel vm = Mapper.Map<ITEM_PEDIDO_COMPRA, ItemPedidoCompraViewModel>(item);
-            return View(vm);
-        }
+            item.ITPC_IN_ATIVO = 1;
+            Int32 volta = baseApp.ValidateReativarItemCompra(item);
 
-        [HttpPost]
-        public ActionResult ReativarItemPedidoCompra(ItemPedidoCompraViewModel vm)
-        {
-            if ((String)Session["Ativa"] == null)
-            {
-                return RedirectToAction("Login", "ControleAcesso");
-            }
-            Int32 idAss = (Int32)Session["IdAssinante"];
-            USUARIO usuario = (USUARIO)Session["UserCredentials"];
-
-            try
-            {
-                // Executa a operação
-                ITEM_PEDIDO_COMPRA item = Mapper.Map<ItemPedidoCompraViewModel, ITEM_PEDIDO_COMPRA>(vm);
-                PEDIDO_COMPRA ped = baseApp.GetItemById(item.PECO_CD_ID);
-                if (item.ITPC_IN_TIPO == 1)
-                {
-
-                    if (ped.ITEM_PEDIDO_COMPRA.Where(x => x.PROD_CD_ID == item.PROD_CD_ID && x.ITPC_IN_ATIVO == 1).ToList().Count > 0)
-                    {
-                        ModelState.AddModelError("", "PRODUTO já existente no pedido");
-                        return View(vm);
-                    }
-                }
-
-                Int32 volta = baseApp.ValidateReativarItemCompra(item);
-                Session["IdVolta"] = item.PECO_CD_ID;
-                return RedirectToAction("VoltarAnexoPedidoCompra");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = ex.Message;
-                return View(vm);
-            }
+            Session["IdVolta"] = item.PECO_CD_ID;
+            return RedirectToAction("VoltarAnexoPedidoCompra");
         }
 
         [HttpGet]
@@ -2410,19 +2280,18 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 try
                 {
+                    var prod = proApp.GetItemById((Int32)vm.PROD_CD_ID);
                     vm.ITPC_NR_QUANTIDADE_REVISADA = vm.ITPC_QN_QUANTIDADE;
                     if (vm.ITPC_IN_TIPO == 1)
                     {
-                        Int32 a = baseApp.GetItemById(vm.PECO_CD_ID).FILI_CD_ID == null ? (Int32)Session["IdFilial"] : (Int32)baseApp.GetItemById(vm.PECO_CD_ID).FILI_CD_ID;
-                        PRODUTO_TABELA_PRECO b = ptpApp.GetByProdFilial((Int32)vm.PROD_CD_ID, a);
-                        vm.ITPC_VL_PRECO_SELECIONADO = b == null || b.PRTP_VL_PRECO == null ? 0 : b.PRTP_VL_PRECO;
+                        vm.ITPC_VL_PRECO_SELECIONADO = prod.PROD_VL_ULTIMO_CUSTO == null ? 0 : prod.PROD_VL_ULTIMO_CUSTO;
                     }
 
                     if (vm.ITPC_IN_TIPO == 1)
                     {
-                        var prod = proApp.GetItemById((Int32)vm.PROD_CD_ID);
                         vm.UNID_CD_ID = prod.UNID_CD_ID;
                     }
+
                     // Executa a operação
                     ITEM_PEDIDO_COMPRA item = Mapper.Map<ItemPedidoCompraViewModel, ITEM_PEDIDO_COMPRA>(vm);
                     Int32 volta = baseApp.ValidateCreateItemCompra(item);
@@ -3083,7 +2952,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Compras por Fornecedor
             List<FORNECEDOR> listaForn = forApp.GetAllItens(idAss);
-            List<Int32> forns = listaGeral.Where(m => m.PECO_IN_STATUS != 8 & (m.FORN_CD_ID != null & m.FORN_CD_ID != 0)).Select(p => p.FORN_CD_ID.Value).Distinct().ToList();
+            List<Int32> forns = listaGeral.Where(m => m.PECO_IN_STATUS != 8 & (m.FORN_CD_ID != null & m.FORN_CD_ID != 0)).Select(p => p.FORN_CD_ID).Distinct().ToList();
             List<ModeloViewModel> listaMod1 = new List<ModeloViewModel>();
             foreach (Int32 item in forns)
             {
@@ -3154,9 +3023,8 @@ namespace ERP_Condominios_Solution.Controllers
             Session["RecebidosPrazo"] = prazo;
 
             // Produtos com estoque abaixo do minimo
-            Int32? idFilial = null;
-            List<PRODUTO_ESTOQUE_FILIAL> listaBase = proApp.RecuperarQuantidadesFiliais(idFilial, idAss);
-            List<PRODUTO_ESTOQUE_FILIAL> pontoPedido = listaBase.Where(x => x.PREF_QN_ESTOQUE < x.PRODUTO.PROD_QN_QUANTIDADE_MINIMA).OrderByDescending(p => p.PREF_QN_ESTOQUE).ToList();
+            List<PRODUTO> listaBase = proApp.GetAllItens(idAss);
+            List<PRODUTO> pontoPedido = listaBase.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).OrderByDescending(p => p.PROD_QN_ESTOQUE).ToList();
             ViewBag.EstoqueMinimo = pontoPedido;
             Session["EstoqueMinimo"] = pontoPedido;
 
@@ -3233,8 +3101,5 @@ namespace ERP_Condominios_Solution.Controllers
             result.Add("cores", cor);
             return Json(result);
         }
-
-
-
     }
 }

@@ -3259,6 +3259,25 @@
     <Content Include="Views\Compra\IncluirPedidoCompra.cshtml" />
     <Content Include="Views\Compra\IncluirCompraExpressa.cshtml" />
     <Content Include="Views\Compra\EditarPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\VerAnexoPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\ProcessarCotacaoPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\AprovarPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\ReprovarPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\ProcessarReceberPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\ReceberPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\ReceberItemPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\CancelarPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\VerPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\VerItemPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\VerAtrasados.cshtml" />
+    <Content Include="Views\Compra\VerEncerrados.cshtml" />
+    <Content Include="Views\Compra\VerCancelados.cshtml" />
+    <Content Include="Views\Compra\EditarItemPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\IncluirItemPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\EnviarCotacaoPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\ProcessarEnviarAprovacaoPedidoCompra.cshtml" />
+    <Content Include="Views\Compra\IncluirAcompanhamento.cshtml" />
+    <Content Include="Views\Compra\MontarTelaDashboardCompra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
