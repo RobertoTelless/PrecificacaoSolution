@@ -197,6 +197,7 @@
     <Compile Include="Interfaces\IAgendaAppService.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
     <Compile Include="Interfaces\IAssinanteAppService.cs" />
+    <Compile Include="Interfaces\IAssinanteCnpjAppService.cs" />
     <Compile Include="Interfaces\IBancoAppService.cs" />
     <Compile Include="Interfaces\ICargoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaClienteAppService.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Interfaces\IMotivoEncerramentoAppService.cs" />
     <Compile Include="Interfaces\IMovimentoEstoqueProdutoAppService.cs" />
     <Compile Include="Interfaces\IPedidoCompraAppService.cs" />
+    <Compile Include="Interfaces\IPlanoAppService.cs" />
     <Compile Include="Interfaces\IProdutoAppService.cs" />
     <Compile Include="Interfaces\IProdutoEstoqueFilialAppService.cs" />
     <Compile Include="Interfaces\IProdutoTabelaPrecoAppService.cs" />
@@ -263,6 +265,7 @@
     <Compile Include="Services\AgendaAppService.cs" />
     <Compile Include="Services\AppServiceBase.cs" />
     <Compile Include="Services\AssinanteAppService.cs" />
+    <Compile Include="Services\AssinanteCnpjAppService.cs" />
     <Compile Include="Services\BancoAppService.cs" />
     <Compile Include="Services\CategoriaClienteAppService.cs" />
     <Compile Include="Services\CategoriaFornecedorAppService.cs" />
@@ -291,6 +294,7 @@
     <Compile Include="Services\MotivoEncerramentoAppService.cs" />
     <Compile Include="Services\MovimentoEstoqueProdutoAppService.cs" />
     <Compile Include="Services\PedidoCompraAppService.cs" />
+    <Compile Include="Services\PlanoAppService.cs" />
     <Compile Include="Services\ProdutoAppService.cs" />
     <Compile Include="Services\ProdutoEstoqueFilialAppService.cs" />
     <Compile Include="Services\ProdutoTabelaPrecoAppService.cs" />

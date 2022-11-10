@@ -424,6 +424,7 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_SMS" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_USUARIO" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PLANO_PLANO_PERIODICIDADE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

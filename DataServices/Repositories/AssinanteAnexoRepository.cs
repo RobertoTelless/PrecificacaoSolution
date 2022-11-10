@@ -23,7 +23,6 @@ namespace DataServices.Repositories
             IQueryable<ASSINANTE_ANEXO> query = Db.ASSINANTE_ANEXO.Where(p => p.ASAN_CD_ID == id);
             return query.FirstOrDefault();
         }
-
     }
 }
  

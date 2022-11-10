@@ -19,6 +19,7 @@ namespace EntitiesServices.Model
         {
             this.ASSINANTE_PAGAMENTO = new HashSet<ASSINANTE_PAGAMENTO>();
             this.ASSINANTE_PLANO = new HashSet<ASSINANTE_PLANO>();
+            this.ASSINANTE = new HashSet<ASSINANTE>();
         }
     
         public int PLAN_CD_ID { get; set; }
@@ -63,5 +64,7 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ASSINANTE_PLANO> ASSINANTE_PLANO { get; set; }
         public virtual PLANO_PERIODICIDADE PLANO_PERIODICIDADE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE> ASSINANTE { get; set; }
     }
 }

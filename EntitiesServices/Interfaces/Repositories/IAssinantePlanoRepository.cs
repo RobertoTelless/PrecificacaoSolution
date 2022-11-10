@@ -12,5 +12,6 @@ namespace ModelServices.Interfaces.Repositories
         List<ASSINANTE_PLANO> GetAllItens();
         ASSINANTE_PLANO GetItemById(Int32 id);
         ASSINANTE_PLANO GetByAssPlan(Int32 plan, Int32 assi);
+
     }
 }

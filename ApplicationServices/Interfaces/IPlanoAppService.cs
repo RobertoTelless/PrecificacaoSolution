@@ -24,5 +24,6 @@ namespace ApplicationServices.Interfaces
 
         List<PLANO_PERIODICIDADE> GetAllPeriodicidades();
         PLANO_PERIODICIDADE GetPeriodicidadeById(Int32 id);
+
     }
 }

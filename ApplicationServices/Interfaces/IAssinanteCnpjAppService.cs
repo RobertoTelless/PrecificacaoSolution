@@ -12,5 +12,6 @@ namespace ApplicationServices.Interfaces
         List<ASSINANTE_QUADRO_SOCIETARIO> GetAllItens();
         List<ASSINANTE_QUADRO_SOCIETARIO> GetByCliente(ASSINANTE cliente);
         Int32 ValidateCreate(ASSINANTE_QUADRO_SOCIETARIO item, USUARIO usuario);
+
     }
 }

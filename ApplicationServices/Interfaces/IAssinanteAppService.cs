@@ -41,6 +41,5 @@ namespace ApplicationServices.Interfaces
         ASSINANTE_PLANO GetByAssPlan(Int32 plan, Int32 assi);
         List<ASSINANTE_PLANO> GetAllAssPlanos();
         PLANO GetPlanoBaseById(Int32 id);
-
     }
 }

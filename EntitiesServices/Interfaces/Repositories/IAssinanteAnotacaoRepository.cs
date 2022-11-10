@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<ASSINANTE_ANOTACAO> GetAllItens();
         ASSINANTE_ANOTACAO GetItemById(Int32 id);
+
     }
 }

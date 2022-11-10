@@ -28,5 +28,6 @@ namespace DataServices.Repositories
             IQueryable<PLANO_PERIODICIDADE> query = Db.PLANO_PERIODICIDADE;
             return query.ToList();
         }
+
     }
 }

@@ -21,7 +21,7 @@ namespace ModelServices.EntitiesServices
         private readonly IPlanoRepository _baseRepository;
         private readonly IPeriodicidadePlanoRepository _perRepository;
         private readonly ILogRepository _logRepository;
-        protected ERP_CRMEntities Db = new ERP_CRMEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public PlanoService(IPlanoRepository baseRepository, IPeriodicidadePlanoRepository perRepository, ILogRepository logRepository ): base(baseRepository)
         {

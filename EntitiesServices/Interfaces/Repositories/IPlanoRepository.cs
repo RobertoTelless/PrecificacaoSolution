@@ -15,5 +15,6 @@ namespace ModelServices.Interfaces.Repositories
         List<PLANO> GetAllItensAdm();
         List<PLANO> GetAllValidos();
         List<PLANO> ExecuteFilter(String nome, String descricao);
+
     }
 }

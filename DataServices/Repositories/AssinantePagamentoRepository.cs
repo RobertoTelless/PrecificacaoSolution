@@ -24,6 +24,7 @@ namespace DataServices.Repositories
             IQueryable<ASSINANTE_PAGAMENTO> query = Db.ASSINANTE_PAGAMENTO.Where(p => p.ASPA_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

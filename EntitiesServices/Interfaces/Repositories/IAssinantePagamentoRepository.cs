@@ -11,5 +11,6 @@ namespace ModelServices.Interfaces.Repositories
     {
         List<ASSINANTE_PAGAMENTO> GetAllItens();
         ASSINANTE_PAGAMENTO GetItemById(Int32 id);
+
     }
 }

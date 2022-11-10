@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             IQueryable<ASSINANTE_ANOTACAO> query = Db.ASSINANTE_ANOTACAO.Where(p => p.ASAT_CD_ID == id);
             return query.FirstOrDefault();
         }
+
     }
 }
  

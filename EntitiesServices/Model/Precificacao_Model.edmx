@@ -2357,6 +2357,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ASSINANTE_PLANO">
+          <End Role="PLANO" Type="Self.PLANO" Multiplicity="0..1" />
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ASSINANTE_PLANO_ASSINANTE">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
           <End Role="ASSINANTE_PLANO" Type="Self.ASSINANTE_PLANO" Multiplicity="*" />
@@ -5712,6 +5724,10 @@
             <End Role="PLANO" EntitySet="PLANO" />
             <End Role="ASSINANTE_PAGAMENTO" EntitySet="ASSINANTE_PAGAMENTO" />
           </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PLANO" Association="Self.FK_ASSINANTE_PLANO">
+            <End Role="PLANO" EntitySet="PLANO" />
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+          </AssociationSet>
           <AssociationSet Name="FK_ASSINANTE_PLANO_ASSINANTE" Association="Self.FK_ASSINANTE_PLANO_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="ASSINANTE_PLANO" EntitySet="ASSINANTE_PLANO" />
@@ -6915,6 +6931,7 @@
           <NavigationProperty Name="GRUPO" Relationship="Db_PrecificacaoModel.FK_GRUPO_ASSINANTE" FromRole="ASSINANTE" ToRole="GRUPO" />
           <NavigationProperty Name="MENSAGEM_AUTOMACAO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_ASSINANTE" FromRole="ASSINANTE" ToRole="MENSAGEM_AUTOMACAO" />
           <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_ASSINANTE" FromRole="ASSINANTE" ToRole="MENSAGENS" />
+          <NavigationProperty Name="PLANO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PLANO" FromRole="ASSINANTE" ToRole="PLANO" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -13125,6 +13142,10 @@
             <End Role="PLANO_PERIODICIDADE" EntitySet="PLANO_PERIODICIDADE" />
             <End Role="PLANO" EntitySet="PLANO" />
           </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PLANO" Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO">
+            <End Role="PLANO" EntitySet="PLANO" />
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ITEM_PEDIDO_COMPRA">
           <Key>
@@ -13657,6 +13678,7 @@
           <NavigationProperty Name="ASSINANTE_PAGAMENTO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_PLANO" FromRole="PLANO" ToRole="ASSINANTE_PAGAMENTO" />
           <NavigationProperty Name="ASSINANTE_PLANO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_PLANO" FromRole="PLANO" ToRole="ASSINANTE_PLANO" />
           <NavigationProperty Name="PLANO_PERIODICIDADE" Relationship="Db_PrecificacaoModel.FK_PLANO_PLANO_PERIODICIDADE" FromRole="PLANO" ToRole="PLANO_PERIODICIDADE" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PLANO" FromRole="PLANO" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="PLANO_PERIODICIDADE">
           <Key>
@@ -14121,6 +14143,18 @@
             </Principal>
             <Dependent Role="PLANO">
               <PropertyRef Name="PLPE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PLANO">
+          <End Type="Db_PrecificacaoModel.PLANO" Role="PLANO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE">
+              <PropertyRef Name="PLAN_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

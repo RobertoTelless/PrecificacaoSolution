@@ -12,5 +12,6 @@ namespace ModelServices.Interfaces.Repositories
         ASSINANTE_QUADRO_SOCIETARIO CheckExist(ASSINANTE_QUADRO_SOCIETARIO cqs);
         List<ASSINANTE_QUADRO_SOCIETARIO> GetAllItens();
         List<ASSINANTE_QUADRO_SOCIETARIO> GetByCliente(ASSINANTE cliente);
+
     }
 }

@@ -15,5 +15,6 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<ASSINANTE_QUADRO_SOCIETARIO> GetByCliente(ASSINANTE cliente);
         Int32 Create(ASSINANTE_QUADRO_SOCIETARIO cqs, LOG log);
         Int32 Create(ASSINANTE_QUADRO_SOCIETARIO cqs);
+
     }
 }

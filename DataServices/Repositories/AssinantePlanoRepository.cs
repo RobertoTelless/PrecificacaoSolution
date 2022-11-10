@@ -32,7 +32,6 @@ namespace DataServices.Repositories
             query = query.Where(x => x.ASSI_CD_ID == assi);
             return query.FirstOrDefault();
         }
-
     }
 }
  

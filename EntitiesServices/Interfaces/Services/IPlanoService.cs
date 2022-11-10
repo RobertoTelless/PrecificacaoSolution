@@ -25,5 +25,6 @@ namespace ModelServices.Interfaces.EntitiesServices
 
         List<PLANO_PERIODICIDADE> GetAllPeriodicidades();
         PLANO_PERIODICIDADE GetPeriodicidadeById(Int32 id);
+
     }
 }

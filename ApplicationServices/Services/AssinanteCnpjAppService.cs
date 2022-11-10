@@ -16,7 +16,6 @@ namespace ApplicationServices.Services
     public class AssinanteCnpjAppService : AppServiceBase<ASSINANTE_QUADRO_SOCIETARIO>, IAssinanteCnpjAppService
     {
         private readonly IAssinanteCnpjService _baseService;
-
         public AssinanteCnpjAppService(IAssinanteCnpjService baseService) : base(baseService)
         {
             _baseService = baseService;

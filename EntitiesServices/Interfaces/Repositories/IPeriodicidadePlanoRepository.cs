@@ -12,5 +12,6 @@ namespace ModelServices.Interfaces.Repositories
         List<PLANO_PERIODICIDADE> GetAllItens();
         PLANO_PERIODICIDADE GetItemById(Int32 id);
         List<PLANO_PERIODICIDADE> GetAllItensAdm();
+
     }
 }

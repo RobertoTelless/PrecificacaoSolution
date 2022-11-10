@@ -22,13 +22,13 @@ namespace ModelServices.EntitiesServices
         private readonly ILogRepository _logRepository;
         private readonly ITipoPessoaRepository _tpRepository;
         private readonly IUFRepository _ufRepository;
-        //private readonly IAssinanteAnexoRepository _anexoRepository;
-        //private readonly IAssinantePagamentoRepository _pagRepository;
-        //private readonly IPlanoRepository _plaRepository;
-        //private readonly IAssinanteAnotacaoRepository _anoRepository;
-        //private readonly IAssinantePlanoRepository _aspRepository;
+        private readonly IAssinanteAnexoRepository _anexoRepository;
+        private readonly IAssinantePagamentoRepository _pagRepository;
+        private readonly IPlanoRepository _plaRepository;
+        private readonly IAssinanteAnotacaoRepository _anoRepository;
+        private readonly IAssinantePlanoRepository _aspRepository;
 
-        protected ERP_CRMEntities Db = new ERP_CRMEntities();
+        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
         public AssinanteService(IAssinanteRepository baseRepository, ILogRepository logRepository, ITipoPessoaRepository tpRepository, IUFRepository ufRepository, IAssinanteAnexoRepository anexoRepository, IAssinantePagamentoRepository pagRepository, IPlanoRepository plaRepository, IAssinanteAnotacaoRepository anoRepository, IAssinantePlanoRepository aspRepository) : base(baseRepository)
         {
