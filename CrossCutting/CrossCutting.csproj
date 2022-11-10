@@ -189,6 +189,7 @@
   <ItemGroup>
     <Compile Include="CommonHelpers.cs" />
     <Compile Include="CommunicationPackage.cs" />
+    <Compile Include="ControlError.cs" />
     <Compile Include="Cryptography.cs" />
     <Compile Include="EMail.cs" />
     <Compile Include="ExceptionManagement.cs" />

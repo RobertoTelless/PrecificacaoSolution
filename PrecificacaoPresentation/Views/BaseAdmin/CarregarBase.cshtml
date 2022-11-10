@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-5 col-md-5 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <span class="label label-primary pull-right">Hoje</span>
@@ -72,65 +72,19 @@
                     </div>
 
 
-                    @*<div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <span class="label label-primary pull-right">Hoje</span>
-                            <h5>Atividade do usuário</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Acessos</small>
-                                    <h4>@Model.USUA_NR_ACESSOS</h4>
-                                </div>
-
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Falhas de Login</small>
-                                    <h4>@Model.USUA_NR_FALHAS</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Transações</small>
-                                    <h4>@((Int32)Session["Logs"])</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Último Acesso</small>
-                                    <h4>@Model.USUA_DT_ACESSO.Value.ToShortDateString()</h4>
-                                </div>
-
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Última Alteração</small>
-                                    @if (Model.USUA_DT_ALTERACAO == null)
-                                    {
-                                        <h4>Não há</h4>
-                                    }
-                                    else
-                                    {
-                                        <h4>@Model.USUA_DT_ALTERACAO.Value.ToShortDateString()</h4>
-                                    }
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Última Falha</small>
-                                    @if (Model.USUA_DT_ULTIMA_FALHA == null)
-                                    {
-                                        <h4>Não há</h4>
-                                    }
-                                    else
-                                    {
-                                        <h4>@Model.USUA_DT_ULTIMA_FALHA.Value.ToShortDateString()</h4>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>*@
                     @Html.ButtonLinkIndex(text: "Configuração", action: "MontarTelaEmpresa", controller: "Empresa", buttonClass: "primary")
                     @Html.ButtonLinkIndex(text: "Cadastros", action: "MontarTelaDashboardCadastros", controller: "BaseAdmin", buttonClass: "primary")                
                     @Html.ButtonLinkIndex(text: "Financeiro", action: "MontarTelaDashboardFinanceiro", controller: "BaseAdmin", buttonClass: "primary")                
                     @Html.ButtonLinkIndex(text: "Estoque", action: "MontarTelaDashboardEstoque", controller: "Estoque", buttonClass: "primary")                
+                    @Html.ButtonLinkIndex(text: "Compras", action: "MontarTelaDashboardCompra", controller: "Compra", buttonClass: "primary")                
+                    @Html.ButtonLinkIndex(text: "CRM", action: "MontarTelaDashboardCRMNovo", controller: "CRM", buttonClass: "primary")                
                     @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
                     {
                         @Html.ButtonLinkIndex(text: "Administração", action: "MontarTelaDashboardAdministracao", controller: "BaseAdmin", buttonClass: "success")                
+                    }
+                    @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
+                    {
+                        @Html.ButtonLinkIndex(text: "Assinantes", action: "MontarTelaDashboardAssinante", controller: "Assinante", buttonClass: "danger")                
                     }
                 </div>
 

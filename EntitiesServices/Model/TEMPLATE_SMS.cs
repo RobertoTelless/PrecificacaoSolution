@@ -14,6 +14,13 @@ namespace EntitiesServices.Model
     
     public partial class TEMPLATE_SMS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TEMPLATE_SMS()
+        {
+            this.MENSAGEM_AUTOMACAO = new HashSet<MENSAGEM_AUTOMACAO>();
+            this.MENSAGENS = new HashSet<MENSAGENS>();
+        }
+    
         public int TSMS_CD_ID { get; set; }
         public Nullable<int> ASSI_CD_ID { get; set; }
         public string TSMS_NM_NOME { get; set; }
@@ -24,5 +31,9 @@ namespace EntitiesServices.Model
         public Nullable<int> TSMS_IN_EDITAVEL { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
     }
 }

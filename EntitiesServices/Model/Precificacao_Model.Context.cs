@@ -150,5 +150,22 @@ namespace EntitiesServices.Model
         public virtual DbSet<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
         public virtual DbSet<PEDIDO_COMPRA_ACOMPANHAMENTO> PEDIDO_COMPRA_ACOMPANHAMENTO { get; set; }
         public virtual DbSet<PEDIDO_COMPRA_ANEXO> PEDIDO_COMPRA_ANEXO { get; set; }
+        public virtual DbSet<ASSINANTE_ANEXO> ASSINANTE_ANEXO { get; set; }
+        public virtual DbSet<ASSINANTE_ANOTACAO> ASSINANTE_ANOTACAO { get; set; }
+        public virtual DbSet<ASSINANTE_CONSUMO> ASSINANTE_CONSUMO { get; set; }
+        public virtual DbSet<ASSINANTE_PAGAMENTO> ASSINANTE_PAGAMENTO { get; set; }
+        public virtual DbSet<ASSINANTE_PLANO> ASSINANTE_PLANO { get; set; }
+        public virtual DbSet<ASSINANTE_QUADRO_SOCIETARIO> ASSINANTE_QUADRO_SOCIETARIO { get; set; }
+        public virtual DbSet<EMAIL_AGENDAMENTO> EMAIL_AGENDAMENTO { get; set; }
+        public virtual DbSet<GRUPO> GRUPO { get; set; }
+        public virtual DbSet<GRUPO_CLIENTE> GRUPO_CLIENTE { get; set; }
+        public virtual DbSet<LOG_EXCECAO> LOG_EXCECAO { get; set; }
+        public virtual DbSet<MENSAGEM_ANEXO> MENSAGEM_ANEXO { get; set; }
+        public virtual DbSet<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
+        public virtual DbSet<MENSAGEM_AUTOMACAO_DATAS> MENSAGEM_AUTOMACAO_DATAS { get; set; }
+        public virtual DbSet<MENSAGENS> MENSAGENS { get; set; }
+        public virtual DbSet<MENSAGENS_DESTINOS> MENSAGENS_DESTINOS { get; set; }
+        public virtual DbSet<PLANO> PLANO { get; set; }
+        public virtual DbSet<PLANO_PERIODICIDADE> PLANO_PERIODICIDADE { get; set; }
     }
 }

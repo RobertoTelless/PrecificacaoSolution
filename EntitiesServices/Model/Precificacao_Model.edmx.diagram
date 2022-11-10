@@ -369,6 +369,61 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_PLANO_CONTA" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_USUARIO" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ACOMPANHAMENTO_USUARIO" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_ANEXO" Width="1.5" PointX="3.375" PointY="174.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_ANOTACAO" Width="1.5" PointX="21.875" PointY="155.375" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_CONSUMO" Width="1.5" PointX="3.375" PointY="177.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_PAGAMENTO" Width="1.5" PointX="24.375" PointY="177.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_PLANO" Width="1.5" PointX="3.375" PointY="162.5" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_QUADRO_SOCIETARIO" Width="1.5" PointX="3.375" PointY="119.875" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMAIL_AGENDAMENTO" Width="1.5" PointX="26.875" PointY="179.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.GRUPO" Width="1.5" PointX="24.875" PointY="159" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.GRUPO_CLIENTE" Width="1.5" PointX="29.125" PointY="177" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.LOG_EXCECAO" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGEM_ANEXO" Width="1.5" PointX="32.375" PointY="198.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Width="1.5" PointX="33.125" PointY="187.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO_DATAS" Width="1.5" PointX="35.375" PointY="189.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGENS" Width="1.5" PointX="30.125" PointY="191.125" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGENS_DESTINOS" Width="1.5" PointX="32.375" PointY="177.75" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLANO" Width="1.5" PointX="1.125" PointY="156.625" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLANO_PERIODICIDADE" Width="1.5" PointX="1.125" PointY="153.875" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_ANEXO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_CONSUMO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_TIPO_PESSOA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_UF" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_PLANO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_PLANO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_CLIENTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_MENSAGENS" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_GRUPO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_GRUPO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_GRUPO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_GRUPO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_ANEXO_MENSAGENS" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_MENSAGENS" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_PERIODICIDADE_TAREFA" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_EMAIL" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_SMS" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_USUARIO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PLANO_PLANO_PERIODICIDADE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

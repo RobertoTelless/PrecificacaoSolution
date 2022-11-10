@@ -25,6 +25,10 @@ namespace EntitiesServices.Model
             this.CONTA_RECEBER = new HashSet<CONTA_RECEBER>();
             this.CRM = new HashSet<CRM>();
             this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
+            this.EMAIL_AGENDAMENTO = new HashSet<EMAIL_AGENDAMENTO>();
+            this.GRUPO_CLIENTE = new HashSet<GRUPO_CLIENTE>();
+            this.MENSAGENS = new HashSet<MENSAGENS>();
+            this.MENSAGENS_DESTINOS = new HashSet<MENSAGENS_DESTINOS>();
         }
     
         public int CLIE_CD_ID { get; set; }
@@ -108,5 +112,13 @@ namespace EntitiesServices.Model
         public virtual ICollection<CRM> CRM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM_PEDIDO_VENDA> CRM_PEDIDO_VENDA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMAIL_AGENDAMENTO> EMAIL_AGENDAMENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GRUPO_CLIENTE> GRUPO_CLIENTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGENS_DESTINOS> MENSAGENS_DESTINOS { get; set; }
     }
 }

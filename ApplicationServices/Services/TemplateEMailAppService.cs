@@ -89,12 +89,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_LOG = DateTime.Now,
+                    LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddTEEM",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE_EMAIL>(item)
+                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE_EMAIL>(item)
                 };
 
                 // Persiste
@@ -114,13 +114,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_LOG = DateTime.Now,
+                    LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditTEEM",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_TEXTO = item.TEEM_SG_SIGLA + "|" + item.TEEM_NM_NOME,
-                    LOG_TX_TEXTO_ANTES = String.Empty
+                    LOG_TX_REGISTRO = item.TEEM_SG_SIGLA + "|" + item.TEEM_NM_NOME,
+                    LOG_TX_REGISTRO_ANTES = String.Empty
                 };
 
                 // Persiste
@@ -137,10 +137,10 @@ namespace ApplicationServices.Services
             try
             {
                 // Checa integridade
-                //if (item.MENSAGENS.Count > 0)
-                //{
-                //    return 1;
-                //}
+                if (item.MENSAGENS.Count > 0)
+                {
+                    return 1;
+                }
 
                 // Acerta campos
                 item.TEEM_IN_ATIVO = 0;
@@ -148,12 +148,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_LOG = DateTime.Now,
+                    LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelTEEM",
-                    LOG_TX_TEXTO = "Template: " + item.TEEM_NM_NOME
+                    LOG_TX_REGISTRO = "Template: " + item.TEEM_NM_NOME
                 };
 
                 // Persiste
@@ -177,12 +177,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_LOG = DateTime.Now,
+                    LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatTEEM",
-                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE_EMAIL>(item)
+                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE_EMAIL>(item)
                 };
 
                 // Persiste

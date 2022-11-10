@@ -27,13 +27,16 @@ namespace ERP_Condominios_Solution.ViewModels
         [StringLength(250, ErrorMessage = "O NOME DO ARQUIVO deve conter no máximo 250 caracteres.")]
         public string TEEM_AQ_ARQUIVO { get; set; }
         public Nullable<int> TEEM_IN_HTML { get; set; }
+        public Nullable<int> TEEM_IN_FIXO { get; set; }
 
         public string file { get; set; }
         public Int32 html { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
 
     }
 }

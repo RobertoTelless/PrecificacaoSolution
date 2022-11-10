@@ -15,6 +15,5 @@ namespace ModelServices.Interfaces.Repositories
         List<TEMPLATE_SMS> GetAllItensAdm(Int32 idAss);
         List<TEMPLATE_SMS> ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss);
         TEMPLATE_SMS CheckExist(TEMPLATE_SMS item, Int32 idAss);
-
     }
 }

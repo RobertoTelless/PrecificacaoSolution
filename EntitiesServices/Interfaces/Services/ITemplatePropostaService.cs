@@ -22,6 +22,5 @@ namespace ModelServices.Interfaces.EntitiesServices
         List<TEMPLATE_PROPOSTA> GetAllItensAdm(Int32 idAss);
         List<TEMPLATE_PROPOSTA> ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss);
         TEMPLATE_PROPOSTA CheckExist(TEMPLATE_PROPOSTA item, Int32 idAss);
-
     }
 }

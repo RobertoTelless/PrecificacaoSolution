@@ -42,13 +42,111 @@
             <PropertyRef Name="ASSI_CD_ID" />
           </Key>
           <Property Name="ASSI_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPE_CD_ID" Type="int" />
+          <Property Name="PLAN_CD_ID" Type="int" />
           <Property Name="ASSI_NM_NOME" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="ASSI_NM_RAZAO" Type="varchar" MaxLength="150" />
+          <Property Name="ASSI_NM_RAZAO_SOCIAL" Type="varchar" MaxLength="250" />
           <Property Name="ASSI_NR_CNPJ" Type="varchar" MaxLength="20" />
           <Property Name="ASSI_NR_INSCRICAO_ESTADUAL" Type="varchar" MaxLength="50" />
           <Property Name="ASSI_NR_INSCRICAO_MUNICIPAL" Type="varchar" MaxLength="50" />
           <Property Name="ASSI_DT_CADASTRO" Type="date" Nullable="false" />
           <Property Name="ASSI_IN_ATIVO" Type="int" Nullable="false" />
+          <Property Name="ASSI_DT_INICIO" Type="date" />
+          <Property Name="ASSI_IN_TIPO" Type="int" />
+          <Property Name="ASSI_IN_STATUS" Type="int" />
+          <Property Name="ASSI_NM_EMAIL" Type="varchar" MaxLength="150" />
+          <Property Name="ASSI_NR_CPF" Type="varchar" MaxLength="20" />
+          <Property Name="ASSI_TX_OBSERVACOES" Type="text" />
+          <Property Name="ASSI_NM_ENDERECO" Type="varchar" MaxLength="100" />
+          <Property Name="ASSI_NR_NUMERO" Type="varchar" MaxLength="20" />
+          <Property Name="ASSI_NM_COMPLEMENTO" Type="varchar" MaxLength="50" />
+          <Property Name="ASSI_NM_BAIRRO" Type="varchar" MaxLength="50" />
+          <Property Name="ASSI_NM_CIDADE" Type="varchar" MaxLength="50" />
+          <Property Name="UF_CD_ID" Type="int" />
+          <Property Name="ASSI_NR_CEP" Type="varchar" MaxLength="10" />
+          <Property Name="ASSI_AQ_FOTO" Type="varchar" MaxLength="250" />
+          <Property Name="ASSI_NR_TELEFONE" Type="varchar" MaxLength="50" />
+          <Property Name="ASSI_NR_CELULAR" Type="varchar" MaxLength="50" />
+          <Property Name="ASSI_IN_BLOQUEADO" Type="int" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_ANEXO">
+          <Key>
+            <PropertyRef Name="ASAN_CD_ID" />
+          </Key>
+          <Property Name="ASAN_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="ASAN_NM_TITULO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ASAN_DT_ANEXO" Type="date" Nullable="false" />
+          <Property Name="ASAN_IN_TIPO" Type="int" Nullable="false" />
+          <Property Name="ASAN_AQ_ARQUIVO" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ASAN_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_ANOTACAO">
+          <Key>
+            <PropertyRef Name="ASAT_CD_ID" />
+          </Key>
+          <Property Name="ASAT_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="ASAT_DT_ANOTACAO" Type="datetime" Nullable="false" />
+          <Property Name="ASAT_TX_ANOTACAO" Type="text" Nullable="false" />
+          <Property Name="ASAT_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_CONSUMO">
+          <Key>
+            <PropertyRef Name="ASCO_CD_ID" />
+          </Key>
+          <Property Name="ASCO_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="ASCO_DT_REFERENCIA" Type="date" />
+          <Property Name="ASCO_NR_USUARIO" Type="int" />
+          <Property Name="ASCO_NR_CONTATO" Type="int" />
+          <Property Name="ASCO_NR_EMAIL" Type="int" />
+          <Property Name="ASCO_NR_SMS" Type="int" />
+          <Property Name="ASCO_NR_WHATSAPP" Type="int" />
+          <Property Name="ASCO_NR_PROCESSO" Type="int" />
+          <Property Name="ASCO_NR_ACOES" Type="int" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_PAGAMENTO">
+          <Key>
+            <PropertyRef Name="ASPA_CD_ID" />
+          </Key>
+          <Property Name="ASPA_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="PLAN_CD_ID" Type="int" />
+          <Property Name="ASPA_DT_PAGAMENTO" Type="date" />
+          <Property Name="ASPA_VL_VALOR" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ASPA_DT_PROXIMO" Type="date" />
+          <Property Name="ASPA_IN_PAGO" Type="int" />
+          <Property Name="ASPA_DT_VENCIMENTO" Type="date" />
+          <Property Name="ASPA_NR_ATRASO" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="ASPA_VL_VALOR_PAGO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ASPA_IN_ATIVO" Type="int" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_PLANO">
+          <Key>
+            <PropertyRef Name="ASPL_CD_ID" />
+          </Key>
+          <Property Name="ASPL_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="PLAN_CD_ID" Type="int" Nullable="false" />
+          <Property Name="ASPL_IN_ATIVO" Type="int" Nullable="false" />
+          <Property Name="ASPL_DT_INICIO" Type="date" />
+          <Property Name="ASPL_DT_VALIDADE" Type="date" />
+          <Property Name="ASPL_IN_PRECO" Type="int" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_QUADRO_SOCIETARIO">
+          <Key>
+            <PropertyRef Name="ASQS_CD_ID" />
+          </Key>
+          <Property Name="ASQS_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="ASQS_NM_QUALIFICACAO" Type="varchar" MaxLength="100" />
+          <Property Name="ASQS_NM_PAIS_ORIGEM" Type="varchar" MaxLength="50" />
+          <Property Name="ASQS_NM_REPRESENTANTE_LEGAL" Type="varchar" MaxLength="50" />
+          <Property Name="ASQS_NM_QUALIFICACAO_REP_LEGAL" Type="varchar" MaxLength="100" />
+          <Property Name="ASQS_NM_NOME" Type="varchar" MaxLength="150" />
+          <Property Name="ASQS_IN_ATIVO" Type="int" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -780,6 +878,17 @@
           <Property Name="DIPR_DS_DESCRICAO" Type="varchar" MaxLength="500" />
           <Property Name="DIPR_DT_DUMMY" Type="date" />
         </EntityType>
+        <EntityType Name="EMAIL_AGENDAMENTO">
+          <Key>
+            <PropertyRef Name="EMAG_CD_ID" />
+          </Key>
+          <Property Name="EMAG_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="CLIE_CD_ID" Type="int" Nullable="false" />
+          <Property Name="MENS_CD_ID" Type="int" />
+          <Property Name="EMAG_DT_AGENDAMENTO" Type="datetime" />
+          <Property Name="EMAG_IN_ENVIADO" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="EMPRESA">
           <Key>
             <PropertyRef Name="EMPR_CD_ID" />
@@ -1038,6 +1147,26 @@
           <Property Name="FUET_IN_SMS" Type="int" />
           <Property Name="FUET_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="GRUPO">
+          <Key>
+            <PropertyRef Name="GRUP_CD_ID" />
+          </Key>
+          <Property Name="GRUP_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="GRUP_NM_NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GRUP_DT_CADASTRO" Type="date" Nullable="false" />
+          <Property Name="GRUP_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GRUPO_CLIENTE">
+          <Key>
+            <PropertyRef Name="GRCL_CD_ID" />
+          </Key>
+          <Property Name="GRCL_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GRUP_CD_ID" Type="int" Nullable="false" />
+          <Property Name="CLIE_CD_ID" Type="int" Nullable="false" />
+          <Property Name="GRCL_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="GRUPO_PLANO_CONTA">
           <Key>
             <PropertyRef Name="GRCC_CD_ID" />
@@ -1081,6 +1210,17 @@
           <Property Name="LOG_TX_TEXTO_ANTES" Type="text" />
           <Property Name="LOG_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="LOG_EXCECAO">
+          <Key>
+            <PropertyRef Name="LOG_CD_ID" />
+          </Key>
+          <Property Name="LOG_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOG_DT_OCORRENCIA" Type="datetime" />
+          <Property Name="LOG_MODULO" Type="varchar" MaxLength="100" />
+          <Property Name="LOG_USUARIO_LOGADO" Type="varchar" MaxLength="50" />
+          <Property Name="LOG_ACAO" Type="varchar" MaxLength="50" />
+          <Property Name="LOG_EXCECAO" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="MAQUINA">
           <Key>
             <PropertyRef Name="MAQN_CD_ID" />
@@ -1095,6 +1235,101 @@
           <Property Name="MAQN_PC_ANTECIPACAO" Type="decimal" Precision="18" Scale="2" />
           <Property Name="MAQN_DT_CADASTRO" Type="date" Nullable="false" />
           <Property Name="MAQN_IN_ATIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MENSAGEM_ANEXO">
+          <Key>
+            <PropertyRef Name="MEAN_CD_ID" />
+          </Key>
+          <Property Name="MEAN_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MENS_CD_ID" Type="int" Nullable="false" />
+          <Property Name="MEAN_NM_TITULO" Type="varchar" MaxLength="50" />
+          <Property Name="MEAN_DT_ANEXO" Type="date" />
+          <Property Name="MEAN_IN_TIPO" Type="int" />
+          <Property Name="MEAN_IN_ATIVO" Type="int" />
+          <Property Name="MEAN_AQ_ARQUIVO" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MENSAGEM_AUTOMACAO">
+          <Key>
+            <PropertyRef Name="MEAU_CD_ID" />
+          </Key>
+          <Property Name="MEAU_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="MEAU_DT_CADASTRO" Type="date" />
+          <Property Name="USUA_CD_ID" Type="int" />
+          <Property Name="MEAU_IN_ATIVO" Type="int" />
+          <Property Name="GRUP_CD_ID" Type="int" />
+          <Property Name="MEAU_IN_TIPO" Type="int" />
+          <Property Name="TEEM_CD_ID" Type="int" />
+          <Property Name="TSMS_CD_ID" Type="int" />
+          <Property Name="MEAU_IN_TIPO_ENVIO" Type="int" />
+          <Property Name="MEAU_DT_INICIO" Type="date" />
+          <Property Name="MEAU_DT_FINAL" Type="date" />
+          <Property Name="MEAU_HR_DISPARO" Type="time" Precision="7" />
+          <Property Name="MEAU_IN_DIA_SEMANA" Type="int" />
+          <Property Name="MEAU_DS_DESCRICAO" Type="varchar" MaxLength="250" />
+          <Property Name="MEAU_DT_DATA_FIXA" Type="date" />
+          <Property Name="PETA_CD_ID" Type="int" />
+          <Property Name="MEAU_IN_ANIVERSARIO" Type="int" />
+          <Property Name="MEAU_ME_DATA_FIXA" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MENSAGEM_AUTOMACAO_DATAS">
+          <Key>
+            <PropertyRef Name="MEAD_CD_ID" />
+          </Key>
+          <Property Name="MEAD_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEAU_CD_ID" Type="int" Nullable="false" />
+          <Property Name="MEAD_DT_DATA" Type="date" />
+          <Property Name="MEAD_IN_ATIVO" Type="int" />
+        </EntityType>
+        <EntityType Name="MENSAGENS">
+          <Key>
+            <PropertyRef Name="MENS_CD_ID" />
+          </Key>
+          <Property Name="MENS_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
+          <Property Name="TEMP_CD_ID" Type="int" />
+          <Property Name="TSMS_CD_ID" Type="int" />
+          <Property Name="TEEM_CD_ID" Type="int" />
+          <Property Name="CLIE_CD_ID" Type="int" />
+          <Property Name="GRUP_CD_ID" Type="int" />
+          <Property Name="MENS_NM_NOME" Type="varchar" MaxLength="250" />
+          <Property Name="MENS_DT_CRIACAO" Type="datetime" />
+          <Property Name="MENS_NM_CAMPANHA" Type="varchar" MaxLength="50" />
+          <Property Name="MENS_TX_TEXTO" Type="text" />
+          <Property Name="MENS_IN_TIPO" Type="int" />
+          <Property Name="MENS_DT_AGENDAMENTO" Type="datetime" />
+          <Property Name="MENS_DT_ENVIO" Type="datetime" />
+          <Property Name="MENS_TX_RETORNO" Type="text" />
+          <Property Name="MENS_NM_CABECALHO" Type="text" />
+          <Property Name="MENS_NM_RODAPE" Type="text" />
+          <Property Name="MENS_NM_LINK" Type="varchar" MaxLength="500" />
+          <Property Name="MENS_TX_SMS" Type="varchar" MaxLength="250" />
+          <Property Name="MENS_IN_CRM" Type="int" />
+          <Property Name="MENS_TX_TEXTO_LIMPO" Type="text" />
+          <Property Name="MENS_IN_STATUS" Type="int" />
+          <Property Name="MENS_IN_AGENDAMENTO" Type="int" />
+          <Property Name="MENS_IN_REPETICAO" Type="int" />
+          <Property Name="MENS_NR_REPETICOES" Type="int" />
+          <Property Name="PETA_CD_ID" Type="int" />
+          <Property Name="MENS_IN_ATIVO" Type="int" />
+          <Property Name="MENS_IN_PERIODICIDADE" Type="int" />
+          <Property Name="MENS_LK_LINK_PESQUISA" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MENSAGENS_DESTINOS">
+          <Key>
+            <PropertyRef Name="MEDE_CD_ID" />
+          </Key>
+          <Property Name="MEDE_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MENS_CD_ID" Type="int" Nullable="false" />
+          <Property Name="CLIE_CD_ID" Type="int" />
+          <Property Name="GRUP_CD_ID" Type="int" />
+          <Property Name="CAMP_CD_ID" Type="int" />
+          <Property Name="MEDE_IN_ATIVO" Type="int" Nullable="false" />
+          <Property Name="MEDE_IN_STATUS" Type="int" />
+          <Property Name="MEDE_IN_POSICAO" Type="int" />
+          <Property Name="MEDE_TX_OBSERVACOES" Type="text" />
+          <Property Name="MEDE_DS_ERRO_ENVIO" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="MOTIVO_CANCELAMENTO">
           <Key>
@@ -1325,6 +1560,47 @@
           <Property Name="PEAN_TX_ANOTACAO" Type="text" Nullable="false" />
           <Property Name="PEAN_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PLANO">
+          <Key>
+            <PropertyRef Name="PLAN_CD_ID" />
+          </Key>
+          <Property Name="PLAN_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLPE_CD_ID" Type="int" />
+          <Property Name="PLAN_NM_NOME" Type="varchar" MaxLength="50" />
+          <Property Name="PLAN_DT_CRIACAO" Type="date" />
+          <Property Name="PLAN_DS_DESCRICAO" Type="varchar" MaxLength="500" />
+          <Property Name="PLAN_VL_PRECO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PLAN_VL_PROMOCAO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PLAN_IN_DURACAO" Type="int" />
+          <Property Name="PLAN_DT_VALIDADE" Type="date" />
+          <Property Name="PLAN_TX_SITE" Type="varchar" MaxLength="5000" />
+          <Property Name="PLAN_IN_MENSAGENS" Type="int" />
+          <Property Name="PLAN_IN_CRM" Type="int" />
+          <Property Name="PLAN_IN_FINANCEIRO" Type="int" />
+          <Property Name="PLAN_IN_FATURA" Type="int" />
+          <Property Name="PLAN_IN_ESTOQUE" Type="int" />
+          <Property Name="PLAN_IN_PATRIMONIO" Type="int" />
+          <Property Name="PLAN_IN_VENDAS" Type="int" />
+          <Property Name="PLAN_IN_COMPRA" Type="int" />
+          <Property Name="PLAN_IN_SERVICOS" Type="int" />
+          <Property Name="PLAN_IN_ATENDIMENTOS" Type="int" />
+          <Property Name="PLAN_IN_OS" Type="int" />
+          <Property Name="PLAN_NR_USUARIOS" Type="int" />
+          <Property Name="PLAN_NR_CONTATOS" Type="int" />
+          <Property Name="PLAN_NR_EMAIL" Type="int" />
+          <Property Name="PLAN_NR_SMS" Type="int" />
+          <Property Name="PLAN_NR_WHATSAPP" Type="int" />
+          <Property Name="PLAN_NR_PROCESSOS" Type="int" />
+          <Property Name="PLAN_NR_ACOES" Type="int" />
+          <Property Name="PLAN_NR_PATRIMONIO" Type="int" />
+          <Property Name="PLAN_NR_PRODUTO" Type="int" />
+          <Property Name="PLAN_NR_FORNECEDOR" Type="int" />
+          <Property Name="PLAN_NR_COMPRA" Type="int" />
+          <Property Name="PLAN_NR_VENDA" Type="int" />
+          <Property Name="PLAN_NR_SERVICE" Type="int" />
+          <Property Name="PLAN_IN_ATIVO" Type="int" />
+          <Property Name="PLAN_NM_EXIBE" Type="varchar" MaxLength="15" />
+        </EntityType>
         <EntityType Name="PLANO_CONTA">
           <Key>
             <PropertyRef Name="CECU_CD_ID" />
@@ -1339,6 +1615,15 @@
           <Property Name="CECU_IN_MOVTO" Type="int" Nullable="false" />
           <Property Name="CECU_IN_ATIVO" Type="int" Nullable="false" />
           <Property Name="CECU_NM_EXIBE" Type="varchar" MaxLength="63" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PLANO_PERIODICIDADE">
+          <Key>
+            <PropertyRef Name="PLPE_CD_ID" />
+          </Key>
+          <Property Name="PLPE_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLPE_NM_NOME" Type="varchar" MaxLength="50" />
+          <Property Name="PLPE_NR_DIAS" Type="int" />
+          <Property Name="PLPE_IN_ATIVO" Type="int" />
         </EntityType>
         <EntityType Name="PLATAFORMA_ENTREGA">
           <Key>
@@ -1997,6 +2282,138 @@
             </Principal>
             <Dependent Role="AGENDA">
               <PropertyRef Name="AGEN_CD_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_ANEXO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="ASSINANTE_ANEXO" Type="Self.ASSINANTE_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_ANEXO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_ANOTACAO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="ASSINANTE_ANOTACAO" Type="Self.ASSINANTE_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_ANOTACAO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_ANOTACAO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="ASSINANTE_ANOTACAO" Type="Self.ASSINANTE_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_ANOTACAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_CONSUMO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="ASSINANTE_CONSUMO" Type="Self.ASSINANTE_CONSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_CONSUMO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PAGAMENTO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="ASSINANTE_PAGAMENTO" Type="Self.ASSINANTE_PAGAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_PAGAMENTO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PAGAMENTO_PLANO">
+          <End Role="PLANO" Type="Self.PLANO" Multiplicity="0..1" />
+          <End Role="ASSINANTE_PAGAMENTO" Type="Self.ASSINANTE_PAGAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_PAGAMENTO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PLANO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="ASSINANTE_PLANO" Type="Self.ASSINANTE_PLANO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_PLANO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PLANO_PLANO">
+          <End Role="PLANO" Type="Self.PLANO" Multiplicity="1" />
+          <End Role="ASSINANTE_PLANO" Type="Self.ASSINANTE_PLANO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_PLANO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="ASSINANTE_QUADRO_SOCIETARIO" Type="Self.ASSINANTE_QUADRO_SOCIETARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_QUADRO_SOCIETARIO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_TIPO_PESSOA">
+          <End Role="TIPO_PESSOA" Type="Self.TIPO_PESSOA" Multiplicity="0..1" />
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PESSOA">
+              <PropertyRef Name="TIPE_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE">
+              <PropertyRef Name="TIPE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_UF">
+          <End Role="UF" Type="Self.UF" Multiplicity="0..1" />
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UF">
+              <PropertyRef Name="UF_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE">
+              <PropertyRef Name="UF_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3092,6 +3509,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EMAIL_AGENDAMENTO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="EMAIL_AGENDAMENTO" Type="Self.EMAIL_AGENDAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="EMAIL_AGENDAMENTO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMAIL_AGENDAMENTO_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="EMAIL_AGENDAMENTO" Type="Self.EMAIL_AGENDAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Principal>
+            <Dependent Role="EMAIL_AGENDAMENTO">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMAIL_AGENDAMENTO_MENSAGENS">
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="0..1" />
+          <End Role="EMAIL_AGENDAMENTO" Type="Self.EMAIL_AGENDAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAGENS">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Principal>
+            <Dependent Role="EMAIL_AGENDAMENTO">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EMPRESA_ANEXO_EMPRESA">
           <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
           <End Role="EMPRESA_ANEXO" Type="Self.EMPRESA_ANEXO" Multiplicity="*" />
@@ -3320,6 +3773,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GRUPO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="GRUPO" Type="Self.GRUPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_CLIENTE_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="GRUPO_CLIENTE" Type="Self.GRUPO_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO_CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_CLIENTE_GRUPO">
+          <End Role="GRUPO" Type="Self.GRUPO" Multiplicity="1" />
+          <End Role="GRUPO_CLIENTE" Type="Self.GRUPO_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO_CLIENTE">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GRUPO_PLANO_CONTA_ASSINANTE">
           <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
           <End Role="GRUPO_PLANO_CONTA" Type="Self.GRUPO_PLANO_CONTA" Multiplicity="*" />
@@ -3329,6 +3818,18 @@
             </Principal>
             <Dependent Role="GRUPO_PLANO_CONTA">
               <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="GRUPO" Type="Self.GRUPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO">
+              <PropertyRef Name="USUA_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3400,6 +3901,234 @@
               <PropertyRef Name="USUA_CD_ID" />
             </Principal>
             <Dependent Role="LOG">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_ANEXO_MENSAGENS">
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="1" />
+          <End Role="MENSAGEM_ANEXO" Type="Self.MENSAGEM_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAGENS">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_ANEXO">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="MENSAGEM_AUTOMACAO" Type="Self.MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO">
+          <End Role="MENSAGEM_AUTOMACAO" Type="Self.MENSAGEM_AUTOMACAO" Multiplicity="1" />
+          <End Role="MENSAGEM_AUTOMACAO_DATAS" Type="Self.MENSAGEM_AUTOMACAO_DATAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="MEAU_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO_DATAS">
+              <PropertyRef Name="MEAU_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_GRUPO">
+          <End Role="GRUPO" Type="Self.GRUPO" Multiplicity="0..1" />
+          <End Role="MENSAGEM_AUTOMACAO" Type="Self.MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA">
+          <End Role="PERIODICIDADE_TAREFA" Type="Self.PERIODICIDADE_TAREFA" Multiplicity="0..1" />
+          <End Role="MENSAGEM_AUTOMACAO" Type="Self.MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERIODICIDADE_TAREFA">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL">
+          <End Role="TEMPLATE_EMAIL" Type="Self.TEMPLATE_EMAIL" Multiplicity="0..1" />
+          <End Role="MENSAGEM_AUTOMACAO" Type="Self.MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE_EMAIL">
+              <PropertyRef Name="TEEM_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="TEEM_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS">
+          <End Role="TEMPLATE_SMS" Type="Self.TEMPLATE_SMS" Multiplicity="0..1" />
+          <End Role="MENSAGEM_AUTOMACAO" Type="Self.MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE_SMS">
+              <PropertyRef Name="TSMS_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="TSMS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="MENSAGEM_AUTOMACAO" Type="Self.MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="1" />
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_DESTINOS_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="MENSAGENS_DESTINOS" Type="Self.MENSAGENS_DESTINOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS_DESTINOS">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_DESTINOS_GRUPO">
+          <End Role="GRUPO" Type="Self.GRUPO" Multiplicity="0..1" />
+          <End Role="MENSAGENS_DESTINOS" Type="Self.MENSAGENS_DESTINOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS_DESTINOS">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_DESTINOS_MENSAGENS">
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="1" />
+          <End Role="MENSAGENS_DESTINOS" Type="Self.MENSAGENS_DESTINOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAGENS">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS_DESTINOS">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_GRUPO">
+          <End Role="GRUPO" Type="Self.GRUPO" Multiplicity="0..1" />
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_PERIODICIDADE_TAREFA">
+          <End Role="PERIODICIDADE_TAREFA" Type="Self.PERIODICIDADE_TAREFA" Multiplicity="0..1" />
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERIODICIDADE_TAREFA">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_TEMPLATE">
+          <End Role="TEMPLATE" Type="Self.TEMPLATE" Multiplicity="0..1" />
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE">
+              <PropertyRef Name="TEMP_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="TEMP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_TEMPLATE_EMAIL">
+          <End Role="TEMPLATE_EMAIL" Type="Self.TEMPLATE_EMAIL" Multiplicity="0..1" />
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE_EMAIL">
+              <PropertyRef Name="TEEM_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="TEEM_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_TEMPLATE_SMS">
+          <End Role="TEMPLATE_SMS" Type="Self.TEMPLATE_SMS" Multiplicity="0..1" />
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE_SMS">
+              <PropertyRef Name="TSMS_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="TSMS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="MENSAGENS" Type="Self.MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
               <PropertyRef Name="USUA_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3617,6 +4346,18 @@
             </Principal>
             <Dependent Role="PLANO_CONTA">
               <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANO_PLANO_PERIODICIDADE">
+          <End Role="PLANO_PERIODICIDADE" Type="Self.PLANO_PERIODICIDADE" Multiplicity="0..1" />
+          <End Role="PLANO" Type="Self.PLANO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO_PERIODICIDADE">
+              <PropertyRef Name="PLPE_CD_ID" />
+            </Principal>
+            <Dependent Role="PLANO">
+              <PropertyRef Name="PLPE_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4788,6 +5529,12 @@
           <EntitySet Name="AGENDA" EntityType="Self.AGENDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AGENDA_ANEXO" EntityType="Self.AGENDA_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASSINANTE" EntityType="Self.ASSINANTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ASSINANTE_ANEXO" EntityType="Self.ASSINANTE_ANEXO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ASSINANTE_ANOTACAO" EntityType="Self.ASSINANTE_ANOTACAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ASSINANTE_CONSUMO" EntityType="Self.ASSINANTE_CONSUMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ASSINANTE_PAGAMENTO" EntityType="Self.ASSINANTE_PAGAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ASSINANTE_PLANO" EntityType="Self.ASSINANTE_PLANO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ASSINANTE_QUADRO_SOCIETARIO" EntityType="Self.ASSINANTE_QUADRO_SOCIETARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BANCO" EntityType="Self.BANCO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CARGO_USUARIO" EntityType="Self.CARGO_USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIA_AGENDA" EntityType="Self.CATEGORIA_AGENDA" Schema="dbo" store:Type="Tables" />
@@ -4830,6 +5577,7 @@
           <EntitySet Name="CRM_PEDIDO_VENDA_ITEM" EntityType="Self.CRM_PEDIDO_VENDA_ITEM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CUSTO_FIXO" EntityType="Self.CUSTO_FIXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DIARIO_PROCESSO" EntityType="Self.DIARIO_PROCESSO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMAIL_AGENDAMENTO" EntityType="Self.EMAIL_AGENDAMENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA_ANEXO" EntityType="Self.EMPRESA_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA_MAQUINA" EntityType="Self.EMPRESA_MAQUINA" Schema="dbo" store:Type="Tables" />
@@ -4846,10 +5594,18 @@
           <EntitySet Name="FORNECEDOR_QUADRO_SOCIETARIO" EntityType="Self.FORNECEDOR_QUADRO_SOCIETARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FUNIL" EntityType="Self.FUNIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FUNIL_ETAPA" EntityType="Self.FUNIL_ETAPA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRUPO" EntityType="Self.GRUPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRUPO_CLIENTE" EntityType="Self.GRUPO_CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GRUPO_PLANO_CONTA" EntityType="Self.GRUPO_PLANO_CONTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ITEM_PEDIDO_COMPRA" EntityType="Self.ITEM_PEDIDO_COMPRA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOG" EntityType="Self.LOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_EXCECAO" EntityType="Self.LOG_EXCECAO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MAQUINA" EntityType="Self.MAQUINA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENSAGEM_ANEXO" EntityType="Self.MENSAGEM_ANEXO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENSAGEM_AUTOMACAO" EntityType="Self.MENSAGEM_AUTOMACAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENSAGEM_AUTOMACAO_DATAS" EntityType="Self.MENSAGEM_AUTOMACAO_DATAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENSAGENS" EntityType="Self.MENSAGENS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENSAGENS_DESTINOS" EntityType="Self.MENSAGENS_DESTINOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOTIVO_CANCELAMENTO" EntityType="Self.MOTIVO_CANCELAMENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOTIVO_ENCERRAMENTO" EntityType="Self.MOTIVO_ENCERRAMENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOVIMENTO_ESTOQUE_PRODUTO" EntityType="Self.MOVIMENTO_ESTOQUE_PRODUTO" Schema="dbo" store:Type="Tables" />
@@ -4867,7 +5623,9 @@
           <EntitySet Name="PESSOA_EXTERNA" EntityType="Self.PESSOA_EXTERNA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PESSOA_EXTERNA_ANEXO" EntityType="Self.PESSOA_EXTERNA_ANEXO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PESSOA_EXTERNA_ANOTACAO" EntityType="Self.PESSOA_EXTERNA_ANOTACAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANO" EntityType="Self.PLANO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLANO_CONTA" EntityType="Self.PLANO_CONTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANO_PERIODICIDADE" EntityType="Self.PLANO_PERIODICIDADE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLATAFORMA_ENTREGA" EntityType="Self.PLATAFORMA_ENTREGA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUTO" EntityType="Self.PRODUTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUTO_ANEXO" EntityType="Self.PRODUTO_ANEXO" Schema="dbo" store:Type="Tables" />
@@ -4929,6 +5687,50 @@
           <AssociationSet Name="FK_AGENDA_USUARIO" Association="Self.FK_AGENDA_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_ANEXO_ASSINANTE" Association="Self.FK_ASSINANTE_ANEXO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_ANEXO" EntitySet="ASSINANTE_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_ANOTACAO_ASSINANTE" Association="Self.FK_ASSINANTE_ANOTACAO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_ANOTACAO" EntitySet="ASSINANTE_ANOTACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_ANOTACAO_USUARIO" Association="Self.FK_ASSINANTE_ANOTACAO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ASSINANTE_ANOTACAO" EntitySet="ASSINANTE_ANOTACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_CONSUMO_ASSINANTE" Association="Self.FK_ASSINANTE_CONSUMO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_CONSUMO" EntitySet="ASSINANTE_CONSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PAGAMENTO_ASSINANTE" Association="Self.FK_ASSINANTE_PAGAMENTO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_PAGAMENTO" EntitySet="ASSINANTE_PAGAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PAGAMENTO_PLANO" Association="Self.FK_ASSINANTE_PAGAMENTO_PLANO">
+            <End Role="PLANO" EntitySet="PLANO" />
+            <End Role="ASSINANTE_PAGAMENTO" EntitySet="ASSINANTE_PAGAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PLANO_ASSINANTE" Association="Self.FK_ASSINANTE_PLANO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_PLANO" EntitySet="ASSINANTE_PLANO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PLANO_PLANO" Association="Self.FK_ASSINANTE_PLANO_PLANO">
+            <End Role="PLANO" EntitySet="PLANO" />
+            <End Role="ASSINANTE_PLANO" EntitySet="ASSINANTE_PLANO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE" Association="Self.FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_QUADRO_SOCIETARIO" EntitySet="ASSINANTE_QUADRO_SOCIETARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_TIPO_PESSOA" Association="Self.FK_ASSINANTE_TIPO_PESSOA">
+            <End Role="TIPO_PESSOA" EntitySet="TIPO_PESSOA" />
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_UF" Association="Self.FK_ASSINANTE_UF">
+            <End Role="UF" EntitySet="UF" />
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
           </AssociationSet>
           <AssociationSet Name="FK_CATEGORIA_AGENDA_ASSINANTE" Association="Self.FK_CATEGORIA_AGENDA_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
@@ -5294,6 +6096,18 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="DIARIO_PROCESSO" EntitySet="DIARIO_PROCESSO" />
           </AssociationSet>
+          <AssociationSet Name="FK_EMAIL_AGENDAMENTO_ASSINANTE" Association="Self.FK_EMAIL_AGENDAMENTO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="EMAIL_AGENDAMENTO" EntitySet="EMAIL_AGENDAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMAIL_AGENDAMENTO_CLIENTE" Association="Self.FK_EMAIL_AGENDAMENTO_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="EMAIL_AGENDAMENTO" EntitySet="EMAIL_AGENDAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMAIL_AGENDAMENTO_MENSAGENS" Association="Self.FK_EMAIL_AGENDAMENTO_MENSAGENS">
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+            <End Role="EMAIL_AGENDAMENTO" EntitySet="EMAIL_AGENDAMENTO" />
+          </AssociationSet>
           <AssociationSet Name="FK_EMPRESA_ANEXO_EMPRESA" Association="Self.FK_EMPRESA_ANEXO_EMPRESA">
             <End Role="EMPRESA" EntitySet="EMPRESA" />
             <End Role="EMPRESA_ANEXO" EntitySet="EMPRESA_ANEXO" />
@@ -5370,9 +6184,25 @@
             <End Role="FUNIL" EntitySet="FUNIL" />
             <End Role="FUNIL_ETAPA" EntitySet="FUNIL_ETAPA" />
           </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_ASSINANTE" Association="Self.FK_GRUPO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="GRUPO" EntitySet="GRUPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_CLIENTE_CLIENTE" Association="Self.FK_GRUPO_CLIENTE_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="GRUPO_CLIENTE" EntitySet="GRUPO_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_CLIENTE_GRUPO" Association="Self.FK_GRUPO_CLIENTE_GRUPO">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="GRUPO_CLIENTE" EntitySet="GRUPO_CLIENTE" />
+          </AssociationSet>
           <AssociationSet Name="FK_GRUPO_PLANO_CONTA_ASSINANTE" Association="Self.FK_GRUPO_PLANO_CONTA_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="GRUPO_PLANO_CONTA" EntitySet="GRUPO_PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_USUARIO" Association="Self.FK_GRUPO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="GRUPO" EntitySet="GRUPO" />
           </AssociationSet>
           <AssociationSet Name="FK_ITEM_PEDIDO_COMPRA_FORNECEDOR" Association="Self.FK_ITEM_PEDIDO_COMPRA_FORNECEDOR">
             <End Role="FORNECEDOR" EntitySet="FORNECEDOR" />
@@ -5397,6 +6227,82 @@
           <AssociationSet Name="FK_LOG_USUARIO" Association="Self.FK_LOG_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="LOG" EntitySet="LOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_ANEXO_MENSAGENS" Association="Self.FK_MENSAGEM_ANEXO_MENSAGENS">
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+            <End Role="MENSAGEM_ANEXO" EntitySet="MENSAGEM_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_ASSINANTE" Association="Self.FK_MENSAGEM_AUTOMACAO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO" Association="Self.FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO">
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+            <End Role="MENSAGEM_AUTOMACAO_DATAS" EntitySet="MENSAGEM_AUTOMACAO_DATAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_GRUPO" Association="Self.FK_MENSAGEM_AUTOMACAO_GRUPO">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA" Association="Self.FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA">
+            <End Role="PERIODICIDADE_TAREFA" EntitySet="PERIODICIDADE_TAREFA" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL" Association="Self.FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL">
+            <End Role="TEMPLATE_EMAIL" EntitySet="TEMPLATE_EMAIL" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS" Association="Self.FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS">
+            <End Role="TEMPLATE_SMS" EntitySet="TEMPLATE_SMS" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_USUARIO" Association="Self.FK_MENSAGEM_AUTOMACAO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_ASSINANTE" Association="Self.FK_MENSAGENS_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_CLIENTE" Association="Self.FK_MENSAGENS_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_DESTINOS_CLIENTE" Association="Self.FK_MENSAGENS_DESTINOS_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="MENSAGENS_DESTINOS" EntitySet="MENSAGENS_DESTINOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_DESTINOS_GRUPO" Association="Self.FK_MENSAGENS_DESTINOS_GRUPO">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="MENSAGENS_DESTINOS" EntitySet="MENSAGENS_DESTINOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_DESTINOS_MENSAGENS" Association="Self.FK_MENSAGENS_DESTINOS_MENSAGENS">
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+            <End Role="MENSAGENS_DESTINOS" EntitySet="MENSAGENS_DESTINOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_GRUPO" Association="Self.FK_MENSAGENS_GRUPO">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_PERIODICIDADE_TAREFA" Association="Self.FK_MENSAGENS_PERIODICIDADE_TAREFA">
+            <End Role="PERIODICIDADE_TAREFA" EntitySet="PERIODICIDADE_TAREFA" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_TEMPLATE" Association="Self.FK_MENSAGENS_TEMPLATE">
+            <End Role="TEMPLATE" EntitySet="TEMPLATE" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_TEMPLATE_EMAIL" Association="Self.FK_MENSAGENS_TEMPLATE_EMAIL">
+            <End Role="TEMPLATE_EMAIL" EntitySet="TEMPLATE_EMAIL" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_TEMPLATE_SMS" Association="Self.FK_MENSAGENS_TEMPLATE_SMS">
+            <End Role="TEMPLATE_SMS" EntitySet="TEMPLATE_SMS" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_USUARIO" Association="Self.FK_MENSAGENS_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
           </AssociationSet>
           <AssociationSet Name="FK_MOTIVO_CANCELAMENTO_ASSINANTE" Association="Self.FK_MOTIVO_CANCELAMENTO_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
@@ -5469,6 +6375,10 @@
           <AssociationSet Name="FK_PLANO_CONTA_ASSINANTE" Association="Self.FK_PLANO_CONTA_ASSINANTE">
             <End Role="ASSINANTE" EntitySet="ASSINANTE" />
             <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANO_PLANO_PERIODICIDADE" Association="Self.FK_PLANO_PLANO_PERIODICIDADE">
+            <End Role="PLANO_PERIODICIDADE" EntitySet="PLANO_PERIODICIDADE" />
+            <End Role="PLANO" EntitySet="PLANO" />
           </AssociationSet>
           <AssociationSet Name="FK_PRODUTO_PRODUTO_ORIGEM" Association="Self.FK_PRODUTO_PRODUTO_ORIGEM">
             <End Role="PRODUTO_ORIGEM" EntitySet="PRODUTO_ORIGEM" />
@@ -5973,6 +6883,38 @@
           <NavigationProperty Name="TAREFA" Relationship="Self.FKTAREFA157283" FromRole="ASSINANTE" ToRole="TAREFA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKUSUARIO561404" FromRole="ASSINANTE" ToRole="USUARIO" />
           <NavigationProperty Name="PEDIDO_COMPRA" Relationship="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ASSINANTE" FromRole="ASSINANTE" ToRole="PEDIDO_COMPRA" />
+          <Property Name="TIPE_CD_ID" Type="Int32" />
+          <Property Name="PLAN_CD_ID" Type="Int32" />
+          <Property Name="ASSI_NM_RAZAO_SOCIAL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_DT_INICIO" Type="DateTime" Precision="0" />
+          <Property Name="ASSI_IN_TIPO" Type="Int32" />
+          <Property Name="ASSI_IN_STATUS" Type="Int32" />
+          <Property Name="ASSI_NM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_NR_CPF" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_NM_ENDERECO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_NR_NUMERO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_NM_COMPLEMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_NM_BAIRRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_NM_CIDADE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UF_CD_ID" Type="Int32" />
+          <Property Name="ASSI_NR_CEP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_AQ_FOTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_NR_CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASSI_IN_BLOQUEADO" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE_ANEXO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_ANEXO_ASSINANTE" FromRole="ASSINANTE" ToRole="ASSINANTE_ANEXO" />
+          <NavigationProperty Name="ASSINANTE_ANOTACAO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_ASSINANTE" FromRole="ASSINANTE" ToRole="ASSINANTE_ANOTACAO" />
+          <NavigationProperty Name="ASSINANTE_CONSUMO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_CONSUMO_ASSINANTE" FromRole="ASSINANTE" ToRole="ASSINANTE_CONSUMO" />
+          <NavigationProperty Name="ASSINANTE_PAGAMENTO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_ASSINANTE" FromRole="ASSINANTE" ToRole="ASSINANTE_PAGAMENTO" />
+          <NavigationProperty Name="ASSINANTE_PLANO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_ASSINANTE" FromRole="ASSINANTE" ToRole="ASSINANTE_PLANO" />
+          <NavigationProperty Name="ASSINANTE_QUADRO_SOCIETARIO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE" FromRole="ASSINANTE" ToRole="ASSINANTE_QUADRO_SOCIETARIO" />
+          <NavigationProperty Name="TIPO_PESSOA" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_TIPO_PESSOA" FromRole="ASSINANTE" ToRole="TIPO_PESSOA" />
+          <NavigationProperty Name="UF" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_UF" FromRole="ASSINANTE" ToRole="UF" />
+          <NavigationProperty Name="EMAIL_AGENDAMENTO" Relationship="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_ASSINANTE" FromRole="ASSINANTE" ToRole="EMAIL_AGENDAMENTO" />
+          <NavigationProperty Name="GRUPO" Relationship="Db_PrecificacaoModel.FK_GRUPO_ASSINANTE" FromRole="ASSINANTE" ToRole="GRUPO" />
+          <NavigationProperty Name="MENSAGEM_AUTOMACAO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_ASSINANTE" FromRole="ASSINANTE" ToRole="MENSAGEM_AUTOMACAO" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_ASSINANTE" FromRole="ASSINANTE" ToRole="MENSAGENS" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -6169,6 +7111,10 @@
           <NavigationProperty Name="CONTA_RECEBER" Relationship="Self.FK_CONTA_RECEBER_CLIENTE" FromRole="CLIENTE" ToRole="CONTA_RECEBER" />
           <NavigationProperty Name="CRM" Relationship="Self.FK_CRM_CLIENTE" FromRole="CLIENTE" ToRole="CRM" />
           <NavigationProperty Name="CRM_PEDIDO_VENDA" Relationship="Self.FK_CRM_PEDIDO_VENDA_CLIENTE" FromRole="CLIENTE" ToRole="CRM_PEDIDO_VENDA" />
+          <NavigationProperty Name="EMAIL_AGENDAMENTO" Relationship="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_CLIENTE" FromRole="CLIENTE" ToRole="EMAIL_AGENDAMENTO" />
+          <NavigationProperty Name="GRUPO_CLIENTE" Relationship="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_CLIENTE" FromRole="CLIENTE" ToRole="GRUPO_CLIENTE" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_CLIENTE" FromRole="CLIENTE" ToRole="MENSAGENS" />
+          <NavigationProperty Name="MENSAGENS_DESTINOS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_CLIENTE" FromRole="CLIENTE" ToRole="MENSAGENS_DESTINOS" />
         </EntityType>
         <EntityType Name="CLIENTE_ANEXO">
           <Key>
@@ -7386,6 +8332,8 @@
           <NavigationProperty Name="CONTA_RECEBER" Relationship="Self.FK_CONTA_RECEBER_PERIODICIDADE_TAREFA" FromRole="PERIODICIDADE_TAREFA" ToRole="CONTA_RECEBER" />
           <NavigationProperty Name="CUSTO_FIXO" Relationship="Self.FKCUSTO_FIXO921563" FromRole="PERIODICIDADE_TAREFA" ToRole="CUSTO_FIXO" />
           <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_PERIODICIDADE_TAREFA" FromRole="PERIODICIDADE_TAREFA" ToRole="TAREFA" />
+          <NavigationProperty Name="MENSAGEM_AUTOMACAO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA" FromRole="PERIODICIDADE_TAREFA" ToRole="MENSAGEM_AUTOMACAO" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_PERIODICIDADE_TAREFA" FromRole="PERIODICIDADE_TAREFA" ToRole="MENSAGENS" />
         </EntityType>
         <EntityType Name="PESSOA_EXTERNA">
           <Key>
@@ -7839,6 +8787,7 @@
           <Property Name="TEMP_DT_CRIACAO" Type="DateTime" Precision="0" />
           <Property Name="TEMP_IN_EDITAVEL" Type="Int32" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_TEMPLATE_ASSINANTE" FromRole="TEMPLATE" ToRole="ASSINANTE" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE" FromRole="TEMPLATE" ToRole="MENSAGENS" />
         </EntityType>
         <EntityType Name="TEMPLATE_EMAIL">
           <Key>
@@ -7858,6 +8807,8 @@
           <Property Name="TEEM_IN_HTML" Type="Int32" />
           <Property Name="TEEM_IN_EDITAVEL" Type="Int32" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_TEMPLATE_EMAIL_ASSINANTE" FromRole="TEMPLATE_EMAIL" ToRole="ASSINANTE" />
+          <NavigationProperty Name="MENSAGEM_AUTOMACAO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL" FromRole="TEMPLATE_EMAIL" ToRole="MENSAGEM_AUTOMACAO" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_EMAIL" FromRole="TEMPLATE_EMAIL" ToRole="MENSAGENS" />
         </EntityType>
         <EntityType Name="TEMPLATE_PROPOSTA">
           <Key>
@@ -7889,6 +8840,8 @@
           <Property Name="TSMS_IN_ATIVO" Type="Int32" Nullable="false" />
           <Property Name="TSMS_IN_EDITAVEL" Type="Int32" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_TEMPLATE_SMS_ASSINANTE" FromRole="TEMPLATE_SMS" ToRole="ASSINANTE" />
+          <NavigationProperty Name="MENSAGEM_AUTOMACAO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS" FromRole="TEMPLATE_SMS" ToRole="MENSAGEM_AUTOMACAO" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_SMS" FromRole="TEMPLATE_SMS" ToRole="MENSAGENS" />
         </EntityType>
         <EntityType Name="TIPO_ACAO">
           <Key>
@@ -7959,6 +8912,7 @@
           <Property Name="TIPE_NM_NOME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_TIPO_PESSOA" FromRole="TIPO_PESSOA" ToRole="CLIENTE" />
           <NavigationProperty Name="FORNECEDOR" Relationship="Self.FK_FORNECEDOR_TIPO_PESSOA" FromRole="TIPO_PESSOA" ToRole="FORNECEDOR" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_TIPO_PESSOA" FromRole="TIPO_PESSOA" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="TIPO_TAREFA">
           <Key>
@@ -8052,6 +9006,7 @@
           <NavigationProperty Name="EMPRESA" Relationship="Self.FK_EMPRESA_UF" FromRole="UF" ToRole="EMPRESA" />
           <NavigationProperty Name="FILIAL" Relationship="Self.FK_FILIAL_UF" FromRole="UF" ToRole="FILIAL" />
           <NavigationProperty Name="FORNECEDOR" Relationship="Self.FK_FORNECEDOR_UF" FromRole="UF" ToRole="FORNECEDOR" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_UF" FromRole="UF" ToRole="ASSINANTE" />
         </EntityType>
         <EntityType Name="UNIDADE">
           <Key>
@@ -8133,6 +9088,10 @@
           <NavigationProperty Name="USUARIO_ANOTACAO1" Relationship="Self.FKUSUARIO_AN728680" FromRole="USUARIO" ToRole="USUARIO_ANOTACAO" />
           <NavigationProperty Name="PEDIDO_COMPRA" Relationship="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_USUARIO" FromRole="USUARIO" ToRole="PEDIDO_COMPRA" />
           <NavigationProperty Name="PEDIDO_COMPRA_ACOMPANHAMENTO" Relationship="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ACOMPANHAMENTO_USUARIO" FromRole="USUARIO" ToRole="PEDIDO_COMPRA_ACOMPANHAMENTO" />
+          <NavigationProperty Name="ASSINANTE_ANOTACAO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_USUARIO" FromRole="USUARIO" ToRole="ASSINANTE_ANOTACAO" />
+          <NavigationProperty Name="GRUPO" Relationship="Db_PrecificacaoModel.FK_GRUPO_USUARIO" FromRole="USUARIO" ToRole="GRUPO" />
+          <NavigationProperty Name="MENSAGEM_AUTOMACAO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_USUARIO" FromRole="USUARIO" ToRole="MENSAGEM_AUTOMACAO" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_USUARIO" FromRole="USUARIO" ToRole="MENSAGENS" />
         </EntityType>
         <EntityType Name="USUARIO_ANEXO">
           <Key>
@@ -11997,6 +12956,175 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="PEDIDO_COMPRA_ACOMPANHAMENTO" EntitySet="PEDIDO_COMPRA_ACOMPANHAMENTO" />
           </AssociationSet>
+          <EntitySet Name="ASSINANTE_ANEXO" EntityType="Db_PrecificacaoModel.ASSINANTE_ANEXO" />
+          <EntitySet Name="ASSINANTE_ANOTACAO" EntityType="Db_PrecificacaoModel.ASSINANTE_ANOTACAO" />
+          <EntitySet Name="ASSINANTE_CONSUMO" EntityType="Db_PrecificacaoModel.ASSINANTE_CONSUMO" />
+          <EntitySet Name="ASSINANTE_PAGAMENTO" EntityType="Db_PrecificacaoModel.ASSINANTE_PAGAMENTO" />
+          <EntitySet Name="ASSINANTE_PLANO" EntityType="Db_PrecificacaoModel.ASSINANTE_PLANO" />
+          <EntitySet Name="ASSINANTE_QUADRO_SOCIETARIO" EntityType="Db_PrecificacaoModel.ASSINANTE_QUADRO_SOCIETARIO" />
+          <EntitySet Name="EMAIL_AGENDAMENTO" EntityType="Db_PrecificacaoModel.EMAIL_AGENDAMENTO" />
+          <EntitySet Name="GRUPO" EntityType="Db_PrecificacaoModel.GRUPO" />
+          <EntitySet Name="GRUPO_CLIENTE" EntityType="Db_PrecificacaoModel.GRUPO_CLIENTE" />
+          <EntitySet Name="LOG_EXCECAO" EntityType="Db_PrecificacaoModel.LOG_EXCECAO" />
+          <EntitySet Name="MENSAGEM_ANEXO" EntityType="Db_PrecificacaoModel.MENSAGEM_ANEXO" />
+          <EntitySet Name="MENSAGEM_AUTOMACAO" EntityType="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" />
+          <EntitySet Name="MENSAGEM_AUTOMACAO_DATAS" EntityType="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO_DATAS" />
+          <EntitySet Name="MENSAGENS" EntityType="Db_PrecificacaoModel.MENSAGENS" />
+          <EntitySet Name="MENSAGENS_DESTINOS" EntityType="Db_PrecificacaoModel.MENSAGENS_DESTINOS" />
+          <EntitySet Name="PLANO" EntityType="Db_PrecificacaoModel.PLANO" />
+          <EntitySet Name="PLANO_PERIODICIDADE" EntityType="Db_PrecificacaoModel.PLANO_PERIODICIDADE" />
+          <AssociationSet Name="FK_ASSINANTE_ANEXO_ASSINANTE" Association="Db_PrecificacaoModel.FK_ASSINANTE_ANEXO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_ANEXO" EntitySet="ASSINANTE_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_ANOTACAO_ASSINANTE" Association="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_ANOTACAO" EntitySet="ASSINANTE_ANOTACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_CONSUMO_ASSINANTE" Association="Db_PrecificacaoModel.FK_ASSINANTE_CONSUMO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_CONSUMO" EntitySet="ASSINANTE_CONSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PAGAMENTO_ASSINANTE" Association="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_PAGAMENTO" EntitySet="ASSINANTE_PAGAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PLANO_ASSINANTE" Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_PLANO" EntitySet="ASSINANTE_PLANO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE" Association="Db_PrecificacaoModel.FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="ASSINANTE_QUADRO_SOCIETARIO" EntitySet="ASSINANTE_QUADRO_SOCIETARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_TIPO_PESSOA" Association="Db_PrecificacaoModel.FK_ASSINANTE_TIPO_PESSOA">
+            <End Role="TIPO_PESSOA" EntitySet="TIPO_PESSOA" />
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_UF" Association="Db_PrecificacaoModel.FK_ASSINANTE_UF">
+            <End Role="UF" EntitySet="UF" />
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMAIL_AGENDAMENTO_ASSINANTE" Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="EMAIL_AGENDAMENTO" EntitySet="EMAIL_AGENDAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_ASSINANTE" Association="Db_PrecificacaoModel.FK_GRUPO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="GRUPO" EntitySet="GRUPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_ASSINANTE" Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_ASSINANTE" Association="Db_PrecificacaoModel.FK_MENSAGENS_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_ANOTACAO_USUARIO" Association="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ASSINANTE_ANOTACAO" EntitySet="ASSINANTE_ANOTACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PAGAMENTO_PLANO" Association="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_PLANO">
+            <End Role="PLANO" EntitySet="PLANO" />
+            <End Role="ASSINANTE_PAGAMENTO" EntitySet="ASSINANTE_PAGAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASSINANTE_PLANO_PLANO" Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_PLANO">
+            <End Role="PLANO" EntitySet="PLANO" />
+            <End Role="ASSINANTE_PLANO" EntitySet="ASSINANTE_PLANO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMAIL_AGENDAMENTO_CLIENTE" Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="EMAIL_AGENDAMENTO" EntitySet="EMAIL_AGENDAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_CLIENTE_CLIENTE" Association="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="GRUPO_CLIENTE" EntitySet="GRUPO_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_CLIENTE" Association="Db_PrecificacaoModel.FK_MENSAGENS_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_DESTINOS_CLIENTE" Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="MENSAGENS_DESTINOS" EntitySet="MENSAGENS_DESTINOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMAIL_AGENDAMENTO_MENSAGENS" Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_MENSAGENS">
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+            <End Role="EMAIL_AGENDAMENTO" EntitySet="EMAIL_AGENDAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_CLIENTE_GRUPO" Association="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_GRUPO">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="GRUPO_CLIENTE" EntitySet="GRUPO_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_USUARIO" Association="Db_PrecificacaoModel.FK_GRUPO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="GRUPO" EntitySet="GRUPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_GRUPO" Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_GRUPO">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_DESTINOS_GRUPO" Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_GRUPO">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="MENSAGENS_DESTINOS" EntitySet="MENSAGENS_DESTINOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_GRUPO" Association="Db_PrecificacaoModel.FK_MENSAGENS_GRUPO">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_ANEXO_MENSAGENS" Association="Db_PrecificacaoModel.FK_MENSAGEM_ANEXO_MENSAGENS">
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+            <End Role="MENSAGEM_ANEXO" EntitySet="MENSAGEM_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO" Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO">
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+            <End Role="MENSAGEM_AUTOMACAO_DATAS" EntitySet="MENSAGEM_AUTOMACAO_DATAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA" Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA">
+            <End Role="PERIODICIDADE_TAREFA" EntitySet="PERIODICIDADE_TAREFA" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL" Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL">
+            <End Role="TEMPLATE_EMAIL" EntitySet="TEMPLATE_EMAIL" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS" Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS">
+            <End Role="TEMPLATE_SMS" EntitySet="TEMPLATE_SMS" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGEM_AUTOMACAO_USUARIO" Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="MENSAGEM_AUTOMACAO" EntitySet="MENSAGEM_AUTOMACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_DESTINOS_MENSAGENS" Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_MENSAGENS">
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+            <End Role="MENSAGENS_DESTINOS" EntitySet="MENSAGENS_DESTINOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_PERIODICIDADE_TAREFA" Association="Db_PrecificacaoModel.FK_MENSAGENS_PERIODICIDADE_TAREFA">
+            <End Role="PERIODICIDADE_TAREFA" EntitySet="PERIODICIDADE_TAREFA" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_TEMPLATE" Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE">
+            <End Role="TEMPLATE" EntitySet="TEMPLATE" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_TEMPLATE_EMAIL" Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_EMAIL">
+            <End Role="TEMPLATE_EMAIL" EntitySet="TEMPLATE_EMAIL" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_TEMPLATE_SMS" Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_SMS">
+            <End Role="TEMPLATE_SMS" EntitySet="TEMPLATE_SMS" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAGENS_USUARIO" Association="Db_PrecificacaoModel.FK_MENSAGENS_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="MENSAGENS" EntitySet="MENSAGENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANO_PLANO_PERIODICIDADE" Association="Db_PrecificacaoModel.FK_PLANO_PLANO_PERIODICIDADE">
+            <End Role="PLANO_PERIODICIDADE" EntitySet="PLANO_PERIODICIDADE" />
+            <End Role="PLANO" EntitySet="PLANO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ITEM_PEDIDO_COMPRA">
           <Key>
@@ -12227,6 +13355,775 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ASSINANTE_ANEXO">
+          <Key>
+            <PropertyRef Name="ASAN_CD_ID" />
+          </Key>
+          <Property Name="ASAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="ASAN_NM_TITULO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASAN_DT_ANEXO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ASAN_IN_TIPO" Type="Int32" Nullable="false" />
+          <Property Name="ASAN_AQ_ARQUIVO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ASAN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_ANEXO_ASSINANTE" FromRole="ASSINANTE_ANEXO" ToRole="ASSINANTE" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_ANOTACAO">
+          <Key>
+            <PropertyRef Name="ASAT_CD_ID" />
+          </Key>
+          <Property Name="ASAT_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="ASAT_DT_ANOTACAO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ASAT_TX_ANOTACAO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ASAT_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_ASSINANTE" FromRole="ASSINANTE_ANOTACAO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_USUARIO" FromRole="ASSINANTE_ANOTACAO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_CONSUMO">
+          <Key>
+            <PropertyRef Name="ASCO_CD_ID" />
+          </Key>
+          <Property Name="ASCO_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="ASCO_DT_REFERENCIA" Type="DateTime" Precision="0" />
+          <Property Name="ASCO_NR_USUARIO" Type="Int32" />
+          <Property Name="ASCO_NR_CONTATO" Type="Int32" />
+          <Property Name="ASCO_NR_EMAIL" Type="Int32" />
+          <Property Name="ASCO_NR_SMS" Type="Int32" />
+          <Property Name="ASCO_NR_WHATSAPP" Type="Int32" />
+          <Property Name="ASCO_NR_PROCESSO" Type="Int32" />
+          <Property Name="ASCO_NR_ACOES" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_CONSUMO_ASSINANTE" FromRole="ASSINANTE_CONSUMO" ToRole="ASSINANTE" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_PAGAMENTO">
+          <Key>
+            <PropertyRef Name="ASPA_CD_ID" />
+          </Key>
+          <Property Name="ASPA_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PLAN_CD_ID" Type="Int32" />
+          <Property Name="ASPA_DT_PAGAMENTO" Type="DateTime" Precision="0" />
+          <Property Name="ASPA_VL_VALOR" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ASPA_DT_PROXIMO" Type="DateTime" Precision="0" />
+          <Property Name="ASPA_IN_PAGO" Type="Int32" />
+          <Property Name="ASPA_DT_VENCIMENTO" Type="DateTime" Precision="0" />
+          <Property Name="ASPA_NR_ATRASO" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ASPA_VL_VALOR_PAGO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ASPA_IN_ATIVO" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_ASSINANTE" FromRole="ASSINANTE_PAGAMENTO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="PLANO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_PLANO" FromRole="ASSINANTE_PAGAMENTO" ToRole="PLANO" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_PLANO">
+          <Key>
+            <PropertyRef Name="ASPL_CD_ID" />
+          </Key>
+          <Property Name="ASPL_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PLAN_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="ASPL_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="ASPL_DT_INICIO" Type="DateTime" Precision="0" />
+          <Property Name="ASPL_DT_VALIDADE" Type="DateTime" Precision="0" />
+          <Property Name="ASPL_IN_PRECO" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_ASSINANTE" FromRole="ASSINANTE_PLANO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="PLANO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_PLANO" FromRole="ASSINANTE_PLANO" ToRole="PLANO" />
+        </EntityType>
+        <EntityType Name="ASSINANTE_QUADRO_SOCIETARIO">
+          <Key>
+            <PropertyRef Name="ASQS_CD_ID" />
+          </Key>
+          <Property Name="ASQS_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="ASQS_NM_QUALIFICACAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ASQS_NM_PAIS_ORIGEM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASQS_NM_REPRESENTANTE_LEGAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASQS_NM_QUALIFICACAO_REP_LEGAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ASQS_NM_NOME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ASQS_IN_ATIVO" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE" FromRole="ASSINANTE_QUADRO_SOCIETARIO" ToRole="ASSINANTE" />
+        </EntityType>
+        <EntityType Name="EMAIL_AGENDAMENTO">
+          <Key>
+            <PropertyRef Name="EMAG_CD_ID" />
+          </Key>
+          <Property Name="EMAG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CLIE_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MENS_CD_ID" Type="Int32" />
+          <Property Name="EMAG_DT_AGENDAMENTO" Type="DateTime" Precision="3" />
+          <Property Name="EMAG_IN_ENVIADO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_ASSINANTE" FromRole="EMAIL_AGENDAMENTO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="CLIENTE" Relationship="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_CLIENTE" FromRole="EMAIL_AGENDAMENTO" ToRole="CLIENTE" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_MENSAGENS" FromRole="EMAIL_AGENDAMENTO" ToRole="MENSAGENS" />
+        </EntityType>
+        <EntityType Name="GRUPO">
+          <Key>
+            <PropertyRef Name="GRUP_CD_ID" />
+          </Key>
+          <Property Name="GRUP_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="GRUP_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GRUP_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GRUP_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_GRUPO_ASSINANTE" FromRole="GRUPO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="GRUPO_CLIENTE" Relationship="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_GRUPO" FromRole="GRUPO" ToRole="GRUPO_CLIENTE" />
+          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_GRUPO_USUARIO" FromRole="GRUPO" ToRole="USUARIO" />
+          <NavigationProperty Name="MENSAGEM_AUTOMACAO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_GRUPO" FromRole="GRUPO" ToRole="MENSAGEM_AUTOMACAO" />
+          <NavigationProperty Name="MENSAGENS_DESTINOS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_GRUPO" FromRole="GRUPO" ToRole="MENSAGENS_DESTINOS" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_GRUPO" FromRole="GRUPO" ToRole="MENSAGENS" />
+        </EntityType>
+        <EntityType Name="GRUPO_CLIENTE">
+          <Key>
+            <PropertyRef Name="GRCL_CD_ID" />
+          </Key>
+          <Property Name="GRCL_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GRUP_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CLIE_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="GRCL_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_CLIENTE" FromRole="GRUPO_CLIENTE" ToRole="CLIENTE" />
+          <NavigationProperty Name="GRUPO" Relationship="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_GRUPO" FromRole="GRUPO_CLIENTE" ToRole="GRUPO" />
+        </EntityType>
+        <EntityType Name="LOG_EXCECAO">
+          <Key>
+            <PropertyRef Name="LOG_CD_ID" />
+          </Key>
+          <Property Name="LOG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOG_DT_OCORRENCIA" Type="DateTime" Precision="3" />
+          <Property Name="LOG_MODULO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LOG_USUARIO_LOGADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LOG_ACAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LOG_EXCECAO1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MENSAGEM_ANEXO">
+          <Key>
+            <PropertyRef Name="MEAN_CD_ID" />
+          </Key>
+          <Property Name="MEAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MENS_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MEAN_NM_TITULO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MEAN_DT_ANEXO" Type="DateTime" Precision="0" />
+          <Property Name="MEAN_IN_TIPO" Type="Int32" />
+          <Property Name="MEAN_IN_ATIVO" Type="Int32" />
+          <Property Name="MEAN_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_ANEXO_MENSAGENS" FromRole="MENSAGEM_ANEXO" ToRole="MENSAGENS" />
+        </EntityType>
+        <EntityType Name="MENSAGEM_AUTOMACAO">
+          <Key>
+            <PropertyRef Name="MEAU_CD_ID" />
+          </Key>
+          <Property Name="MEAU_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MEAU_DT_CADASTRO" Type="DateTime" Precision="0" />
+          <Property Name="USUA_CD_ID" Type="Int32" />
+          <Property Name="MEAU_IN_ATIVO" Type="Int32" />
+          <Property Name="GRUP_CD_ID" Type="Int32" />
+          <Property Name="MEAU_IN_TIPO" Type="Int32" />
+          <Property Name="TEEM_CD_ID" Type="Int32" />
+          <Property Name="TSMS_CD_ID" Type="Int32" />
+          <Property Name="MEAU_IN_TIPO_ENVIO" Type="Int32" />
+          <Property Name="MEAU_DT_INICIO" Type="DateTime" Precision="0" />
+          <Property Name="MEAU_DT_FINAL" Type="DateTime" Precision="0" />
+          <Property Name="MEAU_HR_DISPARO" Type="Time" Precision="7" />
+          <Property Name="MEAU_IN_DIA_SEMANA" Type="Int32" />
+          <Property Name="MEAU_DS_DESCRICAO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MEAU_DT_DATA_FIXA" Type="DateTime" Precision="0" />
+          <Property Name="PETA_CD_ID" Type="Int32" />
+          <Property Name="MEAU_IN_ANIVERSARIO" Type="Int32" />
+          <Property Name="MEAU_ME_DATA_FIXA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_ASSINANTE" FromRole="MENSAGEM_AUTOMACAO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="GRUPO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_GRUPO" FromRole="MENSAGEM_AUTOMACAO" ToRole="GRUPO" />
+          <NavigationProperty Name="MENSAGEM_AUTOMACAO_DATAS" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO" FromRole="MENSAGEM_AUTOMACAO" ToRole="MENSAGEM_AUTOMACAO_DATAS" />
+          <NavigationProperty Name="PERIODICIDADE_TAREFA" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA" FromRole="MENSAGEM_AUTOMACAO" ToRole="PERIODICIDADE_TAREFA" />
+          <NavigationProperty Name="TEMPLATE_EMAIL" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL" FromRole="MENSAGEM_AUTOMACAO" ToRole="TEMPLATE_EMAIL" />
+          <NavigationProperty Name="TEMPLATE_SMS" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS" FromRole="MENSAGEM_AUTOMACAO" ToRole="TEMPLATE_SMS" />
+          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_USUARIO" FromRole="MENSAGEM_AUTOMACAO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="MENSAGEM_AUTOMACAO_DATAS">
+          <Key>
+            <PropertyRef Name="MEAD_CD_ID" />
+          </Key>
+          <Property Name="MEAD_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEAU_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MEAD_DT_DATA" Type="DateTime" Precision="0" />
+          <Property Name="MEAD_IN_ATIVO" Type="Int32" />
+          <NavigationProperty Name="MENSAGEM_AUTOMACAO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO" FromRole="MENSAGEM_AUTOMACAO_DATAS" ToRole="MENSAGEM_AUTOMACAO" />
+        </EntityType>
+        <EntityType Name="MENSAGENS">
+          <Key>
+            <PropertyRef Name="MENS_CD_ID" />
+          </Key>
+          <Property Name="MENS_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSI_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="TEMP_CD_ID" Type="Int32" />
+          <Property Name="TSMS_CD_ID" Type="Int32" />
+          <Property Name="TEEM_CD_ID" Type="Int32" />
+          <Property Name="CLIE_CD_ID" Type="Int32" />
+          <Property Name="GRUP_CD_ID" Type="Int32" />
+          <Property Name="MENS_NM_NOME" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_DT_CRIACAO" Type="DateTime" Precision="3" />
+          <Property Name="MENS_NM_CAMPANHA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_TX_TEXTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_IN_TIPO" Type="Int32" />
+          <Property Name="MENS_DT_AGENDAMENTO" Type="DateTime" Precision="3" />
+          <Property Name="MENS_DT_ENVIO" Type="DateTime" Precision="3" />
+          <Property Name="MENS_TX_RETORNO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_NM_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_NM_RODAPE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_NM_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_TX_SMS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_IN_CRM" Type="Int32" />
+          <Property Name="MENS_TX_TEXTO_LIMPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MENS_IN_STATUS" Type="Int32" />
+          <Property Name="MENS_IN_AGENDAMENTO" Type="Int32" />
+          <Property Name="MENS_IN_REPETICAO" Type="Int32" />
+          <Property Name="MENS_NR_REPETICOES" Type="Int32" />
+          <Property Name="PETA_CD_ID" Type="Int32" />
+          <Property Name="MENS_IN_ATIVO" Type="Int32" />
+          <Property Name="MENS_IN_PERIODICIDADE" Type="Int32" />
+          <Property Name="MENS_LK_LINK_PESQUISA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_ASSINANTE" FromRole="MENSAGENS" ToRole="ASSINANTE" />
+          <NavigationProperty Name="CLIENTE" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_CLIENTE" FromRole="MENSAGENS" ToRole="CLIENTE" />
+          <NavigationProperty Name="EMAIL_AGENDAMENTO" Relationship="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_MENSAGENS" FromRole="MENSAGENS" ToRole="EMAIL_AGENDAMENTO" />
+          <NavigationProperty Name="GRUPO" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_GRUPO" FromRole="MENSAGENS" ToRole="GRUPO" />
+          <NavigationProperty Name="MENSAGEM_ANEXO" Relationship="Db_PrecificacaoModel.FK_MENSAGEM_ANEXO_MENSAGENS" FromRole="MENSAGENS" ToRole="MENSAGEM_ANEXO" />
+          <NavigationProperty Name="MENSAGENS_DESTINOS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_MENSAGENS" FromRole="MENSAGENS" ToRole="MENSAGENS_DESTINOS" />
+          <NavigationProperty Name="PERIODICIDADE_TAREFA" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_PERIODICIDADE_TAREFA" FromRole="MENSAGENS" ToRole="PERIODICIDADE_TAREFA" />
+          <NavigationProperty Name="TEMPLATE" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE" FromRole="MENSAGENS" ToRole="TEMPLATE" />
+          <NavigationProperty Name="TEMPLATE_EMAIL" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_EMAIL" FromRole="MENSAGENS" ToRole="TEMPLATE_EMAIL" />
+          <NavigationProperty Name="TEMPLATE_SMS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_SMS" FromRole="MENSAGENS" ToRole="TEMPLATE_SMS" />
+          <NavigationProperty Name="USUARIO" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_USUARIO" FromRole="MENSAGENS" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="MENSAGENS_DESTINOS">
+          <Key>
+            <PropertyRef Name="MEDE_CD_ID" />
+          </Key>
+          <Property Name="MEDE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MENS_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CLIE_CD_ID" Type="Int32" />
+          <Property Name="GRUP_CD_ID" Type="Int32" />
+          <Property Name="CAMP_CD_ID" Type="Int32" />
+          <Property Name="MEDE_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="MEDE_IN_STATUS" Type="Int32" />
+          <Property Name="MEDE_IN_POSICAO" Type="Int32" />
+          <Property Name="MEDE_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MEDE_DS_ERRO_ENVIO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_CLIENTE" FromRole="MENSAGENS_DESTINOS" ToRole="CLIENTE" />
+          <NavigationProperty Name="GRUPO" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_GRUPO" FromRole="MENSAGENS_DESTINOS" ToRole="GRUPO" />
+          <NavigationProperty Name="MENSAGENS" Relationship="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_MENSAGENS" FromRole="MENSAGENS_DESTINOS" ToRole="MENSAGENS" />
+        </EntityType>
+        <EntityType Name="PLANO">
+          <Key>
+            <PropertyRef Name="PLAN_CD_ID" />
+          </Key>
+          <Property Name="PLAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLPE_CD_ID" Type="Int32" />
+          <Property Name="PLAN_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PLAN_DT_CRIACAO" Type="DateTime" Precision="0" />
+          <Property Name="PLAN_DS_DESCRICAO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PLAN_VL_PRECO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PLAN_VL_PROMOCAO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PLAN_IN_DURACAO" Type="Int32" />
+          <Property Name="PLAN_DT_VALIDADE" Type="DateTime" Precision="0" />
+          <Property Name="PLAN_TX_SITE" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="PLAN_IN_MENSAGENS" Type="Int32" />
+          <Property Name="PLAN_IN_CRM" Type="Int32" />
+          <Property Name="PLAN_IN_FINANCEIRO" Type="Int32" />
+          <Property Name="PLAN_IN_FATURA" Type="Int32" />
+          <Property Name="PLAN_IN_ESTOQUE" Type="Int32" />
+          <Property Name="PLAN_IN_PATRIMONIO" Type="Int32" />
+          <Property Name="PLAN_IN_VENDAS" Type="Int32" />
+          <Property Name="PLAN_IN_COMPRA" Type="Int32" />
+          <Property Name="PLAN_IN_SERVICOS" Type="Int32" />
+          <Property Name="PLAN_IN_ATENDIMENTOS" Type="Int32" />
+          <Property Name="PLAN_IN_OS" Type="Int32" />
+          <Property Name="PLAN_NR_USUARIOS" Type="Int32" />
+          <Property Name="PLAN_NR_CONTATOS" Type="Int32" />
+          <Property Name="PLAN_NR_EMAIL" Type="Int32" />
+          <Property Name="PLAN_NR_SMS" Type="Int32" />
+          <Property Name="PLAN_NR_WHATSAPP" Type="Int32" />
+          <Property Name="PLAN_NR_PROCESSOS" Type="Int32" />
+          <Property Name="PLAN_NR_ACOES" Type="Int32" />
+          <Property Name="PLAN_NR_PATRIMONIO" Type="Int32" />
+          <Property Name="PLAN_NR_PRODUTO" Type="Int32" />
+          <Property Name="PLAN_NR_FORNECEDOR" Type="Int32" />
+          <Property Name="PLAN_NR_COMPRA" Type="Int32" />
+          <Property Name="PLAN_NR_VENDA" Type="Int32" />
+          <Property Name="PLAN_NR_SERVICE" Type="Int32" />
+          <Property Name="PLAN_IN_ATIVO" Type="Int32" />
+          <Property Name="PLAN_NM_EXIBE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASSINANTE_PAGAMENTO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_PLANO" FromRole="PLANO" ToRole="ASSINANTE_PAGAMENTO" />
+          <NavigationProperty Name="ASSINANTE_PLANO" Relationship="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_PLANO" FromRole="PLANO" ToRole="ASSINANTE_PLANO" />
+          <NavigationProperty Name="PLANO_PERIODICIDADE" Relationship="Db_PrecificacaoModel.FK_PLANO_PLANO_PERIODICIDADE" FromRole="PLANO" ToRole="PLANO_PERIODICIDADE" />
+        </EntityType>
+        <EntityType Name="PLANO_PERIODICIDADE">
+          <Key>
+            <PropertyRef Name="PLPE_CD_ID" />
+          </Key>
+          <Property Name="PLPE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLPE_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PLPE_NR_DIAS" Type="Int32" />
+          <Property Name="PLPE_IN_ATIVO" Type="Int32" />
+          <NavigationProperty Name="PLANO" Relationship="Db_PrecificacaoModel.FK_PLANO_PLANO_PERIODICIDADE" FromRole="PLANO_PERIODICIDADE" ToRole="PLANO" />
+        </EntityType>
+        <Association Name="FK_ASSINANTE_ANEXO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_ANEXO" Role="ASSINANTE_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_ANEXO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_ANOTACAO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_ANOTACAO" Role="ASSINANTE_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_ANOTACAO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_CONSUMO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_CONSUMO" Role="ASSINANTE_CONSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_CONSUMO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PAGAMENTO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_PAGAMENTO" Role="ASSINANTE_PAGAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_PAGAMENTO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PLANO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_PLANO" Role="ASSINANTE_PLANO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_PLANO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_QUADRO_SOCIETARIO" Role="ASSINANTE_QUADRO_SOCIETARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_QUADRO_SOCIETARIO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_TIPO_PESSOA">
+          <End Type="Db_PrecificacaoModel.TIPO_PESSOA" Role="TIPO_PESSOA" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PESSOA">
+              <PropertyRef Name="TIPE_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE">
+              <PropertyRef Name="TIPE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_UF">
+          <End Type="Db_PrecificacaoModel.UF" Role="UF" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UF">
+              <PropertyRef Name="UF_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE">
+              <PropertyRef Name="UF_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMAIL_AGENDAMENTO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.EMAIL_AGENDAMENTO" Role="EMAIL_AGENDAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="EMAIL_AGENDAMENTO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.GRUPO" Role="GRUPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Role="MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_ANOTACAO_USUARIO">
+          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_ANOTACAO" Role="ASSINANTE_ANOTACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_ANOTACAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PAGAMENTO_PLANO">
+          <End Type="Db_PrecificacaoModel.PLANO" Role="PLANO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_PAGAMENTO" Role="ASSINANTE_PAGAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_PAGAMENTO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASSINANTE_PLANO_PLANO">
+          <End Type="Db_PrecificacaoModel.PLANO" Role="PLANO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.ASSINANTE_PLANO" Role="ASSINANTE_PLANO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Principal>
+            <Dependent Role="ASSINANTE_PLANO">
+              <PropertyRef Name="PLAN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMAIL_AGENDAMENTO_CLIENTE">
+          <End Type="Db_PrecificacaoModel.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.EMAIL_AGENDAMENTO" Role="EMAIL_AGENDAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Principal>
+            <Dependent Role="EMAIL_AGENDAMENTO">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_CLIENTE_CLIENTE">
+          <End Type="Db_PrecificacaoModel.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.GRUPO_CLIENTE" Role="GRUPO_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO_CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_CLIENTE">
+          <End Type="Db_PrecificacaoModel.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_DESTINOS_CLIENTE">
+          <End Type="Db_PrecificacaoModel.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS_DESTINOS" Role="MENSAGENS_DESTINOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS_DESTINOS">
+              <PropertyRef Name="CLIE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMAIL_AGENDAMENTO_MENSAGENS">
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.EMAIL_AGENDAMENTO" Role="EMAIL_AGENDAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAGENS">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Principal>
+            <Dependent Role="EMAIL_AGENDAMENTO">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_CLIENTE_GRUPO">
+          <End Type="Db_PrecificacaoModel.GRUPO" Role="GRUPO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.GRUPO_CLIENTE" Role="GRUPO_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO_CLIENTE">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_USUARIO">
+          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.GRUPO" Role="GRUPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="GRUPO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_GRUPO">
+          <End Type="Db_PrecificacaoModel.GRUPO" Role="GRUPO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Role="MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_DESTINOS_GRUPO">
+          <End Type="Db_PrecificacaoModel.GRUPO" Role="GRUPO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS_DESTINOS" Role="MENSAGENS_DESTINOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS_DESTINOS">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_GRUPO">
+          <End Type="Db_PrecificacaoModel.GRUPO" Role="GRUPO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="GRUP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_ANEXO_MENSAGENS">
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.MENSAGEM_ANEXO" Role="MENSAGEM_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAGENS">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_ANEXO">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO">
+          <End Type="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Role="MENSAGEM_AUTOMACAO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO_DATAS" Role="MENSAGEM_AUTOMACAO_DATAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="MEAU_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO_DATAS">
+              <PropertyRef Name="MEAU_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA">
+          <End Type="Db_PrecificacaoModel.PERIODICIDADE_TAREFA" Role="PERIODICIDADE_TAREFA" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Role="MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERIODICIDADE_TAREFA">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL">
+          <End Type="Db_PrecificacaoModel.TEMPLATE_EMAIL" Role="TEMPLATE_EMAIL" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Role="MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE_EMAIL">
+              <PropertyRef Name="TEEM_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="TEEM_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS">
+          <End Type="Db_PrecificacaoModel.TEMPLATE_SMS" Role="TEMPLATE_SMS" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Role="MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE_SMS">
+              <PropertyRef Name="TSMS_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="TSMS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGEM_AUTOMACAO_USUARIO">
+          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Role="MENSAGEM_AUTOMACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGEM_AUTOMACAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_DESTINOS_MENSAGENS">
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS_DESTINOS" Role="MENSAGENS_DESTINOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAGENS">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS_DESTINOS">
+              <PropertyRef Name="MENS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_PERIODICIDADE_TAREFA">
+          <End Type="Db_PrecificacaoModel.PERIODICIDADE_TAREFA" Role="PERIODICIDADE_TAREFA" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERIODICIDADE_TAREFA">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_TEMPLATE">
+          <End Type="Db_PrecificacaoModel.TEMPLATE" Role="TEMPLATE" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE">
+              <PropertyRef Name="TEMP_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="TEMP_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_TEMPLATE_EMAIL">
+          <End Type="Db_PrecificacaoModel.TEMPLATE_EMAIL" Role="TEMPLATE_EMAIL" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE_EMAIL">
+              <PropertyRef Name="TEEM_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="TEEM_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_TEMPLATE_SMS">
+          <End Type="Db_PrecificacaoModel.TEMPLATE_SMS" Role="TEMPLATE_SMS" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPLATE_SMS">
+              <PropertyRef Name="TSMS_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="TSMS_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAGENS_USUARIO">
+          <End Type="Db_PrecificacaoModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.MENSAGENS" Role="MENSAGENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="MENSAGENS">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANO_PLANO_PERIODICIDADE">
+          <End Type="Db_PrecificacaoModel.PLANO_PERIODICIDADE" Role="PLANO_PERIODICIDADE" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.PLANO" Role="PLANO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO_PERIODICIDADE">
+              <PropertyRef Name="PLPE_CD_ID" />
+            </Principal>
+            <Dependent Role="PLANO">
+              <PropertyRef Name="PLPE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12270,9 +14167,28 @@
           <EntitySetMapping Name="ASSINANTE">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.ASSINANTE">
               <MappingFragment StoreEntitySet="ASSINANTE">
+                <ScalarProperty Name="ASSI_IN_BLOQUEADO" ColumnName="ASSI_IN_BLOQUEADO" />
+                <ScalarProperty Name="ASSI_NR_CELULAR" ColumnName="ASSI_NR_CELULAR" />
+                <ScalarProperty Name="ASSI_NR_TELEFONE" ColumnName="ASSI_NR_TELEFONE" />
+                <ScalarProperty Name="ASSI_AQ_FOTO" ColumnName="ASSI_AQ_FOTO" />
+                <ScalarProperty Name="ASSI_NR_CEP" ColumnName="ASSI_NR_CEP" />
+                <ScalarProperty Name="UF_CD_ID" ColumnName="UF_CD_ID" />
+                <ScalarProperty Name="ASSI_NM_CIDADE" ColumnName="ASSI_NM_CIDADE" />
+                <ScalarProperty Name="ASSI_NM_BAIRRO" ColumnName="ASSI_NM_BAIRRO" />
+                <ScalarProperty Name="ASSI_NM_COMPLEMENTO" ColumnName="ASSI_NM_COMPLEMENTO" />
+                <ScalarProperty Name="ASSI_NR_NUMERO" ColumnName="ASSI_NR_NUMERO" />
+                <ScalarProperty Name="ASSI_NM_ENDERECO" ColumnName="ASSI_NM_ENDERECO" />
+                <ScalarProperty Name="ASSI_TX_OBSERVACOES" ColumnName="ASSI_TX_OBSERVACOES" />
+                <ScalarProperty Name="ASSI_NR_CPF" ColumnName="ASSI_NR_CPF" />
+                <ScalarProperty Name="ASSI_NM_EMAIL" ColumnName="ASSI_NM_EMAIL" />
+                <ScalarProperty Name="ASSI_IN_STATUS" ColumnName="ASSI_IN_STATUS" />
+                <ScalarProperty Name="ASSI_IN_TIPO" ColumnName="ASSI_IN_TIPO" />
+                <ScalarProperty Name="ASSI_DT_INICIO" ColumnName="ASSI_DT_INICIO" />
+                <ScalarProperty Name="ASSI_NM_RAZAO_SOCIAL" ColumnName="ASSI_NM_RAZAO_SOCIAL" />
+                <ScalarProperty Name="PLAN_CD_ID" ColumnName="PLAN_CD_ID" />
+                <ScalarProperty Name="TIPE_CD_ID" ColumnName="TIPE_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="ASSI_NM_NOME" ColumnName="ASSI_NM_NOME" />
-                <ScalarProperty Name="ASSI_NM_RAZAO" ColumnName="ASSI_NM_RAZAO" />
                 <ScalarProperty Name="ASSI_NR_CNPJ" ColumnName="ASSI_NR_CNPJ" />
                 <ScalarProperty Name="ASSI_NR_INSCRICAO_ESTADUAL" ColumnName="ASSI_NR_INSCRICAO_ESTADUAL" />
                 <ScalarProperty Name="ASSI_NR_INSCRICAO_MUNICIPAL" ColumnName="ASSI_NR_INSCRICAO_MUNICIPAL" />
@@ -14290,6 +16206,289 @@
                 <ScalarProperty Name="PECA_DT_ANEXO" ColumnName="PECA_DT_ANEXO" />
                 <ScalarProperty Name="PECO_CD_ID" ColumnName="PECO_CD_ID" />
                 <ScalarProperty Name="PECA_CD_ID" ColumnName="PECA_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ASSINANTE_ANEXO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.ASSINANTE_ANEXO">
+              <MappingFragment StoreEntitySet="ASSINANTE_ANEXO">
+                <ScalarProperty Name="ASAN_IN_ATIVO" ColumnName="ASAN_IN_ATIVO" />
+                <ScalarProperty Name="ASAN_AQ_ARQUIVO" ColumnName="ASAN_AQ_ARQUIVO" />
+                <ScalarProperty Name="ASAN_IN_TIPO" ColumnName="ASAN_IN_TIPO" />
+                <ScalarProperty Name="ASAN_DT_ANEXO" ColumnName="ASAN_DT_ANEXO" />
+                <ScalarProperty Name="ASAN_NM_TITULO" ColumnName="ASAN_NM_TITULO" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="ASAN_CD_ID" ColumnName="ASAN_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ASSINANTE_ANOTACAO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.ASSINANTE_ANOTACAO">
+              <MappingFragment StoreEntitySet="ASSINANTE_ANOTACAO">
+                <ScalarProperty Name="ASAT_IN_ATIVO" ColumnName="ASAT_IN_ATIVO" />
+                <ScalarProperty Name="ASAT_TX_ANOTACAO" ColumnName="ASAT_TX_ANOTACAO" />
+                <ScalarProperty Name="ASAT_DT_ANOTACAO" ColumnName="ASAT_DT_ANOTACAO" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="ASAT_CD_ID" ColumnName="ASAT_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ASSINANTE_CONSUMO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.ASSINANTE_CONSUMO">
+              <MappingFragment StoreEntitySet="ASSINANTE_CONSUMO">
+                <ScalarProperty Name="ASCO_NR_ACOES" ColumnName="ASCO_NR_ACOES" />
+                <ScalarProperty Name="ASCO_NR_PROCESSO" ColumnName="ASCO_NR_PROCESSO" />
+                <ScalarProperty Name="ASCO_NR_WHATSAPP" ColumnName="ASCO_NR_WHATSAPP" />
+                <ScalarProperty Name="ASCO_NR_SMS" ColumnName="ASCO_NR_SMS" />
+                <ScalarProperty Name="ASCO_NR_EMAIL" ColumnName="ASCO_NR_EMAIL" />
+                <ScalarProperty Name="ASCO_NR_CONTATO" ColumnName="ASCO_NR_CONTATO" />
+                <ScalarProperty Name="ASCO_NR_USUARIO" ColumnName="ASCO_NR_USUARIO" />
+                <ScalarProperty Name="ASCO_DT_REFERENCIA" ColumnName="ASCO_DT_REFERENCIA" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="ASCO_CD_ID" ColumnName="ASCO_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ASSINANTE_PAGAMENTO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.ASSINANTE_PAGAMENTO">
+              <MappingFragment StoreEntitySet="ASSINANTE_PAGAMENTO">
+                <ScalarProperty Name="ASPA_IN_ATIVO" ColumnName="ASPA_IN_ATIVO" />
+                <ScalarProperty Name="ASPA_VL_VALOR_PAGO" ColumnName="ASPA_VL_VALOR_PAGO" />
+                <ScalarProperty Name="ASPA_NR_ATRASO" ColumnName="ASPA_NR_ATRASO" />
+                <ScalarProperty Name="ASPA_DT_VENCIMENTO" ColumnName="ASPA_DT_VENCIMENTO" />
+                <ScalarProperty Name="ASPA_IN_PAGO" ColumnName="ASPA_IN_PAGO" />
+                <ScalarProperty Name="ASPA_DT_PROXIMO" ColumnName="ASPA_DT_PROXIMO" />
+                <ScalarProperty Name="ASPA_VL_VALOR" ColumnName="ASPA_VL_VALOR" />
+                <ScalarProperty Name="ASPA_DT_PAGAMENTO" ColumnName="ASPA_DT_PAGAMENTO" />
+                <ScalarProperty Name="PLAN_CD_ID" ColumnName="PLAN_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="ASPA_CD_ID" ColumnName="ASPA_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ASSINANTE_PLANO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.ASSINANTE_PLANO">
+              <MappingFragment StoreEntitySet="ASSINANTE_PLANO">
+                <ScalarProperty Name="ASPL_IN_PRECO" ColumnName="ASPL_IN_PRECO" />
+                <ScalarProperty Name="ASPL_DT_VALIDADE" ColumnName="ASPL_DT_VALIDADE" />
+                <ScalarProperty Name="ASPL_DT_INICIO" ColumnName="ASPL_DT_INICIO" />
+                <ScalarProperty Name="ASPL_IN_ATIVO" ColumnName="ASPL_IN_ATIVO" />
+                <ScalarProperty Name="PLAN_CD_ID" ColumnName="PLAN_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="ASPL_CD_ID" ColumnName="ASPL_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ASSINANTE_QUADRO_SOCIETARIO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.ASSINANTE_QUADRO_SOCIETARIO">
+              <MappingFragment StoreEntitySet="ASSINANTE_QUADRO_SOCIETARIO">
+                <ScalarProperty Name="ASQS_IN_ATIVO" ColumnName="ASQS_IN_ATIVO" />
+                <ScalarProperty Name="ASQS_NM_NOME" ColumnName="ASQS_NM_NOME" />
+                <ScalarProperty Name="ASQS_NM_QUALIFICACAO_REP_LEGAL" ColumnName="ASQS_NM_QUALIFICACAO_REP_LEGAL" />
+                <ScalarProperty Name="ASQS_NM_REPRESENTANTE_LEGAL" ColumnName="ASQS_NM_REPRESENTANTE_LEGAL" />
+                <ScalarProperty Name="ASQS_NM_PAIS_ORIGEM" ColumnName="ASQS_NM_PAIS_ORIGEM" />
+                <ScalarProperty Name="ASQS_NM_QUALIFICACAO" ColumnName="ASQS_NM_QUALIFICACAO" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="ASQS_CD_ID" ColumnName="ASQS_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMAIL_AGENDAMENTO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.EMAIL_AGENDAMENTO">
+              <MappingFragment StoreEntitySet="EMAIL_AGENDAMENTO">
+                <ScalarProperty Name="EMAG_IN_ENVIADO" ColumnName="EMAG_IN_ENVIADO" />
+                <ScalarProperty Name="EMAG_DT_AGENDAMENTO" ColumnName="EMAG_DT_AGENDAMENTO" />
+                <ScalarProperty Name="MENS_CD_ID" ColumnName="MENS_CD_ID" />
+                <ScalarProperty Name="CLIE_CD_ID" ColumnName="CLIE_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="EMAG_CD_ID" ColumnName="EMAG_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRUPO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.GRUPO">
+              <MappingFragment StoreEntitySet="GRUPO">
+                <ScalarProperty Name="GRUP_IN_ATIVO" ColumnName="GRUP_IN_ATIVO" />
+                <ScalarProperty Name="GRUP_DT_CADASTRO" ColumnName="GRUP_DT_CADASTRO" />
+                <ScalarProperty Name="GRUP_NM_NOME" ColumnName="GRUP_NM_NOME" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="GRUP_CD_ID" ColumnName="GRUP_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRUPO_CLIENTE">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.GRUPO_CLIENTE">
+              <MappingFragment StoreEntitySet="GRUPO_CLIENTE">
+                <ScalarProperty Name="GRCL_IN_ATIVO" ColumnName="GRCL_IN_ATIVO" />
+                <ScalarProperty Name="CLIE_CD_ID" ColumnName="CLIE_CD_ID" />
+                <ScalarProperty Name="GRUP_CD_ID" ColumnName="GRUP_CD_ID" />
+                <ScalarProperty Name="GRCL_CD_ID" ColumnName="GRCL_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_EXCECAO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.LOG_EXCECAO">
+              <MappingFragment StoreEntitySet="LOG_EXCECAO">
+                <ScalarProperty Name="LOG_EXCECAO1" ColumnName="LOG_EXCECAO" />
+                <ScalarProperty Name="LOG_ACAO" ColumnName="LOG_ACAO" />
+                <ScalarProperty Name="LOG_USUARIO_LOGADO" ColumnName="LOG_USUARIO_LOGADO" />
+                <ScalarProperty Name="LOG_MODULO" ColumnName="LOG_MODULO" />
+                <ScalarProperty Name="LOG_DT_OCORRENCIA" ColumnName="LOG_DT_OCORRENCIA" />
+                <ScalarProperty Name="LOG_CD_ID" ColumnName="LOG_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENSAGEM_ANEXO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.MENSAGEM_ANEXO">
+              <MappingFragment StoreEntitySet="MENSAGEM_ANEXO">
+                <ScalarProperty Name="MEAN_AQ_ARQUIVO" ColumnName="MEAN_AQ_ARQUIVO" />
+                <ScalarProperty Name="MEAN_IN_ATIVO" ColumnName="MEAN_IN_ATIVO" />
+                <ScalarProperty Name="MEAN_IN_TIPO" ColumnName="MEAN_IN_TIPO" />
+                <ScalarProperty Name="MEAN_DT_ANEXO" ColumnName="MEAN_DT_ANEXO" />
+                <ScalarProperty Name="MEAN_NM_TITULO" ColumnName="MEAN_NM_TITULO" />
+                <ScalarProperty Name="MENS_CD_ID" ColumnName="MENS_CD_ID" />
+                <ScalarProperty Name="MEAN_CD_ID" ColumnName="MEAN_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENSAGEM_AUTOMACAO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO">
+              <MappingFragment StoreEntitySet="MENSAGEM_AUTOMACAO">
+                <ScalarProperty Name="MEAU_ME_DATA_FIXA" ColumnName="MEAU_ME_DATA_FIXA" />
+                <ScalarProperty Name="MEAU_IN_ANIVERSARIO" ColumnName="MEAU_IN_ANIVERSARIO" />
+                <ScalarProperty Name="PETA_CD_ID" ColumnName="PETA_CD_ID" />
+                <ScalarProperty Name="MEAU_DT_DATA_FIXA" ColumnName="MEAU_DT_DATA_FIXA" />
+                <ScalarProperty Name="MEAU_DS_DESCRICAO" ColumnName="MEAU_DS_DESCRICAO" />
+                <ScalarProperty Name="MEAU_IN_DIA_SEMANA" ColumnName="MEAU_IN_DIA_SEMANA" />
+                <ScalarProperty Name="MEAU_HR_DISPARO" ColumnName="MEAU_HR_DISPARO" />
+                <ScalarProperty Name="MEAU_DT_FINAL" ColumnName="MEAU_DT_FINAL" />
+                <ScalarProperty Name="MEAU_DT_INICIO" ColumnName="MEAU_DT_INICIO" />
+                <ScalarProperty Name="MEAU_IN_TIPO_ENVIO" ColumnName="MEAU_IN_TIPO_ENVIO" />
+                <ScalarProperty Name="TSMS_CD_ID" ColumnName="TSMS_CD_ID" />
+                <ScalarProperty Name="TEEM_CD_ID" ColumnName="TEEM_CD_ID" />
+                <ScalarProperty Name="MEAU_IN_TIPO" ColumnName="MEAU_IN_TIPO" />
+                <ScalarProperty Name="GRUP_CD_ID" ColumnName="GRUP_CD_ID" />
+                <ScalarProperty Name="MEAU_IN_ATIVO" ColumnName="MEAU_IN_ATIVO" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="MEAU_DT_CADASTRO" ColumnName="MEAU_DT_CADASTRO" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="MEAU_CD_ID" ColumnName="MEAU_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENSAGEM_AUTOMACAO_DATAS">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO_DATAS">
+              <MappingFragment StoreEntitySet="MENSAGEM_AUTOMACAO_DATAS">
+                <ScalarProperty Name="MEAD_IN_ATIVO" ColumnName="MEAD_IN_ATIVO" />
+                <ScalarProperty Name="MEAD_DT_DATA" ColumnName="MEAD_DT_DATA" />
+                <ScalarProperty Name="MEAU_CD_ID" ColumnName="MEAU_CD_ID" />
+                <ScalarProperty Name="MEAD_CD_ID" ColumnName="MEAD_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENSAGENS">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.MENSAGENS">
+              <MappingFragment StoreEntitySet="MENSAGENS">
+                <ScalarProperty Name="MENS_LK_LINK_PESQUISA" ColumnName="MENS_LK_LINK_PESQUISA" />
+                <ScalarProperty Name="MENS_IN_PERIODICIDADE" ColumnName="MENS_IN_PERIODICIDADE" />
+                <ScalarProperty Name="MENS_IN_ATIVO" ColumnName="MENS_IN_ATIVO" />
+                <ScalarProperty Name="PETA_CD_ID" ColumnName="PETA_CD_ID" />
+                <ScalarProperty Name="MENS_NR_REPETICOES" ColumnName="MENS_NR_REPETICOES" />
+                <ScalarProperty Name="MENS_IN_REPETICAO" ColumnName="MENS_IN_REPETICAO" />
+                <ScalarProperty Name="MENS_IN_AGENDAMENTO" ColumnName="MENS_IN_AGENDAMENTO" />
+                <ScalarProperty Name="MENS_IN_STATUS" ColumnName="MENS_IN_STATUS" />
+                <ScalarProperty Name="MENS_TX_TEXTO_LIMPO" ColumnName="MENS_TX_TEXTO_LIMPO" />
+                <ScalarProperty Name="MENS_IN_CRM" ColumnName="MENS_IN_CRM" />
+                <ScalarProperty Name="MENS_TX_SMS" ColumnName="MENS_TX_SMS" />
+                <ScalarProperty Name="MENS_NM_LINK" ColumnName="MENS_NM_LINK" />
+                <ScalarProperty Name="MENS_NM_RODAPE" ColumnName="MENS_NM_RODAPE" />
+                <ScalarProperty Name="MENS_NM_CABECALHO" ColumnName="MENS_NM_CABECALHO" />
+                <ScalarProperty Name="MENS_TX_RETORNO" ColumnName="MENS_TX_RETORNO" />
+                <ScalarProperty Name="MENS_DT_ENVIO" ColumnName="MENS_DT_ENVIO" />
+                <ScalarProperty Name="MENS_DT_AGENDAMENTO" ColumnName="MENS_DT_AGENDAMENTO" />
+                <ScalarProperty Name="MENS_IN_TIPO" ColumnName="MENS_IN_TIPO" />
+                <ScalarProperty Name="MENS_TX_TEXTO" ColumnName="MENS_TX_TEXTO" />
+                <ScalarProperty Name="MENS_NM_CAMPANHA" ColumnName="MENS_NM_CAMPANHA" />
+                <ScalarProperty Name="MENS_DT_CRIACAO" ColumnName="MENS_DT_CRIACAO" />
+                <ScalarProperty Name="MENS_NM_NOME" ColumnName="MENS_NM_NOME" />
+                <ScalarProperty Name="GRUP_CD_ID" ColumnName="GRUP_CD_ID" />
+                <ScalarProperty Name="CLIE_CD_ID" ColumnName="CLIE_CD_ID" />
+                <ScalarProperty Name="TEEM_CD_ID" ColumnName="TEEM_CD_ID" />
+                <ScalarProperty Name="TSMS_CD_ID" ColumnName="TSMS_CD_ID" />
+                <ScalarProperty Name="TEMP_CD_ID" ColumnName="TEMP_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
+                <ScalarProperty Name="MENS_CD_ID" ColumnName="MENS_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENSAGENS_DESTINOS">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.MENSAGENS_DESTINOS">
+              <MappingFragment StoreEntitySet="MENSAGENS_DESTINOS">
+                <ScalarProperty Name="MEDE_DS_ERRO_ENVIO" ColumnName="MEDE_DS_ERRO_ENVIO" />
+                <ScalarProperty Name="MEDE_TX_OBSERVACOES" ColumnName="MEDE_TX_OBSERVACOES" />
+                <ScalarProperty Name="MEDE_IN_POSICAO" ColumnName="MEDE_IN_POSICAO" />
+                <ScalarProperty Name="MEDE_IN_STATUS" ColumnName="MEDE_IN_STATUS" />
+                <ScalarProperty Name="MEDE_IN_ATIVO" ColumnName="MEDE_IN_ATIVO" />
+                <ScalarProperty Name="CAMP_CD_ID" ColumnName="CAMP_CD_ID" />
+                <ScalarProperty Name="GRUP_CD_ID" ColumnName="GRUP_CD_ID" />
+                <ScalarProperty Name="CLIE_CD_ID" ColumnName="CLIE_CD_ID" />
+                <ScalarProperty Name="MENS_CD_ID" ColumnName="MENS_CD_ID" />
+                <ScalarProperty Name="MEDE_CD_ID" ColumnName="MEDE_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANO">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PLANO">
+              <MappingFragment StoreEntitySet="PLANO">
+                <ScalarProperty Name="PLAN_NM_EXIBE" ColumnName="PLAN_NM_EXIBE" />
+                <ScalarProperty Name="PLAN_IN_ATIVO" ColumnName="PLAN_IN_ATIVO" />
+                <ScalarProperty Name="PLAN_NR_SERVICE" ColumnName="PLAN_NR_SERVICE" />
+                <ScalarProperty Name="PLAN_NR_VENDA" ColumnName="PLAN_NR_VENDA" />
+                <ScalarProperty Name="PLAN_NR_COMPRA" ColumnName="PLAN_NR_COMPRA" />
+                <ScalarProperty Name="PLAN_NR_FORNECEDOR" ColumnName="PLAN_NR_FORNECEDOR" />
+                <ScalarProperty Name="PLAN_NR_PRODUTO" ColumnName="PLAN_NR_PRODUTO" />
+                <ScalarProperty Name="PLAN_NR_PATRIMONIO" ColumnName="PLAN_NR_PATRIMONIO" />
+                <ScalarProperty Name="PLAN_NR_ACOES" ColumnName="PLAN_NR_ACOES" />
+                <ScalarProperty Name="PLAN_NR_PROCESSOS" ColumnName="PLAN_NR_PROCESSOS" />
+                <ScalarProperty Name="PLAN_NR_WHATSAPP" ColumnName="PLAN_NR_WHATSAPP" />
+                <ScalarProperty Name="PLAN_NR_SMS" ColumnName="PLAN_NR_SMS" />
+                <ScalarProperty Name="PLAN_NR_EMAIL" ColumnName="PLAN_NR_EMAIL" />
+                <ScalarProperty Name="PLAN_NR_CONTATOS" ColumnName="PLAN_NR_CONTATOS" />
+                <ScalarProperty Name="PLAN_NR_USUARIOS" ColumnName="PLAN_NR_USUARIOS" />
+                <ScalarProperty Name="PLAN_IN_OS" ColumnName="PLAN_IN_OS" />
+                <ScalarProperty Name="PLAN_IN_ATENDIMENTOS" ColumnName="PLAN_IN_ATENDIMENTOS" />
+                <ScalarProperty Name="PLAN_IN_SERVICOS" ColumnName="PLAN_IN_SERVICOS" />
+                <ScalarProperty Name="PLAN_IN_COMPRA" ColumnName="PLAN_IN_COMPRA" />
+                <ScalarProperty Name="PLAN_IN_VENDAS" ColumnName="PLAN_IN_VENDAS" />
+                <ScalarProperty Name="PLAN_IN_PATRIMONIO" ColumnName="PLAN_IN_PATRIMONIO" />
+                <ScalarProperty Name="PLAN_IN_ESTOQUE" ColumnName="PLAN_IN_ESTOQUE" />
+                <ScalarProperty Name="PLAN_IN_FATURA" ColumnName="PLAN_IN_FATURA" />
+                <ScalarProperty Name="PLAN_IN_FINANCEIRO" ColumnName="PLAN_IN_FINANCEIRO" />
+                <ScalarProperty Name="PLAN_IN_CRM" ColumnName="PLAN_IN_CRM" />
+                <ScalarProperty Name="PLAN_IN_MENSAGENS" ColumnName="PLAN_IN_MENSAGENS" />
+                <ScalarProperty Name="PLAN_TX_SITE" ColumnName="PLAN_TX_SITE" />
+                <ScalarProperty Name="PLAN_DT_VALIDADE" ColumnName="PLAN_DT_VALIDADE" />
+                <ScalarProperty Name="PLAN_IN_DURACAO" ColumnName="PLAN_IN_DURACAO" />
+                <ScalarProperty Name="PLAN_VL_PROMOCAO" ColumnName="PLAN_VL_PROMOCAO" />
+                <ScalarProperty Name="PLAN_VL_PRECO" ColumnName="PLAN_VL_PRECO" />
+                <ScalarProperty Name="PLAN_DS_DESCRICAO" ColumnName="PLAN_DS_DESCRICAO" />
+                <ScalarProperty Name="PLAN_DT_CRIACAO" ColumnName="PLAN_DT_CRIACAO" />
+                <ScalarProperty Name="PLAN_NM_NOME" ColumnName="PLAN_NM_NOME" />
+                <ScalarProperty Name="PLPE_CD_ID" ColumnName="PLPE_CD_ID" />
+                <ScalarProperty Name="PLAN_CD_ID" ColumnName="PLAN_CD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANO_PERIODICIDADE">
+            <EntityTypeMapping TypeName="Db_PrecificacaoModel.PLANO_PERIODICIDADE">
+              <MappingFragment StoreEntitySet="PLANO_PERIODICIDADE">
+                <ScalarProperty Name="PLPE_IN_ATIVO" ColumnName="PLPE_IN_ATIVO" />
+                <ScalarProperty Name="PLPE_NR_DIAS" ColumnName="PLPE_NR_DIAS" />
+                <ScalarProperty Name="PLPE_NM_NOME" ColumnName="PLPE_NM_NOME" />
+                <ScalarProperty Name="PLPE_CD_ID" ColumnName="PLPE_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -74,6 +74,16 @@ namespace EntitiesServices.Model
             this.TAREFA = new HashSet<TAREFA>();
             this.USUARIO = new HashSet<USUARIO>();
             this.PEDIDO_COMPRA = new HashSet<PEDIDO_COMPRA>();
+            this.ASSINANTE_ANEXO = new HashSet<ASSINANTE_ANEXO>();
+            this.ASSINANTE_ANOTACAO = new HashSet<ASSINANTE_ANOTACAO>();
+            this.ASSINANTE_CONSUMO = new HashSet<ASSINANTE_CONSUMO>();
+            this.ASSINANTE_PAGAMENTO = new HashSet<ASSINANTE_PAGAMENTO>();
+            this.ASSINANTE_PLANO = new HashSet<ASSINANTE_PLANO>();
+            this.ASSINANTE_QUADRO_SOCIETARIO = new HashSet<ASSINANTE_QUADRO_SOCIETARIO>();
+            this.EMAIL_AGENDAMENTO = new HashSet<EMAIL_AGENDAMENTO>();
+            this.GRUPO = new HashSet<GRUPO>();
+            this.MENSAGEM_AUTOMACAO = new HashSet<MENSAGEM_AUTOMACAO>();
+            this.MENSAGENS = new HashSet<MENSAGENS>();
         }
     
         public int ASSI_CD_ID { get; set; }
@@ -84,6 +94,26 @@ namespace EntitiesServices.Model
         public string ASSI_NR_INSCRICAO_MUNICIPAL { get; set; }
         public System.DateTime ASSI_DT_CADASTRO { get; set; }
         public int ASSI_IN_ATIVO { get; set; }
+        public Nullable<int> TIPE_CD_ID { get; set; }
+        public Nullable<int> PLAN_CD_ID { get; set; }
+        public string ASSI_NM_RAZAO_SOCIAL { get; set; }
+        public Nullable<System.DateTime> ASSI_DT_INICIO { get; set; }
+        public Nullable<int> ASSI_IN_TIPO { get; set; }
+        public Nullable<int> ASSI_IN_STATUS { get; set; }
+        public string ASSI_NM_EMAIL { get; set; }
+        public string ASSI_NR_CPF { get; set; }
+        public string ASSI_TX_OBSERVACOES { get; set; }
+        public string ASSI_NM_ENDERECO { get; set; }
+        public string ASSI_NR_NUMERO { get; set; }
+        public string ASSI_NM_COMPLEMENTO { get; set; }
+        public string ASSI_NM_BAIRRO { get; set; }
+        public string ASSI_NM_CIDADE { get; set; }
+        public Nullable<int> UF_CD_ID { get; set; }
+        public string ASSI_NR_CEP { get; set; }
+        public string ASSI_AQ_FOTO { get; set; }
+        public string ASSI_NR_TELEFONE { get; set; }
+        public string ASSI_NR_CELULAR { get; set; }
+        public Nullable<int> ASSI_IN_BLOQUEADO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }
@@ -199,5 +229,27 @@ namespace EntitiesServices.Model
         public virtual ICollection<USUARIO> USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_ANEXO> ASSINANTE_ANEXO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_ANOTACAO> ASSINANTE_ANOTACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_CONSUMO> ASSINANTE_CONSUMO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_PAGAMENTO> ASSINANTE_PAGAMENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_PLANO> ASSINANTE_PLANO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_QUADRO_SOCIETARIO> ASSINANTE_QUADRO_SOCIETARIO { get; set; }
+        public virtual TIPO_PESSOA TIPO_PESSOA { get; set; }
+        public virtual UF UF { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMAIL_AGENDAMENTO> EMAIL_AGENDAMENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GRUPO> GRUPO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
     }
 }

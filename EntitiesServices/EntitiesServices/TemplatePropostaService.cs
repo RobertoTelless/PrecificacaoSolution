@@ -20,7 +20,7 @@ namespace ModelServices.EntitiesServices
     {
         private readonly ITemplatePropostaRepository _baseRepository;
         private readonly ILogRepository _logRepository;
-        protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
+        protected ERP_CRMEntities Db = new ERP_CRMEntities();
 
         public TemplatePropostaService(ITemplatePropostaRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
         {
