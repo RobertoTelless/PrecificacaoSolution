@@ -88,12 +88,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddTSMS",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE_SMS>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE_SMS>(item)
                 };
 
                 // Persiste
@@ -113,13 +113,13 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditTSMS",
                     LOG_IN_ATIVO = 1,
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE_SMS>(item),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<TEMPLATE_SMS>(itemAntes)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE_SMS>(item),
+                    LOG_TX_TEXTO_ANTES = Serialization.SerializeJSON<TEMPLATE_SMS>(itemAntes)
                 };
 
                 // Persiste
@@ -147,12 +147,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelTSMS",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE_SMS>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE_SMS>(item)
                 };
 
                 // Persiste
@@ -176,12 +176,12 @@ namespace ApplicationServices.Services
                 // Monta Log
                 LOG log = new LOG
                 {
-                    LOG_DT_DATA = DateTime.Now,
+                    LOG_DT_LOG = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatTSMS",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE_SMS>(item)
+                    LOG_TX_TEXTO = Serialization.SerializeJSON<TEMPLATE_SMS>(item)
                 };
 
                 // Persiste

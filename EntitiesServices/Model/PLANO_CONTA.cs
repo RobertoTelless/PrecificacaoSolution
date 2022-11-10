@@ -45,8 +45,8 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_RECEBER_RATEIO> CONTA_RECEBER_RATEIO { get; set; }
         public virtual GRUPO_PLANO_CONTA GRUPO_PLANO_CONTA { get; set; }
-        public virtual SUBGRUPO_PLANO_CONTA SUBGRUPO_PLANO_CONTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
+        public virtual SUBGRUPO_PLANO_CONTA SUBGRUPO_PLANO_CONTA { get; set; }
     }
 }

@@ -20,9 +20,9 @@ namespace EntitiesServices.Model
             this.CONTA_PAGAR = new HashSet<CONTA_PAGAR>();
             this.CONTA_RECEBER = new HashSet<CONTA_RECEBER>();
             this.CUSTO_FIXO = new HashSet<CUSTO_FIXO>();
-            this.TAREFA = new HashSet<TAREFA>();
             this.MENSAGEM_AUTOMACAO = new HashSet<MENSAGEM_AUTOMACAO>();
             this.MENSAGENS = new HashSet<MENSAGENS>();
+            this.TAREFA = new HashSet<TAREFA>();
         }
     
         public int PETA_CD_ID { get; set; }
@@ -37,10 +37,10 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CUSTO_FIXO> CUSTO_FIXO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAREFA> TAREFA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TAREFA> TAREFA { get; set; }
     }
 }

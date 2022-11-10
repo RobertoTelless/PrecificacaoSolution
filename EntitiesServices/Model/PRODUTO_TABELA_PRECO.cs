@@ -14,12 +14,6 @@ namespace EntitiesServices.Model
     
     public partial class PRODUTO_TABELA_PRECO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PRODUTO_TABELA_PRECO()
-        {
-            this.FICHA_TECNICA_DETALHE = new HashSet<FICHA_TECNICA_DETALHE>();
-        }
-    
         public int PRTP_CD_ID { get; set; }
         public int PROD_CD_ID { get; set; }
         public Nullable<int> EMPR_CD_ID { get; set; }
@@ -32,8 +26,6 @@ namespace EntitiesServices.Model
         public Nullable<int> PRTP_IN_ATIVO { get; set; }
     
         public virtual EMPRESA EMPRESA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
         public virtual PRODUTO PRODUTO { get; set; }
     }
 }

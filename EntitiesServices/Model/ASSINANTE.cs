@@ -18,6 +18,12 @@ namespace EntitiesServices.Model
         public ASSINANTE()
         {
             this.AGENDA = new HashSet<AGENDA>();
+            this.ASSINANTE_ANEXO = new HashSet<ASSINANTE_ANEXO>();
+            this.ASSINANTE_ANOTACAO = new HashSet<ASSINANTE_ANOTACAO>();
+            this.ASSINANTE_CONSUMO = new HashSet<ASSINANTE_CONSUMO>();
+            this.ASSINANTE_PAGAMENTO = new HashSet<ASSINANTE_PAGAMENTO>();
+            this.ASSINANTE_PLANO = new HashSet<ASSINANTE_PLANO>();
+            this.ASSINANTE_QUADRO_SOCIETARIO = new HashSet<ASSINANTE_QUADRO_SOCIETARIO>();
             this.CATEGORIA_AGENDA = new HashSet<CATEGORIA_AGENDA>();
             this.CATEGORIA_CLIENTE = new HashSet<CATEGORIA_CLIENTE>();
             this.CATEGORIA_FORNECEDOR = new HashSet<CATEGORIA_FORNECEDOR>();
@@ -33,17 +39,22 @@ namespace EntitiesServices.Model
             this.CRM_ORIGEM = new HashSet<CRM_ORIGEM>();
             this.CRM_PEDIDO_VENDA = new HashSet<CRM_PEDIDO_VENDA>();
             this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
+            this.EMAIL_AGENDAMENTO = new HashSet<EMAIL_AGENDAMENTO>();
             this.FILIAL = new HashSet<FILIAL>();
             this.FORMA_ENVIO = new HashSet<FORMA_ENVIO>();
             this.FORMA_FRETE = new HashSet<FORMA_FRETE>();
             this.FORMA_PAGTO_RECTO = new HashSet<FORMA_PAGTO_RECTO>();
             this.FORNECEDOR = new HashSet<FORNECEDOR>();
             this.FUNIL = new HashSet<FUNIL>();
+            this.GRUPO = new HashSet<GRUPO>();
             this.GRUPO_PLANO_CONTA = new HashSet<GRUPO_PLANO_CONTA>();
             this.LOG = new HashSet<LOG>();
+            this.MENSAGEM_AUTOMACAO = new HashSet<MENSAGEM_AUTOMACAO>();
+            this.MENSAGENS = new HashSet<MENSAGENS>();
             this.MOTIVO_CANCELAMENTO = new HashSet<MOTIVO_CANCELAMENTO>();
             this.MOTIVO_ENCERRAMENTO = new HashSet<MOTIVO_ENCERRAMENTO>();
             this.MOVIMENTO_ESTOQUE_PRODUTO = new HashSet<MOVIMENTO_ESTOQUE_PRODUTO>();
+            this.PEDIDO_COMPRA = new HashSet<PEDIDO_COMPRA>();
             this.PLANO_CONTA = new HashSet<PLANO_CONTA>();
             this.SERVICO = new HashSet<SERVICO>();
             this.SUBCATEGORIA_PRODUTO = new HashSet<SUBCATEGORIA_PRODUTO>();
@@ -73,30 +84,18 @@ namespace EntitiesServices.Model
             this.PRODUTO = new HashSet<PRODUTO>();
             this.TAREFA = new HashSet<TAREFA>();
             this.USUARIO = new HashSet<USUARIO>();
-            this.PEDIDO_COMPRA = new HashSet<PEDIDO_COMPRA>();
-            this.ASSINANTE_ANEXO = new HashSet<ASSINANTE_ANEXO>();
-            this.ASSINANTE_ANOTACAO = new HashSet<ASSINANTE_ANOTACAO>();
-            this.ASSINANTE_CONSUMO = new HashSet<ASSINANTE_CONSUMO>();
-            this.ASSINANTE_PAGAMENTO = new HashSet<ASSINANTE_PAGAMENTO>();
-            this.ASSINANTE_PLANO = new HashSet<ASSINANTE_PLANO>();
-            this.ASSINANTE_QUADRO_SOCIETARIO = new HashSet<ASSINANTE_QUADRO_SOCIETARIO>();
-            this.EMAIL_AGENDAMENTO = new HashSet<EMAIL_AGENDAMENTO>();
-            this.GRUPO = new HashSet<GRUPO>();
-            this.MENSAGEM_AUTOMACAO = new HashSet<MENSAGEM_AUTOMACAO>();
-            this.MENSAGENS = new HashSet<MENSAGENS>();
         }
     
         public int ASSI_CD_ID { get; set; }
+        public Nullable<int> TIPE_CD_ID { get; set; }
+        public Nullable<int> PLAN_CD_ID { get; set; }
         public string ASSI_NM_NOME { get; set; }
-        public string ASSI_NM_RAZAO { get; set; }
+        public string ASSI_NM_RAZAO_SOCIAL { get; set; }
         public string ASSI_NR_CNPJ { get; set; }
         public string ASSI_NR_INSCRICAO_ESTADUAL { get; set; }
         public string ASSI_NR_INSCRICAO_MUNICIPAL { get; set; }
         public System.DateTime ASSI_DT_CADASTRO { get; set; }
         public int ASSI_IN_ATIVO { get; set; }
-        public Nullable<int> TIPE_CD_ID { get; set; }
-        public Nullable<int> PLAN_CD_ID { get; set; }
-        public string ASSI_NM_RAZAO_SOCIAL { get; set; }
         public Nullable<System.DateTime> ASSI_DT_INICIO { get; set; }
         public Nullable<int> ASSI_IN_TIPO { get; set; }
         public Nullable<int> ASSI_IN_STATUS { get; set; }
@@ -117,6 +116,21 @@ namespace EntitiesServices.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_ANEXO> ASSINANTE_ANEXO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_ANOTACAO> ASSINANTE_ANOTACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_CONSUMO> ASSINANTE_CONSUMO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_PAGAMENTO> ASSINANTE_PAGAMENTO { get; set; }
+        public virtual PLANO PLANO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_PLANO> ASSINANTE_PLANO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_QUADRO_SOCIETARIO> ASSINANTE_QUADRO_SOCIETARIO { get; set; }
+        public virtual TIPO_PESSOA TIPO_PESSOA { get; set; }
+        public virtual UF UF { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CATEGORIA_AGENDA> CATEGORIA_AGENDA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -148,6 +162,8 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMAIL_AGENDAMENTO> EMAIL_AGENDAMENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FILIAL> FILIAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FORMA_ENVIO> FORMA_ENVIO { get; set; }
@@ -160,15 +176,23 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FUNIL> FUNIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GRUPO> GRUPO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GRUPO_PLANO_CONTA> GRUPO_PLANO_CONTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LOG> LOG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MOTIVO_CANCELAMENTO> MOTIVO_CANCELAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MOTIVO_ENCERRAMENTO> MOTIVO_ENCERRAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PLANO_CONTA> PLANO_CONTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -227,30 +251,5 @@ namespace EntitiesServices.Model
         public virtual ICollection<TAREFA> TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO> USUARIO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ASSINANTE_ANEXO> ASSINANTE_ANEXO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ASSINANTE_ANOTACAO> ASSINANTE_ANOTACAO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ASSINANTE_CONSUMO> ASSINANTE_CONSUMO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ASSINANTE_PAGAMENTO> ASSINANTE_PAGAMENTO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ASSINANTE_PLANO> ASSINANTE_PLANO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ASSINANTE_QUADRO_SOCIETARIO> ASSINANTE_QUADRO_SOCIETARIO { get; set; }
-        public virtual TIPO_PESSOA TIPO_PESSOA { get; set; }
-        public virtual UF UF { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMAIL_AGENDAMENTO> EMAIL_AGENDAMENTO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GRUPO> GRUPO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
-        public virtual PLANO PLANO { get; set; }
     }
 }

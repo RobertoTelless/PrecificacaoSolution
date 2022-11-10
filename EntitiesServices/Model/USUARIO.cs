@@ -19,6 +19,7 @@ namespace EntitiesServices.Model
         {
             this.AGENDA = new HashSet<AGENDA>();
             this.AGENDA1 = new HashSet<AGENDA>();
+            this.ASSINANTE_ANOTACAO = new HashSet<ASSINANTE_ANOTACAO>();
             this.CLIENTE = new HashSet<CLIENTE>();
             this.CLIENTE_ANOTACAO = new HashSet<CLIENTE_ANOTACAO>();
             this.CONTA_PAGAR = new HashSet<CONTA_PAGAR>();
@@ -31,10 +32,15 @@ namespace EntitiesServices.Model
             this.CRM_PEDIDO_VENDA_ACOMPANHAMENTO = new HashSet<CRM_PEDIDO_VENDA_ACOMPANHAMENTO>();
             this.DIARIO_PROCESSO = new HashSet<DIARIO_PROCESSO>();
             this.FORNECEDOR_ANOTACOES = new HashSet<FORNECEDOR_ANOTACOES>();
+            this.GRUPO = new HashSet<GRUPO>();
             this.LOG = new HashSet<LOG>();
+            this.MENSAGEM_AUTOMACAO = new HashSet<MENSAGEM_AUTOMACAO>();
+            this.MENSAGENS = new HashSet<MENSAGENS>();
             this.MOVIMENTO_ESTOQUE_PRODUTO = new HashSet<MOVIMENTO_ESTOQUE_PRODUTO>();
             this.NOTICIA_COMENTARIO = new HashSet<NOTICIA_COMENTARIO>();
             this.NOTIFICACAO = new HashSet<NOTIFICACAO>();
+            this.PEDIDO_COMPRA = new HashSet<PEDIDO_COMPRA>();
+            this.PEDIDO_COMPRA_ACOMPANHAMENTO = new HashSet<PEDIDO_COMPRA_ACOMPANHAMENTO>();
             this.PESSOA_EXTERNA_ANOTACAO = new HashSet<PESSOA_EXTERNA_ANOTACAO>();
             this.TAREFA = new HashSet<TAREFA>();
             this.TAREFA_ACOMPANHAMENTO = new HashSet<TAREFA_ACOMPANHAMENTO>();
@@ -42,12 +48,6 @@ namespace EntitiesServices.Model
             this.VIDEO_COMENTARIO = new HashSet<VIDEO_COMENTARIO>();
             this.USUARIO_ANOTACAO = new HashSet<USUARIO_ANOTACAO>();
             this.USUARIO_ANOTACAO1 = new HashSet<USUARIO_ANOTACAO>();
-            this.PEDIDO_COMPRA = new HashSet<PEDIDO_COMPRA>();
-            this.PEDIDO_COMPRA_ACOMPANHAMENTO = new HashSet<PEDIDO_COMPRA_ACOMPANHAMENTO>();
-            this.ASSINANTE_ANOTACAO = new HashSet<ASSINANTE_ANOTACAO>();
-            this.GRUPO = new HashSet<GRUPO>();
-            this.MENSAGEM_AUTOMACAO = new HashSet<MENSAGEM_AUTOMACAO>();
-            this.MENSAGENS = new HashSet<MENSAGENS>();
         }
     
         public int USUA_CD_ID { get; set; }
@@ -86,6 +86,8 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA1 { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ASSINANTE_ANOTACAO> ASSINANTE_ANOTACAO { get; set; }
         public virtual CARGO_USUARIO CARGO_USUARIO { get; set; }
         public virtual CATEGORIA_USUARIO CATEGORIA_USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -113,13 +115,23 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FORNECEDOR_ANOTACOES> FORNECEDOR_ANOTACOES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GRUPO> GRUPO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LOG> LOG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTICIA_COMENTARIO> NOTICIA_COMENTARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTIFICACAO> NOTIFICACAO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PEDIDO_COMPRA_ACOMPANHAMENTO> PEDIDO_COMPRA_ACOMPANHAMENTO { get; set; }
         public virtual PERFIL PERFIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
@@ -135,17 +147,5 @@ namespace EntitiesServices.Model
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_ANOTACAO> USUARIO_ANOTACAO1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PEDIDO_COMPRA_ACOMPANHAMENTO> PEDIDO_COMPRA_ACOMPANHAMENTO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ASSINANTE_ANOTACAO> ASSINANTE_ANOTACAO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GRUPO> GRUPO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MENSAGENS> MENSAGENS { get; set; }
     }
 }

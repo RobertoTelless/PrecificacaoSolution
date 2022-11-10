@@ -28,6 +28,12 @@ namespace EntitiesServices.Model
         public virtual DbSet<AGENDA> AGENDA { get; set; }
         public virtual DbSet<AGENDA_ANEXO> AGENDA_ANEXO { get; set; }
         public virtual DbSet<ASSINANTE> ASSINANTE { get; set; }
+        public virtual DbSet<ASSINANTE_ANEXO> ASSINANTE_ANEXO { get; set; }
+        public virtual DbSet<ASSINANTE_ANOTACAO> ASSINANTE_ANOTACAO { get; set; }
+        public virtual DbSet<ASSINANTE_CONSUMO> ASSINANTE_CONSUMO { get; set; }
+        public virtual DbSet<ASSINANTE_PAGAMENTO> ASSINANTE_PAGAMENTO { get; set; }
+        public virtual DbSet<ASSINANTE_PLANO> ASSINANTE_PLANO { get; set; }
+        public virtual DbSet<ASSINANTE_QUADRO_SOCIETARIO> ASSINANTE_QUADRO_SOCIETARIO { get; set; }
         public virtual DbSet<BANCO> BANCO { get; set; }
         public virtual DbSet<CARGO_USUARIO> CARGO_USUARIO { get; set; }
         public virtual DbSet<CATEGORIA_AGENDA> CATEGORIA_AGENDA { get; set; }
@@ -70,6 +76,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<CRM_PEDIDO_VENDA_ITEM> CRM_PEDIDO_VENDA_ITEM { get; set; }
         public virtual DbSet<CUSTO_FIXO> CUSTO_FIXO { get; set; }
         public virtual DbSet<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
+        public virtual DbSet<EMAIL_AGENDAMENTO> EMAIL_AGENDAMENTO { get; set; }
         public virtual DbSet<EMPRESA> EMPRESA { get; set; }
         public virtual DbSet<EMPRESA_ANEXO> EMPRESA_ANEXO { get; set; }
         public virtual DbSet<EMPRESA_MAQUINA> EMPRESA_MAQUINA { get; set; }
@@ -86,9 +93,18 @@ namespace EntitiesServices.Model
         public virtual DbSet<FORNECEDOR_QUADRO_SOCIETARIO> FORNECEDOR_QUADRO_SOCIETARIO { get; set; }
         public virtual DbSet<FUNIL> FUNIL { get; set; }
         public virtual DbSet<FUNIL_ETAPA> FUNIL_ETAPA { get; set; }
+        public virtual DbSet<GRUPO> GRUPO { get; set; }
+        public virtual DbSet<GRUPO_CLIENTE> GRUPO_CLIENTE { get; set; }
         public virtual DbSet<GRUPO_PLANO_CONTA> GRUPO_PLANO_CONTA { get; set; }
+        public virtual DbSet<ITEM_PEDIDO_COMPRA> ITEM_PEDIDO_COMPRA { get; set; }
         public virtual DbSet<LOG> LOG { get; set; }
+        public virtual DbSet<LOG_EXCECAO> LOG_EXCECAO { get; set; }
         public virtual DbSet<MAQUINA> MAQUINA { get; set; }
+        public virtual DbSet<MENSAGEM_ANEXO> MENSAGEM_ANEXO { get; set; }
+        public virtual DbSet<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
+        public virtual DbSet<MENSAGEM_AUTOMACAO_DATAS> MENSAGEM_AUTOMACAO_DATAS { get; set; }
+        public virtual DbSet<MENSAGENS> MENSAGENS { get; set; }
+        public virtual DbSet<MENSAGENS_DESTINOS> MENSAGENS_DESTINOS { get; set; }
         public virtual DbSet<MOTIVO_CANCELAMENTO> MOTIVO_CANCELAMENTO { get; set; }
         public virtual DbSet<MOTIVO_ENCERRAMENTO> MOTIVO_ENCERRAMENTO { get; set; }
         public virtual DbSet<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
@@ -98,12 +114,17 @@ namespace EntitiesServices.Model
         public virtual DbSet<NOTIFICACAO> NOTIFICACAO { get; set; }
         public virtual DbSet<NOTIFICACAO_ANEXO> NOTIFICACAO_ANEXO { get; set; }
         public virtual DbSet<OUTRO_CUSTO_VARIAVEL> OUTRO_CUSTO_VARIAVEL { get; set; }
+        public virtual DbSet<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
+        public virtual DbSet<PEDIDO_COMPRA_ACOMPANHAMENTO> PEDIDO_COMPRA_ACOMPANHAMENTO { get; set; }
+        public virtual DbSet<PEDIDO_COMPRA_ANEXO> PEDIDO_COMPRA_ANEXO { get; set; }
         public virtual DbSet<PERFIL> PERFIL { get; set; }
         public virtual DbSet<PERIODICIDADE_TAREFA> PERIODICIDADE_TAREFA { get; set; }
         public virtual DbSet<PESSOA_EXTERNA> PESSOA_EXTERNA { get; set; }
         public virtual DbSet<PESSOA_EXTERNA_ANEXO> PESSOA_EXTERNA_ANEXO { get; set; }
         public virtual DbSet<PESSOA_EXTERNA_ANOTACAO> PESSOA_EXTERNA_ANOTACAO { get; set; }
+        public virtual DbSet<PLANO> PLANO { get; set; }
         public virtual DbSet<PLANO_CONTA> PLANO_CONTA { get; set; }
+        public virtual DbSet<PLANO_PERIODICIDADE> PLANO_PERIODICIDADE { get; set; }
         public virtual DbSet<PLATAFORMA_ENTREGA> PLATAFORMA_ENTREGA { get; set; }
         public virtual DbSet<PRODUTO> PRODUTO { get; set; }
         public virtual DbSet<PRODUTO_ANEXO> PRODUTO_ANEXO { get; set; }
@@ -146,26 +167,5 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO_ANOTACAO> USUARIO_ANOTACAO { get; set; }
         public virtual DbSet<VIDEO> VIDEO { get; set; }
         public virtual DbSet<VIDEO_COMENTARIO> VIDEO_COMENTARIO { get; set; }
-        public virtual DbSet<ITEM_PEDIDO_COMPRA> ITEM_PEDIDO_COMPRA { get; set; }
-        public virtual DbSet<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
-        public virtual DbSet<PEDIDO_COMPRA_ACOMPANHAMENTO> PEDIDO_COMPRA_ACOMPANHAMENTO { get; set; }
-        public virtual DbSet<PEDIDO_COMPRA_ANEXO> PEDIDO_COMPRA_ANEXO { get; set; }
-        public virtual DbSet<ASSINANTE_ANEXO> ASSINANTE_ANEXO { get; set; }
-        public virtual DbSet<ASSINANTE_ANOTACAO> ASSINANTE_ANOTACAO { get; set; }
-        public virtual DbSet<ASSINANTE_CONSUMO> ASSINANTE_CONSUMO { get; set; }
-        public virtual DbSet<ASSINANTE_PAGAMENTO> ASSINANTE_PAGAMENTO { get; set; }
-        public virtual DbSet<ASSINANTE_PLANO> ASSINANTE_PLANO { get; set; }
-        public virtual DbSet<ASSINANTE_QUADRO_SOCIETARIO> ASSINANTE_QUADRO_SOCIETARIO { get; set; }
-        public virtual DbSet<EMAIL_AGENDAMENTO> EMAIL_AGENDAMENTO { get; set; }
-        public virtual DbSet<GRUPO> GRUPO { get; set; }
-        public virtual DbSet<GRUPO_CLIENTE> GRUPO_CLIENTE { get; set; }
-        public virtual DbSet<LOG_EXCECAO> LOG_EXCECAO { get; set; }
-        public virtual DbSet<MENSAGEM_ANEXO> MENSAGEM_ANEXO { get; set; }
-        public virtual DbSet<MENSAGEM_AUTOMACAO> MENSAGEM_AUTOMACAO { get; set; }
-        public virtual DbSet<MENSAGEM_AUTOMACAO_DATAS> MENSAGEM_AUTOMACAO_DATAS { get; set; }
-        public virtual DbSet<MENSAGENS> MENSAGENS { get; set; }
-        public virtual DbSet<MENSAGENS_DESTINOS> MENSAGENS_DESTINOS { get; set; }
-        public virtual DbSet<PLANO> PLANO { get; set; }
-        public virtual DbSet<PLANO_PERIODICIDADE> PLANO_PERIODICIDADE { get; set; }
     }
 }

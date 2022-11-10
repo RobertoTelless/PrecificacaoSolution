@@ -20,8 +20,6 @@ namespace EntitiesServices.Model
         public Nullable<decimal> FITD_QN_QUANTIDADE { get; set; }
         public Nullable<int> FITD_IN_ATIVO { get; set; }
     
-        public virtual FICHA_TECNICA FICHA_TECNICA { get; set; }
         public virtual PRODUTO PRODUTO { get; set; }
-        public virtual PRODUTO_TABELA_PRECO PRODUTO_TABELA_PRECO { get; set; }
     }
 }

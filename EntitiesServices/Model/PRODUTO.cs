@@ -20,6 +20,7 @@ namespace EntitiesServices.Model
             this.CRM_PEDIDO_VENDA_ITEM = new HashSet<CRM_PEDIDO_VENDA_ITEM>();
             this.FICHA_TECNICA = new HashSet<FICHA_TECNICA>();
             this.FICHA_TECNICA_DETALHE = new HashSet<FICHA_TECNICA_DETALHE>();
+            this.ITEM_PEDIDO_COMPRA = new HashSet<ITEM_PEDIDO_COMPRA>();
             this.MOVIMENTO_ESTOQUE_PRODUTO = new HashSet<MOVIMENTO_ESTOQUE_PRODUTO>();
             this.PRODUTO_ANEXO = new HashSet<PRODUTO_ANEXO>();
             this.PRODUTO_ESTOQUE_EMPRESA = new HashSet<PRODUTO_ESTOQUE_EMPRESA>();
@@ -27,7 +28,6 @@ namespace EntitiesServices.Model
             this.PRODUTO_KIT = new HashSet<PRODUTO_KIT>();
             this.PRODUTO_TABELA_PRECO = new HashSet<PRODUTO_TABELA_PRECO>();
             this.PRODUTO_ULTIMOS_CUSTOS = new HashSet<PRODUTO_ULTIMOS_CUSTOS>();
-            this.ITEM_PEDIDO_COMPRA = new HashSet<ITEM_PEDIDO_COMPRA>();
         }
     
         public int PROD_CD_ID { get; set; }
@@ -97,6 +97,8 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ITEM_PEDIDO_COMPRA> ITEM_PEDIDO_COMPRA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MOVIMENTO_ESTOQUE_PRODUTO> MOVIMENTO_ESTOQUE_PRODUTO { get; set; }
         public virtual PRODUTO_ORIGEM PRODUTO_ORIGEM { get; set; }
         public virtual TAMANHO TAMANHO { get; set; }
@@ -115,7 +117,5 @@ namespace EntitiesServices.Model
         public virtual ICollection<PRODUTO_ULTIMOS_CUSTOS> PRODUTO_ULTIMOS_CUSTOS { get; set; }
         public virtual UNIDADE UNIDADE { get; set; }
         public virtual SUBCATEGORIA_PRODUTO SUBCATEGORIA_PRODUTO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ITEM_PEDIDO_COMPRA> ITEM_PEDIDO_COMPRA { get; set; }
     }
 }
