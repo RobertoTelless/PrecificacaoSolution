@@ -238,7 +238,7 @@ namespace ApplicationServices.Services
                         // Prepara campos
                         body = body.Replace("{pedido}", item.PECO_NM_NOME);
                         body = body.Replace("{numero}", item.PECO_CD_ID.ToString());
-                        header = header.Replace("{nome}", item.USUARIO.USUA_NM_NOME);
+                        header = header.Replace("{nome}", usuario.USUA_NM_NOME);
                         String emailBody = header + "<br /><br />" + body + "<br /><br />" + footer;
 
                         // Monta e-mail

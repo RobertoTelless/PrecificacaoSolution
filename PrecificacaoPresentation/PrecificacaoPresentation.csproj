@@ -759,6 +759,8 @@
     <Content Include="Imagens\1\Videos\3\Fotos\hqdefault.jpg" />
     <Content Include="Imagens\1\Videos\4\Fotos\20220810172911_prazer-da-musica-10-08-publi.png" />
     <Content Include="Imagens\1\Videos\5\Fotos\baixados %281%29.jpg" />
+    <Content Include="Imagens\Assinante\1\Foto\FotoOficial.jpg" />
+    <Content Include="Imagens\Assinante\3\Foto\a2.jpg" />
     <Content Include="Imagens\Base\FotoBase.jpg" />
     <Content Include="Imagens\Base\FotoOficial.jpg" />
     <Content Include="Imagens\Base\icone_imagem.jpg" />
@@ -3423,7 +3425,8 @@
     <Folder Include="Imagens\1\Usuario\6\Anexos\" />
     <Folder Include="Imagens\1\Usuario\8\Anexos\" />
     <Folder Include="Imagens\1\Usuario\9\Anexos\" />
-    <Folder Include="Imagens\Assinante\" />
+    <Folder Include="Imagens\Assinante\1\Anexos\" />
+    <Folder Include="Imagens\Assinante\3\Anexos\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Mensagem\" />

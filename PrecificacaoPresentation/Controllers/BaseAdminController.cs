@@ -80,7 +80,7 @@ namespace ERP_Condominios_Solution.Controllers
             crApp = crApps;
             tpApp = tpApps;
             assiApp = assiApps; 
-            planApps = planApps;
+            planApp = planApps;
             crmApp = crmApps;
             temApp = temApps;
         }

@@ -2944,7 +2944,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Compras por Fornecedor
             List<FORNECEDOR> listaForn = forApp.GetAllItens(idAss);
-            List<Int32> forns = listaGeral.Where(m => m.PECO_IN_STATUS != 8 & (m.FORN_CD_ID != null & m.FORN_CD_ID != 0)).Select(p => p.FORN_CD_ID).Distinct().ToList();
+            List<Int32> forns = listaGeral.Where(m => m.PECO_IN_STATUS != 8 & (m.FORN_CD_ID != null & m.FORN_CD_ID != 0)).Select(p => p.FORN_CD_ID.Value).Distinct().ToList();
             List<ModeloViewModel> listaMod1 = new List<ModeloViewModel>();
             foreach (Int32 item in forns)
             {

@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b7e2c34617a3445c833374b19fe745f1" Name="Diagram1">
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.AGENDA" Width="1.5" PointX="7.5" PointY="194.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.AGENDA_ANEXO" Width="1.5" PointX="9.75" PointY="179.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE" Width="1.5" PointX="3" PointY="196.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_ANEXO" Width="1.5" PointX="5.25" PointY="150.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_ANOTACAO" Width="1.5" PointX="8.25" PointY="205.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_CONSUMO" Width="1.5" PointX="5.25" PointY="156.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_PAGAMENTO" Width="1.5" PointX="8.25" PointY="201" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_PLANO" Width="1.5" PointX="8.25" PointY="209.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ASSINANTE_QUADRO_SOCIETARIO" Width="1.5" PointX="5.25" PointY="168.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.BANCO" Width="1.5" PointX="5.25" PointY="171.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CARGO_USUARIO" Width="1.5" PointX="5.25" PointY="175" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_AGENDA" Width="1.5" PointX="5.25" PointY="178.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_CLIENTE" Width="1.5" PointX="5.25" PointY="181.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_CUSTO_FIXO" Width="1.5" PointX="5.25" PointY="184.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_FORNECEDOR" Width="1.5" PointX="5.25" PointY="187.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_NOTIFICACAO" Width="1.5" PointX="5.25" PointY="190" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_PRODUTO" Width="1.5" PointX="5.25" PointY="193" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_SERVICO" Width="1.5" PointX="5.25" PointY="197" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CATEGORIA_USUARIO" Width="1.5" PointX="5.25" PointY="200" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE" Width="1.5" PointX="10.5" PointY="233.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_ANEXO" Width="1.5" PointX="12.75" PointY="234.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_ANOTACAO" Width="1.5" PointX="15.75" PointY="213.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_CONTATO" Width="1.5" PointX="12.75" PointY="241.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_QUADRO_SOCIETARIO" Width="1.5" PointX="12.75" PointY="245.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CLIENTE_REFERENCIA" Width="1.5" PointX="12.75" PointY="248.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.COMISSAO_CARGO" Width="1.5" PointX="7.5" PointY="175.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONFIGURACAO" Width="1.5" PointX="5.25" PointY="202.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO" Width="1.5" PointX="10.5" PointY="182.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_ANEXO" Width="1.5" PointX="12.75" PointY="178.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_CONTATO" Width="1.5" PointX="12.75" PointY="174.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_BANCO_LANCAMENTO" Width="1.5" PointX="12.75" PointY="170.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_PAGAR" Width="1.5" PointX="21" PointY="198.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_PAGAR_ANEXO" Width="1.5" PointX="23.25" PointY="197.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_PAGAR_PARCELA" Width="1.5" PointX="24.25" PointY="191.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_PAGAR_RATEIO" Width="1.5" PointX="26.25" PointY="214.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_RECEBER" Width="1.5" PointX="18.75" PointY="207.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_RECEBER_ANEXO" Width="1.5" PointX="21" PointY="219.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_RECEBER_PARCELA" Width="1.5" PointX="21" PointY="222.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CONTA_RECEBER_RATEIO" Width="1.5" PointX="24" PointY="220" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM" Width="1.5" PointX="15.75" PointY="243.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ACAO" Width="1.5" PointX="24" PointY="236.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ANEXO" Width="1.5" PointX="18" PointY="252.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_COMENTARIO" Width="1.5" PointX="24" PointY="212.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_CONTATO" Width="1.5" PointX="18" PointY="257.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_ORIGEM" Width="1.5" PointX="5.25" PointY="221.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA" Width="1.5" PointX="27" PointY="234.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ACOMPANHAMENTO" Width="1.5" PointX="29.25" PointY="216.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ANEXO" Width="1.5" PointX="29.25" PointY="243.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CRM_PEDIDO_VENDA_ITEM" Width="1.5" PointX="32.25" PointY="232.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.CUSTO_FIXO" Width="1.5" PointX="7.5" PointY="183.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.DIARIO_PROCESSO" Width="1.5" PointX="18" PointY="220.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMAIL_AGENDAMENTO" Width="1.5" PointX="15.75" PointY="223.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA" Width="1.5" PointX="7.5" PointY="223.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA_ANEXO" Width="1.5" PointX="9.75" PointY="250.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.EMPRESA_MAQUINA" Width="1.5" PointX="15.75" PointY="240.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FICHA_TECNICA" Width="1.5" PointX="21" PointY="227.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FICHA_TECNICA_DETALHE" Width="1.5" PointX="23.25" PointY="232.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FILIAL" Width="1.5" PointX="5.25" PointY="211.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_ENVIO" Width="1.5" PointX="5.25" PointY="234.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_FRETE" Width="1.5" PointX="5.25" PointY="244.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORMA_PAGTO_RECTO" Width="1.5" PointX="15.75" PointY="206.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR" Width="1.5" PointX="10.5" PointY="196.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_ANEXO" Width="1.5" PointX="12.75" PointY="221" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_ANOTACOES" Width="1.5" PointX="15.75" PointY="194.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_CONTATO" Width="1.5" PointX="12.75" PointY="224.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FORNECEDOR_QUADRO_SOCIETARIO" Width="1.5" PointX="12.75" PointY="228.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FUNIL" Width="1.5" PointX="5.25" PointY="247.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.FUNIL_ETAPA" Width="1.5" PointX="7.5" PointY="247.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.GRUPO" Width="1.5" PointX="18.75" PointY="193.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.GRUPO_CLIENTE" Width="1.5" PointX="12.75" PointY="238.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.GRUPO_PLANO_CONTA" Width="1.5" PointX="5.25" PointY="252.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.ITEM_PEDIDO_COMPRA" Width="1.5" PointX="18.75" PointY="198.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.LOG" Width="1.5" PointX="21.75" PointY="193.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.LOG_EXCECAO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MAQUINA" Width="1.5" PointX="5.25" PointY="255.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGEM_ANEXO" Width="1.5" PointX="21" PointY="247.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO" Width="1.5" PointX="30" PointY="236.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGEM_AUTOMACAO_DATAS" Width="1.5" PointX="32.25" PointY="238.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGENS" Width="1.5" PointX="18.75" PointY="242.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MENSAGENS_DESTINOS" Width="1.5" PointX="24" PointY="223.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOTIVO_CANCELAMENTO" Width="1.5" PointX="5.25" PointY="259.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOTIVO_ENCERRAMENTO" Width="1.5" PointX="5.25" PointY="263" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.MOVIMENTO_ESTOQUE_PRODUTO" Width="1.5" PointX="23.75" PointY="201.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOMENCLATURA_BRAS_SERVICOS" Width="1.5" PointX="11.25" PointY="159.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTICIA" Width="1.5" PointX="5.25" PointY="266.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTICIA_COMENTARIO" Width="1.5" PointX="15.75" PointY="227.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTIFICACAO" Width="1.5" PointX="10.5" PointY="206.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.NOTIFICACAO_ANEXO" Width="1.5" PointX="12.75" PointY="166" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.OUTRO_CUSTO_VARIAVEL" Width="1.5" PointX="5.25" PointY="271" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PEDIDO_COMPRA" Width="1.5" PointX="21" PointY="211.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PEDIDO_COMPRA_ACOMPANHAMENTO" Width="1.5" PointX="26.25" PointY="201.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PEDIDO_COMPRA_ANEXO" Width="1.5" PointX="23.25" PointY="216.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PERFIL" Width="1.5" PointX="11.25" PointY="162.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PERIODICIDADE_TAREFA" Width="1.5" PointX="16.5" PointY="186.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA" Width="1.5" PointX="10.5" PointY="190.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANEXO" Width="1.5" PointX="12.75" PointY="182.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PESSOA_EXTERNA_ANOTACAO" Width="1.5" PointX="15.75" PointY="190.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLANO" Width="1.5" PointX="0.75" PointY="195" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLANO_CONTA" Width="1.5" PointX="10.5" PointY="226.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLANO_PERIODICIDADE" Width="1.5" PointX="1.5" PointY="191.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PLATAFORMA_ENTREGA" Width="1.5" PointX="5.25" PointY="274.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO" Width="1.5" PointX="18.75" PointY="225.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ANEXO" Width="1.5" PointX="21" PointY="232.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ESTOQUE_EMPRESA" Width="1.5" PointX="26" PointY="230.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_FORNECEDOR" Width="1.5" PointX="15.75" PointY="198.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_KIT" Width="1.5" PointX="21" PointY="236.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ORIGEM" Width="1.5" PointX="16.5" PointY="231.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_TABELA_PRECO" Width="1.5" PointX="27" PointY="226.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.PRODUTO_ULTIMOS_CUSTOS" Width="1.5" PointX="21" PointY="251.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.REGIME_TRIBUTARIO" Width="1.5" PointX="5.25" PointY="227" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SERVICO" Width="1.5" PointX="13.5" PointY="200.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SERVICO_ANEXO" Width="1.5" PointX="15.75" PointY="202.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SERVICO_TABELA_PRECO" Width="1.5" PointX="23.75" PointY="207.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SEXO" Width="1.5" PointX="8.25" PointY="237.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SUBCATEGORIA_PRODUTO" Width="1.5" PointX="13.5" PointY="207.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.SUBGRUPO_PLANO_CONTA" Width="1.5" PointX="10.5" PointY="222.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAMANHO" Width="1.5" PointX="5.25" PointY="281.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA" Width="1.5" PointX="21.75" PointY="240.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA_ACOMPANHAMENTO" Width="1.5" PointX="27" PointY="218.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TAREFA_ANEXO" Width="1.5" PointX="24" PointY="245.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE" Width="1.5" PointX="5.25" PointY="284.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_EMAIL" Width="1.5" PointX="5.25" PointY="289.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_PROPOSTA" Width="1.5" PointX="5.25" PointY="294.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TEMPLATE_SMS" Width="1.5" PointX="5.25" PointY="298.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_ACAO" Width="1.5" PointX="5.25" PointY="302.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CONTA" Width="1.5" PointX="8.25" PointY="188.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CONTRIBUINTE" Width="1.5" PointX="5.25" PointY="305.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_CRM" Width="1.5" PointX="5.25" PointY="308.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_EMBALAGEM" Width="1.5" PointX="16.5" PointY="234.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_PESSOA" Width="1.5" PointX="0.75" PointY="210.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_TAREFA" Width="1.5" PointX="5.25" PointY="311" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_TRANSPORTE" Width="1.5" PointX="8.5" PointY="213.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TIPO_VEICULO" Width="1.5" PointX="8.5" PointY="216.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TRANSPORTADORA" Width="1.5" PointX="10.75" PointY="212" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.TRANSPORTADORA_ANEXO" Width="1.5" PointX="13" PointY="214.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.UF" Width="1.5" PointX="0.75" PointY="205.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.UNIDADE" Width="1.5" PointX="16.5" PointY="261.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO" Width="1.5" PointX="13.5" PointY="186.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO_ANEXO" Width="1.5" PointX="15.75" PointY="216.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.USUARIO_ANOTACAO" Width="1.5" PointX="15.75" PointY="220.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO" Width="1.5" PointX="5.25" PointY="322" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_PrecificacaoModel.VIDEO_COMENTARIO" Width="1.5" PointX="15.75" PointY="254.5" IsExpanded="true" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_ANEXO_AGENDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_CATEGORIA_AGENDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_AGENDA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_AGENDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKAGENDA22330" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKAGENDA418024" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_ANEXO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_CONSUMO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_QUADRO_SOCIETARIO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_TIPO_PESSOA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_UF" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_AGENDA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_CLIENTE_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_FORNECEDOR_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_NOTIFICACAO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_SERVICO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CATEGORIA_USUARIO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONFIGURACAO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_BANCO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ORIGEM_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FILIAL_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORMA_ENVIO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORMA_FRETE_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORMA_PAGTO_RECTO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORNECEDOR_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FUNIL_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_PLANO_CONTA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_LOG_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOTIVO_CANCELAMENTO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOTIVO_ENCERRAMENTO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOVIMENTO_ESTOQUE_PRODUTO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PLANO_CONTA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SUBCATEGORIA_PRODUTO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SUBGRUPO_PLANO_CONTA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TAMANHO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_EMAIL_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_PROPOSTA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TEMPLATE_SMS_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_ACAO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_CONTRIBUINTE_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_CRM_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TIPO_TAREFA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_ASSINANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKBANCO388863" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCARGO_USUA401517" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCATEGORIA_171360" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCATEGORIA_825959" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKEMPRESA495355" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKMAQUINA36030" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKNOTICIA215325" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKNOTIFICACA189005" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKOUTRO_CUST578807" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPESSOA_EXT750477" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPLATAFORMA785659" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO932438" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKTAREFA157283" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO561404" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_ANOTACAO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PAGAMENTO_PLANO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ASSINANTE_PLANO_PLANO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCONTA_BANC816139" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_USUARIO_CARGO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCOMISSAO_C527874" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPESSOA_EXT429415" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_CATEGORIA_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCUSTO_FIXO798962" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKFORNECEDOR675570" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKNOTIFICACA285980" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO88682" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKSUBCATEGOR381994" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_CATEGORIA_SERVICO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_USUARIO_CATEGORIA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_ANEXO_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_ANOTACAO_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_CONTATO_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_QUADRO_SOCIETARIO_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_REFERENCIA_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_REGIME_TRIBUTARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_SEXO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_TIPO_CONTRIBUINTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_TIPO_PESSOA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_UF" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_UF1" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CLIENTE_ANOTACAO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_CONTA_BANCO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_CONTA_BANCO1" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_PARCELA_CONTA_BANCO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CONTA_BANCO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCONTA_BANC165084" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCONTA_BANC166642" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCONTA_BANC521858" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCONTA_BANC819274" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKFORMA_PAGT509018" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_ANEXO_CONTA_PAGAR" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_CENTRO_CUSTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_FORMA_PAGTO_RECTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_FORNECEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_PARCELA_CONTA_PAGAR" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_PERIODICIDADE_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_RATEIO_CONTA_PAGAR" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_PARCELA_FORMA_PAGTO_RECTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_RATEIO_CENTRO_CUSTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_ANEXO_CONTA_RECEBER" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CENTRO_CUSTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_CRM_PEDIDO_VENDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_FORMA_PAGTO_RECTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_PARCELA_CONTA_RECEBER" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_PERIODICIDADE_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_RATEIO_CONTA_RECEBER" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_RECEBER_RATEIO_CENTRO_CUSTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ANEXO_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_COMENTARIO_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_CONTATO_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_CRM_ORIGEM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_MOTIVO_CANCELAMENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_MOTIVO_ENCERRAMENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_TIPO_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_TIPO_ACAO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_ACAO_USUARIO1" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_ACAO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_COMENTARIO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_COMENTARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ACOMPANHAMENTO_CRM_PEDIDO_VENDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ANEXO_CRM_PEDIDO_VENDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_FORMA_ENVIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_FORMA_FRETE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ITEM_CRM_PEDIDO_VENDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_MOTIVO_CANCELAMENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_MOTIVO_ENCERRAMENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_PLATAFORMA_ENTREGA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_TEMPLATE_PROPOSTA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_TRANSPORTADORA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ACOMPANHAMENTO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ITEM_PRODUTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_PEDIDO_VENDA_ITEM_UNIDADE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCUSTO_FIXO481608" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKCUSTO_FIXO921563" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_DIARIO_PROCESSO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMAIL_AGENDAMENTO_MENSAGENS" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_ANEXO_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_UF" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORNECEDOR_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOVIMENTO_ESTOQUE_PRODUTO_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_EMPR" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKEMPRESA834470" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKFORMA_PAGT560718" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_ES179016" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_TA392272" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_EMPRESA_MAQUINA_MAQUINA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FICHA_TECNICA_PRODUTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_PRODUTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FILIAL_UF" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_FILIAL" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_TABELA_PRECO_FILIAL" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_FORMA_PAGTO_RECTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORNECEDOR_TIPO_PESSOA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORNECEDOR_UF" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ITEM_PEDIDO_COMPRA_FORNECEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_FORNECEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKFORNECEDOR523761" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKFORNECEDOR573263" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKFORNECEDOR685992" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKFORNECEDOR90800" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_FO601856" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FORNECEDOR_ANOTACOES_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FUNIL_ETAPA_FUNIL" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_CLIENTE_GRUPO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_GRUPO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_GRUPO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_GRUPO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_GRUPO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT396583" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKSUBGRUPO_P567299" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ITEM_PEDIDO_COMPRA_PEDIDO_COMPRA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ITEM_PEDIDO_COMPRA_PRODUTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_ITEM_PEDIDO_COMPRA_UNIDADE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_LOG_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_ANEXO_MENSAGENS" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_DATAS_MENSAGEM_AUTOMACAO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_PERIODICIDADE_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_EMAIL" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_TEMPLATE_SMS" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGEM_AUTOMACAO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_DESTINOS_MENSAGENS" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_PERIODICIDADE_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_EMAIL" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_TEMPLATE_SMS" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MENSAGENS_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOVIMENTO_ESTOQUE_PRODUTO_PRODUTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_MOVIMENTO_ESTOQUE_PRODUTO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_NOMENCLATURA_BRAS_SERVICOS" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKNOTICIA_CO334260" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKNOTICIA_CO92730" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKNOTIFICACA419021" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKNOTIFICACA793310" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ACOMPANHAMENTO_PEDIDO_COMPRA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ANEXO_PEDIDO_COMPRA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_PLANO_CONTA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PEDIDO_COMPRA_ACOMPANHAMENTO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_USUARIO_PERFIL" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TAREFA_PERIODICIDADE_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANEXO_PESSOA_EXTERNA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_PESSOA_EXTERNA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PESSOA_EXTERNA_ANOTACAO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PLANO_PLANO_PERIODICIDADE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPLANO_CONT936913" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PRODUTO_PRODUTO_ORIGEM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PRODUTO_TAMANHO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_PRODUTO_TIPO_EMBALAGEM" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_AN539356" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_ES321900" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_FO895314" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_KI843257" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_TA78402" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO_UL782175" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO131046" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKPRODUTO137036" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_ANEXO_SERVICO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_TABELA_PRECO_SERVICO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_SERVICO_UNIDADE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TAREFA_ACOMPANHAMENTO_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TAREFA_ANEXO_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TAREFA_TIPO_TAREFA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKTAREFA210002" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKTAREFA_ACO948353" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_TIPO_TRANSPORTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_TIPO_VEICULO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_TRANSPORTADORA_ANEXO_TRANSPORTADORA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_USUARIO_ANEXO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN416650" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
