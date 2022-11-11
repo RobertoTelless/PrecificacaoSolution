@@ -264,6 +264,7 @@
     <Compile Include="Controllers\NoticiaController.cs" />
     <Compile Include="Controllers\NotificacaoController.cs" />
     <Compile Include="Controllers\PessoaExternaController.cs" />
+    <Compile Include="Controllers\PlanoController.cs" />
     <Compile Include="Controllers\PlataformaEntregaController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\TabelaAuxiliarController.cs" />
@@ -3301,6 +3302,13 @@
     <Content Include="Views\Assinante\VerAssinantesBloqueados.cshtml" />
     <Content Include="Views\Assinante\VerAssinaturasVencidas.cshtml" />
     <Content Include="Views\Assinante\VerAssinaturasVencidas30.cshtml" />
+    <Content Include="Views\BaseAdmin\MontarTelaCentralAssinante.cshtml" />
+    <Content Include="Views\BaseAdmin\SolicitarIncluirAssinantePlano.cshtml" />
+    <Content Include="Views\BaseAdmin\MontarTelaDashboardAssinantes.cshtml" />
+    <Content Include="Views\Plano\MontarTelaPlano.cshtml" />
+    <Content Include="Views\Plano\VerComparativoPlanos.cshtml" />
+    <Content Include="Views\Plano\IncluirPlano.cshtml" />
+    <Content Include="Views\Plano\EditarPlano.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

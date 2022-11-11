@@ -13,6 +13,7 @@ namespace CrossCutting
         public string SMTP { get; set; }
         public string PORTA { get; set; }
         public string EMAIL_EMISSOR { get; set; }
+        public string EMAIL_CC_DESTINO { get; set; }
         public string SENHA_EMISSOR { get; set; }
         public string NOME_EMISSOR { get; set; }
         public string EMAIL_DESTINO { get; set; }
