@@ -89,6 +89,7 @@
                                                     @Html.HiddenFor(m => m.PECO_IN_ATIVO)
                                                     @Html.HiddenFor(m => m.PECO_IN_STATUS)
                                                     @Html.HiddenFor(m => m.PECO_DT_FINAL)
+                                                    @Html.HiddenFor(m => m.FORN_CD_ID)
                                                     <div class="col-lg-2 col-md-2 col-xs-12">
                                                         Tipo*
                                                         @Html.DropDownListFor(m => m.PECO_IN_TIPO, (SelectList)ViewBag.Tipo, "Selecionar", new { @class = "form-control", id = "tipo" })

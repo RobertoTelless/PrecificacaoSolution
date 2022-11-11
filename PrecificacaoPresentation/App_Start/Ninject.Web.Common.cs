@@ -130,7 +130,6 @@ namespace Presentation.Start
             kernel.Bind<IFormaEnvioAppService>().To<FormaEnvioAppService>();
             kernel.Bind<IFormaFreteAppService>().To<FormaFreteAppService>();
             kernel.Bind<IPedidoCompraAppService>().To<PedidoCompraAppService>();
-            kernel.Bind<IAssinanteAppService>().To<AssinanteAppService>();
             kernel.Bind<IAssinanteCnpjAppService>().To<AssinanteCnpjAppService>();
             kernel.Bind<IPlanoAppService>().To<PlanoAppService>();
 
@@ -200,7 +199,6 @@ namespace Presentation.Start
             kernel.Bind<IFormaFreteService>().To<FormaFreteService>();
             kernel.Bind<IPedidoCompraService>().To<PedidoCompraService>();
             kernel.Bind<IPlanoService>().To<PlanoService>();
-            kernel.Bind<IAssinanteService>().To<AssinanteService>();
             kernel.Bind<IAssinanteCnpjService>().To<AssinanteCnpjService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
@@ -325,7 +323,6 @@ namespace Presentation.Start
             kernel.Bind<IAssinanteCnpjRepository>().To<AssinanteCnpjRepository>();
             kernel.Bind<IAssinantePagamentoRepository>().To<AssinantePagamentoRepository>();
             kernel.Bind<IAssinantePlanoRepository>().To<AssinantePlanoRepository>();
-            kernel.Bind<IAssinanteRepository>().To<AssinanteRepository>();
             kernel.Bind<IPeriodicidadePlanoRepository>().To<PeriodicidadePlanoRepository>();
             kernel.Bind<IPlanoRepository>().To<PlanoRepository>();
 

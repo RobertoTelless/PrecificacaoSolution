@@ -142,6 +142,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Carrega listas
             Int32 idAss = (Int32)Session["IdAssinante"];
+            ASSINANTE assi = assiApp.GetItemById(idAss);
             if ((Int32)Session["Login"] == 1)
             {
                 Session["Perfis"] = baseApp.GetAllPerfis();
@@ -171,6 +172,44 @@ namespace ERP_Condominios_Solution.Controllers
             Session["IdCP"] = 0;
             Session["MensVencimentoCR"] = 0;
             Session["VoltaCompra"] = 0;
+            Session["MensCompra"] = 0;
+            Session["MensVenda"] = 0;
+            Session["ErroSoma"] = 0;
+            Session["IdCP"] = 0;
+            Session["VoltaCP"] = 0;
+            Session["VoltaCompra"] = 0;
+            Session["MensvencimentoCR"] = 0;
+            Session["VoltaCR"] = 0;
+            Session["IdVoltaTab"] = 0;
+            Session["SMSEMailEnvio"] = 0;
+            Session["MensTemplateSMS"] = 0;
+            Session["MensPermissao"] = 0;
+            Session["MensCRM"] = 0;
+            Session["MensCatCliente"] = 0;
+            Session["MensCargo"] = 0;
+            Session["MensOrigem"] = 0;
+            Session["MensMotCancelamento"] = 0;
+            Session["MensMotEncerramento"] = 0;
+            Session["MensTipoAcao"] = 0;
+            Session["MensAtendimento"] = 0;
+            Session["MensServico"] = 0;
+            Session["MensCR"] = 0;
+            Session["MensCP"] = 0;
+            Session["MensOrdemServico"] = 0;
+            Session["IdOrdemServico"] = 0;
+            Session["VoltaNotificacao"] = 3;
+            Session["VoltaNoticia"] = 1;
+            Session["AgendaCorp"] = 0;
+            Session["VoltaMensagem"] = 0;
+            Session["VoltaCRM"] = 0;
+            Session["ListaCRM"] = null;
+            Session["CRM"] = null;
+            Session["FiltroCRM"] = null;
+            Session["ListaITPC"] = null;
+            Session["VoltaAgendaCRMCalend"] = 0;
+            Session["VoltaCliGrupo"] = 0;
+            Session["VoltaTransp"] = 0;
+            Session["TelefVolta"] = 0;
 
             USUARIO usu = new USUARIO();
             UsuarioViewModel vm = new UsuarioViewModel();
@@ -180,22 +219,6 @@ namespace ERP_Condominios_Solution.Controllers
             USUARIO usuContent = cache["usuario" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID] as USUARIO;
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
             vm = Mapper.Map<USUARIO, UsuarioViewModel>(usuario);
-
-            //if (usuContent == null)
-            //{
-            //    usu = usuApp.GetItemById(((USUARIO)Session["UserCredentials"]).USUA_CD_ID);
-            //    vm = Mapper.Map<USUARIO, UsuarioViewModel>(usu);
-            //    noti = notfApp.GetAllItens(idAss);
-            //    DateTime expiration = DateTime.Now.AddDays(15);
-            //    cache.Set("usuario" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, usu, expiration);
-            //    cache.Set("vm" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, vm, expiration);
-            //    cache.Set("noti" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID, noti, expiration);
-            //}
-
-            //usu = cache.Get("usuario" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as USUARIO;
-            //vm = cache.Get("vm" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as UsuarioViewModel;
-            //noti = cache.Get("noti" + ((USUARIO)Session["UserCredentials"]).USUA_CD_ID) as List<NOTIFICACAO>;
-            //ViewBag.Perfil = usu.PERFIL.PERF_SG_SIGLA;
 
             noti = notfApp.GetAllItensUser(usuario.USUA_CD_ID, usuario.ASSI_CD_ID);
             Session["Notificacoes"] = noti;
@@ -219,6 +242,19 @@ namespace ERP_Condominios_Solution.Controllers
             Session["AgendasHoje"] = ((List<AGENDA>)Session["Agendas"]).Where(p => p.AGEN_DT_DATA == DateTime.Today.Date).ToList();
             Session["NumAgendasHoje"] = ((List<AGENDA>)Session["AgendasHoje"]).Count;
             Session["Logs"] = usu.LOG.Count;
+
+            Session["Planos"] = assi.ASSINANTE_PLANO;
+            Session["PlanosVencidos"] = assi.ASSINANTE_PLANO.Where(p => p.ASPL_DT_VALIDADE.Value.Date < DateTime.Today.Date).ToList();
+            Session["PlanosVencer30"] = assi.ASSINANTE_PLANO.Where(p => p.ASPL_DT_VALIDADE.Value.Date < DateTime.Today.Date.AddDays(30)).ToList();
+            Session["NumPlanos"] = assi.ASSINANTE_PLANO.Count;
+            Session["NumPlanosVencidos"] = assi.ASSINANTE_PLANO.Where(p => p.ASPL_DT_VALIDADE.Value.Date < DateTime.Today.Date).ToList().Count();
+            Session["NumPlanosVencer30"] = assi.ASSINANTE_PLANO.Where(p => p.ASPL_DT_VALIDADE.Value.Date < DateTime.Today.Date.AddDays(30)).ToList().Count();
+
+            List<ASSINANTE_PAGAMENTO> pags = assiApp.GetAllPagamentos();
+            pags = pags.Where(p => p.ASPA_IN_PAGO == 0 & p.ASPA_NR_ATRASO > 0 & p.ASSI_CD_ID == idAss).ToList();
+            Int32 atraso = pags.Count;
+            Session["Atrasos"] = pags;
+            Session["NumAtrasos"] = pags.Count;
 
             String frase = String.Empty;
             String nome = usuario.USUA_NM_NOME.Substring(0, usuario.USUA_NM_NOME.IndexOf(" "));

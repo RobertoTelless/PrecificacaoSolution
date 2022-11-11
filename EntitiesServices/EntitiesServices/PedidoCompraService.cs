@@ -132,6 +132,8 @@ namespace ModelServices.EntitiesServices
             {
                 try
                 {
+                    item.FORN_CD_ID = null;
+                    item.FORNECEDOR = null;
                     _logRepository.Add(log);
                     _baseRepository.Add(item);
                     transaction.Commit();

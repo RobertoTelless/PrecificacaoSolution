@@ -356,14 +356,6 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             Session["ListaITPC"] = null;
 
-            // Verifica possibilidade
-            Int32 num = baseApp.GetAllItens(idAss).Count;
-            if ((Int32)Session["NumCompra"] <= num)
-            {
-                Session["MensCompra"] = 50;
-                return RedirectToAction("MontarTelaCompra", "Compra");
-            }
-
             // Prepara listas
             ViewBag.CC = new SelectList(ccApp.GetAllItens(idAss).OrderBy(p => p.CECU_NM_NOME), "CECU_CD_ID", "CECU_NM_NOME");
             ViewBag.Unidades = new SelectList(baseApp.GetAllUnidades(idAss), "UNID_CD_ID", "UNID_NM_NOME");
@@ -2852,11 +2844,11 @@ namespace ERP_Condominios_Solution.Controllers
                 usuario = (USUARIO)Session["UserCredentials"];
 
                 // Verfifica permissão
-                if ((Int32)Session["PermCompra"] == 0)
-                {
-                    Session["MensPermissao"] = 2;
-                    return RedirectToAction("CarregarBase", "BaseAdmin");
-                }
+                //if ((Int32)Session["PermCompra"] == 0)
+                //{
+                //    Session["MensPermissao"] = 2;
+                //    return RedirectToAction("CarregarBase", "BaseAdmin");
+                //}
             }
             else
             {
