@@ -130,6 +130,9 @@ namespace Presentation.Start
             kernel.Bind<IFormaEnvioAppService>().To<FormaEnvioAppService>();
             kernel.Bind<IFormaFreteAppService>().To<FormaFreteAppService>();
             kernel.Bind<IPedidoCompraAppService>().To<PedidoCompraAppService>();
+            kernel.Bind<IAssinanteAppService>().To<AssinanteAppService>();
+            kernel.Bind<IAssinanteCnpjAppService>().To<AssinanteCnpjAppService>();
+            kernel.Bind<IPlanoAppService>().To<PlanoAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -196,6 +199,9 @@ namespace Presentation.Start
             kernel.Bind<IFormaEnvioService>().To<FormaEnvioService>();
             kernel.Bind<IFormaFreteService>().To<FormaFreteService>();
             kernel.Bind<IPedidoCompraService>().To<PedidoCompraService>();
+            kernel.Bind<IPlanoService>().To<PlanoService>();
+            kernel.Bind<IAssinanteService>().To<AssinanteService>();
+            kernel.Bind<IAssinanteCnpjService>().To<AssinanteCnpjService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -314,6 +320,14 @@ namespace Presentation.Start
             kernel.Bind<IPedidoCompraAnexoRepository>().To<PedidoCompraAnexoRepository>();
             kernel.Bind<IPedidoCompraAcompanhamentoRepository>().To<PedidoCompraAcompanhamentoRepository>();
             kernel.Bind<IItemPedidoCompraRepository>().To<ItemPedidoCompraRepository>();
+            kernel.Bind<IAssinanteAnexoRepository>().To<AssinanteAnexoRepository>();
+            kernel.Bind<IAssinanteAnotacaoRepository>().To<AssinanteAnotacaoRepository>();
+            kernel.Bind<IAssinanteCnpjRepository>().To<AssinanteCnpjRepository>();
+            kernel.Bind<IAssinantePagamentoRepository>().To<AssinantePagamentoRepository>();
+            kernel.Bind<IAssinantePlanoRepository>().To<AssinantePlanoRepository>();
+            kernel.Bind<IAssinanteRepository>().To<AssinanteRepository>();
+            kernel.Bind<IPeriodicidadePlanoRepository>().To<PeriodicidadePlanoRepository>();
+            kernel.Bind<IPlanoRepository>().To<PlanoRepository>();
 
 
         }

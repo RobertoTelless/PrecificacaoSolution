@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Db_PrecificacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Db_PrecificacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AGENDA">
           <Key>
             <PropertyRef Name="AGEN_CD_ID" />
@@ -395,6 +395,23 @@
           <Property Name="CONF_NR_DIAS_ACAO" Type="int" />
           <Property Name="CONF_IN_NUMERO_INICIAL_PEDIDO" Type="int" />
           <Property Name="CONF_NR_DIAS_PROPOSTA" Type="int" />
+          <Property Name="CONF_LK_LINK_SISTEMA" Type="varchar" MaxLength="250" />
+          <Property Name="CONF_IN_RESIDUAL" Type="int" />
+          <Property Name="CONF_NR_DIAS_ATENDIMENTO" Type="int" />
+          <Property Name="CONF_NR_MARGEM_ATRASO" Type="int" />
+          <Property Name="CONF_IN_DIAS_RESERVA_ESTOQUE" Type="int" />
+          <Property Name="CONF_IN_NUMERO_INICIAL_PROPOSTA" Type="int" />
+          <Property Name="CONF__IN_INCLUIR_SEM_ESTOQUE" Type="int" />
+          <Property Name="CONF_IN_ASSINANTE_FILIAL" Type="int" />
+          <Property Name="CONF_IN_FALHA_IMPORTACAO" Type="int" />
+          <Property Name="CONF_IN_ETAPAS_CRM" Type="int" />
+          <Property Name="CONF_IN_NOTIF_ACAO_ADM" Type="int" />
+          <Property Name="CONF_IN_NOTIF_ACAO_GER" Type="int" />
+          <Property Name="CONF_IN_NOTIF_ACAO_VEN" Type="int" />
+          <Property Name="CONF_IN_NOTIF_ACAO_OPR" Type="int" />
+          <Property Name="CONF_IN_NOTIF_ACAO_USU" Type="int" />
+          <Property Name="CONF_EM_CRMSYS" Type="varchar" MaxLength="150" />
+          <Property Name="CONF_EM_CRMSYS1" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="CONTA_BANCO">
           <Key>
@@ -6785,8 +6802,7 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Db_PrecificacaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -7321,6 +7337,23 @@
           <Property Name="CONF_IN_NUMERO_INICIAL_PEDIDO" Type="Int32" />
           <Property Name="CONF_NR_DIAS_PROPOSTA" Type="Int32" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_CONFIGURACAO_ASSINANTE" FromRole="CONFIGURACAO" ToRole="ASSINANTE" />
+          <Property Name="CONF_LK_LINK_SISTEMA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_IN_RESIDUAL" Type="Int32" />
+          <Property Name="CONF_NR_DIAS_ATENDIMENTO" Type="Int32" />
+          <Property Name="CONF_NR_MARGEM_ATRASO" Type="Int32" />
+          <Property Name="CONF_IN_DIAS_RESERVA_ESTOQUE" Type="Int32" />
+          <Property Name="CONF_IN_NUMERO_INICIAL_PROPOSTA" Type="Int32" />
+          <Property Name="CONF__IN_INCLUIR_SEM_ESTOQUE" Type="Int32" />
+          <Property Name="CONF_IN_ASSINANTE_FILIAL" Type="Int32" />
+          <Property Name="CONF_IN_FALHA_IMPORTACAO" Type="Int32" />
+          <Property Name="CONF_IN_ETAPAS_CRM" Type="Int32" />
+          <Property Name="CONF_IN_NOTIF_ACAO_ADM" Type="Int32" />
+          <Property Name="CONF_IN_NOTIF_ACAO_GER" Type="Int32" />
+          <Property Name="CONF_IN_NOTIF_ACAO_VEN" Type="Int32" />
+          <Property Name="CONF_IN_NOTIF_ACAO_OPR" Type="Int32" />
+          <Property Name="CONF_IN_NOTIF_ACAO_USU" Type="Int32" />
+          <Property Name="CONF_EM_CRMSYS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_EM_CRMSYS1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CONTA_BANCO">
           <Key>
@@ -14527,6 +14560,23 @@
           <EntitySetMapping Name="CONFIGURACAO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CONFIGURACAO">
               <MappingFragment StoreEntitySet="CONFIGURACAO">
+                <ScalarProperty Name="CONF_EM_CRMSYS1" ColumnName="CONF_EM_CRMSYS1" />
+                <ScalarProperty Name="CONF_EM_CRMSYS" ColumnName="CONF_EM_CRMSYS" />
+                <ScalarProperty Name="CONF_IN_NOTIF_ACAO_USU" ColumnName="CONF_IN_NOTIF_ACAO_USU" />
+                <ScalarProperty Name="CONF_IN_NOTIF_ACAO_OPR" ColumnName="CONF_IN_NOTIF_ACAO_OPR" />
+                <ScalarProperty Name="CONF_IN_NOTIF_ACAO_VEN" ColumnName="CONF_IN_NOTIF_ACAO_VEN" />
+                <ScalarProperty Name="CONF_IN_NOTIF_ACAO_GER" ColumnName="CONF_IN_NOTIF_ACAO_GER" />
+                <ScalarProperty Name="CONF_IN_NOTIF_ACAO_ADM" ColumnName="CONF_IN_NOTIF_ACAO_ADM" />
+                <ScalarProperty Name="CONF_IN_ETAPAS_CRM" ColumnName="CONF_IN_ETAPAS_CRM" />
+                <ScalarProperty Name="CONF_IN_FALHA_IMPORTACAO" ColumnName="CONF_IN_FALHA_IMPORTACAO" />
+                <ScalarProperty Name="CONF_IN_ASSINANTE_FILIAL" ColumnName="CONF_IN_ASSINANTE_FILIAL" />
+                <ScalarProperty Name="CONF__IN_INCLUIR_SEM_ESTOQUE" ColumnName="CONF__IN_INCLUIR_SEM_ESTOQUE" />
+                <ScalarProperty Name="CONF_IN_NUMERO_INICIAL_PROPOSTA" ColumnName="CONF_IN_NUMERO_INICIAL_PROPOSTA" />
+                <ScalarProperty Name="CONF_IN_DIAS_RESERVA_ESTOQUE" ColumnName="CONF_IN_DIAS_RESERVA_ESTOQUE" />
+                <ScalarProperty Name="CONF_NR_MARGEM_ATRASO" ColumnName="CONF_NR_MARGEM_ATRASO" />
+                <ScalarProperty Name="CONF_NR_DIAS_ATENDIMENTO" ColumnName="CONF_NR_DIAS_ATENDIMENTO" />
+                <ScalarProperty Name="CONF_IN_RESIDUAL" ColumnName="CONF_IN_RESIDUAL" />
+                <ScalarProperty Name="CONF_LK_LINK_SISTEMA" ColumnName="CONF_LK_LINK_SISTEMA" />
                 <ScalarProperty Name="CONF_CD_ID" ColumnName="CONF_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CONF_NR_FALHAS_DIA" ColumnName="CONF_NR_FALHAS_DIA" />

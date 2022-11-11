@@ -30,6 +30,23 @@ namespace EntitiesServices.Model
         public Nullable<int> CONF_NR_DIAS_ACAO { get; set; }
         public Nullable<int> CONF_IN_NUMERO_INICIAL_PEDIDO { get; set; }
         public Nullable<int> CONF_NR_DIAS_PROPOSTA { get; set; }
+        public string CONF_LK_LINK_SISTEMA { get; set; }
+        public Nullable<int> CONF_IN_RESIDUAL { get; set; }
+        public Nullable<int> CONF_NR_DIAS_ATENDIMENTO { get; set; }
+        public Nullable<int> CONF_NR_MARGEM_ATRASO { get; set; }
+        public Nullable<int> CONF_IN_DIAS_RESERVA_ESTOQUE { get; set; }
+        public Nullable<int> CONF_IN_NUMERO_INICIAL_PROPOSTA { get; set; }
+        public Nullable<int> CONF__IN_INCLUIR_SEM_ESTOQUE { get; set; }
+        public Nullable<int> CONF_IN_ASSINANTE_FILIAL { get; set; }
+        public Nullable<int> CONF_IN_FALHA_IMPORTACAO { get; set; }
+        public Nullable<int> CONF_IN_ETAPAS_CRM { get; set; }
+        public Nullable<int> CONF_IN_NOTIF_ACAO_ADM { get; set; }
+        public Nullable<int> CONF_IN_NOTIF_ACAO_GER { get; set; }
+        public Nullable<int> CONF_IN_NOTIF_ACAO_VEN { get; set; }
+        public Nullable<int> CONF_IN_NOTIF_ACAO_OPR { get; set; }
+        public Nullable<int> CONF_IN_NOTIF_ACAO_USU { get; set; }
+        public string CONF_EM_CRMSYS { get; set; }
+        public string CONF_EM_CRMSYS1 { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
     }

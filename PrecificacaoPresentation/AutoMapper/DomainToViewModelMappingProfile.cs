@@ -92,6 +92,11 @@ namespace MvcMapping.Mappers
             CreateMap<ITEM_PEDIDO_COMPRA, ItemPedidoCompraViewModel>();
             CreateMap<PEDIDO_COMPRA, PedidoCompraViewModel>();
             CreateMap<PEDIDO_COMPRA_ACOMPANHAMENTO, PedidoCompraAcompanhamentoViewModel>();
+            CreateMap<ASSINANTE_ANOTACAO, AssinanteAnotacaoViewModel>();
+            CreateMap<ASSINANTE_PAGAMENTO, AssinantePagamentoViewModel>();
+            CreateMap<ASSINANTE_PLANO, AssinantePlanoViewModel>();
+            CreateMap<PLANO, PlanoViewModel>();
+            CreateMap<ASSINANTE, AssinanteViewModel>();
 
 
         }

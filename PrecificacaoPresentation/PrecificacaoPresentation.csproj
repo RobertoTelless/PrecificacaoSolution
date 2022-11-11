@@ -280,6 +280,9 @@
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AgendaViewModel.cs" />
+    <Compile Include="ViewModels\AssinanteAnotacaoViewModel.cs" />
+    <Compile Include="ViewModels\AssinantePagamentoViewModel.cs" />
+    <Compile Include="ViewModels\AssinantePlanoViewModel.cs" />
     <Compile Include="ViewModels\AssinanteViewModel.cs" />
     <Compile Include="ViewModels\BancoViewModel.cs" />
     <Compile Include="ViewModels\CargoViewModel.cs" />
@@ -322,6 +325,8 @@
     <Compile Include="ViewModels\MovimentacaoAvulsaViewModel.cs" />
     <Compile Include="ViewModels\PedidoCompraAcompanhamentoViewModel.cs" />
     <Compile Include="ViewModels\PedidoCompraViewModel.cs" />
+    <Compile Include="ViewModels\PlanoVencidoViewModel.cs" />
+    <Compile Include="ViewModels\PlanoViewModel.cs" />
     <Compile Include="ViewModels\ProdutoFornecedorViewModel.cs" />
     <Compile Include="ViewModels\ProdutoKitViewModel.cs" />
     <Compile Include="ViewModels\ProdutoTabelaPrecoViewModel.cs" />
@@ -3279,6 +3284,23 @@
     <Content Include="Views\Compra\ProcessarEnviarAprovacaoPedidoCompra.cshtml" />
     <Content Include="Views\Compra\IncluirAcompanhamento.cshtml" />
     <Content Include="Views\Compra\MontarTelaDashboardCompra.cshtml" />
+    <Content Include="Views\Assinante\MontarTelaAssinante.cshtml" />
+    <Content Include="Views\Assinante\IncluirAssinante.cshtml" />
+    <Content Include="Views\Assinante\EditarAssinante.cshtml" />
+    <Content Include="Views\Assinante\VerAnexoAssinante.cshtml" />
+    <Content Include="Views\Assinante\EditarAssinantePlano.cshtml" />
+    <Content Include="Views\Assinante\IncluirAssinantePlano.cshtml" />
+    <Content Include="Views\Assinante\EnviarEMailAssinante.cshtml" />
+    <Content Include="Views\Assinante\EnviarSMSAssinante.cshtml" />
+    <Content Include="Views\Assinante\MontarTelaIndicadoresAssinante.cshtml" />
+    <Content Include="Views\Assinante\IncluirAnotacaoAssinante.cshtml" />
+    <Content Include="Views\Assinante\EditarPagamento.cshtml" />
+    <Content Include="Views\Assinante\IncluirPagamento.cshtml" />
+    <Content Include="Views\Assinante\VerConsumoAssinante.cshtml" />
+    <Content Include="Views\Assinante\VerAssinantesAtraso.cshtml" />
+    <Content Include="Views\Assinante\VerAssinantesBloqueados.cshtml" />
+    <Content Include="Views\Assinante\VerAssinaturasVencidas.cshtml" />
+    <Content Include="Views\Assinante\VerAssinaturasVencidas30.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3393,8 +3415,8 @@
     <Folder Include="Imagens\1\Usuario\6\Anexos\" />
     <Folder Include="Imagens\1\Usuario\8\Anexos\" />
     <Folder Include="Imagens\1\Usuario\9\Anexos\" />
+    <Folder Include="Imagens\Assinante\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Assinante\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Mensagem\" />
     <Folder Include="Views\Template\" />
