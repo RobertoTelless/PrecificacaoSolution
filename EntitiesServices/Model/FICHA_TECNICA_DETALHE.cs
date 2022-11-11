@@ -21,5 +21,6 @@ namespace EntitiesServices.Model
         public Nullable<int> FITD_IN_ATIVO { get; set; }
     
         public virtual PRODUTO PRODUTO { get; set; }
+        public virtual FICHA_TECNICA FICHA_TECNICA { get; set; }
     }
 }

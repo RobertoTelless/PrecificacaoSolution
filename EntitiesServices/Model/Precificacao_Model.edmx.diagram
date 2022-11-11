@@ -423,6 +423,7 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN416650" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

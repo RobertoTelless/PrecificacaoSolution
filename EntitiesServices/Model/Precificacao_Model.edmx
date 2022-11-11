@@ -3634,6 +3634,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA">
+          <End Role="FICHA_TECNICA" Type="Self.FICHA_TECNICA" Multiplicity="1" />
+          <End Role="FICHA_TECNICA_DETALHE" Type="Self.FICHA_TECNICA_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FICHA_TECNICA">
+              <PropertyRef Name="FITE_CD_ID" />
+            </Principal>
+            <Dependent Role="FICHA_TECNICA_DETALHE">
+              <PropertyRef Name="FITE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FICHA_TECNICA_DETALHE_PRODUTO">
           <End Role="PRODUTO" Type="Self.PRODUTO" Multiplicity="1" />
           <End Role="FICHA_TECNICA_DETALHE" Type="Self.FICHA_TECNICA_DETALHE" Multiplicity="*" />
@@ -6161,6 +6173,10 @@
             <End Role="UF" EntitySet="UF" />
             <End Role="EMPRESA" EntitySet="EMPRESA" />
           </AssociationSet>
+          <AssociationSet Name="FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA" Association="Self.FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA">
+            <End Role="FICHA_TECNICA" EntitySet="FICHA_TECNICA" />
+            <End Role="FICHA_TECNICA_DETALHE" EntitySet="FICHA_TECNICA_DETALHE" />
+          </AssociationSet>
           <AssociationSet Name="FK_FICHA_TECNICA_DETALHE_PRODUTO" Association="Self.FK_FICHA_TECNICA_DETALHE_PRODUTO">
             <End Role="PRODUTO" EntitySet="PRODUTO" />
             <End Role="FICHA_TECNICA_DETALHE" EntitySet="FICHA_TECNICA_DETALHE" />
@@ -8046,6 +8062,7 @@
           <Property Name="FITE_DT_CADASTRO" Type="DateTime" Precision="0" />
           <Property Name="FITE_IN_ATIVO" Type="Int32" />
           <NavigationProperty Name="PRODUTO" Relationship="Self.FK_FICHA_TECNICA_PRODUTO" FromRole="FICHA_TECNICA" ToRole="PRODUTO" />
+          <NavigationProperty Name="FICHA_TECNICA_DETALHE" Relationship="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA" FromRole="FICHA_TECNICA" ToRole="FICHA_TECNICA_DETALHE" />
         </EntityType>
         <EntityType Name="FICHA_TECNICA_DETALHE">
           <Key>
@@ -8057,6 +8074,7 @@
           <Property Name="FITD_QN_QUANTIDADE" Type="Decimal" Precision="19" Scale="2" />
           <Property Name="FITD_IN_ATIVO" Type="Int32" />
           <NavigationProperty Name="PRODUTO" Relationship="Self.FK_FICHA_TECNICA_DETALHE_PRODUTO" FromRole="FICHA_TECNICA_DETALHE" ToRole="PRODUTO" />
+          <NavigationProperty Name="FICHA_TECNICA" Relationship="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA" FromRole="FICHA_TECNICA_DETALHE" ToRole="FICHA_TECNICA" />
         </EntityType>
         <EntityType Name="FILIAL">
           <Key>
@@ -14154,7 +14172,23 @@
             <End Role="VIDEO" EntitySet="VIDEO" />
             <End Role="VIDEO_COMENTARIO" EntitySet="VIDEO_COMENTARIO" />
           </AssociationSet>
+          <AssociationSet Name="FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA" Association="Db_PrecificacaoModel.FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA">
+            <End Role="FICHA_TECNICA" EntitySet="FICHA_TECNICA" />
+            <End Role="FICHA_TECNICA_DETALHE" EntitySet="FICHA_TECNICA_DETALHE" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA">
+          <End Type="Db_PrecificacaoModel.FICHA_TECNICA" Role="FICHA_TECNICA" Multiplicity="1" />
+          <End Type="Db_PrecificacaoModel.FICHA_TECNICA_DETALHE" Role="FICHA_TECNICA_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FICHA_TECNICA">
+              <PropertyRef Name="FITE_CD_ID" />
+            </Principal>
+            <Dependent Role="FICHA_TECNICA_DETALHE">
+              <PropertyRef Name="FITE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

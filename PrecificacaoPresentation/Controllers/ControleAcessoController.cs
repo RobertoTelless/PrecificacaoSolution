@@ -108,12 +108,133 @@ namespace ERP_Condominios_Solution.Controllers
                     ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0012", CultureInfo.CurrentCulture));
                     return View(vm);
                 }
+                if (volta == 20)
+                {
+                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0114", CultureInfo.CurrentCulture));
+                    return View(vm);
+                }
 
                 // Armazena credenciais para autorização
                 Session["UserCredentials"] = usuario;
                 Session["Usuario"] = usuario;
                 Session["IdAssinante"] = usuario.ASSI_CD_ID;
                 Session["Assinante"] = usuario.ASSINANTE;
+                Session["PlanosVencidos"] = null;
+
+                // Reseta flags de permissao e totais
+                Session["PermMens"] = 0;
+                Session["PermCRM"] = 0;
+                Session["PermServDesk"] = 0;
+                Session["NumSMS"] = 0;
+                Session["NumEMail"] = 0;
+                Session["NumZap"] = 0;
+                Session["NumClientes"] = 0;
+                Session["NumAcoes"] = 0;
+                Session["NumProcessos"] = 0;
+                Session["NumProcessosBase"] = 0;
+                Session["NumUsuarios"] = 0;
+                Session["MensagemLogin"] = 0;
+                Session["MensPermissao"] = 0;
+                Session["NumProduto"] = 0;
+                Session["NumFornecedor"] = 0;
+
+                // Recupera Planos do assinante
+                List<PlanoVencidoViewModel> vencidos = new List<PlanoVencidoViewModel>();
+                List<ASSINANTE_PLANO> plAss = usuario.ASSINANTE.ASSINANTE_PLANO.ToList();
+                plAss = plAss.Where(p => p.ASPL_IN_ATIVO == 1).ToList();
+                
+                List<PLANO> planos = new List<PLANO>();
+                if (plAss.Count == 0)
+                {
+                    ModelState.AddModelError("", CRMSys_Base.ResourceManager.GetString("M0215", CultureInfo.CurrentCulture));
+                    return View(vm);
+                }
+
+                foreach (ASSINANTE_PLANO item in plAss)
+                {
+                    // Verifica validade
+                    if (item.ASPL_DT_VALIDADE < DateTime.Today.Date)
+                    {
+                        PlanoVencidoViewModel plan = new PlanoVencidoViewModel();
+                        plan.Plano = item.PLAN_CD_ID;
+                        plan.Assinante = item.ASSI_CD_ID;
+                        plan.Vencimento = item.ASPL_DT_VALIDADE;
+                        plan.Tipo = 1;
+                        vencidos.Add(plan);                      
+                        continue;
+                    }
+                    if (item.ASPL_DT_VALIDADE < DateTime.Today.Date.AddDays(30))
+                    {
+                        PlanoVencidoViewModel plan = new PlanoVencidoViewModel();
+                        plan.Plano = item.PLAN_CD_ID;
+                        plan.Assinante = item.ASSI_CD_ID;
+                        plan.Vencimento = item.ASPL_DT_VALIDADE;
+                        plan.Tipo = 2;
+                        vencidos.Add(plan);
+                    }
+
+                    // Processa planos
+                    planos.Add(item.PLANO);
+                    Session["NumUsuarios"] = item.PLANO.PLAN_NR_USUARIOS;
+                    if (item.PLANO.PLAN_IN_MENSAGENS == 1)
+                    {
+                        Session["PermMens"] = 1;
+                        if ((Int32)Session["NumSMS"] < item.PLANO.PLAN_NR_SMS)
+                        {
+                            Session["NumSMS"] = item.PLANO.PLAN_NR_SMS;
+                        }
+                        if ((Int32)Session["NumEMail"] < item.PLANO.PLAN_NR_EMAIL)
+                        {
+                            Session["NumEMail"] = item.PLANO.PLAN_NR_EMAIL;
+                        }
+                        if ((Int32)Session["NumZap"] < item.PLANO.PLAN_NR_WHATSAPP)
+                        {
+                            Session["NumZap"] = item.PLANO.PLAN_NR_WHATSAPP;
+                        }
+                        if ((Int32)Session["NumClientes"] < item.PLANO.PLAN_NR_CONTATOS)
+                        {
+                            Session["NumClientes"] = item.PLANO.PLAN_NR_CONTATOS;
+                        }
+                    }
+                    if (item.PLANO.PLAN_IN_CRM == 1)
+                    {
+                        Session["PermCRM"] = 1;
+                        if ((Int32)Session["NumProcessos"] < item.PLANO.PLAN_NR_PROCESSOS)
+                        {
+                            Session["NumProcessos"] = item.PLANO.PLAN_NR_PROCESSOS;
+                        }
+                        if ((Int32)Session["NumAcoes"] < item.PLANO.PLAN_NR_ACOES)
+                        {
+                            Session["NumAcoes"] = item.PLANO.PLAN_NR_ACOES;
+                        }
+                        if ((Int32)Session["NumClientes"] < item.PLANO.PLAN_NR_CONTATOS)
+                        {
+                            Session["NumClientes"] = item.PLANO.PLAN_NR_CONTATOS;
+                        }
+                        if ((Int32)Session["NumProcessosBase"] < item.PLANO.PLAN_NR_PROCESSOS)
+                        {
+                            Session["NumProcessosBase"] = item.PLANO.PLAN_NR_PROCESSOS;
+                        }
+                    }
+                    if ((Int32)Session["NumProduto"] < item.PLANO.PLAN_NR_PRODUTO)
+                    {
+                        Session["NumProduto"] = item.PLANO.PLAN_NR_PRODUTO;
+                    }
+                    if ((Int32)Session["NumFornecedor"] < item.PLANO.PLAN_NR_FORNECEDOR)
+                    {
+                        Session["NumFornecedor"] = item.PLANO.PLAN_NR_FORNECEDOR;
+                    }
+                }
+
+                // Verifica Acesso
+                Session["PlanosVencidosModel"] = vencidos;
+                if (planos.Count == 0)
+                {
+                    Session["MensagemLogin"] = 1;
+                    return RedirectToAction("Login", "ControleAcesso");
+                }
+                Session["Planos"] = planos;
+                Session["ListaMensagem"] = null;
 
                 // Atualiza view
                 String frase = String.Empty;
@@ -145,6 +266,19 @@ namespace ERP_Condominios_Solution.Controllers
                 }
                 ViewBag.Foto = usuario.USUA_AQ_FOTO;
 
+                // Trata Nome
+                String nomeMax = String.Empty;
+                if (usuario.USUA_NM_NOME.Contains(" "))
+                {
+                    nomeMax = usuario.USUA_NM_NOME.Substring(0, usuario.USUA_NM_NOME.IndexOf(" "));
+                }
+                else
+                {
+                    nomeMax = usuario.USUA_NM_NOME;
+                }
+
+                // Carrega Sessions
+                Session["NomeMax"] = nomeMax;
                 Session["Greeting"] = frase;
                 Session["Nome"] = usuario.USUA_NM_NOME;
                 Session["Foto"] = usuario.USUA_AQ_FOTO;
@@ -157,6 +291,10 @@ namespace ERP_Condominios_Solution.Controllers
                 Session["Login"] = 1;
                 Session["IdAssinante"] = usuario.ASSI_CD_ID;
                 Session["IdUsuario"] = usuario.USUA_CD_ID;
+
+                // Grava flag de logado
+                usuario.USUA_IN_LOGADO = 1;
+                Int32 volta5 = baseApp.ValidateEdit(usuario, usuario);
 
                 // Route
                 if (usuario.USUA_IN_PROVISORIO == 1)

@@ -55,6 +55,8 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly ITipoAcaoAppService taApp;
         private readonly IVideoAppService viApp;
         private readonly IPlanoAppService plaApp;
+        private readonly IProdutoAppService proApp;
+        private readonly IFornecedorAppService forApp;
 
         private String msg;
         private Exception exception;
@@ -63,7 +65,7 @@ namespace ERP_Condominios_Solution.Controllers
         List<ASSINANTE> listaMaster = new List<ASSINANTE>();
         String extensao;
 
-        public AssinanteController(IAssinanteAppService baseApps, ILogAppService logApps, IUsuarioAppService usuApps, IConfiguracaoAppService confApps, IAssinanteCnpjAppService ccnpjApps, IClienteAppService cliApps, ICRMAppService crmApps, ITemplateAppService temApps, ICategoriaAgendaAppService caApps, ICategoriaClienteAppService ccApps, ICargoAppService cgApps, ICRMOrigemAppService coApps, IMotivoCancelamentoAppService mcApps, IMotivoEncerramentoAppService meApps, IPeriodicidadeAppService peApps, ITemplateAppService teApps, INoticiaAppService ntApps, INotificacaoAppService noApps, ITipoAcaoAppService taApps, IVideoAppService viApps, IPlanoAppService plaApps)
+        public AssinanteController(IAssinanteAppService baseApps, ILogAppService logApps, IUsuarioAppService usuApps, IConfiguracaoAppService confApps, IAssinanteCnpjAppService ccnpjApps, IClienteAppService cliApps, ICRMAppService crmApps, ITemplateAppService temApps, ICategoriaAgendaAppService caApps, ICategoriaClienteAppService ccApps, ICargoAppService cgApps, ICRMOrigemAppService coApps, IMotivoCancelamentoAppService mcApps, IMotivoEncerramentoAppService meApps, IPeriodicidadeAppService peApps, ITemplateAppService teApps, INoticiaAppService ntApps, INotificacaoAppService noApps, ITipoAcaoAppService taApps, IVideoAppService viApps, IPlanoAppService plaApps, IProdutoAppService proApps, IFornecedorAppService forApps)
         {
             baseApp = baseApps;
             logApp = logApps;
@@ -87,6 +89,8 @@ namespace ERP_Condominios_Solution.Controllers
             taApp = taApps;
             viApp = viApps;
             plaApp = plaApps;
+            proApp = proApps;
+            forApp = forApps;
         }
 
         [HttpGet]
@@ -2622,6 +2626,8 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 numProc = crmApp.GetAllItens(idAss).Count;
             Int32 numAcoes = crmApp.GetAllAcoes(idAss).Count;
             Int32 numProps = crmApp.GetAllPedidos(idAss).Count;
+            Int32 numProd = proApp.GetAllItens(idAss).Count;
+            Int32 numForn = forApp.GetAllItens(idAss).Count;
             //Int32 numEmail = menApp.GetAllItens(idAss).Where(p => p.MENS_IN_TIPO == 1).ToList().Count;
             //Int32 numSMS = menApp.GetAllItens(idAss).Where(p => p.MENS_IN_TIPO == 2).ToList().Count;
 
@@ -2630,8 +2636,10 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.NumProc = numProc;
             ViewBag.NumAcoes = numAcoes;
             ViewBag.NumProps = numProps;
-            //ViewBag.NumEmail = numEmail;
-            //ViewBag.NumSMS = numSMS;
+            ViewBag.NumEmail = 0;
+            ViewBag.NumSMS = 0;
+            ViewBag.NumProdutos = numProd;
+            ViewBag.NumFornecedores = numForn;
 
             // Monta listas para graficos
             List<ModeloViewModel> lista1 = new List<ModeloViewModel>();

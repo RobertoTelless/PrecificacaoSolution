@@ -14,6 +14,12 @@ namespace EntitiesServices.Model
     
     public partial class FICHA_TECNICA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FICHA_TECNICA()
+        {
+            this.FICHA_TECNICA_DETALHE = new HashSet<FICHA_TECNICA_DETALHE>();
+        }
+    
         public int FITE_CD_ID { get; set; }
         public int PROD_CD_ID { get; set; }
         public Nullable<int> ASSI_CD_ID { get; set; }
@@ -30,5 +36,7 @@ namespace EntitiesServices.Model
         public Nullable<int> FITE_IN_ATIVO { get; set; }
     
         public virtual PRODUTO PRODUTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FICHA_TECNICA_DETALHE> FICHA_TECNICA_DETALHE { get; set; }
     }
 }

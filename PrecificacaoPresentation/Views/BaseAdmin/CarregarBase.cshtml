@@ -19,7 +19,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-2 col-md-2 col-sm-12">
                     <div class="ibox-content text-center">
                         @*<h1>@Model.USUA_NM_NOME.Substring(0, Model.USUA_NM_NOME.IndexOf(" "))</h1>*@
                         <h1>@Model.USUA_NM_NOME</h1>
@@ -78,16 +78,44 @@
                     @Html.ButtonLinkIndex(text: "Estoque", action: "MontarTelaDashboardEstoque", controller: "Estoque", buttonClass: "primary")                
                     @Html.ButtonLinkIndex(text: "Compras", action: "MontarTelaDashboardCompra", controller: "Compra", buttonClass: "primary")                
                     @Html.ButtonLinkIndex(text: "CRM", action: "MontarTelaDashboardCRMNovo", controller: "CRM", buttonClass: "primary")                
-                    @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
-                    {
-                        @Html.ButtonLinkIndex(text: "Administração", action: "MontarTelaDashboardAdministracao", controller: "BaseAdmin", buttonClass: "success")                
-                    }
-                    @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
-                    {
-                        @Html.ButtonLinkIndex(text: "Assinantes", action: "MontarTelaDashboardAssinante", controller: "Assinante", buttonClass: "danger")                
-                    }
                 </div>
 
+                @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
+                {
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title" style="background-color: darkseagreen; color: darkgreen">
+                                <span class="label label-primary pull-right">Hoje</span>
+                                <h5>Planos de Assinatura</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <small class="stats-label">Ativos</small>
+                                        <h4>@((Int32)Session["NumPlanos"])</h4>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <small class="stats-label">Vencendo em 30 dias</small>
+                                        <h4>@((Int32)Session["NumPlanosVencer30"])</h4>
+                                    </div>                                 
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        @Html.ButtonLinkIndex(text: "Central Assinante", action: "MontarTelaCentralAssinante", controller: "BaseAdmin")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
+                        {
+                            @Html.ButtonLinkIndex(text: "Administração", action: "MontarTelaDashboardAdministracao", controller: "BaseAdmin", buttonClass: "success")                
+                        }
+                        @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")
+                        {
+                            @Html.ButtonLinkIndex(text: "Assinantes", action: "MontarTelaDashboardAssinantes", controller: "BaseAdmin", buttonClass: "danger")                
+                        }
+                    </div>                 
+                }
             </div>
 
             <div class="row">
