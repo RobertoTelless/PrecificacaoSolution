@@ -53,7 +53,7 @@ namespace ApplicationServices.Services
 
                 // Completa objeto
                 item.CARG_IN_ATIVO = 1;
-                item.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                //item.ASSI_CD_ID = usuario.ASSI_CD_ID;
 
                 // Monta Log
                 LOG log = new LOG

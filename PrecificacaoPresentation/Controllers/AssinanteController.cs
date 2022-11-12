@@ -1632,6 +1632,7 @@ namespace ERP_Condominios_Solution.Controllers
             mensagem.CORPO = emailBody;
             mensagem.DEFAULT_CREDENTIALS = false;
             mensagem.EMAIL_DESTINO = cont.ASSI_NM_EMAIL;
+            mensagem.EMAIL_CC_DESTINO = conf.CONF_EM_CRMSYS1;
             mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
             mensagem.ENABLE_SSL = true;
             mensagem.NOME_EMISSOR = usuario.ASSINANTE.ASSI_NM_NOME;
@@ -4358,7 +4359,7 @@ namespace ERP_Condominios_Solution.Controllers
             a.CONF_IN_NOTIF_ACAO_USU = 0;
             a.CONF_LK_LINK_SISTEMA = "https://crmsys.azurewebsites.net";
             a.CONF_EM_CRMSYS = "rti.principal@gmail.com";
-            a.CONF_EM_CRMSYS1 = "clayton@systembr.net";
+            a.CONF_EM_CRMSYS1 = "jfmfilho@hotmail.com";
             Int32 volta = confApp.ValidateCreate(a);
 
             // Cat.Agenda
@@ -4373,7 +4374,7 @@ namespace ERP_Condominios_Solution.Controllers
             c.ASSI_CD_ID = assi;
             c.CACL_NM_NOME = "Normal";
             c.CACL_IN_ATIVO = 1;
-            volta = ccApp.ValidateCreate(c, null);
+            volta = ccApp.ValidateCreate(c, usuario);
 
             // Cargo
             CARGO_USUARIO d = new CARGO_USUARIO();
@@ -4381,15 +4382,14 @@ namespace ERP_Condominios_Solution.Controllers
             d.CARG_NM_NOME = "Operador";
             d.CARG_IN_ATIVO = 1;
             volta = cgApp.ValidateCreate(d, usuario);
-            CARGO_USUARIO cargo = cgApp.GetAllItens(assi).FirstOrDefault();
-            Int32 carId = cargo.CARG_CD_ID;
+            Int32 carId = d.CARG_CD_ID;
 
             // CRM Origem
             CRM_ORIGEM f = new CRM_ORIGEM();
             f.ASSI_CD_ID = assi;
             f.CROR_NM_NOME = "Contato";
             f.CROR_IN_ATIVO = 1;
-            volta = coApp.ValidateCreate(f, null);
+            volta = coApp.ValidateCreate(f, usuario);
 
             // Filial
             //FILIAL g = new FILIAL();
@@ -4423,14 +4423,14 @@ namespace ERP_Condominios_Solution.Controllers
             j.ASSI_CD_ID = assi;
             j.MOCA_NM_NOME = "Desistência";
             j.MOCA_IN_ATIVO = 1;
-            volta = mcApp.ValidateCreate(j, null);
+            volta = mcApp.ValidateCreate(j, usuario);
 
             // Motivo encerramento
             MOTIVO_ENCERRAMENTO k = new MOTIVO_ENCERRAMENTO();
             k.ASSI_CD_ID = assi;
             k.MOEN_NM_NOME = "Sucesso";
             k.MOEN_IN_ATIVO = 1;
-            volta = meApp.ValidateCreate(k, null);
+            volta = meApp.ValidateCreate(k, usuario);
 
             // Periodicidade
             PERIODICIDADE_TAREFA l = new PERIODICIDADE_TAREFA();
@@ -4468,7 +4468,7 @@ namespace ERP_Condominios_Solution.Controllers
             m.ASSI_CD_ID = assi;
             m.TIAC_NM_NOME = "Normal";
             m.TIAC_IN_ATIVO = 1;
-            volta = taApp.ValidateCreate(m, null);
+            volta = taApp.ValidateCreate(m, usuario);
 
             //// Tipo Tarefa
             //TIPO_TAREFA x = new TIPO_TAREFA();
@@ -4506,8 +4506,7 @@ namespace ERP_Condominios_Solution.Controllers
             //n.USUA_IN_ERP = 1;
             //n.USUA_IN_TECNICO = 1;
             volta = usuApp.ValidateCreate(n, usuario);
-            USUARIO usua = usuApp.GetAllItens(assi).FirstOrDefault();
-            Int32 usuId = usua.USUA_CD_ID;
+            Int32 usuId = n.USUA_CD_ID;
 
             String caminho1 = "/Imagens/" + assi.ToString() + "/Usuario/" + usuId.ToString() + "/Fotos/";
             Directory.CreateDirectory(Server.MapPath(caminho1));
@@ -4532,8 +4531,8 @@ namespace ERP_Condominios_Solution.Controllers
             List<ASSINANTE_PLANO> planos = item.ASSINANTE_PLANO.ToList();
             texto = texto.Replace("{nome}", item.ASSI_NM_NOME);
             texto = texto.Replace("{data}", DateTime.Today.Date.ToShortDateString());
-            texto = texto.Replace("{user}", usua.USUA_NM_LOGIN);
-            texto = texto.Replace("{senha}", usua.USUA_NM_SENHA);
+            texto = texto.Replace("{user}", n.USUA_NM_LOGIN);
+            texto = texto.Replace("{senha}", n.USUA_NM_SENHA);
             String rodape = String.Empty;
             foreach (ASSINANTE_PLANO plan in planos)
             {
