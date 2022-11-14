@@ -724,6 +724,7 @@
     <Content Include="Imagens\1\Fornecedores\5\Fotos\tecnomedi.jpg" />
     <Content Include="Imagens\1\Noticias\4\Fotos\_126353113_gettyimages-1272629638.jpg" />
     <Content Include="Imagens\1\Noticias\5\Fotos\_126371836_9f6e1fd2-2e97-44a3-b0b0-d8b64a407db8.jpg" />
+    <Content Include="Imagens\1\PedidoCompra\8\Anexos\313415341_5414483558679636_2621069881546582758_n.jpg" />
     <Content Include="Imagens\1\Produtos\10\Fotos\Queijo_Muzarella_LactoPar-4kg.png" />
     <Content Include="Imagens\1\Produtos\11\Fotos\11925-PEPERONI-FATIADO-SEARA-GOURMET-800G.jpg" />
     <Content Include="Imagens\1\Produtos\12\Fotos\pizza_peperoni.jpeg" />
@@ -2195,6 +2196,8 @@
     <Content Include="Imagens\1\ContaPagar\1\Anexos\ProdutoLista_03112022.pdf" />
     <Content Include="Imagens\1\ContaPagar\1\Anexos\Produto_9_03112022.pdf" />
     <Content Include="Imagens\1\ContaPagar\5\Anexos\Produto_9_03112022.pdf" />
+    <Content Include="Imagens\1\PedidoCompra\7\Anexos\ContaReceberLista_07112022.pdf" />
+    <Content Include="Imagens\1\PedidoCompra\8\Anexos\Laudo_Exame_Joelho.pdf" />
     <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\WebPrecificacao - Web Deploy.pubxml" />
@@ -3407,7 +3410,7 @@
     <Folder Include="Imagens\1\Noticias\3\Fotos\" />
     <Folder Include="Imagens\1\Notificacao\1\Anexos\" />
     <Folder Include="Imagens\1\Notificacao\2\Anexos\" />
-    <Folder Include="Imagens\1\PedidoCompra\" />
+    <Folder Include="Imagens\1\PedidoCompra\9\Anexos\" />
     <Folder Include="Imagens\1\PessoaExterna\1\Anexos\" />
     <Folder Include="Imagens\1\PessoaExterna\1\Fotos\" />
     <Folder Include="Imagens\1\PessoaExterna\2\Anexos\" />
