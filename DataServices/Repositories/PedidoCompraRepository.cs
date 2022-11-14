@@ -16,6 +16,7 @@ namespace DataServices.Repositories
             IQueryable<PEDIDO_COMPRA> query = Db.PEDIDO_COMPRA;
             query = query.Where(p => p.PECO_NM_NOME == conta.PECO_NM_NOME);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
+            query = query.Where(p => p.PECO_IN_ATIVO == 1);
             return query.FirstOrDefault();
         }
 

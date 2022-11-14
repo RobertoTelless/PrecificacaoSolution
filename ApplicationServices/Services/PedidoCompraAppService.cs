@@ -191,6 +191,7 @@ namespace ApplicationServices.Services
                 item.PECO_IN_ATIVO = 1;
                 item.ASSI_CD_ID = usuario.ASSI_CD_ID;
                 item.USUA_CD_ID = usuario.USUA_CD_ID;
+                USUARIO usuPed = _usuService.GetItemById(item.USUA_CD_ID);
 
                 // Monta Log
                 LOG log = new LOG
@@ -247,7 +248,7 @@ namespace ApplicationServices.Services
                         mensagem.ASSUNTO = "Pedido de Compra - Criação";
                         mensagem.CORPO = emailBody;
                         mensagem.DEFAULT_CREDENTIALS = false;
-                        mensagem.EMAIL_DESTINO = item.USUARIO.USUA_EM_EMAIL;
+                        mensagem.EMAIL_DESTINO = usuPed.USUA_EM_EMAIL;
                         mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
                         mensagem.ENABLE_SSL = true;
                         mensagem.NOME_EMISSOR = usuario.ASSINANTE.ASSI_NM_NOME;

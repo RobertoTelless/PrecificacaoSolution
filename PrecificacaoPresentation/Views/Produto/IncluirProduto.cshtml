@@ -200,6 +200,11 @@
                                                     @Html.TextBoxFor(m => m.PrecoPromocao, new { @class = "form-control", autofocus = true })
                                                     @Html.ValidationMessageFor(m => m.PrecoPromocao, "", new { @style = "color:red" })
                                                 </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12" style="color: green; font-weight: bold">
+                                                    Preço Custo (R$)
+                                                    @Html.TextBoxFor(m => m.UltimoCusto, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.UltimoCusto, "", new { @style = "color:red" })
+                                                </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Preço Mínimo (R$)
                                                     @Html.TextBoxFor(m => m.PrecoMinimo, new { @class = "form-control", autofocus = true })
