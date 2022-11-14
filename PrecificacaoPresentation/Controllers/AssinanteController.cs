@@ -335,7 +335,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Title = "Assinante";
             ViewBag.Tipos = new SelectList(baseApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME");
             ViewBag.UF = new SelectList(baseApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
-            Session["Assinante"] = null;
+            Session["Assi"] = null;
             List<SelectListItem> ativo = new List<SelectListItem>();
             ativo.Add(new SelectListItem() { Text = "Ativo", Value = "1" });
             ativo.Add(new SelectListItem() { Text = "Inativo", Value = "0" });
@@ -578,7 +578,7 @@ namespace ERP_Condominios_Solution.Controllers
 
                     // Trata Anexos e Foto
                     Session["IdVolta"] = item.ASSI_CD_ID;
-                    Session["IdAssinante"] = item.ASSI_CD_ID;
+                    Session["IdAssi"] = item.ASSI_CD_ID;
                     if (Session["FileQueueAssinante"] != null)
                     {
                         List<FileQueue> fq = (List<FileQueue>)Session["FileQueueAssinante"];
@@ -721,8 +721,8 @@ namespace ERP_Condominios_Solution.Controllers
             Session["MensAssinante"] = null;
             Session["VoltaAssinante"] = 1;
             objetoAntes = item;
-            Session["Assinante"] = item;
-            Session["IdAssinante"] = id;
+            Session["Assi"] = item;
+            Session["IdAssi"] = id;
             AssinanteViewModel vm = Mapper.Map<ASSINANTE, AssinanteViewModel>(item);
             return View(vm);
         }
@@ -793,7 +793,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Executar
             ASSINANTE item = baseApp.GetItemById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             item.ASSI_IN_ATIVO = 0;
             Int32 volta = baseApp.ValidateDelete(item, usuario);
             listaMaster = new List<ASSINANTE>();
@@ -829,7 +829,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Executar
             ASSINANTE item = baseApp.GetItemById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             item.ASSI_IN_ATIVO = 1;
             Int32 volta = baseApp.ValidateReativar(item, usuario);
             listaMaster = new List<ASSINANTE>();
@@ -856,7 +856,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Logout", "ControleAcesso");
             }
-            return RedirectToAction("EditarAssinante", new { id = (Int32)Session["IdAssinante"] });
+            return RedirectToAction("EditarAssinante", new { id = (Int32)Session["IdAssi"] });
         }
 
         public ActionResult VoltarDash()
@@ -933,8 +933,8 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Logout", "ControleAcesso");
             }
-            Int32 idNot = (Int32)Session["IdAssinante"];
-            Int32 idAss = (Int32)Session["IdAssinante"];
+            Int32 idNot = (Int32)Session["IdAssi"];
+            Int32 idAss = (Int32)Session["IdAssi"];
 
             if (file == null)
             {
@@ -993,8 +993,8 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Logout", "ControleAcesso");
             }
-            Int32 idNot = (Int32)Session["IdAssinante"];
-            Int32 idAss = (Int32)Session["IdAssinante"];
+            Int32 idNot = (Int32)Session["IdAssi"];
+            Int32 idAss = (Int32)Session["IdAssi"];
 
             if (file == null)
             {
@@ -1053,8 +1053,8 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Logout", "ControleAcesso");
             }
-            Int32 idNot = (Int32)Session["IdAssinante"];
-            Int32 idAss = (Int32)Session["IdAssinante"];
+            Int32 idNot = (Int32)Session["IdAssi"];
+            Int32 idAss = (Int32)Session["IdAssi"];
 
             if (file == null)
             {
@@ -1093,8 +1093,8 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Logout", "ControleAcesso");
             }
-            Int32 idNot = (Int32)Session["IdAssinante"];
-            Int32 idAss = (Int32)Session["IdAssinante"];
+            Int32 idNot = (Int32)Session["IdAssi"];
+            Int32 idAss = (Int32)Session["IdAssi"];
 
             if (file == null)
             {
@@ -1170,7 +1170,7 @@ namespace ERP_Condominios_Solution.Controllers
             preco.Add(new SelectListItem() { Text = "Promoção", Value = "2" });
             ViewBag.Precos = new SelectList(preco, "Value", "Text");
             ASSINANTE_PLANO item = baseApp.GetPlanoById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             AssinantePlanoViewModel vm = Mapper.Map<ASSINANTE_PLANO, AssinantePlanoViewModel>(item);
             return View(vm);
         }
@@ -1215,7 +1215,7 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
             ASSINANTE_PLANO item = baseApp.GetPlanoById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             item.ASPL_IN_ATIVO = 0;
             Int32 volta = baseApp.ValidateEditPlano(item);
 
@@ -1255,7 +1255,7 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
             ASSINANTE_PLANO item = baseApp.GetPlanoById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             item.ASPL_IN_ATIVO = 1;
             Int32 volta = baseApp.ValidateEditPlano(item);
 
@@ -1295,7 +1295,7 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
             ASSINANTE_PLANO item = baseApp.GetPlanoById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
 
             // Cria lançamentos de pagamentos futuros
             ASSINANTE assi = baseApp.GetItemById(item.ASSI_CD_ID);
@@ -1400,7 +1400,7 @@ namespace ERP_Condominios_Solution.Controllers
             // Prepara view
             ASSINANTE_PLANO item = new ASSINANTE_PLANO();
             AssinantePlanoViewModel vm = Mapper.Map<ASSINANTE_PLANO, AssinantePlanoViewModel>(item);
-            vm.ASSI_CD_ID = (Int32)Session["IdAssinante"];
+            vm.ASSI_CD_ID = (Int32)Session["IdAssi"];
             vm.ASPL_IN_ATIVO = 1;
             vm.ASPL_DT_INICIO = DateTime.Today.Date;
             return View(vm);
@@ -1534,7 +1534,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Logout", "ControleAcesso");
             }
             ASSINANTE cont = baseApp.GetItemById(id);
-            Session["Assinante"] = cont;
+            Session["Assi"] = cont;
             ViewBag.Assinante = cont;
             MensagemViewModel mens = new MensagemViewModel();
             mens.NOME = cont.ASSI_NM_NOME;
@@ -1582,7 +1582,7 @@ namespace ERP_Condominios_Solution.Controllers
         {
             // Recupera usuario
             Int32 idAss = (Int32)Session["IdAssinante"];
-            ASSINANTE cont = (ASSINANTE)Session["Assinante"];
+            ASSINANTE cont = (ASSINANTE)Session["Assi"];
 
             // Processa e-mail
             CONFIGURACAO conf = confApp.GetItemById(usuario.ASSI_CD_ID);
@@ -1663,7 +1663,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Logout", "ControleAcesso");
             }
             ASSINANTE item = baseApp.GetItemById(id);
-            Session["Assinante"] = item;
+            Session["Assi"] = item;
             ViewBag.Assinante = item;
             MensagemViewModel mens = new MensagemViewModel();
             mens.NOME = item.ASSI_NM_NOME;
@@ -1715,7 +1715,7 @@ namespace ERP_Condominios_Solution.Controllers
         {
             // Recupera contatos
             Int32 idAss = (Int32)Session["IdAssinante"];
-            ASSINANTE cont = (ASSINANTE)Session["Assinante"];
+            ASSINANTE cont = (ASSINANTE)Session["Assi"];
 
             // Prepara cabeçalho
             String cab = "Prezado Sr(a)." + cont.ASSI_NM_NOME;
@@ -2089,7 +2089,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Logout", "ControleAcesso");
             }
-            ASSINANTE item = baseApp.GetItemById((Int32)Session["IdAssinante"]);
+            ASSINANTE item = baseApp.GetItemById((Int32)Session["IdAssi"]);
             USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
             ASSINANTE_ANOTACAO coment = new ASSINANTE_ANOTACAO();
             AssinanteAnotacaoViewModel vm = Mapper.Map<ASSINANTE_ANOTACAO, AssinanteAnotacaoViewModel>(coment);
@@ -2116,7 +2116,7 @@ namespace ERP_Condominios_Solution.Controllers
                     // Executa a operação
                     ASSINANTE_ANOTACAO item = Mapper.Map<AssinanteAnotacaoViewModel, ASSINANTE_ANOTACAO>(vm);
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
-                    ASSINANTE not = baseApp.GetItemById((Int32)Session["IdAssinante"]);
+                    ASSINANTE not = baseApp.GetItemById((Int32)Session["IdAssi"]);
 
                     item.USUARIO = null;
                     not.ASSINANTE_ANOTACAO.Add(item);
@@ -2126,7 +2126,7 @@ namespace ERP_Condominios_Solution.Controllers
                     // Verifica retorno
 
                     // Sucesso
-                    return RedirectToAction("EditarAssinante", new { id = (Int32)Session["IdAssinante"] });
+                    return RedirectToAction("EditarAssinante", new { id = (Int32)Session["IdAssi"] });
                 }
                 catch (Exception ex)
                 {
@@ -2149,7 +2149,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
             // Prepara view
             ASSINANTE_PAGAMENTO item = baseApp.GetPagtoById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             AssinantePagamentoViewModel vm = Mapper.Map<ASSINANTE_PAGAMENTO, AssinantePagamentoViewModel>(item);
             return View(vm);
         }
@@ -2194,7 +2194,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Logout", "ControleAcesso");
             }
             ASSINANTE_PAGAMENTO item = baseApp.GetPagtoById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             item.ASPA_IN_ATIVO = 0;
             Int32 volta = baseApp.ValidateEditPagto(item);
             return RedirectToAction("VoltarAnexoAssinante");
@@ -2208,7 +2208,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Logout", "ControleAcesso");
             }
             ASSINANTE_PAGAMENTO item = baseApp.GetPagtoById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             item.ASPA_IN_ATIVO = 1;
             Int32 volta = baseApp.ValidateEditPagto(item);
             return RedirectToAction("VoltarAnexoAssinante");
@@ -2222,7 +2222,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Logout", "ControleAcesso");
             }
             ASSINANTE_PAGAMENTO item = baseApp.GetPagtoById(id);
-            objetoAntes = (ASSINANTE)Session["Assinante"];
+            objetoAntes = (ASSINANTE)Session["Assi"];
             item.ASPA_IN_PAGO = 1;
             item.ASPA_DT_PAGAMENTO = DateTime.Today.Date;
             item.ASPA_VL_VALOR_PAGO = item.ASPA_VL_VALOR;
@@ -2239,7 +2239,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
 
             // Recupera listas
-            ASSINANTE assi = baseApp.GetItemById((Int32)Session["IdAssinante"]);
+            ASSINANTE assi = baseApp.GetItemById((Int32)Session["IdAssi"]);
             List<ASSINANTE_PLANO> lista = assi.ASSINANTE_PLANO.ToList();
             List<PLANO> planos = new List<PLANO>();
             foreach (ASSINANTE_PLANO plan in lista)
@@ -2251,7 +2251,7 @@ namespace ERP_Condominios_Solution.Controllers
             // Prepara view
             ASSINANTE_PAGAMENTO item = new ASSINANTE_PAGAMENTO();
             AssinantePagamentoViewModel vm = Mapper.Map<ASSINANTE_PAGAMENTO, AssinantePagamentoViewModel>(item);
-            vm.ASSI_CD_ID = (Int32)Session["IdAssinante"];
+            vm.ASSI_CD_ID = (Int32)Session["IdAssi"];
             vm.ASPA_IN_ATIVO = 1;
             return View(vm);
         }
@@ -2261,7 +2261,7 @@ namespace ERP_Condominios_Solution.Controllers
         public ActionResult IncluirPagamento(AssinantePagamentoViewModel vm)
         {
 
-            ASSINANTE assi = baseApp.GetItemById((Int32)Session["IdAssinante"]);
+            ASSINANTE assi = baseApp.GetItemById((Int32)Session["IdAssi"]);
             List<ASSINANTE_PLANO> lista = assi.ASSINANTE_PLANO.ToList();
             List<PLANO> planos = new List<PLANO>();
             foreach (ASSINANTE_PLANO plan in lista)
@@ -2616,19 +2616,20 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Logout", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            Int32 idAssi = (Int32)Session["IdAssi"];
 
             // Prepara view
             ViewBag.TiposPessoa = new SelectList(baseApp.GetAllTiposPessoa(), "TIPE_CD_ID", "TIPE_NM_NOME"); ;
             ViewBag.UF = new SelectList(baseApp.GetAllUF(), "UF_CD_ID", "UF_SG_SIGLA");
 
             // Recupera consumo
-            Int32 numUsu = usuApp.GetAllItens(idAss).Count;
-            Int32 numCli = cliApp.GetAllItens(idAss).Count;
-            Int32 numProc = crmApp.GetAllItens(idAss).Count;
-            Int32 numAcoes = crmApp.GetAllAcoes(idAss).Count;
-            Int32 numProps = crmApp.GetAllPedidos(idAss).Count;
-            Int32 numProd = proApp.GetAllItens(idAss).Count;
-            Int32 numForn = forApp.GetAllItens(idAss).Count;
+            Int32 numUsu = usuApp.GetAllItens(idAssi).Count;
+            Int32 numCli = cliApp.GetAllItens(idAssi).Count;
+            Int32 numProc = crmApp.GetAllItens(idAssi).Count;
+            Int32 numAcoes = crmApp.GetAllAcoes(idAssi).Count;
+            Int32 numProps = crmApp.GetAllPedidos(idAssi).Count;
+            Int32 numProd = proApp.GetAllItens(idAssi).Count;
+            Int32 numForn = forApp.GetAllItens(idAssi).Count;
             //Int32 numEmail = menApp.GetAllItens(idAss).Where(p => p.MENS_IN_TIPO == 1).ToList().Count;
             //Int32 numSMS = menApp.GetAllItens(idAss).Where(p => p.MENS_IN_TIPO == 2).ToList().Count;
 
@@ -3272,7 +3273,6 @@ namespace ERP_Condominios_Solution.Controllers
             cell.BackgroundColor = BaseColor.LIGHT_GRAY;
             table.AddCell(cell);
 
-            table.AddCell(cell);
             cell = new PdfPCell(new Paragraph("Nome", meuFont))
             {
                 VerticalAlignment = Element.ALIGN_MIDDLE,
@@ -4548,7 +4548,7 @@ namespace ERP_Condominios_Solution.Controllers
             mens.LINK = "2";
             mens.MENS_TX_TEXTO = texto;
             mens.MENS_NM_RODAPE = rodape;
-            Session["Assinante"] = item;
+            Session["Assi"] = item;
             volta = ProcessaEnvioEMailAssinante(mens, usuario);
 
             return 1;
@@ -4557,7 +4557,7 @@ namespace ERP_Condominios_Solution.Controllers
         public ActionResult GerarRelatorioDetalhe()
         {
             // Prepara geração
-            ASSINANTE aten = baseApp.GetItemById((Int32)Session["IdAssinante"]);
+            ASSINANTE aten = baseApp.GetItemById((Int32)Session["IdAssi"]);
             String data = DateTime.Today.Date.ToShortDateString();
             data = data.Substring(0, 2) + data.Substring(3, 2) + data.Substring(6, 4);
             String nomeRel = "Assinante" + aten.ASSI_CD_ID.ToString() + "_" + data + ".pdf";

@@ -14,9 +14,15 @@ namespace DataServices.Repositories
         public USUARIO CheckExist(USUARIO conta, Int32 idAss)
         {
             IQueryable<USUARIO> query = Db.USUARIO;
-            query = query.Where(p => p.USUA_NR_CPF == conta.USUA_NR_CPF);
-            query = query.Where(p => p.ASSI_CD_ID == idAss);
-            return query.FirstOrDefault();
+            if (conta.USUA_NR_CPF != null)
+            {
+                query = query.Where(p => p.USUA_NR_CPF == conta.USUA_NR_CPF);
+                query = query.Where(p => p.USUA_IN_ATIVO == 1);
+                query = query.Where(p => p.ASSI_CD_ID == idAss);
+                return query.FirstOrDefault();
+
+            }
+            return null;
         }
 
         public USUARIO GetByEmail(String email, Int32 idAss)

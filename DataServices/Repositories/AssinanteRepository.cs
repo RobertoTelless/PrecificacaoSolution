@@ -23,6 +23,7 @@ namespace DataServices.Repositories
             {
                 query = query.Where(p => p.ASSI_NR_CNPJ == conta.ASSI_NR_CNPJ);
             }
+            query = query.Where(p => p.ASSI_IN_ATIVO == 1);
             return query.FirstOrDefault();
         }
 
