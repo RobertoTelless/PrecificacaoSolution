@@ -267,9 +267,11 @@
     <Compile Include="Controllers\PlanoController.cs" />
     <Compile Include="Controllers\PlataformaEntregaController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\ServicoController.cs" />
     <Compile Include="Controllers\TabelaAuxiliarController.cs" />
     <Compile Include="Controllers\TarefaController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
+    <Compile Include="Controllers\TransportadoraController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Extensions\HMTLHelperExtensions.cs" />
@@ -3331,6 +3333,19 @@
     <Content Include="Views\Plano\VerComparativoPlanos.cshtml" />
     <Content Include="Views\Plano\IncluirPlano.cshtml" />
     <Content Include="Views\Plano\EditarPlano.cshtml" />
+    <Content Include="Views\CRM\MontarTelaDashboardVendas.cshtml" />
+    <Content Include="Views\CRM\MontarTelaPedidoVenda.cshtml" />
+    <Content Include="Views\CRM\IncluirVenda.cshtml" />
+    <Content Include="Views\CRM\EditarVenda.cshtml" />
+    <Content Include="Views\CRM\CancelarVenda.cshtml" />
+    <Content Include="Views\CRM\ReprovarVenda.cshtml" />
+    <Content Include="Views\CRM\AprovarVenda.cshtml" />
+    <Content Include="Views\CRM\ExpedicaoVenda.cshtml" />
+    <Content Include="Views\CRM\EntregarVenda.cshtml" />
+    <Content Include="Views\CRM\EnviarVenda.cshtml" />
+    <Content Include="Views\CRM\IncluirItemPedidoVenda.cshtml" />
+    <Content Include="Views\CRM\EditarItemPedidoVenda.cshtml" />
+    <Content Include="Views\CRM\VerPedidoVenda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3485,7 +3500,9 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Mensagem\" />
+    <Folder Include="Views\Servico\" />
     <Folder Include="Views\Template\" />
+    <Folder Include="Views\Transportadora\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,7 +1,344 @@
-﻿
+﻿@using Presentation.Extensions
+@using CrossCutting
+@model ERP_Condominios_Solution.ViewModels.UsuarioViewModel
 @{
-    ViewBag.Title = "MontarTelaDashboardVendas";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
-<h2>MontarTelaDashboardVendas</h2>
+<div id="content" class="wraper container-fluid">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            @*Atalhos*@
+            <div class="row">
+                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                    <br />
+                    <div class="col-lg-12 col-md-12 col-xs-12">
+                        @Html.ButtonLinkIndex(text: "Clientes", action: "MostrarClientesVenda", controller: "CRM", buttonClass: "success")
+                        @Html.ButtonLinkIndex(text: "Plataformas de Entrega", action: "MostrarPlataformasVenda", controller: "CRM", buttonClass: "success")                     
+                        @Html.ButtonLinkIndex(text: "Produtos", action: "MostrarProdutosVenda", controller: "CRM", buttonClass: "success")                  
+                        @Html.ButtonLinkIndex(text: "Central de Vendas", action: "MontarTelaPedidoVenda", controller: "CRM", buttonClass: "primary")
+                        @Html.ButtonLinkIndex(text: "Voltar", controller: "Mensagem", action: "Voltar")
+                    </div>
+                    <br /><br />
+                </div>
+            </div>
 
+
+            @*Estatísticas*@
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="ibox-content text-center">
+                        <h1>@Model.USUA_NM_NOME.Substring(0, Model.USUA_NM_NOME.IndexOf(" "))</h1>
+                        <div class="m-b-sm">
+                            <img alt="image" class="img-circle" src="@Url.Content(Model.USUA_AQ_FOTO)" style="width: auto; height: auto; max-height: 90px; max-width: 90px;">
+                        </div>
+                        <p class="font-bold">@((String)Session["NomeGreeting"])</p>
+
+                        <div class="text-center">
+                            @Html.ButtonLinkIndex(text: "Perfil", action: "MontarTelaPerfilUsuario", controller: "Usuario", buttonClass: "btn btn-xs btn-white")
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-warning pull-right">Hoje</span>
+                            <h5>Resumo de Pedidos</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Em Elaboração</small>
+                                    <h4>@ViewBag.Elaboracao</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Cancelados</small>
+                                    <h4>@ViewBag.Cancelado</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Faturamento</small>
+                                    <h4>@ViewBag.Fatura</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Expedição</small>
+                                    <h4>@ViewBag.Expedicao</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Entregues</small>
+                                    <h4>@ViewBag.Entregues</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-warning pull-right">Hoje</span>
+                            <h5>Resumo Pessoal - Pedidos</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Em Elaboração</small>
+                                    <h4>@ViewBag.ElaboracaoPes</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Cancelados</small>
+                                    <h4>@ViewBag.CanceladoPes</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Faturamento</small>
+                                    <h4>@ViewBag.FaturaPes</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Expedição</small>
+                                    <h4>@ViewBag.ExpedicaoPes</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <small class="stats-label">Entregues</small>
+                                    <h4>@ViewBag.EntreguesPes</h4>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Indicadores*@
+            <br />
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Indicadores</h5>
+                        </div>
+                        <div class="ibox-content ibox-heading">
+                            <h3><i class="fa fa-line-chart"></i> Indicadores</h3>
+                            <small><i class="fa fa-tim"></i> Valores acumulados/atualizados até hoje</small>
+                        </div>
+                        <div class="row">
+                            @if ((Int32)Session["PermVenda"] == 1)
+                            {
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                                        <div class="ibox-title">
+                                            <h4>Pedidos por Status</h4>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div class="row">
+                                                <canvas id="doughnutChartPed" height="150"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                                        <div class="ibox-title">
+                                            <h4>Pedidos/Dia</h4>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div class="form-group">
+                                                @Html.ButtonLinkIndex(text: "Ver Todos os Meses", action: "VerPedidosVendasTodos", controller: "CRM")
+                                            </div>
+                                            <div class="row">
+                                                <canvas id="barChartPedido" height="150"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="row">
+                            @if ((Int32)Session["PermVenda"] == 1)
+                            {
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                                        <div class="ibox-title">
+                                            <h4>Pedidos por Status (Pessoal)</h4>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div class="row">
+                                                <canvas id="doughnutChartPedPessoal" height="150"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins" style="border-bottom: solid; border-bottom-color: darkblue; border-bottom-width: 2px; border-left: solid; border-left-color: darkblue; border-left-width: 1px; border-right: solid; border-right-color: darkblue; border-right-width: 1px; border-top: solid; border-top-color: darkblue; border-top-width: 1px">
+                                        <div class="ibox-title">
+                                            <h4>Pedidos/Dia (Pessoal)</h4>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div class="form-group">
+                                                @Html.ButtonLinkIndex(text: "Ver Todos os Meses", action: "VerPedidosVendasTodos", controller: "CRM")
+                                            </div>
+                                            <div class="row">
+                                                <canvas id="barChartPedidoPessoal" height="150"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/jasnyBootstrapStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+    @Styles.Render("~/plugins/touchSpinStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/plugins/toastr")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/bundles/inputmask")
+    @Scripts.Render("~/plugins/jasnyBootstrap")
+    @Scripts.Render("~/plugins/touchSpin")
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/sparkline")
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/plugins/chartjs")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+
+
+
+    <script>
+        function mostrarDesc(desc) {
+            $('#modalDescBody').html(desc);
+            $('#modalDesc').modal('show');
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajax({
+                url: '../CRM/GetDadosGraficoVendas'
+                , type: 'POST'
+                , success: function (result) {
+                var barData = {
+                    labels: result.dias,
+                    datasets: [
+                        {
+                            label: "Total por Dia",
+                            backgroundColor: 'rgba(26,179,148,0.5)',
+                            pointBorderColor: "#fff",
+                            data: result.valores
+                        }
+                    ]
+                };
+
+                var barOptions = {
+                    responsive: true
+                };
+
+                var ctx2 = document.getElementById("barChartPedido").getContext("2d");
+                new Chart(ctx2, { type: 'bar', data: barData, options: barOptions });
+              }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajax({
+                url: '../CRM/GetDadosGraficoVendasStatus'
+                , type: 'POST'
+                , success: function (result) {
+                var doughnutData = {
+                   labels: result.labels,
+                   datasets: [{
+                     data: result.valores,
+                     backgroundColor: result.cores
+                   }]
+                };
+                var doughnutOptions = {
+                   responsive: true
+                };
+                var ctx4 = document.getElementById("doughnutChartPed").getContext("2d");
+                new Chart(ctx4, { type: 'doughnut', data: doughnutData, options: doughnutOptions });
+              }
+            });
+        });
+    </script>
+
+        <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajax({
+                url: '../CRM/GetDadosGraficoVendasPessoal'
+                , type: 'POST'
+                , success: function (result) {
+                var barData = {
+                    labels: result.dias,
+                    datasets: [
+                        {
+                            label: "Total por Dia",
+                            backgroundColor: 'rgba(26,179,148,0.5)',
+                            pointBorderColor: "#fff",
+                            data: result.valores
+                        }
+                    ]
+                };
+
+                var barOptions = {
+                    responsive: true
+                };
+
+                var ctx2 = document.getElementById("barChartPedidoPessoal").getContext("2d");
+                new Chart(ctx2, { type: 'bar', data: barData, options: barOptions });
+              }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajax({
+                url: '../CRM/GetDadosGraficoVendasStatusPessoal'
+                , type: 'POST'
+                , success: function (result) {
+                var doughnutData = {
+                   labels: result.labels,
+                   datasets: [{
+                     data: result.valores,
+                     backgroundColor: result.cores
+                   }]
+                };
+                var doughnutOptions = {
+                   responsive: true
+                };
+                var ctx4 = document.getElementById("doughnutChartPedPessoal").getContext("2d");
+                new Chart(ctx4, { type: 'doughnut', data: doughnutData, options: doughnutOptions });
+              }
+            });
+        });
+    </script>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                  alert("@ViewBag.Message");
+            };
+        </script>
+    }
+}

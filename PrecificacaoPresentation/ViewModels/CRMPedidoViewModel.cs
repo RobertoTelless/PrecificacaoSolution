@@ -10,14 +10,19 @@ namespace ERP_Condominios_Solution.ViewModels
     public class CRMPedidoViewModel
     {
         [Key]
-        public int CRPV_CD_ID { get; set; }
+        public Nullable<int> CRPV_CD_ID { get; set; }
         public Nullable<int> ASSI_CD_ID { get; set; }
         public Nullable<int> CRM1_CD_ID { get; set; }
-        public int FILI_CD_ID { get; set; }
         public Nullable<int> CLIE_CD_ID { get; set; }
         public Nullable<int> FOEN_CD_ID { get; set; }
         public Nullable<int> FOFR_CD_ID { get; set; }
         public Nullable<int> USUA_CD_ID { get; set; }
+        public Nullable<int> PLEN_CD_ID { get; set; }
+        public Nullable<int> TEPR_CD_ID { get; set; }
+        public Nullable<int> MOCA_CD_ID { get; set; }
+        public Nullable<int> MOEN_CD_ID { get; set; }
+        public Nullable<int> TRAN_CD_ID { get; set; }
+        public Nullable<int> FILI_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo DATA DE VALIDADE obrigatorio")]
         [DataType(DataType.Date, ErrorMessage = "A DATA DE VALIDADE deve ser uma data válida")]
         public System.DateTime CRPV_DT_VALIDADE { get; set; }
@@ -75,9 +80,6 @@ namespace ERP_Condominios_Solution.ViewModels
         public string CRPV_DS_APROVACAO { get; set; }
         public CLIENTE CLIENTE_NOME { get; set; }
         public string CRPV_NM_NOME { get; set; }
-        public Nullable<int> TRAN_CD_ID { get; set; }
-        public Nullable<int> TEPR_CD_ID { get; set; }
-        public Nullable<int> MOCA_CD_ID { get; set; }
         public Nullable<int> CRPV_IN_GERAR_CR { get; set; }
         public Nullable<int> CRPV_IN_GEROU_NF { get; set; }
         public string CRPV_NR_NOTA_FISCAL { get; set; }
@@ -204,15 +206,18 @@ namespace ERP_Condominios_Solution.ViewModels
         public virtual ICollection<CRM_PEDIDO_VENDA_ACOMPANHAMENTO> CRM_PEDIDO_VENDA_ACOMPANHAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM_PEDIDO_VENDA_ANEXO> CRM_PEDIDO_VENDA_ANEXO { get; set; }
-        //public virtual FILIAL FILIAL { get; set; }
         public virtual FORMA_ENVIO FORMA_ENVIO { get; set; }
         public virtual FORMA_FRETE FORMA_FRETE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM_PEDIDO_VENDA_ITEM> CRM_PEDIDO_VENDA_ITEM { get; set; }
         public virtual MOTIVO_CANCELAMENTO MOTIVO_CANCELAMENTO { get; set; }
+        public virtual MOTIVO_ENCERRAMENTO MOTIVO_ENCERRAMENTO { get; set; }
+        public virtual PLATAFORMA_ENTREGA PLATAFORMA_ENTREGA { get; set; }
         public virtual TEMPLATE_PROPOSTA TEMPLATE_PROPOSTA { get; set; }
         public virtual TRANSPORTADORA TRANSPORTADORA { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
 
 
     }

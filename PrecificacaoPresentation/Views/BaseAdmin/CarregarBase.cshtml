@@ -78,6 +78,10 @@
                     @Html.ButtonLinkIndex(text: "Estoque", action: "MontarTelaDashboardEstoque", controller: "Estoque", buttonClass: "primary")                
                     @Html.ButtonLinkIndex(text: "Compras", action: "MontarTelaDashboardCompra", controller: "Compra", buttonClass: "primary")                
                     @Html.ButtonLinkIndex(text: "CRM", action: "MontarTelaDashboardCRMNovo", controller: "CRM", buttonClass: "primary")                
+                    @if ((Int32)Session["PermVenda"] == 1)
+                    {
+                        @Html.ButtonLinkIndex(text: "Vendas", action: "MontarTelaDashboardVendas", controller: "CRM", buttonClass: "primary")                
+                    }
                 </div>
 
                 @if ((String)Session["PerfilSigla"] == "ADM" || (String)Session["PerfilSigla"] == "GER")

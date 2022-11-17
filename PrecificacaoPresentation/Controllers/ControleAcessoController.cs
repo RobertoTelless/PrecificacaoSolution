@@ -125,6 +125,7 @@ namespace ERP_Condominios_Solution.Controllers
                 Session["PermMens"] = 0;
                 Session["PermCRM"] = 0;
                 Session["PermServDesk"] = 0;
+                Session["PermVendas"] = 0;
                 Session["NumSMS"] = 0;
                 Session["NumEMail"] = 0;
                 Session["NumZap"] = 0;
@@ -216,8 +217,25 @@ namespace ERP_Condominios_Solution.Controllers
                             Session["NumProcessosBase"] = item.PLANO.PLAN_NR_PROCESSOS;
                         }
                     }
+                    if (item.PLANO.PLAN_IN_VENDAS == 1)
+                    {
+                        Session["PermVendas"] = 1;
+                        if ((Int32)Session["NumVendas"] < item.PLANO.PLAN_NR_VENDA)
+                        {
+                            Session["NumVendas"] = item.PLANO.PLAN_NR_VENDA;
+                        }
+                    }
                     if ((Int32)Session["NumProduto"] < item.PLANO.PLAN_NR_PRODUTO)
                     {
+                        Session["NumProduto"] = item.PLANO.PLAN_NR_PRODUTO;
+                    }
+                    if ((Int32)Session["NumFornecedor"] < item.PLANO.PLAN_NR_FORNECEDOR)
+                    {
+                        Session["NumFornecedor"] = item.PLANO.PLAN_NR_FORNECEDOR;
+                    }
+                }
+                if ((Int32)Session["NumProduto"] < item.PLANO.PLAN_NR_PRODUTO)
+                {
                         Session["NumProduto"] = item.PLANO.PLAN_NR_PRODUTO;
                     }
                     if ((Int32)Session["NumFornecedor"] < item.PLANO.PLAN_NR_FORNECEDOR)

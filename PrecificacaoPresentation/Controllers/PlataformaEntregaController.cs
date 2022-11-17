@@ -206,6 +206,10 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaPlat"] == 50)
+            {
+                return RedirectToAction("MontarTelaDashboardVendas", "CRM");
+            }
             return RedirectToAction("MontarTelaPlataformaEntrega");
         }
 
