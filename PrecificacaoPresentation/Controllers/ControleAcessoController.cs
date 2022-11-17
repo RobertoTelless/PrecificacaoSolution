@@ -225,23 +225,6 @@ namespace ERP_Condominios_Solution.Controllers
                             Session["NumVendas"] = item.PLANO.PLAN_NR_VENDA;
                         }
                     }
-                    if ((Int32)Session["NumProduto"] < item.PLANO.PLAN_NR_PRODUTO)
-                    {
-                        Session["NumProduto"] = item.PLANO.PLAN_NR_PRODUTO;
-                    }
-                    if ((Int32)Session["NumFornecedor"] < item.PLANO.PLAN_NR_FORNECEDOR)
-                    {
-                        Session["NumFornecedor"] = item.PLANO.PLAN_NR_FORNECEDOR;
-                    }
-                }
-                if ((Int32)Session["NumProduto"] < item.PLANO.PLAN_NR_PRODUTO)
-                {
-                        Session["NumProduto"] = item.PLANO.PLAN_NR_PRODUTO;
-                    }
-                    if ((Int32)Session["NumFornecedor"] < item.PLANO.PLAN_NR_FORNECEDOR)
-                    {
-                        Session["NumFornecedor"] = item.PLANO.PLAN_NR_FORNECEDOR;
-                    }
                 }
 
                 // Verifica Acesso
