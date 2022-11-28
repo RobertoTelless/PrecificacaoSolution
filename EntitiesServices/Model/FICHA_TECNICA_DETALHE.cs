@@ -19,6 +19,7 @@ namespace EntitiesServices.Model
         public int PROD_CD_ID { get; set; }
         public Nullable<decimal> FITD_QN_QUANTIDADE { get; set; }
         public Nullable<int> FITD_IN_ATIVO { get; set; }
+        public Nullable<decimal> FITD_PC_PERDA { get; set; }
     
         public virtual FICHA_TECNICA FICHA_TECNICA { get; set; }
         public virtual PRODUTO PRODUTO { get; set; }

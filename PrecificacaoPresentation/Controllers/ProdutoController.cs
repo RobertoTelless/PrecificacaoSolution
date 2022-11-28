@@ -821,7 +821,8 @@ namespace ERP_Condominios_Solution.Controllers
                     {
                         Session["IdProduto"] = item.PROD_CD_ID;
                         Session["VoltaComposto"] = 1;
-                        return RedirectToAction("IncluirFT", "FichaTecnica");
+                        //return RedirectToAction("IncluirFT", "FichaTecnica");
+                        return RedirectToAction("VoltarAnexoProduto");
                     }
                 }
                 catch (Exception ex)
@@ -1049,6 +1050,17 @@ namespace ERP_Condominios_Solution.Controllers
                     // Sucesso
                     listaMasterProd = new List<PRODUTO>();
                     Session["ListaProduto"] = null;
+
+                    // Verifica ficha tecnica
+                    if (item.PROD_IN_COMPOSTO == 1)
+                    {
+                        if (item.FICHA_TECNICA.Count == 0)
+                        {
+                            return RedirectToAction("IncluirFT", "FichaTecnica");
+                        }
+                    }
+
+                    // Retornos
                     if ((Int32)Session["VoltaEstoque"] == 1)
                     {
                         return RedirectToAction("MontarTelaEstoqueProduto", "Estoque");

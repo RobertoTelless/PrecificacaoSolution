@@ -76,6 +76,7 @@ namespace EntitiesServices.Model
         public Nullable<System.DateTime> CRPV_DT_EXPEDICAO { get; set; }
         public Nullable<System.DateTime> CRPV_DT_ENTREGA { get; set; }
         public int CRPV_IN_ATIVO { get; set; }
+        public Nullable<int> CRPV_IN_GERAR_PEDIDO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }

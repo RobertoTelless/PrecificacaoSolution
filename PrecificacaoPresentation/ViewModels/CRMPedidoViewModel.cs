@@ -103,7 +103,23 @@ namespace ERP_Condominios_Solution.ViewModels
         public string NomeProposta { get; set; }
         public Nullable<System.DateTime> DataProposta { get; set; }
         public Nullable<System.DateTime> DataAprovacao { get; set; }
+        public Nullable<int> CRPV_IN_GERAR_PEDIDO { get; set; }
 
+        public bool GeraVenda
+        {
+            get
+            {
+                if (CRPV_IN_GERAR_PEDIDO == 1)
+                {
+                    return true;
+                }
+                return false;
+            }
+            set
+            {
+                CRPV_IN_GERAR_PEDIDO = (value == true) ? 1 : 0;
+            }
+        }
         public bool GeraCR
         {
             get

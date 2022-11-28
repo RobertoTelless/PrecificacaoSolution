@@ -196,6 +196,7 @@
                                         <th>Código (SKU)</th>
                                         <th>Marca</th>
                                         <th>Modelo</th>
+                                        <th>Composto</th>
                                         <th></th>
                                         <th class="td-one-action">Ações</th>
                                     </tr>
@@ -235,7 +236,14 @@
                                                 <td>@cond.PROD_CD_CODIGO</td>
                                                 <td>@cond.PROD_NM_MARCA</td>
                                                 <td>@cond.PROD_NM_MODELO</td>
-
+                                                @if (cond.PROD_IN_COMPOSTO == 1)
+	                                            {
+                                                    <td><span class="badge badge-primary">Sim</span></td>
+                                                }
+                                                else if (cond.PROD_IN_COMPOSTO == 0)
+                                                {
+                                                    <td><span class="badge badge-success">Não</span></td>
+                                                }                                              
                                                 @if (!String.IsNullOrEmpty(cond.PROD_AQ_FOTO))
                                                 {
                                                     <td><img src="@Url.Content(cond.PROD_AQ_FOTO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.PROD_NM_NOME', '@Url.Content(cond.PROD_AQ_FOTO)')"></td>
@@ -296,7 +304,14 @@
                                                 <td>@cond.PROD_CD_CODIGO</td>
                                                 <td>@cond.PROD_NM_MARCA</td>
                                                 <td>@cond.PROD_NM_MODELO</td>
-
+                                                @if (cond.PROD_IN_COMPOSTO == 1)
+	                                            {
+                                                    <td><span class="badge badge-primary">Sim</span></td>
+                                                }
+                                                else if (cond.PROD_IN_COMPOSTO == 0)
+                                                {
+                                                    <td><span class="badge badge-success">Não</span></td>
+                                                }                                              
                                                 @if (!String.IsNullOrEmpty(cond.PROD_AQ_FOTO))
                                                 {
                                                     <td><img src="@Url.Content(cond.PROD_AQ_FOTO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.PROD_NM_NOME', '@Url.Content(cond.PROD_AQ_FOTO)')"></td>

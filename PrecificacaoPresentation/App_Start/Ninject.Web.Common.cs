@@ -132,6 +132,7 @@ namespace Presentation.Start
             kernel.Bind<IPedidoCompraAppService>().To<PedidoCompraAppService>();
             kernel.Bind<IAssinanteCnpjAppService>().To<AssinanteCnpjAppService>();
             kernel.Bind<IPlanoAppService>().To<PlanoAppService>();
+            kernel.Bind<ICRMDiarioAppService>().To<CRMDiarioAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -200,6 +201,7 @@ namespace Presentation.Start
             kernel.Bind<IPedidoCompraService>().To<PedidoCompraService>();
             kernel.Bind<IPlanoService>().To<PlanoService>();
             kernel.Bind<IAssinanteCnpjService>().To<AssinanteCnpjService>();
+            kernel.Bind<ICRMDiarioService>().To<CRMDiarioService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -325,6 +327,7 @@ namespace Presentation.Start
             kernel.Bind<IAssinantePlanoRepository>().To<AssinantePlanoRepository>();
             kernel.Bind<IPeriodicidadePlanoRepository>().To<PeriodicidadePlanoRepository>();
             kernel.Bind<IPlanoRepository>().To<PlanoRepository>();
+            kernel.Bind<ICRMDiarioRepository>().To<CRMDiarioRepository>();
 
 
         }

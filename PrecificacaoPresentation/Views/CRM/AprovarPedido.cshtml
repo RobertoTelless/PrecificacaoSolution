@@ -99,6 +99,7 @@
                                             @Html.HiddenFor(m => m.MOCA_CD_ID)
                                             @Html.HiddenFor(m => m.TEPR_CD_ID)
                                             @Html.HiddenFor(m => m.CRPV_CD_ID)
+                                            @Html.HiddenFor(m => m.CRPV_IN_GERAR_PEDIDO)
                                             @Html.ButtonActionSubmit(text: "Confirma Aprovação da Proposta", htmlAttributes: new { id = "basictoast" })
                                         </div>
 
@@ -158,12 +159,12 @@
                                                                 @Html.TextBoxFor(m => m.CRPV_DT_APROVACAO, "{0:dd/MM/yyyy}", new { @class = "form-control date-picker", autofocus = true, @id="data2" })
                                                                 @Html.ValidationMessageFor(m => m.CRPV_DT_APROVACAO, "", new { @style = "color:red" })
                                                             </div>
-                                                            @*<div class="col-lg-3 col-md-3 col-xs-12" id="rec">
-                                                                Registra Conta a Receber?
+                                                            <div class="col-lg-3 col-md-3 col-xs-12" id="rec">
+                                                                Converte em Venda?
                                                                 <br />
-                                                                @Html.CheckBoxFor(m => m.GeraCR, new { @class = "checkbox i-checks", autofocus = true })
-                                                                @Html.ValidationMessageFor(m => m.GeraCR, "", new { @style = "color:red" })
-                                                            </div>*@
+                                                                @Html.CheckBoxFor(m => m.GeraVenda, new { @class = "checkbox i-checks", autofocus = true })
+                                                                @Html.ValidationMessageFor(m => m.GeraVenda, "", new { @style = "color:red" })
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

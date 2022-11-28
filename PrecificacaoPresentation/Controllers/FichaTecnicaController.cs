@@ -263,7 +263,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             if (Session["Produto"] != null)
             {
-                return RedirectToAction("EditarProduto", "Produto", new { id = ((PRODUTO)Session["Produto"]).PROD_CD_ID });
+                return RedirectToAction("EditarProduto", "Produto", new { id = (Int32)Session["IdProduto"]});
             }
             return RedirectToAction("MontarTelaFT");
         }
@@ -345,6 +345,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
 
             // Prepara view
+            Session["IdProduto"] = prod.PROD_CD_ID;
             Session["ListaFtd"] = null;
             FICHA_TECNICA item = new FICHA_TECNICA();
             FichaTecnicaViewModel vm = Mapper.Map<FICHA_TECNICA, FichaTecnicaViewModel>(item);

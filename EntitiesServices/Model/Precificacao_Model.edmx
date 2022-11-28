@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Db_PrecificacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Db_PrecificacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AGENDA">
           <Key>
             <PropertyRef Name="AGEN_CD_ID" />
@@ -805,6 +805,7 @@
           <Property Name="CRPV_DS_APROVACAO" Type="varchar" MaxLength="5000" />
           <Property Name="CRPV_NM_NOME" Type="varchar" MaxLength="100" />
           <Property Name="CRPV_IN_GERAR_CR" Type="int" />
+          <Property Name="CRPV_IN_GERAR_PEDIDO" Type="int" />
           <Property Name="CRPC_IN_EMAIL" Type="int" />
           <Property Name="CRPV_IN_GEROU_NF" Type="int" />
           <Property Name="CRPV_NR_NOTA_FISCAL" Type="varchar" MaxLength="50" />
@@ -986,6 +987,7 @@
           <Property Name="FITE_CD_ID" Type="int" Nullable="false" />
           <Property Name="PROD_CD_ID" Type="int" Nullable="false" />
           <Property Name="FITD_QN_QUANTIDADE" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="FITD_PC_PERDA" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FITD_IN_ATIVO" Type="int" />
         </EntityType>
         <EntityType Name="FILIAL">
@@ -6818,8 +6820,7 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Db_PrecificacaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -7864,6 +7865,7 @@
           <NavigationProperty Name="TRANSPORTADORA" Relationship="Self.FK_CRM_PEDIDO_VENDA_TRANSPORTADORA" FromRole="CRM_PEDIDO_VENDA" ToRole="TRANSPORTADORA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CRM_PEDIDO_VENDA_USUARIO" FromRole="CRM_PEDIDO_VENDA" ToRole="USUARIO" />
           <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Self.FK_DIARIO_PROCESSO_CRM_PEDIDO_VENDA" FromRole="CRM_PEDIDO_VENDA" ToRole="DIARIO_PROCESSO" />
+          <Property Name="CRPV_IN_GERAR_PEDIDO" Type="Int32" />
         </EntityType>
         <EntityType Name="CRM_PEDIDO_VENDA_ACOMPANHAMENTO">
           <Key>
@@ -8076,6 +8078,7 @@
           <Property Name="FITD_IN_ATIVO" Type="Int32" />
           <NavigationProperty Name="FICHA_TECNICA" Relationship="Self.FK_FICHA_TECNICA_DETALHE_FICHA_TECNICA" FromRole="FICHA_TECNICA_DETALHE" ToRole="FICHA_TECNICA" />
           <NavigationProperty Name="PRODUTO" Relationship="Self.FK_FICHA_TECNICA_DETALHE_PRODUTO" FromRole="FICHA_TECNICA_DETALHE" ToRole="PRODUTO" />
+          <Property Name="FITD_PC_PERDA" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="FILIAL">
           <Key>
@@ -14998,6 +15001,7 @@
           <EntitySetMapping Name="CRM_PEDIDO_VENDA">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CRM_PEDIDO_VENDA">
               <MappingFragment StoreEntitySet="CRM_PEDIDO_VENDA">
+                <ScalarProperty Name="CRPV_IN_GERAR_PEDIDO" ColumnName="CRPV_IN_GERAR_PEDIDO" />
                 <ScalarProperty Name="CRPV_CD_ID" ColumnName="CRPV_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CRM1_CD_ID" ColumnName="CRM1_CD_ID" />
@@ -15228,6 +15232,7 @@
           <EntitySetMapping Name="FICHA_TECNICA_DETALHE">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.FICHA_TECNICA_DETALHE">
               <MappingFragment StoreEntitySet="FICHA_TECNICA_DETALHE">
+                <ScalarProperty Name="FITD_PC_PERDA" ColumnName="FITD_PC_PERDA" />
                 <ScalarProperty Name="FITD_CD_ID" ColumnName="FITD_CD_ID" />
                 <ScalarProperty Name="FITE_CD_ID" ColumnName="FITE_CD_ID" />
                 <ScalarProperty Name="PROD_CD_ID" ColumnName="PROD_CD_ID" />

@@ -19,9 +19,9 @@ namespace ERP_Condominios_Solution.ViewModels
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<decimal> FITD_QN_QUANTIDADE { get; set; }
         public Nullable<int> FITD_IN_ATIVO { get; set; }
+        public Nullable<decimal> FITD_PC_PERDA { get; set; }
 
         public virtual FICHA_TECNICA FICHA_TECNICA { get; set; }
-        public virtual PRODUTO_TABELA_PRECO PRODUTO_TABELA_PRECO { get; set; }
         public virtual PRODUTO PRODUTO { get; set; }
     }
 }

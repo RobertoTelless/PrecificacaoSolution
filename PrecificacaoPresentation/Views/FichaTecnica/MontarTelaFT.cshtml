@@ -118,7 +118,6 @@
                                             <th>Peso (Kg)</th> 
                                             <th>Fator Correção</th> 
                                             <th>Quant.Líquida</th> 
-                                            <th>Perdas (%)</th> 
                                             <th></th>   
                                             <th class="td-one-action">Ações</th>
                                         </tr>
@@ -134,7 +133,6 @@
                                                 <td>@cond.FITE_NR_PESO</td>
                                                 <td>@cond.FITE_NR_FATOR_CORRECAO</td>
                                                 <td>@cond.FITE_NR_PORCOES</td>
-                                                <td>@cond.FITE_PC_PERCENTUAL_PERDA</td>
                                                 @if (!String.IsNullOrEmpty(cond.FITE_AQ_FOTO_APRESENTACAO))
 	                                            {
                                                     <td><img src="@Url.Content(cond.FITE_AQ_FOTO_APRESENTACAO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.FITE_NM_NOME', '@Url.Content(cond.FITE_AQ_FOTO_APRESENTACAO)')"></td>

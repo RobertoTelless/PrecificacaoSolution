@@ -138,6 +138,7 @@ namespace ERP_Condominios_Solution.Controllers
                 Session["MensPermissao"] = 0;
                 Session["NumProduto"] = 0;
                 Session["NumFornecedor"] = 0;
+                Session["NumVendas"] = 0;
 
                 // Recupera Planos do assinante
                 List<PlanoVencidoViewModel> vencidos = new List<PlanoVencidoViewModel>();

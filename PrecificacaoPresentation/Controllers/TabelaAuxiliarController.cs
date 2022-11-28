@@ -115,6 +115,10 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
+            if ((Int32)Session["VoltaMensagem"] == 80)
+            {
+                return RedirectToAction("MontarTelaDashboardVendas", "CRM");
+            }
             return RedirectToAction("MontarTelaTabelasAuxiliares", "BaseAdmin");
         }
 

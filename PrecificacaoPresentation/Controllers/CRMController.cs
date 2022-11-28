@@ -6648,6 +6648,13 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("MontarTelaCliente", "Cliente");
         }
 
+        public ActionResult MostrarEmbalagens()
+        {
+            // Prepara grid
+            Session["VoltaMensagem"] = 80;
+            return RedirectToAction("MontarTelaTipoEmbalagem", "TabelaAuxiliar");
+        }
+
         public ActionResult MontarTelaCRMKanbaChama()
         {
             // Prepara grid
@@ -7181,6 +7188,7 @@ namespace ERP_Condominios_Solution.Controllers
             vm.CRPV_VL_PESO_BRUTO = 0;
             vm.CRPV_VL_PESO_LIQUIDO = 0;
             vm.CRPV_IN_GERAR_CR = 0;
+            vm.CRPV_IN_GERAR_PEDIDO = 0;
             vm.CRPV_DT_VALIDADE = DateTime.Now.AddDays(Convert.ToDouble(conf.CONF_NR_DIAS_PROPOSTA));
             vm.CRPV_IN_NUMERO_GERADO = num;
             vm.CLIE_CD_ID = crm.CLIE_CD_ID;
@@ -7700,6 +7708,9 @@ namespace ERP_Condominios_Solution.Controllers
                     CRM crm = baseApp.GetItemById(item.CRM1_CD_ID.Value);
                     crm.CRM1_IN_STATUS = 4;
                     Int32 volta1 = baseApp.ValidateEdit(crm, crm);
+                    Session["IdVenda"] = item.CRPV_CD_ID;
+
+                    // Converte em venda
 
                     // Gera diario
                     CRM not = baseApp.GetItemById(item.CRM1_CD_ID.Value);
@@ -7714,7 +7725,11 @@ namespace ERP_Condominios_Solution.Controllers
                     dia.DIPR_DS_DESCRICAO = "Aprovação de Proposta " + item.CRPV_NM_NOME + ". Processo: " + not.CRM1_NM_NOME + ". Cliente: " + cli.CLIE_NM_NOME;
                     Int32 volta3 = diaApp.ValidateCreate(dia);
 
-                    // Listas
+                    // Retorno
+                    if (item.CRPV_IN_GERAR_PEDIDO == 1)
+                    {
+                        return RedirectToAction("EditarVenda", new { id = (Int32)Session["IdVenda"] });
+                    }
                     return RedirectToAction("VoltarAcompanhamentoCRM");
                 }
                 catch (Exception ex)
@@ -9731,7 +9746,10 @@ namespace ERP_Condominios_Solution.Controllers
                         List<CRM_PEDIDO_VENDA_ITEM> prods = ped.CRM_PEDIDO_VENDA_ITEM.ToList();
                         foreach (CRM_PEDIDO_VENDA_ITEM prod in prods)
                         {
-                            if (prod.CRPI_IN_TIPO_ITEM == 1)
+                            PRODUTO produto = proApp.GetItemById(prod.PROD_CD_ID.Value);
+                            
+                            // Produto comum
+                            if (produto.PROD_IN_COMPOSTO == 0)
                             {
                                 PRODUTO pef = proApp.GetItemById(prod.PROD_CD_ID.Value);
                                 pef.PROD_QN_RESERVA_ESTOQUE = pef.PROD_QN_RESERVA_ESTOQUE - prod.CRPI_IN_QUANTIDADE;
@@ -9741,7 +9759,6 @@ namespace ERP_Condominios_Solution.Controllers
                                 // Grava movimentação
                                 MOVIMENTO_ESTOQUE_PRODUTO mov = new MOVIMENTO_ESTOQUE_PRODUTO();
                                 mov.ASSI_CD_ID = usuario.ASSI_CD_ID;
-                                //mov.FILI_CD_ID = ped.FILI_CD_ID;
                                 mov.PROD_CD_ID = prod.PROD_CD_ID.Value;
                                 mov.USUA_CD_ID = usuario.USUA_CD_ID;
                                 mov.MOEP_DT_MOVIMENTO = DateTime.Today.Date;
@@ -9753,6 +9770,45 @@ namespace ERP_Condominios_Solution.Controllers
                                 mov.MOEP_QN_QUANTIDADE = prod.CRPI_IN_QUANTIDADE;
                                 Int32 volta3 = meApp.ValidateCreate(mov, usuario);
                             }
+
+                            // Produto composto
+                            if (produto.PROD_IN_COMPOSTO == 1)
+                            {
+                                if (produto.FICHA_TECNICA.Count > 0 )
+                                {
+                                    FICHA_TECNICA ft = produto.FICHA_TECNICA.FirstOrDefault();
+
+
+
+
+
+
+
+
+
+
+
+                                }
+                                else
+                                {
+
+                                }
+
+
+
+
+
+
+
+                            }
+
+
+
+
+
+
+
+
                         }
                     }
 
