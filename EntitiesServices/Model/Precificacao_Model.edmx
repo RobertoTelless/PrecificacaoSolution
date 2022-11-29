@@ -1721,6 +1721,8 @@
           <Property Name="PROD_IN_ATIVO" Type="int" />
           <Property Name="PROD_QN_QUANTIDADE_ALTERADA" Type="int" />
           <Property Name="PROD_DS_JUSTIFICATIVA" Type="varchar" MaxLength="500" />
+          <Property Name="PROD_QN_ESTOQUE_INSUMO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_QN_QUANTIDADE_ALTERADA_INSUMO" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="PRODUTO_ANEXO">
           <Key>
@@ -8969,6 +8971,8 @@
           <NavigationProperty Name="PRODUTO_ULTIMOS_CUSTOS" Relationship="Self.FKPRODUTO_UL782175" FromRole="PRODUTO" ToRole="PRODUTO_ULTIMOS_CUSTOS" />
           <NavigationProperty Name="UNIDADE" Relationship="Self.FKPRODUTO131046" FromRole="PRODUTO" ToRole="UNIDADE" />
           <NavigationProperty Name="SUBCATEGORIA_PRODUTO" Relationship="Self.FKPRODUTO137036" FromRole="PRODUTO" ToRole="SUBCATEGORIA_PRODUTO" />
+          <Property Name="PROD_QN_ESTOQUE_INSUMO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PROD_QN_QUANTIDADE_ALTERADA_INSUMO" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="PRODUTO_ANEXO">
           <Key>
@@ -15958,6 +15962,8 @@
           <EntitySetMapping Name="PRODUTO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.PRODUTO">
               <MappingFragment StoreEntitySet="PRODUTO">
+                <ScalarProperty Name="PROD_QN_QUANTIDADE_ALTERADA_INSUMO" ColumnName="PROD_QN_QUANTIDADE_ALTERADA_INSUMO" />
+                <ScalarProperty Name="PROD_QN_ESTOQUE_INSUMO" ColumnName="PROD_QN_ESTOQUE_INSUMO" />
                 <ScalarProperty Name="PROD_CD_ID" ColumnName="PROD_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CAPR_CD_ID" ColumnName="CAPR_CD_ID" />

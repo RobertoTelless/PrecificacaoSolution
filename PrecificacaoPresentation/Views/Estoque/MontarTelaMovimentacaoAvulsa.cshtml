@@ -50,13 +50,6 @@
                                         Data Final
                                         @Html.TextBoxFor(m => m.MOVMT_DT_MOVIMENTO_FINAL, "{0:dd/MM/yyyy}", new { @class = "form-control date-picker", id = "dataFinal" })
                                     </div>
-                                    @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
-                                    {
-                                        <div class="col-lg-3 col-md-3 col-xs-12">
-                                            Filial
-                                            @Html.DropDownListFor(x => x.FILI_CD_ID, (SelectList)ViewBag.Filiais, "Selecionar", new { @class = "form-control" })
-                                        </div>
-                                    }
                             </div>
                             <div class="form-group">
                                 <div id="lstEntrada" style="display: none;" class="col-lg-3 col-md-3 col-xs-12">
@@ -109,7 +102,6 @@
                                     <th>Tipo de Operação</th>
                                     <th>Data</th>
                                     <th>Nome</th>
-                                    @*<th>Filial</th>*@
                                     <th>Quantidade Antes</th>
                                     <th>Quantidade Alterada</th>
                                     <th>Quantidade Depois</th>
@@ -169,14 +161,6 @@
                                             <td>@cond.MOEP_IN_ORIGEM</td>
                                             <td>@cond.MOEP_DT_MOVIMENTO.ToShortDateString()</td>
                                             <td>@cond.PRODUTO.PROD_NM_NOME</td>
-                                            @*@if (cond.FILIAL != null)
-                                            {
-                                                <td>@cond.FILIAL.FILI_NM_NOME</td>
-                                            }
-                                            else
-                                            {
-                                                <td>-</td>
-                                            }*@
                                             <td>@cond.MOEP_QN_ANTES</td>
                                             <td>@cond.MOEP_QN_ALTERADA</td>
                                             <td>@cond.MOEP_QN_DEPOIS</td>

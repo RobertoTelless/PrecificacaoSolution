@@ -176,7 +176,7 @@
                                                                     @Html.ValidationMessageFor(m => m.USUA_CD_ID, "", new { @style = "color:red" })
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-xs-12">
-                                                                    Nome da Venda
+                                                                    Identificaçãos da Venda
                                                                     @Html.TextBoxFor(m => m.CRPV_NM_NOME, new { @class = "form-control", autofocus = true })
                                                                     @Html.ValidationMessageFor(m => m.CRPV_NM_NOME, "",new { @style="color:red" })
                                                                 </div>
@@ -361,7 +361,7 @@
                                                                     @Html.ValidationMessageFor(m => m.USUA_CD_ID, "", new { @style = "color:red" })
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-xs-12">
-                                                                    Nome da Venda
+                                                                    Identificação da Venda
                                                                     @Html.TextBoxFor(m => m.CRPV_NM_NOME, new { @class = "form-control", autofocus = true })
                                                                     @Html.ValidationMessageFor(m => m.CRPV_NM_NOME, "",new { @style="color:red" })
                                                                 </div>
@@ -636,7 +636,14 @@
                                                                     @foreach (var cond in (Model.CRM_PEDIDO_VENDA_ITEM))
                                                                     {
                                                                         <tr>
-                                                                            <td>Produto</td>
+                                                                            @if (cond.PRODUTO.PROD_IN_COMPOSTO == 0)
+                                                                            {
+                                                                                <td>Simples</td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td>Composto</td>
+                                                                            }
                                                                             <td>@cond.PRODUTO.PROD_NM_NOME</td>
                                                                             <td>@cond.PRODUTO.PROD_NM_MODELO</td>
                                                                             <td>@cond.PRODUTO.PROD_NM_MARCA</td>

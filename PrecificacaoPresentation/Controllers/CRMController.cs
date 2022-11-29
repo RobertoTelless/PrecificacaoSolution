@@ -7660,6 +7660,7 @@ namespace ERP_Condominios_Solution.Controllers
             CRMPedidoViewModel vm = Mapper.Map<CRM_PEDIDO_VENDA, CRMPedidoViewModel>(item);
             vm.CRPV_DT_APROVACAO = DateTime.Today.Date;
             vm.CRPV_IN_STATUS = 5;
+            vm.CRPV_IN_GERAR_PEDIDO = 1;
             return View(vm);
         }
 
@@ -7728,6 +7729,8 @@ namespace ERP_Condominios_Solution.Controllers
                     // Retorno
                     if (item.CRPV_IN_GERAR_PEDIDO == 1)
                     {
+                        item.CRPV_IN_STATUS = 1;
+                        Int32 volta6 = baseApp.ValidateEditPedidoVenda(item);
                         return RedirectToAction("EditarVenda", new { id = (Int32)Session["IdVenda"] });
                     }
                     return RedirectToAction("VoltarAcompanhamentoCRM");
@@ -8838,6 +8841,10 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0150", CultureInfo.CurrentCulture));
             }
+            if ((Int32)Session["MensCRM"] == 199)
+            {
+                ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0229", CultureInfo.CurrentCulture));
+            }
 
             // Processa
             Session["MensCRM"] = 0;
@@ -9751,10 +9758,9 @@ namespace ERP_Condominios_Solution.Controllers
                             // Produto comum
                             if (produto.PROD_IN_COMPOSTO == 0)
                             {
-                                PRODUTO pef = proApp.GetItemById(prod.PROD_CD_ID.Value);
-                                pef.PROD_QN_RESERVA_ESTOQUE = pef.PROD_QN_RESERVA_ESTOQUE - prod.CRPI_IN_QUANTIDADE;
-                                pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE - prod.CRPI_IN_QUANTIDADE;
-                                Int32 volta1 = proApp.ValidateEdit(pef, pef, usuario);
+                                produto.PROD_QN_RESERVA_ESTOQUE = produto.PROD_QN_RESERVA_ESTOQUE - prod.CRPI_IN_QUANTIDADE;
+                                produto.PROD_QN_ESTOQUE = produto.PROD_QN_ESTOQUE - prod.CRPI_IN_QUANTIDADE;
+                                Int32 volta1 = proApp.ValidateEdit(produto, produto, usuario);
 
                                 // Grava movimentação
                                 MOVIMENTO_ESTOQUE_PRODUTO mov = new MOVIMENTO_ESTOQUE_PRODUTO();
@@ -9777,38 +9783,29 @@ namespace ERP_Condominios_Solution.Controllers
                                 if (produto.FICHA_TECNICA.Count > 0 )
                                 {
                                     FICHA_TECNICA ft = produto.FICHA_TECNICA.FirstOrDefault();
+                                    List<FICHA_TECNICA_DETALHE> ftd = ft.FICHA_TECNICA_DETALHE.ToList();
+                                    foreach (FICHA_TECNICA_DETALHE det in ftd)
+                                    {
+                                        Decimal? quant = det.FITD_QN_QUANTIDADE * (1 + (det.FITD_PC_PERDA / 100));                                        
+                                        produto.PROD_QN_ESTOQUE_INSUMO = produto.PROD_QN_ESTOQUE_INSUMO - quant;
+                                        Int32 volta1 = proApp.ValidateEdit(produto, produto, usuario);
 
-
-
-
-
-
-
-
-
-
-
+                                        // Grava movimentação
+                                        MOVIMENTO_ESTOQUE_PRODUTO mov = new MOVIMENTO_ESTOQUE_PRODUTO();
+                                        mov.ASSI_CD_ID = usuario.ASSI_CD_ID;
+                                        mov.PROD_CD_ID = prod.PROD_CD_ID.Value;
+                                        mov.USUA_CD_ID = usuario.USUA_CD_ID;
+                                        mov.MOEP_DT_MOVIMENTO = DateTime.Today.Date;
+                                        mov.MOEP_DS_JUSTIFICATIVA = "Venda Número: " + ped.CRPV_IN_NUMERO_GERADO.ToString();
+                                        mov.MOEP_IN_ATIVO = 1;
+                                        mov.MOEP_IN_CHAVE_ORIGEM = 4;
+                                        mov.MOEP_IN_ORIGEM = "-";
+                                        mov.MOEP_IN_OPERACAO = 2;
+                                        mov.MOEP_QN_QUANTIDADE = Convert.ToInt32(quant);
+                                        Int32 volta3 = meApp.ValidateCreate(mov, usuario);
+                                    }
                                 }
-                                else
-                                {
-
-                                }
-
-
-
-
-
-
-
                             }
-
-
-
-
-
-
-
-
                         }
                     }
 
@@ -10618,7 +10615,8 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Prepara view
             List<PRODUTO> lista = proApp.GetAllItens(idAss).ToList();
-            ViewBag.Produtos = new SelectList(proApp.GetAllItens(idAss).OrderBy(p => p.PROD_NM_NOME), "PROD_CD_ID", "PROD_NM_NOME");
+            lista = lista.Where(p => p.PROD_IN_TIPO_PRODUTO == 1).ToList();          
+            ViewBag.Produtos = new SelectList(lista.OrderBy(p => p.PROD_NM_NOME), "PROD_CD_ID", "PROD_NM_NOME");
 
             CRM_PEDIDO_VENDA_ITEM item = new CRM_PEDIDO_VENDA_ITEM();
             CRMItemPedidoViewModel vm = Mapper.Map<CRM_PEDIDO_VENDA_ITEM, CRMItemPedidoViewModel>(item);
@@ -10639,25 +10637,41 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
             USUARIO usuario = (USUARIO)Session["UserCredentials"];
             List<PRODUTO> lista = proApp.GetAllItens(idAss).ToList();
-            ViewBag.Produtos = new SelectList(proApp.GetAllItens(idAss).OrderBy(p => p.PROD_NM_NOME), "PROD_CD_ID", "PROD_NM_NOME");
+            lista = lista.Where(p => p.PROD_IN_TIPO_PRODUTO == 1).ToList();
+            ViewBag.Produtos = new SelectList(lista.OrderBy(p => p.PROD_NM_NOME), "PROD_CD_ID", "PROD_NM_NOME");
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Verifica estoque
+                    // Recupera produto
+                    CONFIGURACAO conf = confApp.GetItemById(usuario.ASSI_CD_ID);
                     vm.CRPI_IN_TIPO_ITEM = 1;
                     PRODUTO pef = proApp.GetItemById(vm.PROD_CD_ID.Value);
-                    CONFIGURACAO conf = confApp.GetItemById(usuario.ASSI_CD_ID);
-                    CRM_PEDIDO_VENDA ped = baseApp.GetPedidoById(vm.CRPV_CD_ID);
-                    if (vm.CRPI_IN_TIPO_ITEM == 1)
+
+                    // Verifica se tem ficha tecnica
+                    if (pef.PROD_IN_COMPOSTO == 1)
                     {
-                        if (conf.CONF__IN_INCLUIR_SEM_ESTOQUE == 0)
+                        if (pef.FICHA_TECNICA.Count == 0)
                         {
-                            if ((pef.PROD_QN_ESTOQUE - pef.PROD_QN_RESERVA_ESTOQUE) < vm.CRPI_IN_QUANTIDADE)
+                            Session["MensCRM"] = 199;
+                            return RedirectToAction("VoltarEditarVendaDireto");
+                        }
+                    }
+
+                    // Verifica estoque
+                    CRM_PEDIDO_VENDA ped = baseApp.GetPedidoById(vm.CRPV_CD_ID);
+                    if (pef.PROD_IN_COMPOSTO == 0)
+                    {
+                        if (pef.PROD_IN_TIPO_PRODUTO == 1)
+                        {
+                            if (conf.CONF__IN_INCLUIR_SEM_ESTOQUE == 0)
                             {
-                                Session["MensCRM"] = 99;
-                                return RedirectToAction("VoltarEditarVendaDireto");
+                                if ((pef.PROD_QN_ESTOQUE - pef.PROD_QN_RESERVA_ESTOQUE) < vm.CRPI_IN_QUANTIDADE)
+                                {
+                                    Session["MensCRM"] = 99;
+                                    return RedirectToAction("VoltarEditarVendaDireto");
+                                }
                             }
                         }
                     }
@@ -10675,7 +10689,6 @@ namespace ERP_Condominios_Solution.Controllers
 
                     // Executa calculos
                     vm.CRPI_IN_QUANTIDADE_REVISADA = vm.CRPI_IN_QUANTIDADE;
-                    //Int32 a = baseApp.GetPedidoById(vm.CRPV_CD_ID).FILI_CD_ID == null ? (Int32)Session["IdFilial"] : (Int32)baseApp.GetPedidoById(vm.CRPV_CD_ID).FILI_CD_ID;
                     if (vm.CRPI_IN_TIPO_ITEM == 1)
                     {
                         if (vm.CRPI_VL_PRECO_AJUSTADO == 0)
@@ -10720,11 +10733,14 @@ namespace ERP_Condominios_Solution.Controllers
                     volta = baseApp.ValidateEditPedido(ped);
 
                     // Acerta reserva no estoque
-                    if (item.CRPI_IN_TIPO_ITEM == 1)
+                    if (pef.PROD_IN_COMPOSTO == 0)
                     {
-                        Int32? quant = pef.PROD_QN_RESERVA_ESTOQUE + item.CRPI_IN_QUANTIDADE;
-                        pef.PROD_QN_RESERVA_ESTOQUE = quant;
-                        Int32 volta1 = proApp.ValidateEdit(pef, pef, usuario);
+                        if (item.CRPI_IN_TIPO_ITEM == 1)
+                        {
+                            Int32? quant = pef.PROD_QN_RESERVA_ESTOQUE + item.CRPI_IN_QUANTIDADE;
+                            pef.PROD_QN_RESERVA_ESTOQUE = quant;
+                            Int32 volta1 = proApp.ValidateEdit(pef, pef, usuario);
+                        }
                     }
 
                     // Verifica retorno

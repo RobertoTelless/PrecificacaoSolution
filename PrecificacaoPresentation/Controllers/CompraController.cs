@@ -3016,7 +3016,7 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Produtos com estoque abaixo do minimo
             List<PRODUTO> listaBase = proApp.GetAllItens(idAss);
-            List<PRODUTO> pontoPedido = listaBase.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).OrderByDescending(p => p.PROD_QN_ESTOQUE).ToList();
+            List<PRODUTO> pontoPedido = listaBase.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA || x.PROD_QN_ESTOQUE_INSUMO < x.PROD_QN_QUANTIDADE_MAXIMA).OrderByDescending(p => p.PROD_QN_ESTOQUE).ToList();
             ViewBag.EstoqueMinimo = pontoPedido;
             Session["EstoqueMinimo"] = pontoPedido;
 

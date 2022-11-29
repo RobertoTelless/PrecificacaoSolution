@@ -27,6 +27,7 @@ using Canducci.Zip;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System.Threading.Tasks;
+using System.CodeDom;
 
 namespace ERP_Condominios_Solution.Controllers
 {
@@ -281,9 +282,9 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.CodigoProduto = Session["IdProduto"];
 
             // Novos indicadores
-            List<PRODUTO> pontoPedido = listaMasterProd.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
-            List<PRODUTO> estoqueZerado = listaMasterProd.Where(x => x.PROD_QN_ESTOQUE == 0).ToList();
-            List<PRODUTO> estoqueNegativo = listaMasterProd.Where(x => x.PROD_QN_ESTOQUE < 0).ToList();
+            List<PRODUTO> pontoPedido = listaMasterProd.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA || x.PROD_QN_ESTOQUE_INSUMO < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
+            List<PRODUTO> estoqueZerado = listaMasterProd.Where(x => x.PROD_QN_ESTOQUE == 0 || x.PROD_QN_ESTOQUE_INSUMO == 0).ToList();
+            List<PRODUTO> estoqueNegativo = listaMasterProd.Where(x => x.PROD_QN_ESTOQUE < 0 || x.PROD_QN_ESTOQUE_INSUMO < 0 ).ToList();
 
             Session["PontoPedido"] = pontoPedido;
             Session["EstoqueZerado"] = estoqueZerado;
@@ -454,7 +455,7 @@ namespace ERP_Condominios_Solution.Controllers
                 // Sucesso
                 if ((Int32)Session["VoltaConsulta"] == 2)
                 {
-                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
+                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA || x.PROD_QN_ESTOQUE_INSUMO < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
                     if (listaObj == null || listaObj.Count == 0)
                     {
                         Session["MensFiltroEstoque"] = 1;
@@ -465,7 +466,7 @@ namespace ERP_Condominios_Solution.Controllers
                 }
                 if ((Int32)Session["VoltaConsulta"] == 3)
                 {
-                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE == 0).ToList();
+                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE == 0 || x.PROD_QN_ESTOQUE_INSUMO == 0).ToList();
                     if (listaObj == null || listaObj.Count == 0)
                     {
                         Session["MensFiltroEstoque"] = 1;
@@ -476,7 +477,7 @@ namespace ERP_Condominios_Solution.Controllers
                 }
                 if ((Int32)Session["VoltaConsulta"] == 4)
                 {
-                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE < 0).ToList();
+                    listaObj = listaObj.Where(x => x.PROD_QN_ESTOQUE < 0 || x.PROD_QN_ESTOQUE_INSUMO < 0).ToList();
                     if (listaObj == null || listaObj.Count == 0)
                     {
                         Session["MensFiltroEstoque"] = 1;
@@ -865,6 +866,7 @@ namespace ERP_Condominios_Solution.Controllers
             novo.PROD_NR_NCM = item.PROD_NR_NCM;
             novo.PROD_NR_REFERENCIA = item.PROD_NR_REFERENCIA;
             novo.PROD_QN_ESTOQUE = 0;
+            novo.PROD_QN_ESTOQUE_INSUMO = 0;
             novo.PROD_QN_QUANTIDADE_INICIAL = 0;
             novo.PROD_QN_QUANTIDADE_MAXIMA = 0;
             novo.PROD_QN_QUANTIDADE_MINIMA = 0;
@@ -999,6 +1001,7 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Conta = 0;
             ViewBag.Vendas = 0;
             ViewBag.Quantidade = item.PROD_QN_ESTOQUE;
+            ViewBag.QuantidadeInsumo = item.PROD_QN_ESTOQUE_INSUMO;
 
             // Exibe
             Session["VoltaConsulta"] = 1;
@@ -1604,11 +1607,11 @@ namespace ERP_Condominios_Solution.Controllers
             List<PRODUTO> listaBase = prodApp.GetAllItens(idAss);
             if (lista == null)
             {
-                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
+                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA || x.PROD_QN_ESTOQUE_INSUMO < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
             }
             if (lista.Count == 0)
             {
-                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
+                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA || x.PROD_QN_ESTOQUE_INSUMO < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
             }
 
             ViewBag.PontoPedidos = lista;
@@ -1652,11 +1655,11 @@ namespace ERP_Condominios_Solution.Controllers
             List<PRODUTO> listaBase = prodApp.GetAllItens(idAss);
             if (lista == null)
             {
-                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE == 0).ToList();
+                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE == 0 || x.PROD_QN_ESTOQUE_INSUMO == 0).ToList();
             }
             if (lista.Count == 0)
             {
-                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE == 0).ToList();
+                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE == 0 || x.PROD_QN_ESTOQUE_INSUMO == 0).ToList();
             }
 
             ViewBag.EstoqueZerados = lista;
@@ -1688,11 +1691,11 @@ namespace ERP_Condominios_Solution.Controllers
             List<PRODUTO> listaBase = prodApp.GetAllItens(idAss);
             if (lista == null)
             {
-                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE < 0).ToList();
+                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE < 0 || x.PROD_QN_ESTOQUE_INSUMO < 0).ToList();
             }
             if (lista.Count == 0)
             {
-                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE < 0).ToList();
+                lista = listaBase.Where(x => x.PROD_QN_ESTOQUE < 0 || x.PROD_QN_ESTOQUE_INSUMO < 0).ToList();
             }
 
             ViewBag.EstoqueNegativos = lista;
@@ -2907,12 +2910,25 @@ namespace ERP_Condominios_Solution.Controllers
 
             if (aten.PROD_IN_COMPOSTO == 0)
             {
-                cell = new PdfPCell(new Paragraph("Estoque Atual: " + aten.PROD_QN_ESTOQUE, meuFont));
-                cell.Border = 0;
-                cell.Colspan = 1;
-                cell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                cell.HorizontalAlignment = Element.ALIGN_LEFT;
-                table.AddCell(cell);
+                if (aten.PROD_IN_TIPO_PRODUTO == 1)
+                {
+                    cell = new PdfPCell(new Paragraph("Estoque Atual: " + aten.PROD_QN_ESTOQUE, meuFont));
+                    cell.Border = 0;
+                    cell.Colspan = 1;
+                    cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                    table.AddCell(cell);
+                }
+                else
+                {
+                    cell = new PdfPCell(new Paragraph("Estoque Atual: " + aten.PROD_QN_ESTOQUE_INSUMO, meuFont));
+                    cell.Border = 0;
+                    cell.Colspan = 1;
+                    cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                    table.AddCell(cell);
+                }
+
                 cell = new PdfPCell(new Paragraph("Estoque Inicial: " + aten.PROD_QN_QUANTIDADE_INICIAL, meuFont));
                 cell.Border = 0;
                 cell.Colspan = 1;

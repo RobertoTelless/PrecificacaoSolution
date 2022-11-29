@@ -738,4 +738,7 @@
   <data name="M0228" xml:space="preserve">
     <value>Quantidade inicial do estoque deve ser informada</value>
   </data>
+  <data name="M0229" xml:space="preserve">
+    <value>Produto composto sem ficha técnica criada</value>
+  </data>
 </root>

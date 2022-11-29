@@ -137,6 +137,7 @@
                                                         @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MINIMA)
                                                         @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_INICIAL)
                                                         @Html.HiddenFor(x => x.PROD_QN_ESTOQUE)
+                                                        @Html.HiddenFor(x => x.PROD_QN_ESTOQUE_INSUMO)
                                                         @Html.HiddenFor(x => x.PROD_DT_ULTIMA_MOVIMENTACAO)
                                                         @Html.HiddenFor(x => x.PROD_IN_AVISA_MINIMO)
                                                         @Html.HiddenFor(x => x.PROD_IN_TIPO_PRODUTO)
@@ -294,7 +295,14 @@
                                                     <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                         <div class="col-lg-2 col-md-2 col-xs-12" style="color: green;font-weight: bold">
                                                             Estoque Atual
-                                                            @Html.TextBoxFor(m => m.PROD_QN_ESTOQUE, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                            @if (Model.PROD_IN_TIPO_PRODUTO == 1)
+                                                            {
+                                                                @Html.TextBoxFor(m => m.PROD_QN_ESTOQUE, new { @class = "form-control", autofocus = true, @readonly = "readonly", style="color:green; font-wheight: bold" })
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.TextBoxFor(m => m.PROD_QN_ESTOQUE_INSUMO, new { @class = "form-control", autofocus = true, @readonly = "readonly", style="color:green; font-wheight: bold" })
+                                                            }
                                                         </div>
                                                         <div class="col-lg-2 col-md-2 col-xs-12">
                                                             @Html.HiddenFor(x => x.PROD_CD_ID)
@@ -305,6 +313,7 @@
                                                             @Html.HiddenFor(x => x.PROD_DS_DESCRICAO)
                                                             @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_INICIAL)
                                                             @Html.HiddenFor(x => x.PROD_QN_ESTOQUE)
+                                                            @Html.HiddenFor(x => x.PROD_QN_ESTOQUE_INSUMO)
                                                             @Html.HiddenFor(x => x.PROD_IN_AVISA_MINIMO)
                                                             @Html.HiddenFor(x => x.PROD_DT_CADASTRO)
                                                             @Html.HiddenFor(x => x.PROD_IN_ATIVO)
@@ -500,6 +509,7 @@
                                                                             <th>Componente</th>
                                                                             <th>Unidade</th>
                                                                             <th>Quantidade</th>
+                                                                            <th>Perda (%)</th>
                                                                             <th></th>
                                                                         </tr>
                                                                     </thead>
@@ -510,6 +520,7 @@
                                                                                 <td>@cond.PRODUTO.PROD_NM_NOME</td>
                                                                                 <td>@cond.PRODUTO.UNIDADE.UNID_NM_NOME</td>
                                                                                 <td>@cond.FITD_QN_QUANTIDADE</td>
+                                                                                <td>@cond.FITD_PC_PERDA</td>
                                                                                 @if (!String.IsNullOrEmpty(cond.PRODUTO.PROD_AQ_FOTO))
                                                                                 {
                                                                                     <td><img src="@Url.Content(cond.PRODUTO.PROD_AQ_FOTO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;"></td>
@@ -552,6 +563,7 @@
                                                         @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MINIMA)
                                                         @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_INICIAL)
                                                         @Html.HiddenFor(x => x.PROD_QN_ESTOQUE)
+                                                        @Html.HiddenFor(x => x.PROD_QN_ESTOQUE_INSUMO)
                                                         @Html.HiddenFor(x => x.PROD_DT_ULTIMA_MOVIMENTACAO)
                                                         @Html.HiddenFor(x => x.PROD_IN_AVISA_MINIMO)
                                                         @Html.HiddenFor(x => x.PROD_DT_CADASTRO)
@@ -636,6 +648,7 @@
                                                             @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MINIMA)
                                                             @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_INICIAL)
                                                             @Html.HiddenFor(x => x.PROD_QN_ESTOQUE)
+                                                            @Html.HiddenFor(x => x.PROD_QN_ESTOQUE_INSUMO)
                                                             @Html.HiddenFor(x => x.PROD_DT_ULTIMA_MOVIMENTACAO)
                                                             @Html.HiddenFor(x => x.PROD_IN_AVISA_MINIMO)
                                                             @Html.HiddenFor(x => x.PROD_DT_CADASTRO)
@@ -898,6 +911,7 @@
                                                                 @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MINIMA)
                                                                 @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_INICIAL)
                                                                 @Html.HiddenFor(x => x.PROD_QN_ESTOQUE)
+                                                                @Html.HiddenFor(x => x.PROD_QN_ESTOQUE_INSUMO)
                                                                 @Html.HiddenFor(x => x.PROD_DT_ULTIMA_MOVIMENTACAO)
                                                                 @Html.HiddenFor(x => x.PROD_IN_AVISA_MINIMO)
                                                                 @Html.HiddenFor(x => x.PROD_DT_CADASTRO)
@@ -1061,6 +1075,7 @@
                                                         @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_MINIMA)
                                                         @Html.HiddenFor(x => x.PROD_QN_QUANTIDADE_INICIAL)
                                                         @Html.HiddenFor(x => x.PROD_QN_ESTOQUE)
+                                                        @Html.HiddenFor(x => x.PROD_QN_ESTOQUE_INSUMO)
                                                         @Html.HiddenFor(x => x.PROD_DT_ULTIMA_MOVIMENTACAO)
                                                         @Html.HiddenFor(x => x.PROD_IN_AVISA_MINIMO)
                                                         @Html.HiddenFor(x => x.PROD_DT_CADASTRO)

@@ -79,7 +79,14 @@
                                             <td>@cond.PROD_NM_MARCA</td>
                                             <td>@cond.PROD_NM_MODELO</td>
                                             <td>@cond.PROD_NM_FABRICANTE</td>
-                                            <td style="color: darkolivegreen; font-weight: bold">@cond.PROD_QN_ESTOQUE</td>
+                                            @if (cond.PROD_IN_TIPO_PRODUTO == 1)
+                                            {
+                                                <td style="color: brown; font-weight: bold">@cond.PROD_QN_ESTOQUE</td>
+                                            }
+                                            else
+                                            {
+                                                <td style="color: brown; font-weight: bold">@cond.PROD_QN_ESTOQUE_INSUMO</td>
+                                            }
                                             @if (!String.IsNullOrEmpty(cond.PROD_AQ_FOTO))
                                             {
                                                 <td><img src="@Url.Content(cond.PROD_AQ_FOTO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;"></td>

@@ -224,7 +224,14 @@
                                             {
                                                 <td><span class="badge badge-success">Insumo</span></td>
                                             }
-                                            <td>@cond.PROD_QN_ESTOQUE</td>
+                                            @if (cond.PROD_IN_TIPO_PRODUTO == 1)
+                                            {
+                                                <td>@cond.PROD_QN_ESTOQUE</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@cond.PROD_QN_ESTOQUE_INSUMO</td>
+                                            }
                                             <td>@cond.PROD_QN_QUANTIDADE_MAXIMA</td>
                                             <td>@cond.PROD_QN_QUANTIDADE_MINIMA</td>
                                             <td>@cond.PROD_QN_RESERVA_ESTOQUE</td>

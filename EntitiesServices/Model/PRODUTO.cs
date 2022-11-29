@@ -87,6 +87,8 @@ namespace EntitiesServices.Model
         public Nullable<int> PROD_IN_ATIVO { get; set; }
         public Nullable<int> PROD_QN_QUANTIDADE_ALTERADA { get; set; }
         public string PROD_DS_JUSTIFICATIVA { get; set; }
+        public Nullable<decimal> PROD_QN_ESTOQUE_INSUMO { get; set; }
+        public Nullable<decimal> PROD_QN_QUANTIDADE_ALTERADA_INSUMO { get; set; }
     
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_PRODUTO CATEGORIA_PRODUTO { get; set; }

@@ -185,9 +185,9 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Prods = prods;
             ViewBag.Ins = ins;
 
-            List<PRODUTO> pontoPedido = prodTotal.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
-            List<PRODUTO> estoqueZerado = prodTotal.Where(x => x.PROD_QN_ESTOQUE == 0).ToList();
-            List<PRODUTO> estoqueNegativo = prodTotal.Where(x => x.PROD_QN_ESTOQUE < 0).ToList();
+            List<PRODUTO> pontoPedido = prodTotal.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA || x.PROD_QN_ESTOQUE_INSUMO < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
+            List<PRODUTO> estoqueZerado = prodTotal.Where(x => x.PROD_QN_ESTOQUE == 0 || x.PROD_QN_ESTOQUE_INSUMO == 0).ToList();
+            List<PRODUTO> estoqueNegativo = prodTotal.Where(x => x.PROD_QN_ESTOQUE < 0 || x.PROD_QN_ESTOQUE_INSUMO < 0 ).ToList();
 
             ViewBag.PontoPedido = pontoPedido.Count;
             ViewBag.EstoqueZerado = estoqueZerado.Count;
@@ -428,9 +428,9 @@ namespace ERP_Condominios_Solution.Controllers
             prodIns.Add(new SelectListItem() { Text = "Insumo", Value = "2" });
             ViewBag.ProdutoInsumo = new SelectList(prodIns, "Value", "Text");
 
-            List<PRODUTO> pontoPedido = prods.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
-            List<PRODUTO> estoqueZerado = prods.Where(x => x.PROD_QN_ESTOQUE == 0).ToList();
-            List<PRODUTO> estoqueNegativo = prods.Where(x => x.PROD_QN_ESTOQUE < 0).ToList();
+            List<PRODUTO> pontoPedido = prods.Where(x => x.PROD_QN_ESTOQUE < x.PROD_QN_QUANTIDADE_MINIMA || x.PROD_QN_ESTOQUE_INSUMO < x.PROD_QN_QUANTIDADE_MINIMA).ToList();
+            List<PRODUTO> estoqueZerado = prods.Where(x => x.PROD_QN_ESTOQUE == 0 || x.PROD_QN_ESTOQUE_INSUMO == 0).ToList();
+            List<PRODUTO> estoqueNegativo = prods.Where(x => x.PROD_QN_ESTOQUE < 0 || x.PROD_QN_ESTOQUE_INSUMO < 0 ).ToList();
             ViewBag.PontoPedido = pontoPedido.Count;
             ViewBag.EstoqueZerado = estoqueZerado.Count;
             ViewBag.EstoqueNegativo= estoqueNegativo.Count;
@@ -708,12 +708,24 @@ namespace ERP_Condominios_Solution.Controllers
                 };
                 table.AddCell(cell);
 
-                cell = new PdfPCell(new Paragraph(item.PROD_QN_ESTOQUE.ToString(), meuFont))
+                if (item.PROD_IN_TIPO_PRODUTO == 1)
                 {
-                    VerticalAlignment = Element.ALIGN_MIDDLE,
-                    HorizontalAlignment = Element.ALIGN_LEFT
-                };
-                table.AddCell(cell);
+                    cell = new PdfPCell(new Paragraph(item.PROD_QN_ESTOQUE.ToString(), meuFont))
+                    {
+                        VerticalAlignment = Element.ALIGN_MIDDLE,
+                        HorizontalAlignment = Element.ALIGN_LEFT
+                    };
+                    table.AddCell(cell);
+                }
+                else
+                {
+                    cell = new PdfPCell(new Paragraph(item.PROD_QN_ESTOQUE_INSUMO.ToString(), meuFont))
+                    {
+                        VerticalAlignment = Element.ALIGN_MIDDLE,
+                        HorizontalAlignment = Element.ALIGN_LEFT
+                    };
+                    table.AddCell(cell);
+                }
 
                 cell = new PdfPCell(new Paragraph(item.PROD_QN_QUANTIDADE_MINIMA.ToString(), meuFont))
                 {
@@ -877,6 +889,7 @@ namespace ERP_Condominios_Solution.Controllers
             Session["ProdutoEstoque"] = item;
             Session["IdVolta"] = id;
             item.PROD_QN_QUANTIDADE_ALTERADA = item.PROD_QN_ESTOQUE;
+            item.PROD_QN_QUANTIDADE_ALTERADA_INSUMO = item.PROD_QN_ESTOQUE_INSUMO;
             item.PROD_DS_JUSTIFICATIVA = String.Empty;
             return View(item);
         }
@@ -888,15 +901,31 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            if (item.PROD_QN_QUANTIDADE_ALTERADA == null)
+            if (item.PROD_IN_TIPO_PRODUTO == 1)
             {
-                ModelState.AddModelError("", "Campo NOVA CONTAGEM não pode ser nulo");
-                return View(item);
+                if (item.PROD_QN_QUANTIDADE_ALTERADA == null)
+                {
+                    ModelState.AddModelError("", "Campo NOVA CONTAGEM não pode ser nulo");
+                    return View(item);
+                }
+                if (item.PROD_QN_ESTOQUE == item.PROD_QN_QUANTIDADE_ALTERADA)
+                {
+                    ModelState.AddModelError("", "Campo NOVA CONTAGEM com mesmo valor de ESTOQUE");
+                    return View(item);
+                }
             }
-            if (item.PROD_QN_ESTOQUE == item.PROD_QN_QUANTIDADE_ALTERADA)
+            else
             {
-                ModelState.AddModelError("", "Campo NOVA CONTAGEM com mesmo valor de ESTOQUE");
-                return View(item);
+                if (item.PROD_QN_QUANTIDADE_ALTERADA_INSUMO == null)
+                {
+                    ModelState.AddModelError("", "Campo NOVA CONTAGEM não pode ser nulo");
+                    return View(item);
+                }
+                if (item.PROD_QN_ESTOQUE_INSUMO == item.PROD_QN_QUANTIDADE_ALTERADA_INSUMO)
+                {
+                    ModelState.AddModelError("", "Campo NOVA CONTAGEM com mesmo valor de ESTOQUE");
+                    return View(item);
+                }
             }
             if (item.PROD_DS_JUSTIFICATIVA == null)
             {
@@ -1150,13 +1179,29 @@ namespace ERP_Condominios_Solution.Controllers
                 //Efetua Operações
                 if (item.MOEP_IN_TIPO_MOVIMENTO == 1)
                 {
-                    pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE - (Int32)item.MOEP_QN_QUANTIDADE;
-                    Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    if (pef.PROD_IN_TIPO_PRODUTO == 1)
+                    {
+                        pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE - (Int32)item.MOEP_QN_QUANTIDADE;
+                        Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    }
+                    else
+                    {
+                        pef.PROD_QN_ESTOQUE_INSUMO = pef.PROD_QN_ESTOQUE_INSUMO - (Int32)item.MOEP_QN_QUANTIDADE;
+                        Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    }
                 }
                 else
                 {
-                    pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE + (Int32)item.MOEP_QN_QUANTIDADE;
-                    Int32 vs = prodApp.ValidateEdit(pef, pef, usuario);
+                    if (pef.PROD_IN_TIPO_PRODUTO == 1)
+                    {
+                        pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE + (Int32)item.MOEP_QN_QUANTIDADE;
+                        Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    }
+                    else
+                    {
+                        pef.PROD_QN_ESTOQUE_INSUMO = pef.PROD_QN_ESTOQUE_INSUMO + (Int32)item.MOEP_QN_QUANTIDADE;
+                        Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    }
                 }
             }
 
@@ -1189,13 +1234,29 @@ namespace ERP_Condominios_Solution.Controllers
                 //Efetua Operações
                 if (item.MOEP_IN_TIPO_MOVIMENTO == 1)
                 {
-                    pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE + (Int32)item.MOEP_QN_QUANTIDADE;
-                    Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    if (pef.PROD_IN_TIPO_PRODUTO == 1)
+                    {
+                        pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE + (Int32)item.MOEP_QN_QUANTIDADE;
+                        Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    }
+                    else
+                    {
+                        pef.PROD_QN_ESTOQUE_INSUMO = pef.PROD_QN_ESTOQUE_INSUMO + (Int32)item.MOEP_QN_QUANTIDADE;
+                        Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    }
                 }
                 else
                 {
-                    pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE - (Int32)item.MOEP_QN_QUANTIDADE;
-                    Int32 vs = prodApp.ValidateEdit(pef, pef, usuario);
+                    if (pef.PROD_IN_TIPO_PRODUTO == 1)
+                    {
+                        pef.PROD_QN_ESTOQUE = pef.PROD_QN_ESTOQUE - (Int32)item.MOEP_QN_QUANTIDADE;
+                        Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    }
+                    else
+                    {
+                        pef.PROD_QN_ESTOQUE_INSUMO = pef.PROD_QN_ESTOQUE_INSUMO - (Int32)item.MOEP_QN_QUANTIDADE;
+                        Int32 ve = prodApp.ValidateEdit(pef, pef, usuario);
+                    }
                 }
             }
 

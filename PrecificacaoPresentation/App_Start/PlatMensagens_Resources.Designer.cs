@@ -1922,5 +1922,14 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0228", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Produto composto sem ficha técnica criada.
+        /// </summary>
+        internal static string M0229 {
+            get {
+                return ResourceManager.GetString("M0229", resourceCulture);
+            }
+        }
     }
 }
