@@ -32,7 +32,6 @@ namespace DataServices.Repositories
         {
             IQueryable<CRM_PEDIDO_VENDA> query = Db.CRM_PEDIDO_VENDA.Where(p => p.CRPV_IN_ATIVO == 1);
             query = query.Where(p => p.ASSI_CD_ID == idUsu);
-            query = query.Where(p => p.CRM1_CD_ID == null);
             query = query.Where(p => p.CRPV_IN_GERAR_PEDIDO == 1);
             return query.ToList();
         }

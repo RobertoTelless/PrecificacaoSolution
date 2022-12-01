@@ -671,6 +671,7 @@
           <Property Name="ORIG_CD_ID" Type="int" />
           <Property Name="MOCA_CD_ID" Type="int" />
           <Property Name="MOEN_CD_ID" Type="int" />
+          <Property Name="CROR_CD_ID" Type="int" />
           <Property Name="CRM1_IN_ATIVO" Type="int" />
           <Property Name="CRM1_DT_CRIACAO" Type="date" />
           <Property Name="CRM1_NM_NOME" Type="varchar" MaxLength="150" />
@@ -1690,6 +1691,7 @@
           <Property Name="PROD_QN_QUANTIDADE_MINIMA" Type="int" Nullable="false" />
           <Property Name="PROD_QN_QUANTIDADE_MAXIMA" Type="int" Nullable="false" />
           <Property Name="PROD_QN_ESTOQUE" Type="int" Nullable="false" />
+          <Property Name="PROD_QN_ESTOQUE_INSUMO" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PROD_QN_RESERVA_ESTOQUE" Type="int" />
           <Property Name="PROD_NM_LOCALIZACAO_ESTOQUE" Type="varchar" MaxLength="50" />
           <Property Name="PROD_DT_ULTIMA_MOVIMENTACAO" Type="date" />
@@ -1721,7 +1723,6 @@
           <Property Name="PROD_IN_ATIVO" Type="int" />
           <Property Name="PROD_QN_QUANTIDADE_ALTERADA" Type="int" />
           <Property Name="PROD_DS_JUSTIFICATIVA" Type="varchar" MaxLength="500" />
-          <Property Name="PROD_QN_ESTOQUE_INSUMO" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PROD_QN_QUANTIDADE_ALTERADA_INSUMO" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="PRODUTO_ANEXO">
@@ -3191,6 +3192,18 @@
             </Principal>
             <Dependent Role="CRM">
               <PropertyRef Name="ORIG_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_CRM_ORIGEM1">
+          <End Role="CRM_ORIGEM" Type="Self.CRM_ORIGEM" Multiplicity="0..1" />
+          <End Role="CRM" Type="Self.CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_ORIGEM">
+              <PropertyRef Name="CROR_CD_ID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="CROR_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6029,6 +6042,10 @@
             <End Role="CRM_ORIGEM" EntitySet="CRM_ORIGEM" />
             <End Role="CRM" EntitySet="CRM" />
           </AssociationSet>
+          <AssociationSet Name="FK_CRM_CRM_ORIGEM1" Association="Self.FK_CRM_CRM_ORIGEM1">
+            <End Role="CRM_ORIGEM" EntitySet="CRM_ORIGEM" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
           <AssociationSet Name="FK_CRM_MOTIVO_CANCELAMENTO" Association="Self.FK_CRM_MOTIVO_CANCELAMENTO">
             <End Role="MOTIVO_CANCELAMENTO" EntitySet="MOTIVO_CANCELAMENTO" />
             <End Role="CRM" EntitySet="CRM" />
@@ -7717,6 +7734,8 @@
           <NavigationProperty Name="TIPO_CRM" Relationship="Self.FK_CRM_TIPO_CRM" FromRole="CRM" ToRole="TIPO_CRM" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CRM_USUARIO" FromRole="CRM" ToRole="USUARIO" />
           <NavigationProperty Name="DIARIO_PROCESSO" Relationship="Self.FK_DIARIO_PROCESSO_CRM" FromRole="CRM" ToRole="DIARIO_PROCESSO" />
+          <Property Name="CROR_CD_ID" Type="Int32" />
+          <NavigationProperty Name="CRM_ORIGEM1" Relationship="Db_PrecificacaoModel.FK_CRM_CRM_ORIGEM1" FromRole="CRM" ToRole="CRM_ORIGEM" />
         </EntityType>
         <EntityType Name="CRM_ACAO">
           <Key>
@@ -7794,6 +7813,7 @@
           <Property Name="CROR_IN_ATIVO" Type="Int32" />
           <NavigationProperty Name="ASSINANTE" Relationship="Self.FK_CRM_ORIGEM_ASSINANTE" FromRole="CRM_ORIGEM" ToRole="ASSINANTE" />
           <NavigationProperty Name="CRM" Relationship="Self.FK_CRM_CRM_ORIGEM" FromRole="CRM_ORIGEM" ToRole="CRM" />
+          <NavigationProperty Name="CRM1" Relationship="Db_PrecificacaoModel.FK_CRM_CRM_ORIGEM1" FromRole="CRM_ORIGEM" ToRole="CRM" />
         </EntityType>
         <EntityType Name="CRM_PEDIDO_VENDA">
           <Key>
@@ -14196,7 +14216,23 @@
             <End Role="VIDEO" EntitySet="VIDEO" />
             <End Role="VIDEO_COMENTARIO" EntitySet="VIDEO_COMENTARIO" />
           </AssociationSet>
+          <AssociationSet Name="FK_CRM_CRM_ORIGEM1" Association="Db_PrecificacaoModel.FK_CRM_CRM_ORIGEM1">
+            <End Role="CRM_ORIGEM" EntitySet="CRM_ORIGEM" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_CRM_CRM_ORIGEM1">
+          <End Type="Db_PrecificacaoModel.CRM_ORIGEM" Role="CRM_ORIGEM" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.CRM" Role="CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_ORIGEM">
+              <PropertyRef Name="CROR_CD_ID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="CROR_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14899,6 +14935,7 @@
           <EntitySetMapping Name="CRM">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CRM">
               <MappingFragment StoreEntitySet="CRM">
+                <ScalarProperty Name="CROR_CD_ID" ColumnName="CROR_CD_ID" />
                 <ScalarProperty Name="CRM1_CD_ID" ColumnName="CRM1_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CLIE_CD_ID" ColumnName="CLIE_CD_ID" />

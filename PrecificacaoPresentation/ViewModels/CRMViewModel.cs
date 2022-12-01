@@ -62,6 +62,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<int> CRM1_IN_ENTREGA_CONFIRMADA { get; set; }
         [StringLength(1000, ErrorMessage = "AS INFORMAÇÕES DE SAÍDA devem conter no máximo 1000 caracteres.")]
         public string CRM_DS_INFORMACOES_SAIDA { get; set; }
+        public Nullable<int> CROR_CD_ID { get; set; }
 
         public string NumeroProposta { get; set; }
         public string NomeProposta { get; set; }
@@ -113,8 +114,12 @@ namespace ERP_Condominios_Solution.ViewModels
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AGENDA> AGENDA { get; set; }
         public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CONTA_RECEBER> CONTA_RECEBER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM_ACAO> CRM_ACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -131,10 +136,7 @@ namespace ERP_Condominios_Solution.ViewModels
         public virtual TIPO_CRM TIPO_CRM { get; set; }
         public virtual USUARIO USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CONTA_RECEBER> CONTA_RECEBER { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGENDA> AGENDA { get; set; }
+        public virtual CRM_ORIGEM CRM_ORIGEM1 { get; set; }
     }
 }

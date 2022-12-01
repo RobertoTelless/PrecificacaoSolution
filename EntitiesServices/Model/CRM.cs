@@ -58,6 +58,7 @@ namespace EntitiesServices.Model
         public Nullable<System.DateTime> CRM1_DT_DATA_SAIDA { get; set; }
         public Nullable<int> CRM1_IN_ENTREGA_CONFIRMADA { get; set; }
         public string CRM_DS_INFORMACOES_SAIDA { get; set; }
+        public Nullable<int> CROR_CD_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENDA> AGENDA { get; set; }
@@ -82,5 +83,6 @@ namespace EntitiesServices.Model
         public virtual USUARIO USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DIARIO_PROCESSO> DIARIO_PROCESSO { get; set; }
+        public virtual CRM_ORIGEM CRM_ORIGEM1 { get; set; }
     }
 }
