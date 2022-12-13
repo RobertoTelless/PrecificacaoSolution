@@ -204,6 +204,7 @@
     <Compile Include="EntitiesServices\CategoriaServicoService.cs" />
     <Compile Include="EntitiesServices\CentroCustoService.cs" />
     <Compile Include="EntitiesServices\ClienteCnpjService.cs" />
+    <Compile Include="EntitiesServices\CustoFixoService.cs" />
     <Compile Include="EntitiesServices\ClienteService.cs" />
     <Compile Include="EntitiesServices\ContaBancariaService.cs" />
     <Compile Include="EntitiesServices\ContaPagarParcelaService.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Interfaces\Repositories\IAssinantePlanoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IBancoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaClienteRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICategoriaCustoFixoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaFornecedorRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaProdutoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaServicoRepository.cs" />
@@ -280,6 +282,7 @@
     <Compile Include="Interfaces\Repositories\IClienteCnpjRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteContatoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteReferenciaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICustoFixoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaContatoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IContaBancariaLancamentoRepository.cs" />
@@ -402,6 +405,7 @@
     <Compile Include="Interfaces\Services\ICategoriaServicoService.cs" />
     <Compile Include="Interfaces\Services\ICentroCustoService.cs" />
     <Compile Include="Interfaces\Services\IClienteCnpjService.cs" />
+    <Compile Include="Interfaces\Services\ICustoFixoService.cs" />
     <Compile Include="Interfaces\Services\IClienteService.cs" />
     <Compile Include="Interfaces\Services\IContaBancariaService.cs" />
     <Compile Include="Interfaces\Services\IContaPagarParcelaService.cs" />

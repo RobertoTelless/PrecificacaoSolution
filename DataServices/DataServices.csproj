@@ -195,6 +195,7 @@
     <Compile Include="Repositories\AssinantePlanoRepository.cs" />
     <Compile Include="Repositories\BancoRepository.cs" />
     <Compile Include="Repositories\CategoriaClienteRepository.cs" />
+    <Compile Include="Repositories\CategoriaCustoFixoRepository.cs" />
     <Compile Include="Repositories\CategoriaFornecedorRepository.cs" />
     <Compile Include="Repositories\CategoriaProdutoRepository.cs" />
     <Compile Include="Repositories\CategoriaServicoRepository.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Repositories\ClienteCnpjRepository.cs" />
     <Compile Include="Repositories\ClienteContatoRepository.cs" />
     <Compile Include="Repositories\ClienteReferenciaRepository.cs" />
+    <Compile Include="Repositories\CustoFixoRepository.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\ContaBancariaContatoRepository.cs" />
     <Compile Include="Repositories\ContaBancariaLancamentoRepository.cs" />

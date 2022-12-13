@@ -65,6 +65,7 @@ namespace EntitiesServices.Model
         public Nullable<System.DateTime> CAPA_DT_FINAL { get; set; }
         public Nullable<int> CAPA_IN_LIQUIDA_NORMAL { get; set; }
         public Nullable<int> CAPA_IN_LIQUIDA_PARCELA { get; set; }
+        public Nullable<int> CUFX_CD_ID { get; set; }
     
         public virtual CONTA_BANCO CONTA_BANCO { get; set; }
         public virtual CONTA_BANCO CONTA_BANCO1 { get; set; }
@@ -79,5 +80,6 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_PAGAR_RATEIO> CONTA_PAGAR_RATEIO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        public virtual CUSTO_FIXO CUSTO_FIXO { get; set; }
     }
 }

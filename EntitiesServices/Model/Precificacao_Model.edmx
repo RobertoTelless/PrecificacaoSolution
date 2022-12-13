@@ -481,12 +481,16 @@
             <PropertyRef Name="CAPA_CD_ID" />
           </Key>
           <Property Name="CAPA_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" />
           <Property Name="USUA_CD_ID" Type="int" />
           <Property Name="COBA_CD_ID" Type="int" />
+          <Property Name="COBA_CD_ID_1" Type="int" />
           <Property Name="FORN_CD_ID" Type="int" />
           <Property Name="FOPR_CD_ID" Type="int" />
           <Property Name="PETA_CD_ID" Type="int" />
           <Property Name="CECU_CD_ID" Type="int" />
+          <Property Name="CUFX_CD_ID" Type="int" />
+          <Property Name="PECO_CD_ID" Type="int" />
           <Property Name="CAPA_DT_LANCAMENTO" Type="date" />
           <Property Name="CAPA_VL_VALOR" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CAPA_DS_DESCRICAO" Type="varchar" MaxLength="250" />
@@ -514,9 +518,6 @@
           <Property Name="CAPA_VL_PARCIAL" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CAPA_IN_ABERTOS" Type="int" />
           <Property Name="CAPA_IN_FECHADOS" Type="int" />
-          <Property Name="ASSI_CD_ID" Type="int" />
-          <Property Name="PECO_CD_ID" Type="int" />
-          <Property Name="COBA_CD_ID_1" Type="int" />
           <Property Name="CAPA_IN_CHEQUE" Type="int" />
           <Property Name="CAPA_NR_CHEQUE" Type="varchar" MaxLength="50" />
           <Property Name="CAPA_IN_TIPO_DOC" Type="int" />
@@ -868,13 +869,16 @@
             <PropertyRef Name="CUFX_CD_ID" />
           </Key>
           <Property Name="CUFX_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSI_CD_ID" Type="int" />
           <Property Name="EMPR_CD_ID" Type="int" Nullable="false" />
+          <Property Name="PETA_CD_ID" Type="int" Nullable="false" />
           <Property Name="CACF_CD_ID" Type="int" Nullable="false" />
+          <Property Name="FORN_CD_ID" Type="int" />
+          <Property Name="CECU_CD_ID" Type="int" />
           <Property Name="CUFX_NM_NOME" Type="varchar" MaxLength="250" />
           <Property Name="CUFX_DT_INICIO" Type="date" />
           <Property Name="CUFX_DT_TERMINO" Type="date" />
           <Property Name="CUFX_IN_NUMERO_OCORRENCIAS" Type="int" />
-          <Property Name="PETA_CD_ID" Type="int" Nullable="false" />
           <Property Name="CUFX_NR_DIA_VENCIMENTO" Type="int" />
           <Property Name="CUFX_VL_VALOR" Type="decimal" Precision="19" Scale="2" />
           <Property Name="CUFX_DT_CADASTRO" Type="date" />
@@ -2787,6 +2791,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CONTA_PAGAR_CUSTO_FIXO">
+          <End Role="CUSTO_FIXO" Type="Self.CUSTO_FIXO" Multiplicity="0..1" />
+          <End Role="CONTA_PAGAR" Type="Self.CONTA_PAGAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTO_FIXO">
+              <PropertyRef Name="CUFX_CD_ID" />
+            </Principal>
+            <Dependent Role="CONTA_PAGAR">
+              <PropertyRef Name="CUFX_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CONTA_PAGAR_FORMA_PAGTO_RECTO">
           <End Role="FORMA_PAGTO_RECTO" Type="Self.FORMA_PAGTO_RECTO" Multiplicity="0..1" />
           <End Role="CONTA_PAGAR" Type="Self.CONTA_PAGAR" Multiplicity="*" />
@@ -3468,6 +3484,42 @@
             </Principal>
             <Dependent Role="CRM">
               <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTO_FIXO_ASSINANTE">
+          <End Role="ASSINANTE" Type="Self.ASSINANTE" Multiplicity="0..1" />
+          <End Role="CUSTO_FIXO" Type="Self.CUSTO_FIXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CUSTO_FIXO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTO_FIXO_FORNECEDOR">
+          <End Role="FORNECEDOR" Type="Self.FORNECEDOR" Multiplicity="0..1" />
+          <End Role="CUSTO_FIXO" Type="Self.CUSTO_FIXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORNECEDOR">
+              <PropertyRef Name="FORN_CD_ID" />
+            </Principal>
+            <Dependent Role="CUSTO_FIXO">
+              <PropertyRef Name="FORN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTO_FIXO_PLANO_CONTA">
+          <End Role="PLANO_CONTA" Type="Self.PLANO_CONTA" Multiplicity="0..1" />
+          <End Role="CUSTO_FIXO" Type="Self.CUSTO_FIXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO_CONTA">
+              <PropertyRef Name="CECU_CD_ID" />
+            </Principal>
+            <Dependent Role="CUSTO_FIXO">
+              <PropertyRef Name="CECU_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5906,6 +5958,10 @@
             <End Role="CONTA_BANCO" EntitySet="CONTA_BANCO" />
             <End Role="CONTA_PAGAR" EntitySet="CONTA_PAGAR" />
           </AssociationSet>
+          <AssociationSet Name="FK_CONTA_PAGAR_CUSTO_FIXO" Association="Self.FK_CONTA_PAGAR_CUSTO_FIXO">
+            <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
+            <End Role="CONTA_PAGAR" EntitySet="CONTA_PAGAR" />
+          </AssociationSet>
           <AssociationSet Name="FK_CONTA_PAGAR_FORMA_PAGTO_RECTO" Association="Self.FK_CONTA_PAGAR_FORMA_PAGTO_RECTO">
             <End Role="FORMA_PAGTO_RECTO" EntitySet="FORMA_PAGTO_RECTO" />
             <End Role="CONTA_PAGAR" EntitySet="CONTA_PAGAR" />
@@ -6133,6 +6189,18 @@
           <AssociationSet Name="FK_CRM_USUARIO" Association="Self.FK_CRM_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTO_FIXO_ASSINANTE" Association="Self.FK_CUSTO_FIXO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTO_FIXO_FORNECEDOR" Association="Self.FK_CUSTO_FIXO_FORNECEDOR">
+            <End Role="FORNECEDOR" EntitySet="FORNECEDOR" />
+            <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTO_FIXO_PLANO_CONTA" Association="Self.FK_CUSTO_FIXO_PLANO_CONTA">
+            <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+            <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
           </AssociationSet>
           <AssociationSet Name="FK_DIARIO_PROCESSO_AGENDA" Association="Self.FK_DIARIO_PROCESSO_AGENDA">
             <End Role="AGENDA" EntitySet="AGENDA" />
@@ -6985,6 +7053,7 @@
           <NavigationProperty Name="PRODUTO" Relationship="Self.FKPRODUTO932438" FromRole="ASSINANTE" ToRole="PRODUTO" />
           <NavigationProperty Name="TAREFA" Relationship="Self.FKTAREFA157283" FromRole="ASSINANTE" ToRole="TAREFA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FKUSUARIO561404" FromRole="ASSINANTE" ToRole="USUARIO" />
+          <NavigationProperty Name="CUSTO_FIXO" Relationship="Db_PrecificacaoModel.FK_CUSTO_FIXO_ASSINANTE" FromRole="ASSINANTE" ToRole="CUSTO_FIXO" />
         </EntityType>
         <EntityType Name="ASSINANTE_ANEXO">
           <Key>
@@ -7526,6 +7595,8 @@
           <NavigationProperty Name="PERIODICIDADE_TAREFA" Relationship="Self.FK_CONTA_PAGAR_PERIODICIDADE_TAREFA" FromRole="CONTA_PAGAR" ToRole="PERIODICIDADE_TAREFA" />
           <NavigationProperty Name="CONTA_PAGAR_RATEIO" Relationship="Self.FK_CONTA_PAGAR_RATEIO_CONTA_PAGAR" FromRole="CONTA_PAGAR" ToRole="CONTA_PAGAR_RATEIO" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CONTA_PAGAR_USUARIO" FromRole="CONTA_PAGAR" ToRole="USUARIO" />
+          <Property Name="CUFX_CD_ID" Type="Int32" />
+          <NavigationProperty Name="CUSTO_FIXO" Relationship="Db_PrecificacaoModel.FK_CONTA_PAGAR_CUSTO_FIXO" FromRole="CONTA_PAGAR" ToRole="CUSTO_FIXO" />
         </EntityType>
         <EntityType Name="CONTA_PAGAR_ANEXO">
           <Key>
@@ -7959,6 +8030,13 @@
           <NavigationProperty Name="CATEGORIA_CUSTO_FIXO" Relationship="Self.FKCUSTO_FIXO798962" FromRole="CUSTO_FIXO" ToRole="CATEGORIA_CUSTO_FIXO" />
           <NavigationProperty Name="EMPRESA" Relationship="Self.FKCUSTO_FIXO481608" FromRole="CUSTO_FIXO" ToRole="EMPRESA" />
           <NavigationProperty Name="PERIODICIDADE_TAREFA" Relationship="Self.FKCUSTO_FIXO921563" FromRole="CUSTO_FIXO" ToRole="PERIODICIDADE_TAREFA" />
+          <Property Name="ASSI_CD_ID" Type="Int32" />
+          <NavigationProperty Name="ASSINANTE" Relationship="Db_PrecificacaoModel.FK_CUSTO_FIXO_ASSINANTE" FromRole="CUSTO_FIXO" ToRole="ASSINANTE" />
+          <NavigationProperty Name="CONTA_PAGAR" Relationship="Db_PrecificacaoModel.FK_CONTA_PAGAR_CUSTO_FIXO" FromRole="CUSTO_FIXO" ToRole="CONTA_PAGAR" />
+          <Property Name="FORN_CD_ID" Type="Int32" />
+          <NavigationProperty Name="FORNECEDOR" Relationship="Db_PrecificacaoModel.FK_CUSTO_FIXO_FORNECEDOR" FromRole="CUSTO_FIXO" ToRole="FORNECEDOR" />
+          <Property Name="CECU_CD_ID" Type="Int32" />
+          <NavigationProperty Name="PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_CUSTO_FIXO_PLANO_CONTA" FromRole="CUSTO_FIXO" ToRole="PLANO_CONTA" />
         </EntityType>
         <EntityType Name="DIARIO_PROCESSO">
           <Key>
@@ -8221,6 +8299,7 @@
           <NavigationProperty Name="FORNECEDOR_CONTATO" Relationship="Self.FKFORNECEDOR685992" FromRole="FORNECEDOR" ToRole="FORNECEDOR_CONTATO" />
           <NavigationProperty Name="FORNECEDOR_ANEXO" Relationship="Self.FKFORNECEDOR90800" FromRole="FORNECEDOR" ToRole="FORNECEDOR_ANEXO" />
           <NavigationProperty Name="PRODUTO_FORNECEDOR" Relationship="Self.FKPRODUTO_FO601856" FromRole="FORNECEDOR" ToRole="PRODUTO_FORNECEDOR" />
+          <NavigationProperty Name="CUSTO_FIXO" Relationship="Db_PrecificacaoModel.FK_CUSTO_FIXO_FORNECEDOR" FromRole="FORNECEDOR" ToRole="CUSTO_FIXO" />
         </EntityType>
         <EntityType Name="FORNECEDOR_ANEXO">
           <Key>
@@ -8883,6 +8962,7 @@
           <NavigationProperty Name="GRUPO_PLANO_CONTA" Relationship="Self.FKPLANO_CONT396583" FromRole="PLANO_CONTA" ToRole="GRUPO_PLANO_CONTA" />
           <NavigationProperty Name="PEDIDO_COMPRA" Relationship="Self.FK_PEDIDO_COMPRA_PLANO_CONTA" FromRole="PLANO_CONTA" ToRole="PEDIDO_COMPRA" />
           <NavigationProperty Name="SUBGRUPO_PLANO_CONTA" Relationship="Self.FKPLANO_CONT936913" FromRole="PLANO_CONTA" ToRole="SUBGRUPO_PLANO_CONTA" />
+          <NavigationProperty Name="CUSTO_FIXO" Relationship="Db_PrecificacaoModel.FK_CUSTO_FIXO_PLANO_CONTA" FromRole="PLANO_CONTA" ToRole="CUSTO_FIXO" />
         </EntityType>
         <EntityType Name="PLANO_PERIODICIDADE">
           <Key>
@@ -14220,6 +14300,22 @@
             <End Role="CRM_ORIGEM" EntitySet="CRM_ORIGEM" />
             <End Role="CRM" EntitySet="CRM" />
           </AssociationSet>
+          <AssociationSet Name="FK_CUSTO_FIXO_ASSINANTE" Association="Db_PrecificacaoModel.FK_CUSTO_FIXO_ASSINANTE">
+            <End Role="ASSINANTE" EntitySet="ASSINANTE" />
+            <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTA_PAGAR_CUSTO_FIXO" Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_CUSTO_FIXO">
+            <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
+            <End Role="CONTA_PAGAR" EntitySet="CONTA_PAGAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTO_FIXO_FORNECEDOR" Association="Db_PrecificacaoModel.FK_CUSTO_FIXO_FORNECEDOR">
+            <End Role="FORNECEDOR" EntitySet="FORNECEDOR" />
+            <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTO_FIXO_PLANO_CONTA" Association="Db_PrecificacaoModel.FK_CUSTO_FIXO_PLANO_CONTA">
+            <End Role="PLANO_CONTA" EntitySet="PLANO_CONTA" />
+            <End Role="CUSTO_FIXO" EntitySet="CUSTO_FIXO" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_CRM_CRM_ORIGEM1">
           <End Type="Db_PrecificacaoModel.CRM_ORIGEM" Role="CRM_ORIGEM" Multiplicity="0..1" />
@@ -14230,6 +14326,54 @@
             </Principal>
             <Dependent Role="CRM">
               <PropertyRef Name="CROR_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTO_FIXO_ASSINANTE">
+          <End Type="Db_PrecificacaoModel.ASSINANTE" Role="ASSINANTE" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.CUSTO_FIXO" Role="CUSTO_FIXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSINANTE">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Principal>
+            <Dependent Role="CUSTO_FIXO">
+              <PropertyRef Name="ASSI_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTA_PAGAR_CUSTO_FIXO">
+          <End Type="Db_PrecificacaoModel.CUSTO_FIXO" Role="CUSTO_FIXO" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.CONTA_PAGAR" Role="CONTA_PAGAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTO_FIXO">
+              <PropertyRef Name="CUFX_CD_ID" />
+            </Principal>
+            <Dependent Role="CONTA_PAGAR">
+              <PropertyRef Name="CUFX_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTO_FIXO_FORNECEDOR">
+          <End Type="Db_PrecificacaoModel.FORNECEDOR" Role="FORNECEDOR" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.CUSTO_FIXO" Role="CUSTO_FIXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORNECEDOR">
+              <PropertyRef Name="FORN_CD_ID" />
+            </Principal>
+            <Dependent Role="CUSTO_FIXO">
+              <PropertyRef Name="FORN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTO_FIXO_PLANO_CONTA">
+          <End Type="Db_PrecificacaoModel.PLANO_CONTA" Role="PLANO_CONTA" Multiplicity="0..1" />
+          <End Type="Db_PrecificacaoModel.CUSTO_FIXO" Role="CUSTO_FIXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANO_CONTA">
+              <PropertyRef Name="CECU_CD_ID" />
+            </Principal>
+            <Dependent Role="CUSTO_FIXO">
+              <PropertyRef Name="CECU_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -14744,6 +14888,7 @@
           <EntitySetMapping Name="CONTA_PAGAR">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CONTA_PAGAR">
               <MappingFragment StoreEntitySet="CONTA_PAGAR">
+                <ScalarProperty Name="CUFX_CD_ID" ColumnName="CUFX_CD_ID" />
                 <ScalarProperty Name="CAPA_CD_ID" ColumnName="CAPA_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
                 <ScalarProperty Name="COBA_CD_ID" ColumnName="COBA_CD_ID" />
@@ -15149,6 +15294,9 @@
           <EntitySetMapping Name="CUSTO_FIXO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CUSTO_FIXO">
               <MappingFragment StoreEntitySet="CUSTO_FIXO">
+                <ScalarProperty Name="CECU_CD_ID" ColumnName="CECU_CD_ID" />
+                <ScalarProperty Name="FORN_CD_ID" ColumnName="FORN_CD_ID" />
+                <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
                 <ScalarProperty Name="CUFX_CD_ID" ColumnName="CUFX_CD_ID" />
                 <ScalarProperty Name="EMPR_CD_ID" ColumnName="EMPR_CD_ID" />
                 <ScalarProperty Name="CACF_CD_ID" ColumnName="CACF_CD_ID" />

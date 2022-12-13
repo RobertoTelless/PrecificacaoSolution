@@ -30,7 +30,19 @@ namespace ERP_Condominios_Solution.ViewModels
         public string CECU_NM_EXIBE { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CONTA_PAGAR> CONTA_PAGAR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CONTA_PAGAR_RATEIO> CONTA_PAGAR_RATEIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CONTA_RECEBER> CONTA_RECEBER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CONTA_RECEBER_RATEIO> CONTA_RECEBER_RATEIO { get; set; }
         public virtual GRUPO_PLANO_CONTA GRUPO_PLANO_CONTA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
         public virtual SUBGRUPO_PLANO_CONTA SUBGRUPO_PLANO_CONTA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CUSTO_FIXO> CUSTO_FIXO { get; set; }
     }
 }

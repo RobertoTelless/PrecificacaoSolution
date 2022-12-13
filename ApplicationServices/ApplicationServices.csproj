@@ -208,6 +208,7 @@
     <Compile Include="Interfaces\ICategoriaNotificacaoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaAgendaAppService.cs" />
     <Compile Include="Interfaces\ICentroCustoAppService.cs" />
+    <Compile Include="Interfaces\ICustoFixoAppService.cs" />
     <Compile Include="Interfaces\IClienteAppService.cs" />
     <Compile Include="Interfaces\IClienteCnpjAppService.cs" />
     <Compile Include="Interfaces\IContaBancariaAppService.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Services\CategoriaProdutoAppService.cs" />
     <Compile Include="Services\CategoriaServicoAppService.cs" />
     <Compile Include="Services\CentroCustoAppService.cs" />
+    <Compile Include="Services\CustoFixoAppService.cs" />
     <Compile Include="Services\ClienteAppService.cs" />
     <Compile Include="Services\ClienteCnpjAppService.cs" />
     <Compile Include="Services\ContaBancariaAppService.cs" />

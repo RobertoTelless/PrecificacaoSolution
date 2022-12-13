@@ -741,4 +741,19 @@
   <data name="M0229" xml:space="preserve">
     <value>Produto composto sem ficha técnica criada</value>
   </data>
+  <data name="M0230" xml:space="preserve">
+    <value>Custo fixo já cadastrado</value>
+  </data>
+  <data name="M0231" xml:space="preserve">
+    <value>O dia do vencimento de ser entre 1 e 31</value>
+  </data>
+  <data name="M0232" xml:space="preserve">
+    <value>Deve ser informada uma data de início para o custo fixo</value>
+  </data>
+  <data name="M0233" xml:space="preserve">
+    <value>Deve ser informada uma data de término para o custo fixo</value>
+  </data>
+  <data name="M0234" xml:space="preserve">
+    <value>Impossível excluir este custo fixo. Existem registros vinculados a ele.</value>
+  </data>
 </root>

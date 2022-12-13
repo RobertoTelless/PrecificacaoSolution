@@ -253,6 +253,7 @@
     <Compile Include="Controllers\ContaReceberController.cs" />
     <Compile Include="Controllers\ControleAcessoController.cs" />
     <Compile Include="Controllers\CRMController.cs" />
+    <Compile Include="Controllers\CustoFixoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FichaTecnicaController.cs" />
@@ -296,6 +297,7 @@
     <Compile Include="ViewModels\CentroCustoViewModel.cs" />
     <Compile Include="ViewModels\ClienteContatoViewModel.cs" />
     <Compile Include="ViewModels\ClienteReferenciaViewModel.cs" />
+    <Compile Include="ViewModels\CustoFixoViewModel.cs" />
     <Compile Include="ViewModels\ClienteViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaContatoViewModel.cs" />
     <Compile Include="ViewModels\ContaBancariaLancamentoViewModel.cs" />
@@ -3346,6 +3348,8 @@
     <Content Include="Views\CRM\IncluirItemPedidoVenda.cshtml" />
     <Content Include="Views\CRM\EditarItemPedidoVenda.cshtml" />
     <Content Include="Views\CRM\VerPedidoVenda.cshtml" />
+    <Content Include="Views\CustoFixo\MontarTelaCustoFixo.cshtml" />
+    <Content Include="Views\CustoFixo\IncluirCustoFixo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

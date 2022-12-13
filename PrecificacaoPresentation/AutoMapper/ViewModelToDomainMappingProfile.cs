@@ -95,6 +95,7 @@ namespace MvcMapping.Mappers
             CreateMap<AssinantePlanoViewModel, ASSINANTE_PLANO>();
             CreateMap<AssinanteViewModel, ASSINANTE>();
             CreateMap<PlanoViewModel, PLANO>();
+            CreateMap<CustoFixoViewModel, CUSTO_FIXO>();
 
         }
     }

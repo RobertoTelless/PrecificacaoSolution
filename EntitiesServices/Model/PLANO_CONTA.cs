@@ -22,6 +22,7 @@ namespace EntitiesServices.Model
             this.CONTA_RECEBER = new HashSet<CONTA_RECEBER>();
             this.CONTA_RECEBER_RATEIO = new HashSet<CONTA_RECEBER_RATEIO>();
             this.PEDIDO_COMPRA = new HashSet<PEDIDO_COMPRA>();
+            this.CUSTO_FIXO = new HashSet<CUSTO_FIXO>();
         }
     
         public int CECU_CD_ID { get; set; }
@@ -48,5 +49,7 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PEDIDO_COMPRA> PEDIDO_COMPRA { get; set; }
         public virtual SUBGRUPO_PLANO_CONTA SUBGRUPO_PLANO_CONTA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CUSTO_FIXO> CUSTO_FIXO { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace ERP_Condominios_Solution.ViewModels
         [Required(ErrorMessage = "Campo PLANO DE CONTA obrigatorio")]
         public Nullable<int> CECU_CD_ID { get; set; }
         public Nullable<int> ASSI_CD_ID { get; set; }
+        public Nullable<int> CUFX_CD_ID { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Deve ser uma data válida")]
         [Required(ErrorMessage = "Campo DATA DE LANÇAMENTO obrigatorio")]
@@ -225,10 +226,11 @@ namespace ERP_Condominios_Solution.ViewModels
         }
 
 
-        public virtual PLANO_CONTA PLANO_CONTA { get; set; }
         public virtual CONTA_BANCO CONTA_BANCO { get; set; }
+        public virtual CONTA_BANCO CONTA_BANCO1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_PAGAR_ANEXO> CONTA_PAGAR_ANEXO { get; set; }
+        public virtual PLANO_CONTA PLANO_CONTA { get; set; }
         public virtual FORMA_PAGTO_RECTO FORMA_PAGTO_RECTO { get; set; }
         public virtual FORNECEDOR FORNECEDOR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -237,6 +239,6 @@ namespace ERP_Condominios_Solution.ViewModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_PAGAR_RATEIO> CONTA_PAGAR_RATEIO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
-        public virtual CONTA_BANCO CONTA_BANCO1 { get; set; }
+        public virtual CUSTO_FIXO CUSTO_FIXO { get; set; }
     }
 }

@@ -1931,5 +1931,50 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0229", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Custo fixo já cadastrado.
+        /// </summary>
+        internal static string M0230 {
+            get {
+                return ResourceManager.GetString("M0230", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O dia do vencimento de ser entre 1 e 31.
+        /// </summary>
+        internal static string M0231 {
+            get {
+                return ResourceManager.GetString("M0231", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Deve ser informada uma data de início para o custo fixo.
+        /// </summary>
+        internal static string M0232 {
+            get {
+                return ResourceManager.GetString("M0232", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Deve ser informada uma data de término para o custo fixo.
+        /// </summary>
+        internal static string M0233 {
+            get {
+                return ResourceManager.GetString("M0233", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir este custo fixo. Existem registros vinculados a ele..
+        /// </summary>
+        internal static string M0234 {
+            get {
+                return ResourceManager.GetString("M0234", resourceCulture);
+            }
+        }
     }
 }

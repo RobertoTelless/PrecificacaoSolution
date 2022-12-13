@@ -425,6 +425,10 @@
         <AssociationConnector Association="Db_PrecificacaoModel.FKUSUARIO_AN728680" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_VIDEO_COMENTARIO_VIDEO" ManuallyRouted="false" />
         <AssociationConnector Association="Db_PrecificacaoModel.FK_CRM_CRM_ORIGEM1" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CUSTO_FIXO_ASSINANTE" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CONTA_PAGAR_CUSTO_FIXO" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CUSTO_FIXO_FORNECEDOR" />
+        <AssociationConnector Association="Db_PrecificacaoModel.FK_CUSTO_FIXO_PLANO_CONTA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
