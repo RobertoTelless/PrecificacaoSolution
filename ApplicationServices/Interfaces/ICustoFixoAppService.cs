@@ -13,7 +13,7 @@ namespace ApplicationServices.Interfaces
         Int32 ValidateEdit(CUSTO_FIXO perfil, CUSTO_FIXO perfilAntes, USUARIO usuario);
         Int32 ValidateEdit(CUSTO_FIXO item, CUSTO_FIXO itemAntes);
         Int32 ValidateDelete(CUSTO_FIXO perfil, USUARIO usuario, out Int32 conta);
-        Int32 ValidateReativar(CUSTO_FIXO perfil, USUARIO usuario);
+        Int32 ValidateReativar(CUSTO_FIXO perfil, USUARIO usuario, out Int32 conta);
 
         List<CUSTO_FIXO> GetAllItens(Int32 idAss);
         List<CUSTO_FIXO> GetAllItensAdm(Int32 idAss);

@@ -18,23 +18,29 @@ namespace ERP_Condominios_Solution.ViewModels
         public int CACF_CD_ID { get; set; }
         public Nullable<int> CECU_CD_ID { get; set; }
         public Nullable<int> FORN_CD_ID { get; set; }
+        [Required(ErrorMessage = "Campo NOME obrigatorio")]
         [StringLength(250, MinimumLength = 1, ErrorMessage = "O NOME deve conter no minimo 1 e no máximo 250 caracteres.")]
         public string CUFX_NM_NOME { get; set; }
+        [Required(ErrorMessage = "Campo DATA DE INÌCIO obrigatorio")]
         [DataType(DataType.Date, ErrorMessage = "Deve ser uma data válida")]
         public Nullable<System.DateTime> CUFX_DT_INICIO { get; set; }
         [DataType(DataType.Date, ErrorMessage = "Deve ser uma data válida")]
+        [Required(ErrorMessage = "Campo DATA DE TÈRMINO obrigatorio")]
         public Nullable<System.DateTime> CUFX_DT_TERMINO { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "O NÚMERO DE OCORRÊNCIAS deve ser um valor numérico positivo")]
         public Nullable<int> CUFX_IN_NUMERO_OCORRENCIAS { get; set; }
         [Required(ErrorMessage = "Campo PERIODICIDADE obrigatorio")]
         public int PETA_CD_ID { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "O DIA DO VENCIMENTO deve ser um valor numérico positivo")]
+        [Required(ErrorMessage = "Campo DIA DE obrigatorio")]
         public Nullable<int> CUFX_NR_DIA_VENCIMENTO { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "O VALOR DO CUSTO deve ser um valor numérico positivo")]
+        [Required(ErrorMessage = "Campo VALOR obrigatorio")]
         public Nullable<decimal> CUFX_VL_VALOR { get; set; }
         public Nullable<System.DateTime> CUFX_DT_CADASTRO { get; set; }
         public Nullable<int> CUFX_IN_ATIVO { get; set; }
         public Nullable<int> ASSI_CD_ID { get; set; }
+        public Nullable<int> CUFX_IN_TIPO_VALOR { get; set; }
 
         public virtual CATEGORIA_CUSTO_FIXO CATEGORIA_CUSTO_FIXO { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }

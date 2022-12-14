@@ -33,6 +33,7 @@ namespace DataServices.Repositories
         {
             IQueryable<CUSTO_FIXO> query = Db.CUSTO_FIXO;
             query = query.Where(p => p.CUFX_CD_ID == id);
+            query = query.Include(p => p.CONTA_PAGAR);
             return query.FirstOrDefault();
         }
 
@@ -40,6 +41,7 @@ namespace DataServices.Repositories
         {
             IQueryable<CUSTO_FIXO> query = Db.CUSTO_FIXO.Where(p => p.CUFX_IN_ATIVO == 1);
             query = query.Where(p => p.ASSI_CD_ID == idAss);
+            query = query.Include(p => p.CONTA_PAGAR);
             query = query.OrderBy(a => a.CUFX_NM_NOME);
             return query.ToList();
         }
@@ -48,6 +50,7 @@ namespace DataServices.Repositories
         {
             IQueryable<CUSTO_FIXO> query = Db.CUSTO_FIXO;
             query = query.Where(p => p.ASSI_CD_ID == idAss);
+            query = query.Include(p => p.CONTA_PAGAR);
             query = query.OrderBy(a => a.CUFX_NM_NOME);
             return query.ToList();
         }
@@ -79,13 +82,12 @@ namespace DataServices.Repositories
             if (query != null)
             {
                 query = query.Where(p => p.ASSI_CD_ID == idAss);
+                query = query.Include(p => p.CONTA_PAGAR);
                 query = query.OrderBy(a => a.CUFX_NM_NOME);
                 lista = query.ToList<CUSTO_FIXO>();
             }
             return lista;
         }
-
-
     }
 }
  

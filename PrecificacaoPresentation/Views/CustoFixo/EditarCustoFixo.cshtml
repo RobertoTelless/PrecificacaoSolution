@@ -1,0 +1,432 @@
+﻿@using Presentation.Extensions
+@model ERP_Condominios_Solution.ViewModels.CustoFixoViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div id="containerModalDesc">
+        <div class="modal fade" id="modalDesc" tabindex="-1" role="dialog" aria-labelledby="modalDesc" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDesc">Descrição</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="modalDescBody" class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-title"> 
+        <h3 class="title">Custos Fixos</h3> 
+        <br />
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("CarregarBase", "BaseAdmin")">Dashboard</a>
+            </li>
+            <li>
+                <a href="@Url.Action("MontarTelaDashboardCadastro", "BaseAdmin")">Dashboard -  Cadastros</a>
+            </li>
+            <li>
+                <a href="@Url.Action("MontarTelaCustoFixo", "CustoFixo")">Custos Fixos</a>
+            </li> 
+            <li class="active">
+                <strong>Custos Fixos - Edição/Consulta</strong>
+            </li>
+        </ol>
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-xs-12 ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Custos Fixos - Edição/Consulta</h5>
+                </div>
+                <div class="ibox-content">
+                    @Html.AntiForgeryToken()
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">Fechar</button>
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        </div>
+                    }
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab-1">Dados Gerais</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2">Lançamentos a Pagar</a></li>
+                        </ul>
+                        <div class="tab-content">
+
+                            @*Dados Gerais*@
+                            <div id="tab-1" class="tab-pane active">
+                                @using (Html.BeginForm("EditarCustoFixo", "CustoFixo", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
+                                {
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">                
+                                                <h5 style="color: black">(Informar valor do custo SEM ponto de milhares)</h5>
+                                            </div>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">                
+                                                <div class="col-lg-4 col-md-4 col-xs-12">
+                                                    @Html.HiddenFor(m => m.ASSI_CD_ID)
+                                                    @Html.HiddenFor(m => m.CUFX_IN_ATIVO)
+                                                    @Html.HiddenFor(m => m.CUFX_DT_CADASTRO)
+                                                    @Html.HiddenFor(m => m.EMPR_CD_ID)
+                                                    @Html.HiddenFor(m => m.CUFX_IN_TIPO_VALOR)
+                                                    @Html.HiddenFor(m => m.CUFX_CD_ID)
+                                                    Nome do Custo Fixo*
+                                                    @Html.TextBoxFor(m => m.CUFX_NM_NOME, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.CUFX_NM_NOME, "", new { @style = "color:red" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Categoria*
+                                                    <div class="input-group">
+                                                        @Html.DropDownListFor(m => m.CACF_CD_ID, (SelectList)ViewBag.Tipos, "Selecionar", new { @class = "form-control", autofocus = true, onchange = "FiltrarSubGrupoCC($(this).val())" })                            
+                                                        @Html.ValidationMessageFor(m => m.CACF_CD_ID, "", new { @style = "color:red" })
+                                                        <span class="input-group-addon">
+                                                            @Html.TableLinkAction("IncluirCatCustoFixo", "CustoFixo", null, "glyphicon glyphicon-plus", "Adicionar Categoria")
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Valor do Custo (R$)
+                                                    @Html.TextBoxFor(m => m.CUFX_VL_VALOR, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                                    Periodicidade
+                                                    @Html.TextBoxFor(m => m.PERIODICIDADE_TAREFA.PETA_NM_NOME, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">                
+                                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                                    Plano de Contas
+                                                    @Html.TextBoxFor(m => m.PLANO_CONTA.CECU_NM_EXIBE, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-xs-12">
+                                                    Fornecedor
+                                                    @Html.TextBoxFor(m => m.FORNECEDOR.FORN_NM_NOME, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">              
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Início
+                                                    @Html.TextBoxFor(m => m.CUFX_DT_INICIO, "{0:dd/MM/yyyy}", new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Término
+                                                    @Html.TextBoxFor(m => m.CUFX_DT_TERMINO, "{0:dd/MM/yyyy}", new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                    Dia Vencimento
+                                                    @Html.TextBoxFor(m => m.CUFX_NR_DIA_VENCIMENTO, new { @class = "form-control", autofocus = true, @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">                
+                                                <br />
+                                                @Html.ButtonActionSubmit(text: "Confirma Edição de Custo Fixo", htmlAttributes: new { id = "basictoast" })
+                                                @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarBaseCustoFixo", controller: "CustoFixo")
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        
+                            @*Conta a Pagar*@
+                            <div id="tab-2" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <h4>Lançamentos a Pagar</h4>
+                                            <br />
+                                            @if (Model.CONTA_PAGAR != null)
+                                            {
+                                                if (Model.CONTA_PAGAR.Count > 0)
+                                                {
+                                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                                        <thead style="background-color:lightsteelblue">
+                                                            <tr>
+                                                                <th style="width: auto">Num.Documento</th>
+                                                                <th style="width: auto">Emissão</th>
+                                                                <th style="width: auto">Plano de Contas</th>
+                                                                <th style="width: auto">Fornecedor</th>
+                                                                <th style="width: auto">Valor</th>
+                                                                <th style="width: auto">Valor Pago</th>
+                                                                <th style="width: auto">Saldo</th>
+                                                                <th style="width: auto">Vencimento</th>
+                                                                <th style="width: auto">Status</th>
+                                                                <th style="width: auto" class="td-one-action">Ações</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var cond in (Model.CONTA_PAGAR))
+                                                            {
+                                                                <tr>
+                                                                    <td style="cursor: pointer; text-decoration: underline; color: #337ab7;" onclick="mostrarDesc('@cond.CAPA_DS_DESCRICAO')">@cond.CAPA_NR_DOCUMENTO</td>
+                                                                    <td>@cond.CAPA_DT_LANCAMENTO.Value.ToShortDateString()</td>
+                                                                    @if (cond.PLANO_CONTA != null)
+                                                                    {
+                                                                        <td>@cond.PLANO_CONTA.CECU_NM_EXIBE</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    @if (cond.FORNECEDOR != null)
+                                                                    {
+                                                                        <td>@cond.FORNECEDOR.FORN_NM_NOME</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    <td>@CrossCutting.Formatters.DecimalFormatter(cond.CAPA_VL_VALOR.Value)</td>
+                                                                    <td>@CrossCutting.Formatters.DecimalFormatter(cond.CAPA_VL_VALOR_PAGO == null ? 0 : cond.CAPA_VL_VALOR_PAGO.Value)</td>
+                                                                    <td>@CrossCutting.Formatters.DecimalFormatter(cond.CAPA_VL_SALDO.Value)</td>
+                                                                    <td>@cond.CAPA_DT_VENCIMENTO.Value.ToShortDateString()</td>
+                                                                    @if (cond.CAPA_IN_LIQUIDADA == 1)
+                                                                    {
+                                                                        <td><span class="badge badge-primary">Liquidada</span></td>
+                                                                    }
+                                                                    else if (cond.CAPA_NR_ATRASO > 0)
+                                                                    {
+                                                                        <td><span class="badge badge-danger">Em Atraso</span></td>
+                                                                    }
+                                                                    else if (cond.CAPA_IN_PARCELADA == 1)
+                                                                    {
+                                                                        <td><span class="badge badge-success">Parcelada</span></td>
+                                                                    }
+                                                                    else if (cond.CAPA_IN_LIQUIDADA == 0)
+                                                                    {
+                                                                        <td><span class="badge badge-warning">Em Aberto</span></td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td></td>
+                                                                    }
+                                                                    <td class="td-one-action" style="width: 80px">
+                                                                        @if (cond.CAPA_IN_LIQUIDADA == 0)
+                                                                        {
+                                                                            if ((ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER" || ViewBag.Perfil == "OPR") & cond.CAPA_IN_LIQUIDADA == 0)
+                                                                            {
+                                                                                @Html.TableLinkDetails(cond.CAPA_CD_ID, "EditarCP", "fa-edit", "Editar")
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @Html.TableLinkDetails(cond.CAPA_CD_ID, "VerCP", "fa-search", "Ver")
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            @Html.TableLinkDetails(cond.CAPA_CD_ID, "VerCP", "fa-search", "Ver")
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                                else
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-xs-2">
+
+                                                        </div>
+                                                        <div style="border: 5px solid #F6A54A; padding: 10px; border-radius: 8px 8px; " class="col-lg-4 col-md-4 col-xs-8">
+                                                            <h2 style="font-weight: bold">Nenhum lançamento a pagar para este custo fixo</h2>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-xs-2">
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />  
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/jasnyBootstrapStyles")
+    @Styles.Render("~/plugins/touchSpinStyles")
+    @Styles.Render("~/plugins/sweetAlertStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+}
+@section Scripts {
+    @Scripts.Render("~/plugins/toastr")
+    
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/bundles/inputmask")
+    @Scripts.Render("~/plugins/jasnyBootstrap")
+    @Scripts.Render("~/plugins/touchSpin")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    
+    <script>
+        function mostrarDesc(desc) {
+            $('#modalDescBody').html(desc);
+            $('#modalDesc').modal('show');
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('.date-picker').mask('99/99/9999');
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $('.date-picker').datepicker(
+                {
+                    dateFormat: 'dd/mm/yy',
+                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    nextText: 'Proximo',
+                    prevText: 'Anterior',
+                    showOn: "focus"
+                }
+            )
+            .css("display", "normal")
+            .next("button").button({
+                icons: { primary: "ui-icon-calendar" },
+                label: "Selecione uma data",
+                text: false 
+            });
+        });
+    </script>  
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var i = -1;
+            var toastCount = 0;
+            var $toastlast;
+            var getMessage = function () {
+                var msg = 'Hi, welcome to Inspinia. This is example of Toastr notification box.';
+                return msg;
+            };
+
+            $('#basictoast').click(function () {
+                // Display a success toast, with a title
+                toastr.success('Inclusão em andamento!')
+            });
+            $('#showtoast').click(function () {
+                var shortCutFunction = $("#toastTypeGroup input:radio:checked").val();
+                var msg = $('#message').val();
+                var title = $('#title').val() || '';
+                var $showDuration = $('#showDuration');
+                var $hideDuration = $('#hideDuration');
+                var $timeOut = $('#timeOut');
+                var $extendedTimeOut = $('#extendedTimeOut');
+                var $showEasing = $('#showEasing');
+                var $hideEasing = $('#hideEasing');
+                var $showMethod = $('#showMethod');
+                var $hideMethod = $('#hideMethod');
+                var toastIndex = toastCount++;
+                toastr.options = {
+                    closeButton: $('#closeButton').prop('checked'),
+                    debug: $('#debugInfo').prop('checked'),
+                    progressBar: $('#progressBar').prop('checked'),
+                    positionClass: $('#positionGroup input:radio:checked').val() || 'toast-top-right',
+                    onclick: null
+                };
+                if ($('#addBehaviorOnToastClick').prop('checked')) {
+                    toastr.options.onclick = function () {
+                        alert('You can perform some custom action after a toast goes away');
+                    };
+                }
+                if ($showDuration.val().length) {
+                    toastr.options.showDuration = $showDuration.val();
+                }
+                if ($hideDuration.val().length) {
+                    toastr.options.hideDuration = $hideDuration.val();
+                }
+                if ($timeOut.val().length) {
+                    toastr.options.timeOut = $timeOut.val();
+                }
+                if ($extendedTimeOut.val().length) {
+                    toastr.options.extendedTimeOut = $extendedTimeOut.val();
+                }
+                if ($showEasing.val().length) {
+                    toastr.options.showEasing = $showEasing.val();
+                }
+                if ($hideEasing.val().length) {
+                    toastr.options.hideEasing = $hideEasing.val();
+                }
+                if ($showMethod.val().length) {
+                    toastr.options.showMethod = $showMethod.val();
+                }
+                if ($hideMethod.val().length) {
+                    toastr.options.hideMethod = $hideMethod.val();
+                }
+                if (!msg) {
+                    msg = getMessage();
+                }
+                $("#toastrOptions").text("Command: toastr["
+                        + shortCutFunction
+                        + "](\""
+                        + msg
+                        + (title ? "\", \"" + title : '')
+                        + "\")\n\ntoastr.options = "
+                        + JSON.stringify(toastr.options, null, 2)
+                );
+                var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+                $toastlast = $toast;
+                if ($toast.find('#okBtn').length) {
+                    $toast.delegate('#okBtn', 'click', function () {
+                        alert('you clicked me. i was toast #' + toastIndex + '. goodbye!');
+                        $toast.remove();
+                    });
+                }
+                if ($toast.find('#surpriseBtn').length) {
+                    $toast.delegate('#surpriseBtn', 'click', function () {
+                        alert('Surprise! you clicked me. i was toast #' + toastIndex + '. You could perform an action here.');
+                    });
+                }
+            });
+            function getLastToast() {
+                return $toastlast;
+            }
+            $('#clearlasttoast').click(function () {
+                toastr.clear(getLastToast());
+            });
+            $('#cleartoasts').click(function () {
+                toastr.clear();
+            });
+
+        });
+    </script>
+
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                  alert("@ViewBag.Message");
+            };
+        </script>
+    }
+}
+
+

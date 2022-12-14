@@ -3350,6 +3350,7 @@
     <Content Include="Views\CRM\VerPedidoVenda.cshtml" />
     <Content Include="Views\CustoFixo\MontarTelaCustoFixo.cshtml" />
     <Content Include="Views\CustoFixo\IncluirCustoFixo.cshtml" />
+    <Content Include="Views\CustoFixo\EditarCustoFixo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

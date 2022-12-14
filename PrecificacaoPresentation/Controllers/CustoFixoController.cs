@@ -149,9 +149,17 @@ namespace ERP_Condominios_Solution.Controllers
                 {
                     ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0233", CultureInfo.CurrentCulture));
                 }
+                if ((Int32)Session["MensCustoFixo"] == 7)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0235", CultureInfo.CurrentCulture));
+                }
                 if ((Int32)Session["MensCustoFixo"] == 10)
                 {
                     ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0234", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCustoFixo"] == 97)
+                {
+                    ModelState.AddModelError("", "Foram reativados " + ((Int32)Session["Conta"]).ToString() + " lançamentos de contas a pagar");
                 }
                 if ((Int32)Session["MensCustoFixo"] == 98)
                 {
@@ -283,6 +291,10 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss), "PETA_CD_ID", "PETA_NM_NOME");
             ViewBag.Fornecedores = new SelectList(forApp.GetAllItens(idAss), "FORN_CD_ID", "FORN_NM_NOME");
             ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss), "CECU_CD_ID", "CECU_NM_EXIBE");
+            List<SelectListItem> tipoValor = new List<SelectListItem>();
+            tipoValor.Add(new SelectListItem() { Text = "Total", Value = "1" });
+            tipoValor.Add(new SelectListItem() { Text = "Parcelado", Value = "2" });
+            ViewBag.TipoValor = new SelectList(tipoValor, "Value", "Text");
 
             // Recupera empresa
             EMPRESA emp = empApp.GetAllItens(idAss).FirstOrDefault();
@@ -294,6 +306,7 @@ namespace ERP_Condominios_Solution.Controllers
             vm.CUFX_IN_ATIVO = 1;
             vm.CUFX_DT_CADASTRO = DateTime.Today.Date;
             vm.EMPR_CD_ID = emp.EMPR_CD_ID;
+            vm.CUFX_IN_TIPO_VALOR = 1;
             return View(vm);
         }
 
@@ -305,6 +318,10 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss), "PETA_CD_ID", "PETA_NM_NOME");
             ViewBag.Fornecedores = new SelectList(forApp.GetAllItens(idAss), "FORN_CD_ID", "FORN_NM_NOME");
             ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss), "CECU_CD_ID", "CECU_NM_EXIBE");
+            List<SelectListItem> tipoValor = new List<SelectListItem>();
+            tipoValor.Add(new SelectListItem() { Text = "Total", Value = "1" });
+            tipoValor.Add(new SelectListItem() { Text = "Parcelado", Value = "2" });
+            ViewBag.TipoValor = new SelectList(tipoValor, "Value", "Text");
 
             if (ModelState.IsValid)
             {
@@ -334,6 +351,11 @@ namespace ERP_Condominios_Solution.Controllers
                     if (volta == 4)
                     {
                         Session["MensCustoFixo"] = 6;
+                        return RedirectToAction("MontarTelaCustoFixo", "CustoFixo");
+                    }
+                    if (volta == 5)
+                    {
+                        Session["MensCustoFixo"] = 7;
                         return RedirectToAction("MontarTelaCustoFixo", "CustoFixo");
                     }
 
@@ -389,6 +411,10 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss), "PETA_CD_ID", "PETA_NM_NOME");
             ViewBag.Fornecedores = new SelectList(forApp.GetAllItens(idAss), "FORN_CD_ID", "FORN_NM_NOME");
             ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss), "CECU_CD_ID", "CECU_NM_EXIBE");
+            List<SelectListItem> tipoValor = new List<SelectListItem>();
+            tipoValor.Add(new SelectListItem() { Text = "Total", Value = "1" });
+            tipoValor.Add(new SelectListItem() { Text = "Parcelado", Value = "2" });
+            ViewBag.TipoValor = new SelectList(tipoValor, "Value", "Text");
 
             // Recupera custo
             CUSTO_FIXO item = baseApp.GetItemById(id);
@@ -427,6 +453,10 @@ namespace ERP_Condominios_Solution.Controllers
             ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss), "PETA_CD_ID", "PETA_NM_NOME");
             ViewBag.Fornecedores = new SelectList(forApp.GetAllItens(idAss), "FORN_CD_ID", "FORN_NM_NOME");
             ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss), "CECU_CD_ID", "CECU_NM_EXIBE");
+            List<SelectListItem> tipoValor = new List<SelectListItem>();
+            tipoValor.Add(new SelectListItem() { Text = "Total", Value = "1" });
+            tipoValor.Add(new SelectListItem() { Text = "Parcelado", Value = "2" });
+            ViewBag.TipoValor = new SelectList(tipoValor, "Value", "Text");
 
             if (ModelState.IsValid)
             {
@@ -540,90 +570,25 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 idAss = (Int32)Session["IdAssinante"];
 
             // Executar
-            CLIENTE item = baseApp.GetItemById(id);
-            objetoAntes = (CLIENTE)Session["Cliente"];
-            item.CLIE_IN_ATIVO = 1;
-            Int32 volta = baseApp.ValidateReativar(item, usuario);
-            listaMaster = new List<CLIENTE>();
-            Session["ListaCliente"] = null;
-            Session["FiltroCliente"] = null;
-            return RedirectToAction("MontarTelaCliente");
+            CUSTO_FIXO item = baseApp.GetItemById(id);
+            objetoAntes = (CUSTO_FIXO)Session["CustoFixo"];
+            item.CUFX_IN_ATIVO = 1;
+            Int32 volta = baseApp.ValidateReativar(item, usuario, out Int32 conta);
+            listaMaster = new List<CUSTO_FIXO>();
+            Session["ListaCustoFixo"] = null;
+            Session["FiltroCustoFixo"] = null;
+            Session["MensCustoFixo"] = 97;
+            Session["Conta"] = conta;
+            return RedirectToAction("MontarTelaCustoFixo");
         }
 
-        public ActionResult VerCardsCliente()
-        {
-            // Verifica se tem usuario logado
-            USUARIO usuario = new USUARIO();
-            if ((String)Session["Ativa"] == null)
-            {
-                return RedirectToAction("Login", "ControleAcesso");
-            }
-            if ((USUARIO)Session["UserCredentials"] != null)
-            {
-                usuario = (USUARIO)Session["UserCredentials"];
-
-                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
-                {
-                    Session["MensPermissao"] = 2;
-                    return RedirectToAction("CarregarBase", "BaseAdmin");
-                }
-            }
-            else
-            {
-                return RedirectToAction("Login", "ControleAcesso");
-            }
-            Int32 idAss = (Int32)Session["IdAssinante"];
-
-            // Carrega listas
-            if ((List<CLIENTE>)Session["ListaCliente"] == null || ((List<CLIENTE>)Session["ListaCliente"]).Count == 0)
-            {
-                listaMaster = baseApp.GetAllItens(idAss);
-                Session["ListaCliente"] = listaMaster;
-            }
-
-            ViewBag.Listas = (List<CLIENTE>)Session["ListaCliente"];
-            ViewBag.Title = "Clientes";
-            ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACL_CD_ID", "CACL_NM_NOME");
-            ViewBag.Filiais = new SelectList(filApp.GetAllItens(idAss), "FILI_CD_ID", "FILI_NM_NOME");
-            ViewBag.UF = new SelectList(baseApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
-            Session["Cliente"] = null;
-            //List<SelectListItem> ativo = new List<SelectListItem>();
-            //ativo.Add(new SelectListItem() { Text = "Ativo", Value = "1" });
-            //ativo.Add(new SelectListItem() { Text = "Inativo", Value = "0" });
-            //ViewBag.Ativos = new SelectList(ativo, "Value", "Text");
-
-            // Indicadores
-            ViewBag.Clientes = ((List<CLIENTE>)Session["ListaCliente"]).Count;
-            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
-            if (Session["MensCliente"] != null)
-            {
-            }
-
-            // Abre view
-            Session["VoltaCliente"] = 2;
-            objeto = new CLIENTE();
-            return View(objeto);
-        }
-
-        [HttpGet]
-        public ActionResult VerAnexoCliente(Int32 id)
+        public ActionResult VoltarAnexoCustoFixo()
         {
             if ((String)Session["Ativa"] == null)
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            // Prepara view
-            CLIENTE_ANEXO item = baseApp.GetAnexoById(id);
-            return View(item);
-        }
-
-        public ActionResult VoltarAnexoCliente()
-        {
-            if ((String)Session["Ativa"] == null)
-            {
-                return RedirectToAction("Login", "ControleAcesso");
-            }
-            return RedirectToAction("EditarCliente", new { id = (Int32)Session["IdCliente"] });
+            return RedirectToAction("EditarCustoFixo", new { id = (Int32)Session["IdCustoFixo"] });
         }
 
         public ActionResult VoltarDash()
@@ -635,14 +600,303 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("MontarTelaDashboardCadastros", "BaseAdmin");
         }
 
+        [HttpPost]
+        public ActionResult EditarCP(Int32 id)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Session["VoltaCP"] = 99;
+            Session["IdCP"] = id;
+            return RedirectToAction("VoltarAnexoCP", "ContaPagar");
+        }
 
+        [HttpPost]
+        public ActionResult VerCP(Int32 id)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            Session["VoltaCP"] = 99;
+            Session["IdCP"] = id;
+            return RedirectToAction("VoltarAnexoVerCP", "ContaPagar");
+        }
 
+        [HttpPost]
+        public ActionResult IncluirFornecedor()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaFornecedor"] = 99;
+            return RedirectToAction("IncluirFornecedor", "Fornecedor");
+        }
 
+        public ActionResult GerarRelatorioLista()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Logout", "ControleAcesso");
+            }
+            // Prepara geração
+            String data = DateTime.Today.Date.ToShortDateString();
+            data = data.Substring(0, 2) + data.Substring(3, 2) + data.Substring(6, 4);
+            String nomeRel = "CustoFixoLista" + "_" + data + ".pdf";
+            List<CUSTO_FIXO> lista = (List<CUSTO_FIXO>)Session["ListaCustoFixo"];
+            CUSTO_FIXO filtro = (CUSTO_FIXO)Session["FiltroCustoFixo"];
+            Font meuFont = FontFactory.GetFont("Arial", 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            Font meuFont1 = FontFactory.GetFont("Arial", 9, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            Font meuFont2 = FontFactory.GetFont("Arial", 12, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
+            // Cria documento
+            Document pdfDoc = new Document(PageSize.A4.Rotate(), 10, 10, 10, 10);
+            PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+            pdfDoc.Open();
 
+            // Linha horizontal
+            Paragraph line = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
+            pdfDoc.Add(line);
 
+            // Cabeçalho
+            PdfPTable table = new PdfPTable(5);
+            table.WidthPercentage = 100;
+            table.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
+            table.SpacingBefore = 1f;
+            table.SpacingAfter = 1f;
 
+            PdfPCell cell = new PdfPCell();
+            cell.Border = 0;
+            Image image = Image.GetInstance(Server.MapPath("~/Images/Precificacao_Favicon.png"));
+            image.ScaleAbsolute(50, 50);
+            cell.AddElement(image);
+            table.AddCell(cell);
 
+            cell = new PdfPCell(new Paragraph("Custos Fixos - Listagem", meuFont2))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_CENTER
+            };
+            cell.Border = 0;
+            cell.Colspan = 4;
+            table.AddCell(cell);
+            pdfDoc.Add(table);
+
+            // Linha Horizontal
+            Paragraph line1 = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
+            pdfDoc.Add(line1);
+            line1 = new Paragraph("  ");
+            pdfDoc.Add(line1);
+
+            // Grid
+            table = new PdfPTable(new float[] { 70f, 150f, 60f, 80f, 60f, 60f, 60f, 60f, 60f });
+            table.WidthPercentage = 100;
+            table.HorizontalAlignment = 0;
+            table.SpacingBefore = 1f;
+            table.SpacingAfter = 1f;
+
+            cell = new PdfPCell(new Paragraph("Custos Fixos selecionados pelos parametros de filtro abaixo", meuFont1))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.Colspan = 8;
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+
+            cell = new PdfPCell(new Paragraph("Categoria", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph("Nome", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph("Valor", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph("Fornecedor", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph("Periodicidade", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph("Plano de Contas", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph("Início", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph("Término", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+            cell = new PdfPCell(new Paragraph("Dia Vencimento", meuFont))
+            {
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            table.AddCell(cell);
+
+            foreach (CUSTO_FIXO item in lista)
+            {
+                cell = new PdfPCell(new Paragraph(item.CATEGORIA_CUSTO_FIXO.CACF_NM_NOME, meuFont))
+                {
+                    VerticalAlignment = Element.ALIGN_MIDDLE,
+                    HorizontalAlignment = Element.ALIGN_LEFT
+                };
+                table.AddCell(cell);
+                cell = new PdfPCell(new Paragraph(item.CUFX_NM_NOME, meuFont))
+                {
+                    VerticalAlignment = Element.ALIGN_MIDDLE,
+                    HorizontalAlignment = Element.ALIGN_LEFT
+                };
+                table.AddCell(cell);
+                cell = new PdfPCell(new Paragraph(CrossCutting.Formatters.DecimalFormatter(item.CUFX_VL_VALOR.Value), meuFont))
+                {
+                    VerticalAlignment = Element.ALIGN_MIDDLE,
+                    HorizontalAlignment = Element.ALIGN_LEFT
+                };
+                table.AddCell(cell);
+                cell = new PdfPCell(new Paragraph(item.FORNECEDOR.FORN_NM_NOME, meuFont))
+                {
+                    VerticalAlignment = Element.ALIGN_MIDDLE,
+                    HorizontalAlignment = Element.ALIGN_LEFT
+                };
+                table.AddCell(cell);
+                cell = new PdfPCell(new Paragraph(item.PERIODICIDADE_TAREFA.PETA_NM_NOME, meuFont))
+                {
+                    VerticalAlignment = Element.ALIGN_MIDDLE,
+                    HorizontalAlignment = Element.ALIGN_LEFT
+                };
+                table.AddCell(cell);
+                if (item.CECU_CD_ID != null)
+                {
+                    cell = new PdfPCell(new Paragraph(item.PLANO_CONTA.CECU_NM_EXIBE, meuFont))
+                    {
+                        VerticalAlignment = Element.ALIGN_MIDDLE,
+                        HorizontalAlignment = Element.ALIGN_LEFT
+                    };
+                    table.AddCell(cell);
+                }
+                else
+                {
+                    cell = new PdfPCell(new Paragraph("-", meuFont))
+                    {
+                        VerticalAlignment = Element.ALIGN_MIDDLE,
+                        HorizontalAlignment = Element.ALIGN_LEFT
+                    };
+                    table.AddCell(cell);
+                }
+                cell = new PdfPCell(new Paragraph(item.CUFX_DT_INICIO.Value.ToShortDateString(), meuFont))
+                {
+                    VerticalAlignment = Element.ALIGN_MIDDLE,
+                    HorizontalAlignment = Element.ALIGN_LEFT
+                };
+                table.AddCell(cell);
+                cell = new PdfPCell(new Paragraph(item.CUFX_DT_TERMINO.Value.ToShortDateString(), meuFont))
+                {
+                    VerticalAlignment = Element.ALIGN_MIDDLE,
+                    HorizontalAlignment = Element.ALIGN_LEFT
+                };
+                table.AddCell(cell);
+                cell = new PdfPCell(new Paragraph(item.CUFX_NR_DIA_VENCIMENTO.ToString(), meuFont))
+                {
+                    VerticalAlignment = Element.ALIGN_MIDDLE,
+                    HorizontalAlignment = Element.ALIGN_LEFT
+                };
+                table.AddCell(cell);
+            }
+            pdfDoc.Add(table);
+
+            // Linha Horizontal
+            Paragraph line2 = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
+            pdfDoc.Add(line2);
+
+            // Rodapé
+            Chunk chunk1 = new Chunk("Parâmetros de filtro: ", FontFactory.GetFont("Arial", 10, Font.NORMAL, BaseColor.BLACK));
+            pdfDoc.Add(chunk1);
+
+            String parametros = String.Empty;
+            Int32 ja = 0;
+            if (filtro != null)
+            {
+                if (filtro.CACF_CD_ID > 0)
+                {
+                    parametros += "Categoria: " + filtro.CACF_CD_ID;
+                    ja = 1;
+                }
+                if (filtro.CUFX_NM_NOME != null)
+                {
+                    if (ja == 0)
+                    {
+                        parametros += "Nome: " + filtro.CUFX_NM_NOME;
+                        ja = 1;
+                    }
+                    else
+                    {
+                        parametros += " e Nome: " + filtro.CUFX_NM_NOME;
+                    }
+                }
+                if (ja == 0)
+                {
+                    parametros = "Nenhum filtro definido.";
+                }
+            }
+            else
+            {
+                parametros = "Nenhum filtro definido.";
+            }
+            Chunk chunk = new Chunk(parametros, FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK));
+            pdfDoc.Add(chunk);
+
+            // Linha Horizontal
+            Paragraph line3 = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLUE, Element.ALIGN_LEFT, 1)));
+            pdfDoc.Add(line3);
+
+            // Finaliza
+            pdfWriter.CloseStream = false;
+            pdfDoc.Close();
+            Response.Buffer = true;
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=" + nomeRel);
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Write(pdfDoc);
+            Response.End();
+            return RedirectToAction("MontarTelaCustoFixo");
+        }
 
     }
 }

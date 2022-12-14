@@ -1976,5 +1976,14 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0234", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Dta de vencimento tem que ser entre 1 e 30.
+        /// </summary>
+        internal static string M0235 {
+            get {
+                return ResourceManager.GetString("M0235", resourceCulture);
+            }
+        }
     }
 }

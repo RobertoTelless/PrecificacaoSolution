@@ -35,6 +35,7 @@ namespace EntitiesServices.Model
         public Nullable<int> ASSI_CD_ID { get; set; }
         public Nullable<int> FORN_CD_ID { get; set; }
         public Nullable<int> CECU_CD_ID { get; set; }
+        public Nullable<int> CUFX_IN_TIPO_VALOR { get; set; }
     
         public virtual CATEGORIA_CUSTO_FIXO CATEGORIA_CUSTO_FIXO { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }

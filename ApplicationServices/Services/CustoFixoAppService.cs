@@ -113,6 +113,10 @@ namespace ApplicationServices.Services
                 {
                     return 4;
                 }
+                if (item.CUFX_NR_DIA_VENCIMENTO < 1 || item.CUFX_NR_DIA_VENCIMENTO > 30)
+                {
+                    return 5;
+                }
 
                 // Completa objeto
                 item.CUFX_IN_ATIVO = 1;
@@ -135,15 +139,34 @@ namespace ApplicationServices.Services
                 CONTA_BANCO cb = _cbService.GetAllItens(usuario.ASSI_CD_ID).Where(p => p.COBA_IN_CONTA_PADRAO == 1).FirstOrDefault();
                 FORMA_PAGTO_RECTO fp = _fpService.GetAllItens(usuario.ASSI_CD_ID).Where(p => p.COBA_CD_ID == cb.COBA_CD_ID & p.FOPA_IN_TIPO_FORMA == 1).FirstOrDefault();
 
-                // Gerar contas a pagar
+                // Calcula valor dos lançamentos
                 DateTime inicio = item.CUFX_DT_INICIO.Value.Date;
                 Int32 intervalo = item.PERIODICIDADE_TAREFA.PETA_NR_DIAS.Value;
+                Decimal valor = 0;
+
+                // Gerar contas a pagar
                 DateTime proxima = inicio;
                 Int32 sai = 0;
                 Int32 num = 1;
+                DateTime? dataAjustada = null;
                 while (sai == 0)
                 {
+                    // Calcula data de vencimento
                     proxima = inicio.AddDays(intervalo);
+                    Int32 mes = proxima.Month;
+                    if ((proxima.Month == inicio.Month + 1) || (inicio.Month == 12 & proxima.Month == 1)
+                    {
+                        dataAjustada = Convert.ToDateTime(item.CUFX_NR_DIA_VENCIMENTO.ToString() + "/" + proxima.Month.ToString() + "/" + proxima.Year.ToString());
+                    }
+                    else
+                    {
+                        if (proxima.Month == 3 & item.CUFX_NR_DIA_VENCIMENTO > 28)
+                        {
+                            dataAjustada = Convert.ToDateTime("28/" + (proxima.Month - 1).ToString() + "/" + proxima.Year.ToString());
+                        }
+                    }
+
+                    // Grava CP
                     if (proxima <= item.CUFX_DT_TERMINO)
                     {
                         // Monta conta a pagar
@@ -161,7 +184,7 @@ namespace ApplicationServices.Services
                         cp.CAPA_IN_TIPO_LANCAMENTO = 1;
                         cp.CAPA_IN_LIQUIDADA = 0;
                         cp.CAPA_IN_ATIVO = 1;
-                        cp.CAPA_DT_VENCIMENTO = proxima;
+                        cp.CAPA_DT_VENCIMENTO = dataAjustada;
                         cp.CAPA_VL_VALOR_PAGO = 0;
                         cp.CAPA_IN_PARCELADA = 0;
                         cp.CAPA_IN_PARCELAS = 0;
@@ -177,9 +200,24 @@ namespace ApplicationServices.Services
                         Int32 volta1 = _cpService.Create(cp);
                         num++;
 
-                        // Nova data
-                        proxima = proxima.AddDays(intervalo);
-                    }
+                        // Recalcula data inicial
+                        if (proxima.Month == inicio.Month + 1)
+                        {
+                            inicio = proxima;
+                        }
+                        else if (proxima.Month != inicio.Month + 1 & (inicio.Month == 12 & proxima.Month == 1)
+                        {
+                            inicio = proxima;
+                        }
+                        else if (proxima.Month != inicio.Month & (inicio.Month == 1 & proxima.Month == 3)
+                        {
+                            inicio = Convert.ToDateTime("28/" + (proxima.Month - 1).ToString() + "/" + proxima.Year.ToString()); 
+                        }
+                        else
+                        {
+                            inicio = proxima;
+                        }
+                   }
                     else
                     {
                         sai = 1;
@@ -316,10 +354,13 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(CUSTO_FIXO item, USUARIO usuario)
+        public Int32 ValidateReativar(CUSTO_FIXO item, USUARIO usuario, out Int32 conta)
         {
             try
             {
+                // Inicializa
+                conta = 0;
+
                 // Verifica integridade referencial
 
                 // Acerta campos
@@ -337,7 +378,18 @@ namespace ApplicationServices.Services
                 };
 
                 // Persiste
-                return _baseService.Edit(item, log);
+                Int32 volta = _baseService.Edit(item, log);
+
+                // Reativar contas a pagar
+                List<CONTA_PAGAR> cps = _cpService.GetAllItens(usuario.ASSI_CD_ID).Where(p => p.CUFX_CD_ID == item.CUFX_CD_ID).ToList();
+                foreach (CONTA_PAGAR cp in cps)
+                {
+                    // Processa exclusão
+                    cp.CAPA_IN_ATIVO = 1;
+                    Int32 volta2 = _cpService.Edit(cp);
+                    conta++;
+                }
+                return volta;
             }
             catch (Exception ex)
             {

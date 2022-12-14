@@ -879,6 +879,7 @@
           <Property Name="CUFX_DT_INICIO" Type="date" />
           <Property Name="CUFX_DT_TERMINO" Type="date" />
           <Property Name="CUFX_IN_NUMERO_OCORRENCIAS" Type="int" />
+          <Property Name="CUFX_IN_TIPO_VALOR" Type="int" />
           <Property Name="CUFX_NR_DIA_VENCIMENTO" Type="int" />
           <Property Name="CUFX_VL_VALOR" Type="decimal" Precision="19" Scale="2" />
           <Property Name="CUFX_DT_CADASTRO" Type="date" />
@@ -8037,6 +8038,7 @@
           <NavigationProperty Name="FORNECEDOR" Relationship="Db_PrecificacaoModel.FK_CUSTO_FIXO_FORNECEDOR" FromRole="CUSTO_FIXO" ToRole="FORNECEDOR" />
           <Property Name="CECU_CD_ID" Type="Int32" />
           <NavigationProperty Name="PLANO_CONTA" Relationship="Db_PrecificacaoModel.FK_CUSTO_FIXO_PLANO_CONTA" FromRole="CUSTO_FIXO" ToRole="PLANO_CONTA" />
+          <Property Name="CUFX_IN_TIPO_VALOR" Type="Int32" />
         </EntityType>
         <EntityType Name="DIARIO_PROCESSO">
           <Key>
@@ -15294,6 +15296,7 @@
           <EntitySetMapping Name="CUSTO_FIXO">
             <EntityTypeMapping TypeName="Db_PrecificacaoModel.CUSTO_FIXO">
               <MappingFragment StoreEntitySet="CUSTO_FIXO">
+                <ScalarProperty Name="CUFX_IN_TIPO_VALOR" ColumnName="CUFX_IN_TIPO_VALOR" />
                 <ScalarProperty Name="CECU_CD_ID" ColumnName="CECU_CD_ID" />
                 <ScalarProperty Name="FORN_CD_ID" ColumnName="FORN_CD_ID" />
                 <ScalarProperty Name="ASSI_CD_ID" ColumnName="ASSI_CD_ID" />
