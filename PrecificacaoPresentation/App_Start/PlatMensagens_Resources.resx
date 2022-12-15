@@ -759,4 +759,10 @@
   <data name="M0235" xml:space="preserve">
     <value>Dta de vencimento tem que ser entre 1 e 30</value>
   </data>
+  <data name="M0236" xml:space="preserve">
+    <value>Categoria de custo fixo já cadastrada</value>
+  </data>
+  <data name="M0237" xml:space="preserve">
+    <value>Impossível excluir esta categoria. Existem registros vinculados a ela</value>
+  </data>
 </root>

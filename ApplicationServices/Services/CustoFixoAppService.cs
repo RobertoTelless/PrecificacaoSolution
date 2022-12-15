@@ -20,14 +20,16 @@ namespace ApplicationServices.Services
         private readonly IContaBancariaService _cbService;
         private readonly IFormaPagRecAppService _fpService;
         private readonly IContaPagarService _cpService;
+        private readonly IPeriodicidadeService _perService;
 
-        public CustoFixoAppService(ICustoFixoService baseService, IConfiguracaoService confService, IContaBancariaService cbService, IFormaPagRecAppService fpService, IContaPagarService cpService) : base(baseService)
+        public CustoFixoAppService(ICustoFixoService baseService, IConfiguracaoService confService, IContaBancariaService cbService, IFormaPagRecAppService fpService, IContaPagarService cpService, IPeriodicidadeService perService) : base(baseService)
         {
             _baseService = baseService;
             _confService = confService;
             _cbService = cbService;
             _fpService = fpService;
             _cpService = cpService;
+            _perService = perService;
         }
 
         public List<CUSTO_FIXO> GetAllItens(Int32 idAss)
@@ -141,20 +143,20 @@ namespace ApplicationServices.Services
 
                 // Calcula valor dos lançamentos
                 DateTime inicio = item.CUFX_DT_INICIO.Value.Date;
-                Int32 intervalo = item.PERIODICIDADE_TAREFA.PETA_NR_DIAS.Value;
+                Int32 intervalo = _perService.GetItemById(item.PETA_CD_ID).PETA_NR_DIAS.Value;
                 Decimal valor = 0;
 
                 // Gerar contas a pagar
                 DateTime proxima = inicio;
                 Int32 sai = 0;
-                Int32 num = 1;
+                Int32 num = 0;
                 DateTime? dataAjustada = null;
                 while (sai == 0)
                 {
                     // Calcula data de vencimento
                     proxima = inicio.AddDays(intervalo);
                     Int32 mes = proxima.Month;
-                    if ((proxima.Month == inicio.Month + 1) || (inicio.Month == 12 & proxima.Month == 1)
+                    if ((proxima.Month == inicio.Month + 1) || (inicio.Month == 12 & proxima.Month == 1))
                     {
                         dataAjustada = Convert.ToDateTime(item.CUFX_NR_DIA_VENCIMENTO.ToString() + "/" + proxima.Month.ToString() + "/" + proxima.Year.ToString());
                     }
@@ -205,11 +207,11 @@ namespace ApplicationServices.Services
                         {
                             inicio = proxima;
                         }
-                        else if (proxima.Month != inicio.Month + 1 & (inicio.Month == 12 & proxima.Month == 1)
+                        else if (proxima.Month != inicio.Month + 1 & (inicio.Month == 12 & proxima.Month == 1))
                         {
                             inicio = proxima;
                         }
-                        else if (proxima.Month != inicio.Month & (inicio.Month == 1 & proxima.Month == 3)
+                        else if (proxima.Month != inicio.Month & (inicio.Month == 1 & proxima.Month == 3))
                         {
                             inicio = Convert.ToDateTime("28/" + (proxima.Month - 1).ToString() + "/" + proxima.Year.ToString()); 
                         }
@@ -276,7 +278,8 @@ namespace ApplicationServices.Services
                 };
 
                 // Persiste
-                return _baseService.Edit(item, log);
+                Int32 volta = _baseService.Edit(item, log);
+                return volta;
             }
             catch (Exception ex)
             {

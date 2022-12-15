@@ -1985,5 +1985,23 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0235", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria de custo fixo já cadastrada.
+        /// </summary>
+        internal static string M0236 {
+            get {
+                return ResourceManager.GetString("M0236", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Impossível excluir esta categoria. Existem registros vinculados a ela.
+        /// </summary>
+        internal static string M0237 {
+            get {
+                return ResourceManager.GetString("M0237", resourceCulture);
+            }
+        }
     }
 }

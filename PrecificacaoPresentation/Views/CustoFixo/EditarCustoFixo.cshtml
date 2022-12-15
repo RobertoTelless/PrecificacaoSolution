@@ -215,14 +215,7 @@
                                                                     <td class="td-one-action" style="width: 80px">
                                                                         @if (cond.CAPA_IN_LIQUIDADA == 0)
                                                                         {
-                                                                            if ((ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER" || ViewBag.Perfil == "OPR") & cond.CAPA_IN_LIQUIDADA == 0)
-                                                                            {
-                                                                                @Html.TableLinkDetails(cond.CAPA_CD_ID, "EditarCP", "fa-edit", "Editar")
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                @Html.TableLinkDetails(cond.CAPA_CD_ID, "VerCP", "fa-search", "Ver")
-                                                                            }
+                                                                            @Html.TableLinkDetails(cond.CAPA_CD_ID, "EditarCP", "fa-edit", "Editar")
                                                                         }
                                                                         else
                                                                         {

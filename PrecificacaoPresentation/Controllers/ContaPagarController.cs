@@ -380,6 +380,10 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 return RedirectToAction("MontarCentralMensagens", "BaseAdmin");
             }
+            if ((Int32)Session["VoltaCP"] == 99)
+            {
+                return RedirectToAction("VoltarAnexoCustoFixo", "CustoFixo");
+            }
             if ((Int32)Session["VoltaPop"] == 1)
             {
                 return RedirectToAction("MontarTelaPedidoCompra", "Compra");
@@ -1209,12 +1213,15 @@ namespace ERP_Condominios_Solution.Controllers
                     {
                         FiltrarCP((CONTA_PAGAR)Session["FiltroCP"], null);
                     }
+                    if ((Int32)Session["VoltaCP"] == 99)
+                    {
+                        return RedirectToAction("VoltarAnexoCustoFixo", "CustoFixo");
+                    }
 
                     if (vm.CAPA_VL_PARCELADO != null && vm.CAPA_IN_PARCELAS != null && vm.CAPA_DT_INICIO_PARCELAS != null && vm.PETA_CD_ID != null)
                     {
                         return RedirectToAction("EditarCP", new { id = vm.CAPA_CD_ID });
                     }
-
                     return RedirectToAction("MontarTelaCP");
                 }
                 catch (Exception ex)

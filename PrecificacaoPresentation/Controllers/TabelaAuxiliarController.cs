@@ -38,6 +38,7 @@ namespace ERP_Condominios_Solution.Controllers
         private readonly IMotivoEncerramentoAppService meApp;
         private readonly ICategoriaProdutoAppService cpApp;
         private readonly ISubcategoriaProdutoAppService spApp;
+        private readonly ICategoriaCustoFixoAppService cxApp;
 
         CARGO_USUARIO objetoCargo = new CARGO_USUARIO();
         CARGO_USUARIO objetoAntesCargo = new CARGO_USUARIO();
@@ -72,9 +73,12 @@ namespace ERP_Condominios_Solution.Controllers
         SUBCATEGORIA_PRODUTO objetoSubCatProduto = new SUBCATEGORIA_PRODUTO();
         SUBCATEGORIA_PRODUTO objetoAntesSubCatProduto = new SUBCATEGORIA_PRODUTO();
         List<SUBCATEGORIA_PRODUTO> listaMasterSubCatProduto = new List<SUBCATEGORIA_PRODUTO>();
+        CATEGORIA_CUSTO_FIXO objetoCatCusto = new CATEGORIA_CUSTO_FIXO();
+        CATEGORIA_CUSTO_FIXO objetoAntesCatCusto = new CATEGORIA_CUSTO_FIXO();
+        List<CATEGORIA_CUSTO_FIXO> listaMasterCatCusto = new List<CATEGORIA_CUSTO_FIXO>();
         String extensao;
 
-        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps, ITipoEmbalagemAppService teApps, ITipoAcaoAppService taApps, IMotivoCancelamentoAppService mcApps, IMotivoEncerramentoAppService meApps, ICategoriaProdutoAppService cpApps, ISubcategoriaProdutoAppService spApps)
+        public TabelaAuxiliarController(ICargoAppService carApps, ILogAppService logApps, IGrupoCCAppService gruApps, ISubgrupoAppService subApps, ICategoriaClienteAppService ccApps, ICategoriaFornecedorAppService cfApps, ITipoEmbalagemAppService teApps, ITipoAcaoAppService taApps, IMotivoCancelamentoAppService mcApps, IMotivoEncerramentoAppService meApps, ICategoriaProdutoAppService cpApps, ISubcategoriaProdutoAppService spApps, ICategoriaCustoFixoAppService cxApps)
         {
             carApp = carApps;
             logApp = logApps;
@@ -88,6 +92,7 @@ namespace ERP_Condominios_Solution.Controllers
             meApp = meApps;
             cpApp = cpApps;
             spApp = spApps;
+            cxApp = cxApps;
         }
 
         [HttpGet]
@@ -3828,6 +3833,347 @@ namespace ERP_Condominios_Solution.Controllers
             Session["ListaSubCatProduto"] = null;
             return RedirectToAction("MontarTelaSubCatProduto");
         }
+
+        [HttpGet]
+        public ActionResult MontarTelaCatCusto()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA == "VIS")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("CarregarBase", "BaseAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Carrega listas
+            if (Session["ListaCatCusto"] == null)
+            {
+                listaMasterCatCusto = cxApp.GetAllItens(idAss);
+                Session["ListaCatCusto"] = listaMasterCatCusto;
+            }
+            ViewBag.Listas = (List<CATEGORIA_CUSTO_FIXO>)Session["ListaCatCusto"];
+            ViewBag.Title = "CatCusto";
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Indicadores
+            ViewBag.Cargo = ((List<CATEGORIA_CUSTO_FIXO>)Session["ListaCatCusto"]).Count;
+
+            if (Session["MensCatCusto"] != null)
+            {
+                if ((Int32)Session["MensCatCusto"] == 3)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0236", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCatCusto"] == 2)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0011", CultureInfo.CurrentCulture));
+                }
+                if ((Int32)Session["MensCatCusto"] == 4)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0237", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Abre view
+            Session["VoltaCatCusto"] = 1;
+            Session["MensCatCusto"] = 0;
+            objetoCatCusto= new CATEGORIA_CUSTO_FIXO();
+            return View(objetoCatCusto);
+        }
+
+        public ActionResult RetirarFiltroCatCusto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["ListaCatCusto"] = null;
+            Session["FiltroCatCusto"] = null;
+            return RedirectToAction("MontarTelaCatCusto");
+        }
+
+        public ActionResult MostrarTudoCatCusto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            listaMasterCatCusto = cxApp.GetAllItensAdm(idAss);
+            Session["FiltroCatCusto"] = null;
+            Session["ListaCatCusto"] = listaMasterCatCusto;
+            return RedirectToAction("MontarTelaCatCusto");
+        }
+
+        public ActionResult VoltarBaseCatCusto()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if ((Int32)Session["VoltaCatCusto"] == 2)
+            {
+                return RedirectToAction("IncluirCustoFixo", "CustoFixo");
+            }
+            if ((Int32)Session["VoltaCatCusto"] == 3)
+            {
+                return RedirectToAction("VoltarAnexoCustoFixo", "CustoFixo");
+            }
+            return RedirectToAction("MontarTelaCatCusto");
+        }
+
+        [HttpGet]
+        public ActionResult IncluirCatCusto()
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER" )
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Prepara listas
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            CATEGORIA_CUSTO_FIXO item = new CATEGORIA_CUSTO_FIXO();
+            CategoriaCustoFixoViewModel vm = Mapper.Map<CATEGORIA_CUSTO_FIXO, CategoriaCustoFixoViewModel>(item);
+            vm.ASSI_CD_ID = usuario.ASSI_CD_ID;
+            vm.CACF_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirCatCusto(CategoriaCustoFixoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    CATEGORIA_CUSTO_FIXO item = Mapper.Map<CategoriaCustoFixoViewModel, CATEGORIA_CUSTO_FIXO>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = cxApp.ValidateCreate(item, usuarioLogado);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensCatCusto"] = 3;
+                        return RedirectToAction("MontarTelaCatCusto");
+                    }
+                    Session["IdVolta"] = item.CACF_CD_ID;
+
+                    // Sucesso
+                    listaMasterCatCusto= new List<CATEGORIA_CUSTO_FIXO>();
+                    Session["ListaCatCusto"] = null;
+                    return RedirectToAction("VoltarBaseCatCusto");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VerCatCusto(Int32 id)
+        {
+            
+            // Prepara view
+            CATEGORIA_CUSTO_FIXO item = cxApp.GetItemById(id);
+            Session["CatCusto"] = item;
+            Session["IdCatCusto"] = id;
+            CategoriaCustoFixoViewModel vm = Mapper.Map<CATEGORIA_CUSTO_FIXO, CategoriaCustoFixoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult EditarCatCusto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
+
+            // Prepara view
+            CATEGORIA_CUSTO_FIXO item = cxApp.GetItemById(id);
+            objetoAntesCatCusto= item;
+            Session["CatCusto"] = item;
+            Session["IdCatCusto"] = id;
+            CategoriaCustoFixoViewModel vm = Mapper.Map<CATEGORIA_CUSTO_FIXO, CategoriaCustoFixoViewModel>(item);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditarCatCusto(CategoriaCustoFixoViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            if (ModelState.IsValid)
+            {
+                try
+            {
+                    // Executa a operação
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    CATEGORIA_CUSTO_FIXO item = Mapper.Map<CategoriaCustoFixoViewModel, CATEGORIA_CUSTO_FIXO>(vm);
+                    Int32 volta = cxApp.ValidateEdit(item, objetoAntesCatCusto, usuarioLogado);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    listaMasterCatCusto= new List<CATEGORIA_CUSTO_FIXO>();
+                    Session["ListaCatCusto"] = null;
+                    return RedirectToAction("MontarTelaCatCusto");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirCatCusto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            CATEGORIA_CUSTO_FIXO item = cxApp.GetItemById(id);
+            item.CACF_IN_ATIVO = 0;
+            Int32 volta = cxApp.ValidateDelete(item, usuario);
+            if (volta == 1)
+            {
+                Session["MensCatCusto"] = 4;
+                return RedirectToAction("MontarTelaCatCusto");
+            }
+            listaMasterCatCusto= new List<CATEGORIA_CUSTO_FIXO>();
+            Session["ListaCatCusto"] = null;
+            return RedirectToAction("MontarTelaCatCusto");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarCatCusto(Int32 id)
+        {
+            // Verifica se tem usuario logado
+            USUARIO usuario = new USUARIO();
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            if ((USUARIO)Session["UserCredentials"] != null)
+            {
+                usuario = (USUARIO)Session["UserCredentials"];
+                // Verfifica permissão
+                if (usuario.PERFIL.PERF_SG_SIGLA != "ADM" & usuario.PERFIL.PERF_SG_SIGLA != "GER")
+                {
+                    Session["MensPermissao"] = 2;
+                    return RedirectToAction("MontarTelaCatCliente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            // Executar
+            CATEGORIA_CUSTO_FIXO item = cxApp.GetItemById(id);
+            item.CACF_IN_ATIVO = 1;
+            Int32 volta = cxApp.ValidateReativar(item, usuario);
+            listaMasterCatCusto = new List<CATEGORIA_CUSTO_FIXO>();
+            Session["ListaCatCusto"] = null;
+            return RedirectToAction("MontarTelaCatCusto");
+        }
+
 
     }
 }

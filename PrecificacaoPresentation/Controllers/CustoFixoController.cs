@@ -288,9 +288,9 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Prepara listas
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACF_CD_ID", "CACF_NM_NOME");
-            ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss), "PETA_CD_ID", "PETA_NM_NOME");
+            ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss).Where(p => p.PETA_CD_ID == 4), "PETA_CD_ID", "PETA_NM_NOME");
             ViewBag.Fornecedores = new SelectList(forApp.GetAllItens(idAss), "FORN_CD_ID", "FORN_NM_NOME");
-            ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss), "CECU_CD_ID", "CECU_NM_EXIBE");
+            ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss).Where(p => p.CECU_IN_TIPO == 2), "CECU_CD_ID", "CECU_NM_EXIBE");
             List<SelectListItem> tipoValor = new List<SelectListItem>();
             tipoValor.Add(new SelectListItem() { Text = "Total", Value = "1" });
             tipoValor.Add(new SelectListItem() { Text = "Parcelado", Value = "2" });
@@ -315,9 +315,9 @@ namespace ERP_Condominios_Solution.Controllers
         {
             Int32 idAss = (Int32)Session["IdAssinante"];
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACF_CD_ID", "CACF_NM_NOME");
-            ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss), "PETA_CD_ID", "PETA_NM_NOME");
+            ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss).Where(p => p.PETA_CD_ID == 4), "PETA_CD_ID", "PETA_NM_NOME");
             ViewBag.Fornecedores = new SelectList(forApp.GetAllItens(idAss), "FORN_CD_ID", "FORN_NM_NOME");
-            ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss), "CECU_CD_ID", "CECU_NM_EXIBE");
+            ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss).Where(p => p.CECU_IN_TIPO == 2), "CECU_CD_ID", "CECU_NM_EXIBE");
             List<SelectListItem> tipoValor = new List<SelectListItem>();
             tipoValor.Add(new SelectListItem() { Text = "Total", Value = "1" });
             tipoValor.Add(new SelectListItem() { Text = "Parcelado", Value = "2" });
@@ -408,9 +408,9 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Prepara view
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACF_CD_ID", "CACF_NM_NOME");
-            ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss), "PETA_CD_ID", "PETA_NM_NOME");
+            ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss).Where(p => p.PETA_CD_ID == 4), "PETA_CD_ID", "PETA_NM_NOME");
             ViewBag.Fornecedores = new SelectList(forApp.GetAllItens(idAss), "FORN_CD_ID", "FORN_NM_NOME");
-            ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss), "CECU_CD_ID", "CECU_NM_EXIBE");
+            ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss).Where(p => p.CECU_IN_TIPO == 2), "CECU_CD_ID", "CECU_NM_EXIBE");
             List<SelectListItem> tipoValor = new List<SelectListItem>();
             tipoValor.Add(new SelectListItem() { Text = "Total", Value = "1" });
             tipoValor.Add(new SelectListItem() { Text = "Parcelado", Value = "2" });
@@ -450,9 +450,9 @@ namespace ERP_Condominios_Solution.Controllers
         {
             Int32 idAss = (Int32)Session["IdAssinante"];
             ViewBag.Tipos = new SelectList(baseApp.GetAllTipos(idAss), "CACF_CD_ID", "CACF_NM_NOME");
-            ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss), "PETA_CD_ID", "PETA_NM_NOME");
+            ViewBag.Periodicidades = new SelectList(baseApp.GetAllPeriodicidades(idAss).Where(p => p.PETA_CD_ID == 4), "PETA_CD_ID", "PETA_NM_NOME");
             ViewBag.Fornecedores = new SelectList(forApp.GetAllItens(idAss), "FORN_CD_ID", "FORN_NM_NOME");
-            ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss), "CECU_CD_ID", "CECU_NM_EXIBE");
+            ViewBag.PlanoContas = new SelectList(ccApp.GetAllItens(idAss).Where(p => p.CECU_IN_TIPO == 2), "CECU_CD_ID", "CECU_NM_EXIBE");
             List<SelectListItem> tipoValor = new List<SelectListItem>();
             tipoValor.Add(new SelectListItem() { Text = "Total", Value = "1" });
             tipoValor.Add(new SelectListItem() { Text = "Parcelado", Value = "2" });
@@ -600,7 +600,6 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("MontarTelaDashboardCadastros", "BaseAdmin");
         }
 
-        [HttpPost]
         public ActionResult EditarCP(Int32 id)
         {
             if ((String)Session["Ativa"] == null)
@@ -608,11 +607,11 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Logout", "ControleAcesso");
             }
             Session["VoltaCP"] = 99;
+            Session["VoltaPop"] = 0;
             Session["IdCP"] = id;
             return RedirectToAction("VoltarAnexoCP", "ContaPagar");
         }
 
-        [HttpPost]
         public ActionResult VerCP(Int32 id)
         {
             if ((String)Session["Ativa"] == null)
@@ -620,6 +619,7 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Logout", "ControleAcesso");
             }
             Session["VoltaCP"] = 99;
+            Session["VoltaPop"] = 0;
             Session["IdCP"] = id;
             return RedirectToAction("VoltarAnexoVerCP", "ContaPagar");
         }

@@ -201,6 +201,7 @@
     <Compile Include="Interfaces\IBancoAppService.cs" />
     <Compile Include="Interfaces\ICargoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaClienteAppService.cs" />
+    <Compile Include="Interfaces\ICategoriaCustoFixoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaFornecedorAppService.cs" />
     <Compile Include="Interfaces\ICategoriaProdutoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaServicoAppService.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="Services\AssinanteCnpjAppService.cs" />
     <Compile Include="Services\BancoAppService.cs" />
     <Compile Include="Services\CategoriaClienteAppService.cs" />
+    <Compile Include="Services\CategoriaCustoFixoAppService.cs" />
     <Compile Include="Services\CategoriaFornecedorAppService.cs" />
     <Compile Include="Services\CategoriaProdutoAppService.cs" />
     <Compile Include="Services\CategoriaServicoAppService.cs" />

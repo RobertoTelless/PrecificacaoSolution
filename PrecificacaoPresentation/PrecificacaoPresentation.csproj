@@ -291,6 +291,7 @@
     <Compile Include="ViewModels\BancoViewModel.cs" />
     <Compile Include="ViewModels\CargoViewModel.cs" />
     <Compile Include="ViewModels\CategoriaClienteViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaCustoFixoViewModel.cs" />
     <Compile Include="ViewModels\CategoriaFornecedorViewModel.cs" />
     <Compile Include="ViewModels\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\CategoriaServicoViewModel.cs" />
@@ -3351,6 +3352,9 @@
     <Content Include="Views\CustoFixo\MontarTelaCustoFixo.cshtml" />
     <Content Include="Views\CustoFixo\IncluirCustoFixo.cshtml" />
     <Content Include="Views\CustoFixo\EditarCustoFixo.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\MontarTelaCatCusto.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\IncluirCatCusto.cshtml" />
+    <Content Include="Views\TabelaAuxiliar\EditarCatCusto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

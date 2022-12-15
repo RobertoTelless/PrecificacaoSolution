@@ -199,6 +199,7 @@
     <Compile Include="EntitiesServices\AssinanteService.cs" />
     <Compile Include="EntitiesServices\BancoService.cs" />
     <Compile Include="EntitiesServices\CategoriaClienteService.cs" />
+    <Compile Include="EntitiesServices\CategoriaCustoFixoService.cs" />
     <Compile Include="EntitiesServices\CategoriaFornecedorService.cs" />
     <Compile Include="EntitiesServices\CategoriaProdutoService.cs" />
     <Compile Include="EntitiesServices\CategoriaServicoService.cs" />
@@ -400,6 +401,7 @@
     <Compile Include="Interfaces\Services\IBancoService.cs" />
     <Compile Include="Interfaces\Services\ICargoService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaClienteService.cs" />
+    <Compile Include="Interfaces\Services\ICategoriaCustoFixoService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaFornecedorService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaProdutoService.cs" />
     <Compile Include="Interfaces\Services\ICategoriaServicoService.cs" />

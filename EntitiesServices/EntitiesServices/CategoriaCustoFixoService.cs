@@ -16,60 +16,42 @@ using System.Data;
 
 namespace ModelServices.EntitiesServices
 {
-    public class CustoFixoService : ServiceBase<CUSTO_FIXO>, ICustoFixoService
+    public class CategoriaCustoFixoService : ServiceBase<CATEGORIA_CUSTO_FIXO>, ICategoriaCustoFixoService
     {
-        private readonly ICustoFixoRepository _baseRepository;
+        private readonly ICategoriaCustoFixoRepository _baseRepository;
         private readonly ILogRepository _logRepository;
-        private readonly ICategoriaCustoFixoRepository _tipoRepository;
-        private readonly IPeriodicidadeRepository _perRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public CustoFixoService(ICustoFixoRepository baseRepository, ILogRepository logRepository, ICategoriaCustoFixoRepository tipoRepository, IPeriodicidadeRepository perRepository) : base(baseRepository)
+        public CategoriaCustoFixoService(ICategoriaCustoFixoRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
-            _tipoRepository = tipoRepository;
-            _perRepository = perRepository;
+
         }
 
-        public CUSTO_FIXO CheckExist(CUSTO_FIXO conta, Int32 idAss)
+        public CATEGORIA_CUSTO_FIXO CheckExist(CATEGORIA_CUSTO_FIXO conta, Int32 idAss)
         {
-            CUSTO_FIXO item = _baseRepository.CheckExist(conta, idAss);
+            CATEGORIA_CUSTO_FIXO item = _baseRepository.CheckExist(conta, idAss);
             return item;
         }
 
-        public CUSTO_FIXO GetItemById(Int32 id)
+        public CATEGORIA_CUSTO_FIXO GetItemById(Int32 id)
         {
-            CUSTO_FIXO item = _baseRepository.GetItemById(id);
+            CATEGORIA_CUSTO_FIXO item = _baseRepository.GetItemById(id);
             return item;
         }
 
-        public List<CUSTO_FIXO> GetAllItens(Int32 idAss)
+        public List<CATEGORIA_CUSTO_FIXO> GetAllItens(Int32 idAss)
         {
             return _baseRepository.GetAllItens(idAss);
         }
 
-        public List<CUSTO_FIXO> GetAllItensAdm(Int32 idAss)
+        public List<CATEGORIA_CUSTO_FIXO> GetAllItensAdm(Int32 idAss)
         {
             return _baseRepository.GetAllItensAdm(idAss);
         }
 
-        public List<CATEGORIA_CUSTO_FIXO> GetAllTipos(Int32 idAss)
-        {
-            return _tipoRepository.GetAllItens(idAss);
-        }
-
-        public List<PERIODICIDADE_TAREFA> GetAllPeriodicidades(Int32 idAss)
-        {
-            return _perRepository.GetAllItens();
-        }
-
-        public List<CUSTO_FIXO> ExecuteFilter(Int32? catId, String nome, DateTime? dataInicio, DateTime? dataFinal, Int32 idAss)
-        {
-            return _baseRepository.ExecuteFilter(catId, nome, dataInicio, dataFinal, idAss);
-        }
-
-        public Int32 Create(CUSTO_FIXO item, LOG log)
+        public Int32 Create(CATEGORIA_CUSTO_FIXO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -88,7 +70,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Create(CUSTO_FIXO item)
+        public Int32 Create(CATEGORIA_CUSTO_FIXO item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -107,13 +89,13 @@ namespace ModelServices.EntitiesServices
         }
 
 
-        public Int32 Edit(CUSTO_FIXO item, LOG log)
+        public Int32 Edit(CATEGORIA_CUSTO_FIXO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    CUSTO_FIXO obj = _baseRepository.GetById(item.CUFX_CD_ID);
+                    CATEGORIA_CUSTO_FIXO obj = _baseRepository.GetById(item.CACF_CD_ID);
                     _baseRepository.Detach(obj);
                     _logRepository.Add(log);
                     _baseRepository.Update(item);
@@ -128,13 +110,13 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Edit(CUSTO_FIXO item)
+        public Int32 Edit(CATEGORIA_CUSTO_FIXO item)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    CUSTO_FIXO obj = _baseRepository.GetById(item.CUFX_CD_ID);
+                    CATEGORIA_CUSTO_FIXO obj = _baseRepository.GetById(item.CACF_CD_ID);
                     _baseRepository.Detach(obj);
                     _baseRepository.Update(item);
                     transaction.Commit();
@@ -148,7 +130,7 @@ namespace ModelServices.EntitiesServices
             }
         }
 
-        public Int32 Delete(CUSTO_FIXO item, LOG log)
+        public Int32 Delete(CATEGORIA_CUSTO_FIXO item, LOG log)
         {
             using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
             {
@@ -166,6 +148,5 @@ namespace ModelServices.EntitiesServices
                 }
             }
         }
-
     }
 }
