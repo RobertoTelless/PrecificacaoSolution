@@ -777,6 +777,13 @@
     <Content Include="Imagens\Assinante\19\Foto\icon_ambiente.png" />
     <Content Include="Imagens\Assinante\1\Foto\FotoOficial.jpg" />
     <Content Include="Imagens\Assinante\20\Foto\icon_morador.png" />
+    <Content Include="Imagens\Assinante\21\Foto\Kirchner.jpg" />
+    <Content Include="Imagens\Assinante\22\Anexos\Dash_Cliente.png" />
+    <Content Include="Imagens\Assinante\22\Foto\a5.jpg" />
+    <Content Include="Imagens\Assinante\24\Anexos\Dash_Cliente.png" />
+    <Content Include="Imagens\Assinante\24\Foto\a4.jpg" />
+    <Content Include="Imagens\Assinante\25\Anexos\dashboard4_2.jpg" />
+    <Content Include="Imagens\Assinante\25\Foto\a7.jpg" />
     <Content Include="Imagens\Assinante\3\Foto\a2.jpg" />
     <Content Include="Imagens\Assinante\4\Foto\a4.jpg" />
     <Content Include="Imagens\Assinante\5\Foto\a4.jpg" />
@@ -2203,6 +2210,7 @@
     <Content Include="Imagens\1\ContaPagar\5\Anexos\Produto_9_03112022.pdf" />
     <Content Include="Imagens\1\PedidoCompra\7\Anexos\ContaReceberLista_07112022.pdf" />
     <Content Include="Imagens\1\PedidoCompra\8\Anexos\Laudo_Exame_Joelho.pdf" />
+    <Content Include="Imagens\Assinante\21\Anexos\Silva Telles premio da ANE.docx" />
     <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\PrecificacaoWeb - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\WebPrecificacao - Web Deploy.pubxml" />
@@ -3489,6 +3497,8 @@
     <Folder Include="Imagens\21\Usuario\25\Fotos\" />
     <Folder Include="Imagens\24\Usuario\29\Anexos\" />
     <Folder Include="Imagens\24\Usuario\29\Fotos\" />
+    <Folder Include="Imagens\25\Usuario\30\Anexos\" />
+    <Folder Include="Imagens\25\Usuario\30\Fotos\" />
     <Folder Include="Imagens\9\Usuario\17\Anexos\" />
     <Folder Include="Imagens\9\Usuario\17\Fotos\" />
     <Folder Include="Imagens\Assinante\10\Anexos\" />
