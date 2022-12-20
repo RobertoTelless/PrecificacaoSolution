@@ -200,6 +200,7 @@ namespace ApplicationServices.Services
 
                 // Completa objeto
                 item.ASSI_IN_ATIVO = 1;
+                item.ASSI_DT_CADASTRO = DateTime.Today.Date;
 
                 // Monta Log
                 LOG log = new LOG

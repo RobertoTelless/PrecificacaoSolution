@@ -1508,6 +1508,8 @@ namespace ERP_Condominios_Solution.Controllers
                     texto = texto.Replace("{final}", item.ASPL_DT_VALIDADE.Value.ToShortDateString());
                     texto = texto.Replace("{periodo}", plan.PLANO_PERIODICIDADE.PLPE_NM_NOME);
                     texto = texto.Replace("{valor}", preco1.ToString());
+                    texto = texto.Replace("{user}", "ADM" + assi.ASSI_CD_ID.ToString());
+                    texto = texto.Replace("{senha}", "ADM123");
                     mens.MENS_TX_TEXTO = texto;
                     Int32 volta1 = ProcessaEnvioEMailAssinante(mens, usuarioLogado);
 
@@ -1592,10 +1594,10 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Prepara rodape
             String rod = String.Empty;
-            if (vm.MENS_NM_RODAPE == null)
-            {
-                rod = "<b> Administração Precificação </b>";
-            }
+            //if (vm.MENS_NM_RODAPE == null)
+            //{
+            //    rod = "<b> Administração Precificação </b>";
+            //}
 
             // Prepara corpo do e-mail
             String corpo = vm.MENS_TX_TEXTO + "<br /><br />";
@@ -1605,13 +1607,12 @@ namespace ERP_Condominios_Solution.Controllers
             // Link          
             if (!String.IsNullOrEmpty(vm.MENS_NM_LINK))
             {
-                if (!vm.MENS_NM_LINK.Contains("www."))
+                if (!vm.MENS_NM_LINK.Contains("http://") & !vm.MENS_NM_LINK.Contains("https://"))
                 {
-                    vm.MENS_NM_LINK = "www." + vm.MENS_NM_LINK;
-                }
-                if (!vm.MENS_NM_LINK.Contains("http://"))
-                {
-                    vm.MENS_NM_LINK = "http://" + vm.MENS_NM_LINK;
+                    if (!vm.MENS_NM_LINK.Contains("www."))
+                    {
+                        vm.MENS_NM_LINK = "www." + vm.MENS_NM_LINK;
+                    }
                 }
                 if (vm.LINK == "1")
                 {
@@ -4357,7 +4358,7 @@ namespace ERP_Condominios_Solution.Controllers
             a.CONF_IN_NOTIF_ACAO_VEN = 1;
             a.CONF_IN_NOTIF_ACAO_OPR = 0;
             a.CONF_IN_NOTIF_ACAO_USU = 0;
-            a.CONF_LK_LINK_SISTEMA = "https://crmsys.azurewebsites.net";
+            a.CONF_LK_LINK_SISTEMA = "https://webprecificacao.azurewebsites.net";
             a.CONF_EM_CRMSYS = "rti.principal@gmail.com";
             a.CONF_EM_CRMSYS1 = "jfmfilho@hotmail.com";
             Int32 volta = confApp.ValidateCreate(a);
@@ -4499,12 +4500,6 @@ namespace ERP_Condominios_Solution.Controllers
             n.USUA_NR_FALHAS = 0;
             n.USUA_AQ_FOTO = "~/Imagens/Base/icone_imagem.jpg";
             n.USUA_NR_CPF = item.ASSI_NR_CPF;
-            //n.USUA_IN_COMPRADOR = 0;
-            //n.USUA_IN_APROVADOR = 0;
-            //n.USUA_IN_ESPECIAL = 1;
-            //n.USUA_IN_CRM = 1;
-            //n.USUA_IN_ERP = 1;
-            //n.USUA_IN_TECNICO = 1;
             volta = usuApp.ValidateCreate(n, usuario);
             Int32 usuId = n.USUA_CD_ID;
 

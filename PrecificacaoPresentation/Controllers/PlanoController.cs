@@ -412,6 +412,7 @@ namespace ERP_Condominios_Solution.Controllers
                     // Sucesso
                     listaMasterPlano = new List<PLANO>();
                     Session["ListaPlano"] = null;
+                    Session["ListaPlanoAll"] = null;
 
                     // Volta
                     return RedirectToAction("MontarTelaPlano");
@@ -502,6 +503,7 @@ namespace ERP_Condominios_Solution.Controllers
                     // Sucesso
                     listaMasterPlano = new List<PLANO>();
                     Session["ListaPlano"] = null;
+                    Session["ListaPlanoAll"] = null;
                     if (Session["FiltroPlano"] != null)
                     {
                         FiltrarPlano((PLANO)Session["FiltroPlano"]);
@@ -558,6 +560,7 @@ namespace ERP_Condominios_Solution.Controllers
             listaMasterPlano = new List<PLANO>();
             Session["ListaPlano"] = null;
             Session["FiltroPlano"] = null;
+            Session["ListaPlanoAll"] = null;
             return RedirectToAction("MontarTelaPlano");
         }
 
@@ -593,6 +596,7 @@ namespace ERP_Condominios_Solution.Controllers
             Int32 volta = planApp.ValidateReativar(item, usuario);
             listaMasterPlano = new List<PLANO>();
             Session["ListaPlano"] = null;
+            Session["ListaPlanoAll"] = null;
             Session["FiltroPlano"] = null;
             return RedirectToAction("MontarTelaPlano");
         }

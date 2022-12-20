@@ -147,10 +147,6 @@ namespace ApplicationServices.Services
                 usuario.USUA_IN_ATIVO = 1;
                 usuario.CAUS_CD_ID = 1;
                 usuario.USUA_DT_ULTIMA_FALHA = DateTime.Now;
-                if (usuario.ASSI_CD_ID == null)
-                {
-                    usuario.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
-                }
 
                 // Monta Log
                 LOG log = new LOG

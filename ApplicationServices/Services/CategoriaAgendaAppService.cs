@@ -53,10 +53,6 @@ namespace ApplicationServices.Services
 
                 // Completa objeto
                 item.CAAG_IN_ATIVO = 1;
-                if (item.ASSI_CD_ID == null)
-                {
-                    item.ASSI_CD_ID = usuario.ASSI_CD_ID;
-                }
 
                 // Monta Log
                 LOG log = new LOG
