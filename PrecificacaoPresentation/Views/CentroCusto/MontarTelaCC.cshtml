@@ -82,11 +82,11 @@
                                 @Html.ButtonActionSubmit(text: "Filtrar")
                                 @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
                                 {
-                                    @Html.ButtonLinkIndex(text: "Nova Conta", controller: "CentroCusto", action: "IncluirCC", buttonClass: "primary")
+                                    @Html.ButtonLinkIndex(text: "Incluir Nova Conta", controller: "CentroCusto", action: "IncluirCC", buttonClass: "primary")
                                 }
                                 @Html.ButtonLinkIndex(text: "Retirar Filtro", controller: "CentroCusto", action: "RetirarFiltroCC")
                                 @Html.ButtonLinkIndex(text: "Exibir Todas", controller: "CentroCusto", action: "MostrarTudoCC")
-                                @Html.ButtonLinkIndex(text: "Gerar Relatório", controller: "CentroCusto", action: "GerarRelatorioLista")
+                                @Html.ButtonLinkIndex(text: "Gerar Listagem", controller: "CentroCusto", action: "GerarRelatorioLista")
                                 @Html.ButtonLinkIndex(text: "Voltar", controller: "BaseAdmin", action: "MontarTelaDashboardFinanceiro")
                             </div>
                         </div>

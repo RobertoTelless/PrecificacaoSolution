@@ -42,7 +42,7 @@
         <br />
     </div>
 
-    @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
+    @*@if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
     {
         <div class="row">
             <div class="col-lg-2">
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-    }    
+    }*@    
 
     <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
@@ -148,7 +148,7 @@
 	                                }
                                     @Html.ButtonLinkIndex(text: "Retirar Filtro", controller: "Fornecedor", action: "RetirarFiltroFornecedor")
                                     @Html.ButtonLinkIndex(text: "Exibir Todos", controller: "Fornecedor", action: "MostrarTudoFornecedor")
-                                    @Html.ButtonLinkIndex(text: "Exibir Cards dos Fornecedores", controller: "Fornecedor", action: "VerCardsFornecedor")
+                                    @Html.ButtonLinkIndex(text: "Exibir Formato Card", controller: "Fornecedor", action: "VerCardsFornecedor")
                                     @Html.ButtonLinkIndex(text: "Gerar Listagem", controller: "Fornecedor", action: "GerarRelatorioLista")
                                     @if (ViewBag.Perfil == "ADM" || ViewBag.Perfil == "GER")
                                     {

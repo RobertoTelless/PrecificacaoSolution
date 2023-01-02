@@ -49,6 +49,7 @@ namespace ERP_Condominios_Solution.Controllers
             confApp = confApps;
         }
 
+
         [HttpGet]
         public ActionResult Index()
         {

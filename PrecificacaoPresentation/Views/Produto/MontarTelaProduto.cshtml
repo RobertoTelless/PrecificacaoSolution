@@ -3,6 +3,26 @@
 @model EntitiesServices.Model.PRODUTO
 @{ Layout = "~/Views/Shared/_Layout_Admin.cshtml"; }
 <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="modalContainer">
+        <div id="modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @*Titulo gerado dinamicamente*@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @*Gerado dinamicamente*@
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="limpaModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="containerModalDesc">
         <div class="modal fade" id="modalDesc" tabindex="-1" role="dialog" aria-labelledby="modalDesc" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
