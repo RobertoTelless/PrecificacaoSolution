@@ -334,6 +334,7 @@ namespace Presentation.Start
             kernel.Bind<ICRMDiarioRepository>().To<CRMDiarioRepository>();
             kernel.Bind<ICustoFixoRepository>().To<CustoFixoRepository>();
             kernel.Bind<ICategoriaCustoFixoRepository>().To<CategoriaCustoFixoRepository>();
+            kernel.Bind<IEmpresaPlataformaRepository>().To<EmpresaPlataformaRepository>();
 
 
         }

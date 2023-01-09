@@ -77,6 +77,8 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<decimal> EMPR_VL_COMISSAO_VENDEDOR { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<decimal> EMPR_VL_COMISSAO_OUTROS { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> EMPR_VL_TAXA_MEDIA_DEBITO { get; set; }
 
         public virtual ASSINANTE ASSINANTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

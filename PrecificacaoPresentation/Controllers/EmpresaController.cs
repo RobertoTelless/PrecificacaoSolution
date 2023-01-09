@@ -152,7 +152,9 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
             ViewBag.Regimes = new SelectList(baseApp.GetAllRegimes(), "RETR_CD_ID", "RETR_NM_NOME");
+            ViewBag.UF = new SelectList(fornApp.GetAllUF(), "UF_CD_ID", "UF_NM_NOME");
             ViewBag.Maquinas = new SelectList(baseApp.GetAllMaquinas(idAss), "MAQN_CD_ID", "MAQN_NM_NOME");
             List<SelectListItem> opera = new List<SelectListItem>();
             opera.Add(new SelectListItem() { Text = "Sim", Value = "1" });
@@ -162,6 +164,7 @@ namespace ERP_Condominios_Solution.Controllers
             comissao.Add(new SelectListItem() { Text = "Sim", Value = "1" });
             comissao.Add(new SelectListItem() { Text = "Não", Value = "2" });
             ViewBag.Comissao = new SelectList(comissao, "Value", "Text");
+            ViewBag.Perfil = usuario.PERFIL.PERF_SG_SIGLA;
             if (ModelState.IsValid)
             {
                 try
@@ -170,6 +173,7 @@ namespace ERP_Condominios_Solution.Controllers
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
                     EMPRESA item = Mapper.Map<EmpresaViewModel, EMPRESA>(vm);
                     Int32 volta = baseApp.ValidateEdit(item, objetoAntes, usuarioLogado);
+
 
                     // Verifica retorno
                     if (volta == 1)
@@ -182,7 +186,6 @@ namespace ERP_Condominios_Solution.Controllers
                         Session["MensEmpresa"] = 11;
                         return RedirectToAction("MontarTelaEmpresa", "Empresa");
                     }
-
                     // Sucesso
                     listaMaster = new List<EMPRESA>();
                     Session["Empresa"] = null;
@@ -472,7 +475,7 @@ namespace ERP_Condominios_Solution.Controllers
             }
 
             // Prepara view
-            ViewBag.Plataformas = new SelectList(platApp.GetAllItens(idAss).OrderBy(p => p.PLEN_NM_NOME), "PLEN_CD_ID", "PLEN_NM_EXIBE");
+            ViewBag.Plataformas = new SelectList(platApp.GetAllItens(idAss).OrderBy(p => p.PLEN_NM_NOME), "PLEN_CD_ID", "PLEN_NM_NOME");
             EMPRESA_PLATAFORMA item = new EMPRESA_PLATAFORMA();
             EmpresaPlataformaViewModel vm = Mapper.Map<EMPRESA_PLATAFORMA, EmpresaPlataformaViewModel>(item);
             vm.EMPR_CD_ID = (Int32)Session["IdEmpresa"];

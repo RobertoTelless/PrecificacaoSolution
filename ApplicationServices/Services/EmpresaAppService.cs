@@ -161,6 +161,25 @@ namespace ApplicationServices.Services
                     return 2;
                 }
 
+                // Calcula taxa média credito
+                EMPRESA emp = _baseService.GetItemById(usuario.ASSI_CD_ID);
+                List<EMPRESA_MAQUINA> maq = emp.EMPRESA_MAQUINA.ToList();
+                Decimal somaC = 0;
+                Decimal somaD = 0;
+                Decimal taxaC = 0;
+                Decimal taxaD = 0;
+                Int32 quant = 0;
+                foreach (EMPRESA_MAQUINA em in maq)
+                {
+                    somaC += em.MAQUINA.MAQN_PC_CREDITO;
+                    somaD += em.MAQUINA.MAQN_PC_DEBITO;
+                    quant++;
+                }
+                taxaC = somaC / quant;
+                taxaD = somaD / quant;
+                item.EMPR_VL_TAXA_MEDIA = taxaC;
+                item.EMPR_VL_TAXA_MEDIA_DEBITO = taxaD;
+
                 // Monta Log                
                 LOG log = new LOG
                 {

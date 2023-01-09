@@ -144,9 +144,14 @@
                                                             @Html.ValidationMessageFor(m => m.EMPR_IN_OPERA_CARTAO, "", new { @style = "color:red" })
                                                         </div>
                                                         <div class="col-lg-2 col-md-2 col-xs-12">
-                                                            Taxa Média (%)
-                                                            @Html.TextBoxFor(m => m.EMPR_VL_TAXA_MEDIA, new { @class = "form-control", autofocus = true })
+                                                            Taxa Crédito Média (%)
+                                                            @Html.TextBoxFor(m => m.EMPR_VL_TAXA_MEDIA, new { @class = "form-control", autofocus = true, @id = "taxa", @readonly = "readonly", @style="background-color:beige; color: green; font-weight: bold" })
                                                             @Html.ValidationMessageFor(m => m.EMPR_VL_TAXA_MEDIA, "", new { @style = "color:red" })
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Taxa Débito Média (%)
+                                                            @Html.TextBoxFor(m => m.EMPR_VL_TAXA_MEDIA_DEBITO, new { @class = "form-control", autofocus = true, @id = "taxaD", @readonly = "readonly", @style="background-color:beige; color: green; font-weight: bold" })
+                                                            @Html.ValidationMessageFor(m => m.EMPR_VL_TAXA_MEDIA_DEBITO, "", new { @style = "color:red" })
                                                         </div>
                                                         <div class="col-lg-2 col-md-2 col-xs-12">
                                                             Paga Comissão?*
@@ -595,8 +600,12 @@
         function ValidaDiv(valOpera) {
             if (valOpera == '1') {
                 $("#maquina").show();
+                $("#taxa").show();
+                $("#taxaD").show();
             } else if (valOpera == '2') { //Se o tempo for mé igual a 2 mostra a divCpf
                 $("#maquina").hide();
+                $("#taxa").hide();
+                $("#taxaD").hide();
             } 
         }
 
