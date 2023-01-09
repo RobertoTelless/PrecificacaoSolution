@@ -208,6 +208,11 @@ namespace ModelServices.EntitiesServices
             return _emaqRepository.GetByEmpresaMaquina(empresa, maquina);
         }
 
+        public EMPRESA_PLATAFORMA GetByEmpresaPlataforma(Int32 empresa, Int32 plataforma)
+        {
+            return _eplaRepository.GetByEmpresaPlataforma(empresa, plataforma);
+        }
+
         public EMPRESA_MAQUINA GetMaquinaById(Int32 id)
         {
             return _emaqRepository.GetItemById(id);
