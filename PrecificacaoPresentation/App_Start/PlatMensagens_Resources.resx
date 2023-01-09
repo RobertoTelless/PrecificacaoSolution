@@ -765,4 +765,7 @@
   <data name="M0237" xml:space="preserve">
     <value>Impossível excluir esta categoria. Existem registros vinculados a ela</value>
   </data>
+  <data name="M0238" xml:space="preserve">
+    <value>Plataforma de entrega já associada à empresa</value>
+  </data>
 </root>

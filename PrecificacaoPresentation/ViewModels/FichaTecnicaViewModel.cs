@@ -38,6 +38,14 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<decimal> FITE_PC_PERCENTUAL_PERDA { get; set; }
         public Nullable<System.DateTime> FITE_DT_CADASTRO { get; set; }
         public Nullable<int> FITE_IN_ATIVO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> FITE_VL_CUSTO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> FITE_VL_CVM_RECEITA { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> FITE_VL_CVM_UNITARIO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> FITE_VL_CVM_PESO { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FICHA_TECNICA> FICHA_TECNICA1 { get; set; }

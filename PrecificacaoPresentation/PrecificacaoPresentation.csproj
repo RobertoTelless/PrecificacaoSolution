@@ -318,6 +318,8 @@
     <Compile Include="ViewModels\CRMPedidoComentarioViewModel.cs" />
     <Compile Include="ViewModels\CRMPedidoViewModel.cs" />
     <Compile Include="ViewModels\CRMViewModel.cs" />
+    <Compile Include="ViewModels\EmpresaPlataformaViewModel.cs" />
+    <Compile Include="ViewModels\EmpresaOutrosCustosViewModel.cs" />
     <Compile Include="ViewModels\FichaTecnicaDetalheViewModel.cs" />
     <Compile Include="ViewModels\FichaTecnicaViewModel.cs" />
     <Compile Include="ViewModels\FornecedorComentarioViewModel.cs" />
@@ -3363,6 +3365,7 @@
     <Content Include="Views\TabelaAuxiliar\MontarTelaCatCusto.cshtml" />
     <Content Include="Views\TabelaAuxiliar\IncluirCatCusto.cshtml" />
     <Content Include="Views\TabelaAuxiliar\EditarCatCusto.cshtml" />
+    <Content Include="Views\Empresa\IncluirEmpresaPlataforma.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

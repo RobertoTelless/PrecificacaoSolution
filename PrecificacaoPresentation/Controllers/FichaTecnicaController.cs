@@ -417,10 +417,21 @@ namespace ERP_Condominios_Solution.Controllers
                             FITE_CD_ID = item.FITE_CD_ID,
                             PROD_CD_ID = i.PROD_CD_ID,
                             FITD_QN_QUANTIDADE = i.FITD_QN_QUANTIDADE,
+                            FITD_PC_PERDA = i.PRODUTO.PROD_VL_FATOR_CORRECAO,
+                            FITD_QN_QUANTIDADE_BRUTA = (i.FITD_QN_QUANTIDADE * ((i.FITD_PC_PERDA / 100) + 1)),
+                            FITD_VL_CUSTO_UNITARIO = CalculoCustoUnitario(i.PROD_CD_ID, (i.FITD_QN_QUANTIDADE.Value * ((i.PRODUTO.PROD_VL_FATOR_CORRECAO.Value / 100) + 1))),
                             FITD_IN_ATIVO = 1
                         };
                         IncluirTabelaInsumoFT(ftd);
                     }
+
+                    // Calcula CMVs
+                    FICHA_TECNICA fite = ftApp.GetItemById(item.FITE_CD_ID);
+                    List<FICHA_TECNICA_DETALHE> fitd = fite.FICHA_TECNICA_DETALHE.ToList();
+                    Decimal cmvReceita = fitd.Sum(p => p.FITD_VL_CUSTO_UNITARIO.Value);
+                    Decimal cmvUnitario = cmvReceita / fite.FITE_NR_PORCOES.Value;
+                    Decimal cmvPeso = cmvReceita / fite.FITE_NR_PESO.Value;
+                    Int32 volta1 = ftApp.ValidateEdit(fite, fite, usuarioLogado);
                     Session["ListaFtd"] = null;
 
                     // Sucesso
@@ -452,6 +463,27 @@ namespace ERP_Condominios_Solution.Controllers
             }
         }
 
+        public Decimal CalculoCustoUnitario(Int32 idProd, Decimal idFite)
+        {
+            PRODUTO prod = prodApp.GetItemById(idProd);
+            Decimal valor = 0;
+            if (prod.PROD_VL_ULTIMO_CUSTO != null & idFite != null)
+            {
+                if (prod.PROD_VL_ULTIMO_CUSTO != 0 & idFite != 0)
+                {
+                    valor = prod.PROD_VL_ULTIMO_CUSTO.Value / idFite;
+                }
+                else
+                {
+                    valor = 0;
+                }
+                return valor;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         [HttpGet]
         public ActionResult EditarInsumoFT(Int32 id)
@@ -487,6 +519,14 @@ namespace ERP_Condominios_Solution.Controllers
                     FICHA_TECNICA_DETALHE item = Mapper.Map<FichaTecnicaDetalheViewModel, FICHA_TECNICA_DETALHE>(vm);
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
                     Int32 volta = ftApp.ValidateEditInsumo(item);
+
+                    // Calcula CMVs
+                    FICHA_TECNICA fite = ftApp.GetItemById(item.FITE_CD_ID);
+                    List<FICHA_TECNICA_DETALHE> fitd = fite.FICHA_TECNICA_DETALHE.ToList();
+                    Decimal cmvReceita = fitd.Sum(p => p.FITD_VL_CUSTO_UNITARIO.Value);
+                    Decimal cmvUnitario = cmvReceita / fite.FITE_NR_PORCOES.Value;
+                    Decimal cmvPeso = cmvReceita / fite.FITE_NR_PESO.Value;
+                    Int32 volta1 = ftApp.ValidateEdit(fite, fite, usuarioLogado);
 
                     // Verifica retorno
                     return RedirectToAction("VoltarAnexoFT");
@@ -560,6 +600,14 @@ namespace ERP_Condominios_Solution.Controllers
                     Int32 volta = ftApp.ValidateEdit(item, objetoFtAntes, usuarioLogado);
 
                     // Verifica retorno
+
+                    // Calcula CMVs
+                    FICHA_TECNICA fite = ftApp.GetItemById(item.FITE_CD_ID);
+                    List<FICHA_TECNICA_DETALHE> fitd = fite.FICHA_TECNICA_DETALHE.ToList();
+                    Decimal cmvReceita = fitd.Sum(p => p.FITD_VL_CUSTO_UNITARIO.Value);
+                    Decimal cmvUnitario = cmvReceita / fite.FITE_NR_PORCOES.Value;
+                    Decimal cmvPeso = cmvReceita / fite.FITE_NR_PESO.Value;
+                    Int32 volta1 = ftApp.ValidateEdit(fite, fite, usuarioLogado);
 
                     // Sucesso
                     listaMasterFt = new List<FICHA_TECNICA>();
@@ -677,6 +725,14 @@ namespace ERP_Condominios_Solution.Controllers
 
             // Verifica retorno
 
+            // Calcula CMVs
+            FICHA_TECNICA fite = ftApp.GetItemById(item.FITE_CD_ID);
+            List<FICHA_TECNICA_DETALHE> fitd = fite.FICHA_TECNICA_DETALHE.ToList();
+            Decimal cmvReceita = fitd.Sum(p => p.FITD_VL_CUSTO_UNITARIO.Value);
+            Decimal cmvUnitario = cmvReceita / fite.FITE_NR_PORCOES.Value;
+            Decimal cmvPeso = cmvReceita / fite.FITE_NR_PESO.Value;
+            Int32 volta1 = ftApp.ValidateEdit(fite, fite, usuario);
+
             // Sucesso
             listaMasterFt = new List<FICHA_TECNICA>();
             Session["ListaFT"] = null;
@@ -712,6 +768,14 @@ namespace ERP_Condominios_Solution.Controllers
             // Prepara view
             FICHA_TECNICA item = ftApp.GetItemById(id);
             Int32 volta = ftApp.ValidateReativar(item, usuario);
+
+            // Calcula CMVs
+            FICHA_TECNICA fite = ftApp.GetItemById(item.FITE_CD_ID);
+            List<FICHA_TECNICA_DETALHE> fitd = fite.FICHA_TECNICA_DETALHE.ToList();
+            Decimal cmvReceita = fitd.Sum(p => p.FITD_VL_CUSTO_UNITARIO.Value);
+            Decimal cmvUnitario = cmvReceita / fite.FITE_NR_PORCOES.Value;
+            Decimal cmvPeso = cmvReceita / fite.FITE_NR_PESO.Value;
+            Int32 volta1 = ftApp.ValidateEdit(fite, fite, usuario);
 
             // Sucesso
             listaMasterFt = new List<FICHA_TECNICA>();
@@ -756,7 +820,15 @@ namespace ERP_Condominios_Solution.Controllers
                     FICHA_TECNICA_DETALHE item = Mapper.Map<FichaTecnicaDetalheViewModel, FICHA_TECNICA_DETALHE>(vm);
                     USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
                     Int32 volta = ftApp.ValidateCreateInsumo(item);
-                    
+
+                    // Calcula CMVs
+                    FICHA_TECNICA fite = ftApp.GetItemById(item.FITE_CD_ID);
+                    List<FICHA_TECNICA_DETALHE> fitd = fite.FICHA_TECNICA_DETALHE.ToList();
+                    Decimal cmvReceita = fitd.Sum(p => p.FITD_VL_CUSTO_UNITARIO.Value);
+                    Decimal cmvUnitario = cmvReceita / fite.FITE_NR_PORCOES.Value;
+                    Decimal cmvPeso = cmvReceita / fite.FITE_NR_PESO.Value;
+                    Int32 volta1 = ftApp.ValidateEdit(fite, fite, usuarioLogado);
+
                     // Verifica retorno
                     return RedirectToAction("VoltarAnexoFT");
                 }
@@ -796,11 +868,21 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
 
             FICHA_TECNICA_DETALHE item = ftApp.GetDetalheById(id);
             objetoFtAntes = (FICHA_TECNICA)Session["FichaTecnica"];
             item.FITD_IN_ATIVO = 0;
             Int32 volta = ftApp.ValidateEditInsumo(item);
+
+            // Calcula CMVs
+            FICHA_TECNICA fite = ftApp.GetItemById(item.FITE_CD_ID);
+            List<FICHA_TECNICA_DETALHE> fitd = fite.FICHA_TECNICA_DETALHE.ToList();
+            Decimal cmvReceita = fitd.Sum(p => p.FITD_VL_CUSTO_UNITARIO.Value);
+            Decimal cmvUnitario = cmvReceita / fite.FITE_NR_PORCOES.Value;
+            Decimal cmvPeso = cmvReceita / fite.FITE_NR_PESO.Value;
+            Int32 volta1 = ftApp.ValidateEdit(fite, fite, usuarioLogado);
+
             return RedirectToAction("VoltarAnexoFT");
         }
 
@@ -812,11 +894,21 @@ namespace ERP_Condominios_Solution.Controllers
                 return RedirectToAction("Login", "ControleAcesso");
             }
             Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
 
             FICHA_TECNICA_DETALHE item = ftApp.GetDetalheById(id);
             objetoFtAntes = (FICHA_TECNICA)Session["FichaTecnica"];
             item.FITD_IN_ATIVO = 1;
             Int32 volta = ftApp.ValidateEditInsumo(item);
+
+            // Calcula CMVs
+            FICHA_TECNICA fite = ftApp.GetItemById(item.FITE_CD_ID);
+            List<FICHA_TECNICA_DETALHE> fitd = fite.FICHA_TECNICA_DETALHE.ToList();
+            Decimal cmvReceita = fitd.Sum(p => p.FITD_VL_CUSTO_UNITARIO.Value);
+            Decimal cmvUnitario = cmvReceita / fite.FITE_NR_PORCOES.Value;
+            Decimal cmvPeso = cmvReceita / fite.FITE_NR_PESO.Value;
+            Int32 volta1 = ftApp.ValidateEdit(fite, fite, usuarioLogado);
+
             return RedirectToAction("VoltarAnexoFT");
         }
 

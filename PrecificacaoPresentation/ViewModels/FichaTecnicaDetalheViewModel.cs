@@ -20,6 +20,10 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<decimal> FITD_QN_QUANTIDADE { get; set; }
         public Nullable<int> FITD_IN_ATIVO { get; set; }
         public Nullable<decimal> FITD_PC_PERDA { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> FITD_VL_CUSTO_UNITARIO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> FITD_QN_QUANTIDADE_BRUTA { get; set; }
 
         public virtual FICHA_TECNICA FICHA_TECNICA { get; set; }
         public virtual PRODUTO PRODUTO { get; set; }

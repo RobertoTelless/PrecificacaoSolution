@@ -500,5 +500,26 @@ namespace ERP_Condominios_Solution.Controllers
             return RedirectToAction("EditarPlataformaEntrega", new { id = (Int32)Session["IdPlataformaEntrega"] });
         }
 
+        public ActionResult IncluirPlataformaForm()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Session["VoltaPlataforma"] = 10;
+            return RedirectToAction("IncluirPlataformaEntrega");
+        }
+
+        public JsonResult GetPlataforma(Int32 id)
+        {
+            var forn = servApp.GetItemById(id);
+            var hash = new Hashtable();
+            hash.Add("plataforma", forn.PLEN_NM_NOME);
+            hash.Add("valorFixo", forn.PLEN_VL_FIXO);
+            hash.Add("venda", forn.PLEN_PC_VENDA);
+            hash.Add("antecipacao", forn.PLEN_PC_ANTECIPACAO);
+            return Json(hash);
+        }
+
     }
 }

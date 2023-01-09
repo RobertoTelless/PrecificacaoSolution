@@ -68,6 +68,12 @@ namespace ApplicationServices.Services
             return lista;
         }
 
+        public EMPRESA_PLATAFORMA GetPlataformaById(Int32 id)
+        {
+            EMPRESA_PLATAFORMA lista = _baseService.GetPlataformaById(id);
+            return lista;
+        }
+
         public REGIME_TRIBUTARIO GetRegimeById(Int32 id)
         {
             REGIME_TRIBUTARIO lista = _baseService.GetRegimeById(id);
@@ -292,6 +298,45 @@ namespace ApplicationServices.Services
         public EMPRESA_MAQUINA GetByEmpresaMaquina(Int32 empresa, Int32 maquina)
         {
             return _baseService.GetByEmpresaMaquina(empresa, maquina);
+        }
+
+        public Int32 ValidateEditPlataforma(EMPRESA_PLATAFORMA item)
+        {
+            try
+            {
+                // Persiste
+                return _baseService.EditPlataforma(item);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public Int32 ValidateCreatePlataforma(EMPRESA_PLATAFORMA item, Int32 idAss)
+        {
+            try
+            {
+                // Verifica existencia
+                EMPRESA_PLATAFORMA volta1 = _baseService.CheckExistPlataforma(item, idAss);
+                if (volta1 != null)
+                {
+                    return 1;
+                }
+
+                // Persiste
+                Int32 volta = _baseService.CreatePlataforma(item);
+                return volta;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public EMPRESA_PLATAFORMA GetByEmpresaPlataforma(Int32 empresa, Int32 plataforma)
+        {
+            return _baseService.GetByEmpresaPlataforma(empresa, plataforma);
         }
 
     }

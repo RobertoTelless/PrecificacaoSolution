@@ -29,6 +29,7 @@ namespace ERP_Condominios_Solution.Controllers
     {
         private readonly IEmpresaAppService baseApp;
         private readonly IFornecedorAppService fornApp;
+        private readonly IPlataformaEntregaAppService platApp;
         private String msg;
         private Exception exception;
         EMPRESA objeto = new EMPRESA();
@@ -36,10 +37,11 @@ namespace ERP_Condominios_Solution.Controllers
         List<EMPRESA> listaMaster = new List<EMPRESA>();
         String extensao;
 
-        public EmpresaController(IEmpresaAppService baseApps, IFornecedorAppService fornApps)
+        public EmpresaController(IEmpresaAppService baseApps, IFornecedorAppService fornApps, IPlataformaEntregaAppService platApps)
         {
             baseApp = baseApps;
             fornApp = fornApps;
+            platApp = platApps;
         }
 
         [HttpGet]
@@ -352,6 +354,36 @@ namespace ERP_Condominios_Solution.Controllers
         }
 
         [HttpGet]
+        public ActionResult ExcluirEmpresaPlataforma(Int32 id)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            EMPRESA_PLATAFORMA item = baseApp.GetPlataformaById(id);
+            item.EMPL_IN_ATIVO = 0;
+            Int32 volta = baseApp.ValidateEditPlataforma(item);
+            return RedirectToAction("VoltarAnexoEmpresa");
+        }
+
+        [HttpGet]
+        public ActionResult ReativarEmpresaPlataforma(Int32 id)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+            EMPRESA_PLATAFORMA item = baseApp.GetPlataformaById(id);
+            item.EMPL_IN_ATIVO = 1;
+            Int32 volta = baseApp.ValidateEditPlataforma(item);
+            return RedirectToAction("VoltarAnexoEmpresa");
+        }
+
+        [HttpGet]
         public ActionResult IncluirEmpresaMaquina()
         {
             if ((String)Session["Ativa"] == null)
@@ -366,7 +398,7 @@ namespace ERP_Condominios_Solution.Controllers
             {
                 if ((Int32)Session["MensEmpresa"] == 20)
                 {
-                    ModelState.AddModelError("", ERP_Condominio_Resource.ResourceManager.GetString("M0180", CultureInfo.CurrentCulture));
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0180", CultureInfo.CurrentCulture));
                 }
             }
 
@@ -403,6 +435,75 @@ namespace ERP_Condominios_Solution.Controllers
                     {
                         Session["MensEmpresa"] = 20;
                         return RedirectToAction("IncluirEmpresaMaquina", "Empresa");
+                    }
+
+                    // Retorna
+                    return RedirectToAction("VoltarAnexoEmpresa");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult IncluirEmpresaPlataforma()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            USUARIO usuario = (USUARIO)Session["UserCredentials"];
+
+            // Mensagens
+            if (Session["MensEmpresa"] != null)
+            {
+                if ((Int32)Session["MensEmpresa"] == 30)
+                {
+                    ModelState.AddModelError("", PlatMensagens_Resources.ResourceManager.GetString("M0238", CultureInfo.CurrentCulture));
+                }
+            }
+
+            // Prepara view
+            ViewBag.Plataformas = new SelectList(platApp.GetAllItens(idAss).OrderBy(p => p.PLEN_NM_NOME), "PLEN_CD_ID", "PLEN_NM_EXIBE");
+            EMPRESA_PLATAFORMA item = new EMPRESA_PLATAFORMA();
+            EmpresaPlataformaViewModel vm = Mapper.Map<EMPRESA_PLATAFORMA, EmpresaPlataformaViewModel>(item);
+            vm.EMPR_CD_ID = (Int32)Session["IdEmpresa"];
+            vm.EMPL_IN_ATIVO = 1;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IncluirEmpresaPlataforma(EmpresaPlataformaViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idAss = (Int32)Session["IdAssinante"];
+            ViewBag.Plataformas = new SelectList(platApp.GetAllItens(idAss).OrderBy(p => p.PLEN_NM_NOME), "PLEN_CD_ID", "PLEN_NM_EXIBE");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    EMPRESA_PLATAFORMA item = Mapper.Map<EmpresaPlataformaViewModel, EMPRESA_PLATAFORMA>(vm);
+                    USUARIO usuarioLogado = (USUARIO)Session["UserCredentials"];
+                    Int32 volta = baseApp.ValidateCreatePlataforma(item, idAss);
+
+                    // Verifica retorno
+                    if (volta == 1)
+                    {
+                        Session["MensEmpresa"] = 30;
+                        return RedirectToAction("IncluirEmpresaPlataforma", "Empresa");
                     }
 
                     // Retorna

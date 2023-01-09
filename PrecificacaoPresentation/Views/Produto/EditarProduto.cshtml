@@ -399,12 +399,20 @@
                                                         @Html.TextBoxFor(m => m.PROD_QN_RESERVA_ESTOQUE, new { @class = "form-control", autofocus = true })
                                                         @Html.ValidationMessageFor(m => m.PROD_QN_RESERVA_ESTOQUE, "", new { @style = "color:red" })
                                                     </div>
-                                                    <div class="col-lg-3 col-md-3 col-xs-12">
-                                                        Aviso de Limite Mínimo
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Aviso de Limite
                                                         <br />
                                                         @Html.CheckBoxFor(m => m.AvisaMinima, new { @class = "checkbox i-checks" })
                                                         @Html.ValidationMessageFor(m => m.AvisaMinima, "", new { @style = "color:red" })
                                                     </div>
+                                                    @if (Model.PROD_IN_TIPO_PRODUTO == 2)
+                                                    {
+                                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                                            Fator de Correção (%)
+                                                            @Html.TextBoxFor(m => m.PROD_VL_FATOR_CORRECAO, new { @class = "form-control", autofocus = true })
+                                                            @Html.ValidationMessageFor(m => m.PROD_VL_FATOR_CORRECAO, "", new { @style = "color:red" })
+                                                        </div>                                                         
+                                                    }
                                                 </div>
                                                 @if (Model.PROD_IN_TIPO_PRODUTO == 1)
                                                 {
@@ -629,7 +637,9 @@
                                                                         <th>Componente</th>
                                                                         <th>Unidade</th>
                                                                         <th>Quantidade</th>
+                                                                        <th>Quantidade Bruta</th>
                                                                         <th>Perda (%)</th>
+                                                                        <th>Custo Unitário (R$)</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
@@ -640,7 +650,9 @@
                                                                             <td>@cond.PRODUTO.PROD_NM_NOME</td>
                                                                             <td>@cond.PRODUTO.UNIDADE.UNID_NM_NOME</td>
                                                                             <td>@cond.FITD_QN_QUANTIDADE</td>
+                                                                            <td>@cond.FITD_QN_QUANTIDADE_BRUTA</td>
                                                                             <td>@cond.FITD_PC_PERDA</td>
+                                                                            <td>@cond.PRODUTO.PROD_VL_ULTIMO_CUSTO</td>
                                                                             @if (!String.IsNullOrEmpty(cond.PRODUTO.PROD_AQ_FOTO))
                                                                             {
                                                                                 <td><img src="@Url.Content(cond.PRODUTO.PROD_AQ_FOTO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;"></td>

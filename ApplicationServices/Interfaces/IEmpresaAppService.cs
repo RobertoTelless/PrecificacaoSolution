@@ -28,9 +28,13 @@ namespace ApplicationServices.Interfaces
         UF GetUFbySigla(String sigla);
 
         EMPRESA_MAQUINA GetMaquinaById(Int32 id);
+        EMPRESA_PLATAFORMA GetPlataformaById(Int32 id);
         REGIME_TRIBUTARIO GetRegimeById(Int32 id);
         Int32 ValidateEditMaquina(EMPRESA_MAQUINA item);
         Int32 ValidateCreateMaquina(EMPRESA_MAQUINA item, Int32 idAss);
+        Int32 ValidateEditPlataforma(EMPRESA_PLATAFORMA item);
+        Int32 ValidateCreatePlataforma(EMPRESA_PLATAFORMA item, Int32 idAss);
         EMPRESA_MAQUINA GetByEmpresaMaquina(Int32 empresa, Int32 maquina);
+        EMPRESA_PLATAFORMA GetByEmpresaPlataforma(Int32 empresa, Int32 plataforma);
     }
 }

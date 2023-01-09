@@ -34,5 +34,10 @@ namespace ModelServices.Interfaces.EntitiesServices
         Int32 EditMaquina(EMPRESA_MAQUINA item);
         Int32 CreateMaquina(EMPRESA_MAQUINA item);
         EMPRESA_MAQUINA GetByEmpresaMaquina(Int32 empresa, Int32 maquina);
+        EMPRESA_PLATAFORMA CheckExistPlataforma(EMPRESA_PLATAFORMA item, Int32 idAss);
+        EMPRESA_PLATAFORMA GetPlataformaById(Int32 id);
+        Int32 EditPlataforma(EMPRESA_PLATAFORMA item);
+        Int32 CreatePlataforma(EMPRESA_PLATAFORMA item);
+        EMPRESA_PLATAFORMA GetByEmpresaPlataforma(Int32 empresa, Int32 plataforma);
     }
 }

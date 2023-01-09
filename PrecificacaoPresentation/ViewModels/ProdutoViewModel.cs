@@ -118,6 +118,8 @@ namespace ERP_Condominios_Solution.ViewModels
         public Nullable<decimal> PROD_QN_ESTOQUE_INSUMO { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public Nullable<decimal> PROD_QN_QUANTIDADE_ALTERADA_INSUMO { get; set; }
+        [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
+        public Nullable<decimal> PROD_VL_FATOR_CORRECAO { get; set; }
 
         public Nullable<int> EntradaSaida { get; set; }
 

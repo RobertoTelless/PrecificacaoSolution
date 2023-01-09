@@ -97,6 +97,8 @@ namespace MvcMapping.Mappers
             CreateMap<PlanoViewModel, PLANO>();
             CreateMap<CustoFixoViewModel, CUSTO_FIXO>();
             CreateMap<CategoriaCustoFixoViewModel, CATEGORIA_CUSTO_FIXO>();
+            CreateMap<EmpresaOutorsCustosViewModel, EMPRESA_CUSTO_VARIAVEL>();
+            CreateMap<EmpresaPlataformaViewModel, EMPRESA_PLATAFORMA>();
 
         }
     }

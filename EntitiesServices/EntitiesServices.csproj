@@ -306,6 +306,7 @@
     <Compile Include="Interfaces\Repositories\ICRMPedidoComentarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICRMPedidoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICRMRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IEmpresaPlataformaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEmpresaMaquinaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEmpresaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAgendaAnexoRepository.cs" />
@@ -629,7 +630,13 @@
     <Compile Include="Model\EMPRESA_ANEXO.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\EMPRESA_CUSTO_VARIAVEL.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\EMPRESA_MAQUINA.cs">
+      <DependentUpon>Precificacao_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EMPRESA_PLATAFORMA.cs">
       <DependentUpon>Precificacao_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\FICHA_TECNICA.cs">

@@ -227,6 +227,7 @@
     <Compile Include="Repositories\CRMPedidoComentarioRepository.cs" />
     <Compile Include="Repositories\CRMPedidoRepository.cs" />
     <Compile Include="Repositories\CRMRepository.cs" />
+    <Compile Include="Repositories\EmpresaPlataformaRepository.cs" />
     <Compile Include="Repositories\EmpresaMaquinaRepository.cs" />
     <Compile Include="Repositories\FichaTecnicaDetalheRepository.cs" />
     <Compile Include="Repositories\FichaTecnicaRepository.cs" />

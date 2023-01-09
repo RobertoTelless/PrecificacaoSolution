@@ -2003,5 +2003,14 @@ namespace PrecificacaoPresentation.App_Start {
                 return ResourceManager.GetString("M0237", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Plataforma de entrega já associada à empresa.
+        /// </summary>
+        internal static string M0238 {
+            get {
+                return ResourceManager.GetString("M0238", resourceCulture);
+            }
+        }
     }
 }

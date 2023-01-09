@@ -99,6 +99,8 @@ namespace MvcMapping.Mappers
             CreateMap<ASSINANTE, AssinanteViewModel>();
             CreateMap<CUSTO_FIXO, CustoFixoViewModel>();
             CreateMap<CATEGORIA_CUSTO_FIXO, CategoriaCustoFixoViewModel>();
+            CreateMap<EMPRESA_CUSTO_VARIAVEL, EmpresaOutorsCustosViewModel>();
+            CreateMap<EMPRESA_PLATAFORMA, EmpresaPlataformaViewModel>();
 
 
         }

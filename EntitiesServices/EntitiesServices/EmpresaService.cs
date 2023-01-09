@@ -25,9 +25,10 @@ namespace ModelServices.EntitiesServices
         private readonly IEmpresaAnexoRepository _anexoRepository;
         private readonly IEmpresaMaquinaRepository _emaqRepository;
         private readonly IUFRepository _ufRepository;
+        private readonly IEmpresaPlataformaRepository _eplaRepository;
         protected Db_PrecificacaoEntities Db = new Db_PrecificacaoEntities();
 
-        public EmpresaService(IEmpresaRepository baseRepository, ILogRepository logRepository, IMaquinaRepository maqRepository, IRegimeTributarioRepository regRepository, IEmpresaAnexoRepository anexoRepository, IEmpresaMaquinaRepository emaqRepository, IUFRepository ufRepository) : base(baseRepository)
+        public EmpresaService(IEmpresaRepository baseRepository, ILogRepository logRepository, IMaquinaRepository maqRepository, IRegimeTributarioRepository regRepository, IEmpresaAnexoRepository anexoRepository, IEmpresaMaquinaRepository emaqRepository, IUFRepository ufRepository, IEmpresaPlataformaRepository eplaRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
             _logRepository = logRepository;
@@ -36,6 +37,7 @@ namespace ModelServices.EntitiesServices
             _anexoRepository = anexoRepository;
             _emaqRepository = emaqRepository;
             _ufRepository = ufRepository;
+            _eplaRepository = eplaRepository;
         }
 
         public EMPRESA GetItemById(Int32 id)
@@ -63,6 +65,12 @@ namespace ModelServices.EntitiesServices
         public EMPRESA_MAQUINA CheckExistMaquina(EMPRESA_MAQUINA conta, Int32 idAss)
         {
             EMPRESA_MAQUINA item = _emaqRepository.CheckExist(conta, idAss);
+            return item;
+        }
+
+        public EMPRESA_PLATAFORMA CheckExistPlataforma(EMPRESA_PLATAFORMA conta, Int32 idAss)
+        {
+            EMPRESA_PLATAFORMA item = _eplaRepository.CheckExist(conta, idAss);
             return item;
         }
 
@@ -205,6 +213,11 @@ namespace ModelServices.EntitiesServices
             return _emaqRepository.GetItemById(id);
         }
 
+        public EMPRESA_PLATAFORMA GetPlataformaById(Int32 id)
+        {
+            return _eplaRepository.GetItemById(id);
+        }
+
         public REGIME_TRIBUTARIO GetRegimeById(Int32 id)
         {
             return _regRepository.GetItemById(id);
@@ -248,6 +261,43 @@ namespace ModelServices.EntitiesServices
             }
         }
 
+        public Int32 EditPlataforma(EMPRESA_PLATAFORMA item)
+        {
+            using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    EMPRESA_PLATAFORMA obj = _eplaRepository.GetById(item.EMPL_CD_ID);
+                    _eplaRepository.Detach(obj);
+                    _eplaRepository.Update(item);
+                    transaction.Commit();
+                    return 0;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+            }
+        }
+
+        public Int32 CreatePlataforma(EMPRESA_PLATAFORMA item)
+        {
+            using (DbContextTransaction transaction = Db.Database.BeginTransaction(IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    _eplaRepository.Add(item);
+                    transaction.Commit();
+                    return 0;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+            }
+        }
 
 
     }
